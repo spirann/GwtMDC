@@ -1,0 +1,115 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:mdl="urn:import:gwt.material.design.lite.client.ui">
+	<ui:style>
+	</ui:style>
+
+	<mdl:MaterialLayout>
+
+		<mdl:MaterialLayoutContent>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel text="Labels" type="TITLE_COLOR_CONRTAST" />
+			</mdl:MaterialGrid>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel text="Variations on Material Design labels."
+					type="BODY_1_COLOR_CONRTAST" />
+			</mdl:MaterialGrid>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Display 4" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Display 4" type="DISPLAY_4_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Display 3" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Display 3" type="DISPLAY_3_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Display 2" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Display 2" type="DISPLAY_2_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Display 1" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Display 1" type="DISPLAY_1_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Headline" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Headline" type="HEADLINE_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Title" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Title" type="TITLE_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Subhead" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Subhead" type="SUBHEAD_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Body 2" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Body 2" type="BODY_2_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Body 1" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Body 1" type="BODY_1_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialGrid textAlign="LEFT">
+			    <mdl:MaterialCell cols="2">
+			        <mdl:MaterialLabel text="Caption" />
+			    </mdl:MaterialCell>
+			    <mdl:MaterialCell cols="8">
+			        <mdl:MaterialLabel text="Caption" type="CAPTION_COLOR_CONRTAST"/>		        
+			    </mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialCodePanel ui:field="code" type="XML" />
+			
+		</mdl:MaterialLayoutContent>
+	</mdl:MaterialLayout>
+
+</ui:UiBinder> 

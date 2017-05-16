@@ -1,0 +1,228 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:mdl="urn:import:gwt.material.design.lite.client.ui">
+	<ui:style>
+	</ui:style>
+
+	<mdl:MaterialLayout>
+
+		<mdl:MaterialLayoutContent>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel text="BUTTONS" type="TITLE_COLOR_CONRTAST" />
+			</mdl:MaterialGrid>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel text="Variations on Material Design buttons."
+					type="BODY_1_COLOR_CONRTAST" />
+			</mdl:MaterialGrid>
+
+			<!-- ########################## -->
+			<!-- FAB BUTTON -->
+			<!-- ########################## -->
+			<mdl:MaterialGrid textAlign="CENTER" marginTop="64">
+				<mdl:MaterialCell cols="2" offsetDesktop="1">
+					<mdl:MaterialButton type="FAB" iconType="ADD" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FAB" iconType="ADD"
+						colorScheme="BUTTON_COLORED" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Colored Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FAB" iconType="ADD"
+						colorScheme="BUTTON_PRIMARY" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Primary Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FAB" iconType="ADD"
+						colorScheme="BUTTON_ACCENT" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Accent Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FAB" iconType="ADD"
+						enabled="false" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Disabled Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+			</mdl:MaterialGrid>			
+			<mdl:MaterialCodePanel ui:field="codeFab" type="XML" />
+
+			<!-- ########################## -->
+			<!-- MINI FAB BUTTON -->
+			<!-- ########################## -->
+			<mdl:MaterialGrid textAlign="CENTER" marginTop="64">
+				<mdl:MaterialCell cols="2" offsetDesktop="1">
+					<mdl:MaterialButton type="MINI_FAB" iconType="ADD" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Mini Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="MINI_FAB" iconType="ADD"
+						colorScheme="BUTTON_COLORED" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Colored Mini Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="MINI_FAB" iconType="ADD"
+						colorScheme="BUTTON_PRIMARY" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Primary Mini Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="MINI_FAB" iconType="ADD"
+						colorScheme="BUTTON_ACCENT" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Accent Mini Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="MINI_FAB" iconType="ADD"
+						enabled="false" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Disabled Mini Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			<mdl:MaterialCodePanel ui:field="codeMiniFab" type="XML" />
+			
+			<!-- ########################## -->
+			<!-- RAISED BUTTON -->
+			<!-- ########################## -->
+			<mdl:MaterialGrid textAlign="CENTER" marginTop="64">
+				<mdl:MaterialCell cols="2" offsetDesktop="1">
+					<mdl:MaterialButton type="RAISED" text="button" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Raised" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="RAISED" text="button"
+						colorScheme="BUTTON_COLORED" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Colored Raised" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="RAISED" text="button"
+						colorScheme="BUTTON_PRIMARY" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Primary Raised" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="RAISED" text="button"
+						colorScheme="BUTTON_ACCENT" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Accent Raised" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="RAISED" text="button"
+						enabled="false" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Disabled Raised" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			<mdl:MaterialCodePanel ui:field="codeRaised" type="XML" />
+			
+			<!-- ########################## -->
+			<!-- FLAT BUTTON -->
+			<!-- ########################## -->
+			<mdl:MaterialGrid textAlign="CENTER" marginTop="64">
+				<mdl:MaterialCell cols="2" offsetDesktop="1">
+					<mdl:MaterialButton type="FLAT" text="button" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Flat" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FLAT" text="button"
+						colorScheme="BUTTON_COLORED" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Colored Flat" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FLAT" text="button"
+						colorScheme="BUTTON_PRIMARY" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Primary Flat" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FLAT" text="button"
+						colorScheme="BUTTON_ACCENT" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Accent Flat" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="FLAT" text="button"
+						enabled="false" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Disabled Flat" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+			</mdl:MaterialGrid>
+			<mdl:MaterialCodePanel ui:field="codeFlat" type="XML" />
+			
+			<!-- ########################## -->
+			<!-- ICON BUTTON -->
+			<!-- ########################## -->
+			<mdl:MaterialGrid textAlign="CENTER" marginTop="64">
+				<mdl:MaterialCell cols="2" offsetDesktop="1">
+					<mdl:MaterialButton type="ICON" iconType="ADD" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="ICON" iconType="ADD"
+						colorScheme="BUTTON_COLORED" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Colored Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="ICON" iconType="ADD"
+						colorScheme="BUTTON_PRIMARY" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Primary Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="ICON" iconType="ADD"
+						colorScheme="BUTTON_ACCENT" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Accent Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+				<mdl:MaterialCell cols="2">
+					<mdl:MaterialButton type="ICON" iconType="ADD"
+						enabled="false" />
+					<mdl:MaterialCell cols="12">
+						<mdl:MaterialLabel text="Disabled Fab" />
+					</mdl:MaterialCell>
+				</mdl:MaterialCell>
+			</mdl:MaterialGrid>			
+			<mdl:MaterialCodePanel ui:field="codeIcon" type="XML" />
+			
+		</mdl:MaterialLayoutContent>
+	</mdl:MaterialLayout>
+
+</ui:UiBinder> 

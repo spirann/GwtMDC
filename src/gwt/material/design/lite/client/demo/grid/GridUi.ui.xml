@@ -1,0 +1,147 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:mdl="urn:import:gwt.material.design.lite.client.ui">
+	<ui:style>
+	</ui:style>
+
+	<mdl:MaterialLayout>
+
+		<mdl:MaterialLayoutContent>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel text="Grid" type="TITLE_COLOR_CONRTAST" />
+			</mdl:MaterialGrid>
+
+			<mdl:MaterialGrid textAlign="LEFT">
+				<mdl:MaterialLabel
+					text="The Material Design Lite (MDL) grid component is a simplified method 
+					for laying out content for multiple screen sizes. It reduces the usual coding 
+					burden required to correctly display blocks of content in a 
+					variety of display conditions."
+					/>
+				
+				<mdl:MaterialLabel marginTop="16"
+					text="
+						The MDL grid is defined and enclosed by a container element. 
+						A grid has 12 columns in the desktop screen size, 
+						8 in the tablet size, and 4 in the phone size, 
+						each size having predefined margins and gutters. 
+						Cells are laid out sequentially in a row, in the order they are defined, 
+						with some exceptions:
+					"/>
+				
+				<mdl:MaterialLabel marginLeft="32"
+					text="
+						If a cell doesn't fit in the row in one of the screen sizes, 
+						it flows into the following line.
+						" />
+				
+				<mdl:MaterialLabel marginLeft="32"
+					text="
+						If a cell has a specified column size equal to or larger than the number 
+						of columns for the current screen size, it takes up the entirety of its row.
+					"/>
+				
+				<mdl:MaterialLabel marginTop="16"
+					text="You can set a maximum grid width, after which the grid stays centered
+					 with padding on either side, by setting its max-width CSS property."
+					 />
+				
+				<mdl:MaterialLabel marginTop="16"
+					text="Grids are a fairly new and non-standardized feature in most user interfaces, 
+						and provide users with a way to view content in an organized manner that might 
+						otherwise be difficult to understand or retain. 
+						Their design and use is an important factor in the overall user experience."
+					 />
+				
+			</mdl:MaterialGrid>
+
+			<mdl:MaterialGrid backgroundColor="ACCENT" marginTop="16">
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="1" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="1" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="4" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="4" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="4" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="4" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="4" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="4" />
+				</mdl:MaterialCell>				
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="6" colsTablet="8" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="6 (Tablet 8)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="4" colsTablet="6" padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="4 (Tablet 6)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="2" colsPhone="4"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="2 (Phone 4)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" colsDesktop="6" colsTablet="5" colsPhone="2"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="(Desktop 6) (Tablet 5) (Phone 2)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" colsDesktop="4" colsTablet="2" colsPhone="1"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="(Desktop 4) (Tablet 2) (Phone 1)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" colsDesktop="2" colsTablet="1" colsPhone="1"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="(Desktop 2) (Tablet 1) (Phone 1)" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="3" offset="1"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="3, offeset 1" />
+				</mdl:MaterialCell>				
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" colsDesktop="11" colsTablet="6" colsPhone="1" offsetDesktop="1" offsetTablet="2" offsetPhone="3"  padding="8">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="(Desktop 11) (Tablet 6) (Phone 1) (Offset Desktop 1) (Offset Tablet 2) (Offset Phone 3)" />
+				</mdl:MaterialCell>
+				
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="2" padding="8" hideOn="DESKTOP">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="	Hide on Desktop" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="2" padding="8" hideOn="TABLET">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="Hide on Tablet" />
+				</mdl:MaterialCell>
+				<mdl:MaterialCell height="120px" backgroundColor="PRIMARY" cols="2" padding="8" hideOn="PHONE">
+				    <mdl:MaterialLabel textColor="PRIMARY_CONTRAST" text="Hide on Phone" />
+				</mdl:MaterialCell>
+				
+			</mdl:MaterialGrid>
+			
+			<mdl:MaterialCodePanel ui:field="code" type="XML" />
+
+		</mdl:MaterialLayoutContent>
+	</mdl:MaterialLayout>
+
+</ui:UiBinder> 
