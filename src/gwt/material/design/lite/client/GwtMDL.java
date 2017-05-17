@@ -16,11 +16,12 @@ import gwt.material.design.lite.client.resources.ThemeManager;
 public class GwtMDL implements EntryPoint {
 
 	public void onModuleLoad() {
-		injectJs(MaterialResources.INSTANCE.jqueryJs());
-		injectJs(MaterialResources.INSTANCE.materialJs());
+		// injectJs(MaterialResources.INSTANCE.jqueryJs());
+		// injectJs(MaterialResources.INSTANCE.materialJs());
+		injectJs("https://code.getmdl.io/1.3.0/material.min.js");
 		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectCss(MaterialResources.INSTANCE.prismCss());
-		
+
 		ThemeManager.loadCss(ThemeManager.INDIGO_PINK);
 		/*
 		 * ScriptInjector.fromUrl("https://code.getmdl.io/1.3.0/material.min.js"
@@ -31,7 +32,7 @@ public class GwtMDL implements EntryPoint {
 		 * "Script load success.");
 		 * //injectCss(MaterialResources.INSTANCE.materialCss()); } }).inject();
 		 */
-		//injectDebugJs(MaterialResources.INSTANCE.materialJs());
+		// injectDebugJs(MaterialResources.INSTANCE.materialJs());
 		RootPanel.get().add(new DemoUi());
 	}
 
@@ -55,9 +56,18 @@ public class GwtMDL implements EntryPoint {
 		ScriptInjector.fromString(text).setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(removeTag).inject();
 
 	}
-	
+
+	public static native void injectJs(String url)/*-{
+
+		var s = document.createElement("script");
+		s.type = "text/javascript";
+		s.src = "http://code.getmdl.io/1.3.0/material.min.js";
+		$("head").append(s);
+
+	}-*/;
+
 	// Para pegar o nome do navegador
-	//public static native String getUserAgent() /*-{
-	//	return navigator.userAgent.toLowerCase();
-	//}-*/
+	// public static native String getUserAgent() /*-{
+	// return navigator.userAgent.toLowerCase();
+	// }-*/
 }

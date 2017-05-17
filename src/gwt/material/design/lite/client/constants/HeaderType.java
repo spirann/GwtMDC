@@ -29,7 +29,8 @@ import gwt.material.design.lite.client.utils.helper.EnumHelper;
 public enum HeaderType implements CssType {
     NORMAL(""),
     SCROLL("mdl-layout__header--scroll"),
-    WATERFALL("mdl-layout__header--waterfall");
+    WATERFALL("mdl-layout__header--waterfall"),
+    WATERFALL_HIDE_TOP("mdl-layout__header--waterfall mdl-layout__header--waterfall-hide-top");
 
     private final String cssClass;
 

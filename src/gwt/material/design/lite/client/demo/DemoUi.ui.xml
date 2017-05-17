@@ -4,13 +4,42 @@
 	<ui:style>
 	</ui:style>
 
-	<mdl:MaterialLayout fixedHeader="true" fixedDrawer="true" >
+	<mdl:MaterialDiv>
+		<mdl:MaterialLayout fixedHeader="true" fixedTabs="true">
 
-		<mdl:MaterialLayoutHeader>
-			<mdl:MaterialLayoutHeaderRow>
+			<mdl:MaterialLayoutHeader type="WATERFALL_HIDE_TOP">
+
+				<mdl:MaterialLayoutHeaderRow>
+					<mdl:MaterialLayoutTitle text="Title" />
+					<mdl:MaterialLayoutSpacer />
+					<mdl:MaterialNavegation showOn="LARGE_SCREEN_ONLY">
+						<mdl:MaterialNavegationLink text="Link 1"
+							href="" />
+						<mdl:MaterialNavegationLink text="Link 2"
+							href="" />
+						<mdl:MaterialNavegationLink text="Link 3"
+							href="" />
+						<mdl:MaterialNavegationLink text="Link 4"
+							href="" />
+					</mdl:MaterialNavegation>
+				</mdl:MaterialLayoutHeaderRow>
+
+				<mdl:MaterialTabBar>
+					<mdl:MaterialTabItem text="Tab 1" href="#scroll-tab-1" />
+					<mdl:MaterialTabItem text="Tab 2" href="#scroll-tab-2"
+						active="true" />
+					<mdl:MaterialTabItem text="Tab 3" href="#scroll-tab-3" />
+					<mdl:MaterialTabItem text="Tab 4" href="#scroll-tab-4" />
+					<mdl:MaterialTabItem text="Tab 5" href="#scroll-tab-4" />
+					<mdl:MaterialTabItem text="Tab 6" href="#scroll-tab-4" />
+					<mdl:MaterialTabItem text="Tab 7" href="#scroll-tab-4" />
+					<mdl:MaterialTabItem text="Tab 8" href="#scroll-tab-4" />
+				</mdl:MaterialTabBar>
+			</mdl:MaterialLayoutHeader>
+
+			<mdl:MaterialLayoutDrawer>
 				<mdl:MaterialLayoutTitle text="Title" />
-				<mdl:MaterialLayoutSpacer />
-				<mdl:MaterialNavegation showOn="LARGE_SCREEN_ONLY">
+				<mdl:MaterialNavegation>
 					<mdl:MaterialNavegationLink text="Link 1"
 						href="" />
 					<mdl:MaterialNavegationLink text="Link 2"
@@ -20,51 +49,30 @@
 					<mdl:MaterialNavegationLink text="Link 4"
 						href="" />
 				</mdl:MaterialNavegation>
-			</mdl:MaterialLayoutHeaderRow>
-
-			<mdl:MaterialTabBar>
-				<mdl:MaterialTabItem text="Tab 1" href="#scroll-tab-1" />
-				<mdl:MaterialTabItem text="Tab 2" href="#scroll-tab-2"
-					active="true" />
-				<mdl:MaterialTabItem text="Tab 3" href="#scroll-tab-3" />
-				<mdl:MaterialTabItem text="Tab 4" href="#scroll-tab-4" />
-				<mdl:MaterialTabItem text="Tab 5" href="#scroll-tab-4" />
-				<mdl:MaterialTabItem text="Tab 6" href="#scroll-tab-4" />
-				<mdl:MaterialTabItem text="Tab 7" href="#scroll-tab-4" />
-				<mdl:MaterialTabItem text="Tab 8" href="#scroll-tab-4" />
-			</mdl:MaterialTabBar>
-		</mdl:MaterialLayoutHeader>
-
-		<mdl:MaterialLayoutDrawer>
-			<mdl:MaterialLayoutTitle text="Title" />
-			<mdl:MaterialNavegation>
-				<mdl:MaterialNavegationLink text="Link 1"
-					href="" />
-				<mdl:MaterialNavegationLink text="Link 2"
-					href="" />
-				<mdl:MaterialNavegationLink text="Link 3"
-					href="" />
-				<mdl:MaterialNavegationLink text="Link 4"
-					href="" />
-			</mdl:MaterialNavegation>
-		</mdl:MaterialLayoutDrawer>
+			</mdl:MaterialLayoutDrawer>
 
 
-		<mdl:MaterialLayoutContent height="100%">
-			<mdl:MaterialTabContent mdl:id="scroll-tab-1" height="100%">
-				<mdl:MaterialPageContent backgroundColor="GREY"  height="100%"/>
-			</mdl:MaterialTabContent>
-			<mdl:MaterialTabContent mdl:id="scroll-tab-2"
-				active="true">
-				<mdl:MaterialPageContent backgroundColor="TEAL"  height="200px"/>
-			</mdl:MaterialTabContent>
-			<mdl:MaterialTabContent mdl:id="scroll-tab-3">
-				<mdl:MaterialPageContent backgroundColor="CYAN"  height="200px"/>
-			</mdl:MaterialTabContent>
-			<mdl:MaterialTabContent mdl:id="scroll-tab-4">
-				<mdl:MaterialPageContent backgroundColor="BLUE_GREY"  height="200px"/>
-			</mdl:MaterialTabContent>
-		</mdl:MaterialLayoutContent>
+			<mdl:MaterialLayoutContent height="100%">
+				<mdl:MaterialTabContent mdl:id="scroll-tab-1"
+					height="100%">
+					<mdl:MaterialPageContent backgroundColor="GREY"
+						height="100%" />
+				</mdl:MaterialTabContent>
+				<mdl:MaterialTabContent mdl:id="scroll-tab-2"
+					active="true">
+					<mdl:MaterialPageContent backgroundColor="TEAL"
+						height="200px" />
+				</mdl:MaterialTabContent>
+				<mdl:MaterialTabContent mdl:id="scroll-tab-3">
+					<mdl:MaterialPageContent backgroundColor="CYAN"
+						height="200px" />
+				</mdl:MaterialTabContent>
+				<mdl:MaterialTabContent mdl:id="scroll-tab-4">
+					<mdl:MaterialPageContent backgroundColor="BLUE_GREY"
+						height="200px" />
+				</mdl:MaterialTabContent>
+			</mdl:MaterialLayoutContent>
 
-	</mdl:MaterialLayout>
+		</mdl:MaterialLayout>
+	</mdl:MaterialDiv>
 </ui:UiBinder> 

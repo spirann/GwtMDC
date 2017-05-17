@@ -84,8 +84,8 @@ import gwt.material.design.lite.client.events.DropEvent;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends ComplexPanel
-		implements HasId, HasInitialClasses, HasColors, HasEnabled, HasInteractionHandlers, 
-		HasAllFocusHandlers, HasGrid, HasTextAlign, HasInlineStyle, HasFlexbox, HasHideOn, HasShowOn {
+		implements HasId, HasInitialClasses, HasColors, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
+		HasGrid, HasTextAlign, HasInlineStyle, HasFlexbox, HasHideOn, HasShowOn {
 
 	class Appender {
 		Widget widget;
@@ -108,14 +108,16 @@ public class MaterialWidget extends ComplexPanel
 	private CssNameMixin<MaterialWidget, TextAlign> textAlignMixin;
 	private FontSizeMixin<MaterialWidget> fontSizeMixin;
 	private CssNameMixin<MaterialWidget, FontWeight> fontWeightMixin;
-    private FlexboxMixin<MaterialWidget> flexboxMixin;
-    private CssNameMixin<MaterialWidget, HideOn> hideOnMixin;
-    private CssNameMixin<MaterialWidget, ShowOn> showOnMixin;
-    
+	private FlexboxMixin<MaterialWidget> flexboxMixin;
+	private CssNameMixin<MaterialWidget, HideOn> hideOnMixin;
+	private CssNameMixin<MaterialWidget, ShowOn> showOnMixin;
+
 	private String primaryClass;
 	private String[] initialClasses;
 
 	private List<Appender> onLoadAdd;
+
+	private boolean initialize = false;
 
 	public static native void upgradeElement(final Element element)/*-{
 		$wnd.componentHandler.upgradeElement(element);
@@ -168,7 +170,34 @@ public class MaterialWidget extends ComplexPanel
 		}
 
 		upgradeElement(getElement());
+
+		initialize = true;
 	}
+
+	/*
+	@Override
+	public void setStyleName(String style) {
+		super.setStyleName(style);
+		if (initialize) {
+			upgradeElement(getElement());
+		}
+	}
+	
+	@Override
+	public void setStylePrimaryName(String style) {
+		super.setStylePrimaryName(style);
+		if (initialize) {
+			upgradeElement(getElement());
+		}
+	}
+	
+	@Override
+	public void addStyleName(String style) {
+		super.addStyleName(style);
+		if (initialize) {
+			upgradeElement(getElement());
+		}
+	} */
 
 	@Override
 	public void add(Widget child) {
@@ -524,14 +553,14 @@ public class MaterialWidget extends ComplexPanel
 		}, FocusEvent.getType());
 	}
 	// ///
-	
+
 	protected IdMixin<MaterialWidget> getIdMixin() {
-        if (idMixin == null) {
-            idMixin = new IdMixin<>(this);
-        }
-        return idMixin;
-    }
-	
+		if (idMixin == null) {
+			idMixin = new IdMixin<>(this);
+		}
+		return idMixin;
+	}
+
 	protected EnabledMixin<MaterialWidget> getEnabledMixin() {
 		if (enabledMixin == null) {
 			enabledMixin = new EnabledMixin<>(this);
@@ -554,57 +583,57 @@ public class MaterialWidget extends ComplexPanel
 	}
 
 	protected CssNameMixin<MaterialWidget, TextAlign> getTextAlignMixin() {
-        if (textAlignMixin == null) {
-            textAlignMixin = new CssNameMixin<>(this);
-        }
-        return textAlignMixin;
-    }
-	
-	protected CssNameMixin<MaterialWidget, FontWeight> getFontWeightMixin() {
-        if (fontWeightMixin == null) {
-            fontWeightMixin = new CssNameMixin<>(this);
-        }
-        return fontWeightMixin;
-    }
-	
-	protected FontSizeMixin<MaterialWidget> getFontSizeMixin() {
-        if (fontSizeMixin == null) {
-            fontSizeMixin = new FontSizeMixin<>(this);
-        }
-        return fontSizeMixin;
-    }
-	
-	protected FlexboxMixin<MaterialWidget> getFlexboxMixin() {
-        if (flexboxMixin == null) {
-            flexboxMixin = new FlexboxMixin<>(this);
-        }
-        return flexboxMixin;
-    }
-	
-	protected CssNameMixin<MaterialWidget, HideOn> getHideOnMixin() {
-        if (hideOnMixin == null) {
-        	hideOnMixin = new CssNameMixin<>(this);
-        }
-        return hideOnMixin;
-    }
-	
-	protected CssNameMixin<MaterialWidget, ShowOn> getShowOnMixin() {
-        if (showOnMixin == null) {
-        	showOnMixin = new CssNameMixin<>(this);
-        }
-        return showOnMixin;
-    }
-	
-    @Override
-    public void setId(String id) {
-        getIdMixin().setId(id);
-    }
+		if (textAlignMixin == null) {
+			textAlignMixin = new CssNameMixin<>(this);
+		}
+		return textAlignMixin;
+	}
 
-    @Override
-    public String getId() {
-        return getIdMixin().getId();
-    }
-	
+	protected CssNameMixin<MaterialWidget, FontWeight> getFontWeightMixin() {
+		if (fontWeightMixin == null) {
+			fontWeightMixin = new CssNameMixin<>(this);
+		}
+		return fontWeightMixin;
+	}
+
+	protected FontSizeMixin<MaterialWidget> getFontSizeMixin() {
+		if (fontSizeMixin == null) {
+			fontSizeMixin = new FontSizeMixin<>(this);
+		}
+		return fontSizeMixin;
+	}
+
+	protected FlexboxMixin<MaterialWidget> getFlexboxMixin() {
+		if (flexboxMixin == null) {
+			flexboxMixin = new FlexboxMixin<>(this);
+		}
+		return flexboxMixin;
+	}
+
+	protected CssNameMixin<MaterialWidget, HideOn> getHideOnMixin() {
+		if (hideOnMixin == null) {
+			hideOnMixin = new CssNameMixin<>(this);
+		}
+		return hideOnMixin;
+	}
+
+	protected CssNameMixin<MaterialWidget, ShowOn> getShowOnMixin() {
+		if (showOnMixin == null) {
+			showOnMixin = new CssNameMixin<>(this);
+		}
+		return showOnMixin;
+	}
+
+	@Override
+	public void setId(String id) {
+		getIdMixin().setId(id);
+	}
+
+	@Override
+	public String getId() {
+		return getIdMixin().getId();
+	}
+
 	@Override
 	public boolean isEnabled() {
 		return getEnabledMixin().isEnabled();
@@ -639,7 +668,7 @@ public class MaterialWidget extends ComplexPanel
 	public void setCols(int cols) {
 		getGridMixin().setCols(cols);
 	}
-	
+
 	@Override
 	public void setColsDesktop(int cols) {
 		getGridMixin().setColsDesktop(cols);
@@ -659,7 +688,7 @@ public class MaterialWidget extends ComplexPanel
 	public void setOffset(int offset) {
 		getGridMixin().setOffset(offset);
 	}
-	
+
 	@Override
 	public void setOffsetDesktop(int offset) {
 		getGridMixin().setOffsetDesktop(offset);
@@ -674,156 +703,156 @@ public class MaterialWidget extends ComplexPanel
 	public void setOffsetPhone(int offset) {
 		getGridMixin().setOffsetPhone(offset);
 	}
-	
-    @Override
-    public TextAlign getTextAlign() {
-        return getTextAlignMixin().getCssName();
-    }
 
-    @Override
-    public void setTextAlign(TextAlign align) {
-        getTextAlignMixin().setCssName(align);
-    }
-    
-    @Override
-    public void setMargin(double margin) {
-        getElement().getStyle().setMargin(margin, Style.Unit.PX);
-    }
+	@Override
+	public TextAlign getTextAlign() {
+		return getTextAlignMixin().getCssName();
+	}
 
-    @Override
-    public void setMarginTop(final double margin) {
-        getElement().getStyle().setMarginTop(margin, Style.Unit.PX);
-    }
+	@Override
+	public void setTextAlign(TextAlign align) {
+		getTextAlignMixin().setCssName(align);
+	}
 
-    @Override
-    public void setMarginLeft(final double margin) {
-        getElement().getStyle().setMarginLeft(margin, Style.Unit.PX);
-    }
+	@Override
+	public void setMargin(double margin) {
+		getElement().getStyle().setMargin(margin, Style.Unit.PX);
+	}
 
-    @Override
-    public void setMarginRight(final double margin) {
-        getElement().getStyle().setMarginRight(margin, Style.Unit.PX);
-    }
+	@Override
+	public void setMarginTop(final double margin) {
+		getElement().getStyle().setMarginTop(margin, Style.Unit.PX);
+	}
 
-    @Override
-    public void setMarginBottom(final double margin) {
-        getElement().getStyle().setMarginBottom(margin, Style.Unit.PX);
-    }
+	@Override
+	public void setMarginLeft(final double margin) {
+		getElement().getStyle().setMarginLeft(margin, Style.Unit.PX);
+	}
 
-    @Override
-    public void setPadding(double padding) {
-        getElement().getStyle().setPadding(padding, Style.Unit.PX);
-    }
+	@Override
+	public void setMarginRight(final double margin) {
+		getElement().getStyle().setMarginRight(margin, Style.Unit.PX);
+	}
 
-    @Override
-    public void setPaddingTop(final double padding) {
-        getElement().getStyle().setPaddingTop(padding, Style.Unit.PX);
-    }
+	@Override
+	public void setMarginBottom(final double margin) {
+		getElement().getStyle().setMarginBottom(margin, Style.Unit.PX);
+	}
 
-    @Override
-    public void setPaddingLeft(final double padding) {
-        getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
-    }
+	@Override
+	public void setPadding(double padding) {
+		getElement().getStyle().setPadding(padding, Style.Unit.PX);
+	}
 
-    @Override
-    public void setPaddingRight(final double padding) {
-        getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
-    }
+	@Override
+	public void setPaddingTop(final double padding) {
+		getElement().getStyle().setPaddingTop(padding, Style.Unit.PX);
+	}
 
-    @Override
-    public void setPaddingBottom(final double padding) {
-        getElement().getStyle().setPaddingBottom(padding, Style.Unit.PX);
-    }
-    
-    @Override
-    public void setOpacity(double opacity) {
-        getElement().getStyle().setOpacity(opacity);
-    }
+	@Override
+	public void setPaddingLeft(final double padding) {
+		getElement().getStyle().setPaddingLeft(padding, Style.Unit.PX);
+	}
 
-    @Override
-    public double getOpacity() {
-        return Double.parseDouble(getElement().getStyle().getOpacity());
-    }
+	@Override
+	public void setPaddingRight(final double padding) {
+		getElement().getStyle().setPaddingRight(padding, Style.Unit.PX);
+	}
 
-    @Override
-    public void setFontSize(String fontSize) {
-        getFontSizeMixin().setFontSize(fontSize);
-    }
+	@Override
+	public void setPaddingBottom(final double padding) {
+		getElement().getStyle().setPaddingBottom(padding, Style.Unit.PX);
+	}
 
-    @Override
-    public String getFontSize() {
-        return getFontSizeMixin().getFontSize();
-    }
+	@Override
+	public void setOpacity(double opacity) {
+		getElement().getStyle().setOpacity(opacity);
+	}
 
-    @Override
-    public void setFontSize(double fontSize, Style.Unit unit) {
-        getFontSizeMixin().setFontSize(fontSize, unit);
-    }
+	@Override
+	public double getOpacity() {
+		return Double.parseDouble(getElement().getStyle().getOpacity());
+	}
 
-    @Override
-    public void setDisplay(Display display) {
-        getFlexboxMixin().setDisplay(display);
-    }
+	@Override
+	public void setFontSize(String fontSize) {
+		getFontSizeMixin().setFontSize(fontSize);
+	}
 
-    @Override
-    public void setFlexDirection(FlexDirection flexDirection) {
-        getFlexboxMixin().setFlexDirection(flexDirection);
-    }
+	@Override
+	public String getFontSize() {
+		return getFontSizeMixin().getFontSize();
+	}
 
-    @Override
-    public void setFlex(Flex flex) {
-        getFlexboxMixin().setFlex(flex);
-    }
+	@Override
+	public void setFontSize(double fontSize, Style.Unit unit) {
+		getFontSizeMixin().setFontSize(fontSize, unit);
+	}
 
-    @Override
-    public void setFlexGrow(Integer flexGrow) {
-        getFlexboxMixin().setFlexGrow(flexGrow);
-    }
+	@Override
+	public void setDisplay(Display display) {
+		getFlexboxMixin().setDisplay(display);
+	}
 
-    @Override
-    public void setFlexShrink(Integer flexShrink) {
-        getFlexboxMixin().setFlexShrink(flexShrink);
-    }
+	@Override
+	public void setFlexDirection(FlexDirection flexDirection) {
+		getFlexboxMixin().setFlexDirection(flexDirection);
+	}
 
-    @Override
-    public void setFlexBasis(String flexBasis) {
-        getFlexboxMixin().setFlexBasis(flexBasis);
-    }
+	@Override
+	public void setFlex(Flex flex) {
+		getFlexboxMixin().setFlex(flex);
+	}
 
-    @Override
-    public void setFlexOrder(Integer flexOrder) {
-        getFlexboxMixin().setFlexOrder(flexOrder);
-    }
+	@Override
+	public void setFlexGrow(Integer flexGrow) {
+		getFlexboxMixin().setFlexGrow(flexGrow);
+	}
 
-    @Override
-    public void setFlexWrap(FlexWrap flexWrap) {
-        getFlexboxMixin().setFlexWrap(flexWrap);
-    }
+	@Override
+	public void setFlexShrink(Integer flexShrink) {
+		getFlexboxMixin().setFlexShrink(flexShrink);
+	}
 
-    @Override
-    public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
-        getFlexboxMixin().setFlexAlignContent(flexAlignContent);
-    }
+	@Override
+	public void setFlexBasis(String flexBasis) {
+		getFlexboxMixin().setFlexBasis(flexBasis);
+	}
 
-    @Override
-    public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
-        getFlexboxMixin().setFlexAlignSelf(flexAlignSelf);
-    }
+	@Override
+	public void setFlexOrder(Integer flexOrder) {
+		getFlexboxMixin().setFlexOrder(flexOrder);
+	}
 
-    @Override
-    public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
-        getFlexboxMixin().setFlexAlignItems(flexAlignItems);
-    }
+	@Override
+	public void setFlexWrap(FlexWrap flexWrap) {
+		getFlexboxMixin().setFlexWrap(flexWrap);
+	}
 
-    @Override
-    public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
-        getFlexboxMixin().setFlexJustifyContent(flexJustifyContent);
-    }
+	@Override
+	public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
+		getFlexboxMixin().setFlexAlignContent(flexAlignContent);
+	}
 
-    @Override
-    public void setGwtDisplay(Style.Display display) {
-        getFlexboxMixin().setGwtDisplay(display);
-    }
+	@Override
+	public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
+		getFlexboxMixin().setFlexAlignSelf(flexAlignSelf);
+	}
+
+	@Override
+	public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
+		getFlexboxMixin().setFlexAlignItems(flexAlignItems);
+	}
+
+	@Override
+	public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
+		getFlexboxMixin().setFlexJustifyContent(flexJustifyContent);
+	}
+
+	@Override
+	public void setGwtDisplay(Style.Display display) {
+		getFlexboxMixin().setGwtDisplay(display);
+	}
 
 	@Override
 	public void setHideOn(HideOn hideOn) {

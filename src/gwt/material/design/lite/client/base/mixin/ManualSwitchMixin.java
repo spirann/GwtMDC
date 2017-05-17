@@ -21,33 +21,24 @@ package gwt.material.design.lite.client.base.mixin;
 
 import com.google.gwt.user.client.ui.UIObject;
 
+import gwt.material.design.lite.client.base.HasManualSwitch;
+import gwt.material.design.lite.client.constants.CssName;
+
 /**
- * @author Ben Dol
+ * @author Richeli Vargas
  */
-public class StyleMixin<H extends UIObject> extends AbstractMixin<H> {
+public class ManualSwitchMixin<T extends UIObject & HasManualSwitch> extends AbstractMixin<T> implements HasManualSwitch {
 
-	private String style;
+    public ManualSwitchMixin(final T widget) {
+        super(widget);
+    }
 
-	public StyleMixin(final H widget) {
-		super(widget);
-	}
-
-	public void setStyle(String styles) {
-		if (this.style != null && !this.style.isEmpty()) {
-			for (String style : this.style.split(" ")) {
-				uiObject.removeStyleName(style);
-			}
-		}
-		this.style = styles;
-
-		if (styles != null && !styles.isEmpty()) {
-			for (String style : styles.split(" ")) {
-				uiObject.addStyleName(style);
-			}
+	@Override
+	public void setManualSwitch(boolean manual) {
+		uiObject.removeStyleName(CssName.MDL_LAYOUT_TAB_BAR_MANUAL_SWITCH);
+		if(manual){
+			uiObject.addStyleName(CssName.MDL_LAYOUT_TAB_BAR_MANUAL_SWITCH);
 		}
 	}
 
-	public String getStyle() {
-		return style;
-	}
 }

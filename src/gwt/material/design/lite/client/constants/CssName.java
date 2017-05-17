@@ -37,6 +37,7 @@ public interface CssName {
 	String MDL_JS_LAYOUT = "mdl-js-layout";
 	String MDL_LAYOUT_HEADER = "mdl-layout__header";
 	String MDL_LAYOUT_HEADER_TRANSPARENT = "mdl-layout__header--transparent";
+	String MDL_LAYOUT_HEADER_SEAMED = "mdl-layout__header--seamed";
 	String MDL_LAYOUT_HEADER_ROW = "mdl-layout__header-row";
 	String MDL_LAYOUT_TITLE = "mdl-layout-title";
 	String MDL_LAYOUT_CONTENT = "mdl-layout__content";
@@ -47,8 +48,12 @@ public interface CssName {
 	String MDL_LAYOUT_FIXED_HEADER = "mdl-layout--fixed-header";
 	String MDL_LAYOUT_FIXED_DRAWER = "mdl-layout--fixed-drawer";
 	String MDL_LAYOUT_FIXED_TABS = "mdl-layout--fixed-tabs";
+	String MDL_LAYOUT_HIDE_DRAWER_BUTTON = "mdl-layout--no-drawer-button";
+	String MDL_LAYOUT_HIDE_DRAWER_BUTTON_ON_DESKTOP = "mdl-layout--no-desktop-drawer-button";
+	String MDL_LAYOUT_ICON = "mdl-layout-icon";
 	
 	String MDL_LAYOUT_TAB_BAR = "mdl-layout__tab-bar";
+	String MDL_LAYOUT_TAB_BAR_MANUAL_SWITCH = "mdl-layout__tab-manual-switch";
 	String MDL_LAYOUT_TAB_ITEM = "mdl-layout__tab";
 	String MDL_LAYOUT_TAB_PANEL = "mdl-layout__tab-panel";
 	

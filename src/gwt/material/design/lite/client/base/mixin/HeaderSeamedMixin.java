@@ -21,33 +21,24 @@ package gwt.material.design.lite.client.base.mixin;
 
 import com.google.gwt.user.client.ui.UIObject;
 
+import gwt.material.design.lite.client.base.HasHeaderSeamed;
+import gwt.material.design.lite.client.constants.CssName;
+
 /**
- * @author Ben Dol
+ * @author Richeli Vargas
  */
-public class StyleMixin<H extends UIObject> extends AbstractMixin<H> {
+public class HeaderSeamedMixin<T extends UIObject & HasHeaderSeamed> extends AbstractMixin<T> implements HasHeaderSeamed {
 
-	private String style;
+    public HeaderSeamedMixin(final T widget) {
+        super(widget);
+    }
 
-	public StyleMixin(final H widget) {
-		super(widget);
-	}
-
-	public void setStyle(String styles) {
-		if (this.style != null && !this.style.isEmpty()) {
-			for (String style : this.style.split(" ")) {
-				uiObject.removeStyleName(style);
-			}
-		}
-		this.style = styles;
-
-		if (styles != null && !styles.isEmpty()) {
-			for (String style : styles.split(" ")) {
-				uiObject.addStyleName(style);
-			}
+	@Override
+	public void setSeamed(boolean show) {
+		uiObject.removeStyleName(CssName.MDL_LAYOUT_HEADER_SEAMED);
+		if(show){
+			uiObject.addStyleName(CssName.MDL_LAYOUT_HEADER_SEAMED);
 		}
 	}
 
-	public String getStyle() {
-		return style;
-	}
 }
