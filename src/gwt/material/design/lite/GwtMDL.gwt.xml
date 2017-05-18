@@ -27,9 +27,7 @@
   <source path='public'/>
 
   <stylesheet src="https://fonts.googleapis.com/icon?family=Material+Icons"/>
-  <!-- 
-  <stylesheet src="https://code.getmdl.io/1.3.0/material.blue_grey-blue.min.css"/>
-   -->
+ 
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>
   

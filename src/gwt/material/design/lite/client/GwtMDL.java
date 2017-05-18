@@ -17,8 +17,7 @@ public class GwtMDL implements EntryPoint {
 
 	public void onModuleLoad() {
 		// injectJs(MaterialResources.INSTANCE.jqueryJs());
-		// injectJs(MaterialResources.INSTANCE.materialJs());
-		injectJs("https://code.getmdl.io/1.3.0/material.min.js");
+		//injectJs(MaterialResources.INSTANCE.materialJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectCss(MaterialResources.INSTANCE.prismCss());
 
