@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.Float;
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -81,11 +82,12 @@ import gwt.material.design.lite.client.events.DragStartEvent;
 import gwt.material.design.lite.client.events.DropActivateEvent;
 import gwt.material.design.lite.client.events.DropDeactivateEvent;
 import gwt.material.design.lite.client.events.DropEvent;
+import gwt.material.design.lite.client.utils.helper.StyleHelper;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends ComplexPanel
 		implements HasId, HasInitialClasses, HasColors, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
-		HasGrid, HasTextAlign, HasInlineStyle, HasFlexbox, HasHideOn, HasShowOn {
+		HasGrid, HasTextAlign, HasInlineStyle, HasFlexbox, HasHideOn, HasShowOn, HasFloat {
 
 	class Appender {
 		Widget widget;
@@ -111,6 +113,7 @@ public class MaterialWidget extends ComplexPanel
 	private FlexboxMixin<MaterialWidget> flexboxMixin;
 	private CssNameMixin<MaterialWidget, HideOn> hideOnMixin;
 	private CssNameMixin<MaterialWidget, ShowOn> showOnMixin;
+	private CssNameMixin<MaterialWidget, Float> floatMixin;
 
 	private String primaryClass;
 	private String[] initialClasses;
@@ -121,6 +124,14 @@ public class MaterialWidget extends ComplexPanel
 
 	public static native void upgradeElement(final Element element)/*-{
 		$wnd.componentHandler.upgradeElement(element);
+	}-*/;
+
+	public static native void upgradeAllRegistered()/*-{
+		$wnd.componentHandler.upgradeAllRegistered();
+	}-*/;
+
+	public static native void upgradeDom()/*-{
+		$wnd.componentHandler.upgradeDom();
 	}-*/;
 
 	public MaterialWidget() {
@@ -169,35 +180,26 @@ public class MaterialWidget extends ComplexPanel
 			onLoadAdd.clear();
 		}
 
+		//upgradeDom();
 		upgradeElement(getElement());
+		//upgradeAllRegistered();
 
 		initialize = true;
 	}
 
 	/*
-	@Override
-	public void setStyleName(String style) {
-		super.setStyleName(style);
-		if (initialize) {
-			upgradeElement(getElement());
-		}
-	}
-	
-	@Override
-	public void setStylePrimaryName(String style) {
-		super.setStylePrimaryName(style);
-		if (initialize) {
-			upgradeElement(getElement());
-		}
-	}
-	
-	@Override
-	public void addStyleName(String style) {
-		super.addStyleName(style);
-		if (initialize) {
-			upgradeElement(getElement());
-		}
-	} */
+	 * @Override public void setStyleName(String style) {
+	 * super.setStyleName(style); if (initialize) {
+	 * upgradeElement(getElement()); } }
+	 * 
+	 * @Override public void setStylePrimaryName(String style) {
+	 * super.setStylePrimaryName(style); if (initialize) {
+	 * upgradeElement(getElement()); } }
+	 * 
+	 * @Override public void addStyleName(String style) {
+	 * super.addStyleName(style); if (initialize) {
+	 * upgradeElement(getElement()); } }
+	 */
 
 	@Override
 	public void add(Widget child) {
@@ -623,6 +625,13 @@ public class MaterialWidget extends ComplexPanel
 		}
 		return showOnMixin;
 	}
+	
+	protected CssNameMixin<MaterialWidget, Float> getFloatMixin() {
+        if (floatMixin == null) {
+            floatMixin = new CssNameMixin<>(this);
+        }
+        return floatMixin;
+    }
 
 	@Override
 	public void setId(String id) {
@@ -873,5 +882,15 @@ public class MaterialWidget extends ComplexPanel
 	public ShowOn getShowOn() {
 		return getShowOnMixin().getCssName();
 	}
+	
 
+    @Override
+    public void setFloat(Float floatAlign) {
+        getFloatMixin().setCssName(floatAlign);
+    }
+
+    @Override
+    public Float getFloat() {
+        return StyleHelper.fromStyleName(Float.class, getFloatMixin().getCssName());
+    }
 }
