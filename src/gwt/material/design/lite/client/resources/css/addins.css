@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Configure the scrollsbars
+   ========================================================================== */
+
+::-webkit-scrollbar {
+    width: 6px; /* for vertical scrollbars */
+    height: 6px; /* for horizontal scrollbars */
+}
+
+::-webkit-scrollbar-track {
+    /*
+    border-radius: 0px;
+    background: linear-gradient(#455a64, #455a64);
+    background-size: 100% 112px;
+    background-repeat: no-repeat;
+    background-color: #78909c;
+    */
+    background-color: #F5F5F5 !important;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0px !important;
+    background: #455A64 !important;
+}

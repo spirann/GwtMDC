@@ -16,9 +16,11 @@ public class GwtMDL implements EntryPoint {
 
 	public void onModuleLoad() {
 		injectJs(MaterialResources.INSTANCE.jqueryJs());
-		injectJs(MaterialResources.INSTANCE.prismJs());
-		injectCss(MaterialResources.INSTANCE.prismCss());
 		injectJs(MaterialResources.INSTANCE.materialJs());
+		injectJs(MaterialResources.INSTANCE.prismJs());
+		
+		injectCss(MaterialResources.INSTANCE.prismCss());
+		injectCss(MaterialResources.INSTANCE.addinsCss());
 
 		ThemeManager.loadCss(ThemeManager.BLUE_GREY_BLUE);
 		

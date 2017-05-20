@@ -38,4 +38,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/prism.css")
 	TextResource prismCss();
 	
+	@Source("css/addins.css")
+	TextResource addinsCss();
+	
 }
