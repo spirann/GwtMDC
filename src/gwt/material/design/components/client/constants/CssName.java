@@ -35,6 +35,18 @@ public interface CssName {
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";
+	String MDC_TYPOGRAPHY_ADJUST_MARGIN = "mdc-typography--adjust-margin";
+	String MDC_TYPOGRAPHY_DISPLAY_4 = "mdc-typography--display4";
+	String MDC_TYPOGRAPHY_DISPLAY_3 = "mdc-typography--display3";
+	String MDC_TYPOGRAPHY_DISPLAY_2 = "mdc-typography--display2";
+	String MDC_TYPOGRAPHY_DISPLAY_1 = "mdc-typography--display1";
+	String MDC_TYPOGRAPHY_HEADLINE = "mdc-typography--headline";
+	String MDC_TYPOGRAPHY_TITLE = "mdc-typography--title";
+	String MDC_TYPOGRAPHY_SUBHEADING_2 = "mdc-typography--subheading2";
+	String MDC_TYPOGRAPHY_SUBHEADING_1 = "mdc-typography--subheading1";
+	String MDC_TYPOGRAPHY_BODY_2 = "mdc-typography--body2";
+	String MDC_TYPOGRAPHY_BODY_1 = "mdc-typography--body1";
+	String MDC_TYPOGRAPHY_CAPTION = "mdc-typography--caption";
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
 	// //////////////////////////////////////////////////////

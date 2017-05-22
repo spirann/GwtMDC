@@ -26,8 +26,6 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 			initialize(CssName.MDC_TOOLBAR, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 			initialize = true;
 		}
-		
-
 		// 	getElement().getStyle().setProperty("--mdc-toolbar-ratio-to-extend-flexible","3");
 	}
 
