@@ -9,6 +9,7 @@ import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.constants.ThemeAttribute;
 import gwt.material.design.components.client.constants.Typography;
 
 public class MaterialLabel extends MaterialWidget implements HasText, HasTypography {
@@ -17,7 +18,8 @@ public class MaterialLabel extends MaterialWidget implements HasText, HasTypogra
 	private final TypeMixin<MaterialLabel, Typography> typographiMixin = new TypeMixin<>(this);
 	
 	public MaterialLabel() {
-		super(Document.get().createElement(HtmlElements.SPAN), CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+		super(Document.get().createElement(HtmlElements.SPAN), CssName.MDC_TYPOGRAPHY, CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+		setStyleProperty("color", "var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND + ")");
 	}
 
 	@Override

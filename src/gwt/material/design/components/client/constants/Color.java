@@ -23,9 +23,9 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public enum Color implements CssType {
 
-    BLACK("black"),
-    WHITE("white"),
-    TRANSPARENT("transparent"),
+    BLACK(0,0,0,1),
+    WHITE(255,255,255,1),
+    TRANSPARENT(0,0,0,0),
     // RED
     /**
      * The color RED with an RGB value of rgb(244, 67, 54).
@@ -1683,23 +1683,35 @@ public enum Color implements CssType {
      */
     BLUE_GREY_900(38, 50, 56);
 
-    private final String cssClass;
+    private int red;
+    private int green;
+    private int blue;
+    private double alpha;
 
 	Color(final int red, final int green, final int blue) {
 		this(red, green, blue, 1);
 	}
 	
     Color(final int red, final int green, final int blue, double alpha) {
-    	cssClass = "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+    	this.red = red;
+    	this.green = green;
+    	this.blue = blue;
+    	this.alpha = alpha;
     }
      
-    Color(final String cssClass) {
-        this.cssClass = cssClass;
-    }
 
     @Override
     public String getCssName() {
-        return cssClass;
+        return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+    }
+    
+    /**
+     * Replace default alpha, who is 1 
+     * @param alpha
+     * @return
+     */
+    public String getCssName(final String alpha) {
+        return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
     }
 
     public static Color fromStyleName(final String styleName) {

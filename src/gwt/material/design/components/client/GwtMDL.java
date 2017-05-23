@@ -4,8 +4,10 @@ import com.google.gwt.core.client.EntryPoint;
 import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.resources.client.TextResource;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import gwt.material.design.components.client.resources.MaterialResources;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -13,11 +15,13 @@ import gwt.material.design.components.client.resources.MaterialResources;
 public class GwtMDL implements EntryPoint {
 
 	public void onModuleLoad() {
-		//injectJs(MaterialResources.INSTANCE.jqueryJs());
+		// injectJs(MaterialResources.INSTANCE.jqueryJs());
 		injectJs(MaterialResources.INSTANCE.materialJs());
-		injectJs(MaterialResources.INSTANCE.prismJs());		
+		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectCss(MaterialResources.INSTANCE.prismCss());
 		injectCss(MaterialResources.INSTANCE.addinsCss());
+
+		StyleHelper.setStyleProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");
 	}
 
 	public static void injectCss(TextResource resource) {

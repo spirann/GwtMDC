@@ -1,5 +1,7 @@
 package gwt.material.design.components.client.utils.helper;
 
+import com.google.gwt.dom.client.Element;
+
 /*
  * #%L
  * GwtBootstrap3
@@ -31,136 +33,148 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 public final class StyleHelper {
 
-    public static <F extends Enum<? extends Style.HasCssName>> F fromStyleName(final Class<F> enumClass,
-                                                                               final Style.HasCssName styleName) {
-        return EnumHelper.fromStyleName(styleName.getCssName(), enumClass, null);
-    }
+	public static <F extends Enum<? extends Style.HasCssName>> F fromStyleName(final Class<F> enumClass,
+			final Style.HasCssName styleName) {
+		return EnumHelper.fromStyleName(styleName.getCssName(), enumClass, null);
+	}
 
-    /**
-     * Convenience method for first removing all enum style constants and then adding the single one.
-     *
-     * @see #removeEnumStyleNames(UIObject, Class)
-     * @see #addEnumStyleName(UIObject, Style.HasCssName)
-     */
-    public static <E extends Style.HasCssName, F extends Enum<? extends Style.HasCssName>> void addUniqueEnumStyleName(final UIObject uiObject,
-                                                                                                                       final Class<F> enumClass,
-                                                                                                                       final E style) {
-        removeEnumStyleNames(uiObject, enumClass);
-        addEnumStyleName(uiObject, style);
-    }
+	/**
+	 * Convenience method for first removing all enum style constants and then
+	 * adding the single one.
+	 *
+	 * @see #removeEnumStyleNames(UIObject, Class)
+	 * @see #addEnumStyleName(UIObject, Style.HasCssName)
+	 */
+	public static <E extends Style.HasCssName, F extends Enum<? extends Style.HasCssName>> void addUniqueEnumStyleName(
+			final UIObject uiObject, final Class<F> enumClass, final E style) {
+		removeEnumStyleNames(uiObject, enumClass);
+		addEnumStyleName(uiObject, style);
+	}
 
-    /**
-     * Removes all CSS style names specified by an enum that implements {@link Style.HasCssName} from an UIObject.
-     *
-     * @param uiObject  Object to remove CSS class names from
-     * @param enumClass Enum representing CSS class names
-     * @param <E>       Enum type implementing {@link Style.HasCssName}
-     */
-    public static <E extends Enum<? extends Style.HasCssName>> void removeEnumStyleNames(final UIObject uiObject,
-                                                                                         final Class<E> enumClass) {
+	/**
+	 * Removes all CSS style names specified by an enum that implements
+	 * {@link Style.HasCssName} from an UIObject.
+	 *
+	 * @param uiObject
+	 *            Object to remove CSS class names from
+	 * @param enumClass
+	 *            Enum representing CSS class names
+	 * @param <E>
+	 *            Enum type implementing {@link Style.HasCssName}
+	 */
+	public static <E extends Enum<? extends Style.HasCssName>> void removeEnumStyleNames(final UIObject uiObject,
+			final Class<E> enumClass) {
 
-        for (final Enum<? extends Style.HasCssName> constant : enumClass.getEnumConstants()) {
-            final String cssClass = ((Style.HasCssName) constant).getCssName();
+		for (final Enum<? extends Style.HasCssName> constant : enumClass.getEnumConstants()) {
+			final String cssClass = ((Style.HasCssName) constant).getCssName();
 
-            if (cssClass != null && !cssClass.isEmpty()) {
-                uiObject.removeStyleName(cssClass);
-            }
-        }
-    }
+			if (cssClass != null && !cssClass.isEmpty()) {
+				uiObject.removeStyleName(cssClass);
+			}
+		}
+	}
 
-    /**
-     * Adds enum value style name to UIObject unless style is {@code null}.
-     *
-     * @param uiObject Object to add style to
-     * @param style    Style name
-     */
-    public static <E extends Style.HasCssName> void addEnumStyleName(final UIObject uiObject,
-                                                                     final E style) {
+	/**
+	 * Adds enum value style name to UIObject unless style is {@code null}.
+	 *
+	 * @param uiObject
+	 *            Object to add style to
+	 * @param style
+	 *            Style name
+	 */
+	public static <E extends Style.HasCssName> void addEnumStyleName(final UIObject uiObject, final E style) {
 
-        if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
-            uiObject.addStyleName(style.getCssName());
-        }
-    }
+		if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
+			uiObject.addStyleName(style.getCssName());
+		}
+	}
 
-    /**
-     * Removes enum value style name from UIObject unless style is {@code null}.
-     *
-     * @param uiObject Object to remove style from
-     * @param style    Style name
-     */
-    public static <E extends Style.HasCssName> void removeEnumStyleName(final UIObject uiObject,
-                                                                        final E style) {
+	/**
+	 * Removes enum value style name from UIObject unless style is {@code null}.
+	 *
+	 * @param uiObject
+	 *            Object to remove style from
+	 * @param style
+	 *            Style name
+	 */
+	public static <E extends Style.HasCssName> void removeEnumStyleName(final UIObject uiObject, final E style) {
 
-        if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
-            uiObject.removeStyleName(style.getCssName());
-        }
-    }
+		if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
+			uiObject.removeStyleName(style.getCssName());
+		}
+	}
 
-    /**
-     * Returns {@code true} if specified style is contained in space-separated list of styles
-     *
-     * @param styleNames Space-separated list of styles
-     * @param style      Style to look for
-     * @return True if contains style
-     */
-    public static boolean containsStyle(final String styleNames,
-                                        final String style) {
-        if (styleNames == null || style == null) {
-            return false;
-        }
+	/**
+	 * Returns {@code true} if specified style is contained in space-separated
+	 * list of styles
+	 *
+	 * @param styleNames
+	 *            Space-separated list of styles
+	 * @param style
+	 *            Style to look for
+	 * @return True if contains style
+	 */
+	public static boolean containsStyle(final String styleNames, final String style) {
+		if (styleNames == null || style == null) {
+			return false;
+		}
 
-        final String[] styles = styleNames.split("\\s");
+		final String[] styles = styleNames.split("\\s");
 
-        for (final String s : styles) {
-            if (style.equals(s)) {
-                return true;
-            }
-        }
+		for (final String s : styles) {
+			if (style.equals(s)) {
+				return true;
+			}
+		}
 
-        return false;
-    }
+		return false;
+	}
 
-    /**
-     * Toggles a style name on a ui object
-     *
-     * @param uiObject    Object to toggle style on
-     * @param toggleStyle whether or not to toggle the style name on the object
-     * @param styleName   Style name
-     */
-    public static void toggleStyleName(final UIObject uiObject,
-                                       final boolean toggleStyle,
-                                       final String styleName) {
-        if (toggleStyle) {
-            uiObject.addStyleName(styleName);
-        } else {
-            uiObject.removeStyleName(styleName);
-        }
-    }
+	/**
+	 * Toggles a style name on a ui object
+	 *
+	 * @param uiObject
+	 *            Object to toggle style on
+	 * @param toggleStyle
+	 *            whether or not to toggle the style name on the object
+	 * @param styleName
+	 *            Style name
+	 */
+	public static void toggleStyleName(final UIObject uiObject, final boolean toggleStyle, final String styleName) {
+		if (toggleStyle) {
+			uiObject.addStyleName(styleName);
+		} else {
+			uiObject.removeStyleName(styleName);
+		}
+	}
 
-    public static Double getMeasurementValue(String value) {
-        if (value == null) {
-            return null;
-        }
-        try {
-            return Double.parseDouble(value.replaceAll("[^0-9.]", ""));
-        } catch (NumberFormatException ex) {
-            return null;
-        }
-    }
+	public static Double getMeasurementValue(String value) {
+		if (value == null) {
+			return null;
+		}
+		try {
+			return Double.parseDouble(value.replaceAll("[^0-9.]", ""));
+		} catch (NumberFormatException ex) {
+			return null;
+		}
+	}
 
-    public static Style.Unit getMeasurementUnit(String value) {
-        if (value == null) {
-            return null;
-        }
-        try {
-            return Style.Unit.valueOf(
-                    value.replaceAll("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?", "").toUpperCase());
-        } catch (IllegalArgumentException e) {
-            // Silently catch invalid units
-            return null;
-        }
-    }
+	public static Style.Unit getMeasurementUnit(String value) {
+		if (value == null) {
+			return null;
+		}
+		try {
+			return Style.Unit.valueOf(value.replaceAll("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?", "").toUpperCase());
+		} catch (IllegalArgumentException e) {
+			// Silently catch invalid units
+			return null;
+		}
+	}
 
-    private StyleHelper() {
-    }
+	public final static native void setStyleProperty(final Element element, final String attribute, final String value)/*-{
+		element.style.setProperty(attribute, value);
+	}-*/;
+
+	private StyleHelper() {
+	}
 }

@@ -1,21 +1,17 @@
 package gwt.material.design.components.client.base;
 
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 public class BaseWidget extends ComplexPanel {
 
 	public void setStyleProperty(final String attribute, final String value) {
-		setStyleProperty(getElement(), attribute, value);
+		StyleHelper.setStyleProperty(getElement(), attribute, value);
 	}
 
-	protected native void setStyleProperty(final Element element, final String attribute, final String value)/*-{
-		element.style.setProperty(attribute, value);
-	}-*/;
-	
 	public void setMaxWidth(final String maxWidth){
 		setStyleProperty("max-width", maxWidth);
 	}
