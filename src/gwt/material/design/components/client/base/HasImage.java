@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base;
 
+import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.ImageResource;
 
 public interface HasImage {
@@ -37,9 +38,21 @@ public interface HasImage {
      * Sets the resource image.
      */
     void setResource(ImageResource resource);
+       
 
     /**
      * Gets the resource image.
      */
     ImageResource getResource();
+    
+    /**
+     * 
+     * @param resource
+     */
+    void setDataResource(DataResource resource);
+    
+    /**
+     * Gets the resource image.
+     */
+    DataResource getDataResource();
 }
