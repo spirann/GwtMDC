@@ -8,6 +8,7 @@ public interface HtmlElements {
 	String SPAN = "span";
 	String MAIN = "main";
 	String BUTTON = "button";
+	String LABEL = "label";
 	String A = "a";
 	String I = "i";
 	String P = "p";

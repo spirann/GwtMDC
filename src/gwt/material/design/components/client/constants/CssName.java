@@ -35,6 +35,7 @@ public interface CssName {
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";
+	String MDC_TYPOGRAPHY_BASE = "mdc-typography-base";
 	String MDC_TYPOGRAPHY_ADJUST_MARGIN = "mdc-typography--adjust-margin";
 	String MDC_TYPOGRAPHY_DISPLAY_4 = "mdc-typography--display4";
 	String MDC_TYPOGRAPHY_DISPLAY_3 = "mdc-typography--display3";

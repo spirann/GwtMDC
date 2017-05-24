@@ -22,7 +22,36 @@ package gwt.material.design.components.client.constants;
 import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public enum Color implements CssType {
-
+	// THEME
+	MDC_THEME_PRIMARY("var(" + ThemeAttribute.MDC_THEME_PRIMARY+ ")"),
+	MDC_THEME_ACCENT("var(" + ThemeAttribute.MDC_THEME_ACCENT+ ")"),
+	MDC_THEME_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_PRIMARY_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY+ ")"),
+	MDC_THEME_TEXT_SECONDARY_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY+ ")"),
+	MDC_THEME_TEXT_HINT_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY+ ")"),
+	MDC_THEME_TEXT_DISABLED_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY+ ")"),
+	MDC_THEME_TEXT_ICON_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY+ ")"),
+	MDC_THEME_TEXT_PRIMARY_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT+ ")"),
+	MDC_THEME_TEXT_SECONDARY_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT+ ")"),
+	MDC_THEME_TEXT_HINT_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT+ ")"),
+	MDC_THEME_TEXT_DISABLED_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT+ ")"),
+	MDC_THEME_TEXT_ICON_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT+ ")"),
+	MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_HINT_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_DISABLED_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_ICON_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND+ ")"),
+	MDC_THEME_TEXT_PRIMARY_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT+ ")"),
+	MDC_THEME_TEXT_SECONDARY_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT+ ")"),
+	MDC_THEME_TEXT_HINT_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT+ ")"),
+	MDC_THEME_TEXT_DISABLED_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT+ ")"),
+	MDC_THEME_TEXT_ICON_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT+ ")"),
+	MDC_THEME_TEXT_PRIMARY_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK+ ")"),
+	MDC_THEME_TEXT_SECONDARY_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK+ ")"),
+	MDC_THEME_TEXT_HINT_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK+ ")"),
+	MDC_THEME_TEXT_DISABLED_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK+ ")"),
+	MDC_THEME_TEXT_ICON_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK+ ")"),
+	//
     BLACK(0,0,0,1),
     WHITE(255,255,255,1),
     TRANSPARENT(0,0,0,0),
@@ -1683,26 +1712,32 @@ public enum Color implements CssType {
      */
     BLUE_GREY_900(38, 50, 56);
 
-    private int red;
-    private int green;
-    private int blue;
-    private double alpha;
+	private String css;
+    //private int red;
+    //private int green;
+    //private int blue;
+    //private double alpha;
 
+    Color(String css){
+    	this.css = css;
+    }
+    
 	Color(final int red, final int green, final int blue) {
 		this(red, green, blue, 1);
 	}
 	
     Color(final int red, final int green, final int blue, double alpha) {
-    	this.red = red;
-    	this.green = green;
-    	this.blue = blue;
-    	this.alpha = alpha;
+    	//this.red = red;
+    	//this.green = green;
+    	//this.blue = blue;
+    	//this.alpha = alpha;
+    	this.css = "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
     }
      
 
     @Override
     public String getCssName() {
-        return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+        return css;
     }
     
     /**
@@ -1710,9 +1745,9 @@ public enum Color implements CssType {
      * @param alpha
      * @return
      */
-    public String getCssName(final String alpha) {
-        return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
-    }
+    //public String getCssName(final String alpha) {
+    //    return "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+    //}
 
     public static Color fromStyleName(final String styleName) {
         return EnumHelper.fromStyleName(styleName, Color.class, TRANSPARENT);

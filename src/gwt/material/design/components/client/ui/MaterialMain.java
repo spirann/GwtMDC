@@ -15,7 +15,6 @@ public class MaterialMain extends MaterialWidget implements HasToolbarFixedAdjus
 	
 	public MaterialMain(){
 		super(Document.get().createElement(HtmlElements.MAIN), CssName.MDC_TYPOGRAPHY);
-		setStyleProperty("background-color", "var(--mdc-theme-background)");
 	}
 
 	@Override

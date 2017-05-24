@@ -15,8 +15,9 @@ public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
 
 	public enum Align implements CssType {
 
-		TOP(CssName.MDC_LAYOUT_CELL_ALIGN_TOP), MIDDLE(CssName.MDC_LAYOUT_CELL_ALIGN_MIDDLE), BOTTOM(
-				CssName.MDC_LAYOUT_CELL_ALIGN_BOTTOM);
+		TOP(CssName.MDC_LAYOUT_CELL_ALIGN_TOP), 
+		MIDDLE(CssName.MDC_LAYOUT_CELL_ALIGN_MIDDLE), 
+		BOTTOM(CssName.MDC_LAYOUT_CELL_ALIGN_BOTTOM);
 
 		private final String cssClass;
 
