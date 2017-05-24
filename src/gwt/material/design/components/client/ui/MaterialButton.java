@@ -3,26 +3,29 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.HasButtonStyle;
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.ButtonStyle;
+import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.constants.IconType;
 
-public class MaterialButton extends MaterialWidget implements HasType<IconType>, HasHref, HasText {
+public class MaterialButton extends MaterialWidget implements HasType<ButtonType>, HasHref, HasText, HasButtonStyle {
 
 	private final TextMixin<MaterialButton> textMixin = new TextMixin<>(this);
 	private final AttributeMixin<MaterialButton> hrefMixin = new AttributeMixin<>(this, "href");
 	private final AttributeMixin<MaterialButton> targetMixin = new AttributeMixin<>(this, "target");
-	
-	private IconType type;
+	private final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
+	private final TypeMixin<MaterialButton, ButtonStyle> styleMixin = new TypeMixin<>(this);
 
 	public MaterialButton() {
-		super(Document.get().createElement(HtmlElements.BUTTON), CssName.MDC_BUTTON, CssName.MDC_BUTTON_RAISED);
-		setAutoInitData("MDCRipple");	
+		super(Document.get().createElement(HtmlElements.BUTTON), CssName.MDC_BUTTON);
+		setAutoInitData("MDCRipple");
 	}
 
 	@Override
@@ -33,17 +36,6 @@ public class MaterialButton extends MaterialWidget implements HasType<IconType>,
 	@Override
 	public void setText(String text) {
 		textMixin.setText(text);
-	}
-	
-	@Override
-	public void setType(IconType type) {
-		this.type = type;
-		getElement().setInnerHTML(type.getCssName());
-	}
-
-	@Override
-	public IconType getType() {
-		return type;
 	}
 
 	@Override
@@ -66,4 +58,23 @@ public class MaterialButton extends MaterialWidget implements HasType<IconType>,
 		return targetMixin.getAttribute();
 	}
 
+	@Override
+	public void setType(ButtonType type) {
+		typeMixin.setType(type);
+	}
+
+	@Override
+	public ButtonType getType() {
+		return typeMixin.getType();
+	}
+
+	@Override
+	public void setButtonStyle(ButtonStyle style) {
+		styleMixin.setType(style);
+	}
+	
+	@Override
+	public ButtonStyle getButtonStyle() {
+		return styleMixin.getType();
+	}
 }

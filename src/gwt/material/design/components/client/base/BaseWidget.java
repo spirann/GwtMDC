@@ -37,6 +37,10 @@ public class BaseWidget extends ComplexPanel {
 	public void setLetterSpacing(final String letterSpacing) {
 		setStyleProperty("letter-spacing", letterSpacing);
 	}
+	
+	public void setFontSize(final String fontSize) {
+		setStyleProperty("font-size", fontSize);
+	}
 
 	public void setPadding(final String padding) {
 		setStyleProperty("padding", padding);

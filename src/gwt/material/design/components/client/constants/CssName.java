@@ -65,6 +65,7 @@ public interface CssName {
 	String MDC_TOOLBAR_SECTION_ALIGN_END = "mdc-toolbar__section--align-end";
 	String MDC_TOOLBAR_SECTION_SHRINK_TO_FIT = "mdc-toolbar__section--shrink-to-fit";
 	String MDC_TOOLBAR_TITLE = "mdc-toolbar__title";
+	String MDC_TOOLBAR_NAV_LINK = "toolbar-nav-link";
 	// //////////////////////////////////////////////////////
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
@@ -88,51 +89,5 @@ public interface CssName {
 	String MDC_BUTTON_COMPACT = "mdc-button--compact";
 	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
 	String MDC_BUTTON_ACCENT = "mdc-button--accent";
-	// //////////////////////////////////////////////////////
-	//
-	// OLDER MATERIAL DESING LITE
-	//
-	// //////////////////////////////////////////////////////
-	String MDL_RIPPLE_EFFECT = "mdl-js-ripple-effect";
-	String MDL_ACTIVE = "is-active";
-
-	String MDL_SNIPPET_GROUP = "snippet-group";
-	String MDL_SNIPPET_CODE = "snippet-code";
-	String MDL_LANGUAGE_MARKUP = "language-markup";
-
-	String MDL_LAYOUT = "mdl-layout";
-	String MDL_JS_LAYOUT = "mdl-js-layout";
-	String MDL_LAYOUT_HEADER = "mdl-layout__header";
-	String MDL_LAYOUT_HEADER_TRANSPARENT = "mdl-layout__header--transparent";
-	String MDL_LAYOUT_HEADER_SEAMED = "mdl-layout__header--seamed";
-	String MDL_LAYOUT_HEADER_ROW = "mdl-layout__header-row";
-	String MDL_LAYOUT_TITLE = "mdl-layout-title";
-	String MDL_LAYOUT_CONTENT = "mdl-layout__content";
-	String MDL_LAYOUT_SPACER = "mdl-layout-spacer";
-	String MDL_LAYOUT_DRAWER = "mdl-layout__drawer";
-	String MDL_NAVEGATION = "mdl-navigation";
-	String MDL_NAVEGATION_LINK = "mdl-navigation__link";
-	String MDL_LAYOUT_FIXED_HEADER = "mdl-layout--fixed-header";
-	String MDL_LAYOUT_FIXED_DRAWER = "mdl-layout--fixed-drawer";
-	String MDL_LAYOUT_FIXED_TABS = "mdl-layout--fixed-tabs";
-	String MDL_LAYOUT_HIDE_DRAWER_BUTTON = "mdl-layout--no-drawer-button";
-	String MDL_LAYOUT_HIDE_DRAWER_BUTTON_ON_DESKTOP = "mdl-layout--no-desktop-drawer-button";
-	String MDL_LAYOUT_ICON = "mdl-layout-icon";
-
-	String MDL_LAYOUT_TAB_BAR = "mdl-layout__tab-bar";
-	String MDL_LAYOUT_TAB_BAR_MANUAL_SWITCH = "mdl-layout__tab-manual-switch";
-	String MDL_LAYOUT_TAB_ITEM = "mdl-layout__tab";
-	String MDL_LAYOUT_TAB_PANEL = "mdl-layout__tab-panel";
-
-	String MDL_PAGE_CONTENT = "page-content";
-
-	String MDL_GRID = "mdl-grid";
-	String MDL_CEL = "mdl-cell";
-	String MDL_CEL_STRETCH = "mdl-cell--stretch";
-
-	String MDL_BUTTON = "mdl-button";
-	String MDL_JS_BUTTON = "mdl-js-button";
-	String MDL_BUTTON_COLORED = "mdl-button--colored";
-	String MDL_JS_RIPPLE_EFFECT = "mdl-js-ripple-effect";
 
 }

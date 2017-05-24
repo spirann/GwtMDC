@@ -16,5 +16,7 @@ public class ThemeManager {
 		
 		currentTheme = StyleInjector.injectStylesheet(resource.getText());
 		
+		// Addins
+		StyleInjector.inject(MaterialResources.INSTANCE.addinsCss().getText());
 	}
 }

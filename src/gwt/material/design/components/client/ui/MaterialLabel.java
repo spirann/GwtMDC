@@ -15,9 +15,16 @@ public class MaterialLabel extends MaterialWidget implements HasText, HasTypogra
 
 	private final TextMixin<MaterialLabel> textMixin = new TextMixin<>(this);
 	private final TypeMixin<MaterialLabel, Typography> typographiMixin = new TypeMixin<>(this);
-	
+
 	public MaterialLabel() {
-		super(Document.get().createElement(HtmlElements.SPAN), CssName.MDC_TYPOGRAPHY, CssName.MDC_TYPOGRAPHY_BASE, CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+		super(Document.get().createElement(HtmlElements.LABEL), CssName.MDC_TYPOGRAPHY, CssName.MDC_TYPOGRAPHY_BASE,
+				CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+	}
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		getElement().appendChild(Document.get().createElement(HtmlElements.BR));
 	}
 
 	@Override

@@ -50,6 +50,7 @@ import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
+import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
@@ -65,7 +66,7 @@ import gwt.material.design.components.client.events.DropEvent;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled,
-		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole {
+		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive {
 
 	class Appender {
 		Widget widget;
@@ -82,7 +83,8 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	}
 
 	private final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
-	private final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);;
+	private final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
+	private final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
 	private final AttributeMixin<MaterialWidget> autoInitMixin = new AttributeMixin<MaterialWidget>(this,
 			"data-mdc-auto-init");
 	private final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
@@ -538,6 +540,16 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
+	}
+	
+	@Override
+	public boolean isActive() {
+		return activeMixin.isActive();
+	}
+
+	@Override
+	public void setActive(boolean active) {
+		activeMixin.setActive(active);
 	}
 
 	public void setRtl(boolean rtl) {

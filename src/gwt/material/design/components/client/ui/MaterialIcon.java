@@ -21,6 +21,9 @@ public class MaterialIcon extends MaterialWidget implements HasType<IconType>, H
 		super(Document.get().createElement(HtmlElements.I), CssName.MATERIAL_ICONS);
 	}
 
+	
+	// toolbar-nav-link__text
+	
 	public MaterialIcon(final IconType type){
 		this();
 		setType(type);

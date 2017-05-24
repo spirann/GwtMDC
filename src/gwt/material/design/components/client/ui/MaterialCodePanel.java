@@ -1,6 +1,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasType;
@@ -50,10 +51,16 @@ public class MaterialCodePanel extends MaterialWidget implements HasType<CodeTyp
 	private MaterialCode code = new MaterialCode();
 
 	public MaterialCodePanel() {
-		super(Document.get().createElement("pre"));
+		super(Document.get().createElement("pre"), "language-markup");
 		add(code);
 	}
-
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		setType(CodeType.XML);
+	}
+	
 	@Override
 	public String getText() {
 		return code.getText();
@@ -62,6 +69,10 @@ public class MaterialCodePanel extends MaterialWidget implements HasType<CodeTyp
 	@Override
 	public void setText(String text) {
 		code.setText(text);
+	}
+	
+	public void setTextResource(TextResource resource) {
+		setText(resource.getText());
 	}
 
 	@Override

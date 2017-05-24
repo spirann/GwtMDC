@@ -20,19 +20,18 @@
 package gwt.material.design.components.client.base;
 
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.ui.MaterialIcon;
 
 public interface HasIcon {
 
     /**
      * Get the icon widget.
      */
-    MaterialIcon getIcon();
+	IconType getIcon();
 
     /**
-     * Set Material Design icon.
-     * {@link https://www.google.com/design/icons/}
+     * 
+     * @param iconType
      */
-    void setIconType(IconType iconType);
+    void setIcon(IconType iconType);
 
 }

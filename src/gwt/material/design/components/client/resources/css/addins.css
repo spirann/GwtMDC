@@ -6,6 +6,56 @@ html, body {
 .catalog-title {
 	font-family: "Roboto Mono", monospace;
 }
+
+.material-icons {
+	cursor: pointer;
+}
+
+.toolbar-nav-link {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin-top:-14px;
+	margin-bottom: -24px;
+	height:56px;
+	padding: 0 14px;
+	background: none;
+	border: none;
+	border-bottom: 2px solid transparent;
+	cursor: pointer;
+	font-family: Roboto Mono;
+	font-size: .875rem;
+	letter-spacing: .04em;
+	line-height: 1.25rem;
+	text-decoration: none;
+	text-transform: uppercase;
+	white-space: nowrap;
+}
+
+.toolbar-nav-link,
+.toolbar-nav-link:active, 
+.toolbar-nav-link:hover,
+.toolbar-nav-link:link, 
+.toolbar-nav-link:visited {
+	color: var(--mdc-theme-text-primary-on-primary);
+	fill: var(--mdc-theme-text-primary-on-primary);
+}
+ 
+.toolbar-nav-link.active {
+	color: var(--mdc-theme-accent);
+	border-bottom: 2px solid var(--mdc-theme-accent);
+}
+
+.mdc-toolbar>.material-icons, 
+.mdc-toolbar__row>.material-icons,
+.mdc-toolbar__section>.material-icons {
+	margin-right: 12px;
+	margin-left: 12px;
+}
+
 /* ==========================================================================
    Configure the scrollsbars
    ========================================================================== */
@@ -22,7 +72,8 @@ html, body {
     background-repeat: no-repeat;
     background-color: #78909c;
     */
-	background-color: var(--mdc-theme-text-primary-on-primary); /* #F5F5F5 !important; */
+	background-color: var(--mdc-theme-text-primary-on-primary);
+	/* #F5F5F5 !important; */
 }
 
 ::-webkit-scrollbar-thumb {
@@ -32,6 +83,3 @@ html, body {
 	*/
 	background: var(--mdc-theme-accent);
 }
-
- 
- 

@@ -9,6 +9,7 @@ public interface HtmlElements {
 	String MAIN = "main";
 	String BUTTON = "button";
 	String LABEL = "label";
+	String BR = "br";
 	String A = "a";
 	String I = "i";
 	String P = "p";

@@ -16,6 +16,6 @@ public class TextMixin<T extends UIObject> extends AbstractMixin<T> {
     }
 
     public void setText(final String text) {
-        uiObject.getElement().setInnerHTML(text);
+    	uiObject.getElement().setInnerHTML(text);
     }
 }
