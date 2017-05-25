@@ -28,9 +28,12 @@ public interface MaterialResources extends ClientBundle {
 
 	@Source("js/jquery-2.1.1.min.js")
 	TextResource jqueryJs();
+	
+	@Source("js/google_analytics.js")
+	TextResource googleAnalyticsJs();
 
 	@Source("js/material-components-web.min.js")
-	TextResource materialJs();
+	TextResource materialComponentsWebJs();
 	
 	@Source("js/prism.js")
 	TextResource prismJs();

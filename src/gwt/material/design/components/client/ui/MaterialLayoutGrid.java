@@ -2,7 +2,10 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Document;
 
+import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Align;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 
@@ -32,7 +35,9 @@ import gwt.material.design.components.client.constants.HtmlElements;
  * @author Richeli Vargas
  *
  */
-public class MaterialLayoutGrid extends MaterialWidget {
+public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
+	
+	private final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
 
 	public MaterialLayoutGrid() {
 		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_LAYOUT_GRID);
@@ -55,4 +60,21 @@ public class MaterialLayoutGrid extends MaterialWidget {
 	public void setGutter(int gutter) {
 		setStyleProperty("--mdc-layout-grid-gutter", gutter + "px");
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public void setAlign(Align align) {
+		alignMixin.setType(align);
+	}
+
+	/**
+	 * 
+	 */
+	@Override
+	public Align getAlign() {
+		return alignMixin.getType();
+	}
+
 }

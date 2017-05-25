@@ -10,6 +10,8 @@ public interface HtmlElements {
 	String BUTTON = "button";
 	String LABEL = "label";
 	String BR = "br";
+	String CODE = "code";
+	String PRE = "pre";
 	String A = "a";
 	String I = "i";
 	String P = "p";

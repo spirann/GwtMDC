@@ -15,9 +15,10 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 public class GwtMDL implements EntryPoint {
 
 	public void onModuleLoad() {
-		//injectJs(MaterialResources.INSTANCE.jqueryJs());
-		injectJs(MaterialResources.INSTANCE.materialJs());
+		injectJs(MaterialResources.INSTANCE.jqueryJs());
+		injectJs(MaterialResources.INSTANCE.googleAnalyticsJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
+		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectCss(MaterialResources.INSTANCE.prismCss());
 		injectCss(MaterialResources.INSTANCE.addinsCss());
 

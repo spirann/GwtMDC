@@ -18,5 +18,6 @@ public class ThemeManager {
 		
 		// Addins
 		StyleInjector.inject(MaterialResources.INSTANCE.addinsCss().getText());
+		StyleInjector.inject(MaterialResources.INSTANCE.prismCss().getText());
 	}
 }

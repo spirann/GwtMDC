@@ -89,7 +89,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			"data-mdc-auto-init");
 	private final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
 	private final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
-
+	
 	private String primaryClass;
 	private String[] initialClasses;
 
@@ -583,5 +583,4 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public String getRole() {
 		return roleMixin.getAttribute();
 	}
-
 }

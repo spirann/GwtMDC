@@ -54,8 +54,12 @@ public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
 		alignMixin.setStyle(align.getCssName());
 	}
 
-	public void getAlign() {
-		Align.fromStyleName(alignMixin.getStyle());
+	/**
+	 * 
+	 * @return
+	 */
+	public Align getAlign() {
+		return Align.fromStyleName(alignMixin.getStyle());
 	}
 
 	@Override
