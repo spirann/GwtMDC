@@ -127,6 +127,6 @@ public class BaseWidget extends ComplexPanel {
 	}
 
 	public void setLayoutPosition(final Style.Position position){
-		setStyleProperty("layout-position", position.getCssName());
+		setStyleProperty("position", position.getCssName());
 	}
 }

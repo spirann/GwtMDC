@@ -48,8 +48,8 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 	 * 
 	 * @param padding
 	 */
-	public void setPadding(int padding) {
-		setStyleProperty("--mdc-layout-grid-margin", padding + "px");
+	public void setGridMargin(int margin) {
+		setStyleProperty("--mdc-layout-grid-margin", margin + "px");
 	}
 
 	/**

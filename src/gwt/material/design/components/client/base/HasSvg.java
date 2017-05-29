@@ -19,28 +19,43 @@
  */
 package gwt.material.design.components.client.base;
 
-import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.resources.client.TextResource;
 
-public interface HasImage {
+import gwt.material.design.components.client.constants.Color;
 
-    /**
-     * Sets the url of an image.
-     */
-    void setUrl(String url);
+public interface HasSvg {
 
-    /**
-     * Gets the image url.
-     */
-    String getUrl();
+	/**
+	 * Sets the resource svg image.
+	 */
+	void setResource(TextResource resource);
 
-    /**
-     * Sets the resource image.
-     */
-    void setResource(ImageResource resource);
-       
-
-    /**
-     * Gets the resource image.
-     */
-    ImageResource getResource();
+	/**
+	 * Gets the resource svg image.
+	 */
+	TextResource getResource();
+	
+	/**
+	 * 
+	 * @param fillColor
+	 */
+	void setFillColor(Color fillColor);
+	
+	/**
+	 * 
+	 * @return
+	 */
+	Color getFillColor();
+	
+	/**
+	 * 
+	 * @param width
+	 */
+	void setWidth(String width);
+	
+	/**
+	 * 
+	 * @param height
+	 */
+	void setHeight(String height);
 }

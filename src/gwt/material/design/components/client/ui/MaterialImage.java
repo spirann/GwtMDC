@@ -28,7 +28,6 @@ import com.google.gwt.event.dom.client.HasLoadHandlers;
 import com.google.gwt.event.dom.client.LoadEvent;
 import com.google.gwt.event.dom.client.LoadHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasCaption;
 
@@ -98,16 +97,6 @@ public class MaterialImage extends MaterialWidget implements HasCaption, HasImag
     @Override
     public ImageResource getResource() {
         return imageMixin.getResource();
-    }
-    
-    @Override
-    public void setDataResource(DataResource resource) {
-        imageMixin.setDataResource(resource);
-    }
-    
-    @Override
-    public DataResource getDataResource() {
-        return imageMixin.getDataResource();
     }
 
     public int getWidth() {

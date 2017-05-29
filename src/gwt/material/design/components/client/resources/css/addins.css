@@ -22,9 +22,9 @@ html, body {
 	font-family: "Roboto Mono", monospace;
 }
 
-.material-icons {
-	cursor: pointer;
-}
+/* ==========================================================================
+   Toolbar nav link
+   ========================================================================== */
 
 .toolbar-nav-link {
 	display: -webkit-box;
@@ -61,10 +61,18 @@ html, body {
 	border-bottom: 2px solid var(--mdc-theme-accent);
 }
 
-.mdc-toolbar>.material-icons, .mdc-toolbar__row>.material-icons,
-	.mdc-toolbar__section>.material-icons {
+/* ==========================================================================
+   Icons
+   ========================================================================== */
+
+.material-icons {
+	cursor: pointer;
+}
+
+.mdc-toolbar > .material-icons, 
+.mdc-toolbar__row > .material-icons,
+.mdc-toolbar__section > .material-icons {
 	margin-right: 12px;
-	margin-left: 12px;
 }
 
 /* ==========================================================================

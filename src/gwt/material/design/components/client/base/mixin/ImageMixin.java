@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.resources.client.DataResource;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.UIObject;
 
@@ -32,7 +31,6 @@ public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> 
 
     private String url = "";
     private ImageResource resource;
-    private DataResource dataResource;
 
     public ImageMixin(final T widget) {
         super(widget);
@@ -58,16 +56,5 @@ public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> 
     @Override
     public ImageResource getResource() {
         return resource;
-    }
-
-    @Override
-    public void setDataResource(DataResource dataResource) {
-    	this.dataResource = dataResource;
-        setUrl(dataResource.getSafeUri().asString());
-    }
-    
-    @Override
-    public DataResource getDataResource() {
-        return dataResource;
     }
 }

@@ -33,6 +33,7 @@ public class MaterialLabel extends MaterialWidget implements HasText, HasTypogra
 			if(typographiMixin.getType() == null){
 				setTypography(Typography.BODY_1);
 			}
+			
 			getElement().appendChild(Document.get().createElement(HtmlElements.BR));
 			initialize = true;
 		}
