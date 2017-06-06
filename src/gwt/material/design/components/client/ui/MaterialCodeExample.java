@@ -10,7 +10,7 @@ public class MaterialCodeExample extends MaterialWidget  {
 
 	public MaterialCodeExample() {
 		super(Document.get().createElement(HtmlElements.PRE), CssName.PRISM_LANGUAGE_MARKUP);	
-		setPadding("48px");
+		setPadding("24px");
 	}
 
 }

@@ -12,6 +12,8 @@ public interface HtmlElements {
 	String BR = "br";
 	String CODE = "code";
 	String PRE = "pre";
+	String IFRAME = "iframe";
+	String HTML = "html";
 	String A = "a";
 	String I = "i";
 	String P = "p";
