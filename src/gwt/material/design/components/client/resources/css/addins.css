@@ -73,7 +73,6 @@ html, body {
 .mdc-toolbar__row > .material-icons,
 .mdc-toolbar__section > .material-icons {
 	font-size: 24px;
-	background-color: cyan;
 	margin-left: 12px;
 	margin-right: 12px;
 }
