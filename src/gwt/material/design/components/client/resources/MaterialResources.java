@@ -44,4 +44,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/addins.css")
 	TextResource addinsCss();
 	
+	@Source("css/material-components-web.min.css")
+	TextResource materialComponentsWebCss();
+	
 }

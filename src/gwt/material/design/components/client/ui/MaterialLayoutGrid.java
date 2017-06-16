@@ -41,6 +41,7 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 
 	public MaterialLayoutGrid() {
 		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_LAYOUT_GRID);
+		setPadding("0");
 	}
 
 	/**

@@ -20,6 +20,7 @@ public class GwtMDL implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectCss(MaterialResources.INSTANCE.prismCss());
+		injectCss(MaterialResources.INSTANCE.materialComponentsWebCss());
 		injectCss(MaterialResources.INSTANCE.addinsCss());
 
 		StyleHelper.setStyleProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");

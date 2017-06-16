@@ -17,7 +17,6 @@
   <source path='client'/>
 
   <!-- Load the Material Design Icons -->
-  <stylesheet src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css"/>
   <stylesheet src="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/> 
   <stylesheet src="https://fonts.googleapis.com/css?family=Roboto+Mono"/>
   <stylesheet src="https://fonts.googleapis.com/icon?family=Material+Icons"/> 	

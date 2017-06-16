@@ -14,6 +14,16 @@ public class BaseWidget extends ComplexPanel {
 		StyleHelper.setStyleProperty(getElement(), attribute, value);
 	}
 
+	@Override
+	public void setWidth(final String width) {
+		setStyleProperty("width", width);
+	}
+	
+	@Override
+	public void setHeight(final String height) {
+		setStyleProperty("height", height);
+	}
+	
 	public void setMaxWidth(final String maxWidth) {
 		setStyleProperty("max-width", maxWidth);
 	}
