@@ -68,6 +68,10 @@ import gwt.material.design.components.client.events.DropEvent;
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled,
 		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive {
 
+	static {
+		autoInit();
+	}
+	
 	class Appender {
 		Widget widget;
 		int index = -1;

@@ -44,22 +44,40 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 		setPadding("0");
 	}
 
-	/**
-	 * Default is 16px
-	 * 
-	 * @param padding
-	 */
-	public void setGridMargin(int margin) {
-		setStyleProperty("--mdc-layout-grid-margin", margin + "px");
+	public void setGridMargin(int gutter) {
+		setDesktopMargin(gutter);
+		setTabletMargin(gutter);
+		setPhoneMargin(gutter);
+	}
+	
+	public void setDesktopMargin(int margin) {
+		setStyleProperty("--mdc-layout-grid-margin-desktop", margin + "px");
+	}
+	
+	public void setTabletMargin(int margin) {
+		setStyleProperty("--mdc-layout-grid-margin-tablet", margin + "px");
+	}
+	
+	public void setPhoneMargin(int margin) {
+		setStyleProperty("--mdc-layout-grid-margin-phone", margin + "px");
 	}
 
-	/**
-	 * Default is 16px
-	 * 
-	 * @param gutter
-	 */
 	public void setGutter(int gutter) {
-		setStyleProperty("--mdc-layout-grid-gutter", gutter + "px");
+		setDesktopGutter(gutter);
+		setTabletGutter(gutter);
+		setPhoneGutter(gutter);
+	}
+	
+	public void setDesktopGutter(int gutter) {
+		setStyleProperty("--mdc-layout-grid-gutter-desktop", gutter + "px");
+	}
+	
+	public void setTabletGutter(int gutter) {
+		setStyleProperty("--mdc-layout-grid-gutter-tablet", gutter + "px");
+	}
+	
+	public void setPhoneGutter(int gutter) {
+		setStyleProperty("--mdc-layout-grid-gutter-phone", gutter + "px");
 	}
 	
 	/**

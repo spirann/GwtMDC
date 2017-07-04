@@ -18,8 +18,8 @@ public class GwtMDL implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.jqueryJs());
 		injectJs(MaterialResources.INSTANCE.googleAnalyticsJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
+		injectCss(MaterialResources.INSTANCE.prismCss());		
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
-		injectCss(MaterialResources.INSTANCE.prismCss());
 		injectCss(MaterialResources.INSTANCE.materialComponentsWebCss());
 		injectCss(MaterialResources.INSTANCE.addinsCss());
 

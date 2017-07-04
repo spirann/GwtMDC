@@ -76,6 +76,7 @@ public interface CssName {
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
 	String MDC_LAYOUT_GRID = "mdc-layout-grid";
+	String MDC_LAYOUT_GRID_INNER = "mdc-layout-grid__inner";
 	String MDC_LAYOUT_CELL = "mdc-layout-grid__cell";
 	String MDC_LAYOUT_CELL_SPAN = "mdc-layout-grid__cell--span-{columns}-{screen_size}";
 	String MDC_LAYOUT_CELL_ORDER = "mdc-layout-grid__cell--order-{number}";
