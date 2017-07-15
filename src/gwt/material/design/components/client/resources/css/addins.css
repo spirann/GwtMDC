@@ -3,6 +3,10 @@ html, body {
 	paddin: 0;
 }
 
+i, a {
+	cursor: pointer;
+}
+
 .left-align {
 	margin-left: 0;
 	margin-right: auto;

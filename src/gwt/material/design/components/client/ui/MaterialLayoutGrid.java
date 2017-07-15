@@ -7,7 +7,7 @@ import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Align;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssPropertyName;
+import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
@@ -51,15 +51,15 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 	}
 	
 	public void setDesktopPadding(int margin) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
 	}
 	
 	public void setTabletPadding(int margin) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
 	}
 	
 	public void setPhonePadding(int margin) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
 	}
 
 	public void setGutter(int gutter) {
@@ -69,15 +69,15 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 	}
 	
 	public void setDesktopGutter(int gutter) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
 	}
 	
 	public void setTabletGutter(int gutter) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
 	}
 	
 	public void setPhoneGutter(int gutter) {
-		setStyleProperty(CssPropertyName.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
+		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
 	}
 	
 	/**

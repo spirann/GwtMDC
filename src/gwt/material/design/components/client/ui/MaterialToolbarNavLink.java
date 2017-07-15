@@ -14,6 +14,7 @@ public class MaterialToolbarNavLink extends MaterialWidget implements HasText {
 
 	public MaterialToolbarNavLink() {
 		super(Document.get().createElement(HtmlElements.SPAN), CssName.MDC_TOOLBAR_NAV_LINK);
+		
 	}
 
 	@Override

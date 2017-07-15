@@ -24,13 +24,11 @@ package gwt.material.design.components.client.constants;
  *
  * @author kebzlou7979
  */
-public interface CssPropertyName {
+public interface MdcAttribute {
 
-	String MDC_LAYOUT_GRID_MARGIN_DESKTOP = "--mdc-layout-grid-margin-desktop";
-	String MDC_LAYOUT_GRID_MARGIN_TABLET = "--mdc-layout-grid-margin-tablet";
-	String MDC_LAYOUT_GRID_MARGIN_PHONE = "--mdc-layout-grid-margin-phone";
-	String MDC_LAYOUT_GRID_GUTTER_DESKTOP = "--mdc-layout-grid-margin-desktop";
-	String MDC_LAYOUT_GRID_GUTTER_TABLET = "--mdc-layout-grid-margin-tablet";
-	String MDC_LAYOUT_GRID_GUTTER_PHONE = "--mdc-layout-grid-margin-phone";
-	
+	// //////////////////////////////////////////////////////
+	// RIPPLES
+	// //////////////////////////////////////////////////////
+	String DATA_MDC_RIPPLE_IS_UNBOUNDED = "data-mdc-ripple-is-unbounded";
+
 }
