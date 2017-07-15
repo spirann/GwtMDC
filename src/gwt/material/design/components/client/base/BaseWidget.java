@@ -52,44 +52,44 @@ public class BaseWidget extends ComplexPanel {
 		setStyleProperty("font-size", fontSize);
 	}
 
-	public void setPadding(final String padding) {
-		setStyleProperty("padding", padding);
+	public void setPadding(final int padding) {
+		setStyleProperty("padding", padding + "px");
 	}
 
-	public void setPaddingTop(final String paddingTop) {
-		setStyleProperty("padding-top", paddingTop);
+	public void setPaddingTop(final int paddingTop) {
+		setStyleProperty("padding-top", paddingTop + "px");
 	}
 
-	public void setPaddingBottom(final String paddingBottom) {
-		setStyleProperty("padding-bottom", paddingBottom);
+	public void setPaddingBottom(final int paddingBottom) {
+		setStyleProperty("padding-bottom", paddingBottom + "px");
 	}
 
-	public void setPaddingLeft(final String paddingLeft) {
-		setStyleProperty("padding-left", paddingLeft);
+	public void setPaddingLeft(final int paddingLeft) {
+		setStyleProperty("padding-left", paddingLeft + "px");
 	}
 
-	public void setPaddingRight(final String paddingRight) {
-		setStyleProperty("padding-right", paddingRight);
+	public void setPaddingRight(final int paddingRight) {
+		setStyleProperty("padding-right", paddingRight + "px");
 	}
 
-	public void setMargin(final String margin) {
-		setStyleProperty("margin", margin);
+	public void setMargin(final int margin) {
+		setStyleProperty("margin", margin + "px");
 	}
 
-	public void setMarginTop(final String marginTop) {
-		setStyleProperty("margin-top", marginTop);
+	public void setMarginTop(final int marginTop) {
+		setStyleProperty("margin-top", marginTop + "px");
 	}
 
-	public void setMarginBottom(final String marginBottom) {
-		setStyleProperty("margin-bottom", marginBottom);
+	public void setMarginBottom(final int marginBottom) {
+		setStyleProperty("margin-bottom", marginBottom + "px");
 	}
 
-	public void setMarginLeft(final String marginLeft) {
-		setStyleProperty("margin-left", marginLeft);
+	public void setMarginLeft(final int marginLeft) {
+		setStyleProperty("margin-left", marginLeft + "px");
 	}
 
-	public void setMarginRight(final String marginRight) {
-		setStyleProperty("margin-right", marginRight);
+	public void setMarginRight(final int marginRight) {
+		setStyleProperty("margin-right", marginRight + "px");
 	}
 
 	public void setBackground(final String background) {

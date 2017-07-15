@@ -22,32 +22,43 @@ html, body {
 	font-family: "Roboto Mono", monospace;
 }
 
+.mdc-toolbar img {
+	align-self: center;
+	margin: 0 0 0 16px;
+}
+
 /* ==========================================================================
    Toolbar nav link
    ========================================================================== */
 
 .toolbar-nav-link {
+	align-self: flex-end;
 	display: -webkit-box;
 	display: -ms-flexbox;
 	display: flex;
 	-webkit-box-align: center;
 	-ms-flex-align: center;
 	align-items: center;
-	margin-top: -14px;
-	margin-bottom: -24px;
-	height: 56px;
-	padding: 0 14px;
+	
 	background: none;
 	border: none;
 	border-bottom: 2px solid transparent;
+	
 	cursor: pointer;
+	
 	font-family: Roboto Mono;
-	font-size: .875rem;
+	font-size: .875rem;	
 	letter-spacing: .04em;
-	line-height: 1.25rem;
+    line-height: 1.5rem;	
 	text-decoration: none;
 	text-transform: uppercase;
-	white-space: nowrap;
+	
+	margin: 0 0 -4px 0;
+	padding: 16px 14px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 1;
 }
 
 .toolbar-nav-link, .toolbar-nav-link:active, .toolbar-nav-link:hover,
@@ -59,27 +70,6 @@ html, body {
 .toolbar-nav-link.active {
 	color: var(--mdc-theme-accent);
 	border-bottom: 2px solid var(--mdc-theme-accent);
-}
-
-/* ==========================================================================
-   Icons
-   ========================================================================== */
-
-.material-icons {
-	cursor: pointer;
-}
-
-.mdc-toolbar > .material-icons, 
-.mdc-toolbar__row > .material-icons,
-.mdc-toolbar__section > .material-icons {
-	font-size: 24px;
-	margin-left: 12px;
-	margin-right: 12px;
-}
-
-.mdc-toolbar__section--align-start:first-child > .material-icons {
-	margin-left: 0;
-	margin-right: 24px;
 }
 
 /* ==========================================================================

@@ -10,14 +10,17 @@ public class ThemeManager {
 	
 	public static void applyTheme(final TextResource resource){
 		
+		// Remove old styles
 		if(currentTheme != null){
 			currentTheme.removeFromParent();
 		}
 		
-		currentTheme = StyleInjector.injectStylesheet(resource.getText());
-		
-		// Addins
+		// Reload system style 
+		StyleInjector.inject(MaterialResources.INSTANCE.materialComponentsWebCss().getText());
 		StyleInjector.inject(MaterialResources.INSTANCE.addinsCss().getText());
 		StyleInjector.inject(MaterialResources.INSTANCE.prismCss().getText());
+		
+		// Apply the theme
+		currentTheme = StyleInjector.injectStylesheet(resource.getText());
 	}
 }

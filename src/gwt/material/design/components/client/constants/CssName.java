@@ -71,11 +71,12 @@ public interface CssName {
 	String MDC_TOOLBAR_SECTION_ALIGN_END = "mdc-toolbar__section--align-end";
 	String MDC_TOOLBAR_SECTION_SHRINK_TO_FIT = "mdc-toolbar__section--shrink-to-fit";
 	String MDC_TOOLBAR_TITLE = "mdc-toolbar__title";
+	String MDC_TOOLBAR_ICON_MENU = "material-icons mdc-toolbar__icon--menu";
 	String MDC_TOOLBAR_NAV_LINK = "toolbar-nav-link";
 	// //////////////////////////////////////////////////////
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
-	String MDC_LAYOUT_GRID = "mdc-layout-grid";
+	String MDC_LAYOUT_GRID = "mdc-layout-grid";	
 	String MDC_LAYOUT_GRID_INNER = "mdc-layout-grid__inner";
 	String MDC_LAYOUT_CELL = "mdc-layout-grid__cell";
 	String MDC_LAYOUT_CELL_SPAN = "mdc-layout-grid__cell--span-{columns}-{screen_size}";
