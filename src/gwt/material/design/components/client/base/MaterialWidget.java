@@ -52,8 +52,11 @@ import com.google.gwt.user.client.ui.WidgetCollection;
 
 import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
+import gwt.material.design.components.client.base.mixin.RippleMixin;
+import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.events.DragEndEvent;
 import gwt.material.design.components.client.events.DragEnterEvent;
 import gwt.material.design.components.client.events.DragLeaveEvent;
@@ -65,13 +68,13 @@ import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
 
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled,
-		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive {
+public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle {
 
 	static {
 		autoInit();
 	}
-	
+
 	class Appender {
 		Widget widget;
 		int index = -1;
@@ -93,7 +96,9 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			"data-mdc-auto-init");
 	private final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
 	private final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
-	
+	private final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
+	private final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
+
 	private String primaryClass;
 	private String[] initialClasses;
 
@@ -103,6 +108,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	public static native void autoInit()/*-{
 		$wnd.mdc.autoInit();
+	}-*/;
+
+	public static native void rippleInit(Element element)/*-{
+		$wnd.mdc.ripple.MDCRipple.attachTo(element);
 	}-*/;
 
 	public MaterialWidget() {
@@ -152,11 +161,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		}
 
 		initialize = true;
-
-		autoInit();
+		
+		rippleInit(getElement());
+		
 	}
-
-	
 
 	/*
 	 * @Override public void setStyleName(String style) {
@@ -545,7 +553,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
 	}
-	
+
 	@Override
 	public boolean isActive() {
 		return activeMixin.isActive();
@@ -586,5 +594,20 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public String getRole() {
 		return roleMixin.getAttribute();
+	}
+
+	@Override
+	public void setRipple(Ripple ripple) {
+		ripleMixin.setRipple(ripple);
+	}
+
+	@Override
+	public Ripple getRipple() {
+		return ripleMixin.getRipple();
+	}
+
+	@Override
+	public void setCircle(boolean circle) {
+		circleMixin.setCircle(circle);
 	}
 }

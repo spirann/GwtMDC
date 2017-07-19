@@ -9,7 +9,7 @@ import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.MdcAttribute;
+import gwt.material.design.components.client.constants.Ripple;
 
 public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconType>, HasHref {
 
@@ -19,16 +19,21 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 	private IconType type;
 
 	public MaterialToolbarIcon() {
-		super(Document.get().createElement(HtmlElements.A), CssName.MDC_TOOLBAR_ICON_MENU, CssName.MDC_RIPPLE_SURFACE, CssName.MDC_RIPPLE_SURFACE_ACCENT);
-		getElement().setAttribute(MdcAttribute.DATA_MDC_RIPPLE_IS_UNBOUNDED, "");
+		super(Document.get().createElement(HtmlElements.A), CssName.MDC_TOOLBAR_ICON_MENU);
+		setCircle(true);
 	}
-
-	
-	// toolbar-nav-link__text
 	
 	public MaterialToolbarIcon(final IconType type){
 		this();
 		setType(type);
+	}
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		if(getRipple() == null){
+			setRipple(Ripple.ACCENT);
+		}
 	}
 
 	@Override

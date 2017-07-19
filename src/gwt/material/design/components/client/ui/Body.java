@@ -8,13 +8,13 @@ import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 
-public class MaterialDiv extends MaterialWidget implements HasToolbarFixedAdjust{
+public class Body extends MaterialWidget implements HasToolbarFixedAdjust{
 
-	private final StyleEnabledMixin<MaterialDiv> toolbarFixedAdjustMixin = new StyleEnabledMixin<>(
+	private final StyleEnabledMixin<Body> toolbarFixedAdjustMixin = new StyleEnabledMixin<>(
 			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 	
-	public MaterialDiv(){
-		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_TYPOGRAPHY);
+	public Body(){
+		super(Document.get().createElement(HtmlElements.BODY), CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override
