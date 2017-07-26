@@ -171,8 +171,38 @@ public final class StyleHelper {
 		}
 	}
 
-	public final static native void setStyleProperty(final Element element, final String attribute, final String value)/*-{
+	public final static native void setStyleProperty(final Element element, final String attribute,
+			final String value)/*-{
 		element.style.setProperty(attribute, value);
+	}-*/;
+
+	private static long uiId = 1;
+
+	public static final String getUniqueUiId() {
+		return String.valueOf(uiId++);
+	}
+
+	public final static void setPseudoStyleProperty(final Element element, final String pseudoClass, final String attribute, final String value) {
+		setPseudoStyleProperty(element, pseudoClass, attribute, value, getUniqueUiId());
+	}
+
+	public final static native void setPseudoStyleProperty(final Element element, final String pseudoClass, final String prop, final String value,
+			final String uiId)/*-{
+		
+		var _sheetId = "pseudoStyles";
+		var _head = document.head || document.getElementsByTagName('head')[0];
+		var _sheet = document.getElementById(_sheetId)
+				|| document.createElement('style');
+		_sheet.id = _sheetId;
+		var className = "pseudoStyle" + uiId;
+
+		element.className += " " + className;
+
+		_sheet.innerHTML += " ." + className + ":" + pseudoClass + "{" + prop + ":"
+				+ value + "}";
+				
+		_head.appendChild(_sheet);
+
 	}-*/;
 
 	private StyleHelper() {

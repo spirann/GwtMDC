@@ -3,7 +3,6 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasRipple;
-import gwt.material.design.components.client.constants.MdcAttribute;
 import gwt.material.design.components.client.constants.Ripple;
 
 public class RippleMixin<W extends UIObject> extends StyleMixin<W> implements HasRipple {
@@ -29,12 +28,4 @@ public class RippleMixin<W extends UIObject> extends StyleMixin<W> implements Ha
 		return type;
 	}
 
-	//@Override
-	public void setUnbounded(boolean unbounded) {
-		if (unbounded) {
-			uiObject.getElement().setAttribute(MdcAttribute.DATA_MDC_RIPPLE_IS_UNBOUNDED, "");
-		} else {
-			uiObject.getElement().removeAttribute(MdcAttribute.DATA_MDC_RIPPLE_IS_UNBOUNDED);
-		}
-	}
 }

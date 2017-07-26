@@ -44,6 +44,34 @@ public interface CssName {
 	String MDC_RIPPLE_SURFACE_PRIMARY = "mdc-ripple-surface--primary";
 	String MDC_RIPPLE_SURFACE_ACCENT = "mdc-ripple-surface--accent";
 	// //////////////////////////////////////////////////////
+	// ELEVATION
+	// //////////////////////////////////////////////////////
+	String MDC_ELEVATION_Z0 = "mdc-elevation--z0";
+	String MDC_ELEVATION_Z1 = "mdc-elevation--z1";
+	String MDC_ELEVATION_Z2 = "mdc-elevation--z2";
+	String MDC_ELEVATION_Z3 = "mdc-elevation--z3";
+	String MDC_ELEVATION_Z4 = "mdc-elevation--z4";
+	String MDC_ELEVATION_Z5 = "mdc-elevation--z5";
+	String MDC_ELEVATION_Z6 = "mdc-elevation--z6";
+	String MDC_ELEVATION_Z7 = "mdc-elevation--z7";
+	String MDC_ELEVATION_Z8 = "mdc-elevation--z8";
+	String MDC_ELEVATION_Z9 = "mdc-elevation--z9";
+	String MDC_ELEVATION_Z10 = "mdc-elevation--z10";
+	String MDC_ELEVATION_Z11 = "mdc-elevation--z11";
+	String MDC_ELEVATION_Z12 = "mdc-elevation--z12";
+	String MDC_ELEVATION_Z13 = "mdc-elevation--z13";
+	String MDC_ELEVATION_Z14 = "mdc-elevation--z14";
+	String MDC_ELEVATION_Z15 = "mdc-elevation--z15";
+	String MDC_ELEVATION_Z16 = "mdc-elevation--z16";
+	String MDC_ELEVATION_Z17 = "mdc-elevation--z17";
+	String MDC_ELEVATION_Z18 = "mdc-elevation--z18";
+	String MDC_ELEVATION_Z19 = "mdc-elevation--z19";
+	String MDC_ELEVATION_Z20 = "mdc-elevation--z20";
+	String MDC_ELEVATION_Z21 = "mdc-elevation--z21";
+	String MDC_ELEVATION_Z22 = "mdc-elevation--z22";
+	String MDC_ELEVATION_Z23 = "mdc-elevation--z23";
+	String MDC_ELEVATION_Z24 = "mdc-elevation--z24";
+	// //////////////////////////////////////////////////////
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";

@@ -26,6 +26,14 @@ i, a {
 	font-family: "Roboto Mono", monospace;
 }
 
+.mdc-toolbar {
+	display: flex;
+	justify-content: flex-start;
+	align-content: flex-start;
+	align-items: center;	
+	flex-direction: column;
+}
+
 .mdc-toolbar img {
 	align-self: center;
 	margin: 0 0 0 16px;

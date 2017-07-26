@@ -56,6 +56,8 @@ import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Elevation;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.events.DragEndEvent;
 import gwt.material.design.components.client.events.DragEnterEvent;
@@ -69,7 +71,7 @@ import gwt.material.design.components.client.events.DropEvent;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle {
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation {
 
 	static {
 		autoInit();
@@ -98,6 +100,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	private final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
 	private final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	private final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
+	private final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 
 	private String primaryClass;
 	private String[] initialClasses;
@@ -609,5 +612,15 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public void setCircle(boolean circle) {
 		circleMixin.setCircle(circle);
+	}
+
+	@Override
+	public void setElevation(Elevation elevation) {
+		elevationMixin.setType(elevation);
+	}
+
+	@Override
+	public Elevation getElevation() {
+		return elevationMixin.getType();
 	}
 }

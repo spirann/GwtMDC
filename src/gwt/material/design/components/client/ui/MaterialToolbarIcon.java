@@ -32,7 +32,7 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 	protected void onLoad() {
 		super.onLoad();
 		if(getRipple() == null){
-			setRipple(Ripple.ACCENT);
+			setRipple(Ripple.DEFAULT);
 		}
 	}
 

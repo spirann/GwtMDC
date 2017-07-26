@@ -2,6 +2,7 @@ package gwt.material.design.components.client.base;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.Overflow;
+import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
@@ -50,6 +51,10 @@ public class BaseWidget extends ComplexPanel {
 	
 	public void setFontSize(final String fontSize) {
 		setStyleProperty("font-size", fontSize);
+	}
+	
+	public void setTextAlign(final TextAlign textAlign){
+		setStyleProperty("text-align", textAlign.getCssName());
 	}
 
 	public void setPadding(final int padding) {
