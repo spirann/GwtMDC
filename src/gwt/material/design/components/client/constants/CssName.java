@@ -31,6 +31,8 @@ public interface CssName {
 	// PRISM JS
 	//
 	// //////////////////////////////////////////////////////
+	String MDC_CODE_EXAMPLE = "mdc-code-example";
+	String MDC_CODE = "mdc-code";
 	String PRISM_LANGUAGE_MARKUP = "language-markup";
 	// //////////////////////////////////////////////////////
 	//
@@ -118,6 +120,22 @@ public interface CssName {
 	String MDC_LAYOUT_CELL_ALIGN_TOP = "mdc-layout-grid__cell--align-top";
 	String MDC_LAYOUT_CELL_ALIGN_MIDDLE = "mdc-layout-grid__cell--align-middle";
 	String MDC_LAYOUT_CELL_ALIGN_BOTTOM = "mdc-layout-grid__cell--align-bottom";
+	// //////////////////////////////////////////////////////
+	// GRID LIST
+	// //////////////////////////////////////////////////////
+	String MDC_GRID_LIST = "mdc-grid-list";
+	String MDC_GRID_LIST_TILES = "mdc-grid-list__tiles";
+	String MDC_GRID_LIST_HEADER_CAPTION = "mdc-grid-list--header-caption";
+	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
+	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
+	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
+	String MDC_GRID_TILE = "mdc-grid-tile";
+	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
+	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
+	String MDC_GRID_TILE_SUPPORT_TEXT = "mdc-grid-tile__support-text";
+	String MDC_GRID_TILE_PRIMARY = "mdc-grid-tile__primary";
+	String MDC_GRID_TILE_PRIMARY_CONTENT = "mdc-grid-tile__primary-content";
+	String MDC_GRID_TILE_SECONDARY = "mdc-grid-tile__secondary";
 	// //////////////////////////////////////////////////////
 	// ICONS
 	// //////////////////////////////////////////////////////

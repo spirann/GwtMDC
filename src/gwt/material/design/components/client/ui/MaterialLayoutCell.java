@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasColumns;
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -39,7 +39,7 @@ public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
 	private final StyleMixin<MaterialLayoutCell> alignMixin = new StyleMixin<>(this);
 
 	public MaterialLayoutCell() {
-		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_LAYOUT_CELL);
+		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_CELL);
 	}
 
 	/**

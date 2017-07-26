@@ -1,20 +1,41 @@
 package gwt.material.design.components.client.constants;
 
-public interface HtmlElements {
-	String BODY = "body";
-	String HEADER = "header";
-	String DIV = "div";
-	String SECTION = "section";
-	String SPAN = "span";
-	String MAIN = "main";
-	String BUTTON = "button";
-	String LABEL = "label";
-	String BR = "br";
-	String CODE = "code";
-	String PRE = "pre";
-	String IFRAME = "iframe";
-	String HTML = "html";
-	String A = "a";
-	String I = "i";
-	String P = "p";
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
+
+public enum HtmlElements {
+	
+	BODY("body"),
+	HEADER("header"),
+	DIV("div"),
+	UL("ul"),
+	LI("li"),
+	SECTION("section"),
+	SPAN("span"),
+	MAIN("main"),
+	BUTTON("button"),
+	LABEL("label"),
+	BR("br"),
+	CODE("code"),
+	PRE("pre"),
+	IFRAME("iframe"),
+	HTML("html"),
+	A("a"),
+	I("i"),
+	IMG("img"),
+	P("p");
+	
+	private final String tag;
+	
+	private HtmlElements(final String tag){
+		this.tag = tag;
+	}
+	
+	public String getTag(){
+		return tag;
+	}
+	
+	public Element createElement(){
+		return Document.get().createElement(tag);
+	}	
 }

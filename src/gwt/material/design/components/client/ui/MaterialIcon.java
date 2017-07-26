@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
@@ -18,10 +18,9 @@ public class MaterialIcon extends MaterialWidget implements HasType<IconType>, H
 	private IconType type;
 
 	public MaterialIcon() {
-		super(Document.get().createElement(HtmlElements.I), CssName.MATERIAL_ICONS);
+		super(HtmlElements.I.createElement(), CssName.MATERIAL_ICONS);
 	}
-
-	
+		
 	// toolbar-nav-link__text
 	
 	public MaterialIcon(final IconType type){

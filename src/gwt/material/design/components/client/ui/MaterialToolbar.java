@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -16,7 +16,7 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 	private boolean initialize = false;
 
 	public MaterialToolbar() {
-		super(Document.get().createElement(HtmlElements.HEADER), CssName.MDC_TOOLBAR);
+		super(HtmlElements.HEADER.createElement(), CssName.MDC_TOOLBAR);
 	}
 
 	@Override

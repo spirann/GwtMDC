@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasButtonStyle;
@@ -24,7 +24,7 @@ public class MaterialButton extends MaterialWidget implements HasType<ButtonType
 	private final TypeMixin<MaterialButton, ButtonStyle> styleMixin = new TypeMixin<>(this);
 
 	public MaterialButton() {
-		super(Document.get().createElement(HtmlElements.BUTTON), CssName.MDC_BUTTON);
+		super(HtmlElements.BUTTON.createElement(), CssName.MDC_BUTTON);
 		setAutoInitData("MDCRipple");
 	}
 

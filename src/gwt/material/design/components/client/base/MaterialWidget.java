@@ -81,7 +81,7 @@ import gwt.material.design.components.client.events.DropEvent;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox {
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox, HasRtl {
 
 	static {
 		autoInit();
@@ -278,7 +278,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	}
 
 	public List<Widget> getChildrenList() {
-		List<Widget> children = new ArrayList<>();
+		final List<Widget> children = new ArrayList<>();
 		for (int i = 0; i < getWidgetCount(); i++) {
 			children.add(getWidget(i));
 		}
@@ -578,6 +578,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		activeMixin.setActive(active);
 	}
 
+	@Override
 	public void setRtl(boolean rtl) {
 		if (rtl) {
 			rtlMixin.setAttribute("rtl");
@@ -586,6 +587,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		}
 	}
 
+	@Override
 	public boolean isRtl() {
 		return rtlMixin.getAttribute() != null;
 	}

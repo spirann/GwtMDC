@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.HasText;
@@ -19,12 +19,12 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 
 	private CodeType type;
 
-	private Element code = Document.get().createElement(HtmlElements.CODE);
+	private Element code = HtmlElements.CODE.createElement();
 
 	private boolean initialized = false;
 
 	public MaterialCode() {
-		super(Document.get().createElement(HtmlElements.PRE), CssName.PRISM_LANGUAGE_MARKUP);
+		super(HtmlElements.PRE.createElement(), CssName.PRISM_LANGUAGE_MARKUP, CssName.MDC_CODE);
 		getElement().appendChild(code);
 	}
 

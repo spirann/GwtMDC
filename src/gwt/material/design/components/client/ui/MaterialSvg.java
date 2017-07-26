@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 import com.google.gwt.resources.client.TextResource;
 
 import gwt.material.design.components.client.base.HasSvg;
@@ -14,7 +14,7 @@ public class MaterialSvg extends MaterialWidget implements HasSvg {
 	private final SvgMixin<MaterialSvg> svgMixin = new SvgMixin<MaterialSvg>(this);
 
 	public MaterialSvg() {
-		super(Document.get().createElement(HtmlElements.DIV));
+		super(HtmlElements.DIV.createElement());
 	}
 
 	@Override

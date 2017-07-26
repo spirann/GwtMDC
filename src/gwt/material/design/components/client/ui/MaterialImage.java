@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.ImageElement;
 import com.google.gwt.event.dom.client.ErrorEvent;
 import com.google.gwt.event.dom.client.ErrorHandler;
@@ -34,86 +33,85 @@ import com.google.gwt.user.client.ui.HasCaption;
 import gwt.material.design.components.client.base.HasImage;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
-
+import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialImage extends MaterialWidget implements HasCaption, HasImage,
-        HasLoadHandlers, HasErrorHandlers {
+public class MaterialImage extends MaterialWidget implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
 
-    private final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
+	private final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
 
-    /**
-     * Creates an empty image.
-     */
-    public MaterialImage() {
-        super(Document.get().createImageElement());
-    }
+	/**
+	 * Creates an empty image.
+	 */
+	public MaterialImage() {
+		super(HtmlElements.IMG.createElement());
+	}
 
-    /**
-     * Creates a simple image.
-     */
-    public MaterialImage(String url) {
-        this();
-        setUrl(url);
-    }
-    
-    /**
-     * Creates an image from an ImageResource.
-     */
-    public MaterialImage(ImageResource resource) {
-        this();
-        setResource(resource);
-    }
+	/**
+	 * Creates a simple image.
+	 */
+	public MaterialImage(String url) {
+		this();
+		setUrl(url);
+	}
 
-    @Override
-    public String getCaption() {
-        return getElement().getAttribute("data-caption");
-    }
+	/**
+	 * Creates an image from an ImageResource.
+	 */
+	public MaterialImage(ImageResource resource) {
+		this();
+		setResource(resource);
+	}
 
-    @Override
-    public void setCaption(String caption) {
-        getElement().setAttribute("data-caption", caption);
-    }
+	@Override
+	public String getCaption() {
+		return getElement().getAttribute("data-caption");
+	}
 
-    @Override
-    public void setUrl(String url) {
-        imageMixin.setUrl(url);
-    }
+	@Override
+	public void setCaption(String caption) {
+		getElement().setAttribute("data-caption", caption);
+	}
 
-    @Override
-    public String getUrl() {
-        return imageMixin.getUrl();
-    }
+	@Override
+	public void setUrl(String url) {
+		imageMixin.setUrl(url);
+	}
 
-    @Override
-    public void setResource(ImageResource resource) {
-        imageMixin.setResource(resource);
-    }
+	@Override
+	public String getUrl() {
+		return imageMixin.getUrl();
+	}
 
-    @Override
-    public ImageResource getResource() {
-        return imageMixin.getResource();
-    }
+	@Override
+	public void setResource(ImageResource resource) {
+		imageMixin.setResource(resource);
+	}
 
-    public int getWidth() {
-        return ((ImageElement)getElement().cast()).getWidth();
-    }
+	@Override
+	public ImageResource getResource() {
+		return imageMixin.getResource();
+	}
 
-    public int getHeight() {
-        return ((ImageElement)getElement().cast()).getHeight();
-    }
+	public int getWidth() {
+		return ((ImageElement) getElement().cast()).getWidth();
+	}
 
-    @Override
-    public HandlerRegistration addLoadHandler(final LoadHandler handler) {
-        return addDomHandler(handler, LoadEvent.getType());
-    }
+	public int getHeight() {
+		return ((ImageElement) getElement().cast()).getHeight();
+	}
 
-    @Override
-    public HandlerRegistration addErrorHandler(final ErrorHandler handler) {
-        return addDomHandler(handler, ErrorEvent.getType());
-    }
+	@Override
+	public HandlerRegistration addLoadHandler(final LoadHandler handler) {
+		return addDomHandler(handler, LoadEvent.getType());
+	}
+
+	@Override
+	public HandlerRegistration addErrorHandler(final ErrorHandler handler) {
+		return addDomHandler(handler, ErrorEvent.getType());
+	}
 }

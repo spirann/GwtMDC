@@ -144,4 +144,8 @@ public class BaseWidget extends ComplexPanel {
 	public void setLayoutPosition(final Style.Position position){
 		setStyleProperty("position", position.getCssName());
 	}
+	
+	public void setZIndex(final int zIndex){
+		setStyleProperty("z-index", String.valueOf(zIndex));
+	}
 }

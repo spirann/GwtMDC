@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
@@ -39,7 +39,7 @@ public class MaterialToolbarSection extends MaterialWidget {
 			this, CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
 
 	public MaterialToolbarSection() {
-		super(Document.get().createElement(HtmlElements.SECTION), CssName.MDC_TOOLBAR_SECTION);
+		super(HtmlElements.SECTION.createElement(), CssName.MDC_TOOLBAR_SECTION);
 	}
 
 	/**

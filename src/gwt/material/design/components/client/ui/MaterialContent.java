@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasToolbarFixedAdjust;
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -14,7 +14,7 @@ public class MaterialContent extends MaterialWidget implements HasToolbarFixedAd
 			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 	
 	public MaterialContent(){
-		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_TYPOGRAPHY);
+		super(HtmlElements.DIV.createElement(), CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

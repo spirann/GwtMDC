@@ -39,6 +39,20 @@ i, a {
 	margin: 0 0 0 16px;
 }
 
+.mdc-code-example {
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+	padding: 24px;
+}
+
+.mdc-code {
+	flex: one;
+	width: 100%;
+	text-align: left;
+}
+
 /* ==========================================================================
    Toolbar nav link
    ========================================================================== */

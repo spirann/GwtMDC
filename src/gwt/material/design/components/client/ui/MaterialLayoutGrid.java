@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -41,7 +41,7 @@ public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 	private final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
 
 	public MaterialLayoutGrid() {
-		super(Document.get().createElement(HtmlElements.DIV), CssName.MDC_LAYOUT_GRID);
+		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_GRID);
 	}
 
 	public void setPadding(int gutter) {

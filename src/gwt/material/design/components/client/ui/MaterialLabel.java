@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasTypography;
@@ -19,7 +19,7 @@ public class MaterialLabel extends MaterialWidget implements HasText, HasTypogra
 	private boolean initialize = false;
 
 	public MaterialLabel() {
-		super(Document.get().createElement(HtmlElements.LABEL), 
+		super(HtmlElements.LABEL.createElement(), 
 				CssName.MDC_TYPOGRAPHY, 
 				CssName.MDC_TYPOGRAPHY_BASE,
 				CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
@@ -34,7 +34,7 @@ public class MaterialLabel extends MaterialWidget implements HasText, HasTypogra
 				setTypography(Typography.BODY_1);
 			}
 			
-			getElement().appendChild(Document.get().createElement(HtmlElements.BR));
+			getElement().appendChild(HtmlElements.BR.createElement());
 			initialize = true;
 		}
 	}

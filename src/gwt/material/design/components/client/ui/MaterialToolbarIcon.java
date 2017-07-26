@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Document;
+
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
@@ -19,7 +19,7 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 	private IconType type;
 
 	public MaterialToolbarIcon() {
-		super(Document.get().createElement(HtmlElements.A), CssName.MDC_TOOLBAR_ICON_MENU);
+		super(HtmlElements.A.createElement(), CssName.MDC_TOOLBAR_ICON_MENU);
 		setCircle(true);
 	}
 	
