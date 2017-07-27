@@ -57,7 +57,7 @@ public class CaptionSettingMixin<W extends UIObject> extends AbstractMixin<W> im
 	@Override
 	public void setCaptionIconPosition(CaptionIconPosition iconPosition) {
 		this.iconPosition = iconPosition;
-		if (position == null) {
+		if (iconPosition == null) {
 			iconPositionMixin.setStyle(null);
 		} else {
 			iconPositionMixin.setStyle(iconPosition.getCssName());

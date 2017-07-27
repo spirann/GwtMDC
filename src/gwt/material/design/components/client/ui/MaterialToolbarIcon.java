@@ -20,7 +20,6 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 
 	public MaterialToolbarIcon() {
 		super(HtmlElements.A.createElement(), CssName.MDC_TOOLBAR_ICON_MENU);
-		setCircle(true);
 	}
 	
 	public MaterialToolbarIcon(final IconType type){

@@ -32,4 +32,41 @@
   --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5); 
+  
+  /* ============================== */
+  /* Used only in source code view 	*/
+  /* - MaterialCode 				*/
+  /* - MaterialCodeExample 			*/
+  /* ============================== */
+  
+  --mdc-theme-code-background: #272822;
+  --mdc-theme-code-color: #f5f5f5;
+  --mdc-theme-code-token-comment: slategray;
+  --mdc-theme-code-token-prolog: slategray;
+  --mdc-theme-code-token-doctype: slategray;
+  --mdc-theme-code-token-cdata: slategray;
+  --mdc-theme-code-token-punctuation: #f8f8f2;
+  --mdc-theme-code-token-property: #f92672;
+  --mdc-theme-code-token-tag: #f92672;
+  --mdc-theme-code-token-constant: #f92672;
+  --mdc-theme-code-token-symbol: #f92672;
+  --mdc-theme-code-token-deleted: #f92672;
+  --mdc-theme-code-token-boolean: #ae81ff;
+  --mdc-theme-code-token-number: #ae81ff;
+  --mdc-theme-code-token-selector: #a6e22e;
+  --mdc-theme-code-token-attr-name: #a6e22e;
+  --mdc-theme-code-token-string: #a6e22e;
+  --mdc-theme-code-token-char: #a6e22e;
+  --mdc-theme-code-token-builtin: #a6e22e;
+  --mdc-theme-code-token-inserted: #a6e22e;
+  --mdc-theme-code-token-operator: #f8f8f2;
+  --mdc-theme-code-token-entity: #f8f8f2;
+  --mdc-theme-code-token-url: #f8f8f2;
+  --mdc-theme-code-token-variable: #f8f8f2;
+  --mdc-theme-code-token-atrule: #e6db74;
+  --mdc-theme-code-token-attr-value: #e6db74;
+  --mdc-theme-code-token-function: #e6db74;
+  --mdc-theme-code-token-keyword: #66d9ef;
+  --mdc-theme-code-token-regex: #fd971f;
+  --mdc-theme-code-token-important: #fd971f;
 }

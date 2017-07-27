@@ -4,7 +4,9 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public enum CaptionIconPosition implements CssType, Type {
 
-	START(CssName.MDC_GRID_LIST_ICON_ALIGN_START), END(CssName.MDC_GRID_LIST_ICON_ALIGN_END);
+	NONE(""),
+	START(CssName.MDC_GRID_LIST_ICON_ALIGN_START), 
+	END(CssName.MDC_GRID_LIST_ICON_ALIGN_END);
 
 	private final String cssClass;
 
@@ -18,6 +20,6 @@ public enum CaptionIconPosition implements CssType, Type {
 	}
 
 	public static CaptionIconPosition fromStyleName(final String styleName) {
-		return EnumHelper.fromStyleName(styleName, CaptionIconPosition.class, START);
+		return EnumHelper.fromStyleName(styleName, CaptionIconPosition.class, NONE);
 	}
 }

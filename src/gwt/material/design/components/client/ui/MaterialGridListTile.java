@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
@@ -16,7 +15,6 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.Ripple;
 
 public class MaterialGridListTile extends MaterialWidget implements HasIcon, HasCaption, HasSupportText, HasImage {
 
@@ -24,20 +22,18 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 		$wnd.mdc.gridList.MDCGridList.attachTo(element);
 	}-*/;
 
-	private MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), CssName.MDC_GRID_TILE_PRIMARY,
-			CssName.MDC_TYPOGRAPHY);
+	private MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), 
+			CssName.MDC_GRID_TILE_PRIMARY, CssName.MDC_TYPOGRAPHY);
 
 	private MaterialImage image = new MaterialImage();
-
-	
 	
 	private MaterialWidget secondary = new MaterialWidget(HtmlElements.SPAN.createElement(),
-			CssName.MDC_GRID_TILE_SECONDARY, CssName.MDC_TYPOGRAPHY);
+			CssName.MDC_GRID_TILE_SECONDARY);
 
 	private MaterialIcon icon = new MaterialIcon();
 	
-	private MaterialWidget caption = new MaterialWidget(HtmlElements.SPAN.createElement(), CssName.MDC_GRID_TILE_TITLE,
-			CssName.MDC_TYPOGRAPHY);
+	private MaterialWidget caption = new MaterialWidget(HtmlElements.SPAN.createElement(), 
+			CssName.MDC_GRID_TILE_TITLE, CssName.MDC_TYPOGRAPHY);
 
 	private MaterialWidget supportText = new MaterialWidget(HtmlElements.SPAN.createElement(),
 			CssName.MDC_GRID_TILE_SUPPORT_TEXT, CssName.MDC_TYPOGRAPHY);
@@ -53,26 +49,24 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 		super.onLoad();
 
 		if (!initialize) {
+			
 			super.add(primary);
-
-			gridListInit(getElement());
 
 			image.addStyleName(CssName.MDC_GRID_TILE_PRIMARY_CONTENT);
 
 			primary.setZIndex(0);
 			primary.add(image);
 
-			icon.setStyleName(CssName.MDC_GRID_TILE_ICON);
-			icon.setRipple(Ripple.DEFAULT);
+			icon.addStyleName(CssName.MDC_GRID_TILE_ICON);
 			icon.setCircle(true);
-			icon.setBackgroundColor(Color.RED);
-			icon.setLayoutPosition(Position.ABSOLUTE);
 			
 			secondary.setZIndex(1);
 			secondary.add(icon);
 			secondary.add(caption);
 			secondary.add(supportText);
 
+			gridListInit(getElement());
+			
 			initialize = true;
 		}
 	}
