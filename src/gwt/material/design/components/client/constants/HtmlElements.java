@@ -20,6 +20,7 @@ public enum HtmlElements {
 	PRE("pre"),
 	IFRAME("iframe"),
 	HTML("html"),
+	INPUT("input"),
 	A("a"),
 	I("i"),
 	IMG("img"),

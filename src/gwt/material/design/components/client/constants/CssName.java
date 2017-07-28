@@ -150,5 +150,12 @@ public interface CssName {
 	String MDC_BUTTON_COMPACT = "mdc-button--compact";
 	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
 	String MDC_BUTTON_ACCENT = "mdc-button--accent";
-
+	// //////////////////////////////////////////////////////
+	// INPUTS AND CONTROLS
+	// //////////////////////////////////////////////////////
+	String MDC_RADIO = "mdc-radio";
+	String MDC_RADIO_NATIVE_CONTROL = "mdc-radio__native-control";
+	String MDC_RADIO_BACKGROUND = "mdc-radio__background";
+	String MDC_RADIO_OUTER_CIRCLE = "mdc-radio__outer-circle";
+	String MDC_RADIO_INNER_CIRCLE = "mdc-radio__inner-circle";
 }
