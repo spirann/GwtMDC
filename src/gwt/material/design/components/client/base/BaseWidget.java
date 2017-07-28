@@ -1,11 +1,13 @@
 package gwt.material.design.components.client.base;
 
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
+import gwt.material.design.components.client.constants.BorderCollapse;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
@@ -19,12 +21,12 @@ public class BaseWidget extends ComplexPanel {
 	public void setWidth(final String width) {
 		setStyleProperty("width", width);
 	}
-	
+
 	@Override
 	public void setHeight(final String height) {
 		setStyleProperty("height", height);
 	}
-	
+
 	public void setMaxWidth(final String maxWidth) {
 		setStyleProperty("max-width", maxWidth);
 	}
@@ -44,16 +46,16 @@ public class BaseWidget extends ComplexPanel {
 	public void setLineHeight(final String lineHeight) {
 		setStyleProperty("line-height", lineHeight);
 	}
-	
+
 	public void setLetterSpacing(final String letterSpacing) {
 		setStyleProperty("letter-spacing", letterSpacing);
 	}
-	
+
 	public void setFontSize(final String fontSize) {
 		setStyleProperty("font-size", fontSize);
 	}
-	
-	public void setTextAlign(final TextAlign textAlign){
+
+	public void setTextAlign(final TextAlign textAlign) {
 		setStyleProperty("text-align", textAlign.getCssName());
 	}
 
@@ -141,11 +143,35 @@ public class BaseWidget extends ComplexPanel {
 		setStyleProperty("right", right);
 	}
 
-	public void setLayoutPosition(final Style.Position position){
+	public void setLayoutPosition(final Style.Position position) {
 		setStyleProperty("position", position.getCssName());
 	}
-	
-	public void setZIndex(final int zIndex){
+
+	public void setZIndex(final int zIndex) {
 		setStyleProperty("z-index", String.valueOf(zIndex));
+	}
+
+	public void setBorderWidth(final int borderWidth) {
+		setStyleProperty("border-width", borderWidth + "px");
+	}
+	
+	public void setBorderColor(final Color color) {
+		setStyleProperty("border-color", color.getCssName());
+	}
+	
+	public void setBorderStyle(final BorderStyle borderStyle) {
+		setStyleProperty("border-style", borderStyle.getCssName());
+	}
+	
+	public void setBorderSpacing(final int borderSpacing) {
+		setStyleProperty("border-spacing", borderSpacing + "px");
+	}
+	
+	public void setBorderCollapse(final BorderCollapse borderCollapse) {
+		setStyleProperty("border-collapse", borderCollapse.getCssName());
+	}
+	
+	public void setBorderRadius(final int borderRadius) {
+		setStyleProperty("border-radius", borderRadius + "px");
 	}
 }

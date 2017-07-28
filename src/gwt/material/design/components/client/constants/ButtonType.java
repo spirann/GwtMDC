@@ -5,8 +5,15 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 public enum ButtonType implements CssType {
 
 	FLAT(""),
-	FAB(CssName.MDC_BUTTON_ACCENT),
-	RAISED(CssName.MDC_BUTTON_RAISED);
+	RAISED(CssName.MDC_BUTTON_RAISED),
+	DENSE(CssName.MDC_BUTTON_DENSE),
+	DENSE_RAISED(CssName.MDC_BUTTON_RAISED + " " + CssName.MDC_BUTTON_DENSE),
+	COMPACT(CssName.MDC_BUTTON_COMPACT),
+	COMPACT_RAISED(CssName.MDC_BUTTON_RAISED + " " + CssName.MDC_BUTTON_COMPACT),
+	PRIMARY(CssName.MDC_BUTTON_PRIMARY),
+	PRIMARY_RAISED(CssName.MDC_BUTTON_RAISED + " " + CssName.MDC_BUTTON_PRIMARY),
+	ACCENT(CssName.MDC_BUTTON_ACCENT),
+	ACCENT_RAISED(CssName.MDC_BUTTON_RAISED + " " + CssName.MDC_BUTTON_ACCENT);
 
     private final String cssClass;
 
