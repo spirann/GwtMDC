@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.Element;
  */
 
 import com.google.gwt.dom.client.Style;
+import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
 /**
@@ -105,8 +106,8 @@ public final class StyleHelper {
 	}
 
 	/**
-	 * Returns {@code true} if specified style is contained in space-separated
-	 * list of styles
+	 * Returns {@code true} if specified style is contained in space-separated list
+	 * of styles
 	 *
 	 * @param styleNames
 	 *            Space-separated list of styles
@@ -175,34 +176,14 @@ public final class StyleHelper {
 			final String value)/*-{
 		element.style.setProperty(attribute, value);
 	}-*/;
-
-	private static long uiId = 1;
-
-	public static final String getUniqueUiId() {
-		return String.valueOf(uiId++);
+	
+	public final static String getComputedProperty(final String property) {
+		return getComputedProperty(RootPanel.get().getElement(), property);
 	}
 
-	public final static void setPseudoStyleProperty(final Element element, final String pseudoClass, final String attribute, final String value) {
-		setPseudoStyleProperty(element, pseudoClass, attribute, value, getUniqueUiId());
-	}
-
-	public final static native void setPseudoStyleProperty(final Element element, final String pseudoClass, final String prop, final String value,
-			final String uiId)/*-{
-		
-		var _sheetId = "pseudoStyles";
-		var _head = document.head || document.getElementsByTagName('head')[0];
-		var _sheet = document.getElementById(_sheetId)
-				|| document.createElement('style');
-		_sheet.id = _sheetId;
-		var className = "pseudoStyle" + uiId;
-
-		element.className += " " + className;
-
-		_sheet.innerHTML += " ." + className + ":" + pseudoClass + "{" + prop + ":"
-				+ value + "}";
-				
-		_head.appendChild(_sheet);
-
+	public final static native String getComputedProperty(Element e, String property)/*-{
+		var cs = $wnd.document.defaultView.getComputedStyle(e, null);
+		return cs.getPropertyValue(property);
 	}-*/;
 
 	private StyleHelper() {

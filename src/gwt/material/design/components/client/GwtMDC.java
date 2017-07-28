@@ -12,7 +12,7 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
  */
-public class GwtMDL implements EntryPoint {
+public class GwtMDC implements EntryPoint {
 
 	public void onModuleLoad() {
 		injectJs(MaterialResources.INSTANCE.jqueryJs());

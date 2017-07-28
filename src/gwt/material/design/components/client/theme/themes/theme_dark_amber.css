@@ -21,11 +21,11 @@
   --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.38);
   --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.38);
   
-  --mdc-theme-text-primary-on-light: rgba(255, 255, 255, 0.87);
-  --mdc-theme-text-secondary-on-light: rgba(255, 255, 255, 0.54);
-  --mdc-theme-text-hint-on-light: rgba(255, 255, 255, 0.38);
-  --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.38);
-  --mdc-theme-text-icon-on-light: rgba(255, 255, 255, 0.38);
+  --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
+  --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
+  --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
+  --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
+  --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
   
   --mdc-theme-text-primary-on-dark: white;
   --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);

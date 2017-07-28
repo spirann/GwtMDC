@@ -5,13 +5,13 @@
 -->
 <!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.8.0//EN"
   "http://gwtproject.org/doctype/2.8.0/gwt-module.dtd">
-<module rename-to='gwtmdl'>
+<module rename-to='gwtmdc'>
 
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
   
   <!-- Specify the app entry point class.                         -->
-  <entry-point class='gwt.material.design.components.client.GwtMDL'/>
+  <entry-point class='gwt.material.design.components.client.GwtMDC'/>
 
   <!-- Specify the paths for translatable code                    -->
   <source path='client'/>
