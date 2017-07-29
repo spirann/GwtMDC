@@ -153,6 +153,7 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// INPUTS AND CONTROLS
 	// //////////////////////////////////////////////////////
+	String MDC_FORM_FIELD = "mdc-form-field";
 	String MDC_RADIO = "mdc-radio";
 	String MDC_RADIO_NATIVE_CONTROL = "mdc-radio__native-control";
 	String MDC_RADIO_BACKGROUND = "mdc-radio__background";

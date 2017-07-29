@@ -2,30 +2,36 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasName;
+import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasCheked;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.InputType;
+import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
+import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialRadioButton extends MaterialWidget implements HasCheked, HasName {
+public class MaterialRadioButton extends MaterialFormField implements HasCheked, HasName, HasText {
 
 	public static native void radioInit(Element element)/*-{
 		$wnd.mdc.radio.MDCRadio.attachTo(element);
 	}-*/;
 
+	// /////////////////////////////////////////////////////////////
+	// Radio
+	// /////////////////////////////////////////////////////////////
+	private Div radio = new Div(CssName.MDC_RADIO);
 	private Input input = new Input(InputType.RADIO, CssName.MDC_RADIO_NATIVE_CONTROL);
 	private Div divBackground = new Div(CssName.MDC_RADIO_BACKGROUND);
 	private Div divOuterCircle = new Div(CssName.MDC_RADIO_OUTER_CIRCLE);
 	private Div divInnerCircle = new Div(CssName.MDC_RADIO_INNER_CIRCLE);
-
-	public MaterialRadioButton() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_RADIO);
-	}
-
+	
+	// /////////////////////////////////////////////////////////////
+	// Label
+	// /////////////////////////////////////////////////////////////
+	private Label label = new Label(); 
+	
 	@Override
 	protected void onLoad() {
 		super.onLoad();
@@ -33,15 +39,20 @@ public class MaterialRadioButton extends MaterialWidget implements HasCheked, Ha
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 		
-		add(input);
-		add(divBackground);
+		radio.add(input);
+		radio.add(divBackground);
 		
-		radioInit(getElement());
+		radio.setRipple(Ripple.DEFAULT);
+		radio.setCircle(true);
+		
+		add(radio);
+		add(label);
 	}
 	
 	@Override
 	public void setId(String id) {
 		input.setId(id);
+		label.getElement().setAttribute("for", input.getId());
 	}
 
 	@Override
@@ -62,6 +73,16 @@ public class MaterialRadioButton extends MaterialWidget implements HasCheked, Ha
 	@Override
 	public String getName() {
 		return input.getName();
+	}
+
+	@Override
+	public String getText() {
+		return label.getText();
+	}
+
+	@Override
+	public void setText(String text) {
+		label.setText(text);
 	}
 
 }

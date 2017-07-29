@@ -46,7 +46,7 @@ public class MaterialTheme implements Serializable {
 	private String textIconOnDark;
 	//
 	private String codeBackground;
-	private String codeColor;
+	private String codeString;
 	private String codeTokenComment;
 	private String codeTokenProlog;
 	private String codeTokenDoctype;
@@ -116,7 +116,7 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty("--mdc-theme-text-icon-on-dark", textIconOnDark));
 		//
 		text.append(loadProperty("--mdc-theme-code-background", codeBackground));
-		text.append(loadProperty("--mdc-theme-code-color", codeColor));
+		text.append(loadProperty("--mdc-theme-code-String", codeString));
 		text.append(loadProperty("--mdc-theme-code-token-comment", codeTokenComment));
 		text.append(loadProperty("--mdc-theme-code-token-prolog", codeTokenProlog));
 		text.append(loadProperty("--mdc-theme-code-token-doctype", codeTokenDoctype));
@@ -131,7 +131,7 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty("--mdc-theme-code-token-number", codeTokenNumber));
 		text.append(loadProperty("--mdc-theme-code-token-selector", codeTokenSelector));
 		text.append(loadProperty("--mdc-theme-code-token-attr-name", codeTokenAttrName));
-		text.append(loadProperty("--mdc-theme-code-token-string", codeTokenString));
+		text.append(loadProperty("--mdc-theme-code-token-String", codeTokenString));
 		text.append(loadProperty("--mdc-theme-code-token-char", codeTokenChar));
 		text.append(loadProperty("--mdc-theme-code-token-builtin", codeTokenBuiltin));
 		text.append(loadProperty("--mdc-theme-code-token-inserted", codeTokenInserted));
@@ -158,11 +158,15 @@ public class MaterialTheme implements Serializable {
 			return "";
 		}
 
+		final String color;
+		
 		if (value == null) {
-			value = StyleHelper.getComputedProperty(property);
+			color = StyleHelper.getComputedProperty(property);
+		} else {
+			color = value;
 		}
 
-		return property + ": " + value + ";";
+		return property + ": " + color + ";";
 	}
 
 	public String getPrimary() {
@@ -397,12 +401,12 @@ public class MaterialTheme implements Serializable {
 		this.codeBackground = codeBackground;
 	}
 
-	public String getCodeColor() {
-		return codeColor;
+	public String getCodeString() {
+		return codeString;
 	}
 
-	public void setCodeColor(String codeColor) {
-		this.codeColor = codeColor;
+	public void setCodeString(String codeString) {
+		this.codeString = codeString;
 	}
 
 	public String getCodeTokenComment() {
