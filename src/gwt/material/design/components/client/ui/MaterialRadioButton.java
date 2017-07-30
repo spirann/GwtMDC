@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasCheked;
+import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -13,7 +14,7 @@ import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialRadioButton extends MaterialFormField implements HasCheked, HasName, HasText {
+public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasCheked, HasName, HasText {
 
 	public static native void radioInit(Element element)/*-{
 		$wnd.mdc.radio.MDCRadio.attachTo(element);
@@ -88,4 +89,21 @@ public class MaterialRadioButton extends MaterialFormField implements HasCheked,
 		label.setText(text);
 	}
 
+	@Override
+	public Boolean getValue() {
+		return isChecked();
+	}
+
+	@Override
+	public void setValue(Boolean value) {
+		
+	}
+
+	@Override
+	public void setValue(Boolean value, boolean fireEvents) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
