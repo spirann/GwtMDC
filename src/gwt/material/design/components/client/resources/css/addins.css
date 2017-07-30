@@ -53,6 +53,11 @@ i, a {
 	text-align: left;
 }
 
+.mdc-radio__outer-circle {
+    /* @alternate */
+    border-color: rgba(0, 0, 0, 0.54);
+    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));}
+
 /* ==========================================================================
    Toolbar nav link
    ========================================================================== */

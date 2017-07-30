@@ -5,6 +5,7 @@ import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasCheked;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.Ripple;
@@ -44,6 +45,8 @@ public class MaterialRadioButton extends MaterialFormField implements HasCheked,
 		
 		radio.setRipple(Ripple.DEFAULT);
 		radio.setCircle(true);
+		
+		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 		
 		add(radio);
 		add(label);
