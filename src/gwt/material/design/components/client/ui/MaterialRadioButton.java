@@ -21,16 +21,20 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	private final static Map<String, MaterialRadioButton> history = new HashMap<>();
 	
-	public void putInHistory() {
+	public void putInHistory(final boolean fireEvent) {
 		
 		final MaterialRadioButton old = history.get(getName());
 		
-		if(old != null && old != this) {
+		if(fireEvent && old != null && old != this) {
 			old.fireChangeEvent();
 		}
 		
 		history.put(getName(), this);
 		
+	}
+	
+	public void putInHistory() {
+		putInHistory(true);
 	}
 	
 	private void removeFromHistory() {
@@ -122,6 +126,9 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		setValue(input.getElement(), value);
+
+		putInHistory(fireEvents);
+		
 		if (fireEvents) {
 			fireChangeEvent();
 		}
