@@ -8,7 +8,6 @@ import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.MaterialFormField;
-import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -19,38 +18,44 @@ import gwt.material.design.components.client.ui.html.Label;
 
 public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasName, HasText {
 
+	// ////////////////////////////////////////////////////////////////
+	// Control for change value in RadioButton group
+	// Because the event is not trigger when another radio is selected
+	// ////////////////////////////////////////////////////////////////
 	private final static Map<String, MaterialRadioButton> history = new HashMap<>();
-	
-	public void putInHistory(final boolean fireEvent) {
-		
-		final MaterialRadioButton old = history.get(getName());
-		
-		if(fireEvent && old != null && old != this) {
-			old.fireChangeEvent();
-		}
-		
-		history.put(getName(), this);
-		
-	}
-	
+
 	public void putInHistory() {
 		putInHistory(true);
 	}
 	
-	private void removeFromHistory() {
-		
+	public void putInHistory(final boolean fireEvent) {
+
 		final MaterialRadioButton old = history.get(getName());
-		
-		if(old == this) {
+
+		if (fireEvent && old != null && old != this) {
+			old.fireChangeEvent();
+		}
+
+		history.put(getName(), this);
+
+	}
+
+	private void removeFromHistory() {
+
+		final MaterialRadioButton old = history.get(getName());
+
+		if (old == this) {
 			history.remove(getName());
 		}
-		
+
 	}
-	
-	public static native void radioInit(Element element)/*-{		
+
+	// /////////////////////////////////////////////////////////////
+	// Initialize RadioButton, but it is not necessary
+	// /////////////////////////////////////////////////////////////
+	public static native void radioInit(Element element)/*-{
 		$wnd.mdc.radio.MDCRadio.attachTo(element);
 	}-*/;
-
 
 	// /////////////////////////////////////////////////////////////
 	// Radio
@@ -65,17 +70,15 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// Label
 	// /////////////////////////////////////////////////////////////
 	private Label label = new Label();
-	
-	private final CheckedMixin<Input> checkedMixin = new CheckedMixin<Input>(input);
 
 	public MaterialRadioButton() {
 		super();
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		
+
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 
@@ -90,29 +93,32 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		add(radio);
 		add(label);
 
-		if(getValue()) {
+		if (getValue()) {
 			putInHistory();
 		}
 
 		addValueChangeListener(input.getElement());
-		
+
 	}
-	
+
 	protected native void addValueChangeListener(Element element)/*-{
-		var _this = this;		
-		element.addEventListener('change', function(event){
-			if(element.checked){
-				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-			}	
-		});
+		var _this = this;
+		element
+				.addEventListener(
+						'change',
+						function(event) {
+							if (element.checked) {
+								_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+							}
+						});
 	}-*/;
-	
+
 	@Override
 	public void setId(String id) {
 		input.setId(id);
 		label.getElement().setAttribute("for", input.getId());
 	}
-	
+
 	@Override
 	public String getId() {
 		return input.getId();
@@ -122,13 +128,13 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	public void setValue(Boolean value) {
 		setValue(value, true);
 	}
-	
+
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		setValue(input.getElement(), value);
 
 		putInHistory(fireEvents);
-		
+
 		if (fireEvents) {
 			fireChangeEvent();
 		}
@@ -138,15 +144,14 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	public Boolean getValue() {
 		return getValue(input.getElement());
 	}
-	
+
 	public static native Boolean getValue(Element element)/*-{
 		return element.checked;
 	}-*/;
-	
-	public static native void setValue(Element element, boolean value)/*-{
-		element.checked = value;		
-	}-*/;
 
+	public static native void setValue(Element element, boolean value)/*-{
+		element.checked = value;
+	}-*/;
 
 	@Override
 	public void setName(String name) {
