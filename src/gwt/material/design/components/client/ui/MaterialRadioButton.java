@@ -1,11 +1,14 @@
 package gwt.material.design.components.client.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasCheked;
 import gwt.material.design.components.client.base.MaterialFormField;
+import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -14,11 +17,36 @@ import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasCheked, HasName, HasText {
+public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasName, HasText {
 
-	public static native void radioInit(Element element)/*-{
+	private final static Map<String, MaterialRadioButton> history = new HashMap<>();
+	
+	public void putInHistory() {
+		
+		final MaterialRadioButton old = history.get(getName());
+		
+		if(old != null && old != this) {
+			old.fireChangeEvent();
+		}
+		
+		history.put(getName(), this);
+		
+	}
+	
+	private void removeFromHistory() {
+		
+		final MaterialRadioButton old = history.get(getName());
+		
+		if(old == this) {
+			history.remove(getName());
+		}
+		
+	}
+	
+	public static native void radioInit(Element element)/*-{		
 		$wnd.mdc.radio.MDCRadio.attachTo(element);
 	}-*/;
+
 
 	// /////////////////////////////////////////////////////////////
 	// Radio
@@ -28,46 +56,90 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	private Div divBackground = new Div(CssName.MDC_RADIO_BACKGROUND);
 	private Div divOuterCircle = new Div(CssName.MDC_RADIO_OUTER_CIRCLE);
 	private Div divInnerCircle = new Div(CssName.MDC_RADIO_INNER_CIRCLE);
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Label
 	// /////////////////////////////////////////////////////////////
-	private Label label = new Label(); 
+	private Label label = new Label();
+	
+	private final CheckedMixin<Input> checkedMixin = new CheckedMixin<Input>(input);
+
+	public MaterialRadioButton() {
+		super();
+	}
 	
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-
+		
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
-		
+
 		radio.add(input);
 		radio.add(divBackground);
-		
+
 		radio.setRipple(Ripple.DEFAULT);
 		radio.setCircle(true);
-		
+
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
-		
+
 		add(radio);
 		add(label);
+
+		if(getValue()) {
+			putInHistory();
+		}
+
+		addValueChangeListener(input.getElement());
+		
 	}
+	
+	protected native void addValueChangeListener(Element element)/*-{
+		var _this = this;		
+		element.addEventListener('change', function(event){
+			if(element.checked){
+				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+			}	
+		});
+	}-*/;
 	
 	@Override
 	public void setId(String id) {
 		input.setId(id);
 		label.getElement().setAttribute("for", input.getId());
 	}
-
+	
 	@Override
-	public void setChecked(boolean checked) {
-		input.setChecked(checked);
+	public String getId() {
+		return input.getId();
 	}
 
 	@Override
-	public boolean isChecked() {
-		return input.isChecked();
+	public void setValue(Boolean value) {
+		setValue(value, true);
 	}
+	
+	@Override
+	public void setValue(Boolean value, boolean fireEvents) {
+		setValue(input.getElement(), value);
+		if (fireEvents) {
+			fireChangeEvent();
+		}
+	}
+
+	@Override
+	public Boolean getValue() {
+		return getValue(input.getElement());
+	}
+	
+	public static native Boolean getValue(Element element)/*-{
+		return element.checked;
+	}-*/;
+	
+	public static native void setValue(Element element, boolean value)/*-{
+		element.checked = value;		
+	}-*/;
+
 
 	@Override
 	public void setName(String name) {
@@ -89,21 +161,4 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		label.setText(text);
 	}
 
-	@Override
-	public Boolean getValue() {
-		return isChecked();
-	}
-
-	@Override
-	public void setValue(Boolean value) {
-		
-	}
-
-	@Override
-	public void setValue(Boolean value, boolean fireEvents) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 }

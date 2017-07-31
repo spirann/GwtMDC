@@ -14,12 +14,23 @@ public abstract class MaterialFormField<T> extends MaterialWidget implements Has
 
 	private boolean valueChangeHandlerInitialized;
 
+	private T value;
+
 	public MaterialFormField() {
 		super(HtmlElements.DIV.createElement(), CssName.MDC_FORM_FIELD);
+	}
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
 	}
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());
+	}
+
+	protected void fireChangeEvent() {
+		ValueChangeEvent.fire(MaterialFormField.this, getValue());
 	}
 
 	@Override
@@ -29,11 +40,29 @@ public abstract class MaterialFormField<T> extends MaterialWidget implements Has
 			valueChangeHandlerInitialized = true;
 			addChangeHandler(new ChangeHandler() {
 				public void onChange(ChangeEvent event) {
-					ValueChangeEvent.fire(MaterialFormField.this, getValue());
+					fireChangeEvent();
 				}
 			});
 		}
 		return addHandler(handler, ValueChangeEvent.getType());
+	}
+
+	@Override
+	public void setValue(T value) {
+		setValue(value, true);
+	}
+
+	@Override
+	public T getValue() {
+		return value;
+	}
+
+	@Override
+	public void setValue(T value, boolean fireEvents) {
+		this.value = value;
+		if (fireEvents) {
+			fireChangeEvent();
+		}
 	}
 
 }

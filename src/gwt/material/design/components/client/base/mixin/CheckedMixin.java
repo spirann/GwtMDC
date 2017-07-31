@@ -16,7 +16,7 @@ public class CheckedMixin<T extends UIObject> extends AbstractMixin<T> implement
 	@Override
 	public void setChecked(boolean checked) {
 		if (checked) {
-			uiObject.getElement().setAttribute("checked", "true");
+			uiObject.getElement().setAttribute("checked", "_");
 		} else {
 			uiObject.getElement().removeAttribute("checked");
 		}
@@ -24,7 +24,7 @@ public class CheckedMixin<T extends UIObject> extends AbstractMixin<T> implement
 
 	@Override
 	public boolean isChecked() {
-		return uiObject.getElement().getAttribute("checked") != null;
+		return uiObject.getElement().hasAttribute("checked");
 	}
 
 }

@@ -78,6 +78,7 @@ import gwt.material.design.components.client.events.DragStartEvent;
 import gwt.material.design.components.client.events.DropActivateEvent;
 import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
+import gwt.material.design.components.client.utils.helper.IdHelper;
 
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
@@ -149,6 +150,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected void onLoad() {
 		super.onLoad();
 
+		if(getId() == null) {
+			setId(IdHelper.createUniqueUiId());
+		}
+		
 		if (getPrimaryClass() != null && !getPrimaryClass().isEmpty()) {
 			setStylePrimaryName(getPrimaryClass());
 		}
