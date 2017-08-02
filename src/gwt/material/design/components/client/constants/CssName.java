@@ -77,7 +77,6 @@ public interface CssName {
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";
-	String MDC_TYPOGRAPHY_BASE = "mdc-typography-base";
 	String MDC_TYPOGRAPHY_ADJUST_MARGIN = "mdc-typography--adjust-margin";
 	String MDC_TYPOGRAPHY_DISPLAY_4 = "mdc-typography--display4";
 	String MDC_TYPOGRAPHY_DISPLAY_3 = "mdc-typography--display3";
@@ -155,6 +154,7 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_FORM_FIELD = "mdc-form-field";
 	String MDC_RADIO = "mdc-radio";
+	String MDC_RADIO_DISABLED = "mdc-radio--disabled";
 	String MDC_RADIO_NATIVE_CONTROL = "mdc-radio__native-control";
 	String MDC_RADIO_BACKGROUND = "mdc-radio__background";
 	String MDC_RADIO_OUTER_CIRCLE = "mdc-radio__outer-circle";

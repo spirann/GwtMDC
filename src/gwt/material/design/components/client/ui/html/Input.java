@@ -24,13 +24,13 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 		setType(type);
 	}
 
-	public Input(final InputType type, final String... cssClass) {
-		super(HtmlElements.INPUT.createElement(), CssName.MDC_TYPOGRAPHY, cssClass);
+	public Input(final InputType type, final String cssClass) {
+		super(HtmlElements.INPUT.createElement(), cssClass, CssName.MDC_TYPOGRAPHY);
 		setType(type);
 	}
 
-	public Input(final String... cssClass) {
-		super(HtmlElements.INPUT.createElement(), CssName.MDC_TYPOGRAPHY, cssClass);
+	public Input(final String cssClass) {
+		super(HtmlElements.INPUT.createElement(), cssClass, CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

@@ -17,8 +17,8 @@ public class Div extends MaterialWidget implements HasToolbarFixedAdjust{
 		super(HtmlElements.DIV.createElement(), CssName.MDC_TYPOGRAPHY);
 	}
 	
-	public Div(final String... cssClass) {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_TYPOGRAPHY, cssClass);
+	public Div(final String cssClass) {
+		super(HtmlElements.DIV.createElement(), cssClass, CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

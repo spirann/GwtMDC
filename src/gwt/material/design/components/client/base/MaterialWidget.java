@@ -81,7 +81,7 @@ import gwt.material.design.components.client.events.DropEvent;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
+public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers,
 		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox, HasRtl {
 
 	static {
@@ -102,17 +102,16 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		}
 	}
 
-	private final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
-	private final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
-	private final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
-	private final AttributeMixin<MaterialWidget> autoInitMixin = new AttributeMixin<MaterialWidget>(this,
-			"data-mdc-auto-init");
-	private final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
-	private final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
-	private final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
-	private final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
-	private final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
-	private final FlexboxMixin<MaterialWidget> flexboxMixin = new FlexboxMixin<>(this);
+	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
+	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
+	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
+	protected final AttributeMixin<MaterialWidget> autoInitMixin = new AttributeMixin<MaterialWidget>(this, "data-mdc-auto-init");
+	protected final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
+	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
+	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
+	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
+	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
+	protected final FlexboxMixin<MaterialWidget> flexboxMixin = new FlexboxMixin<>(this);
 
 	private String primaryClass;
 	private String[] initialClasses;
@@ -571,6 +570,16 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
+	}
+	
+	@Override
+	public String getDisabledClass() {
+		return enabledMixin.getDisabledClass();
+	}
+	
+	@Override
+	public void setDisabledClass(String disabledClass) {
+		enabledMixin.setDisabledClass(disabledClass);
 	}
 
 	@Override

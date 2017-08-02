@@ -17,12 +17,7 @@ public class Label extends MaterialWidget implements HasText, HasTypography {
 	private final TypeMixin<Label, Typography> typographiMixin = new TypeMixin<>(this);
 
 	public Label() {
-		super(HtmlElements.LABEL.createElement(), 
-				CssName.MDC_TYPOGRAPHY);
-	}
-	
-	public Label(final String... cssClass) {
-		super(HtmlElements.LABEL.createElement(), CssName.MDC_TYPOGRAPHY, cssClass);
+		super(HtmlElements.LABEL.createElement(), CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

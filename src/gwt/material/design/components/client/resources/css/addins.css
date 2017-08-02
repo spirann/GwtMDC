@@ -53,10 +53,29 @@ i, a {
 	text-align: left;
 }
 
-.mdc-radio__outer-circle {
-    /* @alternate */
-    border-color: rgba(0, 0, 0, 0.54);
-    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));}
+.mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {   
+    background-color: var(--mdc-theme-accent);
+}
+
+.mdc-radio__outer-circle {    
+    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+}
+
+.mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
+	border-color: var(--mdc-theme-accent);
+}
+
+.mdc-radio__inner-circle[disabled] {  
+    background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+}
+
+.mdc-radio__outer-circle[disabled] {  
+    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+}
+  
+.mdc-typography[disabled] {
+	color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+} 
 
 /* ==========================================================================
    Toolbar nav link

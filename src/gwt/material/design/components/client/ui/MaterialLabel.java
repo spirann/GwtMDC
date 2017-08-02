@@ -11,8 +11,8 @@ public class MaterialLabel extends Label {
 	private boolean initialize = false;
 
 	public MaterialLabel() {
-		super(CssName.MDC_TYPOGRAPHY_BASE,
-				CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+		super();
+		setInitialClasses(CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
 	}
 
 	@Override

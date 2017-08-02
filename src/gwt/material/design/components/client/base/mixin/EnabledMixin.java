@@ -1,6 +1,6 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
  * Copyright (C) 2015 - 2016 GwtMaterialDesign
  * %%
@@ -21,74 +21,102 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.IndexedPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
+import gwt.material.design.components.client.base.HasDisabledClass;
 
 /**
- * @author Ben Dol
- * @author kevzlou7979
+ * 
+ * @author Richeli Vargas
+ *
+ * @param <T>
  */
-public class EnabledMixin<T extends Widget & HasEnabled> extends AbstractMixin<T> implements HasEnabled {
-    private static final String DISABLED = "disabled";
+public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabled & HasDisabledClass>
+		extends AbstractMixin<T> implements HasEnabled, HasDisabledClass {
 
-    private HandlerRegistration handler;
+	private static final String DISABLED = "disabled";
 
-    public EnabledMixin(final T widget) {
-        super(widget);
-    }
+	private String disabledClass;
 
-    @Override
-    public void setUiObject(T uiObject) {
-        super.setUiObject(uiObject);
+	private HandlerRegistration handler;
 
-        // Clean up previous handler
-        if (handler != null) {
-            handler.removeHandler();
-            handler = null;
-        }
-    }
+	public EnabledMixin(final T widget) {
+		super(widget);
+	}
 
-    @Override
-    public boolean isEnabled() {
-        return !StyleHelper.containsStyle(uiObject.getStyleName(), DISABLED);
-    }
+	@Override
+	public void setUiObject(T uiObject) {
+		super.setUiObject(uiObject);
 
-    @Override
-    public void setEnabled(boolean enabled) {
-        if (!uiObject.isAttached() && handler == null) {
-            handler = uiObject.addAttachHandler(event -> {
-                if (event.isAttached()) {
-                    applyEnabled(enabled, uiObject);
-                } else if (handler != null) {
-                    handler.removeHandler();
-                    handler = null;
-                }
-            });
-        } else {
-            applyEnabled(enabled, uiObject);
-        }
-    }
+		// Clean up previous handler
+		if (handler != null) {
+			handler.removeHandler();
+			handler = null;
+		}
+	}
 
-    public void setEnabled(MaterialWidget widget, boolean enabled) {
-        setEnabled(enabled);
-        for (Widget child : widget.getChildren()) {
-            if (child instanceof MaterialWidget) {
-                ((MaterialWidget) child).setEnabled(enabled);
-                setEnabled((MaterialWidget) child, enabled);
-            }
-        }
-    }
+	@Override
+	public boolean isEnabled() {
+		return !uiObject.getElement().hasAttribute(DISABLED);
+	}
 
-    private void applyEnabled(boolean enabled, UIObject obj) {
-        if (enabled) {
-            obj.removeStyleName(DISABLED);
-            obj.getElement().removeAttribute(DISABLED);
-        } else {
-            obj.addStyleName(DISABLED);
-            obj.getElement().setAttribute(DISABLED, "");
-        }
-    }
+	@Override
+	public void setEnabled(boolean enabled) {
+		if (!uiObject.isAttached() && handler == null) {
+			handler = uiObject.addAttachHandler(event -> {
+				if (event.isAttached()) {
+					applyEnabled(enabled, uiObject);
+				} else if (handler != null) {
+					handler.removeHandler();
+					handler = null;
+				}
+			});
+		} else {
+			applyEnabled(enabled, uiObject);
+		}
+	}
+
+	public String getDisabledClass() {
+		return disabledClass;
+	}
+
+	public void setDisabledClass(String disabledClass) {
+		this.disabledClass = disabledClass;
+	}
+
+	@SuppressWarnings("unchecked")
+	private void applyEnabled(boolean enabled, T element) {
+
+		final String disabledClass;
+
+		if (element instanceof HasDisabledClass) {
+			disabledClass = ((HasDisabledClass) element).getDisabledClass();
+		} else {
+			disabledClass = null;
+		}
+
+		if (enabled) {
+			element.getElement().removeAttribute(DISABLED);
+			if (disabledClass != null) {
+				element.getElement().removeClassName(disabledClass);
+			}
+		} else {
+			element.getElement().setAttribute(DISABLED, "");
+			if (disabledClass != null) {
+				element.getElement().addClassName(disabledClass);
+			}
+		}
+
+		for (int index = 0; index < element.getWidgetCount(); index++) {
+
+			final Widget widget = element.getWidget(index);
+
+			if (widget instanceof Widget && widget instanceof IndexedPanel.ForIsWidget && widget instanceof HasEnabled
+					&& widget instanceof HasDisabledClass) {
+				applyEnabled(enabled, (T) widget);
+			}
+		}
+
+	}
 }
