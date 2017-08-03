@@ -1,10 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.MaterialFormField;
@@ -12,59 +8,28 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasName, HasText {
-
-	// ////////////////////////////////////////////////////////////////
-	// Control for change value in RadioButton group
-	// Because the event is not trigger when another radio is selected
-	// ////////////////////////////////////////////////////////////////
-	private final static Map<String, MaterialRadioButton> history = new HashMap<>();
-
-	protected void putInHistory() {
-		putInHistory(true);
-	}
-	
-	protected void putInHistory(final boolean fireEvent) {
-
-		final MaterialRadioButton old = history.get(getName());
-
-		if (fireEvent && old != null && old != this) {
-			old.fireChangeEvent();
-		}
-
-		history.put(getName(), this);
-
-	}
-
-	protected void removeFromHistory() {
-
-		final MaterialRadioButton old = history.get(getName());
-
-		if (old == this) {
-			history.remove(getName());
-		}
-
-	}
+public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize RadioButton
+	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void radioInit(Element element)/*-{
-		$wnd.mdc.radio.MDCRadio.attachTo(element);
+	public static native void checkboxInit(Element element)/*-{
+		$wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Radio
 	// /////////////////////////////////////////////////////////////
-	private Div radio = new Div(CssName.MDC_RADIO);	
-	private Input input = new Input(InputType.RADIO, CssName.MDC_RADIO_NATIVE_CONTROL);
-	private Div divBackground = new Div(CssName.MDC_RADIO_BACKGROUND);
-	private Div divOuterCircle = new Div(CssName.MDC_RADIO_OUTER_CIRCLE);
-	private Div divInnerCircle = new Div(CssName.MDC_RADIO_INNER_CIRCLE);
+	private Div checkbox = new Div(CssName.MDC_CHECKBOX);	
+	private Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
+	private Div divBackground = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
+	private MaterialSvg svgCheckmark = new MaterialSvg();
+	private Div divMixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
@@ -75,39 +40,27 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	protected void onLoad() {
 		super.onLoad();
 
-		divBackground.add(divOuterCircle);
-		divBackground.add(divInnerCircle);
+		svgCheckmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
+		
+		
+		divBackground.add(svgCheckmark);
+		divBackground.add(divMixedmark);
 
-		radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
-		radio.add(input);
-		radio.add(divBackground);
+		checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
+		checkbox.add(input);
+		checkbox.add(divBackground);
 
 		setRipple(Ripple.DEFAULT);
 		setCircle(true);
 
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
-		add(radio);
+		add(checkbox);
 		add(label);
-
-		if (getValue()) {
-			putInHistory();
-		}
-
-		addValueChangeListener(input.getElement());
-
-		radioInit(radio.getElement());
+		
+		checkboxInit(checkbox.getElement());
+		svgCheckmark.setFillColor(Color.MDC_THEME_ACCENT);
 	}
-
-	protected native void addValueChangeListener(Element element)/*-{
-		var _this = this;
-		element.addEventListener('change',
-			function(event) {
-				if (element.checked) {
-					_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-				}
-			});
-	}-*/;
 
 	@Override
 	public void setId(String id) {
@@ -123,9 +76,6 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		setValue(input.getElement(), value);
-
-		putInHistory(fireEvents);
-
 		if (fireEvents) {
 			fireChangeEvent();
 		}
@@ -143,16 +93,22 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	protected native void setValue(Element element, boolean value)/*-{
 		element.checked = value;
 	}-*/;
-
-	@Override
-	public void setName(String name) {
-		input.setName(name);
+	
+	public Boolean isIndeterminate(){
+		return isIndeterminate(input.getElement());
 	}
 
-	@Override
-	public String getName() {
-		return input.getName();
-	}
+	public void setIndeterminate(boolean value) {
+		setIndeterminate(input.getElement(), value);
+	};
+	
+	protected native Boolean isIndeterminate(Element element)/*-{
+		return element.indeterminate;
+	}-*/;
+	
+	protected native void setIndeterminate(Element element, boolean value)/*-{
+		element.indeterminate = value;
+	}-*/;
 
 	@Override
 	public String getText() {
@@ -166,17 +122,17 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	
 	@Override
 	public void setRipple(Ripple ripple) {
-		radio.setRipple(ripple);
+		checkbox.setRipple(ripple);
 	}
 	
 	@Override
 	public Ripple getRipple() {
-		return radio.getRipple();
+		return checkbox.getRipple();
 	}
 	
 	@Override
 	public void setCircle(boolean circle) {
-		radio.setCircle(circle);
+		checkbox.setCircle(circle);
 	}
 	
 	@Override

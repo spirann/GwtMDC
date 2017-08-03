@@ -53,6 +53,10 @@ i, a {
 	text-align: left;
 }
 
+/* ==========================================================================
+   RadioButton color adjust
+   ========================================================================== */
+
 .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {   
     background-color: var(--mdc-theme-accent);
 }
@@ -65,6 +69,7 @@ i, a {
 	border-color: var(--mdc-theme-accent);
 }
 
+/* Disabled */
 .mdc-radio__inner-circle[disabled] {  
     background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
 }
@@ -76,6 +81,58 @@ i, a {
 .mdc-typography[disabled] {
 	color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
 } 
+
+/* ==========================================================================
+   Checkbox color adjust
+   ========================================================================== */
+@-webkit-keyframes mdc-checkbox-fade-out-accent {
+    0%,
+    80% {
+    /* @alternate */
+    border-color: transparent;
+    /* @alternate */
+    background-color: var(--mdc-theme-accent, #3f51b5); }
+    100% {
+    border-color: rgba(0, 0, 0, 0.54);
+    background-color: transparent;
+    }
+}
+
+.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background, .mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background {
+  -webkit-animation: mdc-checkbox-fade-out-accent 180ms linear;
+          animation: mdc-checkbox-fade-out-accent 180ms linear; }
+
+.mdc-checkbox__background {   
+    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
+}
+
+.mdc-checkbox__native-control:checked ~ .mdc-checkbox__background,
+.mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
+	background: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
+	border-color: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
+}
+
+/* Disabled */
+.mdc-checkbox__background[disabled] {  
+    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+}
+
+.mdc-checkbox__native-control:checked ~ .mdc-checkbox__background[disabled] {
+	border-color: transparent !important;
+	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+}
+
+.mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background[disabled] {
+	border-color: transparent !important;
+	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
+}
+
+/* ==========================================================================
+   Layout Grid adjust
+   ========================================================================== */
+.mdc-layout-grid {
+	width: 100%;
+}
 
 /* ==========================================================================
    Toolbar nav link

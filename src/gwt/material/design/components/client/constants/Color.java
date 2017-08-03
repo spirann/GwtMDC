@@ -23,59 +23,61 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public enum Color implements CssType {
 	// THEME
-	MDC_THEME_PRIMARY("var(" + ThemeAttribute.MDC_THEME_PRIMARY + ")"), MDC_THEME_ACCENT(
-			"var(" + ThemeAttribute.MDC_THEME_ACCENT + ")"), MDC_THEME_BACKGROUND(
-					"var(" + ThemeAttribute.MDC_THEME_BACKGROUND + ")"), MDC_THEME_TEXT_PRIMARY_ON_PRIMARY("var("
-							+ ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY
-							+ ")"), MDC_THEME_TEXT_SECONDARY_ON_PRIMARY(
-									"var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY
-											+ ")"), MDC_THEME_TEXT_HINT_ON_PRIMARY(
-													"var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY
-															+ ")"), MDC_THEME_TEXT_DISABLED_ON_PRIMARY(
-																	"var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY
-																			+ ")"), MDC_THEME_TEXT_ICON_ON_PRIMARY(
-																					"var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY
-																							+ ")"), MDC_THEME_TEXT_PRIMARY_ON_ACCENT(
-																									"var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT
-																											+ ")"), MDC_THEME_TEXT_SECONDARY_ON_ACCENT(
-																													"var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT
-																															+ ")"), MDC_THEME_TEXT_HINT_ON_ACCENT(
-																																	"var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT
-																																			+ ")"), MDC_THEME_TEXT_DISABLED_ON_ACCENT(
-																																					"var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT
-																																							+ ")"), MDC_THEME_TEXT_ICON_ON_ACCENT(
-																																									"var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT
-																																											+ ")"), MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND(
-																																													"var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND
-																																															+ ")"), MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND(
-																																																	"var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND
-																																																			+ ")"), MDC_THEME_TEXT_HINT_ON_BACKGROUND(
-																																																					"var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND
-																																																							+ ")"), MDC_THEME_TEXT_DISABLED_ON_BACKGROUND(
-																																																									"var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND
-																																																											+ ")"), MDC_THEME_TEXT_ICON_ON_BACKGROUND(
-																																																													"var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND
-																																																															+ ")"), MDC_THEME_TEXT_PRIMARY_ON_LIGHT(
-																																																																	"var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT
-																																																																			+ ")"), MDC_THEME_TEXT_SECONDARY_ON_LIGHT(
-																																																																					"var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT
-																																																																							+ ")"), MDC_THEME_TEXT_HINT_ON_LIGHT(
-																																																																									"var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT
-																																																																											+ ")"), MDC_THEME_TEXT_DISABLED_ON_LIGHT(
-																																																																													"var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT
-																																																																															+ ")"), MDC_THEME_TEXT_ICON_ON_LIGHT(
-																																																																																	"var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT
-																																																																																			+ ")"), MDC_THEME_TEXT_PRIMARY_ON_DARK(
-																																																																																					"var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK
-																																																																																							+ ")"), MDC_THEME_TEXT_SECONDARY_ON_DARK(
-																																																																																									"var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK
-																																																																																											+ ")"), MDC_THEME_TEXT_HINT_ON_DARK(
-																																																																																													"var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK
-																																																																																															+ ")"), MDC_THEME_TEXT_DISABLED_ON_DARK(
-																																																																																																	"var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK
-																																																																																																			+ ")"), MDC_THEME_TEXT_ICON_ON_DARK(
-																																																																																																					"var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK
-																																																																																																							+ ")"),
+	MDC_THEME_PRIMARY("var(" + ThemeAttribute.MDC_THEME_PRIMARY + ")"),
+	//
+	MDC_THEME_ACCENT("var(" + ThemeAttribute.MDC_THEME_ACCENT + ")"),
+	//
+	MDC_THEME_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_PRIMARY_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY + ")"),
+	//
+	MDC_THEME_TEXT_SECONDARY_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY + ")"),
+	//
+	MDC_THEME_TEXT_HINT_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY + ")"),
+	//
+	MDC_THEME_TEXT_DISABLED_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY + ")"),
+	//
+	MDC_THEME_TEXT_ICON_ON_PRIMARY("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY + ")"),
+	//
+	MDC_THEME_TEXT_PRIMARY_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT + ")"),
+	//
+	MDC_THEME_TEXT_SECONDARY_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT + ")"),
+	//
+	MDC_THEME_TEXT_HINT_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT + ")"),
+	//
+	MDC_THEME_TEXT_DISABLED_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT + ")"),
+	//
+	MDC_THEME_TEXT_ICON_ON_ACCENT("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT + ")"),
+	//
+	MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_HINT_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_DISABLED_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_ICON_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND + ")"),
+	//
+	MDC_THEME_TEXT_PRIMARY_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT + ")"),
+	//
+	MDC_THEME_TEXT_SECONDARY_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT + ")"),
+	//
+	MDC_THEME_TEXT_HINT_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT + ")"),
+	//
+	MDC_THEME_TEXT_DISABLED_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT + ")"),
+	//
+	MDC_THEME_TEXT_ICON_ON_LIGHT("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT + ")"),
+	//
+	MDC_THEME_TEXT_PRIMARY_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK + ")"),
+	//
+	MDC_THEME_TEXT_SECONDARY_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK + ")"),
+	//
+	MDC_THEME_TEXT_HINT_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK + ")"),
+	//
+	MDC_THEME_TEXT_DISABLED_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK + ")"),
+	//
+	MDC_THEME_TEXT_ICON_ON_DARK("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK + ")"),
 	//
 	BLACK(0, 0, 0, 1), WHITE(255, 255, 255, 1), TRANSPARENT(0, 0, 0, 0),
 	// RED
@@ -2583,11 +2585,11 @@ public enum Color implements CssType {
 
 	public String getCssName(final double alpha) {
 		if (css.contains("rgba")) {
-			
+
 			final int last = css.lastIndexOf(",");
-			
+
 			return css.substring(0, last) + "," + alpha + ")";
-					
+
 		} else {
 			return css;
 		}

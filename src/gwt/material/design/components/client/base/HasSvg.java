@@ -31,9 +31,9 @@ public interface HasSvg {
 	void setResource(TextResource resource);
 
 	/**
-	 * Gets the resource svg image.
+	 * Sets the resource svg image.
 	 */
-	TextResource getResource();
+	void setSvg(String text);
 	
 	/**
 	 * 

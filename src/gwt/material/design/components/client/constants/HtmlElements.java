@@ -24,7 +24,9 @@ public enum HtmlElements {
 	A("a"),
 	I("i"),
 	IMG("img"),
-	P("p");
+	P("p"),
+	SVG("svg"),
+	PATH("path");
 	
 	private final String tag;
 	

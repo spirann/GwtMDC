@@ -153,10 +153,19 @@ public interface CssName {
 	// INPUTS AND CONTROLS
 	// //////////////////////////////////////////////////////
 	String MDC_FORM_FIELD = "mdc-form-field";
+	// Radio Button
 	String MDC_RADIO = "mdc-radio";
 	String MDC_RADIO_DISABLED = "mdc-radio--disabled";
 	String MDC_RADIO_NATIVE_CONTROL = "mdc-radio__native-control";
 	String MDC_RADIO_BACKGROUND = "mdc-radio__background";
 	String MDC_RADIO_OUTER_CIRCLE = "mdc-radio__outer-circle";
 	String MDC_RADIO_INNER_CIRCLE = "mdc-radio__inner-circle";
+	// Checkbox
+	String MDC_CHECKBOX = "mdc-checkbox";
+	String MDC_CHECKBOX_DISABLED = "mdc-checkbox--disabled";
+	String MDC_CHECKBOX_NATIVE_CONTROL = "mdc-checkbox__native-control";
+	String MDC_CHECKBOX_BACKGROUND = "mdc-checkbox__background";
+	String MDC_CHECKBOX_CHECKMARK = "mdc-checkbox__checkmark";
+	String MDC_CHECKBOX_MIXEDMARK = "mdc-checkbox__mixedmark";
+	//
 }

@@ -21,30 +21,38 @@ package gwt.material.design.components.client.resources;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.resources.client.ClientBundle;
+import com.google.gwt.resources.client.DataResource.MimeType;
 import com.google.gwt.resources.client.TextResource;
 
 public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
 
-	@Source("js/jquery-2.1.1.min.js")
+	@Source("js/jquery-2.1.1.min.js")	
 	TextResource jqueryJs();
-	
+
 	@Source("js/google_analytics.js")
 	TextResource googleAnalyticsJs();
 
 	@Source("js/material-components-web.min.js")
 	TextResource materialComponentsWebJs();
-	
+
 	@Source("js/prism.js")
 	TextResource prismJs();
-	
+
 	@Source("css/prism.css")
 	TextResource prismCss();
-	
+
 	@Source("css/addins.css")
 	TextResource addinsCss();
-	
+
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();
-	
+
+	// ////////////////////////////////////////
+	// Images
+	// ////////////////////////////////////////
+	@Source("image/mdc-checkbox__checkmark.svg")
+	@MimeType("image/svg+xml")
+	TextResource mdcCheckboxCheckmark();
+
 }

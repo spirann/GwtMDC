@@ -23,8 +23,8 @@ public class MaterialSvg extends MaterialWidget implements HasSvg {
 	}
 
 	@Override
-	public TextResource getResource() {
-		return svgMixin.getResource();
+	public void setSvg(String text) {
+		svgMixin.setSvg(text);
 	}
 
 	@Override
