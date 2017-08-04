@@ -22,20 +22,20 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 		$wnd.mdc.gridList.MDCGridList.attachTo(element);
 	}-*/;
 
-	private MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), 
+	protected MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), 
 			CssName.MDC_GRID_TILE_PRIMARY, CssName.MDC_TYPOGRAPHY);
 
-	private MaterialImage image = new MaterialImage();
+	protected MaterialImage image = new MaterialImage();
 	
-	private MaterialWidget secondary = new MaterialWidget(HtmlElements.SPAN.createElement(),
+	protected MaterialWidget secondary = new MaterialWidget(HtmlElements.SPAN.createElement(),
 			CssName.MDC_GRID_TILE_SECONDARY);
 
-	private MaterialIcon icon = new MaterialIcon();
+	protected MaterialIcon icon = new MaterialIcon();
 	
-	private MaterialWidget caption = new MaterialWidget(HtmlElements.SPAN.createElement(), 
+	protected MaterialWidget caption = new MaterialWidget(HtmlElements.SPAN.createElement(), 
 			CssName.MDC_GRID_TILE_TITLE, CssName.MDC_TYPOGRAPHY);
 
-	private MaterialWidget supportText = new MaterialWidget(HtmlElements.SPAN.createElement(),
+	protected MaterialWidget supportText = new MaterialWidget(HtmlElements.SPAN.createElement(),
 			CssName.MDC_GRID_TILE_SUPPORT_TEXT, CssName.MDC_TYPOGRAPHY);
 
 	private boolean initialize = false;
@@ -59,6 +59,7 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 
 			icon.addStyleName(CssName.MDC_GRID_TILE_ICON);
 			icon.setCircle(true);
+			icon.setPadding(0);
 			
 			secondary.setZIndex(1);
 			secondary.add(icon);

@@ -11,7 +11,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 
 public class MaterialSvg extends MaterialWidget implements HasSvg {
 
-	private final SvgMixin<MaterialSvg> svgMixin = new SvgMixin<MaterialSvg>(this);
+	protected final SvgMixin<MaterialSvg> svgMixin = new SvgMixin<MaterialSvg>(this);
 
 	public MaterialSvg() {
 		super(HtmlElements.DIV.createElement());

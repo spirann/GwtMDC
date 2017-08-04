@@ -11,7 +11,7 @@ import gwt.material.design.components.client.constants.ToolbarType;
 
 public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarType> {
 
-	private final TypeMixin<MaterialToolbar, ToolbarType> typeMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialToolbar, ToolbarType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialize = false;
 

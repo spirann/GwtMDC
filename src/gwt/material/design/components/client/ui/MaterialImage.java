@@ -42,7 +42,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
  */
 public class MaterialImage extends MaterialWidget implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
 
-	private final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
+	protected final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
 
 	/**
 	 * Creates an empty image.

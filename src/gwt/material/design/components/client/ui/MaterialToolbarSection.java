@@ -34,8 +34,8 @@ public class MaterialToolbarSection extends MaterialWidget {
 		}
 	};
 
-	private final StyleMixin<MaterialToolbarSection> alignMixin = new StyleMixin<>(this);
-	private final StyleEnabledMixin<MaterialToolbarSection> shrinkToFitMixin = new StyleEnabledMixin<>(
+	protected final StyleMixin<MaterialToolbarSection> alignMixin = new StyleMixin<>(this);
+	protected final StyleEnabledMixin<MaterialToolbarSection> shrinkToFitMixin = new StyleEnabledMixin<>(
 			this, CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
 
 	public MaterialToolbarSection() {

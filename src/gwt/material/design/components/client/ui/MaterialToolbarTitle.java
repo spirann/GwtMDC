@@ -10,7 +10,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 
 public class MaterialToolbarTitle extends MaterialWidget implements HasText {
 
-	private final TextMixin<MaterialToolbarTitle> textMixin = new TextMixin<>(this);
+	protected final TextMixin<MaterialToolbarTitle> textMixin = new TextMixin<>(this);
 
 	public MaterialToolbarTitle() {
 		super(HtmlElements.SPAN.createElement(), CssName.MDC_TOOLBAR_TITLE);

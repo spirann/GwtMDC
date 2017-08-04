@@ -54,6 +54,20 @@ i, a {
 }
 
 /* ==========================================================================
+   Change Ripple background
+   ========================================================================== 
+.mdc-ripple-surface--accent.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--accent.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-accent);
+}
+*/
+/* ==========================================================================
+   Floating FAB
+   ========================================================================== */
+.mdc-icon-toggle--disabled {
+	opacity: 0.30;
+}   
+/* ==========================================================================
    Floating FAB
    ========================================================================== */
 
@@ -72,6 +86,20 @@ i, a {
 }
 
 /* ==========================================================================
+   Material disabled adjust
+   ========================================================================== */
+.material-icons--disabled {
+	opacity: 0.30;
+}
+
+/* ==========================================================================
+   Form fields disabled adjust
+   ========================================================================== */
+.mdc-form-field[disabled] {
+	opacity: 0.30;
+}
+
+/* ==========================================================================
    RadioButton color adjust
    ========================================================================== */
 
@@ -87,32 +115,19 @@ i, a {
 	border-color: var(--mdc-theme-accent);
 }
 
-/* Disabled */
-.mdc-radio__inner-circle[disabled] {  
-    background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
-}
-
-.mdc-radio__outer-circle[disabled] {  
-    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
-}
-  
-.mdc-typography[disabled] {
-	color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
-} 
-
 /* ==========================================================================
    Checkbox color adjust
    ========================================================================== */
 @-webkit-keyframes mdc-checkbox-fade-out-accent {
     0%,
     80% {
-    /* @alternate */
-    border-color: transparent;
-    /* @alternate */
-    background-color: var(--mdc-theme-accent, #3f51b5); }
+    	/* @alternate */
+    	border-color: transparent;
+    	/* @alternate */
+    	background-color: var(--mdc-theme-accent, #3f51b5); }
     100% {
-    border-color: rgba(0, 0, 0, 0.54);
-    background-color: transparent;
+    	border-color: rgba(0, 0, 0, 0.54);
+    	background-color: transparent;
     }
 }
 
@@ -128,21 +143,6 @@ i, a {
 .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
 	background: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
 	border-color: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
-}
-
-/* Disabled */
-.mdc-checkbox__background[disabled] {  
-    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
-}
-
-.mdc-checkbox__native-control:checked ~ .mdc-checkbox__background[disabled] {
-	border-color: transparent !important;
-	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
-}
-
-.mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background[disabled] {
-	border-color: transparent !important;
-	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)) !important;
 }
 
 /* ==========================================================================
@@ -206,21 +206,10 @@ i, a {
 }
 
 ::-webkit-scrollbar-track {
-	/*
-    border-radius: 0px;
-    background: linear-gradient(#455a64, #455a64);
-    background-size: 100% 112px;
-    background-repeat: no-repeat;
-    background-color: #78909c;
-    */
 	background-color: var(--mdc-theme-text-primary-on-primary);
-	/* #F5F5F5 !important; */
 }
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 0px !important;
-	/*
-	background: #455A64 !important;
-	*/
 	background: var(--mdc-theme-accent);
 }

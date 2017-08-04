@@ -54,5 +54,9 @@ public interface MaterialResources extends ClientBundle {
 	@Source("image/mdc-checkbox__checkmark.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcCheckboxCheckmark();
+	
+	@Source("image/mdc-slider__thumb.svg")
+	@MimeType("image/svg+xml")
+	TextResource mdcSliderThumb();
 
 }

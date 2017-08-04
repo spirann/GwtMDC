@@ -30,7 +30,6 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
 
     public AttributeMixin(final T widget, String attribute) {
         super(widget);
-
         this.attribute = attribute;
     }
 

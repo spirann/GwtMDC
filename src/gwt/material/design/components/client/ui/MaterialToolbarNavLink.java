@@ -1,6 +1,5 @@
 package gwt.material.design.components.client.ui;
 
-
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -11,21 +10,27 @@ import gwt.material.design.components.client.constants.Ripple;
 
 public class MaterialToolbarNavLink extends MaterialWidget implements HasText {
 
-	private final TextMixin<MaterialToolbarNavLink> textMixin = new TextMixin<>(this);
+	protected final TextMixin<MaterialToolbarNavLink> textMixin = new TextMixin<>(this);
 
 	public MaterialToolbarNavLink() {
 		super(HtmlElements.SPAN.createElement(), CssName.MDC_TOOLBAR_NAV_LINK);
 	}
 
+	private boolean initialized = false;
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		
-		if(getRipple() == null){
-			setRipple(Ripple.DEFAULT);
+
+		if (!initialized) {
+
+			if (getRipple() == null) {
+				setRipple(Ripple.DEFAULT);
+			}
+
 		}
 	}
-	
+
 	@Override
 	public String getText() {
 		return textMixin.getText();

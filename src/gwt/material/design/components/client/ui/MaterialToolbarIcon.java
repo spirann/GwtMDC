@@ -13,10 +13,10 @@ import gwt.material.design.components.client.constants.Ripple;
 
 public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconType>, HasHref {
 
-	private final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
-	private final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
+	protected final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
+	protected final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
 	
-	private IconType type;
+	protected IconType type;
 
 	public MaterialToolbarIcon() {
 		super(HtmlElements.A.createElement(), CssName.MDC_TOOLBAR_ICON_MENU);
@@ -25,16 +25,9 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 	public MaterialToolbarIcon(final IconType type){
 		this();
 		setType(type);
+		setRipple(Ripple.DEFAULT);
 	}
 	
-	@Override
-	protected void onLoad() {
-		super.onLoad();
-		if(getRipple() == null){
-			setRipple(Ripple.DEFAULT);
-		}
-	}
-
 	@Override
 	public void setType(IconType type) {
 		this.type = type;

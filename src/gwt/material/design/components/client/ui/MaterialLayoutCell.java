@@ -35,8 +35,8 @@ public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
 		}
 	};
 
-	private final ColumnsMixin<MaterialLayoutCell> columnsMixin = new ColumnsMixin<MaterialLayoutCell>(this);
-	private final StyleMixin<MaterialLayoutCell> alignMixin = new StyleMixin<>(this);
+	protected final ColumnsMixin<MaterialLayoutCell> columnsMixin = new ColumnsMixin<MaterialLayoutCell>(this);
+	protected final StyleMixin<MaterialLayoutCell> alignMixin = new StyleMixin<>(this);
 
 	public MaterialLayoutCell() {
 		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_CELL);

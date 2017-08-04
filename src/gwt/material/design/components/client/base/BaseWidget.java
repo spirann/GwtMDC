@@ -111,8 +111,12 @@ public class BaseWidget extends ComplexPanel {
 		setStyleProperty("background-color", color.getCssName());
 	}
 
-	public void setTextColor(final Color color) {
+	public void setColor(final Color color) {
 		setStyleProperty("color", color.getCssName());
+	}
+	
+	public void setTextColor(final Color color) {
+		setColor(color);
 	}
 
 	public void setOverflow(final Overflow overflow) {

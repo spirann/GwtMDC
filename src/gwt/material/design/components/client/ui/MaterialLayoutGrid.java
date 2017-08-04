@@ -38,7 +38,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
  */
 public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
 	
-	private final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
 
 	public MaterialLayoutGrid() {
 		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_GRID);

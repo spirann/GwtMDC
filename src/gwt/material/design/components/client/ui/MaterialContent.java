@@ -10,7 +10,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 
 public class MaterialContent extends MaterialWidget implements HasToolbarFixedAdjust{
 
-	private final StyleEnabledMixin<MaterialContent> toolbarFixedAdjustMixin = new StyleEnabledMixin<>(
+	protected final StyleEnabledMixin<MaterialContent> toolbarFixedAdjustMixin = new StyleEnabledMixin<>(
 			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 	
 	public MaterialContent(){

@@ -128,7 +128,14 @@ public interface CssName {
 	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
 	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
 	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
-	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-"; // + one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
+	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-"; // + one
+																		// of
+																		// -->
+																		// 16x9
+																		// | 2x3
+																		// | 3x2
+																		// | 4x3
+																		// | 3x4
 	String MDC_GRID_TILE = "mdc-grid-tile";
 	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
 	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
@@ -140,6 +147,7 @@ public interface CssName {
 	// ICONS
 	// //////////////////////////////////////////////////////
 	String MATERIAL_ICONS = "material-icons";
+	String MATERIAL_ICONS_DISABLED = "material-icons--disabled";
 	// //////////////////////////////////////////////////////
 	// BUTTONS
 	// //////////////////////////////////////////////////////
@@ -158,6 +166,11 @@ public interface CssName {
 	String MDC_FAB_PLAIN = "mdc-fab--plain";
 	String MDC_FAB_FIXED = "mdc-fab--fixed";
 	// //////////////////////////////////////////////////////
+	// ICON TOGGLE
+	// //////////////////////////////////////////////////////
+	String MDC_ICON_TOGGLE = "mdc-icon-toggle";
+	String MDC_ICON_TOGGLE_DISABLED = "mdc-icon-toggle--disabled";
+	// //////////////////////////////////////////////////////
 	// INPUTS AND CONTROLS
 	// //////////////////////////////////////////////////////
 	String MDC_FORM_FIELD = "mdc-form-field";
@@ -175,5 +188,14 @@ public interface CssName {
 	String MDC_CHECKBOX_BACKGROUND = "mdc-checkbox__background";
 	String MDC_CHECKBOX_CHECKMARK = "mdc-checkbox__checkmark";
 	String MDC_CHECKBOX_MIXEDMARK = "mdc-checkbox__mixedmark";
-	//
+	// Slider
+	String MDC_SLIDER = "mdc-slider";
+	String MDC_SLIDER_DISCRETE = "mdc-slider--discrete";
+	String MDC_SLIDER_TRACK_CONTAINER = "mdc-slider__track-container";
+	String MDC_SLIDER_TRACK = "mdc-slider__track";
+	String MDC_SLIDER_THUMB_CONTAINER = "mdc-slider__thumb-container";
+	String MDC_SLIDER_THUMB = "mdc-slider__thumb";
+	String MDC_SLIDER_FOCUS_RING = "mdc-slider__focus-ring";
+	String MDC_SLIDER_PIN = "mdc-slider__pin";
+	String MDC_SLIDER_PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
 }

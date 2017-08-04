@@ -22,12 +22,12 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// Control for change value in RadioButton group
 	// Because the event is not trigger when another radio is selected
 	// ////////////////////////////////////////////////////////////////
-	private final static Map<String, MaterialRadioButton> history = new HashMap<>();
+	protected final static Map<String, MaterialRadioButton> history = new HashMap<>();
 
 	protected void putInHistory() {
 		putInHistory(true);
 	}
-	
+
 	protected void putInHistory(final boolean fireEvent) {
 
 		final MaterialRadioButton old = history.get(getName());
@@ -60,7 +60,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// /////////////////////////////////////////////////////////////
 	// Radio
 	// /////////////////////////////////////////////////////////////
-	private Div radio = new Div(CssName.MDC_RADIO);	
+	private Div radio = new Div(CssName.MDC_RADIO);
 	private Input input = new Input(InputType.RADIO, CssName.MDC_RADIO_NATIVE_CONTROL);
 	private Div divBackground = new Div(CssName.MDC_RADIO_BACKGROUND);
 	private Div divOuterCircle = new Div(CssName.MDC_RADIO_OUTER_CIRCLE);
@@ -71,42 +71,55 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// /////////////////////////////////////////////////////////////
 	private Label label = new Label();
 
+	private boolean initialized = false;
+
+	public MaterialRadioButton() {
+		super();
+		setRipple(Ripple.DEFAULT);
+		setCircle(true);
+	}
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
 
-		divBackground.add(divOuterCircle);
-		divBackground.add(divInnerCircle);
+		if (!initialized) {
 
-		radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
-		radio.add(input);
-		radio.add(divBackground);
+			divBackground.add(divOuterCircle);
+			divBackground.add(divInnerCircle);
 
-		setRipple(Ripple.DEFAULT);
-		setCircle(true);
+			radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
+			radio.add(input);
+			radio.add(divBackground);
 
-		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
-		add(radio);
-		add(label);
+			add(radio);
+			add(label);
 
-		if (getValue()) {
-			putInHistory();
+			if (getValue()) {
+				putInHistory();
+			}
+
+			addValueChangeListener(input.getElement());
+
+			radioInit(radio.getElement());
+
+			initialized = true;
+
 		}
-
-		addValueChangeListener(input.getElement());
-
-		radioInit(radio.getElement());
 	}
 
 	protected native void addValueChangeListener(Element element)/*-{
 		var _this = this;
-		element.addEventListener('change',
-			function(event) {
-				if (element.checked) {
-					_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-				}
-			});
+		element
+				.addEventListener(
+						'change',
+						function(event) {
+							if (element.checked) {
+								_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+							}
+						});
 	}-*/;
 
 	@Override
@@ -163,22 +176,22 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	public void setText(String text) {
 		label.setText(text);
 	}
-	
+
 	@Override
 	public void setRipple(Ripple ripple) {
 		radio.setRipple(ripple);
 	}
-	
+
 	@Override
 	public Ripple getRipple() {
 		return radio.getRipple();
 	}
-	
+
 	@Override
 	public void setCircle(boolean circle) {
 		radio.setCircle(circle);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);

@@ -17,9 +17,9 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 		$wnd.Prism.highlightAll();
 	}-*/;
 
-	private CodeType type;
+	protected CodeType type;
 
-	private Element code = HtmlElements.CODE.createElement();
+	protected Element code = HtmlElements.CODE.createElement();
 
 	private boolean initialized = false;
 

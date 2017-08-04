@@ -14,8 +14,8 @@ import gwt.material.design.components.client.constants.HtmlElements;
 
 public class MaterialGridList extends MaterialWidget implements HasCaptionContent, HasAspectRatio {	
 	
-	private final CaptionSettingMixin<MaterialGridList> captionSettingMixin = new CaptionSettingMixin<MaterialGridList>(this);
-	private final AspectRatioMixin<MaterialGridList> aspectRatioMixin = new AspectRatioMixin<MaterialGridList>(this, CssName.MDC_GRID_LIST_TILE_ASPECT);
+	protected final CaptionSettingMixin<MaterialGridList> captionSettingMixin = new CaptionSettingMixin<MaterialGridList>(this);
+	protected final AspectRatioMixin<MaterialGridList> aspectRatioMixin = new AspectRatioMixin<MaterialGridList>(this, CssName.MDC_GRID_LIST_TILE_ASPECT);
 	
 	public MaterialGridList(){
 		super(HtmlElements.DIV.createElement(), CssName.MDC_GRID_LIST);

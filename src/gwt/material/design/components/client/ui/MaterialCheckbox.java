@@ -25,41 +25,51 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	// Radio
 	// /////////////////////////////////////////////////////////////
-	private Div checkbox = new Div(CssName.MDC_CHECKBOX);	
-	private Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
-	private Div divBackground = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
-	private MaterialSvg svgCheckmark = new MaterialSvg();
-	private Div divMixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
+	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
+	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
+	protected Div divBackground = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
+	protected MaterialSvg svgCheckmark = new MaterialSvg();
+	protected Div divMixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
 	// /////////////////////////////////////////////////////////////
-	private Label label = new Label();
+	protected Label label = new Label();
 
+	private boolean initialized = false;
+
+	public MaterialCheckbox(){
+		super();
+		setRipple(Ripple.DEFAULT);
+		setCircle(true);
+	}
+	
 	@Override
 	protected void onLoad() {
 		super.onLoad();
 
-		svgCheckmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-		
-		
-		divBackground.add(svgCheckmark);
-		divBackground.add(divMixedmark);
+		if (!initialized) {
 
-		checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
-		checkbox.add(input);
-		checkbox.add(divBackground);
+			svgCheckmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
 
-		setRipple(Ripple.DEFAULT);
-		setCircle(true);
+			divBackground.add(svgCheckmark);
+			divBackground.add(divMixedmark);
 
-		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+			checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
+			checkbox.add(input);
+			checkbox.add(divBackground);
 
-		add(checkbox);
-		add(label);
-		
-		checkboxInit(checkbox.getElement());
-		svgCheckmark.setFillColor(Color.MDC_THEME_ACCENT);
+			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+
+			add(checkbox);
+			add(label);
+
+			checkboxInit(checkbox.getElement());
+			svgCheckmark.setFillColor(Color.MDC_THEME_ACCENT);
+
+			initialized = true;
+
+		}
 	}
 
 	@Override
@@ -93,19 +103,19 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	protected native void setValue(Element element, boolean value)/*-{
 		element.checked = value;
 	}-*/;
-	
-	public Boolean isIndeterminate(){
+
+	public Boolean isIndeterminate() {
 		return isIndeterminate(input.getElement());
 	}
 
 	public void setIndeterminate(boolean value) {
 		setIndeterminate(input.getElement(), value);
 	};
-	
+
 	protected native Boolean isIndeterminate(Element element)/*-{
 		return element.indeterminate;
 	}-*/;
-	
+
 	protected native void setIndeterminate(Element element, boolean value)/*-{
 		element.indeterminate = value;
 	}-*/;
@@ -119,22 +129,22 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	public void setText(String text) {
 		label.setText(text);
 	}
-	
+
 	@Override
 	public void setRipple(Ripple ripple) {
 		checkbox.setRipple(ripple);
 	}
-	
+
 	@Override
 	public Ripple getRipple() {
 		return checkbox.getRipple();
 	}
-	
+
 	@Override
 	public void setCircle(boolean circle) {
 		checkbox.setCircle(circle);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
