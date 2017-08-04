@@ -128,7 +128,7 @@ public interface CssName {
 	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
 	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
 	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
-	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-"; //+ one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
+	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-"; // + one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
 	String MDC_GRID_TILE = "mdc-grid-tile";
 	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
 	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
@@ -149,6 +149,14 @@ public interface CssName {
 	String MDC_BUTTON_COMPACT = "mdc-button--compact";
 	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
 	String MDC_BUTTON_ACCENT = "mdc-button--accent";
+	// //////////////////////////////////////////////////////
+	// FAB - Floating Action Button
+	// //////////////////////////////////////////////////////
+	String MDC_FAB = "mdc-fab";
+	String MDC_FAB_ICON = "mdc-fab__icon";
+	String MDC_FAB_MINI = "mdc-fab--mini";
+	String MDC_FAB_PLAIN = "mdc-fab--plain";
+	String MDC_FAB_FIXED = "mdc-fab--fixed";
 	// //////////////////////////////////////////////////////
 	// INPUTS AND CONTROLS
 	// //////////////////////////////////////////////////////
