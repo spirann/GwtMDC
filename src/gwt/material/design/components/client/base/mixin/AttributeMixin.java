@@ -29,8 +29,13 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
     private String attribute;
 
     public AttributeMixin(final T widget, String attribute) {
-        super(widget);
+    	super(widget);
         this.attribute = attribute;
+    }
+    
+    public AttributeMixin(final T widget, String attribute, String value) {
+        this(widget, attribute);
+        this.uiObject.getElement().setAttribute(attribute, value);
     }
 
     public void setAttribute(String value) {

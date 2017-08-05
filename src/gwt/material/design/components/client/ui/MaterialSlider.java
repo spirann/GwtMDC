@@ -1,14 +1,20 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.HasInputHandlers;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.events.InputEvent;
+import gwt.material.design.components.client.handlers.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialSlider extends MaterialFormField<Double> {
+public class MaterialSlider extends MaterialFormField<Double> implements HasInputHandlers<Double> {
+
+	private boolean inputHandlerInitialized;
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
@@ -16,10 +22,10 @@ public class MaterialSlider extends MaterialFormField<Double> {
 	public static native void sliderInit(Element element)/*-{
 		$wnd.mdc.slider.MDCSlider.attachTo(element);
 	}-*/;
-	
-	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin");
-	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow");
-	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax");
+
+	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
+	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
+	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -32,12 +38,12 @@ public class MaterialSlider extends MaterialFormField<Double> {
 
 	private boolean initialized = false;
 
-	public MaterialSlider(){
+	public MaterialSlider() {
 		super();
 		setRole("slider");
 		setWidth("100%");
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
@@ -51,36 +57,35 @@ public class MaterialSlider extends MaterialFormField<Double> {
 			slider.add(trackContainer);
 			slider.add(thumbContainer);
 
-			add(slider);			
-				
-			sliderInit(slider.getElement());
-			
-			initialized = true;
+			add(slider);
 
-			layout(slider.getElement());
+			addChageEvent(getElement());
+			addInputEvent(getElement());
+			sliderInit(getElement());
+
+			initialized = true;
 		}
 	}
-	
-	public native void layout(Element element)/*-{
-		element.layout();
+
+	public native void addChageEvent(Element element)/*-{
+		var _this = this;
+		element.addEventListener('MDCSlider:change', displayDate);
+		function displayDate() {
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+		}
 	}-*/;
-	
-	public native void setMin(Element element, double value)/*-{
-		element.min = value;
-	}-*/;
-	
-	public native void setMax(Element element, double value)/*-{
-		element.max = value;
-	}-*/;
-	
-	public native void setValue(Element element, double value)/*-{
-		element.value = value;
+
+	public native void addInputEvent(Element element)/*-{
+		var _this = this;
+		element.addEventListener('MDCSlider:input', displayDate);
+		function displayDate() {
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+		}
 	}-*/;
 
 	@Override
 	public void setValue(Double value, boolean fireEvents) {
 		valuenowMixin.setAttribute(value);
-		//setValue(slider.getElement(), value);
 		super.setValue(value, fireEvents);
 	}
 
@@ -88,14 +93,35 @@ public class MaterialSlider extends MaterialFormField<Double> {
 	public Double getValue() {
 		return valuenowMixin.getAttributeAsDouble();
 	}
-	
-	public void setMin(final Double min){
+
+	public void setMin(final double min) {
 		valueminMixin.setAttribute(min);
-		//setMin(slider.getElement(), min);
 	}
-	
-	public void setMax(final Double max){
+
+	public double getMin() {
+		return valueminMixin.getAttributeAsDouble();
+	}
+
+	public void setMax(final double max) {
 		valuemaxMixin.setAttribute(max);
-		//setMax(slider.getElement(), max);
+	}
+
+	public double getMax() {
+		return valuemaxMixin.getAttributeAsDouble();
+	}
+
+	@Override
+	public HandlerRegistration addInputHandler(InputHandler<Double> handler) {
+
+		if (!inputHandlerInitialized) {
+			inputHandlerInitialized = true;
+			addHandler(new InputHandler<Double>() {
+				public void onInput(InputEvent<Double> event) {
+					InputEvent.fire(MaterialSlider.this, getValue());
+				}
+			}, InputEvent.getType());
+		}
+
+		return addHandler(handler, InputEvent.getType());
 	}
 }
