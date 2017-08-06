@@ -11,6 +11,7 @@ import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.handlers.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Span;
 
 public class MaterialSlider extends MaterialFormField<Double> implements HasInputHandlers<Double> {
 
@@ -26,6 +27,7 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
+	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -36,6 +38,10 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 	protected Div thumbContainer = new Div(CssName.MDC_SLIDER_THUMB_CONTAINER);
 	protected Div focusRing = new Div(CssName.MDC_SLIDER_FOCUS_RING);
 
+	protected Div pin = new Div(CssName.MDC_SLIDER_PIN);
+	protected Span pinMarker = new Span(CssName.MDC_SLIDER_PIN_VALUE_MARKER);
+
+	
 	private boolean initialized = false;
 
 	public MaterialSlider() {
@@ -50,10 +56,13 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 
 		if (!initialized) {
 
-			trackContainer.add(track);
+			pinMarker.getElement().setInnerText("30");
+			pin.add(pinMarker);			
+			trackContainer.add(track);			
 			thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
 			thumbContainer.add(focusRing);
-
+			thumbContainer.add(pin);
+			
 			slider.add(trackContainer);
 			slider.add(thumbContainer);
 
@@ -123,5 +132,17 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		}
 
 		return addHandler(handler, InputEvent.getType());
+	}
+
+	public void setDiscrete(final boolean discrete) {
+		if (discrete) {
+			slider.addStyleName(CssName.MDC_SLIDER_DISCRETE);
+		} else {
+			slider.removeStyleName(CssName.MDC_SLIDER_DISCRETE);
+		}
+	}
+	
+	public void setStep(final Double step){
+		dataStepMixin.setAttribute(step);
 	}
 }
