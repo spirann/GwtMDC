@@ -20,13 +20,13 @@
 package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.dom.client.Style.HasCssName;
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 
 /**
  * @author Ben Dol
  */
-public class CssNameMixin<H extends UIObject, T extends HasCssName> extends StyleMixin<H> {
+public class CssNameMixin<H extends Widget, T extends HasCssName> extends StyleMixin<H> {
 
     private T style;
 

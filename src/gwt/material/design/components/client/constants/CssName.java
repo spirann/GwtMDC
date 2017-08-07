@@ -191,6 +191,7 @@ public interface CssName {
 	// Slider
 	String MDC_SLIDER = "mdc-slider";
 	String MDC_SLIDER_DISCRETE = "mdc-slider--discrete";
+	String MDC_SLIDER_DISPLAY_MARKERS = "mdc-slider--display-markers";
 	String MDC_SLIDER_TRACK_CONTAINER = "mdc-slider__track-container";
 	String MDC_SLIDER_TRACK = "mdc-slider__track";
 	String MDC_SLIDER_THUMB_CONTAINER = "mdc-slider__thumb-container";

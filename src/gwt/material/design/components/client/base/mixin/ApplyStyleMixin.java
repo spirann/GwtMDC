@@ -25,60 +25,48 @@ import com.google.gwt.user.client.ui.Widget;
 /**
  * @author Richeli Vargas
  */
-public class StyleMixin<H extends Widget> extends AbstractMixin<H> {
+public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 
-	private String style;
-
+	private boolean apply = false;
+	
+	private final String cssClass; 
+	
 	private HandlerRegistration handler;
-
-	public StyleMixin(final H widget) {
+	
+	public ApplyStyleMixin(final T widget, final String cssClass) {
 		super(widget);
+		this.cssClass = cssClass;
 	}
-
-	@Override
-	public void setUiObject(H uiObject) {
-		super.setUiObject(uiObject);
-
-		// Clean up previous handler
-		if (handler != null) {
-			handler.removeHandler();
-			handler = null;
-		}
-	}
-
-	public void setStyle(String styles) {
-
+	
+	public void setApply(boolean discrete) {
+		this.apply = discrete;
+		
 		if (!uiObject.isAttached() && handler == null) {
+			
 			handler = uiObject.addAttachHandler(event -> {
 				if (event.isAttached()) {
-					applyStyle(styles);
+					apply(discrete);
 				} else if (handler != null) {
 					handler.removeHandler();
 					handler = null;
 				}
 			});
+			
 		} else {
-			applyStyle(styles);
+			apply(discrete);
 		}
-
 	}
+	
+	private void apply(boolean discrete){
+		
+		setStyle(null);
 
-	public void applyStyle(String styles) {
-		if (this.style != null && !this.style.isEmpty()) {
-			for (String style : this.style.split(" ")) {
-				uiObject.removeStyleName(style);
-			}
-		}
-		this.style = styles;
-
-		if (styles != null && !styles.isEmpty()) {
-			for (String style : styles.split(" ")) {
-				uiObject.addStyleName(style);
-			}
+		if (discrete) {
+			setStyle(cssClass);
 		}
 	}
 
-	public String getStyle() {
-		return style;
+	public boolean isApplied() {
+		return apply;
 	}
 }

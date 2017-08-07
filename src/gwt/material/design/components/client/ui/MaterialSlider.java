@@ -3,9 +3,12 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.HasDiscrete;
 import gwt.material.design.components.client.base.HasInputHandlers;
+import gwt.material.design.components.client.base.HasMarkers;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.handlers.InputHandler;
@@ -13,7 +16,7 @@ import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 
-public class MaterialSlider extends MaterialFormField<Double> implements HasInputHandlers<Double> {
+public class MaterialSlider extends MaterialFormField<Double> implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	private boolean inputHandlerInitialized;
 
@@ -28,7 +31,8 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
 	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
-
+	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER_DISCRETE);
+	
 	// /////////////////////////////////////////////////////////////
 	// Slider
 	// /////////////////////////////////////////////////////////////
@@ -41,9 +45,10 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 	protected Div pin = new Div(CssName.MDC_SLIDER_PIN);
 	protected Span pinMarker = new Span(CssName.MDC_SLIDER_PIN_VALUE_MARKER);
 
-	
 	private boolean initialized = false;
 
+	protected final ApplyStyleMixin<Div> markersMixin = new ApplyStyleMixin<>(slider, CssName.MDC_SLIDER_DISPLAY_MARKERS);
+	
 	public MaterialSlider() {
 		super();
 		setRole("slider");
@@ -55,28 +60,27 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		super.onLoad();
 
 		if (!initialized) {
-
-			pinMarker.getElement().setInnerText("30");
-			pin.add(pinMarker);			
-			trackContainer.add(track);			
+			
+			pin.add(pinMarker);
+			trackContainer.add(track);
 			thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
 			thumbContainer.add(focusRing);
 			thumbContainer.add(pin);
-			
+
 			slider.add(trackContainer);
 			slider.add(thumbContainer);
 
 			add(slider);
 
 			addChageEvent(getElement());
-			addInputEvent(getElement());
+			addInputEvent(getElement(), pinMarker.getElement());
 			sliderInit(getElement());
 
 			initialized = true;
 		}
 	}
 
-	public native void addChageEvent(Element element)/*-{
+	protected native void addChageEvent(Element element)/*-{
 		var _this = this;
 		element.addEventListener('MDCSlider:change', displayDate);
 		function displayDate() {
@@ -84,10 +88,11 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		}
 	}-*/;
 
-	public native void addInputEvent(Element element)/*-{
+	protected native void addInputEvent(Element element, Element pinMarker)/*-{
 		var _this = this;
 		element.addEventListener('MDCSlider:input', displayDate);
 		function displayDate() {
+			pinMarker.innerText = parseFloat(_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()()).toFixed(0);
 			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
 		}
 	}-*/;
@@ -134,15 +139,27 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		return addHandler(handler, InputEvent.getType());
 	}
 
+	@Override
 	public void setDiscrete(final boolean discrete) {
-		if (discrete) {
-			slider.addStyleName(CssName.MDC_SLIDER_DISCRETE);
-		} else {
-			slider.removeStyleName(CssName.MDC_SLIDER_DISCRETE);
-		}
+		discreteMixin.setApply(discrete);
 	}
-	
-	public void setStep(final Double step){
+
+	@Override
+	public boolean isDiscrete() {
+		return discreteMixin.isApplied();
+	}
+
+	public void setStep(final Double step) {
 		dataStepMixin.setAttribute(step);
+	}
+
+	@Override
+	public void setMarkers(boolean markers) {
+		markersMixin.setApply(markers);
+	}
+
+	@Override
+	public boolean isMarkers() {
+		return markersMixin.isApplied();
 	}
 }

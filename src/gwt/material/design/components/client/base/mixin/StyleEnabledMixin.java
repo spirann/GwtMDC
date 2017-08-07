@@ -19,12 +19,12 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 /**
  * @author Richeli Vargas
  */
-public class StyleEnabledMixin<W extends UIObject> extends StyleMixin<W> {
+public class StyleEnabledMixin<W extends Widget> extends StyleMixin<W> {
 
 	private final String cssClass;
 	private boolean enabled = false;

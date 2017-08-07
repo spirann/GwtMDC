@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.CodeType;
@@ -28,7 +28,7 @@ import gwt.material.design.components.client.constants.CodeType;
  * @author kevzlou7979
  * @author Ben Dol
  */
-public class CodeTypeMixin<T extends UIObject & HasType<CodeType>>  extends StyleMixin<T>
+public class CodeTypeMixin<T extends Widget & HasType<CodeType>>  extends StyleMixin<T>
 		implements HasType<CodeType> {
 
 	private CodeType CodeType;

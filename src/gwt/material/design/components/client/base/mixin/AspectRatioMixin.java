@@ -1,11 +1,11 @@
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasAspectRatio;
 import gwt.material.design.components.client.constants.AspectRatio;
 
-public class AspectRatioMixin<W extends UIObject> extends StyleMixin<W> implements HasAspectRatio {
+public class AspectRatioMixin<W extends Widget> extends StyleMixin<W> implements HasAspectRatio {
 
 	private AspectRatio aspectRatio;
 

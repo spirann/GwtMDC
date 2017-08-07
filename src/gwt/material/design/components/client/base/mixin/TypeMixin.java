@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.CssType;
@@ -27,7 +27,7 @@ import gwt.material.design.components.client.constants.CssType;
 /**
  * @author Ben Dol
  */
-public class TypeMixin<W extends UIObject, T extends CssType> extends StyleMixin<W> implements HasType<T> {
+public class TypeMixin<W extends Widget, T extends CssType> extends StyleMixin<W> implements HasType<T> {
 
 	private T type;
 	

@@ -1,13 +1,12 @@
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
-
+import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.HasCaptionContent;
 import gwt.material.design.components.client.constants.CaptionIconPosition;
 import gwt.material.design.components.client.constants.CaptionPosition;
 import gwt.material.design.components.client.constants.CaptionType;
 
-public class CaptionSettingMixin<W extends UIObject> extends AbstractMixin<W> implements HasCaptionContent {
+public class CaptionSettingMixin<W extends Widget> extends AbstractMixin<W> implements HasCaptionContent {
 
 	private CaptionType type;
 	private CaptionPosition position;
