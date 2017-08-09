@@ -7,8 +7,8 @@ import gwt.material.design.components.client.base.HasDiscrete;
 import gwt.material.design.components.client.base.HasInputHandlers;
 import gwt.material.design.components.client.base.HasMarkers;
 import gwt.material.design.components.client.base.MaterialFormField;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.handlers.InputHandler;
@@ -16,7 +16,8 @@ import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 
-public class MaterialSlider extends MaterialFormField<Double> implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
+public class MaterialSlider extends MaterialFormField<Double>
+		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	private boolean inputHandlerInitialized;
 
@@ -31,28 +32,27 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
 	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
-	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER_DISCRETE);
-	
+	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_SLIDER_DISCRETE);
+	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_SLIDER_DISPLAY_MARKERS);
+
 	// /////////////////////////////////////////////////////////////
 	// Slider
 	// /////////////////////////////////////////////////////////////
-	protected Div slider = new Div(CssName.MDC_SLIDER);
 	protected Div trackContainer = new Div(CssName.MDC_SLIDER_TRACK_CONTAINER);
 	protected Div track = new Div(CssName.MDC_SLIDER_TRACK);
+	protected Div markerContainer = new Div(CssName.MDC_SLIDER_TRACK_MARKER_CONTAINER);
 	protected Div thumbContainer = new Div(CssName.MDC_SLIDER_THUMB_CONTAINER);
 	protected Div focusRing = new Div(CssName.MDC_SLIDER_FOCUS_RING);
-
 	protected Div pin = new Div(CssName.MDC_SLIDER_PIN);
 	protected Span pinMarker = new Span(CssName.MDC_SLIDER_PIN_VALUE_MARKER);
 
 	private boolean initialized = false;
 
-	protected final ApplyStyleMixin<Div> markersMixin = new ApplyStyleMixin<>(slider, CssName.MDC_SLIDER_DISPLAY_MARKERS);
-	
 	public MaterialSlider() {
-		super();
+		super(CssName.MDC_SLIDER);
 		setRole("slider");
-		setWidth("100%");
 	}
 
 	@Override
@@ -60,17 +60,17 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		super.onLoad();
 
 		if (!initialized) {
-			
-			pin.add(pinMarker);
+
 			trackContainer.add(track);
+			trackContainer.add(markerContainer);
+
+			pin.add(pinMarker);
 			thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
 			thumbContainer.add(focusRing);
 			thumbContainer.add(pin);
 
-			slider.add(trackContainer);
-			slider.add(thumbContainer);
-
-			add(slider);
+			add(trackContainer);
+			add(thumbContainer);
 
 			addChageEvent(getElement());
 			addInputEvent(getElement(), pinMarker.getElement());
@@ -78,8 +78,15 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 
 			initialized = true;
 		}
+		
+		//setupTrackMarker(getElement());
+		
 	}
 
+	protected native void setupTrackMarker(Element element)/*-{
+		element.setupTrackMarker();
+	}-*/;	
+	
 	protected native void addChageEvent(Element element)/*-{
 		var _this = this;
 		element.addEventListener('MDCSlider:change', displayDate);
@@ -92,7 +99,9 @@ public class MaterialSlider extends MaterialFormField<Double> implements HasInpu
 		var _this = this;
 		element.addEventListener('MDCSlider:input', displayDate);
 		function displayDate() {
-			pinMarker.innerText = parseFloat(_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()()).toFixed(0);
+			pinMarker.innerText = parseFloat(
+					_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()())
+					.toFixed(0);
 			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
 		}
 	}-*/;

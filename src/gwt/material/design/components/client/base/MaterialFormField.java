@@ -10,14 +10,18 @@ import com.google.gwt.user.client.ui.HasValue;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 
-public abstract class MaterialFormField<T> extends MaterialWidget implements HasValue<T> {
+public class MaterialFormField<T> extends MaterialWidget implements HasValue<T> {
 
 	private boolean valueChangeHandlerInitialized;
 
 	private T value;
 
-	public MaterialFormField() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_FORM_FIELD);
+	protected MaterialFormField() {
+		this(CssName.MDC_FORM_FIELD);
+	}
+	
+	protected MaterialFormField(final String cssClass) {
+		super(HtmlElements.DIV.createElement(), cssClass);
 	}
 	
 	@Override

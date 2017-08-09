@@ -38,14 +38,14 @@ public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 		this.cssClass = cssClass;
 	}
 	
-	public void setApply(boolean discrete) {
-		this.apply = discrete;
+	public void setApply(boolean apply) {
+		this.apply = apply;
 		
 		if (!uiObject.isAttached() && handler == null) {
 			
 			handler = uiObject.addAttachHandler(event -> {
 				if (event.isAttached()) {
-					apply(discrete);
+					apply(apply);
 				} else if (handler != null) {
 					handler.removeHandler();
 					handler = null;
@@ -53,17 +53,18 @@ public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 			});
 			
 		} else {
-			apply(discrete);
+			apply(apply);
 		}
 	}
 	
-	private void apply(boolean discrete){
+	private void apply(boolean apply){
 		
 		setStyle(null);
 
-		if (discrete) {
+		if (apply) {
 			setStyle(cssClass);
 		}
+		
 	}
 
 	public boolean isApplied() {
