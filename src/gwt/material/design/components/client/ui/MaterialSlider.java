@@ -41,6 +41,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 	// /////////////////////////////////////////////////////////////
 	// Slider
 	// /////////////////////////////////////////////////////////////
+	protected Div slider = new Div(CssName.MDC_SLIDER);
 	protected Div trackContainer = new Div(CssName.MDC_SLIDER_TRACK_CONTAINER);
 	protected Div track = new Div(CssName.MDC_SLIDER_TRACK);
 	protected Div markerContainer = new Div(CssName.MDC_SLIDER_TRACK_MARKER_CONTAINER);
@@ -52,8 +53,9 @@ public class MaterialSlider extends MaterialFormField<Double>
 	private boolean initialized = false;
 
 	public MaterialSlider() {
-		super(CssName.MDC_SLIDER);
+		super();
 		setRole("slider");
+		setWidth("100%");
 	}
 
 	@Override
@@ -70,8 +72,9 @@ public class MaterialSlider extends MaterialFormField<Double>
 			thumbContainer.add(focusRing);
 			thumbContainer.add(pin);
 
-			add(trackContainer);
-			add(thumbContainer);
+			slider.add(trackContainer);
+			slider.add(thumbContainer);
+			add(slider);
 
 			addChageEvent(getElement());
 			addInputEvent(getElement(), pinMarker.getElement());
@@ -196,6 +199,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	@Override
 	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
 		enabledMixin.setAttribute(!enabled);
 	}
 }

@@ -7,6 +7,13 @@ i, a {
 	cursor: pointer;
 }
 
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: var(--mdc-theme-accent);
+}
+
 .left-align {
 	margin-left: 0;
 	margin-right: auto;
@@ -104,7 +111,7 @@ i, a {
    ========================================================================== */
 
 .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {   
-    background-color: var(--mdc-theme-primary);
+    background-color: var(--mdc-theme-accent);
 }
 
 .mdc-radio__outer-circle {    
@@ -112,19 +119,19 @@ i, a {
 }
 
 .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
-	border-color: var(--mdc-theme-primary);
+	border-color: var(--mdc-theme-accent);
 }
 
 /* ==========================================================================
    Checkbox color adjust
    ========================================================================== */
-@-webkit-keyframes mdc-checkbox-fade-out-primary {
+@-webkit-keyframes mdc-checkbox-fade-out-accent {
     0%,
     80% {
     	/* @alternate */
     	border-color: transparent;
     	/* @alternate */
-    	background-color: var(--mdc-theme-primary, #3f51b5); }
+    	background-color: var(--mdc-theme-accent, #3f51b5); }
     100% {
     	border-color: rgba(0, 0, 0, 0.54);
     	background-color: transparent;
@@ -132,8 +139,8 @@ i, a {
 }
 
 .mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background, .mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background {
-  -webkit-animation: mdc-checkbox-fade-out-primary 180ms linear;
-          animation: mdc-checkbox-fade-out-primary 180ms linear; }
+  -webkit-animation: mdc-checkbox-fade-out-accent 180ms linear;
+          animation: mdc-checkbox-fade-out-accent 180ms linear; }
 
 .mdc-checkbox__background {   
     border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
@@ -141,9 +148,39 @@ i, a {
 
 .mdc-checkbox__native-control:checked ~ .mdc-checkbox__background,
 .mdc-checkbox__native-control:indeterminate ~ .mdc-checkbox__background {
-	background: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54));
-	border-color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54));
+	background: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
+	border-color: var(--mdc-theme-accent, rgba(0, 0, 0, 0.54));
 }
+
+/* ==========================================================================
+   Slider color adjust
+   ========================================================================== */
+
+.mdc-slider__track-container {
+	background-color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-slider__focus-ring,
+.mdc-slider__pin,
+.mdc-slider__track {
+	color: var(--mdc-theme-text-primary-on-accent);
+    background-color: var(--mdc-theme-accent);
+}
+
+.mdc-slider__track-marker-container::after {
+	width: 0;
+	height: 0;
+}
+
+.mdc-slider__track-marker::after {
+	background-color: var(--mdc-theme-accent) !important;
+}
+
+.mdc-slider__thumb {
+  	fill: var(--mdc-theme-accent);
+  	stroke: var(--mdc-theme-accent);
+}
+
 
 /* ==========================================================================
    Layout Grid adjust
