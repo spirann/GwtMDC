@@ -32,6 +32,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
 	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
+	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled", "false");
 	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_SLIDER_DISCRETE);
 	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
@@ -77,16 +78,29 @@ public class MaterialSlider extends MaterialFormField<Double>
 			sliderInit(getElement());
 
 			initialized = true;
+
+			setupTrackMarker();
 		}
-		
-		//setupTrackMarker(getElement());
-		
+
 	}
 
-	protected native void setupTrackMarker(Element element)/*-{
-		element.setupTrackMarker();
-	}-*/;	
-	
+	protected void setupTrackMarker() {
+
+		if (initialized) {
+
+			final int count = (int) ((getMax() - getMin()) / getStep());
+			markerContainer.clear();
+			if (isMarkers()) {
+				for (int i = 0; i < count; i++) {
+					final Div div = new Div(CssName.MDC_SLIDER_TRACK_MARKER);
+					markerContainer.add(div);
+				}
+			}
+
+		}
+
+	}
+
 	protected native void addChageEvent(Element element)/*-{
 		var _this = this;
 		element.addEventListener('MDCSlider:change', displayDate);
@@ -119,6 +133,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setMin(final double min) {
 		valueminMixin.setAttribute(min);
+		setupTrackMarker();
 	}
 
 	public double getMin() {
@@ -127,6 +142,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setMax(final double max) {
 		valuemaxMixin.setAttribute(max);
+		setupTrackMarker();
 	}
 
 	public double getMax() {
@@ -160,15 +176,26 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setStep(final Double step) {
 		dataStepMixin.setAttribute(step);
+		setupTrackMarker();
+	}
+
+	public Double getStep() {
+		return dataStepMixin.getAttributeAsDouble();
 	}
 
 	@Override
 	public void setMarkers(boolean markers) {
 		markersMixin.setApply(markers);
+		setupTrackMarker();
 	}
 
 	@Override
 	public boolean isMarkers() {
 		return markersMixin.isApplied();
+	}
+
+	@Override
+	public void setEnabled(boolean enabled) {
+		enabledMixin.setAttribute(!enabled);
 	}
 }
