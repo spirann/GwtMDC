@@ -17,8 +17,8 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	//public static native void checkboxInit(Element element)/*-{
-	//	$wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
+	//public static native void switchInit(Element element)/*-{
+	//	$wnd.mdc.switch.MDCSwitch.attachTo(element);
 	//}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -54,7 +54,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 			switch_.add(divBackground);
 
 			label.addStyleName(CssName.MDC_SWITCH_LABEL);
-			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 			
 			add(switch_);
 			add(label);

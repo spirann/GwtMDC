@@ -208,4 +208,11 @@ public interface CssName {
 	String MDC_SWITCH_BACKGROUND = "mdc-switch__background";
 	String MDC_SWITCH_KNOB = "mdc-switch__knob";
 	String MDC_SWITCH_LABEL = "mdc-switch-label";
+	// Textfield
+	String MDC_TEXTFIELD = "mdc-textfield";
+	String MDC_TEXTFIELD_INPUT = "mdc-textfield__input";
+	String MDC_TEXTFIELD_LABEL = "mdc-textfield__label";
+	String MDC_TEXTFIELD_DISABLED = "mdc-textfield--disabled";
+	String MDC_TEXTFIELD_DENSE = "mdc-textfield--dense";
+	
 }

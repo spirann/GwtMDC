@@ -3,6 +3,7 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.HasIndeterminate;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
@@ -13,7 +14,7 @@ import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText {
+public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText, HasIndeterminate {
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
@@ -59,8 +60,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 			checkbox.add(input);
 			checkbox.add(divBackground);
 
-			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
-
 			add(checkbox);
 			add(label);
 
@@ -104,10 +103,12 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		element.checked = value;
 	}-*/;
 
-	public Boolean isIndeterminate() {
+	@Override
+	public boolean isIndeterminate() {
 		return isIndeterminate(input.getElement());
 	}
 
+	@Override
 	public void setIndeterminate(boolean value) {
 		setIndeterminate(input.getElement(), value);
 	};

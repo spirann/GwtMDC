@@ -92,8 +92,6 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 			radio.add(input);
 			radio.add(divBackground);
 
-			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
-
 			add(radio);
 			add(label);
 
