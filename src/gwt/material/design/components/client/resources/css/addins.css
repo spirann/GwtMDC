@@ -184,9 +184,23 @@ a:active {
 /* ==========================================================================
    Switch color adjust
    ========================================================================== */
-.mdc-switch--theme-dark .mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob::before,
-.mdc-theme--dark .mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob::before {
-  	background-color: var(--mdc-theme-accent, #3f51b5); 
+.mdc-switch__background {
+	background-color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
+}   
+
+.mdc-switch__native-control:checked ~ .mdc-switch__background::before {
+	background-color: var(--mdc-theme-accent, #3f51b5);
+	opacity: 0.24;
+}
+
+.mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob,
+.mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob::before {
+  	background-color: var(--mdc-theme-accent, #3f51b5);
+}
+   
+.mdc-switch__native-control:not(checked) ~ .mdc-switch__background .mdc-switch__knob,
+.mdc-switch__native-control:not(checked) ~ .mdc-switch__background .mdc-switch__knob::before {
+  	background-color:  #ddd;
 }
 
 /* ==========================================================================
