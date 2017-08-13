@@ -8,28 +8,26 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.Ripple;
-import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText {
+public class MaterialSwitch extends MaterialFormField<Boolean> implements HasText {
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void checkboxInit(Element element)/*-{
-		$wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
-	}-*/;
+	//public static native void checkboxInit(Element element)/*-{
+	//	$wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
+	//}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Radio
 	// /////////////////////////////////////////////////////////////
-	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
-	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
-	protected Div divBackground = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
-	protected MaterialSvg svgCheckmark = new MaterialSvg();
-	protected Div divMixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
+	protected Div switch_ = new Div(CssName.MDC_SWITCH);
+	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH_NATIVE_CONTROL);
+	protected Div divBackground = new Div(CssName.MDC_SWITCH_BACKGROUND);
+	protected Div divKnob = new Div(CssName.MDC_SWITCH_KNOB);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
@@ -38,10 +36,8 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	private boolean initialized = false;
 
-	public MaterialCheckbox(){
+	public MaterialSwitch(){
 		super();
-		setRipple(Ripple.DEFAULT);
-		setCircle(true);
 	}
 	
 	@Override
@@ -50,23 +46,19 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 		if (!initialized) {
 
-			svgCheckmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
+			divBackground.add(divKnob);
+			
+			switch_.setPadding(8);
+			switch_.setDisabledClass(CssName.MDC_SWITCH_DISABLED);
+			switch_.add(input);
+			switch_.add(divBackground);
 
-			divBackground.add(svgCheckmark);
-			divBackground.add(divMixedmark);
-
-			checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
-			checkbox.add(input);
-			checkbox.add(divBackground);
-
+			label.addStyleName(CssName.MDC_SWITCH_LABEL);
 			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
-
-			add(checkbox);
+			
+			add(switch_);
 			add(label);
-
-			checkboxInit(checkbox.getElement());
-			svgCheckmark.setFillColor(Color.MDC_THEME_ACCENT);
-
+			
 			initialized = true;
 
 		}
@@ -104,22 +96,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		element.checked = value;
 	}-*/;
 
-	public Boolean isIndeterminate() {
-		return isIndeterminate(input.getElement());
-	}
-
-	public void setIndeterminate(boolean value) {
-		setIndeterminate(input.getElement(), value);
-	};
-
-	protected native Boolean isIndeterminate(Element element)/*-{
-		return element.indeterminate;
-	}-*/;
-
-	protected native void setIndeterminate(Element element, boolean value)/*-{
-		element.indeterminate = value;
-	}-*/;
-
 	@Override
 	public String getText() {
 		return label.getText();
@@ -132,17 +108,17 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	@Override
 	public void setRipple(Ripple ripple) {
-		checkbox.setRipple(ripple);
+		switch_.setRipple(ripple);
 	}
 
 	@Override
 	public Ripple getRipple() {
-		return checkbox.getRipple();
+		return switch_.getRipple();
 	}
 
 	@Override
 	public void setCircle(boolean circle) {
-		checkbox.setCircle(circle);
+		switch_.setCircle(circle);
 	}
 
 	@Override

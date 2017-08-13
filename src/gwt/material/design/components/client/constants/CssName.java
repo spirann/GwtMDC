@@ -201,4 +201,11 @@ public interface CssName {
 	String MDC_SLIDER_FOCUS_RING = "mdc-slider__focus-ring";
 	String MDC_SLIDER_PIN = "mdc-slider__pin";
 	String MDC_SLIDER_PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
+	// Switch
+	String MDC_SWITCH = "mdc-switch";
+	String MDC_SWITCH_DISABLED = "mdc-switch--disabled";
+	String MDC_SWITCH_NATIVE_CONTROL = "mdc-switch__native-control";
+	String MDC_SWITCH_BACKGROUND = "mdc-switch__background";
+	String MDC_SWITCH_KNOB = "mdc-switch__knob";
+	String MDC_SWITCH_LABEL = "mdc-switch-label";
 }

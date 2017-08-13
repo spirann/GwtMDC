@@ -5,16 +5,19 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasTypography;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HasFor;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Typography;
 
-public class Label extends MaterialWidget implements HasText, HasTypography {
+public class Label extends MaterialWidget implements HasText, HasTypography, HasFor {
 
 	private final TextMixin<Label> textMixin = new TextMixin<>(this);
 	private final TypeMixin<Label, Typography> typographiMixin = new TypeMixin<>(this);
+	protected final AttributeMixin<Label> forMixin = new AttributeMixin<Label>(this, "for");
 
 	public Label() {
 		super(HtmlElements.LABEL.createElement(), CssName.MDC_TYPOGRAPHY);
@@ -38,6 +41,11 @@ public class Label extends MaterialWidget implements HasText, HasTypography {
 	@Override
 	public Typography getTypography() {
 		return typographiMixin.getType();
+	}
+
+	@Override
+	public void setFor(String elementId) {
+		forMixin.setAttribute(elementId);
 	}
 
 }
