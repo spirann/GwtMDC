@@ -109,6 +109,12 @@ public interface CssName {
 	String MDC_TOOLBAR_ICON_MENU = "material-icons mdc-toolbar__icon--menu";
 	String MDC_TOOLBAR_NAV_LINK = "toolbar-nav-link";
 	// //////////////////////////////////////////////////////
+	// DRAWER
+	// //////////////////////////////////////////////////////
+	String MDC_PERSISTENT_DRAWER = "mdc-persistent-drawer";
+	String MDC_PERSISTENT_DRAWER_DRAWER = "mdc-persistent-drawer__drawer";
+	String MDC_PERSISTENT_DRAWER_TOOLBAR_SPACER = "mdc-persistent-drawer__toolbar-spacer";
+	// //////////////////////////////////////////////////////
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
 	String MDC_LAYOUT_GRID = "mdc-layout-grid";
@@ -128,14 +134,8 @@ public interface CssName {
 	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
 	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
 	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
-	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-"; // + one
-																		// of
-																		// -->
-																		// 16x9
-																		// | 2x3
-																		// | 3x2
-																		// | 4x3
-																		// | 3x4
+	// + one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
+	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-";
 	String MDC_GRID_TILE = "mdc-grid-tile";
 	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
 	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
@@ -218,5 +218,5 @@ public interface CssName {
 	String MDC_TEXTFIELD_HELPTEXT_PERSISTENT = "mdc-textfield-helptext--persistent";
 	String MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG = "mdc-textfield-helptext--validation-msg";
 	String MDC_TEXTFIELD_MULTILINE = "mdc-textfield--multiline";
-	
+
 }

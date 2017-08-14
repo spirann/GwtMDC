@@ -10,6 +10,8 @@ public enum HtmlElements {
 	DIV("div"),
 	UL("ul"),
 	LI("li"),
+	ASIDE("aside"),
+	NAV("nav"),
 	SECTION("section"),
 	SPAN("span"),
 	MAIN("main"),
