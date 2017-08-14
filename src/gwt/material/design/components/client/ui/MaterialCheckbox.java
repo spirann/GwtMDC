@@ -5,6 +5,8 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasIndeterminate;
 import gwt.material.design.components.client.base.MaterialFormField;
+import gwt.material.design.components.client.base.mixin.CheckedMixin;
+import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -24,7 +26,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
-	// Radio
+	// Checkbox
 	// /////////////////////////////////////////////////////////////
 	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
 	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
@@ -37,14 +39,20 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	protected Label label = new Label();
 
+	// /////////////////////////////////////////////////////////////
+	// Style mixin
+	// /////////////////////////////////////////////////////////////
+	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
+	protected final IndeterminateMixin<Input> indeterminateMixin = new IndeterminateMixin<>(input);
+
 	private boolean initialized = false;
 
-	public MaterialCheckbox(){
+	public MaterialCheckbox() {
 		super();
 		setRipple(Ripple.DEFAULT);
 		setCircle(true);
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
@@ -84,7 +92,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
-		setValue(input.getElement(), value);
+		checkedMixin.setChecked(value);
 		if (fireEvents) {
 			fireChangeEvent();
 		}
@@ -92,34 +100,18 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	@Override
 	public Boolean getValue() {
-		return getValue(input.getElement());
+		return checkedMixin.isChecked();
 	}
-
-	protected native Boolean getValue(Element element)/*-{
-		return element.checked;
-	}-*/;
-
-	protected native void setValue(Element element, boolean value)/*-{
-		element.checked = value;
-	}-*/;
 
 	@Override
 	public boolean isIndeterminate() {
-		return isIndeterminate(input.getElement());
+		return indeterminateMixin.isIndeterminate();
 	}
 
 	@Override
 	public void setIndeterminate(boolean value) {
-		setIndeterminate(input.getElement(), value);
+		indeterminateMixin.setIndeterminate(value);
 	};
-
-	protected native Boolean isIndeterminate(Element element)/*-{
-		return element.indeterminate;
-	}-*/;
-
-	protected native void setIndeterminate(Element element, boolean value)/*-{
-		element.indeterminate = value;
-	}-*/;
 
 	@Override
 	public String getText() {

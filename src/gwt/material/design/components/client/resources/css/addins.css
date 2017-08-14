@@ -107,8 +107,10 @@ a:active {
 }
 
 .mdc-form-field input,
-.mdc-form-field label {
+.mdc-form-field label,
+.mdc-form-field textarea {
 	color: var(--mdc-theme-text-primary-on-background);
+    text-shadow: none;
 }
 
 /* ==========================================================================
@@ -212,6 +214,12 @@ a:active {
    Textfield color adjust
    ========================================================================== */
 
+.mdc-textfield,
+.mdc-textfield__input,
+.mdc-textfield__label {
+	width: 100%;
+}
+
 .mdc-textfield--box.mdc-textfield--focused .mdc-textfield__bottom-line,
 .mdc-textfield--focused.mdc-textfield--upgraded:not(.mdc-textfield--fullwidth):not(.mdc-textfield--multiline):not(.mdc-textfield--box)::after {
     background-color: var(--mdc-theme-accent, #3f51b5);
@@ -241,6 +249,52 @@ a:active {
 
 .mdc-textfield:not(.mdc-textfield--disabled) .mdc-textfield__input {
 	border-bottom: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
+}
+
+/* -------------------------------------------------------------------
+ * Adjust help text margins
+ * ------------------------------------------------------------------- 
+ */
+ 
+ .mdc-textfield--disabled + .mdc-textfield-helptext {
+ 	color: var(--mdc-theme-text-disabled-on-background);
+ }
+ 
+.mdc-textfield-helptext {
+	padding: 0;
+	margin: 0;
+	margin-top: -4px;
+	margin-left: -4px;	
+	max-width: 100%;
+	overflow: hidden;
+  	text-overflow: ellipsis;
+}
+
+/* -------------------------------------------------------------------
+ * If Textfield has a placeholder the label it make the label to up
+ * ------------------------------------------------------------------- 
+ */
+
+.mdc-textfield__input[placeholder]:not([placeholder=""]) + .mdc-textfield__label {
+      -webkit-transform: translateY(-100%) scale(0.75, 0.75);
+              transform: translateY(-100%) scale(0.75, 0.75);
+}
+
+.mdc-textfield--dense .mdc-textfield__input[placeholder]:not([placeholder=""]) + .mdc-textfield__label {
+    -webkit-transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923);
+            transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923); 
+}
+
+/* ==========================================================================
+   TextArea color adjust
+   ========================================================================== */
+
+.mdc-textfield--multiline .mdc-textfield__input {
+    border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-textfield--multiline .mdc-textfield__input:focus {
+	border-color: var(--mdc-theme-accent, #3f51b5); 
 }
 
 /* ==========================================================================
@@ -293,6 +347,27 @@ a:active {
 .toolbar-nav-link.active {
 	color: var(--mdc-theme-accent);
 	border-bottom: 2px solid var(--mdc-theme-accent);
+}
+
+/* ==========================================================================
+   Configure placeholder color
+   ========================================================================== */
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	color: var(--mdc-theme-text-primary-on-background) !important;
+	opacity: 0.54 !important;
+}
+::-moz-placeholder { /* Firefox 19+ */
+	color: var(--mdc-theme-text-primary-on-background) !important;
+	opacity: 0.54 !important;
+}
+:-ms-input-placeholder { /* IE 10+ */
+	color: var(--mdc-theme-text-primary-on-background) !important;
+	opacity: 0.54 !important;
+}
+:-moz-placeholder { /* Firefox 18- */
+	color: var(--mdc-theme-text-primary-on-background) !important;
+	opacity: 0.54 !important;
 }
 
 /* ==========================================================================

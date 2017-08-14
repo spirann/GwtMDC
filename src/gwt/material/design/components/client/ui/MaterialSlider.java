@@ -22,7 +22,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 	private boolean inputHandlerInitialized;
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize Slider
 	// /////////////////////////////////////////////////////////////
 	public static native void sliderInit(Element element)/*-{
 		$wnd.mdc.slider.MDCSlider.attachTo(element);

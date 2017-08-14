@@ -21,6 +21,7 @@ public enum HtmlElements {
 	IFRAME("iframe"),
 	HTML("html"),
 	INPUT("input"),
+	TEXTAREA("textarea"),
 	A("a"),
 	I("i"),
 	IMG("img"),

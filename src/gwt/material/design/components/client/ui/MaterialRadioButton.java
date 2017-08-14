@@ -8,6 +8,7 @@ import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.MaterialFormField;
+import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -70,7 +71,12 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// Label
 	// /////////////////////////////////////////////////////////////
 	private Label label = new Label();
-
+	
+	// /////////////////////////////////////////////////////////////
+	// Style mixin
+	// /////////////////////////////////////////////////////////////
+	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
+	
 	private boolean initialized = false;
 
 	public MaterialRadioButton() {
@@ -110,14 +116,11 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	protected native void addValueChangeListener(Element element)/*-{
 		var _this = this;
-		element
-				.addEventListener(
-						'change',
-						function(event) {
-							if (element.checked) {
-								_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-							}
-						});
+		element.addEventListener('change', function(event) {
+			if (element.checked) {
+				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+			}
+		});
 	}-*/;
 
 	@Override
@@ -133,8 +136,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
-		setValue(input.getElement(), value);
-
+		checkedMixin.setChecked(value);
 		putInHistory(fireEvents);
 
 		if (fireEvents) {
@@ -144,16 +146,8 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	@Override
 	public Boolean getValue() {
-		return getValue(input.getElement());
+		return checkedMixin.isChecked();
 	}
-
-	protected native Boolean getValue(Element element)/*-{
-		return element.checked;
-	}-*/;
-
-	protected native void setValue(Element element, boolean value)/*-{
-		element.checked = value;
-	}-*/;
 
 	@Override
 	public void setName(String name) {

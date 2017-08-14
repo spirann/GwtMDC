@@ -214,5 +214,9 @@ public interface CssName {
 	String MDC_TEXTFIELD_LABEL = "mdc-textfield__label";
 	String MDC_TEXTFIELD_DISABLED = "mdc-textfield--disabled";
 	String MDC_TEXTFIELD_DENSE = "mdc-textfield--dense";
+	String MDC_TEXTFIELD_HELPTEXT = "mdc-textfield-helptext";
+	String MDC_TEXTFIELD_HELPTEXT_PERSISTENT = "mdc-textfield-helptext--persistent";
+	String MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG = "mdc-textfield-helptext--validation-msg";
+	String MDC_TEXTFIELD_MULTILINE = "mdc-textfield--multiline";
 	
 }
