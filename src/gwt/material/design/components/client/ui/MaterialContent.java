@@ -14,7 +14,7 @@ public class MaterialContent extends MaterialWidget implements HasToolbarFixedAd
 			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 	
 	public MaterialContent(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_TYPOGRAPHY);
+		super(HtmlElements.DIV.createElement(), CssName.MDC_CONTENT, CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

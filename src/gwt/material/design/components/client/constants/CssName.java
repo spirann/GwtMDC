@@ -115,6 +115,10 @@ public interface CssName {
 	String MDC_PERSISTENT_DRAWER_DRAWER = "mdc-persistent-drawer__drawer";
 	String MDC_PERSISTENT_DRAWER_TOOLBAR_SPACER = "mdc-persistent-drawer__toolbar-spacer";
 	// //////////////////////////////////////////////////////
+	// MATERIAL CONTENT
+	// //////////////////////////////////////////////////////
+	String MDC_CONTENT = "mdc-content";
+	// //////////////////////////////////////////////////////
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
 	String MDC_LAYOUT_GRID = "mdc-layout-grid";
@@ -165,6 +169,14 @@ public interface CssName {
 	String MDC_FAB_MINI = "mdc-fab--mini";
 	String MDC_FAB_PLAIN = "mdc-fab--plain";
 	String MDC_FAB_FIXED = "mdc-fab--fixed";
+	// //////////////////////////////////////////////////////
+	// LIST
+	// //////////////////////////////////////////////////////	
+	String MDC_LIST = "mdc-list";
+	String MDC_LIST_GROUP = "mdc-list-group";
+	String MDC_LIST_ITEM = "mdc-list-item";
+	String MDC_LIST_DIVIDER = "mdc-list-divider";
+	String MDC_LIST_ITEM_START_DETAIL = "mdc-list-item__start-detail";
 	// //////////////////////////////////////////////////////
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////

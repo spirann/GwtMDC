@@ -1,6 +1,6 @@
 html, body {
-	margin: 0;
-	paddin: 0;
+	margin: 0px;
+	padding: 0px;
 }
 
 i, a {
@@ -27,6 +27,15 @@ a:active {
 .right-align {
 	margin-left: auto;
 	margin-right: 0;
+}
+
+.mdc-content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex: one;
+	margin: 0;
+	padding: 0;
 }
 
 .catalog-title {
@@ -59,6 +68,23 @@ a:active {
 	width: 100%;
 	text-align: left;
 }
+
+.mdc-persistent-drawer {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	height: 100%;
+	min-height: 100%;
+}
+
+
+.mdc-persistent-drawer__drawer {
+	margin-bottom: 0;
+	padding-bottom: 0;
+	height: 100%;
+	min-height: 100%;
+	overflow: hidden;
+}
+
 
 /* ==========================================================================
    Change Ripple background
