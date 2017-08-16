@@ -85,15 +85,35 @@ a:active {
 	overflow: hidden;
 }
 
+/* ==========================================================================
+   Adjust drawer
+   ========================================================================== */
+.mdc-persistent-drawer__toolbar-spacer {    
+    border-bottom: 1px solid var(--mdc-theme-text-primary-on-background);
+    opacity: 0.18;
+}
 
 /* ==========================================================================
-   Change Ripple background
-   ========================================================================== 
-.mdc-ripple-surface--accent.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--accent.mdc-ripple-upgraded::after {
-	background-color: var(--mdc-theme-accent);
+   Adjust list color
+   ========================================================================== */
+.mdc-list-item.mdc-ripple-upgraded::after,
+.mdc-list-item.mdc-ripple-upgraded.mdc-ripple-upgraded::after,
+.mdc-list-item.mdc-ripple-upgraded.mdc-ripple-upgraded--unbounded::after {
+	  /* Adjust because of a google css bug */
+      top: 100%;
+      left: 100%; 
+} 
+   
+.mdc-list-item > .material-icons {
+	color: var(--mdc-theme-text-primary-on-background);
+}   
+ 
+.mdc-list-divider {
+	background-color: var(--mdc-theme-text-icon-on-background);
+	opacity: 0.24; 
 }
-*/
+
+
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
@@ -374,6 +394,36 @@ a:active {
 	color: var(--mdc-theme-accent);
 	border-bottom: 2px solid var(--mdc-theme-accent);
 }
+
+
+/* ==========================================================================
+   Configure Ripple background
+   ========================================================================== */ 
+.mdc-ripple-surface--primary.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--primary.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-ripple-primary);
+}
+
+.mdc-ripple-surface--accent.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--accent.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-ripple-accent);
+}
+
+.mdc-ripple-surface--on-primary.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--on-primary.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-ripple-on-primary);
+}
+
+.mdc-ripple-surface--on-accent.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--on-accent.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-ripple-on-accent);
+}
+
+.mdc-ripple-surface--on-background.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--on-background.mdc-ripple-upgraded::after {
+	background-color: var(--mdc-theme-ripple-on-background);
+}
+
 
 /* ==========================================================================
    Configure placeholder color

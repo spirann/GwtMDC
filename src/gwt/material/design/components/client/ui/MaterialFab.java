@@ -7,6 +7,7 @@ import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FabType;
 import gwt.material.design.components.client.constants.HtmlElements;
@@ -27,7 +28,7 @@ public class MaterialFab extends MaterialWidget implements HasType<FabType>, Has
 
 	public MaterialFab() {
 		super(HtmlElements.BUTTON.createElement(), CssName.MDC_FAB, CssName.MATERIAL_ICONS);
-		setAutoInitData("MDCRipple");
+		setAutoInitData(AutoInitData.MDC_RIPPLE);
 		setRipple(Ripple.DEFAULT);
 	}
 

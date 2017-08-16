@@ -45,6 +45,9 @@ public interface CssName {
 	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
 	String MDC_RIPPLE_SURFACE_PRIMARY = "mdc-ripple-surface--primary";
 	String MDC_RIPPLE_SURFACE_ACCENT = "mdc-ripple-surface--accent";
+	String MDC_RIPPLE_SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
+	String MDC_RIPPLE_SURFACE_ON_ACCENT = "mdc-ripple-surface--on-accent";
+	String MDC_RIPPLE_SURFACE_ON_BACKGROUND = "mdc-ripple-surface--on-background";
 	// //////////////////////////////////////////////////////
 	// ELEVATION
 	// //////////////////////////////////////////////////////

@@ -53,12 +53,14 @@ import com.google.gwt.user.client.ui.WidgetCollection;
 
 import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Elevation;
 import gwt.material.design.components.client.constants.Flex;
@@ -81,12 +83,17 @@ import gwt.material.design.components.client.events.DropEvent;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox, HasRtl {
+public class MaterialWidget extends BaseWidget
+		implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers, HasAllFocusHandlers,
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox, HasRtl {
 
 	static {
 		autoInit();
 	}
+
+	public static native void autoInit()/*-{
+		$wnd.mdc.autoInit();
+	}-*/;
 
 	class Appender {
 		Widget widget;
@@ -105,7 +112,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
-	protected final AttributeMixin<MaterialWidget> autoInitMixin = new AttributeMixin<MaterialWidget>(this, "data-mdc-auto-init");
+	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
@@ -119,14 +126,6 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	private List<Appender> onLoadAdd;
 
 	private boolean initialize = false;
-
-	public static native void autoInit()/*-{
-		$wnd.mdc.autoInit();
-	}-*/;
-
-	public static native void rippleInit(Element element)/*-{
-		$wnd.mdc.ripple.MDCRipple.attachTo(element);
-	}-*/;
 
 	public MaterialWidget() {
 	}
@@ -149,10 +148,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected void onLoad() {
 		super.onLoad();
 
-		if(getId() == null) {
+		if (getId() == null) {
 			setId(IdHelper.createUniqueUiId());
 		}
-		
+
 		if (getPrimaryClass() != null && !getPrimaryClass().isEmpty()) {
 			setStylePrimaryName(getPrimaryClass());
 		}
@@ -179,23 +178,19 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		}
 
 		initialize = true;
-		
-		rippleInit(getElement());
-		
+
 	}
 
 	/*
-	 * @Override public void setStyleName(String style) {
-	 * super.setStyleName(style); if (initialize) {
-	 * upgradeElement(getElement()); } }
+	 * @Override public void setStyleName(String style) { super.setStyleName(style);
+	 * if (initialize) { upgradeElement(getElement()); } }
 	 * 
 	 * @Override public void setStylePrimaryName(String style) {
 	 * super.setStylePrimaryName(style); if (initialize) {
 	 * upgradeElement(getElement()); } }
 	 * 
-	 * @Override public void addStyleName(String style) {
-	 * super.addStyleName(style); if (initialize) {
-	 * upgradeElement(getElement()); } }
+	 * @Override public void addStyleName(String style) { super.addStyleName(style);
+	 * if (initialize) { upgradeElement(getElement()); } }
 	 */
 
 	@Override
@@ -571,12 +566,12 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
 	}
-	
+
 	@Override
 	public String getDisabledClass() {
 		return enabledMixin.getDisabledClass();
 	}
-	
+
 	@Override
 	public void setDisabledClass(String disabledClass) {
 		enabledMixin.setDisabledClass(disabledClass);
@@ -607,13 +602,13 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	}
 
 	@Override
-	public void setAutoInitData(String autoInitData) {
-		autoInitMixin.setAttribute(autoInitData);
+	public void setAutoInitData(AutoInitData autoInitData) {
+		autoInitMixin.setAutoInitData(autoInitData);
 	}
 
 	@Override
-	public String getAutoInitData() {
-		return autoInitMixin.getAttribute();
+	public AutoInitData getAutoInitData() {
+		return autoInitMixin.getAutoInitData();
 	}
 
 	@Override
@@ -628,7 +623,13 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	@Override
 	public void setRipple(Ripple ripple) {
+		
 		ripleMixin.setRipple(ripple);
+		
+		if(ripple != null && getAutoInitData() == null ) {
+			setAutoInitData(AutoInitData.MDC_RIPPLE);
+		}
+		
 	}
 
 	@Override
@@ -650,69 +651,69 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public Elevation getElevation() {
 		return elevationMixin.getType();
 	}
-	
+
 	@Override
-    public void setGwtDisplay(Style.Display display) {
-        flexboxMixin.setGwtDisplay(display);
-    }
-	
+	public void setGwtDisplay(Style.Display display) {
+		flexboxMixin.setGwtDisplay(display);
+	}
+
 	@Override
-    public void setDisplay(Display display) {
+	public void setDisplay(Display display) {
 		flexboxMixin.setDisplay(display);
-    }
+	}
 
-    @Override
-    public void setFlexDirection(FlexDirection flexDirection) {
-    	flexboxMixin.setFlexDirection(flexDirection);
-    }
+	@Override
+	public void setFlexDirection(FlexDirection flexDirection) {
+		flexboxMixin.setFlexDirection(flexDirection);
+	}
 
-    @Override
-    public void setFlex(Flex flex) {
-    	flexboxMixin.setFlex(flex);
-    }
+	@Override
+	public void setFlex(Flex flex) {
+		flexboxMixin.setFlex(flex);
+	}
 
-    @Override
-    public void setFlexGrow(Integer flexGrow) {
-    	flexboxMixin.setFlexGrow(flexGrow);
-    }
+	@Override
+	public void setFlexGrow(Integer flexGrow) {
+		flexboxMixin.setFlexGrow(flexGrow);
+	}
 
-    @Override
-    public void setFlexShrink(Integer flexShrink) {
-        flexboxMixin.setFlexShrink(flexShrink);
-    }
+	@Override
+	public void setFlexShrink(Integer flexShrink) {
+		flexboxMixin.setFlexShrink(flexShrink);
+	}
 
-    @Override
-    public void setFlexBasis(String flexBasis) {
-        flexboxMixin.setFlexBasis(flexBasis);
-    }
+	@Override
+	public void setFlexBasis(String flexBasis) {
+		flexboxMixin.setFlexBasis(flexBasis);
+	}
 
-    @Override
-    public void setFlexOrder(Integer flexOrder) {
-        flexboxMixin.setFlexOrder(flexOrder);
-    }
+	@Override
+	public void setFlexOrder(Integer flexOrder) {
+		flexboxMixin.setFlexOrder(flexOrder);
+	}
 
-    @Override
-    public void setFlexWrap(FlexWrap flexWrap) {
-        flexboxMixin.setFlexWrap(flexWrap);
-    }
+	@Override
+	public void setFlexWrap(FlexWrap flexWrap) {
+		flexboxMixin.setFlexWrap(flexWrap);
+	}
 
-    @Override
-    public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
-        flexboxMixin.setFlexAlignContent(flexAlignContent);
-    }
+	@Override
+	public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
+		flexboxMixin.setFlexAlignContent(flexAlignContent);
+	}
 
-    @Override
-    public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
-        flexboxMixin.setFlexAlignSelf(flexAlignSelf);
-    }
+	@Override
+	public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
+		flexboxMixin.setFlexAlignSelf(flexAlignSelf);
+	}
 
-    @Override
-    public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
-        flexboxMixin.setFlexAlignItems(flexAlignItems);
-    }
+	@Override
+	public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
+		flexboxMixin.setFlexAlignItems(flexAlignItems);
+	}
 
-    @Override
-    public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
-        flexboxMixin.setFlexJustifyContent(flexJustifyContent);
-    }
+	@Override
+	public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
+		flexboxMixin.setFlexJustifyContent(flexJustifyContent);
+	}
 }

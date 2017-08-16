@@ -39,10 +39,11 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
     }
 
     public void setAttribute(String value) {
+    	
+    	uiObject.getElement().removeAttribute(attribute);
+    	
         if (value != null) {
             uiObject.getElement().setAttribute(attribute, value);
-        } else {
-            uiObject.getElement().removeAttribute(attribute);
         }
     }
 

@@ -38,6 +38,17 @@ public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 		this.cssClass = cssClass;
 	}
 	
+	@Override
+	public void setUiObject(T uiObject) {
+		super.setUiObject(uiObject);
+
+		// Clean up previous handler
+		if (handler != null) {
+			handler.removeHandler();
+			handler = null;
+		}
+	}
+	
 	public void setApply(boolean apply) {
 		this.apply = apply;
 		

@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.base;
 
+import gwt.material.design.components.client.constants.AutoInitData;
+
 public interface HasAutoInitData {
 
 	/**
@@ -28,7 +30,7 @@ public interface HasAutoInitData {
 	 * set to the Component’s class name. Then, after writing the markup, simply
 	 * insert a script tag that calls mdc.autoInit().
 	 */
-	void setAutoInitData(String autoInitData);
+	void setAutoInitData(AutoInitData autoInitData);
 
-	String getAutoInitData();
+	AutoInitData getAutoInitData();
 }

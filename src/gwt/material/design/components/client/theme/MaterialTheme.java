@@ -2,6 +2,7 @@ package gwt.material.design.components.client.theme;
 
 import java.io.Serializable;
 
+import gwt.material.design.components.client.constants.ThemeAttribute;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 public class MaterialTheme implements Serializable {
@@ -15,35 +16,43 @@ public class MaterialTheme implements Serializable {
 	private String accent;
 	private String background;
 	//
+	private String ripplePrimary;
+	private String rippleAccent;
+	//
 	private String textPrimaryOnPrimary;
 	private String textSecondaryOnPrimary;
 	private String textHintOnPrimary;
 	private String textDisabledOnPrimary;
 	private String textIconOnPrimary;
+	private String rippleOnPrimary;
 	//
 	private String textPrimaryOnAccent;
 	private String textSecondaryOnAccent;
 	private String textHintOnAccent;
 	private String textDisabledOnAccent;
 	private String textIconOnAccent;
+	private String rippleOnAccent;
 	//
 	private String textPrimaryOnBackground;
 	private String textSecondaryOnBackground;
 	private String textHintOnBackground;
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
+	private String rippleOnBackground;
 	//
 	private String textPrimaryOnLight;
 	private String textSecondaryOnLight;
 	private String textHintOnLight;
 	private String textDisabledOnLight;
 	private String textIconOnLight;
+	private String rippleOnLight;
 	//
 	private String textPrimaryOnDark;
 	private String textSecondaryOnDark;
 	private String textHintOnDark;
 	private String textDisabledOnDark;
 	private String textIconOnDark;
+	private String rippleOnDark;
 	//
 	private String codeBackground;
 	private String codeString;
@@ -81,39 +90,47 @@ public class MaterialTheme implements Serializable {
 		final StringBuilder text = new StringBuilder();
 		text.append(":root {");
 		//
-		text.append(loadProperty("--mdc-theme-primary", primary));
-		text.append(loadProperty("--mdc-theme-accent", accent));
-		text.append(loadProperty("--mdc-theme-background", background));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_PRIMARY, primary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_ACCENT, accent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_BACKGROUND, background));
 		//
-		text.append(loadProperty("--mdc-theme-text-primary-on-primary", textPrimaryOnPrimary));
-		text.append(loadProperty("--mdc-theme-text-secondary-on-primary", textSecondaryOnPrimary));
-		text.append(loadProperty("--mdc-theme-text-hint-on-primary", textHintOnPrimary));
-		text.append(loadProperty("--mdc-theme-text-disabled-on-primary", textDisabledOnPrimary));
-		text.append(loadProperty("--mdc-theme-text-icon-on-primary", textIconOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_PRIMARY, ripplePrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ACCENT, rippleAccent));
 		//
-		text.append(loadProperty("--mdc-theme-text-primary-on-accent", textPrimaryOnAccent));
-		text.append(loadProperty("--mdc-theme-text-secondary-on-accent", textSecondaryOnAccent));
-		text.append(loadProperty("--mdc-theme-text-hint-on-accent", textHintOnAccent));
-		text.append(loadProperty("--mdc-theme-text-disabled-on-accent", textDisabledOnAccent));
-		text.append(loadProperty("--mdc-theme-text-icon-on-accent", textIconOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY, textPrimaryOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY, textSecondaryOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY, textHintOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY, textDisabledOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY, textIconOnPrimary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_PRIMARY, rippleOnPrimary));
 		//
-		text.append(loadProperty("--mdc-theme-text-primary-on-background", textPrimaryOnBackground));
-		text.append(loadProperty("--mdc-theme-text-secondary-on-background", textSecondaryOnBackground));
-		text.append(loadProperty("--mdc-theme-text-hint-on-background", textHintOnBackground));
-		text.append(loadProperty("--mdc-theme-text-disabled-on-background", textDisabledOnBackground));
-		text.append(loadProperty("--mdc-theme-text-icon-on-background", textIconOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT, textPrimaryOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT, textSecondaryOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT, textHintOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT, textDisabledOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT, textIconOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_ACCENT, rippleOnAccent));
 		//
-		text.append(loadProperty("--mdc-theme-text-primary-on-light", textPrimaryOnLight));
-		text.append(loadProperty("--mdc-theme-text-secondary-on-light", textSecondaryOnLight));
-		text.append(loadProperty("--mdc-theme-text-hint-on-light", textHintOnLight));
-		text.append(loadProperty("--mdc-theme-text-disabled-on-light", textDisabledOnLight));
-		text.append(loadProperty("--mdc-theme-text-icon-on-light", textIconOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND, textHintOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND, textDisabledOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_BACKGROUND, rippleOnBackground));
 		//
-		text.append(loadProperty("--mdc-theme-text-primary-on-dark", textPrimaryOnDark));
-		text.append(loadProperty("--mdc-theme-text-secondary-on-dark", textSecondaryOnDark));
-		text.append(loadProperty("--mdc-theme-text-hint-on-dark", textHintOnDark));
-		text.append(loadProperty("--mdc-theme-text-disabled-on-dark", textDisabledOnDark));
-		text.append(loadProperty("--mdc-theme-text-icon-on-dark", textIconOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT, textPrimaryOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT, textSecondaryOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT, textHintOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT, textDisabledOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT, textIconOnLight));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_LIGHT, rippleOnLight));
+		//
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK, textPrimaryOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK, textSecondaryOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK, textHintOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK, textDisabledOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK, textIconOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_DARK, rippleOnDark));
 		//
 		text.append(loadProperty("--mdc-theme-code-background", codeBackground));
 		text.append(loadProperty("--mdc-theme-code-String", codeString));
@@ -633,4 +650,60 @@ public class MaterialTheme implements Serializable {
 		this.codeTokenImportant = codeTokenImportant;
 	}
 
+	public String getRipplePrimary() {
+		return ripplePrimary;
+	}
+
+	public void setRipplePrimary(String ripplePrimary) {
+		this.ripplePrimary = ripplePrimary;
+	}
+
+	public String getRippleAccent() {
+		return rippleAccent;
+	}
+
+	public void setRippleAccent(String rippleAccent) {
+		this.rippleAccent = rippleAccent;
+	}
+
+	public String getRippleOnPrimary() {
+		return rippleOnPrimary;
+	}
+
+	public void setRippleOnPrimary(String rippleOnPrimary) {
+		this.rippleOnPrimary = rippleOnPrimary;
+	}
+
+	public String getRippleOnAccent() {
+		return rippleOnAccent;
+	}
+
+	public void setRippleOnAccent(String rippleOnAccent) {
+		this.rippleOnAccent = rippleOnAccent;
+	}
+
+	public String getRippleOnBackground() {
+		return rippleOnBackground;
+	}
+
+	public void setRippleOnBackground(String rippleOnBackground) {
+		this.rippleOnBackground = rippleOnBackground;
+	}
+
+	public String getRippleOnLight() {
+		return rippleOnLight;
+	}
+
+	public void setRippleOnLight(String rippleOnLight) {
+		this.rippleOnLight = rippleOnLight;
+	}
+
+	public String getRippleOnDark() {
+		return rippleOnDark;
+	}
+
+	public void setRippleOnDark(String rippleOnDark) {
+		this.rippleOnDark = rippleOnDark;
+	}
+	
 }

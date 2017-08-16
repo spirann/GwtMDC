@@ -1,7 +1,5 @@
 package gwt.material.design.components.client.ui;
 
-
-
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
@@ -22,8 +20,8 @@ public class MaterialIcon extends MaterialWidget implements HasType<IconType>, H
 		setDisabledClass(CssName.MATERIAL_ICONS_DISABLED);
 		setPadding(8);
 	}
-	
-	public MaterialIcon(final IconType type){
+
+	public MaterialIcon(final IconType type) {
 		this();
 		setType(type);
 	}

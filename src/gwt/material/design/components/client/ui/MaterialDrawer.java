@@ -23,7 +23,7 @@ public class MaterialDrawer extends MaterialWidget {
 
 	protected final TextMixin<MaterialDrawer> textMixin = new TextMixin<>(this);
 
-	protected Nav nav = new Nav(CssName.MDC_PERSISTENT_DRAWER_DRAWER);
+	protected Nav nav = new Nav(CssName.MDC_PERSISTENT_DRAWER_DRAWER);	
 
 	private HandlerRegistration handler;
 	
