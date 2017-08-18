@@ -38,14 +38,14 @@ public class AutoInitDataMixin<T extends Widget & HasAutoInitData> extends Abstr
 		uiObject.getElement().removeAttribute("data-mdc-auto-init");
 
 		if (autoInitData != null) {
-			
+
 			uiObject.getElement().setAttribute("data-mdc-auto-init", autoInitData.getCssName());
 
 			if (!uiObject.isAttached() && handler == null) {
 
 				handler = uiObject.addAttachHandler(event -> {
 					if (event.isAttached()) {
-						rippleInit(uiObject.getElement());
+						init();
 					} else if (handler != null) {
 						handler.removeHandler();
 						handler = null;
@@ -53,9 +53,22 @@ public class AutoInitDataMixin<T extends Widget & HasAutoInitData> extends Abstr
 				});
 
 			} else {
-				rippleInit(uiObject.getElement());
+				init();
 			}
 		}
+	}
+
+	private void init() {
+
+		switch (autoInitData) {
+		case MDC_RIPPLE:
+			rippleInit(uiObject.getElement());
+			break;
+		case NONE:
+		default:
+			break;
+		}
+
 	}
 
 	public static native void rippleInit(Element element)/*-{

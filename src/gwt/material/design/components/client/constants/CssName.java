@@ -114,9 +114,20 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
+	// Persistent
+	String MDC_PERMANENT_DRAWER = "mdc-permanent-drawer";
+	String MDC_PERMANENT_DRAWER_TOOLBAR_SPACER = "mdc-permanent-drawer__toolbar-spacer";
+	// Persistent
 	String MDC_PERSISTENT_DRAWER = "mdc-persistent-drawer";
 	String MDC_PERSISTENT_DRAWER_DRAWER = "mdc-persistent-drawer__drawer";
 	String MDC_PERSISTENT_DRAWER_TOOLBAR_SPACER = "mdc-persistent-drawer__toolbar-spacer";
+	// Temporary
+	String MDC_TEMPORARY_DRAWER = "mdc-temporary-drawer";
+	String MDC_TEMPORARY_DRAWER_DRAWER = "mdc-temporary-drawer__drawer";
+	String MDC_TEMPORARY_DRAWER_TOOLBAR_SPACER = "mdc-temporary-drawer__toolbar-spacer";
+
+	String MDC_TEMPORARY_DRAWER_HEADER = "mdc-temporary-drawer__header";
+	String MDC_TEMPORARY_DRAWER_HEADER_CONTENT = "mdc-temporary-drawer__header-content";
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////
@@ -141,8 +152,11 @@ public interface CssName {
 	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
 	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
 	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
+	// ------------------------------------------------------------------------
 	// + one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
+	// Ex.: mdc-grid-list--tile-aspect-16x9
 	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-";
+	// ------------------------------------------------------------------------
 	String MDC_GRID_TILE = "mdc-grid-tile";
 	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
 	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
@@ -174,7 +188,7 @@ public interface CssName {
 	String MDC_FAB_FIXED = "mdc-fab--fixed";
 	// //////////////////////////////////////////////////////
 	// LIST
-	// //////////////////////////////////////////////////////	
+	// //////////////////////////////////////////////////////
 	String MDC_LIST = "mdc-list";
 	String MDC_LIST_GROUP = "mdc-list-group";
 	String MDC_LIST_ITEM = "mdc-list-item";

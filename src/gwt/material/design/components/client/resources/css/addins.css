@@ -30,12 +30,18 @@ a:active {
 }
 
 .mdc-content {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
 	flex: one;
+	align-self: auto;
+	flex-grow: 1;
+	display: flex;
+	align-items: flex-start;
+	justify-content: flex-start;
+	align-content: flex-start;
+	flex-direction: row;
+	flex-wrap: wrap;	
 	margin: 0;
 	padding: 0;
+	overflow-x: hidden; 
 }
 
 .catalog-title {
@@ -69,50 +75,37 @@ a:active {
 	text-align: left;
 }
 
-.mdc-persistent-drawer {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	height: 100%;
-	min-height: 100%;
+
+/* ==========================================================================
+   Adjust drawer
+   ========================================================================== */
+
+.mdc-permanent-drawer .mdc-list-item,
+.mdc-persistent-drawer .mdc-list-item,
+.mdc-temporary-drawer .mdc-list-item {
+	padding-left: 8px;
 }
-
-
+ 
+.mdc-permanent-drawer,
+.mdc-permanent-drawer__drawer, 
+.mdc-persistent-drawer,
 .mdc-persistent-drawer__drawer {
 	margin-bottom: 0;
 	padding-bottom: 0;
 	height: 100%;
 	min-height: 100%;
-	overflow: hidden;
 }
-
-/* ==========================================================================
-   Adjust drawer
-   ========================================================================== */
-.mdc-persistent-drawer__toolbar-spacer {    
-    border-bottom: 1px solid var(--mdc-theme-text-primary-on-background);
-    opacity: 0.18;
-}
-
 /* ==========================================================================
    Adjust list color
    ========================================================================== */
-.mdc-list-item.mdc-ripple-upgraded::after,
-.mdc-list-item.mdc-ripple-upgraded.mdc-ripple-upgraded::after,
-.mdc-list-item.mdc-ripple-upgraded.mdc-ripple-upgraded--unbounded::after {
-	  /* Adjust because of a google css bug */
-      top: 100%;
-      left: 100%; 
-} 
-   
+
+.mdc-list-group .mdc-list-item {
+	
+}
+
 .mdc-list-item > .material-icons {
 	color: var(--mdc-theme-text-primary-on-background);
 }   
- 
-.mdc-list-divider {
-	background-color: var(--mdc-theme-text-icon-on-background);
-	opacity: 0.24; 
-}
-
 
 /* ==========================================================================
    Floating FAB
