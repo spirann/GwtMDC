@@ -86,8 +86,7 @@ a:active {
 	padding-left: 8px;
 }
  
-.mdc-permanent-drawer,
-.mdc-permanent-drawer__drawer, 
+.mdc-permanent-drawer, 
 .mdc-persistent-drawer,
 .mdc-persistent-drawer__drawer {
 	margin-bottom: 0;
