@@ -59,6 +59,7 @@ import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
+import gwt.material.design.components.client.base.mixin.RoleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Display;
@@ -71,6 +72,7 @@ import gwt.material.design.components.client.constants.FlexDirection;
 import gwt.material.design.components.client.constants.FlexJustifyContent;
 import gwt.material.design.components.client.constants.FlexWrap;
 import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.DragEndEvent;
 import gwt.material.design.components.client.events.DragEnterEvent;
 import gwt.material.design.components.client.events.DragLeaveEvent;
@@ -113,8 +115,8 @@ public class MaterialWidget extends BaseWidget
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
-	protected final AttributeMixin<MaterialWidget> roleMixin = new AttributeMixin<MaterialWidget>(this, "role");
-	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<MaterialWidget>(this, "dir");
+	protected final RoleMixin<MaterialWidget> roleMixin = new RoleMixin<>(this);
+	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
@@ -612,13 +614,13 @@ public class MaterialWidget extends BaseWidget
 	}
 
 	@Override
-	public void setRole(String role) {
-		roleMixin.setAttribute(role);
+	public void setRole(Role role) {
+		roleMixin.setRole(role);
 	}
 
 	@Override
-	public String getRole() {
-		return roleMixin.getAttribute();
+	public Role getRole() {
+		return roleMixin.getRole();
 	}
 
 	@Override

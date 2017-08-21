@@ -7,6 +7,7 @@ public enum HtmlElements {
 	
 	BODY("body"),
 	HEADER("header"),
+	FOOTER("footer"),
 	DIV("div"),
 	UL("ul"),
 	LI("li"),
@@ -29,7 +30,11 @@ public enum HtmlElements {
 	IMG("img"),
 	P("p"),
 	SVG("svg"),
-	PATH("path");
+	PATH("path"),
+	H1("h1"),
+	H2("h2"),
+	H3("h3"),
+	H4("h4");
 	
 	private final String tag;
 	

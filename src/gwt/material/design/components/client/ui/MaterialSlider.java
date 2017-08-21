@@ -10,6 +10,7 @@ import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.handlers.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
@@ -54,7 +55,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public MaterialSlider() {
 		super();
-		setRole("slider");
+		setRole(Role.SLIDER);
 		setWidth("100%");
 	}
 

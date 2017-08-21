@@ -19,13 +19,15 @@
  */
 package gwt.material.design.components.client.base;
 
+import gwt.material.design.components.client.constants.Role;
+
 public interface HasRole {
 
 	/**
 	 * 
 	 * @param role
 	 */
-	void setRole(String role);
+	void setRole(Role role);
 
-	String getRole();
+	Role getRole();
 }

@@ -14,6 +14,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.constants.Role;
 
 public class MaterialIconToggle extends MaterialWidget implements HasValue<Boolean> {
 
@@ -36,7 +37,7 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 
 	public MaterialIconToggle() {
 		super(HtmlElements.I.createElement(), CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
-		setRole("button");
+		setRole(Role.BUTTON);
 		setDisabledClass(CssName.MDC_ICON_TOGGLE_DISABLED);
 		setRipple(Ripple.DEFAULT);
 		setCircle(true);	

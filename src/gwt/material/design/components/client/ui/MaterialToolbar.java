@@ -7,6 +7,7 @@ import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.constants.ToolbarType;
 
 public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarType> {
@@ -17,6 +18,7 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 
 	public MaterialToolbar() {
 		super(HtmlElements.HEADER.createElement(), CssName.MDC_TOOLBAR);
+		setRole(Role.TOOLBAR);
 	}
 
 	@Override
