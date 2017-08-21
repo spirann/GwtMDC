@@ -86,7 +86,8 @@ a:active {
 	padding-left: 8px;
 }
  
-.mdc-permanent-drawer, 
+.mdc-permanent-drawer,
+.mdc-permanent-drawer .mdc-list-group, 
 .mdc-persistent-drawer,
 .mdc-persistent-drawer__drawer {
 	margin-bottom: 0;
@@ -98,8 +99,11 @@ a:active {
    Adjust list color
    ========================================================================== */
 
-.mdc-list-group .mdc-list-item {
-	
+.mdc-permanent-drawer .mdc-list-group,
+.mdc-persistent-drawer .mdc-list-group,
+.mdc-temporary-drawer .mdc-list-group {
+	overflow-y: auto;
+	overflow-x: hidden; 
 }
 
 .mdc-list-item > .material-icons {

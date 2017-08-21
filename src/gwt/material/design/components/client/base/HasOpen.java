@@ -6,4 +6,8 @@ public interface HasOpen {
 	
 	public boolean isOpen();
 	
+	public void open();
+	
+	public void close();
+	
 }
