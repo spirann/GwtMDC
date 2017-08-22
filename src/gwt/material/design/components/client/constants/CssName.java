@@ -136,11 +136,13 @@ public interface CssName {
 	String MDC_DIALOG_HEADER = "mdc-dialog__header";
 	String MDC_DIALOG_HEADER_TITLE = "mdc-dialog__header__title";
 	String MDC_DIALOG_BODY = "mdc-dialog__body";
+	String MDC_DIALOG_BODY_SCROLLABLE = "mdc-dialog__body--scrollable";
 	String MDC_DIALOG_FOOTER = "mdc-dialog__footer";
 	String MDC_DIALOG_FOOTER_BUTTON = "mdc-dialog__footer__button";
 	String MDC_DIALOG_FOOTER_BUTTON_CANCEL = "mdc-dialog__footer__button--cancel";
 	String MDC_DIALOG_FOOTER_BUTTON_ACCEPT = "mdc-dialog__footer__button--accept";
 	String MDC_DIALOG_BACKDROP = "mdc-dialog__backdrop";
+	String MDC_DIALOG_ACTION = "mdc-dialog__action";
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////

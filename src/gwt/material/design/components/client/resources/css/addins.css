@@ -95,6 +95,24 @@ a:active {
 	height: 100%;
 	min-height: 100%;
 }
+
+/* ==========================================================================
+   Adjust dialog color
+   ========================================================================== */
+
+.mdc-dialog__header,
+.mdc-dialog__footer__button {
+	color: var(--mdc-theme-text-primary-on-background);
+}
+
+.mdc-dialog__body {
+	color: var(--mdc-theme-text-secondary-on-background);
+}
+
+.mdc-dialog__action {
+	color: var(--mdc-theme-accent);
+}
+
 /* ==========================================================================
    Adjust list color
    ========================================================================== */

@@ -9,7 +9,6 @@ import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
-import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
@@ -23,7 +22,6 @@ public class MaterialButton extends MaterialWidget implements HasType<ButtonType
 
 	public MaterialButton() {
 		super(HtmlElements.BUTTON.createElement(), CssName.MDC_BUTTON);
-		setAutoInitData(AutoInitData.MDC_RIPPLE);
 	}
 
 	@Override
