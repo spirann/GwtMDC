@@ -1,10 +1,10 @@
 :root {
   --mdc-theme-primary: #424242;
-  --mdc-theme-accent: #FFC400;
+  --mdc-theme-secondary: #FFC400;
   --mdc-theme-background: #000;
   
   --mdc-theme-ripple-primary: rgba(66,66,66, 0.12);
-  --mdc-theme-ripple-accent: rgba(255,196,0, 0.12);
+  --mdc-theme-ripple-secondary: rgba(255,196,0, 0.12);
   
   --mdc-theme-text-primary-on-primary: white;
   --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
@@ -13,12 +13,12 @@
   --mdc-theme-text-icon-on-primary: rgba(255, 255, 255, 0.5);
   --mdc-theme-ripple-on-primary: rgba(255, 255, 255, 0.12);
   
-  --mdc-theme-text-primary-on-accent: black;
-  --mdc-theme-text-secondary-on-accent: rgba(0, 0, 0, 0.7);
-  --mdc-theme-text-hint-on-accent: rgba(0, 0, 0, 0.5);
-  --mdc-theme-text-disabled-on-accent: rgba(0, 0, 0, 0.5);
-  --mdc-theme-text-icon-on-accent: rgba(0, 0, 0, 0.5);
-  --mdc-theme-ripple-on-accent: rgba(0, 0, 0, 0.12);
+  --mdc-theme-text-primary-on-secondary: black;
+  --mdc-theme-text-secondary-on-secondary: rgba(0, 0, 0, 0.7);
+  --mdc-theme-text-hint-on-secondary: rgba(0, 0, 0, 0.5);
+  --mdc-theme-text-disabled-on-secondary: rgba(0, 0, 0, 0.5);
+  --mdc-theme-text-icon-on-secondary: rgba(0, 0, 0, 0.5);
+  --mdc-theme-ripple-on-secondary: rgba(0, 0, 0, 0.12);
   
   --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
   --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.54);

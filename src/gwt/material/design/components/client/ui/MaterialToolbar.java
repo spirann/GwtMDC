@@ -18,7 +18,7 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject toolbar;
 	protected static native JavaScriptObject toolbarInit(final Element element)/*-{
-		return $wnd.mdc.toolbar.MDCToolbar.attachTo(element);		
+		return $wnd.mdc.toolbar.MDCToolbar.attachTo(element);	
 	}-*/;
 
 	protected final TypeMixin<MaterialToolbar, ToolbarType> typeMixin = new TypeMixin<>(this);
@@ -39,18 +39,14 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 			
 			initialize = true;
 			
-			Scheduler.get().scheduleFixedDelay(() -> {
-				
-				fixedAdjustElement(toolbar);
-				
-				return false;
-				
+			Scheduler.get().scheduleFixedDelay(() -> {				
+				fixedAdjustElement(toolbar);				
+				return false;				
 			}, 500);
 		}
 	}
 	
 	protected static native void fixedAdjustElement(final JavaScriptObject toolbar)/*-{
-		console.log($doc.querySelector('.mdc-toolbar-fixed-adjust'));
 		toolbar.fixedAdjustElement = $doc.querySelector('.mdc-toolbar-fixed-adjust');
 	}-*/;
 	

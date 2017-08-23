@@ -4,6 +4,8 @@ import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.resources.client.TextResource;
 
+import gwt.material.design.components.client.GwtMDC;
+
 public class ThemeManager {
 
 	private static StyleElement currentTheme;
@@ -24,7 +26,10 @@ public class ThemeManager {
 			currentTheme.removeFromParent();
 		}
 
+		GwtMDC.loadCssResources();
+		
 		// Apply the theme
 		currentTheme = StyleInjector.injectStylesheetAtEnd(resource);
+		
 	}
 }

@@ -13,11 +13,11 @@ public class MaterialTheme implements Serializable {
 	private static final long serialVersionUID = 4421038495355108683L;
 
 	private String primary;
-	private String accent;
+	private String secondary;
 	private String background;
 	//
 	private String ripplePrimary;
-	private String rippleAccent;
+	private String rippleSecondary;
 	//
 	private String textPrimaryOnPrimary;
 	private String textSecondaryOnPrimary;
@@ -26,12 +26,12 @@ public class MaterialTheme implements Serializable {
 	private String textIconOnPrimary;
 	private String rippleOnPrimary;
 	//
-	private String textPrimaryOnAccent;
-	private String textSecondaryOnAccent;
-	private String textHintOnAccent;
-	private String textDisabledOnAccent;
-	private String textIconOnAccent;
-	private String rippleOnAccent;
+	private String textPrimaryOnSecondary;
+	private String textSecondaryOnSecondary;
+	private String textHintOnSecondary;
+	private String textDisabledOnSecondary;
+	private String textIconOnSecondary;
+	private String rippleOnSecondary;
 	//
 	private String textPrimaryOnBackground;
 	private String textSecondaryOnBackground;
@@ -91,11 +91,11 @@ public class MaterialTheme implements Serializable {
 		text.append(":root {");
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_PRIMARY, primary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_ACCENT, accent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_ACCENT, secondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_BACKGROUND, background));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_PRIMARY, ripplePrimary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ACCENT, rippleAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ACCENT, rippleSecondary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY, textPrimaryOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY, textSecondaryOnPrimary));
@@ -104,12 +104,12 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY, textIconOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_PRIMARY, rippleOnPrimary));
 		//
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT, textPrimaryOnAccent));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT, textSecondaryOnAccent));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT, textHintOnAccent));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT, textDisabledOnAccent));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT, textIconOnAccent));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_ACCENT, rippleOnAccent));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT, textPrimaryOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT, textSecondaryOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT, textHintOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT, textDisabledOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT, textIconOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_ACCENT, rippleOnSecondary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground));
@@ -194,12 +194,12 @@ public class MaterialTheme implements Serializable {
 		this.primary = primary;
 	}
 
-	public String getAccent() {
-		return accent;
+	public String getSecondary() {
+		return secondary;
 	}
 
-	public void setAccent(String accent) {
-		this.accent = accent;
+	public void setSecondary(String secondary) {
+		this.secondary = secondary;
 	}
 
 	public String getBackground() {
@@ -250,44 +250,44 @@ public class MaterialTheme implements Serializable {
 		this.textIconOnPrimary = textIconOnPrimary;
 	}
 
-	public String getTextPrimaryOnAccent() {
-		return textPrimaryOnAccent;
+	public String getTextPrimaryOnSecondary() {
+		return textPrimaryOnSecondary;
 	}
 
-	public void setTextPrimaryOnAccent(String textPrimaryOnAccent) {
-		this.textPrimaryOnAccent = textPrimaryOnAccent;
+	public void setTextPrimaryOnSecondary(String textPrimaryOnSecondary) {
+		this.textPrimaryOnSecondary = textPrimaryOnSecondary;
 	}
 
-	public String getTextSecondaryOnAccent() {
-		return textSecondaryOnAccent;
+	public String getTextSecondaryOnSecondary() {
+		return textSecondaryOnSecondary;
 	}
 
-	public void setTextSecondaryOnAccent(String textSecondaryOnAccent) {
-		this.textSecondaryOnAccent = textSecondaryOnAccent;
+	public void setTextSecondaryOnSecondary(String textSecondaryOnSecondary) {
+		this.textSecondaryOnSecondary = textSecondaryOnSecondary;
 	}
 
-	public String getTextHintOnAccent() {
-		return textHintOnAccent;
+	public String getTextHintOnSecondary() {
+		return textHintOnSecondary;
 	}
 
-	public void setTextHintOnAccent(String textHintOnAccent) {
-		this.textHintOnAccent = textHintOnAccent;
+	public void setTextHintOnSecondary(String textHintOnSecondary) {
+		this.textHintOnSecondary = textHintOnSecondary;
 	}
 
-	public String getTextDisabledOnAccent() {
-		return textDisabledOnAccent;
+	public String getTextDisabledOnSecondary() {
+		return textDisabledOnSecondary;
 	}
 
-	public void setTextDisabledOnAccent(String textDisabledOnAccent) {
-		this.textDisabledOnAccent = textDisabledOnAccent;
+	public void setTextDisabledOnSecondary(String textDisabledOnSecondary) {
+		this.textDisabledOnSecondary = textDisabledOnSecondary;
 	}
 
-	public String getTextIconOnAccent() {
-		return textIconOnAccent;
+	public String getTextIconOnSecondary() {
+		return textIconOnSecondary;
 	}
 
-	public void setTextIconOnAccent(String textIconOnAccent) {
-		this.textIconOnAccent = textIconOnAccent;
+	public void setTextIconOnSecondary(String textIconOnSecondary) {
+		this.textIconOnSecondary = textIconOnSecondary;
 	}
 
 	public String getTextPrimaryOnBackground() {
@@ -658,12 +658,12 @@ public class MaterialTheme implements Serializable {
 		this.ripplePrimary = ripplePrimary;
 	}
 
-	public String getRippleAccent() {
-		return rippleAccent;
+	public String getRippleSecondary() {
+		return rippleSecondary;
 	}
 
-	public void setRippleAccent(String rippleAccent) {
-		this.rippleAccent = rippleAccent;
+	public void setRippleSecondary(String rippleSecondary) {
+		this.rippleSecondary = rippleSecondary;
 	}
 
 	public String getRippleOnPrimary() {
@@ -674,12 +674,12 @@ public class MaterialTheme implements Serializable {
 		this.rippleOnPrimary = rippleOnPrimary;
 	}
 
-	public String getRippleOnAccent() {
-		return rippleOnAccent;
+	public String getRippleOnSecondary() {
+		return rippleOnSecondary;
 	}
 
-	public void setRippleOnAccent(String rippleOnAccent) {
-		this.rippleOnAccent = rippleOnAccent;
+	public void setRippleOnSecondary(String rippleOnSecondary) {
+		this.rippleOnSecondary = rippleOnSecondary;
 	}
 
 	public String getRippleOnBackground() {
