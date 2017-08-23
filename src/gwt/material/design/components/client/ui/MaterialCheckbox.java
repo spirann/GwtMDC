@@ -72,7 +72,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 			add(label);
 
 			checkboxInit(checkbox.getElement());
-			svgCheckmark.setFillColor(Color.MDC_THEME_ACCENT);
+			svgCheckmark.setFillColor(Color.MDC_THEME_SECONDARY);
 
 			initialized = true;
 

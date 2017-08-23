@@ -91,11 +91,11 @@ public class MaterialTheme implements Serializable {
 		text.append(":root {");
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_PRIMARY, primary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_ACCENT, secondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_BACKGROUND, background));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_PRIMARY, ripplePrimary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ACCENT, rippleSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_SECONDARY, rippleSecondary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY, textPrimaryOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY, textSecondaryOnPrimary));
@@ -104,12 +104,12 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY, textIconOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_PRIMARY, rippleOnPrimary));
 		//
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_ACCENT, textPrimaryOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_ACCENT, textSecondaryOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_ACCENT, textHintOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_ACCENT, textDisabledOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_ACCENT, textIconOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_ACCENT, rippleOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_SECONDARY, textPrimaryOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_SECONDARY, textSecondaryOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_SECONDARY, textHintOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_SECONDARY, textDisabledOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_SECONDARY, textIconOnSecondary));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_SECONDARY, rippleOnSecondary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground));

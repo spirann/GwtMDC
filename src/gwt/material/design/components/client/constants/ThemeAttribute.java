@@ -3,11 +3,11 @@ package gwt.material.design.components.client.constants;
 public interface ThemeAttribute {
 
 	String MDC_THEME_PRIMARY = "--mdc-theme-primary";
-	String MDC_THEME_ACCENT = "--mdc-theme-secondary";
+	String MDC_THEME_SECONDARY = "--mdc-theme-secondary";
 	String MDC_THEME_BACKGROUND = "--mdc-theme-background";	
 	//
 	String MDC_THEME_RIPPLE_PRIMARY = "--mdc-theme-ripple-primary";
-	String MDC_THEME_RIPPLE_ACCENT = "--mdc-theme-ripple-secondary";
+	String MDC_THEME_RIPPLE_SECONDARY = "--mdc-theme-ripple-secondary";
 	//
 	String MDC_THEME_TEXT_PRIMARY_ON_PRIMARY = "--mdc-theme-text-primary-on-primary";
 	String MDC_THEME_TEXT_SECONDARY_ON_PRIMARY = "--mdc-theme-text-secondary-on-primary";
@@ -16,12 +16,12 @@ public interface ThemeAttribute {
 	String MDC_THEME_TEXT_ICON_ON_PRIMARY = "--mdc-theme-text-icon-on-primary";
 	String MDC_THEME_RIPPLE_ON_PRIMARY = "--mdc-theme-ripple-on-primary";
 	//
-	String MDC_THEME_TEXT_PRIMARY_ON_ACCENT = "--mdc-theme-text-primary-on-secondary";
-	String MDC_THEME_TEXT_SECONDARY_ON_ACCENT = "--mdc-theme-text-secondary-on-secondary";
-	String MDC_THEME_TEXT_HINT_ON_ACCENT = "--mdc-theme-text-hint-on-secondary";
-	String MDC_THEME_TEXT_DISABLED_ON_ACCENT = "--mdc-theme-text-disabled-on-secondary";
-	String MDC_THEME_TEXT_ICON_ON_ACCENT = "--mdc-theme-text-icon-on-secondary";
-	String MDC_THEME_RIPPLE_ON_ACCENT = "--mdc-theme-ripple-on-secondary";
+	String MDC_THEME_TEXT_PRIMARY_ON_SECONDARY = "--mdc-theme-text-primary-on-secondary";
+	String MDC_THEME_TEXT_SECONDARY_ON_SECONDARY = "--mdc-theme-text-secondary-on-secondary";
+	String MDC_THEME_TEXT_HINT_ON_SECONDARY = "--mdc-theme-text-hint-on-secondary";
+	String MDC_THEME_TEXT_DISABLED_ON_SECONDARY = "--mdc-theme-text-disabled-on-secondary";
+	String MDC_THEME_TEXT_ICON_ON_SECONDARY = "--mdc-theme-text-icon-on-secondary";
+	String MDC_THEME_RIPPLE_ON_SECONDARY = "--mdc-theme-ripple-on-secondary";
 	//
 	String MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND = "--mdc-theme-text-primary-on-background";
 	String MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND = "--mdc-theme-text-secondary-on-background";

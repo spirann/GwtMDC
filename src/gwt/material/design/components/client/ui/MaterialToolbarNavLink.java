@@ -25,7 +25,7 @@ public class MaterialToolbarNavLink extends MaterialWidget implements HasText {
 		if (!initialized) {
 
 			if (getRipple() == null) {
-				setRipple(Ripple.ACCENT);
+				setRipple(Ripple.SECONDARY);
 			}
 			
 			initialized = true;
