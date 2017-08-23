@@ -8,6 +8,7 @@ import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssType;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public class MaterialToolbarSection extends MaterialWidget {
@@ -40,6 +41,7 @@ public class MaterialToolbarSection extends MaterialWidget {
 
 	public MaterialToolbarSection() {
 		super(HtmlElements.SECTION.createElement(), CssName.MDC_TOOLBAR_SECTION);
+		setRole(Role.TOOLBAR);
 	}
 
 	/**

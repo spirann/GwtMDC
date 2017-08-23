@@ -96,6 +96,32 @@ a:active {
 	min-height: 100%;
 }
 
+.mdc-permanent-drawer .mdc-list-group,
+.mdc-persistent-drawer .mdc-list-group,
+.mdc-temporary-drawer .mdc-list-group {
+	overflow-y: auto;
+	overflow-x: hidden; 
+}
+
+.mdc-permanent-drawer,
+.mdc-persistent-drawer__drawer,
+.mdc-temporary-drawer__drawer {
+	border-right-color: var(--mdc-theme-text-hint-on-background);
+}
+
+[dir="rtl"] .mdc-permanent-drawer, .mdc-permanent-drawer[dir="rtl"],
+[dir="rtl"] .mdc-persistent-drawer__drawer, .mdc-persistent-drawer__drawer[dir="rtl"],
+[dir="rtl"] .mdc-temporary-drawer__drawer, .mdc-temporary-drawer__drawer[dir="rtl"] {
+	border-left-color: var(--mdc-theme-text-hint-on-background);
+}
+
+.mdc-permanent-drawer__toolbar-spacer,
+.mdc-persistent-drawer__toolbar-spacer,
+.mdc-temporary-drawer__toolbar-spacer {
+	border-bottom-color: var(--mdc-theme-text-hint-on-background);
+}
+
+
 /* ==========================================================================
    Adjust dialog color
    ========================================================================== */
@@ -117,19 +143,16 @@ a:active {
    Adjust list color
    ========================================================================== */
 
-.mdc-permanent-drawer .mdc-list-group,
-.mdc-persistent-drawer .mdc-list-group,
-.mdc-temporary-drawer .mdc-list-group {
-	overflow-y: auto;
-	overflow-x: hidden; 
-}
-
 .mdc-list-item > .material-icons {
 	color: var(--mdc-theme-text-primary-on-background);
 }   
 
+.mdc-list-divider {
+	background-color: var(--mdc-theme-text-hint-on-background);
+}
+
 /* ==========================================================================
-   Floating FAB
+   Icon toggle
    ========================================================================== */
 .mdc-icon-toggle--disabled {
 	opacity: 0.30;

@@ -32,7 +32,7 @@ public class MaterialDialog extends MaterialWidget
 	// /////////////////////////////////////////////////////////////
 	// Initialize DIALOG
 	// /////////////////////////////////////////////////////////////
-	public native JavaScriptObject dialogInit(Element element)/*-{
+	public static native JavaScriptObject dialogInit(Element element)/*-{
 		$wnd.mdc.dialog.MDCDialog.attachTo(element);
 		var dialog = new $wnd.mdc.dialog.MDCDialog(element);
 		return dialog;
@@ -68,10 +68,8 @@ public class MaterialDialog extends MaterialWidget
 	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialDialog> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
 	protected final AttributeMixin<MaterialDialog> ariaLabelledbyMixin = new AttributeMixin<>(this, "aria-labelledby");
-	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this,
-			"aria-describedby");
-	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body,
-			CssName.MDC_DIALOG_BODY_SCROLLABLE);
+	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG_BODY_SCROLLABLE);
 
 	private HandlerRegistration handler;
 

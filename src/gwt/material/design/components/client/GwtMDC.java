@@ -7,6 +7,8 @@ import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.RootPanel;
 
 import gwt.material.design.components.client.resources.MaterialResources;
+import gwt.material.design.components.client.theme.MaterialThemes;
+import gwt.material.design.components.client.theme.ThemeManager;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
@@ -15,19 +17,36 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 public class GwtMDC implements EntryPoint {
 
 	public void onModuleLoad() {
+		
+		// ///////////////////////////////////////////////////////////////
+		// Load main resources
+		// ///////////////////////////////////////////////////////////////
+		loadResources();
+		
+		// ///////////////////////////////////////////////////////////////
+		// Configure background
+		// ///////////////////////////////////////////////////////////////
+		StyleHelper.setStyleProperty(RootPanel.getBodyElement(), 
+				"background-color", "var(--mdc-theme-background)");
+
+		// ///////////////////////////////////////////////////////////////
+		// Apply default theme
+		// ///////////////////////////////////////////////////////////////
+		ThemeManager.applyTheme(MaterialThemes.INSTANCE.indigo_pink());
+	}
+	
+	public static void loadResources() {
 		injectJs(MaterialResources.INSTANCE.jqueryJs());
 		injectJs(MaterialResources.INSTANCE.googleAnalyticsJs());
-		injectJs(MaterialResources.INSTANCE.prismJs());
-		injectCss(MaterialResources.INSTANCE.prismCss());		
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
+		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectCss(MaterialResources.INSTANCE.materialComponentsWebCss());
 		injectCss(MaterialResources.INSTANCE.addinsCss());
-
-		StyleHelper.setStyleProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");
+		injectCss(MaterialResources.INSTANCE.prismCss());
 	}
 
 	public static void injectCss(TextResource resource) {
-		StyleInjector.inject(resource.getText());
+		StyleInjector.injectStylesheet(resource.getText());
 	}
 
 	public static void injectJs(TextResource resource) {
@@ -46,8 +65,4 @@ public class GwtMDC implements EntryPoint {
 		ScriptInjector.fromString(text).setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(removeTag).inject();
 
 	}
-	// Para pegar o nome do navegador
-	// public static native String getUserAgent() /*-{
-	// return navigator.userAgent.toLowerCase();
-	// }-*/
 }

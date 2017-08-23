@@ -21,7 +21,7 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public native void toggleInit(Element element)/*-{
+	public static native void toggleInit(Element element)/*-{
 		$wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
 	}-*/;
 

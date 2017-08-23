@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.MaterialDrawerBase;
@@ -12,10 +13,12 @@ public class MaterialDrawerPersistent extends MaterialDrawerBase {
 	// /////////////////////////////////////////////////////////////
 	// Initialize Drawer
 	// /////////////////////////////////////////////////////////////
-	public static native void drawerInit(Element element)/*-{
+	public static native JavaScriptObject drawerInit(Element element)/*-{
 		$wnd.mdc.drawer.MDCPersistentDrawer.attachTo(element);
+		var drawer = new $wnd.mdc.drawer.MDCPersistentDrawer(element);
+		return drawer;
 	}-*/;
-
+	
 	protected Nav nav = new Nav(CssName.MDC_PERSISTENT_DRAWER_DRAWER);
 
 	private boolean initialized = false;
@@ -32,17 +35,20 @@ public class MaterialDrawerPersistent extends MaterialDrawerBase {
 
 			nav.add(content);
 			super.add(nav, getElement());
+			
+			drawer = drawerInit(getElement());
 
+			initialized = true;
 		}
 	}
 
-	protected native boolean isOpen(Element element)/*-{
-		var drawer = new $wnd.mdc.drawer.MDCPersistentDrawer(element);
+	@Override
+	protected native boolean isOpen(final JavaScriptObject drawer)/*-{
 		return drawer.open;
 	}-*/;
 
-	protected native void setOpen(Element element, boolean open)/*-{
-		var drawer = new $wnd.mdc.drawer.MDCPersistentDrawer(element);
+	@Override
+	protected native void setOpen(final JavaScriptObject drawer, boolean open)/*-{
 		drawer.open = open;
 	}-*/;
 
