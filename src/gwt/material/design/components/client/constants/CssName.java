@@ -44,9 +44,9 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
 	String MDC_RIPPLE_SURFACE_PRIMARY = "mdc-ripple-surface--primary";
-	String MDC_RIPPLE_SURFACE_ACCENT = "mdc-ripple-surface--accent";
+	String MDC_RIPPLE_SURFACE_ACCENT = "mdc-ripple-surface--secondary";
 	String MDC_RIPPLE_SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
-	String MDC_RIPPLE_SURFACE_ON_ACCENT = "mdc-ripple-surface--on-accent";
+	String MDC_RIPPLE_SURFACE_ON_ACCENT = "mdc-ripple-surface--on-secondary";
 	String MDC_RIPPLE_SURFACE_ON_BACKGROUND = "mdc-ripple-surface--on-background";
 	// //////////////////////////////////////////////////////
 	// ELEVATION
@@ -192,7 +192,7 @@ public interface CssName {
 	String MDC_BUTTON_RAISED = "mdc-button--raised";
 	String MDC_BUTTON_COMPACT = "mdc-button--compact";
 	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
-	String MDC_BUTTON_ACCENT = "mdc-button--accent";
+	String MDC_BUTTON_ACCENT = "mdc-button--secondary";
 	// //////////////////////////////////////////////////////
 	// FAB - Floating Action Button
 	// //////////////////////////////////////////////////////
