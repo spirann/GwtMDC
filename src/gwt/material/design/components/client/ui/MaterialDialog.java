@@ -292,4 +292,28 @@ public class MaterialDialog extends MaterialWidget
 		return cancel.isEnabled();
 	}
 
+	@Override
+	public void setPadding(int padding) {
+		body.setPadding(padding);
+	}
+	
+	@Override
+	public void setPaddingBottom(int paddingBottom) {
+		body.setPaddingBottom(paddingBottom);
+	}
+	
+	@Override
+	public void setPaddingLeft(int paddingLeft) {
+		body.setPaddingLeft(paddingLeft);
+	}
+	
+	@Override
+	public void setPaddingRight(int paddingRight) {
+		body.setPaddingRight(paddingRight);
+	}
+	
+	@Override
+	public void setPaddingTop(int paddingTop) {
+		body.setPaddingTop(paddingTop);
+	}
 }

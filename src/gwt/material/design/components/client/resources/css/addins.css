@@ -15,6 +15,15 @@ a:active {
     color: var(--mdc-theme-secondary);
 }
 
+
+.material-icons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
+}
+
+
 .left-align {
 	margin-left: 0;
 	margin-right: auto;
@@ -142,10 +151,25 @@ a:active {
 /* ==========================================================================
    Adjust list color
    ========================================================================== */
-
-.mdc-list-item > .material-icons {
+   
+.mdc-list-item .mdc-list-item__start-detail  {
 	color: var(--mdc-theme-text-primary-on-background);
-}   
+}
+   
+.mdc-list:not(.mdc-list--avatar-list) .mdc-list-item .mdc-list-item__start-detail  {
+	margin-right: 16px;
+}  
+
+.mdc-list-item .mdc-list-item__start-detail:not(.material-icons)  {
+	width: 40px;
+	height: 40px;
+	
+}
+
+.mdc-list--avatar-list .mdc-list-item__start-detail:not(img) {
+	width: 24px;
+	height: 24px;
+}
 
 .mdc-list-divider {
 	background-color: var(--mdc-theme-text-hint-on-background);

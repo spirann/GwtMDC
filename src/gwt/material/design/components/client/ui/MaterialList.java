@@ -9,7 +9,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 public class MaterialList extends MaterialWidget{
 
 	public MaterialList(){
-		super(HtmlElements.UL.createElement(), CssName.MDC_LIST);
+		super(HtmlElements.UL.createElement(), CssName.MDC_LIST + " mdc-list--avatar-list");
 	}
 	
 }

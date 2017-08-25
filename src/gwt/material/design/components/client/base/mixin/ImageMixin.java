@@ -29,32 +29,39 @@ import gwt.material.design.components.client.base.HasImage;
  */
 public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> implements HasImage {
 
-    private String url = "";
-    private ImageResource resource;
+	private String url = "";
+	private ImageResource resource;
 
-    public ImageMixin(final T widget) {
-        super(widget);
-    }
+	public ImageMixin(final T widget) {
+		super(widget);
+	}
 
-    @Override
-    public void setUrl(String url) {
-        this.url = url;
-        uiObject.getElement().setAttribute("src", url);
-    }
+	@Override
+	public void setUrl(String url) {
+		this.url = url;
+		uiObject.getElement().setAttribute("src", url);
+	}
 
-    @Override
-    public String getUrl() {
-        return url;
-    }
+	@Override
+	public String getUrl() {
+		return url;
+	}
 
-    @Override
-    public void setResource(ImageResource resource) {
-        this.resource = resource;
-        setUrl(resource.getSafeUri().asString());
-    }
-    
-    @Override
-    public ImageResource getResource() {
-        return resource;
-    }
+	/**
+	 * @param resource ImageResource or  TextResource
+	 */
+	@Override
+	public void setResource(ImageResource resource) {
+		this.resource = resource;
+		if(resource == null ) {
+			setUrl(null);
+		} else {
+			setUrl(resource.getSafeUri().asString());
+		}
+	}
+
+	@Override
+	public ImageResource getResource() {
+		return resource;
+	}
 }

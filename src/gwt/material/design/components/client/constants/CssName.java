@@ -209,6 +209,8 @@ public interface CssName {
 	String MDC_LIST_ITEM = "mdc-list-item";
 	String MDC_LIST_DIVIDER = "mdc-list-divider";
 	String MDC_LIST_ITEM_START_DETAIL = "mdc-list-item__start-detail";
+	String MDC_LIST_ITEM_TEXT = "mdc-list-item__text";
+	String MDC_LIST_ITEM_TEXT_SECONDARY = "mdc-list-item__text__secondary";
 	// //////////////////////////////////////////////////////
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////

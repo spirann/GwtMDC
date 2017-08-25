@@ -43,4 +43,5 @@ public interface HasImage {
      * Gets the resource image.
      */
     ImageResource getResource();
+    
 }
