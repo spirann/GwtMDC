@@ -97,9 +97,14 @@ public class MaterialWidget extends BaseWidget
 		$wnd.mdc.autoInit();
 	}-*/;
 
-	class Appender {
-		Widget widget;
-		int index = -1;
+	protected class Appender {
+
+		public static final int SEQUENTIAL = -1;
+		public static final int START = -2;
+		public static final int END = -3;
+
+		public Widget widget;
+		public int index = SEQUENTIAL;
 
 		public Appender(Widget widget, int index) {
 			this.widget = widget;
@@ -170,8 +175,12 @@ public class MaterialWidget extends BaseWidget
 		if (onLoadAdd != null) {
 			// Check the onLoadAdd items.
 			for (Appender item : onLoadAdd) {
-				if (item.index == -1) {
+				if (item.index == Appender.SEQUENTIAL) {
 					add(item.widget, (Element) getElement());
+				} else if (item.index == Appender.START) {
+					insert(item.widget, 0);
+				} else if (item.index == Appender.END) {
+					insert(item.widget, getWidgetCount());
 				} else {
 					insert(item.widget, item.index);
 				}
@@ -222,6 +231,13 @@ public class MaterialWidget extends BaseWidget
 			onLoadAdd.add(new Appender(child, beforeIndex));
 		} else {
 			// Regular child addition
+			if (beforeIndex == Appender.START) {
+				beforeIndex = 0;
+			} else if (beforeIndex == Appender.END) {
+				beforeIndex = getWidgetCount();
+			} else if (beforeIndex == Appender.SEQUENTIAL) {
+				beforeIndex = getWidgetCount();
+			}
 			super.insert(child, container, beforeIndex, domInsert);
 		}
 	}
@@ -625,13 +641,13 @@ public class MaterialWidget extends BaseWidget
 
 	@Override
 	public void setRipple(Ripple ripple) {
-		
+
 		ripleMixin.setRipple(ripple);
-		
-		if(ripple != null && getAutoInitData() == null ) {
+
+		if (ripple != null && getAutoInitData() == null) {
 			setAutoInitData(AutoInitData.MDC_RIPPLE);
 		}
-		
+
 	}
 
 	@Override

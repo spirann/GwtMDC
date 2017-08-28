@@ -205,10 +205,13 @@ public interface CssName {
 	// LIST
 	// //////////////////////////////////////////////////////
 	String MDC_LIST = "mdc-list";
+	String MDC_LIST_AVATAR_LIST = "mdc-list--avatar-list";
+	String MDC_LIST_DENSE = "mdc-list--dense";
 	String MDC_LIST_GROUP = "mdc-list-group";
 	String MDC_LIST_ITEM = "mdc-list-item";
 	String MDC_LIST_DIVIDER = "mdc-list-divider";
 	String MDC_LIST_ITEM_START_DETAIL = "mdc-list-item__start-detail";
+	String MDC_LIST_ITEM_END_DETAIL = "mdc-list-item__end-detail";
 	String MDC_LIST_ITEM_TEXT = "mdc-list-item__text";
 	String MDC_LIST_ITEM_TEXT_SECONDARY = "mdc-list-item__text__secondary";
 	// //////////////////////////////////////////////////////

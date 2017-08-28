@@ -163,7 +163,6 @@ a:active {
 .mdc-list-item .mdc-list-item__start-detail:not(.material-icons)  {
 	width: 40px;
 	height: 40px;
-	
 }
 
 .mdc-list--avatar-list .mdc-list-item__start-detail:not(img) {
