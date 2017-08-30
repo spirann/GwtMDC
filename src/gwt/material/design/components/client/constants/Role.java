@@ -8,7 +8,9 @@ public enum Role implements CssType {
 	BUTTON("button"),
 	SLIDER("slider"),
 	TOOLBAR("toolbar"),
-	ALERT_DIALOG("alertdialog");
+	ALERT_DIALOG("alertdialog"),
+	PROGRESS_BAR("progressbar"),
+	SEPARATOR("separator");
 
     private final String cssClass;
 

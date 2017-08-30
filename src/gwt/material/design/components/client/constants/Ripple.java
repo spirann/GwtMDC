@@ -4,7 +4,7 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 public enum Ripple implements CssType {
 
-	NONE(""),
+	NONE(CssName.MDC_RIPPLE_SURFACE + " mdc-ripple-surface--none"),
 	DEFAULT(CssName.MDC_RIPPLE_SURFACE),
 	PRIMARY(CssName.MDC_RIPPLE_SURFACE + " " + CssName.MDC_RIPPLE_SURFACE_PRIMARY),
 	SECONDARY(CssName.MDC_RIPPLE_SURFACE + " " + CssName.MDC_RIPPLE_SURFACE_SECONDARY),

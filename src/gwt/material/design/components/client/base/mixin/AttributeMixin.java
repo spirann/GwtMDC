@@ -64,14 +64,17 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
     }
 
     public int getAttributeAsInteger() {
-        return Integer.parseInt(getAttribute());
+    	final String attribute = getAttribute();
+        return attribute == null ? 0 : Integer.parseInt(attribute);
     }
 
     public double getAttributeAsDouble() {
-        return Double.parseDouble(getAttribute());
+    	final String attribute = getAttribute();
+        return attribute == null ? 0.0 : Double.parseDouble(attribute);
     }
 
     public boolean getAttributeAsBoolean() {
-        return Boolean.parseBoolean(getAttribute());
+    	final String attribute = getAttribute();
+        return attribute == null ? false : Boolean.parseBoolean(attribute);
     }
 }

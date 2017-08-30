@@ -18,6 +18,8 @@ public class MaterialIcon extends MaterialWidget implements HasType<IconType>, H
 	public MaterialIcon() {
 		super(HtmlElements.I.createElement(), CssName.MATERIAL_ICONS);
 		setDisabledClass(CssName.MATERIAL_ICONS_DISABLED);
+		setWidth("24px");
+		setHeight("24px");
 		setPadding(8);
 	}
 

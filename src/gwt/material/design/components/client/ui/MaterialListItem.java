@@ -40,7 +40,7 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 	}
 
 	@Override
-	protected void onLoad() {		
+	protected void onLoad() {
 
 		if (!initialized) {
 
@@ -70,7 +70,7 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 			initialized = true;
 
 		}
-		
+
 		super.onLoad();
 	}
 
@@ -82,7 +82,7 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 			el.parentNode.removeChild(el);
 		}
 	}-*/;
-	
+
 	private void insertDetail(final Widget widget, final String detailClass, final int detailPos) {
 		removeDatail(getElement(), detailClass);
 		widget.addStyleName(detailClass);
@@ -90,14 +90,35 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 	}
 
 	@UiChild(tagname = "start")
-	public void addStartDetail(final Widget widget) {
+	public void addStartDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM_START_DETAIL, Appender.START);
+		if(prevent) {
+			prevent(widget.getElement());
+		}
 	}
 
 	@UiChild(tagname = "end")
-	public void addEndDetail(final Widget widget) {
+	public void addEndDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM_END_DETAIL, Appender.END);
+		if(prevent) {
+			prevent(widget.getElement());
+		}
 	}
+
+	private native void prevent(final Element element)/*-{
+		
+		var event = function(evt) {
+			evt.stopPropagation();
+			evt.cancelBubble = true;
+		};
+		
+		element.addEventListener('click', event);
+		element.addEventListener('mousedown', event);
+		element.addEventListener('pointerdown', event);
+		
+		
+		
+	}-*/;
 
 	@Override
 	public String getText() {

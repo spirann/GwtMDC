@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
@@ -29,7 +30,9 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 	protected final AttributeMixin<MaterialIconToggle> toggleOffMixin = new AttributeMixin<>(this, "data-toggle-off");
 	protected final AttributeMixin<MaterialIconToggle> ariaPressedMixin = new AttributeMixin<>(this, "aria-pressed");
 
-	private IconType type;
+	protected Color colorOn;
+
+	protected Color colorOff;
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -40,7 +43,7 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 		setRole(Role.BUTTON);
 		setDisabledClass(CssName.MDC_ICON_TOGGLE_DISABLED);
 		setRipple(Ripple.DEFAULT);
-		setCircle(true);	
+		setCircle(true);
 	}
 
 	@Override
@@ -50,16 +53,18 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 		if (!initialized) {
 			toggleInit(getElement());
 			addChageEvent(getElement());
+			updateColor();
 			initialized = true;
 		}
 	}
-	
+
 	public native void addChageEvent(Element element)/*-{
-		var _this = this;		
-		element.addEventListener('MDCIconToggle:change', displayDate);		
+		var _this = this;
+		element.addEventListener('MDCIconToggle:change', displayDate);
 		function displayDate() {
-    		_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
-		}		
+			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
+			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
+		}
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {
@@ -72,6 +77,16 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());
+	}
+
+	protected void updateColor() {
+		if (getValue() && colorOn != null) {
+			setColor(colorOn);
+		} else if (!getValue() && colorOff != null) {
+			setColor(colorOff);
+		} else {
+			setColor(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
+		}
 	}
 
 	protected void fireChangeEvent() {
@@ -108,5 +123,21 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 		if (fireEvents) {
 			fireChangeEvent();
 		}
+	}
+
+	public Color getColorOn() {
+		return colorOn;
+	}
+
+	public void setColorOn(Color colorOn) {
+		this.colorOn = colorOn;
+	}
+
+	public Color getColorOff() {
+		return colorOff;
+	}
+
+	public void setColorOff(Color colorOff) {
+		this.colorOff = colorOff;
 	}
 }

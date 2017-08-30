@@ -180,6 +180,19 @@ a:active {
 .mdc-icon-toggle--disabled {
 	opacity: 0.30;
 }   
+
+.mdc-icon-toggle.mdc-list-item__start-detail {
+	width: 36px;
+	height: 36px;
+	margin-left: -6px;
+}
+
+.mdc-icon-toggle.mdc-list-item__end-detail {
+	width: 36px;
+	height: 36px;
+	margin-right: -6px;
+}
+
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
@@ -410,6 +423,13 @@ a:active {
 }
 
 /* ==========================================================================
+   Linear Progres adjust
+   ========================================================================== */
+.mdc-linear-progress .mdc-linear-progress__bar-inner {
+    background-color: var(--mdc-theme-secondary, #ff4081); 
+}
+
+/* ==========================================================================
    Toolbar nav link
    ========================================================================== */
 
@@ -457,7 +477,12 @@ a:active {
 
 /* ==========================================================================
    Configure Ripple background
-   ========================================================================== */ 
+   ========================================================================== */
+.mdc-ripple-surface--none.mdc-ripple-upgraded::before, 
+.mdc-ripple-surface--none.mdc-ripple-upgraded::after {
+	background-color: transparent;
+}
+    
 .mdc-ripple-surface--primary.mdc-ripple-upgraded::before, 
 .mdc-ripple-surface--primary.mdc-ripple-upgraded::after {
 	background-color: var(--mdc-theme-ripple-primary);

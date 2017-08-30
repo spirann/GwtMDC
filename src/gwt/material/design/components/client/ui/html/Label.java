@@ -1,6 +1,7 @@
 package gwt.material.design.components.client.ui.html;
 
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasTypography;
@@ -21,6 +22,10 @@ public class Label extends MaterialWidget implements HasText, HasTypography, Has
 
 	public Label() {
 		super(HtmlElements.LABEL.createElement(), CssName.MDC_TYPOGRAPHY);
+	}
+	
+	public Label(final Element element) {
+		super(element, CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override

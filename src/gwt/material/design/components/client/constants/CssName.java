@@ -204,12 +204,14 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// LIST
 	// //////////////////////////////////////////////////////
+	String MDC_LIST_GROUP = "mdc-list-group";
+	String MDC_LIST_GROUP_SUBHEADER = "mdc-list-group__subheader";
+	String MDC_LIST_DIVIDER = "mdc-list-divider";
+	String MDC_LIST_DIVIDER_INSET = "mdc-list-divider--inset";
 	String MDC_LIST = "mdc-list";
 	String MDC_LIST_AVATAR_LIST = "mdc-list--avatar-list";
 	String MDC_LIST_DENSE = "mdc-list--dense";
-	String MDC_LIST_GROUP = "mdc-list-group";
 	String MDC_LIST_ITEM = "mdc-list-item";
-	String MDC_LIST_DIVIDER = "mdc-list-divider";
 	String MDC_LIST_ITEM_START_DETAIL = "mdc-list-item__start-detail";
 	String MDC_LIST_ITEM_END_DETAIL = "mdc-list-item__end-detail";
 	String MDC_LIST_ITEM_TEXT = "mdc-list-item__text";
@@ -267,5 +269,16 @@ public interface CssName {
 	String MDC_TEXTFIELD_HELPTEXT_PERSISTENT = "mdc-textfield-helptext--persistent";
 	String MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG = "mdc-textfield-helptext--validation-msg";
 	String MDC_TEXTFIELD_MULTILINE = "mdc-textfield--multiline";
-
+	// //////////////////////////////////////////////////////
+	// LINEAR PROGRESS
+	// //////////////////////////////////////////////////////
+	String MDC_LINEAR_PROGRESS = "mdc-linear-progress";
+	String MDC_LINEAR_PROGRESS_INDETERMINATE = "mdc-linear-progress--indeterminate";
+	String MDC_LINEAR_PROGRESS_REVERSED = "mdc-linear-progress--reversed";
+	String MDC_LINEAR_PROGRESS_BUFFERING_DOTS = "mdc-linear-progress__buffering-dots";
+	String MDC_LINEAR_PROGRESS_BUFFER = "mdc-linear-progress__buffer";
+	String MDC_LINEAR_PROGRESS_BAR = "mdc-linear-progress__bar";
+	String MDC_LINEAR_PROGRESS_PRIMARY_BAR = "mdc-linear-progress__primary-bar";
+	String MDC_LINEAR_PROGRESS_SECONDARY_BAR = "mdc-linear-progress__secondary-bar";
+	String MDC_LINEAR_PROGRESS_BAR_INNER = "mdc-linear-progress__bar-inner";
 }
