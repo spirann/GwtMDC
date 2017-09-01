@@ -423,10 +423,34 @@ a:active {
 }
 
 /* ==========================================================================
-   Linear Progres adjust
+   Linear Progress adjust
    ========================================================================== */
+
 .mdc-linear-progress .mdc-linear-progress__bar-inner {
     background-color: var(--mdc-theme-secondary, #ff4081); 
+}
+
+.mdc-linear-progress__buffering-dots {
+	right: 0;
+	background-image: radial-gradient(ellipse 4px 4px at center, var(--mdc-theme-text-hint-on-background, #e6e6e6) 0%, var(--mdc-theme-text-hint-on-background, #e6e6e6) 47%, var(--mdc-theme-text-hint-on-background, #e6e6e6) 47%, transparent 47%, transparent 48%);
+	opacity: 0.75;
+}
+
+.mdc-linear-progress--reversed .mdc-linear-progress__buffering-dots {
+	left: 0;
+}
+
+.mdc-linear-progress__buffer {
+	background-color: var(--mdc-theme-text-hint-on-background, #e6e6e6);
+}
+
+/* ==========================================================================
+   Menu adjust
+   ========================================================================== */
+
+.mdc-simple-menu {
+	background-color: var(--mdc-theme-background, #fff);
+	border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(255,255,255,0.24));
 }
 
 /* ==========================================================================

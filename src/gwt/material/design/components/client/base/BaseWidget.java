@@ -103,8 +103,12 @@ public class BaseWidget extends ComplexPanel {
 		setStyleProperty("background", background);
 	}
 
-	public void setBackgroundImg(final ImageResource imageResource) {
-		setBackground("url('" + imageResource.getSafeUri().asString() + "') center / cover");
+	public void setBackgroundImageResource(final ImageResource imageResource) {
+		setBackgroundImage("url('" + imageResource.getSafeUri().asString() + "') center / cover");
+	}
+	
+	public void setBackgroundImage(final String url) {
+		setStyleProperty("background-image", url);
 	}
 
 	public void setBackgroundColor(final Color color) {

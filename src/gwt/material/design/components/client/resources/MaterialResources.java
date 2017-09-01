@@ -58,5 +58,5 @@ public interface MaterialResources extends ClientBundle {
 	@Source("image/mdc-slider__thumb.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcSliderThumb();
-
+	
 }

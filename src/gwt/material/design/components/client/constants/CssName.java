@@ -129,6 +129,12 @@ public interface CssName {
 	String MDC_TEMPORARY_DRAWER_HEADER = "mdc-temporary-drawer__header";
 	String MDC_TEMPORARY_DRAWER_HEADER_CONTENT = "mdc-temporary-drawer__header-content";
 	// //////////////////////////////////////////////////////
+	// MENU
+	// //////////////////////////////////////////////////////
+	String MDC_MENU_ANCHOR = "mdc-menu-anchor";
+	String MDC_MENU = "mdc-simple-menu";
+	String MDC_MENU_ITEMS = "mdc-simple-menu__items";
+	// //////////////////////////////////////////////////////
 	// DIALOG
 	// //////////////////////////////////////////////////////
 	String MDC_DIALOG = "mdc-dialog";

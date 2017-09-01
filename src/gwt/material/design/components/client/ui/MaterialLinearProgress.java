@@ -9,6 +9,7 @@ import gwt.material.design.components.client.base.HasProgress;
 import gwt.material.design.components.client.base.HasReverse;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
@@ -40,7 +41,7 @@ public class MaterialLinearProgress extends MaterialWidget
 	protected Div secondaryBar = new Div(
 			CssName.MDC_LINEAR_PROGRESS_BAR + " " + CssName.MDC_LINEAR_PROGRESS_SECONDARY_BAR);
 	protected Span secondaryInner = new Span(CssName.MDC_LINEAR_PROGRESS_BAR_INNER);
-	
+
 	private Double progress = 0.0;
 	private double buffer = 1.0;
 
@@ -50,6 +51,10 @@ public class MaterialLinearProgress extends MaterialWidget
 		super(HtmlElements.DIV.createElement(), CssName.MDC_LINEAR_PROGRESS);
 		setRole(Role.PROGRESS_BAR);
 	}
+
+	native String btoa(String b64) /*-{
+		return btoa(b64);
+	}-*/;
 
 	@Override
 	protected void onLoad() {
@@ -67,9 +72,9 @@ public class MaterialLinearProgress extends MaterialWidget
 
 			linearProgress = linearProgressInit(getElement());
 
-			setBuffer(buffer);	
+			setBuffer(buffer);
 			setProgress(progress);
-			
+
 			initialized = true;
 		}
 	}
@@ -101,6 +106,7 @@ public class MaterialLinearProgress extends MaterialWidget
 	public void setBuffer(double buffer) {
 		this.buffer = buffer < 0 || buffer > 1 ? 1.0 : buffer;
 		if (linearProgress != null) {
+			bufferingDots.setWidth("calc(" + ((1 - buffer) * 100) + "% - 6px)");
 			setBuffer(linearProgress, this.buffer);
 		}
 	}
@@ -133,5 +139,17 @@ public class MaterialLinearProgress extends MaterialWidget
 	protected native void setProgress(final JavaScriptObject linearProgress, double progress)/*-{
 		linearProgress.progress = progress;
 	}-*/;
+
+	public void setProgressColor(final Color color) {
+		primaryInner.setBackgroundColor(color);
+		secondaryInner.setBackgroundColor(color);
+	}
+
+	public void setBufferColor(final Color color) {
+		final String css = color.getCssName();
+		buffer_.setBackgroundColor(color);
+		bufferingDots.setBackgroundImage("radial-gradient(ellipse 4px 4px at center, " + css + " 0%, " + css
+				+ " 47%, " + css + " 47%, transparent 47%, transparent 48%)");
+	}
 
 }

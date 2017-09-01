@@ -10,7 +10,9 @@ public enum Role implements CssType {
 	TOOLBAR("toolbar"),
 	ALERT_DIALOG("alertdialog"),
 	PROGRESS_BAR("progressbar"),
-	SEPARATOR("separator");
+	SEPARATOR("separator"),
+	MENU("menu"),
+	MENU_ITEM("menuitem");
 
     private final String cssClass;
 
