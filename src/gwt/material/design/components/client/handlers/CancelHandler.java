@@ -5,7 +5,7 @@ import com.google.gwt.event.shared.EventHandler;
 
 import gwt.material.design.components.client.events.CancelEvent;
 
-public interface CancelHandler<T> extends EventHandler {
+public interface CancelHandler extends EventHandler {
 
 	/**
 	 * Called when {@link ValueChangeEvent} is fired.
@@ -13,5 +13,5 @@ public interface CancelHandler<T> extends EventHandler {
 	 * @param event
 	 *            the {@link ValueChangeEvent} that was fired
 	 */
-	void onCancel(CancelEvent<T> event);
+	void onCancel(CancelEvent event);
 }

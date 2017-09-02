@@ -10,7 +10,7 @@ public class AcceptEvent extends GwtEvent<AcceptHandler> {
 	/**
 	 * Handler type.
 	 */
-	private final static Type<AcceptHandler> TYPE = new Type<>();
+	public static final Type<AcceptHandler> TYPE = new Type<AcceptHandler>();
 
 	/**
 	 * Fires a value change event on all registered handlers in the handler

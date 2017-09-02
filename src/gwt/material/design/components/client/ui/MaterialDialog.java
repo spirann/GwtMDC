@@ -27,7 +27,7 @@ import gwt.material.design.components.client.ui.html.Header;
 import gwt.material.design.components.client.ui.html.Section;
 
 public class MaterialDialog extends MaterialWidget
-		implements HasAcceptHandlers, HasCancelHandlers<Boolean>, HasOpen, HasScrollable {
+		implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize DIALOG
@@ -230,11 +230,11 @@ public class MaterialDialog extends MaterialWidget
 	}
 
 	protected void fireCancelEvent() {
-		CancelEvent.fire(MaterialDialog.this, Boolean.TRUE);
+		CancelEvent.fire(MaterialDialog.this);
 	}
 
 	@Override
-	public HandlerRegistration addCancelHandler(final CancelHandler<Boolean> handler) {
+	public HandlerRegistration addCancelHandler(final CancelHandler handler) {
 		return addHandler(handler, CancelEvent.getType());
 	}
 

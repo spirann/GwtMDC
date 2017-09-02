@@ -6,13 +6,13 @@ import com.google.gwt.event.shared.HasHandlers;
 
 import gwt.material.design.components.client.handlers.CancelHandler;
 
-public interface HasCancelHandlers<T> extends HasHandlers {
+public interface HasCancelHandlers extends HasHandlers {
 	  /**
 	   * Adds a {@link ValueChangeEvent} handler.
 	   * 
 	   * @param handler the handler
 	   * @return the registration for the event
 	   */
-	  HandlerRegistration addCancelHandler(CancelHandler<T> handler);
+	  HandlerRegistration addCancelHandler(CancelHandler handler);
 
 }
