@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
@@ -187,5 +189,10 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
+	}
+	
+	@Override
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return radio.addClickHandler(handler);
 	}
 }

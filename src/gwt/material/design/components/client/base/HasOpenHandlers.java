@@ -4,15 +4,15 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.handlers.AcceptHandler;
+import gwt.material.design.components.client.handlers.OpenHandler;
 
-public interface HasAcceptHandlers extends HasHandlers {
+public interface HasOpenHandlers extends HasHandlers {
 	  /**
 	   * Adds a {@link ValueChangeEvent} handler.
 	   * 
 	   * @param handler the handler
 	   * @return the registration for the event
 	   */
-	  HandlerRegistration addAcceptHandler(AcceptHandler handler);
+	  HandlerRegistration addOpenHandler(OpenHandler handler);
 
 }

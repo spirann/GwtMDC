@@ -151,6 +151,10 @@ a:active {
 /* ==========================================================================
    Adjust list color
    ========================================================================== */
+.mdc-list-item,
+.mdc-list-item * {
+	cursor: pointer;
+}
    
 .mdc-list-item .mdc-list-item__start-detail  {
 	color: var(--mdc-theme-text-primary-on-background);

@@ -1,6 +1,8 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasIndeterminate;
@@ -141,5 +143,10 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
+	}
+	
+	@Override
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return checkbox.addClickHandler(handler);
 	}
 }

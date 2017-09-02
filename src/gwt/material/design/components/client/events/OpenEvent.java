@@ -2,29 +2,29 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.GwtEvent;
 
-import gwt.material.design.components.client.base.HasAcceptHandlers;
-import gwt.material.design.components.client.handlers.AcceptHandler;
+import gwt.material.design.components.client.base.HasOpenHandlers;
+import gwt.material.design.components.client.handlers.OpenHandler;
 
-public class AcceptEvent extends GwtEvent<AcceptHandler> {
+public class OpenEvent extends GwtEvent<OpenHandler> {
 
 	/**
 	 * Handler type.
 	 */
-	private final static Type<AcceptHandler> TYPE = new Type<>();
+	public static final Type<OpenHandler> TYPE = new Type<OpenHandler>();
 
 	/**
 	 * Fires a value change event on all registered handlers in the handler
 	 * manager. If no such handlers exist, this method will do nothing.
 	 * 
-	 * @param the
-	 *            old value type
+	 * @param <T>
+	 *            the old value type
 	 * @param source
 	 *            the source of the handlers
 	 * @param value
 	 *            the value
 	 */
-	public static void fire(HasAcceptHandlers source) {
-		source.fireEvent(new AcceptEvent());
+	public static void fire(HasOpenHandlers source) {
+		source.fireEvent(new OpenEvent());
 	}
 
 	/**
@@ -32,7 +32,7 @@ public class AcceptEvent extends GwtEvent<AcceptHandler> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<AcceptHandler> getType() {
+	public static Type<OpenHandler> getType() {
 		return TYPE;
 	}
 
@@ -42,19 +42,18 @@ public class AcceptEvent extends GwtEvent<AcceptHandler> {
 	 * @param value
 	 *            the value
 	 */
-	protected AcceptEvent() {
+	protected OpenEvent() {
 	}
 
 	// The instance knows its BeforeSelectionHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
-	@Override
-	public final Type<AcceptHandler> getAssociatedType() {
+	public final Type<OpenHandler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(AcceptHandler handler) {
-		handler.onAccept(this);
+	protected void dispatch(OpenHandler handler) {
+		handler.onOpen(this);
 	}
 
 }

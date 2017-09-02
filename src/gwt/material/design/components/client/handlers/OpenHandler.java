@@ -3,9 +3,9 @@ package gwt.material.design.components.client.handlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.shared.EventHandler;
 
-import gwt.material.design.components.client.events.AcceptEvent;
+import gwt.material.design.components.client.events.OpenEvent;
 
-public interface AcceptHandler extends EventHandler {
+public interface OpenHandler extends EventHandler {
 
 	/**
 	 * Called when {@link ValueChangeEvent} is fired.
@@ -13,5 +13,5 @@ public interface AcceptHandler extends EventHandler {
 	 * @param event
 	 *            the {@link ValueChangeEvent} that was fired
 	 */
-	void onAccept(AcceptEvent event);
+	void onOpen(OpenEvent event);
 }
