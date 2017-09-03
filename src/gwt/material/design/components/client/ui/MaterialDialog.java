@@ -32,10 +32,8 @@ public class MaterialDialog extends MaterialWidget
 	// /////////////////////////////////////////////////////////////
 	// Initialize DIALOG
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject dialogInit(Element element)/*-{
-		$wnd.mdc.dialog.MDCDialog.attachTo(element);
-		var dialog = new $wnd.mdc.dialog.MDCDialog(element);
-		return dialog;
+	public static native JavaScriptObject jsInit(Element element)/*-{		
+		return $wnd.mdc.dialog.MDCDialog.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -106,7 +104,7 @@ public class MaterialDialog extends MaterialWidget
 
 			addAcceptEvent(getElement());
 			addCancelEvent(getElement());
-			dialog = dialogInit(getElement());
+			dialog = jsInit(getElement());
 
 		}
 

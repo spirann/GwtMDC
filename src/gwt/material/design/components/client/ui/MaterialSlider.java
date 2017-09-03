@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -25,8 +26,8 @@ public class MaterialSlider extends MaterialFormField<Double>
 	// /////////////////////////////////////////////////////////////
 	// Initialize Slider
 	// /////////////////////////////////////////////////////////////
-	public static native void sliderInit(Element element)/*-{
-		$wnd.mdc.slider.MDCSlider.attachTo(element);
+	public static native JavaScriptObject jsInit(final Element element)/*-{
+		return $wnd.mdc.slider.MDCSlider.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
@@ -79,7 +80,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 			addChageEvent(getElement());
 			addInputEvent(getElement(), pinMarker.getElement());
-			sliderInit(getElement());
+			jsInit(getElement());
 
 			initialized = true;
 

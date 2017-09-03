@@ -23,8 +23,8 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void checkboxInit(Element element)/*-{
-		$wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
+	public static native void jsInit(Element element)/*-{
+		return $wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -73,7 +73,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 			add(checkbox);
 			add(label);
 
-			checkboxInit(checkbox.getElement());
+			jsInit(checkbox.getElement());
 			svgCheckmark.setFillColor(Color.MDC_THEME_SECONDARY);
 
 			initialized = true;

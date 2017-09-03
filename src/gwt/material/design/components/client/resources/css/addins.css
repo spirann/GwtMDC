@@ -179,10 +179,19 @@ a:active {
 }
 
 /* ==========================================================================
+   Button
+   ========================================================================== */
+
+.mdc-button--primary[disabled].mdc-button--raised,
+.mdc-button--accent[disabled].mdc-button--raised {
+    opacity: 0.26;
+}
+
+/* ==========================================================================
    Icon toggle
    ========================================================================== */
 .mdc-icon-toggle--disabled {
-	opacity: 0.30;
+	opacity: 0.26;
 }   
 
 .mdc-icon-toggle.mdc-list-item__start-detail {
@@ -220,14 +229,14 @@ a:active {
    Material disabled adjust
    ========================================================================== */
 .material-icons--disabled {
-	opacity: 0.30;
+	opacity: 0.26;
 }
 
 /* ==========================================================================
    Form fields disabled adjust
    ========================================================================== */
 .mdc-form-field[disabled] {
-	opacity: 0.30;
+	opacity: 0.26;
 }
 
 .mdc-form-field input,

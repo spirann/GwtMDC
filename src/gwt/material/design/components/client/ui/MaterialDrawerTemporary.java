@@ -13,10 +13,8 @@ public class MaterialDrawerTemporary extends MaterialDrawerBase {
 	// /////////////////////////////////////////////////////////////
 	// Initialize Drawer
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject drawerInit(Element element)/*-{
-		$wnd.mdc.drawer.MDCTemporaryDrawer.attachTo(element);
-		var drawer = new $wnd.mdc.drawer.MDCTemporaryDrawer(element);
-		return drawer;
+	public static native JavaScriptObject jsInit(Element element)/*-{
+		return $wnd.mdc.drawer.MDCTemporaryDrawer.attachTo(element);
 	}-*/;
 	
 	protected Nav nav = new Nav(CssName.MDC_TEMPORARY_DRAWER_DRAWER);
@@ -40,7 +38,7 @@ public class MaterialDrawerTemporary extends MaterialDrawerBase {
 			nav.add(content);
 			super.add(nav, getElement());
 			
-			drawer = drawerInit(getElement());
+			drawer = jsInit(getElement());
 
 			initialized = true;
 		}

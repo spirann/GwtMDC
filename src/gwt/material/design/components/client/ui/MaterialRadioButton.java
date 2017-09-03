@@ -3,6 +3,7 @@ package gwt.material.design.components.client.ui;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -56,8 +57,8 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// /////////////////////////////////////////////////////////////
 	// Initialize RadioButton
 	// /////////////////////////////////////////////////////////////
-	public static native void radioInit(Element element)/*-{
-		$wnd.mdc.radio.MDCRadio.attachTo(element);
+	public static native JavaScriptObject jsInit(Element element)/*-{
+		return $wnd.mdc.radio.MDCRadio.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -109,7 +110,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 			addValueChangeListener(input.getElement());
 
-			radioInit(radio.getElement());
+			jsInit(radio.getElement());
 
 			initialized = true;
 

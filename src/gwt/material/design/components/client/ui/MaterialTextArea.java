@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
@@ -26,8 +27,8 @@ public class MaterialTextArea extends MaterialFormField<String>
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void textfieldInit(Element element)/*-{
-		$wnd.mdc.textfield.MDCTextfield.attachTo(element);
+	public static native JavaScriptObject jsInit(final Element element)/*-{
+		return $wnd.mdc.textfield.MDCTextfield.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ public class MaterialTextArea extends MaterialFormField<String>
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<Textarea> requeridMixin = new RequiredMixin<>(textarea);
 	protected final PlaceholderMixin<Textarea> placeholderMixin = new PlaceholderMixin<>(textarea);
-	
+
 	protected final ApplyStyleMixin<MaterialTextArea> denseMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_TEXTFIELD_DENSE);
 	protected final ApplyStyleMixin<Label> helpPersistentMixin = new ApplyStyleMixin<>(helper,
@@ -87,7 +88,7 @@ public class MaterialTextArea extends MaterialFormField<String>
 			add(textField);
 			add(helper);
 
-			textfieldInit(textField.getElement());
+			jsInit(textField.getElement());
 
 			initialized = true;
 
@@ -219,13 +220,13 @@ public class MaterialTextArea extends MaterialFormField<String>
 	public String getPlaceholder() {
 		return placeholderMixin.getPlaceholder();
 	}
-	
-	public void setRows(int rows){
+
+	public void setRows(int rows) {
 		textarea.setRows(rows);
 	}
-	
-	public void setCols(int cols){
+
+	public void setCols(int cols) {
 		textarea.setCols(cols);
 	}
-	
+
 }

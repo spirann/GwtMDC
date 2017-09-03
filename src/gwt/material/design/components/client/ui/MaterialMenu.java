@@ -22,7 +22,7 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 
 	protected JavaScriptObject menu;
 
-	public static native JavaScriptObject menuInit(Element element)/*-{
+	public static native JavaScriptObject jsInit(Element element)/*-{
 		return  $wnd.mdc.menu.MDCSimpleMenu.attachTo(element);
 	}-*/;
 
@@ -46,7 +46,7 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 			items.getElement().setAttribute("aria-hidden", "true");
 			super.add(items);
 
-			menu = menuInit(getElement());
+			menu = jsInit(getElement());
 
 			initialized = true;
 		}

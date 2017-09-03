@@ -18,8 +18,8 @@ import gwt.material.design.components.client.constants.IconType;
 
 public class MaterialGridListTile extends MaterialWidget implements HasIcon, HasCaption, HasSupportText, HasImage {
 
-	public static native void gridListInit(Element element)/*-{
-		$wnd.mdc.gridList.MDCGridList.attachTo(element);
+	public static native void jsInit(Element element)/*-{
+		return $wnd.mdc.gridList.MDCGridList.attachTo(element);
 	}-*/;
 
 	protected MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), 
@@ -66,7 +66,7 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 			secondary.add(caption);
 			secondary.add(supportText);
 
-			gridListInit(getElement());
+			jsInit(getElement());
 			
 			initialize = true;
 		}

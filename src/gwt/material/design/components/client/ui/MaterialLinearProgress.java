@@ -20,11 +20,11 @@ public class MaterialLinearProgress extends MaterialWidget
 		implements HasReverse, HasIndeterminate, HasProgress, HasBuffer {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize Linear Progress
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject linearProgress;
 
-	public static native JavaScriptObject linearProgressInit(Element element)/*-{
+	public static native JavaScriptObject jsInit(Element element)/*-{
 		return $wnd.mdc.linearProgress.MDCLinearProgress.attachTo(element);
 	}-*/;
 
@@ -70,7 +70,7 @@ public class MaterialLinearProgress extends MaterialWidget
 			add(primaryBar);
 			add(secondaryBar);
 
-			linearProgress = linearProgressInit(getElement());
+			linearProgress = jsInit(getElement());
 
 			setBuffer(buffer);
 			setProgress(progress);

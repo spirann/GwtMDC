@@ -17,7 +17,7 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 	// Initialize toolbar
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject toolbar;
-	protected static native JavaScriptObject toolbarInit(final Element element)/*-{
+	protected static native JavaScriptObject jsInit(final Element element)/*-{
 		return $wnd.mdc.toolbar.MDCToolbar.attachTo(element);	
 	}-*/;
 
@@ -35,7 +35,7 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 
 		if (!initialize) {			
 			
-			toolbar = toolbarInit(getElement());			
+			toolbar = jsInit(getElement());			
 			
 			initialize = true;
 			

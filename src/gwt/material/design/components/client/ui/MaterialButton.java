@@ -1,6 +1,5 @@
 package gwt.material.design.components.client.ui;
 
-
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasHref;
@@ -20,8 +19,25 @@ public class MaterialButton extends MaterialWidget implements HasType<ButtonType
 	private final AttributeMixin<MaterialButton> targetMixin = new AttributeMixin<>(this, "target");
 	private final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 
+	private boolean initialized = false;
+
 	public MaterialButton() {
 		super(HtmlElements.BUTTON.createElement(), CssName.MDC_BUTTON);
+	}
+
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+
+		if (!initialized) {
+
+			if (getType() == null) {
+				setType(ButtonType.SECONDARY_RAISED);
+			}
+
+			initialized = true;
+
+		}
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
@@ -30,8 +31,8 @@ public class MaterialTextField extends MaterialFormField<String>
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void textfieldInit(Element element)/*-{
-		$wnd.mdc.textfield.MDCTextfield.attachTo(element);
+	public static native JavaScriptObject textfieldInit(Element element)/*-{
+		return $wnd.mdc.textfield.MDCTextfield.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////

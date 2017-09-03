@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -20,10 +21,10 @@ import gwt.material.design.components.client.constants.Role;
 public class MaterialIconToggle extends MaterialWidget implements HasValue<Boolean> {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize Icon Toggle
 	// /////////////////////////////////////////////////////////////
-	public static native void toggleInit(Element element)/*-{
-		$wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
+	public static native JavaScriptObject jsInit(Element element)/*-{
+		return $wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
@@ -51,7 +52,7 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 		super.onLoad();
 
 		if (!initialized) {
-			toggleInit(getElement());
+			jsInit(getElement());
 			addChageEvent(getElement());
 			updateColor();
 			initialized = true;

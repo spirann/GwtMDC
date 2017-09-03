@@ -13,10 +13,8 @@ public class MaterialDrawerPersistent extends MaterialDrawerBase {
 	// /////////////////////////////////////////////////////////////
 	// Initialize Drawer
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject drawerInit(Element element)/*-{
-		$wnd.mdc.drawer.MDCPersistentDrawer.attachTo(element);
-		var drawer = new $wnd.mdc.drawer.MDCPersistentDrawer(element);
-		return drawer;
+	public static native JavaScriptObject jsInit(Element element)/*-{
+		return $wnd.mdc.drawer.MDCPersistentDrawer.attachTo(element);
 	}-*/;
 	
 	protected Nav nav = new Nav(CssName.MDC_PERSISTENT_DRAWER_DRAWER);
@@ -36,7 +34,7 @@ public class MaterialDrawerPersistent extends MaterialDrawerBase {
 			nav.add(content);
 			super.add(nav, getElement());
 			
-			drawer = drawerInit(getElement());
+			drawer = jsInit(getElement());
 
 			initialized = true;
 		}
