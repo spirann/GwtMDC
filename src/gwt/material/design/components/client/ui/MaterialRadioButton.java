@@ -84,7 +84,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	public MaterialRadioButton() {
 		super();
-		setRipple(Ripple.DEFAULT);
+		setRipple(Ripple.SECONDARY);
 		setCircle(true);
 	}
 

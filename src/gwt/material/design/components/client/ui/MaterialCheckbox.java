@@ -51,7 +51,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	public MaterialCheckbox() {
 		super();
-		setRipple(Ripple.DEFAULT);
+		setRipple(Ripple.SECONDARY);
 		setCircle(true);
 	}
 
