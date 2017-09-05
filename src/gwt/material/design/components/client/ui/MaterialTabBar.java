@@ -1,78 +1,102 @@
 package gwt.material.design.components.client.ui;
 
-
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
-import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssType;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.utils.helper.EnumHelper;
+import gwt.material.design.components.client.ui.html.Span;
 
 public class MaterialTabBar extends MaterialWidget {
 
-	public enum Align implements CssType {
+	protected JavaScriptObject javaScriptComponent;
 
-		START(CssName.MDC_TOOLBAR_SECTION_ALIGN_START), 
-		CENTER(CssName.MDC_TOOLBAR_SECTION_ALIGN_CENTER), 
-		END(CssName.MDC_TOOLBAR_SECTION_ALIGN_END);
+	protected static native JavaScriptObject jsInit(final Element element)/*-{
+		return $wnd.mdc.tabs.MDCTabBar.attachTo(element);
+	}-*/;
 
-		private final String cssClass;
+	private Span indicator = new Span(CssName.MDC_TAB_BAR_INDICATOR);
 
-		Align(final String cssClass) {
-			this.cssClass = cssClass;
-		}
-
-		@Override
-		public String getCssName() {
-			return cssClass;
-		}
-
-		public static Align fromStyleName(final String styleName) {
-			return EnumHelper.fromStyleName(styleName, Align.class, CENTER);
-		}
-	};
-
-	protected final StyleMixin<MaterialTabBar> alignMixin = new StyleMixin<>(this);
-	protected final StyleEnabledMixin<MaterialTabBar> shrinkToFitMixin = new StyleEnabledMixin<>(
-			this, CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
+	private boolean initialized = false;
 
 	public MaterialTabBar() {
-		super(HtmlElements.SECTION.createElement(), CssName.MDC_TOOLBAR_SECTION);
-		setRole(Role.TOOLBAR);
+		super(HtmlElements.NAV.createElement(), CssName.MDC_TAB_BAR, CssName.MDC_TAB_BAR_INDICATOR_ACCENT);
+		setRole(Role.TAB_BAR);
+		addChangeEvent(getElement());
 	}
 
-	/**
-	 * Toolbar sections are aligned to the toolbar’s center. You can change this
-	 * behavior by applying mdc-toolbar__section--align-start or
-	 * mdc-toolbar__section--align-end to align the sections to the start or the
-	 * end of the toolbar (respectively).
-	 * 
-	 * @param align
-	 */
-	public void setAlign(final Align align) {
-		alignMixin.setStyle(align.getCssName());
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+
+		if (!initialized) {
+
+			super.add(indicator);
+			
+			javaScriptComponent = jsInit(getElement());
+			preventDefaultClick(javaScriptComponent, true);		
+						
+			initialized = true;
+
+		}
+	}
+	
+	protected native void addChangeEvent(Element element)/*-{
+		
+		var _this = this;
+		element.addEventListener('MDCTabBar:change', function(tabs) {
+			
+			var dynamicTabBar = tabs.detail;
+            var nthChildIndex = dynamicTabBar.activeTabIndex;
+			
+			_this.@gwt.material.design.components.client.ui.MaterialTabBar::select(I)(nthChildIndex);
+			
+			
+		});
+		
+	}-*/;
+
+	protected void select(int index) {
+		
+		for(int i = 0; i < getWidgetCount(); i++) {
+			
+			final Widget child = getWidget(i);
+			
+			if(child instanceof MaterialTab) {				
+				final MaterialTab tab = (MaterialTab) child;
+				tab.setActive(i == index);				
+			}
+			
+		}
+		
+	}
+	
+	@Override
+	public void add(Widget child) {
+		super.add(child);
+		super.add(indicator);
 	}
 
-	public void getAlign() {
-		Align.fromStyleName(alignMixin.getStyle());
-	}
+	protected native void preventDefaultClick(final JavaScriptObject tabBar, final boolean prevent)/*-{
+		tabBar.preventDefaultOnClick = prevent;
+	}-*/;
 
-	/**
-	 * Toolbar sections are laid out using flexbox. Each section will take up an
-	 * equal amount of space within the toolbar by default. But you can
-	 * accommodate very long section (very long title) by adding
-	 * mdc-toolbar__section--shrink-to-fit to other sections.
-	 * 
-	 * @param shrinkToFit
-	 */
-	public void setShrinkToFit(final boolean shrinkToFit) {
-		shrinkToFitMixin.setEnabled(shrinkToFit);
+	public int getActiveTabIndex() {
+		return javaScriptComponent == null ? -1 : getActiveTabIndex(javaScriptComponent);
 	}
+	
+	protected native int getActiveTabIndex(final JavaScriptObject tabBar)/*-{
+		return tabBar.activeTabIndex;
+	}-*/;
 
-	public boolean isShrinkToFit() {
-		return shrinkToFitMixin.isEnabled();
+	public void setActiveTabIndex(final int activeTabIndex) {
+		setActiveTabIndex(javaScriptComponent, activeTabIndex);	
 	}
+	
+	protected native void setActiveTabIndex(final JavaScriptObject tabBar, int activeTabIndex)/*-{
+		tabBar.activeTabIndex = activeTabIndex;
+	}-*/;
 }
