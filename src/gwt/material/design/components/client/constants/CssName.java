@@ -112,6 +112,15 @@ public interface CssName {
 	String MDC_TOOLBAR_ICON_MENU = "material-icons mdc-toolbar__icon--menu";
 	String MDC_TOOLBAR_NAV_LINK = "toolbar-nav-link";
 	// //////////////////////////////////////////////////////
+	// TAB BAR
+	// //////////////////////////////////////////////////////
+	String MDC_TAB_BAR = "mdc-tab-bar";
+	String MDC_TAB_BAR_INDICATOR = "mdc-tab-bar__indicator";
+	String MDC_TAB_BAR_INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
+	String MDC_TAB = "mdc-tab";
+	String MDC_TAB_ICON = "mdc-tab__icon";
+	String MDC_TAB_ACTIVE = "mdc-tab--active";	
+	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
 	// Persistent

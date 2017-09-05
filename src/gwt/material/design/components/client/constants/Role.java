@@ -8,6 +8,8 @@ public enum Role implements CssType {
 	BUTTON("button"),
 	SLIDER("slider"),
 	TOOLBAR("toolbar"),
+	TAB_BAR("tablist"),
+	TAB("tab"),
 	ALERT_DIALOG("alertdialog"),
 	PROGRESS_BAR("progressbar"),
 	SEPARATOR("separator"),
