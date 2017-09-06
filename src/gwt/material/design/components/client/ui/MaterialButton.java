@@ -14,10 +14,10 @@ import gwt.material.design.components.client.constants.HtmlElements;
 
 public class MaterialButton extends MaterialWidget implements HasType<ButtonType>, HasHref, HasText {
 
-	private final TextMixin<MaterialButton> textMixin = new TextMixin<>(this);
-	private final AttributeMixin<MaterialButton> hrefMixin = new AttributeMixin<>(this, "href");
-	private final AttributeMixin<MaterialButton> targetMixin = new AttributeMixin<>(this, "target");
-	private final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
+	protected final TextMixin<MaterialButton> textMixin = new TextMixin<>(this);
+	protected final AttributeMixin<MaterialButton> hrefMixin = new AttributeMixin<>(this, "href");
+	protected final AttributeMixin<MaterialButton> targetMixin = new AttributeMixin<>(this, "target");
+	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialized = false;
 

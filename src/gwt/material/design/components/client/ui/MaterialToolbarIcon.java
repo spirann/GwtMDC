@@ -4,6 +4,7 @@ import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
@@ -13,9 +14,8 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 
 	protected final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
 	protected final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
-
-	protected IconType type;
-
+	protected final IconMixin<MaterialToolbarIcon> iconMixin = new IconMixin<>(this);
+	
 	private boolean initialized = false;
 
 	public MaterialToolbarIcon() {
@@ -44,13 +44,12 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 
 	@Override
 	public void setType(IconType type) {
-		this.type = type;
-		getElement().setInnerHTML(type.getCssName());
+		iconMixin.setIcon(type);
 	}
 
 	@Override
 	public IconType getType() {
-		return type;
+		return iconMixin.getIcon();
 	}
 
 	@Override
