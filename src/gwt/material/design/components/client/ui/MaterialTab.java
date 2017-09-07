@@ -2,9 +2,12 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style;
+import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -12,6 +15,7 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
@@ -28,10 +32,10 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	protected static native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.tabs.MDCTabFoundation(element);
 	}-*/;
-	
+
 	private MaterialWidget icon = new MaterialWidget(HtmlElements.I.createElement(), CssName.MATERIAL_ICONS,
 			CssName.MDC_TAB_ICON);
-	
+
 	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
 
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
@@ -39,8 +43,8 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	protected final AttributeMixin<MaterialTab> hrefMixin = new AttributeMixin<>(this, "href");
 	protected final AttributeMixin<MaterialTab> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 
-	private MaterialTabBar parent;
-
+	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB_ACTIVE);
+	
 	private boolean initialized = false;
 
 	private HandlerRegistration handler;
@@ -61,20 +65,46 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 			}
 
 			add(label);
-			
+
 			javaScriptComponent = jsInit(getElement());
-			
+
 			initialized = true;
 		}
 	}
-	
+
+	protected void updateTarget() {
+
+		if (getTarget() != null && !getTarget().isEmpty()) {
+
+			final Element target = DOM.getElementById(getTarget());
+			if (target == null) {
+				
+				final String style;
+				if (isActive()) {
+					style = "#" + getTarget() + "{ display: block; }";
+				} else {
+					style = "#" + getTarget() + "{ display: none; }";
+				}
+
+				StyleInjector.injectStylesheetAtEnd(style);
+
+			} else {
+				if (isActive()) {
+					target.getStyle().setDisplay(Style.Display.BLOCK);
+				} else {
+					target.getStyle().setDisplay(Style.Display.NONE);
+				}
+			}
+		}
+	}
+
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return super.addClickHandler(new ClickHandler() {
 			@Override
 			public void onClick(ClickEvent event) {
 				final Timer timer = new Timer() {
-					
+
 					@Override
 					public void run() {
 						handler.onClick(event);
@@ -84,7 +114,7 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 			}
 		});
 	}
-	
+
 	@Override
 	public void setActive(boolean active) {
 		setActive(active, true);
@@ -92,18 +122,21 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 	protected void setActive(boolean active, boolean notifyParent) {
 		super.setActive(active);
+		activeMixin.setApply(active);
 		
-		if(notifyParent && isAttached()) {
-			
+		updateTarget();
+
+		if (notifyParent && isAttached()) {
+
 			final Widget widget = getParent();
-			
-			if(widget instanceof MaterialTabBar) {
+
+			if (widget instanceof MaterialTabBar) {
 				final MaterialTabBar materialTabBar = (MaterialTabBar) widget;
 				materialTabBar.setActiveTabIndex(materialTabBar.getWidgetIndex(this));
 			}
 		}
 	}
-	
+
 	@Override
 	public String getText() {
 		return textMixin.getText();

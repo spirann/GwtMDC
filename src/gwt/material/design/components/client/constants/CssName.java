@@ -115,6 +115,10 @@ public interface CssName {
 	// TAB BAR
 	// //////////////////////////////////////////////////////
 	String MDC_TAB_BAR_SCROLLER = "mdc-tab-bar-scroller";
+	String MDC_TAB_BAR_SCROLLER_INDICATOR = "mdc-tab-bar-scroller__indicator";
+	String MDC_TAB_BAR_SCROLLER_INDICATOR_BACK = "mdc-tab-bar-scroller__indicator--back";
+	String MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD = "mdc-tab-bar-scroller__indicator--forward";
+	String MDC_TAB_BAR_SCROLLER_INDICATOR_INNER = "mdc-tab-bar-scroller__indicator__inner";
 	String MDC_TAB_BAR_SCROLLER_SCROLL_FRAME = "mdc-tab-bar-scroller__scroll-frame";
 	String MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";
 	String MDC_TAB_BAR = "mdc-tab-bar";
@@ -123,6 +127,7 @@ public interface CssName {
 	String MDC_TAB_BAR_INDICATOR = "mdc-tab-bar__indicator";
 	String MDC_TAB_BAR_INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
 	String MDC_TAB = "mdc-tab";
+	String MDC_TAB_PANEL = "mdc-tab-panel";
 	String MDC_TAB_ICON = "mdc-tab__icon";
 	String MDC_TAB_ICON_TEXT = "mdc-tab__icon-text";
 	String MDC_TAB_ACTIVE = "mdc-tab--active";	

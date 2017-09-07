@@ -50,8 +50,8 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 
 			addChangeEvent(getElement());
 
-			javaScriptComponent = jsInit(getElement());
-			preventDefaultClick(javaScriptComponent, true);
+			//javaScriptComponent = jsInit(getElement());
+			//preventDefaultClick(javaScriptComponent, true);
 			loadFirstSelected();
 			initialized = true;
 

@@ -85,6 +85,14 @@ a:active {
 	text-align: left;
 }
 
+.mdc-tab-bar-scroller__indicator {
+	color: var(--mdc-theme-text-secondary-on-primary, rgba(0, 0, 0, 0.54));
+}
+
+.mdc-tab-bar-scroller__indicator:hover {
+	color: var(--mdc-theme-text-primary-on-primary, rgba(0, 0, 0, 0.54));
+}
+
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
