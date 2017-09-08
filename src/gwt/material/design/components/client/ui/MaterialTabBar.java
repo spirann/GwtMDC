@@ -35,7 +35,7 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 	private int activeTabIndex = -1;
 
 	public MaterialTabBar() {
-		super(HtmlElements.NAV.createElement(), CssName.MDC_TAB_BAR, CssName.MDC_TAB_BAR_INDICATOR_ACCENT);
+		super(HtmlElements.NAV.createElement(), CssName.MDC_TAB_BAR);//, CssName.MDC_TAB_BAR_INDICATOR_ACCENT);
 		setRole(Role.TAB_BAR);
 		setType(TabBarType.ICON_WITH_TEXT);
 	}
@@ -50,9 +50,10 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 
 			addChangeEvent(getElement());
 
-			//javaScriptComponent = jsInit(getElement());
-			//preventDefaultClick(javaScriptComponent, true);
+			javaScriptComponent = jsInit(getElement());
+			preventDefaultClick(javaScriptComponent, true);
 			loadFirstSelected();
+			
 			initialized = true;
 
 		}
