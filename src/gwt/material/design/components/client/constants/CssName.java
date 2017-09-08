@@ -123,14 +123,14 @@ public interface CssName {
 	String MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";
 	String MDC_TAB_BAR = "mdc-tab-bar";
 	String MDC_TAB_BAR_ICON_TABS = "mdc-tab-bar--icon-tabs";
-	String MDC_TAB_BAR_ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";	
+	String MDC_TAB_BAR_ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
 	String MDC_TAB_BAR_INDICATOR = "mdc-tab-bar__indicator";
 	String MDC_TAB_BAR_INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
 	String MDC_TAB = "mdc-tab";
 	String MDC_TAB_PANEL = "mdc-tab-panel";
 	String MDC_TAB_ICON = "mdc-tab__icon";
 	String MDC_TAB_ICON_TEXT = "mdc-tab__icon-text";
-	String MDC_TAB_ACTIVE = "mdc-tab--active";	
+	String MDC_TAB_ACTIVE = "mdc-tab--active";
 	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
@@ -169,6 +169,14 @@ public interface CssName {
 	String MDC_DIALOG_FOOTER_BUTTON_ACCEPT = "mdc-dialog__footer__button--accept";
 	String MDC_DIALOG_BACKDROP = "mdc-dialog__backdrop";
 	String MDC_DIALOG_ACTION = "mdc-dialog__action";
+	// //////////////////////////////////////////////////////
+	// SNACKBAR
+	// //////////////////////////////////////////////////////
+	String MDC_SNACKBAR = "mdc-snackbar";
+	String MDC_SNACKBAR_ALIGN_START = "mdc-snackbar--align-start";
+	String MDC_SNACKBAR_TEXT = "mdc-snackbar__text";
+	String MDC_SNACKBAR_ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
+	String MDC_SNACKBAR_ACTION_BUTTON = "mdc-snackbar__action-button";	
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////
