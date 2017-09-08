@@ -9,10 +9,12 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.constants.TabBarTextColor;
 import gwt.material.design.components.client.constants.TabBarType;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -23,49 +25,56 @@ public class MaterialTabBarScroller extends MaterialWidget implements HasType<Ta
 	protected static native JavaScriptObject jsInit(final Element element)/*-{
 		return $wnd.mdc.tabs.MDCTabBarScroller.attachTo(element);
 	}-*/;
-	
-	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
-	protected MaterialWidget backIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(), CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
-	
+
+	protected Div scrollerBackIndicator = new Div(
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
+	protected MaterialWidget backIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(),
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
+
 	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME);
 	protected MaterialTabBar tabBar = new MaterialTabBar();
+
+	protected Div scrollerForwardIndicator = new Div(
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
+	protected MaterialWidget forwardIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(),
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
 	
-	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
-	protected MaterialWidget forwardIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(), CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
-	
+	protected final TypeMixin<MaterialTabBarScroller, TabBarTextColor> colorMixin = new TypeMixin<>(this);
+
 	private boolean initialized = false;
-	
-	public MaterialTabBarScroller(){
+
+	public MaterialTabBarScroller() {
 		super(HtmlElements.DIV.createElement(), CssName.MDC_TAB_BAR_SCROLLER);
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		
-		if(!initialized){
-			
+
+		if (!initialized) {
+
 			backIndicatorInner.getElement().setAttribute("aria-label", "scroll back button");
 			backIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_BEFORE.getCssName());
 			scrollerBackIndicator.add(backIndicatorInner);
-			
+
 			tabBar.addStyleName(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS);
 			scrollerFrame.add(tabBar);
-			
+
 			forwardIndicatorInner.getElement().setAttribute("aria-label", "scroll forward button");
 			forwardIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_NEXT.getCssName());
 			scrollerForwardIndicator.add(forwardIndicatorInner);
-			
+
 			super.add(scrollerBackIndicator);
 			super.add(scrollerFrame);
 			super.add(scrollerForwardIndicator);
-			
+
 			javaScriptComponent = jsInit(getElement());
-			
+
 			initialized = true;
+
 		}
 	}
-	
+
 	@Override
 	public void add(Widget child) {
 		tabBar.add(child);
@@ -85,7 +94,7 @@ public class MaterialTabBarScroller extends MaterialWidget implements HasType<Ta
 	public TabBarType getType() {
 		return tabBar.getType();
 	}
-	
+
 	public int getActiveTabIndex() {
 		return tabBar.getActiveTabIndex();
 	}
@@ -93,11 +102,15 @@ public class MaterialTabBarScroller extends MaterialWidget implements HasType<Ta
 	public void setActiveTabIndex(int activeTabIndex) {
 		tabBar.setActiveTabIndex(activeTabIndex);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		super.setTextColor(color);
 		backIndicatorInner.setTextColor(color);
 		forwardIndicatorInner.setTextColor(color);
+	}
+	
+	public void setColorScheme(TabBarTextColor barColor){
+		colorMixin.setType(barColor);
 	}
 }

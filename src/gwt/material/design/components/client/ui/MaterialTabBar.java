@@ -15,6 +15,7 @@ import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.constants.TabBarTextColor;
 import gwt.material.design.components.client.constants.TabBarType;
 import gwt.material.design.components.client.ui.html.Span;
 
@@ -23,19 +24,25 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 	protected JavaScriptObject javaScriptComponent;
 
 	protected static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.tabs.MDCTabBar.attachTo(element);
+		if (element.parentNode.className.indexOf('mdc-tab-bar-scroller__scroll-frame') > -1) {
+			return new $wnd.mdc.tabs.MDCTabBarFoundation(element);
+		} else {
+			return $wnd.mdc.tabs.MDCTabBar.attachTo(element);
+		}
 	}-*/;
 
 	private Span indicator = new Span(CssName.MDC_TAB_BAR_INDICATOR);
 
 	protected final TypeMixin<MaterialTabBar, TabBarType> typeMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialTabBar, TabBarTextColor> colorMixin = new TypeMixin<>(this);
 
 	private boolean initialized = false;
 
 	private int activeTabIndex = -1;
 
 	public MaterialTabBar() {
-		super(HtmlElements.NAV.createElement(), CssName.MDC_TAB_BAR);//, CssName.MDC_TAB_BAR_INDICATOR_ACCENT);
+		super(HtmlElements.NAV.createElement(), CssName.MDC_TAB_BAR);
+
 		setRole(Role.TAB_BAR);
 		setType(TabBarType.ICON_WITH_TEXT);
 	}
@@ -53,7 +60,7 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 			javaScriptComponent = jsInit(getElement());
 			preventDefaultClick(javaScriptComponent, true);
 			loadFirstSelected();
-			
+
 			initialized = true;
 
 		}
@@ -62,13 +69,10 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 	protected native void addChangeEvent(Element element)/*-{
 
 		var _this = this;
-		element.addEventListener('MDCTabBar:change',function(tabs) {
-			
+		element.addEventListener('MDCTabBar:change', function(tabs) {
 			var dynamicTabBar = tabs.detail;
 			var nthChildIndex = dynamicTabBar.activeTabIndex;
-						
 			_this.@gwt.material.design.components.client.ui.MaterialTabBar::setActiveTabIndex(I)(nthChildIndex);
-
 		});
 
 	}-*/;
@@ -145,7 +149,7 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 	protected native void setActiveTabIndex(final JavaScriptObject tabBar, final int activeTabIndex)/*-{
 		tabBar.activeTabIndex = activeTabIndex;
 	}-*/;
-	
+
 	@Override
 	public void setType(TabBarType type) {
 		typeMixin.setType(type);
@@ -163,5 +167,9 @@ public class MaterialTabBar extends MaterialWidget implements HasType<TabBarType
 				handler.onChange(event);
 			}
 		}, ChangeEvent.getType());
+	}
+	
+	public void setColorScheme(TabBarTextColor barColor){
+		colorMixin.setType(barColor);
 	}
 }
