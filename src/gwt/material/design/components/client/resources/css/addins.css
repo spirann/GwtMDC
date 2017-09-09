@@ -15,15 +15,6 @@ a:active {
     color: var(--mdc-theme-secondary);
 }
 
-
-.material-icons {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	align-content: center;
-}
-
-
 .left-align {
 	margin-left: 0;
 	margin-right: auto;
@@ -38,6 +29,18 @@ a:active {
 	margin-left: auto;
 	margin-right: 0;
 }
+
+/* ==========================================================================
+   Estra to use Roboto Mono
+   ========================================================================== */
+
+.catalog-title {
+	font-family: "Roboto Mono", monospace;
+}
+
+/* ==========================================================================
+   Config default component content
+   ========================================================================== */
 
 .mdc-content {
 	flex: one;
@@ -54,9 +57,39 @@ a:active {
 	overflow-x: hidden; 
 }
 
-.catalog-title {
-	font-family: "Roboto Mono", monospace;
+/* ==========================================================================
+   Adjust icon position
+   ========================================================================== */
+
+.material-icons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
 }
+
+
+/* ==========================================================================
+   Adjust code
+   ========================================================================== */
+
+.mdc-code-example {
+	display: flex;
+	flex-direction: column;	
+	justify-content: center;
+	align-items: center;
+	padding: 24px;
+}
+
+.mdc-code {
+	flex: one;
+	width: 100%;
+	text-align: left;
+}
+
+/* ==========================================================================
+   Adjust Toolbar
+   ========================================================================== */
 
 .mdc-toolbar {
 	display: flex;
@@ -71,18 +104,12 @@ a:active {
 	margin: 0 0 0 16px;
 }
 
-.mdc-code-example {
-	display: flex;
-	flex-direction: column;	
-	justify-content: center;
-	align-items: center;
-	padding: 24px;
-}
+/* ==========================================================================
+   Adjust Snackbar
+   ========================================================================== */
 
-.mdc-code {
-	flex: one;
-	width: 100%;
-	text-align: left;
+.mdc-snackbar {
+	z-index: 1;		
 }
 
 /* ==========================================================================
@@ -382,8 +409,26 @@ a:active {
 	bottom: 1rem;
 	right: 1rem;
 	z-index: 1;
+	
+    transition: bottom 0.5s;
 }
 
+/* ---------------------
+   Ajust for Snackbars
+   ---------------------  */
+@media (max-width: 599px) {
+
+	.mdc-snackbar--multiline.mdc-snackbar--active ~ .mdc-fab--fixed {		
+		bottom: calc(1rem + 80px);
+		transition: bottom 0.25s;
+	}
+
+	.mdc-snackbar--active ~ .mdc-fab--fixed {	
+		bottom: calc(1rem + 48px);
+		transition: bottom 0.25s;    
+	}
+	
+}
 
 @media ( min-width : 1024px) {
 	.mdc-fab--fixed {
