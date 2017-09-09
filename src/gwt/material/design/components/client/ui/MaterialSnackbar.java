@@ -18,7 +18,7 @@ import gwt.material.design.components.client.ui.html.Div;
 
 public class MaterialSnackbar extends MaterialWidget implements HasText {
 
-	protected JavaScriptObject javaScriptComponent;
+	protected JavaScriptObject jsElement;
 
 	protected static native JavaScriptObject jsInit(final Element element)/*-{
 		return $wnd.mdc.snackbar.MDCSnackbar.attachTo(element);
@@ -57,7 +57,7 @@ public class MaterialSnackbar extends MaterialWidget implements HasText {
 			add(text);
 			add(actionWrapper);
 
-			javaScriptComponent = jsInit(getElement());
+			jsElement = jsInit(getElement());
 
 			initialized = true;
 		}
@@ -67,7 +67,7 @@ public class MaterialSnackbar extends MaterialWidget implements HasText {
 	protected native void show(final String text, final String actionText, final boolean actionOnBottom, final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::javaScriptComponent;
+		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
 		
 		var _action = null;
 		
@@ -91,12 +91,12 @@ public class MaterialSnackbar extends MaterialWidget implements HasText {
 	}-*/;
 	
 	public native void setDismissesOnAction(final boolean dismissesOnAction) /*-{
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::javaScriptComponent;
+		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 
 	public native boolean isDismissesOnAction() /*-{
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::javaScriptComponent;
+		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 	

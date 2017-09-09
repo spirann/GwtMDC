@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -12,6 +11,7 @@ import gwt.material.design.components.client.base.HasScrollable;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.HtmlElements;
@@ -30,16 +30,18 @@ public class MaterialDialog extends MaterialWidget
 		implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize DIALOG
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(Element element)/*-{		
-		return $wnd.mdc.dialog.MDCDialog.attachTo(element);
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement = $wnd.mdc.dialog.MDCDialog.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Dialog
 	// /////////////////////////////////////////////////////////////
-	private JavaScriptObject dialog;
 	protected Div surface = new Div(CssName.MDC_DIALOG_SURFACE);
 	protected Header header = new Header(CssName.MDC_DIALOG_HEADER);
 	protected H2 headerTitle = new H2(CssName.MDC_DIALOG_HEADER_TITLE) {
@@ -66,8 +68,10 @@ public class MaterialDialog extends MaterialWidget
 	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialDialog> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
 	protected final AttributeMixin<MaterialDialog> ariaLabelledbyMixin = new AttributeMixin<>(this, "aria-labelledby");
-	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this, "aria-describedby");
-	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG_BODY_SCROLLABLE);
+	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this,
+			"aria-describedby");
+	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body,
+			CssName.MDC_DIALOG_BODY_SCROLLABLE);
 
 	private HandlerRegistration handler;
 
@@ -102,9 +106,9 @@ public class MaterialDialog extends MaterialWidget
 			super.add(surface);
 			super.add(backdrop);
 
-			addAcceptEvent(getElement());
-			addCancelEvent(getElement());
-			dialog = jsInit(getElement());
+			initializeAcceptEventListener();
+			initializeCancelEventListener();
+			jsInit();
 
 		}
 
@@ -176,46 +180,37 @@ public class MaterialDialog extends MaterialWidget
 	}
 
 	@Override
-	public boolean isOpen() {
-		return isOpen(dialog);
-	}
-
-	@Override
-	public void open() {
-		show(dialog);
-	}
-
-	@Override
-	public void close() {
-		close(dialog);
-	}
-
-	protected native boolean isOpen(final JavaScriptObject dialog)/*-{
+	public native boolean isOpen()/*-{
+		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
 		return dialog && dialog.open;
 	}-*/;
 
-	protected native void show(final JavaScriptObject dialog)/*-{
+	@Override
+	public native void open()/*-{
+		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
 		dialog.show();
 	}-*/;
 
-	protected native void close(final JavaScriptObject dialog)/*-{
+	@Override
+	public native void close()/*-{
+		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
 		dialog.close();
 	}-*/;
 
-	protected native void addAcceptEvent(final Element element)/*-{
+	protected native void initializeAcceptEventListener()/*-{
 		var _this = this;
-		element.addEventListener('MDCDialog:accept', fireEvent);
-		function fireEvent() {
+		var element = _this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
+		element.addEventListener('MDCDialog:accept', function () {
 			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireAcceptEvent()();
-		}
+		});
 	}-*/;
 
-	protected native void addCancelEvent(final Element element)/*-{
+	protected native void initializeCancelEventListener()/*-{
 		var _this = this;
-		element.addEventListener('MDCDialog:cancel', fireEvent);
-		function fireEvent() {
+		var element = _this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
+		element.addEventListener('MDCDialog:cancel', function () {
 			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireCancelEvent()();
-		}
+		});
 	}-*/;
 
 	protected void fireAcceptEvent() {
@@ -267,6 +262,10 @@ public class MaterialDialog extends MaterialWidget
 	public boolean isAcceptEnabled() {
 		return accept.isEnabled();
 	}
+	
+	public void setAcceptType(final ButtonType type){
+		accept.setType(type);
+	}
 
 	public void setCancelText(final String text) {
 		cancel.setText(text);
@@ -289,27 +288,31 @@ public class MaterialDialog extends MaterialWidget
 	public boolean isCancelEnabled() {
 		return cancel.isEnabled();
 	}
+	
+	public void setCancelType(final ButtonType type){
+		cancel.setType(type);
+	}
 
 	@Override
 	public void setPadding(int padding) {
 		body.setPadding(padding);
 	}
-	
+
 	@Override
 	public void setPaddingBottom(int paddingBottom) {
 		body.setPaddingBottom(paddingBottom);
 	}
-	
+
 	@Override
 	public void setPaddingLeft(int paddingLeft) {
 		body.setPaddingLeft(paddingLeft);
 	}
-	
+
 	@Override
 	public void setPaddingRight(int paddingRight) {
 		body.setPaddingRight(paddingRight);
 	}
-	
+
 	@Override
 	public void setPaddingTop(int paddingTop) {
 		body.setPaddingTop(paddingTop);

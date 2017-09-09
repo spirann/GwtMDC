@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
@@ -22,11 +21,12 @@ import gwt.material.design.components.client.ui.html.Label;
 public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText, HasIndeterminate {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	private JavaScriptObject jsElement;
+	protected JavaScriptObject jsElement;
 
-	public native void jsInit(Element element)/*-{
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialCheckbox::getElement()();
 		this.@gwt.material.design.components.client.ui.MaterialCheckbox::jsElement = $wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
 	}-*/;
 
@@ -35,13 +35,9 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
 	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
-	protected Div divBackground = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
-	protected MaterialSvg svgCheckmark = new MaterialSvg();
-	protected Div divMixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
-
-	// /////////////////////////////////////////////////////////////
-	// Label
-	// /////////////////////////////////////////////////////////////
+	protected Div background = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
+	protected MaterialSvg checkmark = new MaterialSvg();
+	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
 	protected Label label = new Label();
 
 	// /////////////////////////////////////////////////////////////
@@ -64,20 +60,20 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 		if (!initialized) {
 
-			svgCheckmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
+			checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
 
-			divBackground.add(svgCheckmark);
-			divBackground.add(divMixedmark);
+			background.add(checkmark);
+			background.add(mixedmark);
 
 			checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
 			checkbox.add(input);
-			checkbox.add(divBackground);
+			checkbox.add(background);
 
 			add(checkbox);
 			add(label);
 
-			jsInit(checkbox.getElement());
-			svgCheckmark.setFillColor(Color.MDC_THEME_SECONDARY);
+			jsInit();
+			checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
 
 			initialized = true;
 

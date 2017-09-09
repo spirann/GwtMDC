@@ -8,9 +8,9 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialFormField<T> extends MaterialWidget implements HasValue<T> {
+public class MaterialFormField<T> extends Div implements HasValue<T> {
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -20,8 +20,12 @@ public class MaterialFormField<T> extends MaterialWidget implements HasValue<T> 
 		this(CssName.MDC_FORM_FIELD);
 	}
 	
-	protected MaterialFormField(final String cssClass) {
-		super(HtmlElements.DIV.createElement(), cssClass);
+	protected MaterialFormField(final String primaryClass) {
+		super(primaryClass);
+	}
+	
+	public MaterialFormField(final String primaryClass, final String ... initialClasses) {
+		super(primaryClass, initialClasses);
 	}
 	
 	@Override

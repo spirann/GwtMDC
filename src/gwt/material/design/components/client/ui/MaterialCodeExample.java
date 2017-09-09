@@ -1,15 +1,12 @@
 package gwt.material.design.components.client.ui;
 
-
-
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Pre;
 
-public class MaterialCodeExample extends MaterialWidget  {
+public class MaterialCodeExample extends Pre {
 
 	public MaterialCodeExample() {
-		super(HtmlElements.PRE.createElement(), CssName.PRISM_LANGUAGE_MARKUP, CssName.MDC_CODE_EXAMPLE);
+		super(CssName.PRISM_LANGUAGE_MARKUP, CssName.MDC_CODE_EXAMPLE);
 	}
 
 }

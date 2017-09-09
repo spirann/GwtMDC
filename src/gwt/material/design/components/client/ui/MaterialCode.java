@@ -1,31 +1,27 @@
 package gwt.material.design.components.client.ui;
 
-
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CodeType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Code;
 
 public class MaterialCode extends MaterialWidget implements HasType<CodeType>, HasText {
 
-	public static native void highlightAll()/*-{
-		$wnd.Prism.highlightAll();
-	}-*/;
+	protected Code code = new Code();
 
-	protected CodeType type;
-
-	protected Element code = HtmlElements.CODE.createElement();
-
+	protected final TypeMixin<Code, CodeType> typeMixin = new TypeMixin<>(code);	
+	
 	private boolean initialized = false;
 
 	public MaterialCode() {
 		super(HtmlElements.PRE.createElement(), CssName.PRISM_LANGUAGE_MARKUP, CssName.MDC_CODE);
-		getElement().appendChild(code);
+		add(code);
 	}
 
 	@Override
@@ -34,7 +30,7 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 
 		if (!initialized) {
 
-			if (type == null) {
+			if (getType() == null) {
 				setType(CodeType.XML);
 			}
 
@@ -44,6 +40,10 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 		highlight();
 	}
 
+	public native void highlightAll()/*-{
+		$wnd.Prism.highlightAll();
+	}-*/;
+
 	private void highlight() {
 		if (initialized) {
 			highlightAll();
@@ -52,12 +52,12 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 
 	@Override
 	public String getText() {
-		return code.getInnerText();
+		return code.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		code.setInnerText(text);
+		code.setText(text);
 		highlight();
 	}
 
@@ -67,19 +67,12 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 
 	@Override
 	public void setType(CodeType type) {
-
-		if (this.type != null) {
-			code.removeClassName(type.getCssName());
-		}
-
-		this.type = type;
-		code.addClassName(type.getCssName());
-
+		typeMixin.setType(type);
 		highlight();
 	}
 
 	@Override
 	public CodeType getType() {
-		return type;
+		return typeMixin.getType();
 	}
 }
