@@ -1,18 +1,18 @@
 package gwt.material.design.components.client.ui.html;
 
-
-
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.HtmlElements;
 
-public class Span extends MaterialWidget {
+public class Span extends Text {
 
-	public Span(){
+	public Span() {
 		super(HtmlElements.SPAN.createElement());
 	}
-	
-	public Span(final String cssClass) {
-		super(HtmlElements.SPAN.createElement(), cssClass);
+
+	public Span(final String primaryClass) {
+		super(HtmlElements.SPAN.createElement(), primaryClass);
 	}
 	
+	public Span(final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.SPAN.createElement(), primaryClass, initialClasses);
+	}
 }

@@ -14,11 +14,15 @@ public class Div extends MaterialWidget implements HasToolbarFixedAdjust{
 			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
 	
 	public Div(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_TYPOGRAPHY);
+		super(HtmlElements.DIV.createElement());
 	}
 	
-	public Div(final String cssClass) {
-		super(HtmlElements.DIV.createElement(), cssClass);
+	public Div(final String primaryClass) {
+		super(HtmlElements.DIV.createElement(), primaryClass);
+	}
+	
+	public Div(final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.DIV.createElement(), primaryClass, initialClasses);
 	}
 
 	@Override

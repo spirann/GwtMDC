@@ -8,8 +8,12 @@ public class Section extends MaterialWidget {
 	public Section() {
 		super(HtmlElements.SECTION.createElement());
 	}
-
-	public Section(final String cssClass) {
-		super(HtmlElements.SECTION.createElement(), cssClass);
+	
+	public Section(final String primaryClass) {
+		super(HtmlElements.SECTION.createElement(), primaryClass);
+	}
+	
+	public Section(final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.SECTION.createElement(), primaryClass, initialClasses);
 	}
 }

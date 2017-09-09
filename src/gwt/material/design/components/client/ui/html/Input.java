@@ -5,7 +5,6 @@ import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.InputTypeMixin;
 import gwt.material.design.components.client.base.mixin.NameMixin;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.InputType;
 
@@ -16,7 +15,7 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 	private final NameMixin<Input> nameMixin = new NameMixin<Input>(this);
 
 	public Input() {
-		super(HtmlElements.INPUT.createElement(), CssName.MDC_TYPOGRAPHY);
+		super(HtmlElements.INPUT.createElement());
 	}
 
 	public Input(final InputType type) {
@@ -24,13 +23,22 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 		setType(type);
 	}
 
-	public Input(final InputType type, final String cssClass) {
-		super(HtmlElements.INPUT.createElement(), cssClass, CssName.MDC_TYPOGRAPHY);
+	public Input(final InputType type, final String primaryClass) {
+		super(HtmlElements.INPUT.createElement(), primaryClass);
+		setType(type);
+	}
+	
+	public Input(final InputType type, final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.INPUT.createElement(), primaryClass, initialClasses);
 		setType(type);
 	}
 
-	public Input(final String cssClass) {
-		super(HtmlElements.INPUT.createElement(), cssClass, CssName.MDC_TYPOGRAPHY);
+	public Input(final String primaryClass) {
+		super(HtmlElements.INPUT.createElement(), primaryClass);
+	}
+	
+	public Input(final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.INPUT.createElement(), primaryClass, initialClasses);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -23,8 +24,10 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	// Initialize Checkbox
 	// /////////////////////////////////////////////////////////////
-	public static native void jsInit(Element element)/*-{
-		return $wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
+	private JavaScriptObject jsElement;
+
+	public native void jsInit(Element element)/*-{
+		this.@gwt.material.design.components.client.ui.MaterialCheckbox::jsElement = $wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -144,7 +147,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
 	}
-	
+
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return checkbox.addClickHandler(handler);

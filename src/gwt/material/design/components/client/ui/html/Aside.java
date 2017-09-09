@@ -11,8 +11,12 @@ public class Aside extends MaterialWidget {
 		super(HtmlElements.ASIDE.createElement());
 	}
 	
-	public Aside(final String cssClass) {
-		super(HtmlElements.ASIDE.createElement(), cssClass);
+	public Aside(final String primaryClass) {
+		super(HtmlElements.ASIDE.createElement(), primaryClass);
+	}
+	
+	public Aside(final String primaryClass, final String ... initialClasses) {
+		super(HtmlElements.ASIDE.createElement(), primaryClass, initialClasses);
 	}
 	
 }

@@ -4,25 +4,23 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Button;
 
-public class MaterialButton extends MaterialWidget implements HasType<ButtonType>, HasHref, HasText {
+public class MaterialButton extends Button implements HasType<ButtonType>, HasHref, HasText {
 
 	protected final TextMixin<MaterialButton> textMixin = new TextMixin<>(this);
-	protected final AttributeMixin<MaterialButton> hrefMixin = new AttributeMixin<>(this, "href");
-	protected final AttributeMixin<MaterialButton> targetMixin = new AttributeMixin<>(this, "target");
+	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialized = false;
 
 	public MaterialButton() {
-		super(HtmlElements.BUTTON.createElement(), CssName.MDC_BUTTON);
+		super(CssName.MDC_BUTTON);
 	}
 
 	@Override
@@ -52,22 +50,22 @@ public class MaterialButton extends MaterialWidget implements HasType<ButtonType
 
 	@Override
 	public void setHref(String href) {
-		hrefMixin.setAttribute(href);
+		hrefMixin.setHref(href);
 	}
 
 	@Override
 	public String getHref() {
-		return hrefMixin.getAttribute();
+		return hrefMixin.getHref();
 	}
 
 	@Override
 	public void setTarget(String target) {
-		targetMixin.setAttribute(target);
+		hrefMixin.setTarget(target);
 	}
 
 	@Override
 	public String getTarget() {
-		return targetMixin.getAttribute();
+		return hrefMixin.getTarget();
 	}
 
 	@Override

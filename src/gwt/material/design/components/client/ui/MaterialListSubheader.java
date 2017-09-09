@@ -2,13 +2,11 @@ package gwt.material.design.components.client.ui;
 
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.ui.html.H3;
 
-public class MaterialListSubheader extends Label {
+public class MaterialListSubheader extends H3 {
 
 	public MaterialListSubheader() {
-		super(HtmlElements.H3.createElement());
-		setInitialClasses(CssName.MDC_LIST_GROUP_SUBHEADER);
+		super(CssName.MDC_LIST_GROUP_SUBHEADER);
 	}
 }

@@ -1,29 +1,19 @@
 package gwt.material.design.components.client.ui.html;
 
-
-
-import gwt.material.design.components.client.base.HasToolbarFixedAdjust;
 import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 
-public class Main extends MaterialWidget implements HasToolbarFixedAdjust{
+public class Main extends MaterialWidget {
 
-	private final StyleEnabledMixin<Main> toolbarFixedAdjustMixin = new StyleEnabledMixin<>(
-			this, CssName.MDC_TOOLBAR_FIXED_ADJUST);
-	
-	public Main(){
-		super(HtmlElements.MAIN.createElement(), CssName.MDC_TYPOGRAPHY);
+	public Main() {
+		super(HtmlElements.MAIN.createElement());
 	}
 
-	@Override
-	public void setToolbarFixedAdjust(boolean toolbarFixedAdjust) {
-		toolbarFixedAdjustMixin.setEnabled(toolbarFixedAdjust);
+	public Main(final String primaryClass) {
+		super(HtmlElements.MAIN.createElement(), primaryClass);
 	}
 
-	@Override
-	public boolean isToolbarFixedAdjust() {
-		return toolbarFixedAdjustMixin.isEnabled();
+	public Main(final String primaryClass, final String... initialClasses) {
+		super(HtmlElements.MAIN.createElement(), primaryClass, initialClasses);
 	}
 }
