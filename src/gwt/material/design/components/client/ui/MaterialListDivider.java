@@ -1,25 +1,22 @@
 package gwt.material.design.components.client.ui;
 
-
-
 import gwt.material.design.components.client.base.HasInset;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialListDivider extends MaterialWidget implements HasInset {
+public class MaterialListDivider extends Div implements HasInset {
 
 	protected final ApplyStyleMixin<MaterialListDivider> insetMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_LIST_DIVIDER_INSET);
-	
-	public MaterialListDivider(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_LIST_DIVIDER);
+
+	public MaterialListDivider() {
+		super(CssName.MDC_LIST_DIVIDER);
 		setRole(Role.SEPARATOR);
 	}
-	
-	public MaterialListDivider(final boolean inset){
+
+	public MaterialListDivider(final boolean inset) {
 		this();
 		setInset(inset);
 	}
@@ -33,5 +30,5 @@ public class MaterialListDivider extends MaterialWidget implements HasInset {
 	public boolean isInset() {
 		return insetMixin.isApplied();
 	}
-	
+
 }

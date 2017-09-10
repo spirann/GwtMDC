@@ -8,25 +8,24 @@ import gwt.material.design.components.client.base.HasAcceptHandlers;
 import gwt.material.design.components.client.base.HasCancelHandlers;
 import gwt.material.design.components.client.base.HasOpen;
 import gwt.material.design.components.client.base.HasScrollable;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.AcceptEvent;
 import gwt.material.design.components.client.events.CancelEvent;
 import gwt.material.design.components.client.handlers.AcceptHandler;
 import gwt.material.design.components.client.handlers.CancelHandler;
+import gwt.material.design.components.client.ui.html.Aside;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Footer;
 import gwt.material.design.components.client.ui.html.H2;
 import gwt.material.design.components.client.ui.html.Header;
 import gwt.material.design.components.client.ui.html.Section;
 
-public class MaterialDialog extends MaterialWidget
+public class MaterialDialog extends Aside
 		implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
 
 	// /////////////////////////////////////////////////////////////
@@ -78,7 +77,7 @@ public class MaterialDialog extends MaterialWidget
 	private boolean initialized = false;
 
 	public MaterialDialog() {
-		super(HtmlElements.ASIDE.createElement(), CssName.MDC_DIALOG);
+		super(CssName.MDC_DIALOG);
 		setRole(Role.ALERT_DIALOG);
 	}
 
@@ -266,6 +265,10 @@ public class MaterialDialog extends MaterialWidget
 	public void setAcceptType(final ButtonType type){
 		accept.setType(type);
 	}
+	
+	public ButtonType getAcceptType(){
+		return accept.getType();
+	}
 
 	public void setCancelText(final String text) {
 		cancel.setText(text);
@@ -291,6 +294,10 @@ public class MaterialDialog extends MaterialWidget
 	
 	public void setCancelType(final ButtonType type){
 		cancel.setType(type);
+	}
+	
+	public ButtonType getCancelType(){
+		return cancel.getType();
 	}
 
 	@Override

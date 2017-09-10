@@ -1,15 +1,12 @@
 package gwt.material.design.components.client.ui;
 
-
-
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialToolbarRow extends MaterialWidget{
+public class MaterialToolbarRow extends Div {
 
-	public MaterialToolbarRow(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_TOOLBAR_ROW);
+	public MaterialToolbarRow() {
+		super(CssName.MDC_TOOLBAR_ROW);
 	}
-	
+
 }

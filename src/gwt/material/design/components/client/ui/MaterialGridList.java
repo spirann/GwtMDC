@@ -2,7 +2,6 @@ package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.HasAspectRatio;
 import gwt.material.design.components.client.base.HasCaptionContent;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
 import gwt.material.design.components.client.base.mixin.CaptionSettingMixin;
 import gwt.material.design.components.client.constants.AspectRatio;
@@ -10,15 +9,15 @@ import gwt.material.design.components.client.constants.CaptionIconPosition;
 import gwt.material.design.components.client.constants.CaptionPosition;
 import gwt.material.design.components.client.constants.CaptionType;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialGridList extends MaterialWidget implements HasCaptionContent, HasAspectRatio {	
+public class MaterialGridList extends Div implements HasCaptionContent, HasAspectRatio {	
 	
 	protected final CaptionSettingMixin<MaterialGridList> captionSettingMixin = new CaptionSettingMixin<MaterialGridList>(this);
 	protected final AspectRatioMixin<MaterialGridList> aspectRatioMixin = new AspectRatioMixin<MaterialGridList>(this, CssName.MDC_GRID_LIST_TILE_ASPECT);
 	
 	public MaterialGridList(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_GRID_LIST);
+		super(CssName.MDC_GRID_LIST);
 	}
 	
 	@Override

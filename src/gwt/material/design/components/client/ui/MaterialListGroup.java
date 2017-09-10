@@ -1,15 +1,12 @@
 package gwt.material.design.components.client.ui;
 
-
-
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialListGroup extends MaterialWidget{
+public class MaterialListGroup extends Div {
 
-	public MaterialListGroup(){
-		super(HtmlElements.DIV.createElement(), CssName.MDC_LIST_GROUP);
+	public MaterialListGroup() {
+		super(CssName.MDC_LIST_GROUP);
 	}
-	
+
 }

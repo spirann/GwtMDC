@@ -1,8 +1,5 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
-
 import gwt.material.design.components.client.base.MaterialDrawerBase;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
@@ -11,12 +8,13 @@ import gwt.material.design.components.client.ui.html.Nav;
 public class MaterialDrawerPersistent extends MaterialDrawerBase {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Drawer
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(Element element)/*-{
-		return $wnd.mdc.drawer.MDCPersistentDrawer.attachTo(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialDrawerPersistent::getElement()();
+		this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement = $wnd.mdc.drawer.MDCPersistentDrawer.attachTo(element);
 	}-*/;
-	
+
 	protected Nav nav = new Nav(CssName.MDC_PERSISTENT_DRAWER_DRAWER);
 
 	private boolean initialized = false;
@@ -33,20 +31,22 @@ public class MaterialDrawerPersistent extends MaterialDrawerBase {
 
 			nav.add(content);
 			super.add(nav, getElement());
-			
-			drawer = jsInit(getElement());
+
+			jsInit();
 
 			initialized = true;
 		}
 	}
 
 	@Override
-	protected native boolean isOpen(final JavaScriptObject drawer)/*-{
-		return drawer.open;
+	public native boolean isOpen()/*-{
+		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		return drawer && drawer.open;
 	}-*/;
 
 	@Override
-	protected native void setOpen(final JavaScriptObject drawer, boolean open)/*-{
+	protected native void setNativeOpen(boolean open)/*-{
+		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
 		drawer.open = open;
 	}-*/;
 

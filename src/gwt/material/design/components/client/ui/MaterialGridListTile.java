@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Element;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
@@ -10,38 +10,36 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasImage;
 import gwt.material.design.components.client.base.HasSupportText;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Li;
+import gwt.material.design.components.client.ui.html.Span;
 
-public class MaterialGridListTile extends MaterialWidget implements HasIcon, HasCaption, HasSupportText, HasImage {
+public class MaterialGridListTile extends Li implements HasIcon, HasCaption, HasSupportText, HasImage {
 
-	public static native void jsInit(Element element)/*-{
-		return $wnd.mdc.gridList.MDCGridList.attachTo(element);
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialGridListTile::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialGridListTile::jsElement = $wnd.mdc.gridList.MDCGridList.attachTo(element);
 	}-*/;
 
-	protected MaterialWidget primary = new MaterialWidget(HtmlElements.DIV.createElement(), 
-			CssName.MDC_GRID_TILE_PRIMARY, CssName.MDC_TYPOGRAPHY);
-
-	protected MaterialImage image = new MaterialImage();
-	
-	protected MaterialWidget secondary = new MaterialWidget(HtmlElements.SPAN.createElement(),
-			CssName.MDC_GRID_TILE_SECONDARY);
-
-	protected MaterialIcon icon = new MaterialIcon();
-	
-	protected MaterialWidget caption = new MaterialWidget(HtmlElements.SPAN.createElement(), 
-			CssName.MDC_GRID_TILE_TITLE, CssName.MDC_TYPOGRAPHY);
-
-	protected MaterialWidget supportText = new MaterialWidget(HtmlElements.SPAN.createElement(),
-			CssName.MDC_GRID_TILE_SUPPORT_TEXT, CssName.MDC_TYPOGRAPHY);
+	protected Div primary = new Div(CssName.MDC_GRID_TILE_PRIMARY, CssName.MDC_TYPOGRAPHY);
+	protected MaterialImage image = new MaterialImage();	
+	protected Span secondary = new Span(CssName.MDC_GRID_TILE_SECONDARY);
+	protected MaterialIcon icon = new MaterialIcon();	
+	protected Span caption = new Span(CssName.MDC_GRID_TILE_TITLE, CssName.MDC_TYPOGRAPHY);
+	protected Span supportText = new Span(CssName.MDC_GRID_TILE_SUPPORT_TEXT, CssName.MDC_TYPOGRAPHY);
 
 	private boolean initialize = false;
 
 	public MaterialGridListTile() {
-		super(HtmlElements.LI.createElement(), CssName.MDC_GRID_TILE);
+		super(CssName.MDC_GRID_TILE);
 	}
 
 	@Override
@@ -66,7 +64,7 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 			secondary.add(caption);
 			secondary.add(supportText);
 
-			jsInit(getElement());
+			jsInit();
 			
 			initialize = true;
 		}
@@ -85,11 +83,6 @@ public class MaterialGridListTile extends MaterialWidget implements HasIcon, Has
 
 	@Override
 	public IconType getIcon() {
-
-		if (icon == null) {
-			return null;
-		}
-
 		return icon.getType();
 	}
 

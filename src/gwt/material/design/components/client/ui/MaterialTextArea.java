@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
@@ -25,16 +24,20 @@ public class MaterialTextArea extends MaterialFormField<String>
 		implements HasText, HasLabel, HasDense, HasRequired, HasHelpText, HasPlaceholder {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.textfield.MDCTextfield.attachTo(element);
-	}-*/;
+	protected JavaScriptObject jsElement;
 
+	protected native void jsInit()/*-{
+		var textField = this.@gwt.material.design.components.client.ui.MaterialTextArea::textField;
+		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialTextArea::jsElement = $wnd.mdc.textfield.MDCTextfield.attachTo(element);
+	}-*/;
+	
 	// /////////////////////////////////////////////////////////////
 	// Textarea
 	// /////////////////////////////////////////////////////////////
-	protected Div textField = new Div(CssName.MDC_TEXTFIELD + " " + CssName.MDC_TEXTFIELD_MULTILINE);
+	protected Div textField = new Div(CssName.MDC_TEXTFIELD, CssName.MDC_TEXTFIELD_MULTILINE);
 	protected Textarea textarea = new Textarea(CssName.MDC_TEXTFIELD_INPUT);
 
 	// /////////////////////////////////////////////////////////////
@@ -88,7 +91,7 @@ public class MaterialTextArea extends MaterialFormField<String>
 			add(textField);
 			add(helper);
 
-			jsInit(textField.getElement());
+			jsInit();
 
 			initialized = true;
 
@@ -106,25 +109,28 @@ public class MaterialTextArea extends MaterialFormField<String>
 		return textarea.getId();
 	}
 
-	@Override
-	public void setValue(String value, boolean fireEvents) {
-		setValue(textarea.getElement(), value);
-		if (fireEvents) {
-			fireChangeEvent();
-		}
-	}
+	 
 
 	@Override
-	public String getValue() {
-		return getValue(textarea.getElement());
-	}
-
-	protected native String getValue(Element element)/*-{
+	public native String getValue()/*-{		
+		
+		var textarea = this.@gwt.material.design.components.client.ui.MaterialTextArea::textarea;
+		var element = textarea.@gwt.material.design.components.client.ui.html.Div::getElement()();		
 		return element.value;
+		
 	}-*/;
 
-	protected native void setValue(Element element, String value)/*-{
+	@Override
+	public native void setValue(String value, boolean fireEvents)/*-{
+		
+		var textarea = this.@gwt.material.design.components.client.ui.MaterialTextArea::textarea;
+		var element = textarea.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		element.value = value;
+		
+		if(fireEvents){
+			this.@gwt.material.design.components.client.ui.MaterialTextArea::fireChangeEvent()();
+		}
+		
 	}-*/;
 
 	@Override

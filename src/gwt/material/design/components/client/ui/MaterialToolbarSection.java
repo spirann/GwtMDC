@@ -1,23 +1,19 @@
 package gwt.material.design.components.client.ui;
 
-
-
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
 import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssType;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.html.Section;
 import gwt.material.design.components.client.utils.helper.EnumHelper;
 
-public class MaterialToolbarSection extends MaterialWidget {
+public class MaterialToolbarSection extends Section {
 
 	public enum Align implements CssType {
 
-		START(CssName.MDC_TOOLBAR_SECTION_ALIGN_START), 
-		CENTER(CssName.MDC_TOOLBAR_SECTION_ALIGN_CENTER), 
-		END(CssName.MDC_TOOLBAR_SECTION_ALIGN_END);
+		START(CssName.MDC_TOOLBAR_SECTION_ALIGN_START), CENTER(CssName.MDC_TOOLBAR_SECTION_ALIGN_CENTER), END(
+				CssName.MDC_TOOLBAR_SECTION_ALIGN_END);
 
 		private final String cssClass;
 
@@ -36,11 +32,11 @@ public class MaterialToolbarSection extends MaterialWidget {
 	};
 
 	protected final StyleMixin<MaterialToolbarSection> alignMixin = new StyleMixin<>(this);
-	protected final StyleEnabledMixin<MaterialToolbarSection> shrinkToFitMixin = new StyleEnabledMixin<>(
-			this, CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
+	protected final StyleEnabledMixin<MaterialToolbarSection> shrinkToFitMixin = new StyleEnabledMixin<>(this,
+			CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
 
 	public MaterialToolbarSection() {
-		super(HtmlElements.SECTION.createElement(), CssName.MDC_TOOLBAR_SECTION);
+		super(CssName.MDC_TOOLBAR_SECTION);
 		setRole(Role.TOOLBAR);
 	}
 

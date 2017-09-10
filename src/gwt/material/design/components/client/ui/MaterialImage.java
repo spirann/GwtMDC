@@ -31,16 +31,15 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasCaption;
 
 import gwt.material.design.components.client.base.HasImage;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Img;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialImage extends MaterialWidget implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
+public class MaterialImage extends Img implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
 
 	protected final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
 
@@ -48,7 +47,7 @@ public class MaterialImage extends MaterialWidget implements HasCaption, HasImag
 	 * Creates an empty image.
 	 */
 	public MaterialImage() {
-		super(HtmlElements.IMG.createElement());
+		super();
 	}
 
 	/**

@@ -2,31 +2,31 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.Scheduler;
-import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.ToolbarType;
+import gwt.material.design.components.client.ui.html.Header;
 
-public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarType> {
+public class MaterialToolbar extends Header implements HasType<ToolbarType> {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize toolbar
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject toolbar;
-	protected static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.toolbar.MDCToolbar.attachTo(element);	
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialToolbar::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialToolbar::jsElement = $wnd.mdc.toolbar.MDCToolbar.attachTo(element);
 	}-*/;
-
+		
 	protected final TypeMixin<MaterialToolbar, ToolbarType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialize = false;
 
 	public MaterialToolbar() {
-		super(HtmlElements.HEADER.createElement(), CssName.MDC_TOOLBAR);
+		super(CssName.MDC_TOOLBAR);
 	}
 
 	@Override
@@ -35,18 +35,19 @@ public class MaterialToolbar extends MaterialWidget implements HasType<ToolbarTy
 
 		if (!initialize) {			
 			
-			toolbar = jsInit(getElement());			
+			jsInit();			
 			
 			initialize = true;
 			
 			Scheduler.get().scheduleFixedDelay(() -> {				
-				fixedAdjustElement(toolbar);				
+				fixedAdjustElement();				
 				return false;				
-			}, 500);
+			}, 100);
 		}
 	}
 	
-	protected static native void fixedAdjustElement(final JavaScriptObject toolbar)/*-{
+	protected native void fixedAdjustElement()/*-{
+		var toolbar = this.@gwt.material.design.components.client.ui.MaterialToolbar::jsElement
 		toolbar.fixedAdjustElement = $doc.querySelector('.mdc-toolbar-fixed-adjust');
 	}-*/;
 	

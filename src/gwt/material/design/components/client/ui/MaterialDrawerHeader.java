@@ -2,19 +2,18 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Header;
 
-public class MaterialDrawerHeader extends MaterialWidget {
+public class MaterialDrawerHeader extends Header {
 
 	protected Div headerContent = new Div(CssName.MDC_TEMPORARY_DRAWER_HEADER_CONTENT);
 
 	private boolean initialized = false;
 
 	public MaterialDrawerHeader() {
-		super(HtmlElements.HEADER.createElement(), CssName.MDC_TEMPORARY_DRAWER_HEADER);
+		super(CssName.MDC_TEMPORARY_DRAWER_HEADER);
 	}
 
 	@Override
@@ -32,5 +31,19 @@ public class MaterialDrawerHeader extends MaterialWidget {
 	public void add(Widget child) {
 		headerContent.add(child);
 	}
+	
+	@Override
+	public Widget getWidget(int index) {
+		return headerContent.getWidget(index);
+	}
 
+	@Override
+	public int getWidgetCount() {
+		return headerContent.getWidgetCount();
+	}
+	
+	@Override
+	public int getWidgetIndex(Widget child) {
+		return headerContent.getWidgetIndex(child);
+	}
 }

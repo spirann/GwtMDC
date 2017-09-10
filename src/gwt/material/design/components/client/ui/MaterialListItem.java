@@ -8,16 +8,16 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.ui.html.Li;
 
-public class MaterialListItem extends MaterialWidget implements HasHref, HasText, HasIcon {
+public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 
 	private MaterialIcon icon = new MaterialIcon();
 	private MaterialImage avatar = new MaterialImage();
@@ -29,14 +29,13 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 	// /////////////////////////////////////////////////////////////
 	private final TextMixin<Label> primaryTextMixin = new TextMixin<>(primaryText);
 	private final TextMixin<Label> secondaryTextMixin = new TextMixin<>(secondaryText);
-	private final AttributeMixin<MaterialListItem> hrefMixin = new AttributeMixin<>(this, "href");
-	private final AttributeMixin<MaterialListItem> targetMixin = new AttributeMixin<>(this, "target");
+	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
 
 	private boolean initialized = false;
 
 	public MaterialListItem() {
-		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM);
+		super(CssName.MDC_LIST_ITEM);
 	}
 
 	@Override
@@ -92,7 +91,7 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 	@UiChild(tagname = "start")
 	public void addStartDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM_START_DETAIL, Appender.START);
-		if(prevent) {
+		if (prevent) {
 			prevent(widget.getElement());
 		}
 	}
@@ -100,24 +99,22 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 	@UiChild(tagname = "end")
 	public void addEndDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM_END_DETAIL, Appender.END);
-		if(prevent) {
+		if (prevent) {
 			prevent(widget.getElement());
 		}
 	}
 
 	private native void prevent(final Element element)/*-{
-		
+
 		var event = function(evt) {
 			evt.stopPropagation();
 			evt.cancelBubble = true;
 		};
-		
+
 		element.addEventListener('click', event);
 		element.addEventListener('mousedown', event);
 		element.addEventListener('pointerdown', event);
-		
-		
-		
+
 	}-*/;
 
 	@Override
@@ -142,22 +139,22 @@ public class MaterialListItem extends MaterialWidget implements HasHref, HasText
 
 	@Override
 	public void setHref(String href) {
-		hrefMixin.setAttribute(href);
+		hrefMixin.setHref(href);
 	}
 
 	@Override
 	public String getHref() {
-		return hrefMixin.getAttribute();
+		return hrefMixin.getHref();
 	}
 
 	@Override
 	public void setTarget(String target) {
-		targetMixin.setAttribute(target);
+		hrefMixin.setTarget(target);
 	}
 
 	@Override
 	public String getTarget() {
-		return targetMixin.getAttribute();
+		return hrefMixin.getTarget();
 	}
 
 	@Override

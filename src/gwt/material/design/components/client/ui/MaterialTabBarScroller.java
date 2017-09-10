@@ -1,50 +1,48 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.TabBarTextColor;
 import gwt.material.design.components.client.constants.TabBarType;
+import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialTabBarScroller extends MaterialWidget implements HasType<TabBarType>, HasChangeHandlers {
+public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, HasChangeHandlers {
 
-	protected JavaScriptObject javaScriptComponent;
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
 
-	protected static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.tabs.MDCTabBarScroller.attachTo(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::jsElement = $wnd.mdc.tabs.MDCTabBarScroller.attachTo(element);
 	}-*/;
 
-	protected Div scrollerBackIndicator = new Div(
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
-	protected MaterialWidget backIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(),
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
+	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR, CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
+	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
 
 	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME);
 	protected MaterialTabBar tabBar = new MaterialTabBar();
 
-	protected Div scrollerForwardIndicator = new Div(
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR + " " + CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
-	protected MaterialWidget forwardIndicatorInner = new MaterialWidget(HtmlElements.A.createElement(),
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
+	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR, CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
+	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
 	
 	protected final TypeMixin<MaterialTabBarScroller, TabBarTextColor> colorMixin = new TypeMixin<>(this);
 
 	private boolean initialized = false;
 
 	public MaterialTabBarScroller() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_TAB_BAR_SCROLLER);
+		super(CssName.MDC_TAB_BAR_SCROLLER);
 	}
 
 	@Override
@@ -68,7 +66,7 @@ public class MaterialTabBarScroller extends MaterialWidget implements HasType<Ta
 			super.add(scrollerFrame);
 			super.add(scrollerForwardIndicator);
 
-			javaScriptComponent = jsInit(getElement());
+			jsInit();
 
 			initialized = true;
 

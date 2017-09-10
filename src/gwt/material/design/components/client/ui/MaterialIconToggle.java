@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -9,22 +8,24 @@ import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.html.Icon;
 
-public class MaterialIconToggle extends MaterialWidget implements HasValue<Boolean> {
+public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Icon Toggle
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(Element element)/*-{
-		return $wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialIconToggle::jsElement = $wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
@@ -40,7 +41,7 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 	private boolean initialized = false;
 
 	public MaterialIconToggle() {
-		super(HtmlElements.I.createElement(), CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
+		super(CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
 		setRole(Role.BUTTON);
 		setDisabledClass(CssName.MDC_ICON_TOGGLE_DISABLED);
 		setRipple(Ripple.DEFAULT);
@@ -52,20 +53,20 @@ public class MaterialIconToggle extends MaterialWidget implements HasValue<Boole
 		super.onLoad();
 
 		if (!initialized) {
-			jsInit(getElement());
-			addChageEvent(getElement());
+			jsInit();
+			initializeChageEventListener();
 			updateColor();
 			initialized = true;
 		}
 	}
 
-	public native void addChageEvent(Element element)/*-{
+	public native void initializeChageEventListener()/*-{
 		var _this = this;
-		element.addEventListener('MDCIconToggle:change', displayDate);
-		function displayDate() {
+		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
+		element.addEventListener('MDCIconToggle:change', function () {
 			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
 			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
-		}
+		});
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {

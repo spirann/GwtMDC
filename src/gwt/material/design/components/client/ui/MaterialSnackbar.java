@@ -2,26 +2,27 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialSnackbar extends MaterialWidget implements HasText {
+public class MaterialSnackbar extends Div implements HasText {
 
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
 
-	protected static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.snackbar.MDCSnackbar.attachTo(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialSnackbar::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement = $wnd.mdc.snackbar.MDCSnackbar.attachTo(element);
 	}-*/;
 
 	protected Div text = new Div(CssName.MDC_SNACKBAR_TEXT);
@@ -32,18 +33,15 @@ public class MaterialSnackbar extends MaterialWidget implements HasText {
 	protected final ApplyStyleMixin<MaterialSnackbar> atStartMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_SNACKBAR_ALIGN_START);
 
-	private String actionText;
-	
-	private boolean multiline = false;
-	
-	private boolean actionOnBottom = false;
-	
-	private int timeout = 2750;
+	protected String actionText;	
+	protected boolean multiline = false;	
+	protected boolean actionOnBottom = false;	
+	protected int timeout = 2750;
 	
 	private boolean initialized = false;
 
 	public MaterialSnackbar() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_SNACKBAR);
+		super(CssName.MDC_SNACKBAR);
 	}
 
 	@Override
@@ -57,7 +55,7 @@ public class MaterialSnackbar extends MaterialWidget implements HasText {
 			add(text);
 			add(actionWrapper);
 
-			jsElement = jsInit(getElement());
+			jsInit();
 
 			initialized = true;
 		}

@@ -339,7 +339,7 @@ a:active {
 }
 
 .mdc-dialog__action {
-	color: var(--mdc-theme-secondary);
+	color: var(--mdc-theme-text-secondary-on-background);
 }
 
 /* ==========================================================================
@@ -677,52 +677,6 @@ a:active {
 	background-color: var(--mdc-theme-background, #fff);
 	border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(255,255,255,0.24));
 }
-
-/* ==========================================================================
-   Toolbar nav link
-   ========================================================================== */
-
-.toolbar-nav-link {
-	align-self: flex-end;
-	display: -webkit-box;
-	display: -ms-flexbox;
-	display: flex;
-	-webkit-box-align: center;
-	-ms-flex-align: center;
-	align-items: center;
-	
-	background: none;
-	border: none;
-	border-bottom: 2px solid transparent;
-	
-	cursor: pointer;
-		
-	font-family: Roboto Mono;
-	font-size: .875rem;	
-	letter-spacing: .04em;
-    line-height: 1.5rem;	
-	text-decoration: none;
-	text-transform: uppercase;
-	
-	margin: 0 0 -4px 0;
-	padding: 16px 14px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.toolbar-nav-link, .toolbar-nav-link:active, .toolbar-nav-link:hover,
-	.toolbar-nav-link:link, .toolbar-nav-link:visited {
-	color: var(--mdc-theme-text-primary-on-primary);
-	fill: var(--mdc-theme-text-primary-on-primary);
-}
-
-.toolbar-nav-link.active {
-	color: var(--mdc-theme-secondary);
-	border-bottom: 2px solid var(--mdc-theme-secondary);
-}
-
 
 /* ==========================================================================
    Configure Ripple background

@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.HasDiscrete;
@@ -22,12 +21,15 @@ public class MaterialSlider extends MaterialFormField<Double>
 		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	private boolean inputHandlerInitialized;
+	
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize Slider
-	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(final Element element)/*-{
-		return $wnd.mdc.slider.MDCSlider.attachTo(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialSlider::jsElement = $wnd.mdc.slider.MDCSlider.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
@@ -78,9 +80,9 @@ public class MaterialSlider extends MaterialFormField<Double>
 			slider.add(thumbContainer);
 			add(slider);
 
-			addChageEvent(getElement());
-			addInputEvent(getElement(), pinMarker.getElement());
-			jsInit(getElement());
+			initializeChageEventListener();
+			initializeInputEventListener();
+			jsInit();
 
 			initialized = true;
 
@@ -106,23 +108,27 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	}
 
-	protected native void addChageEvent(Element element)/*-{
+	protected native void initializeChageEventListener()/*-{
 		var _this = this;
-		element.addEventListener('MDCSlider:change', displayDate);
-		function displayDate() {
+		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
+		element.addEventListener('MDCSlider:change', function () {
 			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-		}
+		});
 	}-*/;
 
-	protected native void addInputEvent(Element element, Element pinMarker)/*-{
+	protected native void initializeInputEventListener()/*-{
 		var _this = this;
-		element.addEventListener('MDCSlider:input', displayDate);
-		function displayDate() {
-			pinMarker.innerText = parseFloat(
+		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
+		
+		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinMarker;
+		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
+		
+		element.addEventListener('MDCSlider:input', function () {
+			pinMarkerElement.innerText = parseFloat(
 					_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()())
 					.toFixed(0);
 			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-		}
+		});
 	}-*/;
 
 	@Override

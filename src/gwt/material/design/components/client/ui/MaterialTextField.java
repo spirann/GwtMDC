@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
@@ -29,10 +28,14 @@ public class MaterialTextField extends MaterialFormField<String>
 		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasHelpText, HasPlaceholder, HasType<InputType> {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize Checkbox
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject textfieldInit(Element element)/*-{
-		return $wnd.mdc.textfield.MDCTextfield.attachTo(element);
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var textField = this.@gwt.material.design.components.client.ui.MaterialTextField::textField;
+		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textfield.MDCTextfield.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -93,7 +96,7 @@ public class MaterialTextField extends MaterialFormField<String>
 			add(textField);
 			add(helper);
 
-			textfieldInit(textField.getElement());
+			jsInit();
 
 			initialized = true;
 
@@ -112,24 +115,23 @@ public class MaterialTextField extends MaterialFormField<String>
 	}
 
 	@Override
-	public void setValue(String value, boolean fireEvents) {
-		setValue(input.getElement(), value);
-		if (fireEvents) {
-			fireChangeEvent();
-		}
-	}
-
-	@Override
-	public String getValue() {
-		return getValue(input.getElement());
-	}
-
-	protected native String getValue(Element element)/*-{
+	public native String getValue()/*-{
+		var textfield = this.@gwt.material.design.components.client.ui.MaterialTextField::input;
+		var element = textfield.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		return element.value;
 	}-*/;
 
-	protected native void setValue(Element element, String value)/*-{
+	@Override
+	public native void setValue(String value, boolean fireEvents)/*-{
+		
+		var textfield = this.@gwt.material.design.components.client.ui.MaterialTextField::input;
+		var element = textfield.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		element.value = value;
+		
+		if(fireEvents){
+			this.@gwt.material.design.components.client.ui.MaterialTextField::fireChangeEvent()();
+		}
+		
 	}-*/;
 
 	@Override

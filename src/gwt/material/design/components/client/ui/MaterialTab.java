@@ -17,30 +17,34 @@ import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Span;
 
 public class MaterialTab extends MaterialWidget implements HasHref, HasText, HasIcon {
 
-	protected JavaScriptObject javaScriptComponent;
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
 
-	protected static native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabs.MDCTabFoundation(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialTab::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialTab::jsElement = new $wnd.mdc.tabs.MDCTabFoundation(element);
 	}-*/;
-
-	private MaterialWidget icon = new MaterialWidget(HtmlElements.I.createElement(), CssName.MATERIAL_ICONS,
-			CssName.MDC_TAB_ICON);
-
+	
+	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB_ICON);
 	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
 
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final IconMixin<MaterialWidget> iconMixin = new IconMixin<>(icon);
-	protected final AttributeMixin<MaterialTab> hrefMixin = new AttributeMixin<>(this, "href");
+	protected final HrefMixin<MaterialTab> hrefMixin = new HrefMixin<>(this);
 	protected final AttributeMixin<MaterialTab> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 
 	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB_ACTIVE);
@@ -66,7 +70,9 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 			add(label);
 
-			javaScriptComponent = jsInit(getElement());
+			jsInit();
+			
+			updateTarget();			
 
 			initialized = true;
 		}
@@ -149,12 +155,12 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 	@Override
 	public void setHref(String href) {
-		hrefMixin.setAttribute(href);
+		hrefMixin.setHref(href);
 	}
 
 	@Override
 	public String getHref() {
-		return hrefMixin.getAttribute();
+		return hrefMixin.getHref();
 	}
 
 	@Override

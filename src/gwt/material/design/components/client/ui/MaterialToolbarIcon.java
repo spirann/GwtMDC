@@ -2,15 +2,14 @@ package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.ui.html.Anchor;
 
-public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconType>, HasHref {
+public class MaterialToolbarIcon extends Anchor implements HasType<IconType>, HasHref {
 
 	protected final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
 	protected final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
@@ -19,7 +18,7 @@ public class MaterialToolbarIcon extends MaterialWidget implements HasType<IconT
 	private boolean initialized = false;
 
 	public MaterialToolbarIcon() {
-		super(HtmlElements.A.createElement(), CssName.MDC_TOOLBAR_ICON_MENU);
+		super(CssName.MDC_TOOLBAR_ICON_MENU);
 	}
 
 	public MaterialToolbarIcon(final IconType type) {

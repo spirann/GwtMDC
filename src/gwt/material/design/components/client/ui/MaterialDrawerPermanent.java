@@ -16,5 +16,5 @@ public class MaterialDrawerPermanent extends MaterialDrawerBase {
 		}
 
 	}
-	
+
 }

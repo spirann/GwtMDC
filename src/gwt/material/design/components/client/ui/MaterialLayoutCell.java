@@ -3,15 +3,14 @@ package gwt.material.design.components.client.ui;
 
 
 import gwt.material.design.components.client.base.HasColumns;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ColumnsMixin;
 import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssType;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.EnumHelper;
 
-public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
+public class MaterialLayoutCell extends Div implements HasColumns {
 
 	public enum Align implements CssType {
 
@@ -39,7 +38,7 @@ public class MaterialLayoutCell extends MaterialWidget implements HasColumns {
 	protected final StyleMixin<MaterialLayoutCell> alignMixin = new StyleMixin<>(this);
 
 	public MaterialLayoutCell() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_CELL);
+		super(CssName.MDC_LAYOUT_CELL);
 	}
 
 	/**

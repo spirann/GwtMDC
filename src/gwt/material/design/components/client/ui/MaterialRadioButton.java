@@ -55,10 +55,14 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	}
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize RadioButton
+	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	public static native JavaScriptObject jsInit(Element element)/*-{
-		return $wnd.mdc.radio.MDCRadio.attachTo(element);
+	protected JavaScriptObject jsElement;
+
+	protected native void jsInit()/*-{
+		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;
+		var element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialRadioButton::jsElement = $wnd.mdc.radio.MDCRadio.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -110,7 +114,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 			addValueChangeListener(input.getElement());
 
-			jsInit(radio.getElement());
+			jsInit();
 
 			initialized = true;
 

@@ -1,7 +1,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -9,31 +8,34 @@ import gwt.material.design.components.client.base.HasCloseHandlers;
 import gwt.material.design.components.client.base.HasOpen;
 import gwt.material.design.components.client.base.HasOpenHandlers;
 import gwt.material.design.components.client.base.HasRole;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
 import gwt.material.design.components.client.events.OpenEvent;
 import gwt.material.design.components.client.handlers.CloseHandler;
 import gwt.material.design.components.client.handlers.OpenHandler;
+import gwt.material.design.components.client.ui.html.Div;
 
-public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHandlers, HasCloseHandlers {
+public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCloseHandlers {
 
-	protected JavaScriptObject menu;
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
 
-	public static native JavaScriptObject jsInit(Element element)/*-{
-		return  $wnd.mdc.menu.MDCSimpleMenu.attachTo(element);
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.ui.MaterialMenu::getElement()();
+		this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement = $wnd.mdc.menu.MDCSimpleMenu.attachTo(element);
 	}-*/;
 
-	private MaterialList items = new MaterialList();
+	protected MaterialList items = new MaterialList();
 
 	private HandlerRegistration handler;
 
 	private boolean initialized = false;
 
 	public MaterialMenu() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_MENU);
+		super(CssName.MDC_MENU);
 	}
 
 	@Override
@@ -46,7 +48,7 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 			items.getElement().setAttribute("aria-hidden", "true");
 			super.add(items);
 
-			menu = jsInit(getElement());
+			jsInit();
 
 			initialized = true;
 		}
@@ -94,7 +96,7 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 			handler = addAttachHandler(event -> {
 
 				if (event.isAttached()) {
-					setOpen(menu, open);
+					setNativeOpen(open);
 				} else if (handler != null) {
 					handler.removeHandler();
 					handler = null;
@@ -103,13 +105,8 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 			});
 
 		} else {
-			setOpen(menu, open);
+			setNativeOpen(open);
 		}
-	}
-
-	@Override
-	public boolean isOpen() {
-		return menu != null && isOpen(menu);
 	}
 
 	@Override
@@ -122,8 +119,9 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 		setOpen(false);
 	}
 
-	protected native void setOpen(final JavaScriptObject menu, boolean open)/*-{
+	protected native void setNativeOpen(boolean open)/*-{
 		var _this = this;
+		var menu = this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement;
 		var oldOpen = menu.open;		
 		menu.open = open;
 		
@@ -137,8 +135,10 @@ public class MaterialMenu extends MaterialWidget implements HasOpen, HasOpenHand
 		
 	}-*/;
 
-	protected native boolean isOpen(final JavaScriptObject menu)/*-{
-		return menu.open;
+	@Override
+	public native boolean isOpen()/*-{		
+		var menu = this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement;		
+		return menu && menu.open;
 	}-*/;
 
 	protected void fireCloseEvent() {

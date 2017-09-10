@@ -3,12 +3,11 @@ package gwt.material.design.components.client.ui;
 
 
 import gwt.material.design.components.client.base.HasAlign;
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Align;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssProperty;
-import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * The layout grid
@@ -36,12 +35,12 @@ import gwt.material.design.components.client.constants.HtmlElements;
  * @author Richeli Vargas
  *
  */
-public class MaterialLayoutGrid extends MaterialWidget implements HasAlign {
+public class MaterialLayoutGrid extends Div implements HasAlign {
 	
 	protected final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
 
 	public MaterialLayoutGrid() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_LAYOUT_GRID);
+		super(CssName.MDC_LAYOUT_GRID);
 	}
 
 	public void setPadding(int gutter) {

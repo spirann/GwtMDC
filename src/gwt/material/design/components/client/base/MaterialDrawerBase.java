@@ -6,18 +6,19 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.MaterialListGroup;
+import gwt.material.design.components.client.ui.html.Aside;
 
-public class MaterialDrawerBase extends MaterialWidget implements HasOpen {
+public class MaterialDrawerBase extends Aside implements HasOpen {
 
-	protected JavaScriptObject drawer;
+	protected JavaScriptObject jsElement;
 	protected MaterialListGroup content = new MaterialListGroup();
 
 	private HandlerRegistration handler;
 
 	private boolean initialized = false;
 
-	protected MaterialDrawerBase(final String cssClass) {
-		super(HtmlElements.ASIDE.createElement(), cssClass);
+	protected MaterialDrawerBase(final String primaryClass) {
+		super(primaryClass);
 	}
 
 	@Override
@@ -25,7 +26,7 @@ public class MaterialDrawerBase extends MaterialWidget implements HasOpen {
 		super.onLoad();
 		if (!initialized) {
 			
-			drawer = getElement();
+			jsElement = getElement();
 			
 			initialized = true;
 		}
@@ -74,7 +75,7 @@ public class MaterialDrawerBase extends MaterialWidget implements HasOpen {
 			handler = addAttachHandler(event -> {
 
 				if (event.isAttached()) {
-					setOpen(drawer, open);
+					setNativeOpen(open);
 				} else if (handler != null) {
 					handler.removeHandler();
 					handler = null;
@@ -83,25 +84,30 @@ public class MaterialDrawerBase extends MaterialWidget implements HasOpen {
 			});
 
 		} else {
-			setOpen(drawer, open);
+			setNativeOpen(open);
 		}
 	}
 
 	@Override
-	public boolean isOpen() {
-		return isOpen(drawer);
-	}
-
-	protected native boolean isOpen(final JavaScriptObject drawer)/*-{
-		return drawer.style.display != "none";
+	public native boolean isOpen()/*-{
+		
+		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		
+		return drawer && drawer.style.display != "none";
+		
 	}-*/;
 
-	protected native void setOpen(final JavaScriptObject drawer, boolean open)/*-{
+
+	protected native void setNativeOpen(boolean open)/*-{
+		
+		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		
 		if (open) {
 			drawer.style.display = "flex";
 		} else {
 			drawer.style.display = "none";
 		}
+		
 	}-*/;
 
 	@Override
