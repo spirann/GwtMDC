@@ -139,7 +139,11 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	}
 
 	public void setBackgroundImageResource(final ImageResource imageResource) {
-		setBackgroundImage("url('" + imageResource.getSafeUri().asString() + "') center / cover");
+		setStyleProperty("background", "url('" + imageResource.getSafeUri().asString() + "') no-repeat center center fixed");
+		setStyleProperty("-webkit-background-size", "cover");
+		setStyleProperty("-moz-background-size", "cover");
+		setStyleProperty("-o-background-size", "cover");
+		setStyleProperty("background-size", "cover");
 	}
 	
 	public void setBackgroundImage(final String url) {
