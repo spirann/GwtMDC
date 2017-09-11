@@ -48,6 +48,24 @@ a:active {
 	font-family: "Roboto Mono", monospace;
 }
 
+@media (max-width: 479px) {
+	.mdc-hide-on-phone {
+		display: none;
+	}
+}
+
+@media (min-width: 480px) and (max-width: 839px) {
+	.mdc-hide-on-tablet {
+		display: none;
+	}
+}
+
+@media (min-width: 840px) {
+	.mdc-hide-on-desktop {
+		display: none;
+	}
+}
+
 /* ==========================================================================
    Config default component content
    ========================================================================== */
@@ -399,6 +417,16 @@ a:active {
 /* ==========================================================================
    Button
    ========================================================================== */
+
+.mdc-button--primary::before,
+.mdc-button--primary::after {
+	background-color: var(--mdc-theme-ripple-primary);
+}
+
+.mdc-button--accent::before,
+.mdc-button--accent::after {
+	background-color: var(--mdc-theme-ripple-secondary);
+}
 
 .mdc-button--primary[disabled].mdc-button--raised,
 .mdc-button--accent[disabled].mdc-button--raised {

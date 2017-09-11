@@ -80,6 +80,7 @@ import gwt.material.design.components.client.base.mixin.RoleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Elevation;
+import gwt.material.design.components.client.constants.HideOn;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.DragEndEvent;
@@ -101,7 +102,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn {
 
 	static {
 		autoInit();
@@ -139,6 +140,7 @@ public class MaterialWidget extends BaseWidget
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 	
 
 	private String primaryClass;
@@ -682,5 +684,15 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public Elevation getElevation() {
 		return elevationMixin.getType();
+	}
+
+	@Override
+	public void setHideOn(HideOn hideOn) {
+		hideOnMixin.setType(hideOn);
+	}
+
+	@Override
+	public HideOn getHideOn() {
+		return hideOnMixin.getType();
 	}
 }
