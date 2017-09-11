@@ -101,4 +101,5 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	public ButtonType getType() {
 		return typeMixin.getType();
 	}
+
 }

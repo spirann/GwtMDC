@@ -23,7 +23,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -75,21 +74,12 @@ import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
-import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.RoleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
-import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Elevation;
-import gwt.material.design.components.client.constants.Flex;
-import gwt.material.design.components.client.constants.FlexAlignContent;
-import gwt.material.design.components.client.constants.FlexAlignItems;
-import gwt.material.design.components.client.constants.FlexAlignSelf;
-import gwt.material.design.components.client.constants.FlexDirection;
-import gwt.material.design.components.client.constants.FlexJustifyContent;
-import gwt.material.design.components.client.constants.FlexWrap;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.DragEndEvent;
@@ -111,7 +101,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasFlexbox, HasRtl {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl {
 
 	static {
 		autoInit();
@@ -149,7 +139,7 @@ public class MaterialWidget extends BaseWidget
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
-	protected final FlexboxMixin<MaterialWidget> flexboxMixin = new FlexboxMixin<>(this);
+	
 
 	private String primaryClass;
 	private String[] initialClasses;
@@ -692,70 +682,5 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public Elevation getElevation() {
 		return elevationMixin.getType();
-	}
-
-	@Override
-	public void setGwtDisplay(Style.Display display) {
-		flexboxMixin.setGwtDisplay(display);
-	}
-
-	@Override
-	public void setDisplay(Display display) {
-		flexboxMixin.setDisplay(display);
-	}
-
-	@Override
-	public void setFlexDirection(FlexDirection flexDirection) {
-		flexboxMixin.setFlexDirection(flexDirection);
-	}
-
-	@Override
-	public void setFlex(Flex flex) {
-		flexboxMixin.setFlex(flex);
-	}
-
-	@Override
-	public void setFlexGrow(Integer flexGrow) {
-		flexboxMixin.setFlexGrow(flexGrow);
-	}
-
-	@Override
-	public void setFlexShrink(Integer flexShrink) {
-		flexboxMixin.setFlexShrink(flexShrink);
-	}
-
-	@Override
-	public void setFlexBasis(String flexBasis) {
-		flexboxMixin.setFlexBasis(flexBasis);
-	}
-
-	@Override
-	public void setFlexOrder(Integer flexOrder) {
-		flexboxMixin.setFlexOrder(flexOrder);
-	}
-
-	@Override
-	public void setFlexWrap(FlexWrap flexWrap) {
-		flexboxMixin.setFlexWrap(flexWrap);
-	}
-
-	@Override
-	public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
-		flexboxMixin.setFlexAlignContent(flexAlignContent);
-	}
-
-	@Override
-	public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
-		flexboxMixin.setFlexAlignSelf(flexAlignSelf);
-	}
-
-	@Override
-	public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
-		flexboxMixin.setFlexAlignItems(flexAlignItems);
-	}
-
-	@Override
-	public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
-		flexboxMixin.setFlexJustifyContent(flexJustifyContent);
 	}
 }

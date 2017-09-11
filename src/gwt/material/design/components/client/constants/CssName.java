@@ -225,6 +225,7 @@ public interface CssName {
 	String MDC_BUTTON_COMPACT = "mdc-button--compact";
 	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
 	String MDC_BUTTON_SECONDARY = "mdc-button--accent";
+	String MDC_BUTTON_STROKED = "mdc-button--stroked";
 	// //////////////////////////////////////////////////////
 	// FAB - Floating Action Button
 	// //////////////////////////////////////////////////////

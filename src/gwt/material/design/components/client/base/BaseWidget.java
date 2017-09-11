@@ -26,8 +26,17 @@ import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
+import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.constants.BorderCollapse;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.Display;
+import gwt.material.design.components.client.constants.Flex;
+import gwt.material.design.components.client.constants.FlexAlignContent;
+import gwt.material.design.components.client.constants.FlexAlignItems;
+import gwt.material.design.components.client.constants.FlexAlignSelf;
+import gwt.material.design.components.client.constants.FlexDirection;
+import gwt.material.design.components.client.constants.FlexJustifyContent;
+import gwt.material.design.components.client.constants.FlexWrap;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
@@ -35,8 +44,10 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
  * @author Richeli Vargas
  *
  */
-public class BaseWidget extends ComplexPanel {
+public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
+	protected final FlexboxMixin<BaseWidget> flexboxMixin = new FlexboxMixin<>(this);
+	
 	public void setStyleProperty(final String attribute, final String value) {
 		StyleHelper.setStyleProperty(getElement(), attribute, value);
 	}
@@ -205,5 +216,76 @@ public class BaseWidget extends ComplexPanel {
 	
 	public void setBorderRadius(final int borderRadius) {
 		setStyleProperty("border-radius", borderRadius + "px");
+	}
+
+	/* *****************************************************************************
+	 *
+	 * FLEX BOX SETTER'S
+	 * 
+	 ******************************************************************************* */
+	
+	@Override
+	public void setGwtDisplay(Style.Display display) {
+		flexboxMixin.setGwtDisplay(display);
+	}
+
+	@Override
+	public void setDisplay(Display display) {
+		flexboxMixin.setDisplay(display);
+	}
+
+	@Override
+	public void setFlexDirection(FlexDirection flexDirection) {
+		flexboxMixin.setFlexDirection(flexDirection);
+	}
+
+	@Override
+	public void setFlex(Flex flex) {
+		flexboxMixin.setFlex(flex);
+	}
+
+	@Override
+	public void setFlexGrow(Integer flexGrow) {
+		flexboxMixin.setFlexGrow(flexGrow);
+	}
+
+	@Override
+	public void setFlexShrink(Integer flexShrink) {
+		flexboxMixin.setFlexShrink(flexShrink);
+	}
+
+	@Override
+	public void setFlexBasis(String flexBasis) {
+		flexboxMixin.setFlexBasis(flexBasis);
+	}
+
+	@Override
+	public void setFlexOrder(Integer flexOrder) {
+		flexboxMixin.setFlexOrder(flexOrder);
+	}
+
+	@Override
+	public void setFlexWrap(FlexWrap flexWrap) {
+		flexboxMixin.setFlexWrap(flexWrap);
+	}
+
+	@Override
+	public void setFlexAlignContent(FlexAlignContent flexAlignContent) {
+		flexboxMixin.setFlexAlignContent(flexAlignContent);
+	}
+
+	@Override
+	public void setFlexAlignSelf(FlexAlignSelf flexAlignSelf) {
+		flexboxMixin.setFlexAlignSelf(flexAlignSelf);
+	}
+
+	@Override
+	public void setFlexAlignItems(FlexAlignItems flexAlignItems) {
+		flexboxMixin.setFlexAlignItems(flexAlignItems);
+	}
+
+	@Override
+	public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
+		flexboxMixin.setFlexJustifyContent(flexJustifyContent);
 	}
 }
