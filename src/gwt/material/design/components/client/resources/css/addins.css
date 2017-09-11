@@ -147,6 +147,9 @@ a:active {
 /* ----------------------------------- 
 	Default color is text on primary 
 -------------------------------------- */
+.mdc-tab-bar {
+	margin: 0;
+}
    
 .mdc-tab {
 	color: var(--mdc-theme-text-secondary-on-primary, rgba(0, 0, 0, 0.54));
