@@ -217,6 +217,10 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setBorderRadius(final int borderRadius) {
 		setStyleProperty("border-radius", borderRadius + "px");
 	}
+	
+	public void setOpacity(final double opacity) {
+		setStyleProperty("opacity", String.valueOf(opacity));
+	}
 
 	/* *****************************************************************************
 	 *
