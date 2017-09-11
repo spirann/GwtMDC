@@ -73,9 +73,7 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 
 	public MaterialTabBar() {
 		super(CssName.MDC_TAB_BAR);
-
 		setRole(Role.TAB_BAR);
-		setType(TabBarType.ICON_WITH_TEXT);
 	}
 
 	@Override

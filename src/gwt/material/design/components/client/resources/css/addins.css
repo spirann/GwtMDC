@@ -5,27 +5,16 @@ html, body {
 
 html, 
 body,
-div,
-span,
-header,
-footer,
-aside,
-section,
-button,
 label,
-textarea,
 h1, 
 h2, 
 h3, 
 h4,
-textarea,
-a,
-li,
-nav {
-	font-family: "Roboto Mono", monospace;
+textarea {
+	font-family: "Roboto", monospace;
 }
 
-i, a {
+i, button, a {
 	cursor: pointer;
 }
 
@@ -168,6 +157,14 @@ a:active {
     background-color: var(--mdc-theme-ripple-on-primary);
 }
 
+.mdc-toolbar .mdc-tab {
+	height: 64px;
+}
+/* if has text only
+.mdc-tab-bar:not(.mdc-tab-bar--icon-tabs):not(.mdc-tab-bar--icons-with-text) {
+	bottom: -12px;
+}
+*/
 /* ---------------------------- 
 		Primary color 
 ------------------------------- */
@@ -303,7 +300,9 @@ a:active {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
-
+.mdc-permanent-drawer .mdc-list-group__subheader,
+.mdc-persistent-drawer .mdc-list-group__subheader,
+.mdc-temporary-drawer .mdc-list-group__subheader,
 .mdc-permanent-drawer .mdc-list-item,
 .mdc-persistent-drawer .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item {
@@ -391,6 +390,10 @@ a:active {
 
 .mdc-list-divider {
 	background-color: var(--mdc-theme-text-hint-on-background);
+}
+
+.mdc-list-group__subheader {
+	color: var(--mdc-theme-text-secondary-on-background);
 }
 
 /* ==========================================================================
