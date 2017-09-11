@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,8 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * #L%
- */
-package gwt.material.design.components.client.base.mixin;
+ */package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -25,8 +24,10 @@ import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.CodeType;
 
 /**
- * @author kevzlou7979
- * @author Ben Dol
+ * 
+ * 
+ * @author Richeli Vargas
+ * 
  */
 public class CodeTypeMixin<T extends Widget & HasType<CodeType>>  extends StyleMixin<T>
 		implements HasType<CodeType> {

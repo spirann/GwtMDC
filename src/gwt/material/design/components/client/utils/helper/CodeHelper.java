@@ -1,10 +1,8 @@
-package gwt.material.design.components.client.utils.helper;
-
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,12 +17,17 @@ package gwt.material.design.components.client.utils.helper;
  * limitations under the License.
  * #L%
  */
-
+package gwt.material.design.components.client.utils.helper;
 
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.safehtml.shared.SafeHtmlBuilder;
 import com.google.gwt.safehtml.shared.SafeHtmlUtils;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public final class CodeHelper {
     public static SafeHtml parseCode(String code) {
         SafeHtmlBuilder builder = new SafeHtmlBuilder();

@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,14 +24,13 @@ import com.google.gwt.resources.client.ClientBundle;
 import com.google.gwt.resources.client.DataResource.MimeType;
 import com.google.gwt.resources.client.TextResource;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
-
-	@Source("js/jquery-2.1.1.min.js")	
-	TextResource jqueryJs();
-
-	@Source("js/google_analytics.js")
-	TextResource googleAnalyticsJs();
 
 	@Source("js/material-components-web.min.js")
 	TextResource materialComponentsWebJs();

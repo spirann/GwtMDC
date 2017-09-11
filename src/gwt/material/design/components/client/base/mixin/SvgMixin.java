@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,7 +30,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
- * @author kevzlou7979
+ * @author Richeli Vargas
  */
 public class SvgMixin<T extends UIObject & HasSvg> extends AbstractMixin<T> implements HasSvg {
 

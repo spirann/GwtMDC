@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -23,6 +23,11 @@ import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HasHandlers;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public class DragMoveEvent extends GwtEvent<DragMoveEvent.DragMoveHandler> {
 
     public interface DragMoveHandler extends EventHandler {

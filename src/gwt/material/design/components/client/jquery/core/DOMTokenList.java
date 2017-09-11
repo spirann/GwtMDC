@@ -1,15 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package gwt.material.design.components.client.jquery.core;
-
-/*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,17 +17,14 @@ package gwt.material.design.components.client.jquery.core;
  * limitations under the License.
  * #L%
  */
-
+package gwt.material.design.components.client.jquery.core;
 
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
 
 /**
- * Documentación de {@link DOMTokenList}.
- *
- * //TODO Documentar la interface
- *
- * @author Cristian Rinaldi <csrinaldi@gmail.com>
+ * 
+ * @author Richeli Vargas
  */
 @JsType(isNative = true)
 public class DOMTokenList {

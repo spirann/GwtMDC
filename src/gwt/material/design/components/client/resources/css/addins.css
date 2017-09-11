@@ -3,6 +3,27 @@ html, body {
 	padding: 0px;
 }
 
+html, 
+body,
+div,
+span,
+header,
+footer,
+aside,
+section,
+button,
+label,
+textarea,
+h1, 
+h2, 
+h3, 
+h4,
+textarea,
+a,
+li,
+nav {
+	font-family: "Roboto Mono", monospace;
+}
 
 i, a {
 	cursor: pointer;
@@ -409,7 +430,8 @@ a:active {
 	bottom: 1rem;
 	right: 1rem;
 	z-index: 1;
-	
+
+	-webkit-transition: bottom 0.5s;    	
     transition: bottom 0.5s;
 }
 
@@ -420,11 +442,15 @@ a:active {
 
 	.mdc-snackbar--multiline.mdc-snackbar--active ~ .mdc-fab--fixed {		
 		bottom: calc(1rem + 80px);
+		
+		-webkit-transition: bottom 0.25s;
 		transition: bottom 0.25s;
 	}
 
 	.mdc-snackbar--active ~ .mdc-fab--fixed {	
 		bottom: calc(1rem + 48px);
+		
+		-webkit-transition: bottom 0.25s;    
 		transition: bottom 0.25s;    
 	}
 	

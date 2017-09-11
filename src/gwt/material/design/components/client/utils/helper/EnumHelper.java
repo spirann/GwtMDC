@@ -1,10 +1,8 @@
-package gwt.material.design.components.client.utils.helper;
-
 /*
  * #%L
- * GwtBootstrap3
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2013 GwtBootstrap3
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,11 +17,14 @@ package gwt.material.design.components.client.utils.helper;
  * limitations under the License.
  * #L%
  */
+package gwt.material.design.components.client.utils.helper;
+
+
 
 import com.google.gwt.dom.client.Style;
 
 /**
- * @author Sven Jacobs
+ * @author Richeli Vargas
  */
 public final class EnumHelper {
 

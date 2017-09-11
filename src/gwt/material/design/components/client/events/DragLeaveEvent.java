@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +25,11 @@ import com.google.gwt.event.shared.HasHandlers;
 
 import gwt.material.design.components.client.jquery.api.JQueryElement;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public class DragLeaveEvent extends GwtEvent<DragLeaveEvent.DragLeaveHandler> {
 
     public interface DragLeaveHandler extends EventHandler {

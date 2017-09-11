@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -34,9 +34,7 @@ import gwt.material.design.components.client.constants.FlexWrap;
 import gwt.material.design.components.client.utils.helper.BrowserPrefixHelper;
 
 /**
- * Mixin for Flexbox layout
- *
- * @author chriswjones
+ * @author Richeli Vargas
  */
 public class FlexboxMixin<T extends Widget & HasFlexbox> extends AbstractMixin<T> implements HasFlexbox {
 

@@ -1,8 +1,8 @@
 /*
  * #%L
- * GwtMaterial
+ * Gwt Material Design Components
  * %%
- * Copyright (C) 2015 - 2016 GwtMaterialDesign
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
  * %%
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,6 +21,11 @@ package gwt.material.design.components.client.base;
 
 import gwt.material.design.components.client.constants.Type;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public interface HasType<T extends Type> {
     /**
      * Sets the type on the widget
