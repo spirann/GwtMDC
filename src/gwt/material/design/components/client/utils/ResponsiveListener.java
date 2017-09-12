@@ -5,7 +5,7 @@ import com.google.gwt.user.client.Window;
 
 public class ResponsiveListener {
 
-	public static interface ResponsiveHandler {
+	public static interface Handler {
 		
 		public void onPhone();
 		
@@ -19,7 +19,7 @@ public class ResponsiveListener {
 		
 	}
 	
-	public static HandlerRegistration register(final ResponsiveHandler handler) {
+	public static HandlerRegistration register(final Handler handler) {
 		
 		return Window.addResizeHandler(event -> {
 			
