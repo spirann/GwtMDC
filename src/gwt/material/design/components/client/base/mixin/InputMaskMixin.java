@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasInputMask;
@@ -30,20 +31,24 @@ import gwt.material.design.components.client.base.HasInputMask;
  */
 public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> implements HasInputMask {
 
-	private static final String INPUT_MASK = "href";
-	
+	private static final String INPUT_MASK = "inputmask";
+
 	public InputMaskMixin(T uiObject) {
 		super(uiObject);
 	}
 
 	@Override
 	public void setInputMask(String inputMask) {
-		uiObject.getElement().setAttribute(INPUT_MASK, inputMask);
+		setInputMask(uiObject.getElement(), inputMask);
 	}
 
 	@Override
 	public String getInputMask() {
 		return uiObject.getElement().getAttribute(INPUT_MASK);
 	}
+
+	protected native void setInputMask(Element element, String inputMask)/*-{
+		$wnd.VMasker(element).maskPattern(inputMask);
+	}-*/;
 
 }

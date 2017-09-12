@@ -62,6 +62,7 @@ public class GwtMDC implements EntryPoint {
 	public static void loadJsResources() {
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
+		injectJs(MaterialResources.INSTANCE.jqueryMaskJs());
 	}
 
 	public static void loadCssResources() {
@@ -72,11 +73,8 @@ public class GwtMDC implements EntryPoint {
 		}
 
 		// Load new styles
-		styles = new StyleElement[] { 
-				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),
-				injectCss(MaterialResources.INSTANCE.prismCss()), 
-				injectCss(MaterialResources.INSTANCE.addinsCss()) 
-		};
+		styles = new StyleElement[] { injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),
+				injectCss(MaterialResources.INSTANCE.prismCss()), injectCss(MaterialResources.INSTANCE.addinsCss()) };
 
 	}
 
@@ -94,10 +92,11 @@ public class GwtMDC implements EntryPoint {
 
 	public static void injectJs(TextResource resource, boolean removeTag, boolean sourceUrl) {
 
-		String text = resource.getText() + (sourceUrl ? "//# sourceURL=" + resource.getName() + ".js" : "");
+		final String text = resource.getText() + (sourceUrl ? "//# sourceURL=" + resource.getName() + ".js" : "");
 
 		// Inject the script resource
 		ScriptInjector.fromString(text).setWindow(ScriptInjector.TOP_WINDOW).setRemoveTag(removeTag).inject();
 
 	}
+
 }
