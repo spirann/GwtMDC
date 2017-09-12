@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasHelpText;
+import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
@@ -31,6 +32,7 @@ import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.InputMaskMixin;
 import gwt.material.design.components.client.base.mixin.PatternMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.RequiredMixin;
@@ -49,7 +51,7 @@ import gwt.material.design.components.client.ui.html.Label;
  *
  */
 public class MaterialTextField extends MaterialFormField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasHelpText, HasPlaceholder, HasType<InputType> {
+		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasHelpText, HasPlaceholder, HasType<InputType>, HasInputMask {
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
@@ -86,6 +88,7 @@ public class MaterialTextField extends MaterialFormField<String>
 	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
+	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
 	
 	protected final ApplyStyleMixin<MaterialTextField> denseMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_TEXTFIELD_DENSE);
@@ -270,5 +273,15 @@ public class MaterialTextField extends MaterialFormField<String>
 	@Override
 	public InputType getType() {
 		return input.getType();
+	}
+
+	@Override
+	public void setInputMask(String inputMask) {
+		inputMaskMixin.setInputMask(inputMask);
+	}
+
+	@Override
+	public String getInputMask() {
+		return inputMaskMixin.getInputMask();
 	}
 }
