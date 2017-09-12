@@ -19,7 +19,15 @@ public class ResponsiveListener {
 		
 	}
 	
+	public static native void fire() /*-{
+		
+		$wnd.dispatchEvent(new Event('resize'));
+		
+	}-*/;
+	
 	public static HandlerRegistration register(final Handler handler) {
+		
+		
 		
 		return Window.addResizeHandler(event -> {
 			
