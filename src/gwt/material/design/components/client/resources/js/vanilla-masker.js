@@ -10,7 +10,7 @@
   var DIGIT = "9",
       ALPHA = "A",
       ALPHANUM = "S",
-      BY_PASS_KEYS = [8, 9, 13, 16, 17, 18, 20, 36, 37, 38, 39, 40, 45, 46, 91, 92, 93, 112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 255],
+      BY_PASS_KEYS = [9, 16, 17, 18, 36, 37, 38, 39, 40, 91, 92, 93],
       isAllowedKeyCode = function(keyCode) {
         for (var i = 0, len = BY_PASS_KEYS.length; i < len; i++) {
           if (keyCode == BY_PASS_KEYS[i]) {
@@ -67,25 +67,20 @@
           var source = e.target || e.srcElement;
 
           if (isAllowedKeyCode(e.keyCode)) {
-        	  e.preventDefault();
-        	  that.opts.lastOutput = source.lastOutput;
-        	  
-        	  var value = VMasker[maskFunction](source.value + String.fromCharCode(e.keyCode), that.opts);
-        	  if(source.value.length != value.length){
-        		  source.value = value;
-        	  }
-        	  
-        	  source.lastOutput = source.value;
+            setTimeout(function() {
+              that.opts.lastOutput = source.lastOutput;
+              source.value = VMasker[maskFunction](source.value, that.opts);
+              source.lastOutput = source.value;
               if (source.setSelectionRange && that.opts.suffixUnit) {
                 source.setSelectionRange(source.value.length, (source.value.length - that.opts.suffixUnit.length));
               }
+            }, 0);
           }
         }
     ;
     for (var i = 0, len = this.elements.length; i < len; i++) {
       this.elements[i].lastOutput = "";
-      //this.elements[i].onkeyup = onType;
-      this.elements[i].onkeydown = onType;
+      this.elements[i].onkeyup = onType;
       if (this.elements[i].value.length) {
         this.elements[i].value = VMasker[maskFunction](this.elements[i].value, this.opts);
       }
@@ -199,15 +194,14 @@
           output[i] = values[index++];
         } else if (output[i] === DIGIT || output[i] === ALPHA || output[i] === ALPHANUM) {
           if(placeholder !== undefined){
-        	return addPlaceholdersToOutput(output, i, placeholder).join("");
+            return addPlaceholdersToOutput(output, i, placeholder).join("");
           }
           else{
-        	return output.slice(0, i).join("");
+            return output.slice(0, i).join("");
           }
         }
       }
     }
-
     return output.join("").substr(0, i);
   };
 
