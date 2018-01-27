@@ -41,8 +41,6 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 
 	protected final TypeMixin<Code, CodeType> typeMixin = new TypeMixin<>(code);	
 	
-	private boolean initialized = false;
-
 	public MaterialCode() {
 		super(HtmlElements.PRE.createElement(), CssName.PRISM_LANGUAGE_MARKUP, CssName.MDC_CODE);
 		add(code);
@@ -51,19 +49,17 @@ public class MaterialCode extends MaterialWidget implements HasType<CodeType>, H
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-
-		if (!initialized) {
-
-			if (getType() == null) {
-				setType(CodeType.XML);
-			}
-
-			initialized = true;
-		}
-
 		highlight();
 	}
 
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		if (getType() == null) {
+			setType(CodeType.XML);
+		}		
+	}
+	
 	public native void highlightAll()/*-{
 		$wnd.Prism.highlightAll();
 	}-*/;

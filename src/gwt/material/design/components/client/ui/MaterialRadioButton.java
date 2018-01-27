@@ -86,7 +86,8 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	protected native void jsInit()/*-{
 		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;
 		var element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialRadioButton::jsElement = $wnd.mdc.radio.MDCRadio.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialRadioButton::jsElement = $wnd.mdc.radio.MDCRadio
+				.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -102,13 +103,11 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// Label
 	// /////////////////////////////////////////////////////////////
 	private Label label = new Label();
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
 	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
-	
-	private boolean initialized = false;
 
 	public MaterialRadioButton() {
 		super();
@@ -117,41 +116,38 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		divBackground.add(divOuterCircle);
+		divBackground.add(divInnerCircle);
 
-			divBackground.add(divOuterCircle);
-			divBackground.add(divInnerCircle);
+		radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
+		radio.add(input);
+		radio.add(divBackground);
 
-			radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
-			radio.add(input);
-			radio.add(divBackground);
+		add(radio);
+		add(label);
 
-			add(radio);
-			add(label);
-
-			if (getValue()) {
-				putInHistory();
-			}
-
-			addValueChangeListener(input.getElement());
-
-			jsInit();
-
-			initialized = true;
-
+		if (getValue()) {
+			putInHistory();
 		}
+
+		addValueChangeListener(input.getElement());
+
+		jsInit();
 	}
 
 	protected native void addValueChangeListener(Element element)/*-{
 		var _this = this;
-		element.addEventListener('change', function(event) {
-			if (element.checked) {
-				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-			}
-		});
+		element
+				.addEventListener(
+						'change',
+						function(event) {
+							if (element.checked) {
+								_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+							}
+						});
 	}-*/;
 
 	@Override
@@ -219,7 +215,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
 	}
-	
+
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return radio.addClickHandler(handler);

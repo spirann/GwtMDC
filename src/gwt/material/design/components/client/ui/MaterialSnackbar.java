@@ -46,7 +46,8 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialSnackbar::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement = $wnd.mdc.snackbar.MDCSnackbar.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement = $wnd.mdc.snackbar.MDCSnackbar
+				.attachTo(element);
 	}-*/;
 
 	protected Div text = new Div(CssName.MDC_SNACKBAR_TEXT);
@@ -57,61 +58,54 @@ public class MaterialSnackbar extends Div implements HasText {
 	protected final ApplyStyleMixin<MaterialSnackbar> atStartMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_SNACKBAR_ALIGN_START);
 
-	protected String actionText;	
-	protected boolean multiline = false;	
-	protected boolean actionOnBottom = false;	
+	protected String actionText;
+	protected boolean multiline = false;
+	protected boolean actionOnBottom = false;
 	protected int timeout = 2750;
-	
-	private boolean initialized = false;
 
 	public MaterialSnackbar() {
 		super(CssName.MDC_SNACKBAR);
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		actionWrapper.add(action);
 
-			actionWrapper.add(action);
+		add(text);
+		add(actionWrapper);
 
-			add(text);
-			add(actionWrapper);
-
-			jsInit();
-
-			initialized = true;
-		}
-
+		jsInit();
 	}
 
-	protected native void show(final String text, final String actionText, final boolean actionOnBottom, final boolean multiline, final int timeout)/*-{
+	protected native void show(final String text, final String actionText, final boolean actionOnBottom,
+			final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
 		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
-		
+
 		var _action = null;
-		
-		if(actionText) {
+
+		if (actionText) {
 			_action = function() {
 				_this.@gwt.material.design.components.client.ui.MaterialSnackbar::fireClickEvent()();
 			};
 		}
-	
+
 		var dataObj = {
 			message : text,
 			actionText : actionText,
 			actionHandler : _action,
-			actionOnBottom: actionOnBottom,
-            multiline: multiline,
-            timeout: timeout
+			actionOnBottom : actionOnBottom,
+			multiline : multiline,
+			timeout : timeout
 		};
 
 		snackbar.show(dataObj);
 
 	}-*/;
-	
+
 	public native void setDismissesOnAction(final boolean dismissesOnAction) /*-{
 		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
@@ -121,7 +115,7 @@ public class MaterialSnackbar extends Div implements HasText {
 		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
-	
+
 	protected void fireClickEvent() {
 		ClickEvent.fireNativeEvent(Document.get().createClickEvent(0, 0, 0, 0, 0, false, false, false, false), this);
 	}
@@ -140,19 +134,19 @@ public class MaterialSnackbar extends Div implements HasText {
 		show(getText(), actionText, actionOnBottom, multiline, timeout);
 	}
 
-	public void setActionText(final String text){
+	public void setActionText(final String text) {
 		actionText = text;
 	}
-	
+
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return action.addClickHandler(handler);
 	}
-	
+
 	public void setAtStart(final boolean atStart) {
 		atStartMixin.setApply(atStart);
 	}
-	
+
 	public boolean isAtStart() {
 		return atStartMixin.isApplied();
 	}
@@ -180,5 +174,5 @@ public class MaterialSnackbar extends Div implements HasText {
 	public void setTimeout(int timeout) {
 		this.timeout = timeout;
 	}
-	
+
 }

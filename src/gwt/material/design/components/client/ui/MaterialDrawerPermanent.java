@@ -30,15 +30,7 @@ import gwt.material.design.components.client.constants.CssName;
 public class MaterialDrawerPermanent extends MaterialDrawerBase {
 
 	public MaterialDrawerPermanent() {
-		super(CssName.MDC_PERMANENT_DRAWER);
-	}
-
-	public static class Spacer extends MaterialDrawerBase.Spacer {
-
-		public Spacer() {
-			super(CssName.MDC_PERMANENT_DRAWER_TOOLBAR_SPACER);
-		}
-
+		super(CssName.MDC_DRAWER_PERMANENT);
 	}
 
 }

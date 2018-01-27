@@ -98,42 +98,41 @@ public class MaterialDialog extends Aside
 
 	private HandlerRegistration handler;
 
-	private boolean initialized = false;
-
 	public MaterialDialog() {
 		super(CssName.MDC_DIALOG);
 		setRole(Role.ALERT_DIALOG);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		
+		header.add(headerTitle);
+
+		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
+		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
+		cancel.addStyleName(CssName.MDC_DIALOG_ACTION);
+		footer.add(cancel);
+
+		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
+		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
+		accept.addStyleName(CssName.MDC_DIALOG_ACTION);
+		footer.add(accept);
+
+		surface.add(header);
+		surface.add(body);
+		surface.add(footer);
+		super.add(surface);
+		super.add(backdrop);
+
+		initializeAcceptEventListener();
+		initializeCancelEventListener();
+		jsInit();
 	}
 
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-
-		if (!initialized) {
-
-			header.add(headerTitle);
-
-			cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
-			cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
-			cancel.addStyleName(CssName.MDC_DIALOG_ACTION);
-			footer.add(cancel);
-
-			accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
-			accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
-			accept.addStyleName(CssName.MDC_DIALOG_ACTION);
-			footer.add(accept);
-
-			surface.add(header);
-			surface.add(body);
-			surface.add(footer);
-			super.add(surface);
-			super.add(backdrop);
-
-			initializeAcceptEventListener();
-			initializeCancelEventListener();
-			jsInit();
-
-		}
 
 		if (accept.getText().isEmpty()) {
 			accept.setDisplay(Display.NONE);

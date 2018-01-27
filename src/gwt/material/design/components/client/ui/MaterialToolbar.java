@@ -42,9 +42,10 @@ public class MaterialToolbar extends Header implements HasType<ToolbarType> {
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialToolbar::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialToolbar::jsElement = $wnd.mdc.toolbar.MDCToolbar.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialToolbar::jsElement = $wnd.mdc.toolbar.MDCToolbar
+				.attachTo(element);
 	}-*/;
-		
+
 	protected final TypeMixin<MaterialToolbar, ToolbarType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialize = false;
@@ -54,27 +55,21 @@ public class MaterialToolbar extends Header implements HasType<ToolbarType> {
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialize) {			
-			
-			jsInit();			
-			
-			initialize = true;
-			
-			Scheduler.get().scheduleFixedDelay(() -> {				
-				fixedAdjustElement();				
-				return false;				
-			}, 100);
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		jsInit();
+		Scheduler.get().scheduleFixedDelay(() -> {
+			fixedAdjustElement();
+			return false;
+		}, 100);
 	}
-	
+
 	protected native void fixedAdjustElement()/*-{
 		var toolbar = this.@gwt.material.design.components.client.ui.MaterialToolbar::jsElement
-		toolbar.fixedAdjustElement = $doc.querySelector('.mdc-toolbar-fixed-adjust');
+		toolbar.fixedAdjustElement = $doc
+				.querySelector('.mdc-toolbar-fixed-adjust');
 	}-*/;
-	
+
 	@Override
 	public void setType(ToolbarType type) {
 		typeMixin.setType(type);

@@ -49,33 +49,26 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialMenu::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement = $wnd.mdc.menu.MDCSimpleMenu.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement = $wnd.mdc.menu.MDCSimpleMenu
+				.attachTo(element);
 	}-*/;
 
 	protected MaterialList items = new MaterialList();
 
 	private HandlerRegistration handler;
-
-	private boolean initialized = false;
-
+	
 	public MaterialMenu() {
 		super(CssName.MDC_MENU);
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
-			items.addStyleName(CssName.MDC_MENU_ITEMS);
-			items.setRole(Role.MENU);
-			items.getElement().setAttribute("aria-hidden", "true");
-			super.add(items);
-
-			jsInit();
-
-			initialized = true;
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		items.addStyleName(CssName.MDC_MENU_ITEMS);
+		items.setRole(Role.MENU);
+		items.getElement().setAttribute("aria-hidden", "true");
+		super.add(items);
+		jsInit();
 	}
 
 	@Override
@@ -146,29 +139,29 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected native void setNativeOpen(boolean open)/*-{
 		var _this = this;
 		var menu = this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement;
-		var oldOpen = menu.open;		
+		var oldOpen = menu.open;
 		menu.open = open;
-		
-		if(oldOpen != open){
-			if(open){
+
+		if (oldOpen != open) {
+			if (open) {
 				_this.@gwt.material.design.components.client.ui.MaterialMenu::fireOpenEvent()();
-			} else {	
+			} else {
 				_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
 			}
 		}
-		
+
 	}-*/;
 
 	@Override
-	public native boolean isOpen()/*-{		
-		var menu = this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement;		
+	public native boolean isOpen()/*-{
+		var menu = this.@gwt.material.design.components.client.ui.MaterialMenu::jsElement;
 		return menu && menu.open;
 	}-*/;
 
 	protected void fireCloseEvent() {
 		CloseEvent.fire(MaterialMenu.this);
 	}
-	
+
 	@Override
 	public HandlerRegistration addCloseHandler(CloseHandler handler) {
 		return addHandler(event -> {
@@ -181,7 +174,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected void fireOpenEvent() {
 		OpenEvent.fire(MaterialMenu.this);
 	}
-	
+
 	@Override
 	public HandlerRegistration addOpenHandler(OpenHandler handler) {
 		return addHandler(event -> {

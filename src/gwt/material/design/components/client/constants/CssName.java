@@ -138,20 +138,18 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
+	String MDC_DRAWER = "mdc-drawer";
+	String MDC_DRAWER_DRAWER = "mdc-drawer__drawer";
+	String MDC_DRAWER_TOOLBAR_SPACER = "mdc-drawer__toolbar-spacer";
+	String MDC_DRAWER_HEADER = "mdc-drawer__header";
+	String MDC_DRAWER_HEADER_CONTENT = "mdc-drawer__header-content";
+	String MDC_DRAWER_CONTENT = "mdc-drawer__content";
+	// Permanet
+	String MDC_DRAWER_PERMANENT = "mdc-permanent-drawer";
 	// Persistent
-	String MDC_PERMANENT_DRAWER = "mdc-permanent-drawer";
-	String MDC_PERMANENT_DRAWER_TOOLBAR_SPACER = "mdc-permanent-drawer__toolbar-spacer";
-	// Persistent
-	String MDC_PERSISTENT_DRAWER = "mdc-persistent-drawer";
-	String MDC_PERSISTENT_DRAWER_DRAWER = "mdc-persistent-drawer__drawer";
-	String MDC_PERSISTENT_DRAWER_TOOLBAR_SPACER = "mdc-persistent-drawer__toolbar-spacer";
+	String MDC_DRAWER_PERSISTENT = "mdc-drawer--persistent";
 	// Temporary
-	String MDC_TEMPORARY_DRAWER = "mdc-temporary-drawer";
-	String MDC_TEMPORARY_DRAWER_DRAWER = "mdc-temporary-drawer__drawer";
-	String MDC_TEMPORARY_DRAWER_TOOLBAR_SPACER = "mdc-temporary-drawer__toolbar-spacer";
-
-	String MDC_TEMPORARY_DRAWER_HEADER = "mdc-temporary-drawer__header";
-	String MDC_TEMPORARY_DRAWER_HEADER_CONTENT = "mdc-temporary-drawer__header-content";
+	String MDC_DRAWER_TEMPORARY = "mdc-drawer--temporary";
 	// //////////////////////////////////////////////////////
 	// MENU
 	// //////////////////////////////////////////////////////

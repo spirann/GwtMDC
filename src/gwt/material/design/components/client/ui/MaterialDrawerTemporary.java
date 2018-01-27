@@ -20,9 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.MaterialDrawerBase;
-import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Nav;
 
 /**
  * 
@@ -34,32 +32,19 @@ public class MaterialDrawerTemporary extends MaterialDrawerBase {
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
-	protected native void jsInit()/*-{
+	protected native void jsInit() /*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialDrawerTemporary::getElement()();
 		this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement = $wnd.mdc.drawer.MDCTemporaryDrawer.attachTo(element);
 	}-*/;
-	
-	protected Nav nav = new Nav(CssName.MDC_TEMPORARY_DRAWER_DRAWER);
-
-	private boolean initialized = false;
 
 	public MaterialDrawerTemporary() {
-		super(CssName.MDC_TEMPORARY_DRAWER);
+		super(CssName.MDC_DRAWER_TEMPORARY);
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
-			
-			nav.add(content);
-			super.add(nav, getElement());
-			
-			jsInit();
-
-			initialized = true;
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		jsInit();
 	}
 
 	@Override
@@ -74,17 +59,4 @@ public class MaterialDrawerTemporary extends MaterialDrawerBase {
 		drawer.open = open;
 	}-*/;
 
-	@Override
-	public void setBackgroundColor(Color color) {
-		super.setBackgroundColor(color);
-		nav.setBackgroundColor(color);
-	}
-
-	public static class Spacer extends MaterialDrawerBase.Spacer {
-
-		public Spacer() {
-			super(CssName.MDC_TEMPORARY_DRAWER_TOOLBAR_SPACER);
-		}
-
-	}
 }

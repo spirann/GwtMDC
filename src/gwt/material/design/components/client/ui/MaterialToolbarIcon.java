@@ -38,8 +38,6 @@ public class MaterialToolbarIcon extends Anchor implements HasType<IconType>, Ha
 	protected final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
 	protected final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
 	protected final IconMixin<MaterialToolbarIcon> iconMixin = new IconMixin<>(this);
-	
-	private boolean initialized = false;
 
 	public MaterialToolbarIcon() {
 		super(CssName.MDC_TOOLBAR_ICON_MENU);
@@ -51,17 +49,10 @@ public class MaterialToolbarIcon extends Anchor implements HasType<IconType>, Ha
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
-
-			if (getRipple() == null) {
-				setRipple(Ripple.SECONDARY);
-			}
-
-			initialized = true;
-
+	protected void onInitialize() {
+		super.onInitialize();
+		if (getRipple() == null) {
+			setRipple(Ripple.SECONDARY);
 		}
 	}
 

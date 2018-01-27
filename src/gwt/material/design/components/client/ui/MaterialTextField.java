@@ -50,8 +50,8 @@ import gwt.material.design.components.client.ui.html.Label;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextField extends MaterialFormField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasHelpText, HasPlaceholder, HasType<InputType>, HasInputMask {
+public class MaterialTextField extends MaterialFormField<String> implements HasText, HasLabel, HasDense, HasRequired,
+		HasPattern, HasHelpText, HasPlaceholder, HasType<InputType>, HasInputMask {
 
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
@@ -61,7 +61,8 @@ public class MaterialTextField extends MaterialFormField<String>
 	protected native void jsInit()/*-{
 		var textField = this.@gwt.material.design.components.client.ui.MaterialTextField::textField;
 		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textfield.MDCTextfield.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textfield.MDCTextfield
+				.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
@@ -89,7 +90,7 @@ public class MaterialTextField extends MaterialFormField<String>
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-	
+
 	protected final ApplyStyleMixin<MaterialTextField> denseMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_TEXTFIELD_DENSE);
 	protected final ApplyStyleMixin<Label> helpPersistentMixin = new ApplyStyleMixin<>(helper,
@@ -97,37 +98,29 @@ public class MaterialTextField extends MaterialFormField<String>
 	protected final ApplyStyleMixin<Label> helpValidationMixin = new ApplyStyleMixin<>(helper,
 			CssName.MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG);
 
-	private boolean initialized = false;
-
 	public MaterialTextField() {
 		super();
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
+		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
-			label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
-			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+		setFlexDirection(FlexDirection.COLUMN);
 
-			setFlexDirection(FlexDirection.COLUMN);
+		helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
 
-			helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
+		textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
+		textField.add(input);
+		textField.add(label);
 
-			textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
-			textField.add(input);
-			textField.add(label);
+		add(textField);
+		add(helper);
 
-			add(textField);
-			add(helper);
-
-			jsInit();
-
-			initialized = true;
-
-		}
+		jsInit();
 	}
 
 	@Override
@@ -150,15 +143,15 @@ public class MaterialTextField extends MaterialFormField<String>
 
 	@Override
 	public native void setValue(String value, boolean fireEvents)/*-{
-		
+
 		var textfield = this.@gwt.material.design.components.client.ui.MaterialTextField::input;
 		var element = textfield.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		element.value = value;
-		
-		if(fireEvents){
+
+		if (fireEvents) {
 			this.@gwt.material.design.components.client.ui.MaterialTextField::fireChangeEvent()();
 		}
-		
+
 	}-*/;
 
 	@Override
@@ -264,7 +257,7 @@ public class MaterialTextField extends MaterialFormField<String>
 	public String getPlaceholder() {
 		return placeholderMixin.getPlaceholder();
 	}
-	
+
 	@Override
 	public void setType(InputType type) {
 		input.setType(type);

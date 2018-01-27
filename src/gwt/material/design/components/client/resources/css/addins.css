@@ -323,11 +323,13 @@ a:active {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
+.mdc-drawer--persistent {
+	height: 100vh;
+}  
+
 .mdc-permanent-drawer .mdc-list-group__subheader,
-.mdc-persistent-drawer .mdc-list-group__subheader,
 .mdc-temporary-drawer .mdc-list-group__subheader,
 .mdc-permanent-drawer .mdc-list-item,
-.mdc-persistent-drawer .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item {
 	padding-left: 8px;
 }

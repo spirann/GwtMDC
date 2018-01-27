@@ -70,8 +70,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
 	protected final IndeterminateMixin<Input> indeterminateMixin = new IndeterminateMixin<>(input);
 
-	private boolean initialized = false;
-
 	public MaterialCheckbox() {
 		super();
 		setRipple(Ripple.SECONDARY);
@@ -79,10 +77,8 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
+	protected void onInitialize() {
+		super.onInitialize();
 
 			checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
 
@@ -98,10 +94,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 			jsInit();
 			checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
-
-			initialized = true;
-
-		}
 	}
 
 	@Override

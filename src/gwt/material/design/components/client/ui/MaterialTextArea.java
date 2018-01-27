@@ -55,9 +55,10 @@ public class MaterialTextArea extends MaterialFormField<String>
 	protected native void jsInit()/*-{
 		var textField = this.@gwt.material.design.components.client.ui.MaterialTextArea::textField;
 		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTextArea::jsElement = $wnd.mdc.textfield.MDCTextfield.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialTextArea::jsElement = $wnd.mdc.textfield.MDCTextfield
+				.attachTo(element);
 	}-*/;
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Textarea
 	// /////////////////////////////////////////////////////////////
@@ -89,37 +90,29 @@ public class MaterialTextArea extends MaterialFormField<String>
 	protected final ApplyStyleMixin<Label> helpValidationMixin = new ApplyStyleMixin<>(helper,
 			CssName.MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG);
 
-	private boolean initialized = false;
-
 	public MaterialTextArea() {
 		super();
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
+		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
-			label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
-			label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+		setFlexDirection(FlexDirection.COLUMN);
 
-			setFlexDirection(FlexDirection.COLUMN);
+		helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
 
-			helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
+		textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
+		textField.add(textarea);
+		textField.add(label);
 
-			textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
-			textField.add(textarea);
-			textField.add(label);
+		add(textField);
+		add(helper);
 
-			add(textField);
-			add(helper);
-
-			jsInit();
-
-			initialized = true;
-
-		}
+		jsInit();
 	}
 
 	@Override
@@ -133,28 +126,26 @@ public class MaterialTextArea extends MaterialFormField<String>
 		return textarea.getId();
 	}
 
-	 
-
 	@Override
-	public native String getValue()/*-{		
-		
+	public native String getValue()/*-{
+
 		var textarea = this.@gwt.material.design.components.client.ui.MaterialTextArea::textarea;
-		var element = textarea.@gwt.material.design.components.client.ui.html.Div::getElement()();		
+		var element = textarea.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		return element.value;
-		
+
 	}-*/;
 
 	@Override
 	public native void setValue(String value, boolean fireEvents)/*-{
-		
+
 		var textarea = this.@gwt.material.design.components.client.ui.MaterialTextArea::textarea;
 		var element = textarea.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		element.value = value;
-		
-		if(fireEvents){
+
+		if (fireEvents) {
 			this.@gwt.material.design.components.client.ui.MaterialTextArea::fireChangeEvent()();
 		}
-		
+
 	}-*/;
 
 	@Override

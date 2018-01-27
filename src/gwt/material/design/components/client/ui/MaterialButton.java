@@ -41,24 +41,16 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 
-	private boolean initialized = false;
-
 	public MaterialButton() {
 		super(CssName.MDC_BUTTON);
 	}
-
+	
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
-
-			if (getType() == null) {
-				setType(ButtonType.SECONDARY_RAISED);
-			}
-
-			initialized = true;
-
+	protected void onInitialize() {
+		super.onInitialize();
+		
+		if (getType() == null) {
+			setType(ButtonType.SECONDARY_RAISED);
 		}
 	}
 

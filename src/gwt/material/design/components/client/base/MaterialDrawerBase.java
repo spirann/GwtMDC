@@ -21,11 +21,13 @@ package gwt.material.design.components.client.base;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.ui.MaterialListGroup;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Aside;
+import gwt.material.design.components.client.ui.html.Nav;
 
 /**
  * 
@@ -35,31 +37,23 @@ import gwt.material.design.components.client.ui.html.Aside;
 public class MaterialDrawerBase extends Aside implements HasOpen {
 
 	protected JavaScriptObject jsElement;
-	protected MaterialListGroup content = new MaterialListGroup();
+	protected Nav content = new Nav(CssName.MDC_DRAWER_DRAWER);
 
 	private HandlerRegistration handler;
 
-	private boolean initialized = false;
-
 	protected MaterialDrawerBase(final String primaryClass) {
-		super(primaryClass);
+		super(CssName.MDC_DRAWER, primaryClass);
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-		if (!initialized) {
-			
-			jsElement = getElement();
-			
-			initialized = true;
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		jsElement = getElement();
 	}
 
 	@Override
 	protected void onUnload() {
 		super.onUnload();
-
 		if (handler != null) {
 			handler.removeHandler();
 		}
@@ -114,24 +108,20 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 
 	@Override
 	public native boolean isOpen()/*-{
-		
 		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
-		
 		return drawer && drawer.style.display != "none";
-		
 	}-*/;
 
-
 	protected native void setNativeOpen(boolean open)/*-{
-		
+
 		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
-		
+
 		if (open) {
 			drawer.style.display = "flex";
 		} else {
 			drawer.style.display = "none";
 		}
-		
+
 	}-*/;
 
 	@Override
@@ -144,12 +134,23 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 		setOpen(false);
 	}
 
-	public static class Spacer extends MaterialWidget {
-
-		protected Spacer(final String cssClass) {
-			super(HtmlElements.DIV.createElement(), cssClass);
-		}
-
+	@Override
+	public void setBackground(String background) {
+		content.setBackground(background);
 	}
 
+	@Override
+	public void setBackgroundColor(Color color) {
+		content.setBackgroundColor(color);
+	}
+
+	@Override
+	public void setBackgroundImage(String url) {
+		content.setBackgroundImage(url);
+	}
+
+	@Override
+	public void setBackgroundImageResource(ImageResource imageResource) {
+		content.setBackgroundImageResource(imageResource);
+	}
 }

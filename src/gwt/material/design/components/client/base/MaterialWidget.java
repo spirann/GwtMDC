@@ -148,7 +148,7 @@ public class MaterialWidget extends BaseWidget
 
 	private List<Appender> onLoadAdd;
 
-	private boolean initialize = false;
+	protected boolean initialized = false;
 
 	public MaterialWidget() {
 	}
@@ -204,8 +204,15 @@ public class MaterialWidget extends BaseWidget
 			onLoadAdd.clear();
 		}
 
-		initialize = true;
+		if(!initialized) {
+			onInitialize();
+			initialized = true;
+		}
 
+	}
+	
+	protected void onInitialize() {
+		
 	}
 
 	/*

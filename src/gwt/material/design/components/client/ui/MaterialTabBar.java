@@ -69,40 +69,36 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 	protected final TypeMixin<MaterialTabBar, TabBarTextColor> colorMixin = new TypeMixin<>(this);
 	protected int activeTabIndex = -1;
 
-	private boolean initialized = false;
-
 	public MaterialTabBar() {
 		super(CssName.MDC_TAB_BAR);
 		setRole(Role.TAB_BAR);
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		super.add(indicator);
 
-			super.add(indicator);
+		addChangeEvent(getElement());
 
-			addChangeEvent(getElement());
+		jsInit();
+		preventDefaultClick(true);
+		loadFirstSelected();
 
-			jsInit();
-			preventDefaultClick(true);
-			loadFirstSelected();
-
-			initialized = true;
-
-		}
 	}
 
 	protected native void addChangeEvent(Element element)/*-{
 
 		var _this = this;
-		element.addEventListener('MDCTabBar:change', function(tabs) {
-			var dynamicTabBar = tabs.detail;
-			var nthChildIndex = dynamicTabBar.activeTabIndex;
-			_this.@gwt.material.design.components.client.ui.MaterialTabBar::setActiveTabIndex(I)(nthChildIndex);
-		});
+		element
+				.addEventListener(
+						'MDCTabBar:change',
+						function(tabs) {
+							var dynamicTabBar = tabs.detail;
+							var nthChildIndex = dynamicTabBar.activeTabIndex;
+							_this.@gwt.material.design.components.client.ui.MaterialTabBar::setActiveTabIndex(I)(nthChildIndex);
+						});
 
 	}-*/;
 
@@ -117,7 +113,7 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 			final Widget child = getWidget(i);
 
 			if (child instanceof MaterialTab) {
-				final MaterialTab tab = (MaterialTab) child;				
+				final MaterialTab tab = (MaterialTab) child;
 				if (tab.isActive()) {
 					setActiveTabIndex(i);
 				}

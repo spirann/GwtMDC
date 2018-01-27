@@ -46,8 +46,6 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	protected final TypeMixin<MaterialFab, FabType> typeMixin = new TypeMixin<>(this);
 	protected final IconMixin<Span> iconMixin = new IconMixin<>(icon);
 
-	private boolean initialized = false;
-
 	public MaterialFab() {
 		super(CssName.MDC_FAB, CssName.MATERIAL_ICONS);
 		setAutoInitData(AutoInitData.MDC_RIPPLE);
@@ -55,13 +53,9 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {			
-			add(icon);
-			initialized = true;
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		add(icon);
 	}
 
 	@Override

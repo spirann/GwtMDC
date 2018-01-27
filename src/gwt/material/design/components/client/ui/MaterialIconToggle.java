@@ -49,7 +49,8 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialIconToggle::jsElement = $wnd.mdc.iconToggle.MDCIconToggle.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialIconToggle::jsElement = $wnd.mdc.iconToggle.MDCIconToggle
+				.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
@@ -62,8 +63,6 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	private boolean valueChangeHandlerInitialized;
 
-	private boolean initialized = false;
-
 	public MaterialIconToggle() {
 		super(CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
 		setRole(Role.BUTTON);
@@ -73,24 +72,23 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
-
-		if (!initialized) {
-			jsInit();
-			initializeChageEventListener();
-			updateColor();
-			initialized = true;
-		}
+	protected void onInitialize() {
+		super.onInitialize();
+		jsInit();
+		initializeChageEventListener();
+		updateColor();
 	}
 
 	public native void initializeChageEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
-		element.addEventListener('MDCIconToggle:change', function () {
-			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
-			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
-		});
+		element
+				.addEventListener(
+						'MDCIconToggle:change',
+						function() {
+							_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
+							_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
+						});
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {

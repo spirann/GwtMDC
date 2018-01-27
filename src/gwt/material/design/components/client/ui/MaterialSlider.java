@@ -45,7 +45,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	private boolean inputHandlerInitialized;
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
@@ -53,7 +53,8 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialSlider::jsElement = $wnd.mdc.slider.MDCSlider.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialSlider::jsElement = $wnd.mdc.slider.MDCSlider
+				.attachTo(element);
 	}-*/;
 
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
@@ -78,8 +79,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected Div pin = new Div(CssName.MDC_SLIDER_PIN);
 	protected Span pinMarker = new Span(CssName.MDC_SLIDER_PIN_VALUE_MARKER);
 
-	private boolean initialized = false;
-
 	public MaterialSlider() {
 		super();
 		setRole(Role.SLIDER);
@@ -87,31 +86,26 @@ public class MaterialSlider extends MaterialFormField<Double>
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		trackContainer.add(track);
+		trackContainer.add(markerContainer);
 
-			trackContainer.add(track);
-			trackContainer.add(markerContainer);
+		pin.add(pinMarker);
+		thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
+		thumbContainer.add(focusRing);
+		thumbContainer.add(pin);
 
-			pin.add(pinMarker);
-			thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
-			thumbContainer.add(focusRing);
-			thumbContainer.add(pin);
+		slider.add(trackContainer);
+		slider.add(thumbContainer);
+		add(slider);
 
-			slider.add(trackContainer);
-			slider.add(thumbContainer);
-			add(slider);
+		initializeChageEventListener();
+		initializeInputEventListener();
+		jsInit();
 
-			initializeChageEventListener();
-			initializeInputEventListener();
-			jsInit();
-
-			initialized = true;
-
-			setupTrackMarker();
-		}
+		setupTrackMarker();
 
 	}
 
@@ -135,24 +129,30 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected native void initializeChageEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		element.addEventListener('MDCSlider:change', function () {
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-		});
+		element
+				.addEventListener(
+						'MDCSlider:change',
+						function() {
+							_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+						});
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		
+
 		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinMarker;
 		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
-		
-		element.addEventListener('MDCSlider:input', function () {
-			pinMarkerElement.innerText = parseFloat(
-					_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()())
-					.toFixed(0);
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-		});
+
+		element
+				.addEventListener(
+						'MDCSlider:input',
+						function() {
+							pinMarkerElement.innerText = parseFloat(
+									_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()())
+									.toFixed(0);
+							_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+						});
 	}-*/;
 
 	@Override

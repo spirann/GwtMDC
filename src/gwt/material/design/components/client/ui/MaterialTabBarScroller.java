@@ -49,18 +49,23 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::jsElement = $wnd.mdc.tabs.MDCTabBarScroller.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::jsElement = $wnd.mdc.tabs.MDCTabBarScroller
+				.attachTo(element);
 	}-*/;
 
-	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR, CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
-	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
+	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
+	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
+			CssName.MATERIAL_ICONS);
 
 	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME);
 	protected MaterialTabBar tabBar = new MaterialTabBar();
 
-	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR, CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
-	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER, CssName.MATERIAL_ICONS);
-	
+	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
+			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
+	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
+			CssName.MATERIAL_ICONS);
+
 	protected final TypeMixin<MaterialTabBarScroller, TabBarTextColor> colorMixin = new TypeMixin<>(this);
 
 	private boolean initialized = false;
@@ -70,31 +75,25 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		backIndicatorInner.getElement().setAttribute("aria-label", "scroll back button");
+		backIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_BEFORE.getCssName());
+		scrollerBackIndicator.add(backIndicatorInner);
 
-			backIndicatorInner.getElement().setAttribute("aria-label", "scroll back button");
-			backIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_BEFORE.getCssName());
-			scrollerBackIndicator.add(backIndicatorInner);
+		tabBar.addStyleName(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS);
+		scrollerFrame.add(tabBar);
 
-			tabBar.addStyleName(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS);
-			scrollerFrame.add(tabBar);
+		forwardIndicatorInner.getElement().setAttribute("aria-label", "scroll forward button");
+		forwardIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_NEXT.getCssName());
+		scrollerForwardIndicator.add(forwardIndicatorInner);
 
-			forwardIndicatorInner.getElement().setAttribute("aria-label", "scroll forward button");
-			forwardIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_NEXT.getCssName());
-			scrollerForwardIndicator.add(forwardIndicatorInner);
+		super.add(scrollerBackIndicator);
+		super.add(scrollerFrame);
+		super.add(scrollerForwardIndicator);
 
-			super.add(scrollerBackIndicator);
-			super.add(scrollerFrame);
-			super.add(scrollerForwardIndicator);
-
-			jsInit();
-
-			initialized = true;
-
-		}
+		jsInit();
 	}
 
 	@Override
@@ -131,8 +130,8 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		backIndicatorInner.setTextColor(color);
 		forwardIndicatorInner.setTextColor(color);
 	}
-	
-	public void setColorScheme(TabBarTextColor barColor){
+
+	public void setColorScheme(TabBarTextColor barColor) {
 		colorMixin.setType(barColor);
 	}
 }

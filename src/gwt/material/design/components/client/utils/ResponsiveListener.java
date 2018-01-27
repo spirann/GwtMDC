@@ -27,8 +27,6 @@ public class ResponsiveListener {
 	
 	public static HandlerRegistration register(final Handler handler) {
 		
-		
-		
 		return Window.addResizeHandler(event -> {
 			
 			final int width = event.getWidth();

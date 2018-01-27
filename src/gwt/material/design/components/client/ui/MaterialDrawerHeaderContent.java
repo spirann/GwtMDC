@@ -20,29 +20,18 @@
 package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.constants.Typography;
-import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialLabel extends Label {
+public class MaterialDrawerHeaderContent extends Div {
 
-	public MaterialLabel() {
-		super(CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+	
+	public MaterialDrawerHeaderContent() {
+		super(CssName.MDC_DRAWER_HEADER_CONTENT);
 	}
-
-	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-
-		if (getTypography() == null) {
-			setTypography(Typography.BODY_2);
-		}
-
-		getElement().appendChild(HtmlElements.BR.createElement());
-	}
+	
 }

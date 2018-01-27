@@ -66,8 +66,6 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	protected Double progress = 0.0;
 	protected double buffer = 1.0;
 
-	private boolean initialized = false;
-
 	public MaterialLinearProgress() {
 		super(CssName.MDC_LINEAR_PROGRESS);
 		setRole(Role.PROGRESS_BAR);
@@ -78,26 +76,22 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	}-*/;
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		primaryBar.add(primaryInner);
+		secondaryBar.add(secondaryInner);
 
-			primaryBar.add(primaryInner);
-			secondaryBar.add(secondaryInner);
+		add(bufferingDots);
+		add(buffer_);
+		add(primaryBar);
+		add(secondaryBar);
 
-			add(bufferingDots);
-			add(buffer_);
-			add(primaryBar);
-			add(secondaryBar);
+		jsInit();
 
-			jsInit();
+		setBuffer(buffer);
+		setProgress(progress);
 
-			setBuffer(buffer);
-			setProgress(progress);
-
-			initialized = true;
-		}
 	}
 
 	@Override
@@ -130,18 +124,19 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	 */
 	@Override
 	public native void setBuffer(double buffer)/*-{
-		
+
 		this.@gwt.material.design.components.client.ui.MaterialLinearProgress::buffer = buffer;
 
 		var bufferingDots = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::bufferingDots;
 		var bufferingDotsElement = bufferingDots.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		var linearProgress = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::jsElement;
-		
+
 		if (linearProgress) {
-			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100) + "% - 6px)";
+			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100)
+					+ "% - 6px)";
 			linearProgress.buffer = buffer;
 		}
-		
+
 	}-*/;
 
 	@Override

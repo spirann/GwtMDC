@@ -60,9 +60,10 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 	protected native void jsInit()/*-{
 		var element = this.@gwt.material.design.components.client.ui.MaterialTab::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTab::jsElement = new $wnd.mdc.tabs.MDCTabFoundation(element);
+		this.@gwt.material.design.components.client.ui.MaterialTab::jsElement = new $wnd.mdc.tabs.MDCTabFoundation(
+				element);
 	}-*/;
-	
+
 	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB_ICON);
 	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
 
@@ -72,8 +73,6 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	protected final AttributeMixin<MaterialTab> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 
 	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB_ACTIVE);
-	
-	private boolean initialized = false;
 
 	private HandlerRegistration handler;
 
@@ -83,23 +82,18 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
-
-			if (getIcon() != null) {
-				add(icon);
-			}
-
-			add(label);
-
-			jsInit();
-			
-			updateTarget();			
-
-			initialized = true;
+		if (getIcon() != null) {
+			add(icon);
 		}
+
+		add(label);
+
+		jsInit();
+
+		updateTarget();
 	}
 
 	protected void updateTarget() {
@@ -108,7 +102,7 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 			final Element target = DOM.getElementById(getTarget());
 			if (target == null) {
-				
+
 				final String style;
 				if (isActive()) {
 					style = "#" + getTarget() + "{ display: block; }";
@@ -153,7 +147,7 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	protected void setActive(boolean active, boolean notifyParent) {
 		super.setActive(active);
 		activeMixin.setApply(active);
-		
+
 		updateTarget();
 
 		if (notifyParent && isAttached()) {

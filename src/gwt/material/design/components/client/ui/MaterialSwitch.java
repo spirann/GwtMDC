@@ -50,39 +50,31 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	// Label
 	// /////////////////////////////////////////////////////////////
 	protected Label label = new Label();
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
 	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
-
-	private boolean initialized = false;
 
 	public MaterialSwitch() {
 		super();
 	}
 
 	@Override
-	protected void onLoad() {
-		super.onLoad();
+	protected void onInitialize() {
+		super.onInitialize();
 
-		if (!initialized) {
+		divBackground.add(divKnob);
 
-			divBackground.add(divKnob);
+		switch_.setPadding(8);
+		switch_.setDisabledClass(CssName.MDC_SWITCH_DISABLED);
+		switch_.add(input);
+		switch_.add(divBackground);
 
-			switch_.setPadding(8);
-			switch_.setDisabledClass(CssName.MDC_SWITCH_DISABLED);
-			switch_.add(input);
-			switch_.add(divBackground);
+		label.addStyleName(CssName.MDC_SWITCH_LABEL);
 
-			label.addStyleName(CssName.MDC_SWITCH_LABEL);
-
-			add(switch_);
-			add(label);
-
-			initialized = true;
-
-		}
+		add(switch_);
+		add(label);
 	}
 
 	@Override
