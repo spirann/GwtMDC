@@ -145,7 +145,7 @@ public interface CssName {
 	String MDC_DRAWER_HEADER_CONTENT = "mdc-drawer__header-content";
 	String MDC_DRAWER_CONTENT = "mdc-drawer__content";
 	// Permanet
-	String MDC_DRAWER_PERMANENT = "mdc-permanent-drawer";
+	String MDC_DRAWER_PERMANENT = "mdc-drawer--permanent";
 	// Persistent
 	String MDC_DRAWER_PERSISTENT = "mdc-drawer--persistent";
 	// Temporary

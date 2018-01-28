@@ -1,6 +1,7 @@
 html, body {
 	margin: 0px;
 	padding: 0px;
+	height: 100%;
 }
 
 html, 
@@ -323,9 +324,15 @@ a:active {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
+.mdc-drawer--permanent,
 .mdc-drawer--persistent {
-	height: 100vh;
+	height: 100%;
 }  
+
+.mdc-drawer .mdc-drawer__drawer {
+	max-height: 100%;
+	overflow-y: auto; 
+}
 
 .mdc-permanent-drawer .mdc-list-group__subheader,
 .mdc-temporary-drawer .mdc-list-group__subheader,
