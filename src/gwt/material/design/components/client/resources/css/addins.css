@@ -130,6 +130,11 @@ a:active {
 	flex-direction: column;
 }
 
+.mdc-toolbar__section {
+	align-items: center;
+	align-content: center;
+}
+
 .mdc-toolbar img {
 	align-self: center;
 	margin: 0 0 0 16px;
@@ -404,11 +409,8 @@ a:active {
    
 .mdc-list-item .mdc-list-item__start-detail  {
 	color: var(--mdc-theme-text-primary-on-background);
-}
-   
-.mdc-list:not(.mdc-list--avatar-list) .mdc-list-item .mdc-list-item__start-detail  {
 	margin-right: 16px;
-}  
+}
 
 .mdc-list-item .mdc-list-item__start-detail:not(.material-icons)  {
 	width: 40px;

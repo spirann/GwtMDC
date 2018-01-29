@@ -62,8 +62,8 @@ public class MaterialTextArea extends MaterialFormField<String>
 	// /////////////////////////////////////////////////////////////
 	// Textarea
 	// /////////////////////////////////////////////////////////////
-	protected Div textField = new Div(CssName.MDC_TEXTFIELD, CssName.MDC_TEXTFIELD_MULTILINE);
-	protected Textarea textarea = new Textarea(CssName.MDC_TEXTFIELD_INPUT);
+	protected Div textField = new Div(CssName.MDC_TEXT_FIELD, CssName.MDC_TEXT_FIELD_MULTILINE);
+	protected Textarea textarea = new Textarea(CssName.MDC_TEXT_FIELD_INPUT);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
@@ -84,11 +84,11 @@ public class MaterialTextArea extends MaterialFormField<String>
 	protected final PlaceholderMixin<Textarea> placeholderMixin = new PlaceholderMixin<>(textarea);
 
 	protected final ApplyStyleMixin<MaterialTextArea> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXTFIELD_DENSE);
+			CssName.MDC_TEXT_FIELD_DENSE);
 	protected final ApplyStyleMixin<Label> helpPersistentMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXTFIELD_HELPTEXT_PERSISTENT);
+			CssName.MDC_TEXT_FIELD_HELPTEXT_PERSISTENT);
 	protected final ApplyStyleMixin<Label> helpValidationMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG);
+			CssName.MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG);
 
 	public MaterialTextArea() {
 		super();
@@ -98,14 +98,14 @@ public class MaterialTextArea extends MaterialFormField<String>
 	protected void onInitialize() {
 		super.onInitialize();
 
-		label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
+		label.addStyleName(CssName.MDC_TEXT_FIELD_LABEL);
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
 		setFlexDirection(FlexDirection.COLUMN);
 
-		helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
+		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
 
-		textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
+		textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
 		textField.add(textarea);
 		textField.add(label);
 

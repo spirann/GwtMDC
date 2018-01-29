@@ -297,15 +297,15 @@ public interface CssName {
 	String MDC_SWITCH_KNOB = "mdc-switch__knob";
 	String MDC_SWITCH_LABEL = "mdc-switch-label";
 	// Textfield
-	String MDC_TEXTFIELD = "mdc-textfield";
-	String MDC_TEXTFIELD_INPUT = "mdc-textfield__input";
-	String MDC_TEXTFIELD_LABEL = "mdc-textfield__label";
-	String MDC_TEXTFIELD_DISABLED = "mdc-textfield--disabled";
-	String MDC_TEXTFIELD_DENSE = "mdc-textfield--dense";
-	String MDC_TEXTFIELD_HELPTEXT = "mdc-textfield-helptext";
-	String MDC_TEXTFIELD_HELPTEXT_PERSISTENT = "mdc-textfield-helptext--persistent";
-	String MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG = "mdc-textfield-helptext--validation-msg";
-	String MDC_TEXTFIELD_MULTILINE = "mdc-textfield--multiline";
+	String MDC_TEXT_FIELD = "mdc-text-field";
+	String MDC_TEXT_FIELD_INPUT = "mdc-text-field__input";
+	String MDC_TEXT_FIELD_LABEL = "mdc-text-field__label";
+	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";
+	String MDC_TEXT_FIELD_DENSE = "mdc-text-field--dense";
+	String MDC_TEXT_FIELD_HELPTEXT = "mdc-text-field-helptext";
+	String MDC_TEXT_FIELD_HELPTEXT_PERSISTENT = "mdc-text-field-helptext--persistent";
+	String MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG = "mdc-text-field-helptext--validation-msg";
+	String MDC_TEXT_FIELD_MULTILINE = "mdc-text-field--multiline";
 	// //////////////////////////////////////////////////////
 	// LINEAR PROGRESS
 	// //////////////////////////////////////////////////////

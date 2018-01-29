@@ -61,20 +61,19 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	protected native void jsInit()/*-{
 		var textField = this.@gwt.material.design.components.client.ui.MaterialTextField::textField;
 		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textfield.MDCTextfield
-				.attachTo(element);
+		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textField.MDCTextField.attachTo(element);
 	}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
-	protected Div textField = new Div(CssName.MDC_TEXTFIELD);
-	protected Input input = new Input(InputType.TEXT, CssName.MDC_TEXTFIELD_INPUT);
+	protected Div textField = new Div(CssName.MDC_TEXT_FIELD);
+	protected Input input = new Input(InputType.TEXT, CssName.MDC_TEXT_FIELD_INPUT);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
 	// /////////////////////////////////////////////////////////////
-	protected Label label = new Label();
+	protected Label label = new Label(CssName.MDC_TEXT_FIELD_LABEL);
 	protected Label helper = new Label() {
 		@Override
 		public void setId(String id) {
@@ -92,11 +91,11 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
 
 	protected final ApplyStyleMixin<MaterialTextField> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXTFIELD_DENSE);
+			CssName.MDC_TEXT_FIELD_DENSE);
 	protected final ApplyStyleMixin<Label> helpPersistentMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXTFIELD_HELPTEXT_PERSISTENT);
+			CssName.MDC_TEXT_FIELD_HELPTEXT_PERSISTENT);
 	protected final ApplyStyleMixin<Label> helpValidationMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXTFIELD_HELPTEXT_VALIDATION_MSG);
+			CssName.MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG);
 
 	public MaterialTextField() {
 		super();
@@ -106,16 +105,19 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	protected void onInitialize() {
 		super.onInitialize();
 
-		label.addStyleName(CssName.MDC_TEXTFIELD_LABEL);
+		input.setId("x");
+		//label.addStyleName("mdc-text-field__label--float-above");
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
+		label.getElement().setAttribute("for", "x");
 
 		setFlexDirection(FlexDirection.COLUMN);
 
-		helper.addStyleName(CssName.MDC_TEXTFIELD_HELPTEXT);
+		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
 
-		textField.setDisabledClass(CssName.MDC_TEXTFIELD_DISABLED);
+		textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
 		textField.add(input);
 		textField.add(label);
+		textField.add(new Div("mdc-text-field__bottom-line"));
 
 		add(textField);
 		add(helper);
