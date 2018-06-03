@@ -49,6 +49,7 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 	protected void onInitialize() {
 		super.onInitialize();
 		jsElement = getElement();
+		content.setBackgroundColor(Color.MDC_THEME_BACKGROUND);
 	}
 
 	@Override

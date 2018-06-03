@@ -22,6 +22,7 @@ package gwt.material.design.components.client.base;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -131,6 +132,14 @@ public class MaterialWidget extends BaseWidget
 		}
 	}
 
+	// /////////////////////////////////////////////////////////////
+	// Initialize java script component
+	// /////////////////////////////////////////////////////////////
+	protected JavaScriptObject jsElement;
+
+	// /////////////////////////////////////////////////////////////
+	// Mixin list
+	// /////////////////////////////////////////////////////////////
 	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
@@ -141,7 +150,6 @@ public class MaterialWidget extends BaseWidget
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
-	
 
 	private String primaryClass;
 	private String[] initialClasses;
@@ -166,6 +174,11 @@ public class MaterialWidget extends BaseWidget
 		this(element, primaryClass);
 		setInitialClasses(initialClass);
 	}
+
+	protected native void jsInit()/*-{
+		var element = this.@gwt.material.design.components.client.base.MaterialWidget::getElement()();
+		this.@gwt.material.design.components.client.base.MaterialWidget::jsElement = element;
+	}-*/;
 
 	@Override
 	protected void onLoad() {
@@ -204,15 +217,15 @@ public class MaterialWidget extends BaseWidget
 			onLoadAdd.clear();
 		}
 
-		if(!initialized) {
+		if (!initialized) {
 			onInitialize();
 			initialized = true;
 		}
 
 	}
-	
+
 	protected void onInitialize() {
-		
+		jsInit();
 	}
 
 	/*

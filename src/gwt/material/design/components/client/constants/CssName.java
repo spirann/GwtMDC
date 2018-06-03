@@ -99,22 +99,18 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
 	// //////////////////////////////////////////////////////
-	String MDC_TOOLBAR = "mdc-toolbar";
-	String MDC_TOOLBAR_FIXED = "mdc-toolbar--fixed";
-	String MDC_TOOLBAR_WATERFALL = "mdc-toolbar--waterfall";
-	String MDC_TOOLBAR_LASTROW_ONLY = "mdc-toolbar--fixed-lastrow-only";
-	String MDC_TOOLBAR_FIXED_ADJUST = "mdc-toolbar-fixed-adjust";
-	String MDC_TOOLBAR_FLEXIBLE = "mdc-toolbar--flexible";
-	String MDC_TOOLBAR_FLEXIBLE_BEHAVIOR = "mdc-toolbar--flexible-default-behavior";
-	String MDC_TOOLBAR_ROW = "mdc-toolbar__row";
-	String MDC_TOOLBAR_SECTION = "mdc-toolbar__section";
-	String MDC_TOOLBAR_SECTION_ALIGN_START = "mdc-toolbar__section--align-start";
-	String MDC_TOOLBAR_SECTION_ALIGN_CENTER = "mdc-toolbar__section--align-center";
-	String MDC_TOOLBAR_SECTION_ALIGN_END = "mdc-toolbar__section--align-end";
-	String MDC_TOOLBAR_SECTION_SHRINK_TO_FIT = "mdc-toolbar__section--shrink-to-fit";
-	String MDC_TOOLBAR_TITLE = "mdc-toolbar__title";
-	String MDC_TOOLBAR_ICON_MENU = "material-icons mdc-toolbar__icon--menu";
-	String MDC_TOOLBAR_NAV_LINK = "toolbar-nav-link";
+	String MDC_TOP_APP_BAR = "mdc-top-app-bar";
+	String MDC_TOP_APP_BAR__NAVEGATION_ICON = "mdc-top-app-bar__navigation-icon";
+	String MDC_TOP_APP_BAR__TITLE = "mdc-top-app-bar__title";
+	String MDC_TOP_APP_BAR__ROW = "mdc-top-app-bar__row";
+	String MDC_TOP_APP_BAR__SECTION = "mdc-top-app-bar__section";
+	String MDC_TOP_APP_BAR__SECTION__ALIGN_START = "mdc-top-app-bar__section--align-start";
+	String MDC_TOP_APP_BAR__SECTION__ALIGN_END = "mdc-top-app-bar__section--align-end";
+	String MDC_TOP_APP_BAR__ACTION_ITEM = "mdc-top-app-bar__action-item";
+	String MDC_TOP_APP_BAR__FIXED = "mdc-top-app-bar--fixed";
+	String MDC_TOP_APP_BAR__PROMINENT = "mdc-top-app-bar--prominent";
+	String MDC_TOP_APP_BAR__SHORT = "mdc-top-app-bar--short";
+	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
 	// //////////////////////////////////////////////////////
 	// TAB BAR
 	// //////////////////////////////////////////////////////
@@ -154,8 +150,8 @@ public interface CssName {
 	// MENU
 	// //////////////////////////////////////////////////////
 	String MDC_MENU_ANCHOR = "mdc-menu-anchor";
-	String MDC_MENU = "mdc-simple-menu";
-	String MDC_MENU_ITEMS = "mdc-simple-menu__items";
+	String MDC_MENU = "mdc-menu";
+	String MDC_MENU_ITEMS = "mdc-menu__items";
 	// //////////////////////////////////////////////////////
 	// DIALOG
 	// //////////////////////////////////////////////////////
