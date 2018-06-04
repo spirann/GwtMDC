@@ -19,8 +19,6 @@
  */
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasHref;
@@ -30,6 +28,7 @@ import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Button;
 
 /**
@@ -45,6 +44,15 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 
 	public MaterialButton() {
 		super(CssName.MDC_BUTTON);
+	}
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		
+		if(getRipple() == null) {
+			setRipple(Ripple.DEFAULT);
+		}
 	}
 			
 	@Override

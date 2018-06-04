@@ -750,33 +750,33 @@ a:active {
 /* ==========================================================================
    Configure Ripple background
    ========================================================================== */
-.mdc-ripple-surface--none.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--none.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--none::before, 
+.mdc-ripple-surface--none::after {
 	background-color: transparent;
 }
     
-.mdc-ripple-surface--primary.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--primary.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--primary::before, 
+.mdc-ripple-surface--primary:after {
 	background-color: var(--mdc-theme-ripple-primary);
 }
 
-.mdc-ripple-surface--secondary.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--secondary.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--secondary::before, 
+.mdc-ripple-surface--secondary::after {
 	background-color: var(--mdc-theme-ripple-secondary);
 }
 
-.mdc-ripple-surface--on-primary.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--on-primary.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--on-primary::before, 
+.mdc-ripple-surface--on-primary::after {
 	background-color: var(--mdc-theme-ripple-on-primary);
 }
 
-.mdc-ripple-surface--on-secondary.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--on-secondary.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--on-secondary::before, 
+.mdc-ripple-surface--on-secondary::after {
 	background-color: var(--mdc-theme-ripple-on-secondary);
 }
 
-.mdc-ripple-surface--on-background.mdc-ripple-upgraded::before, 
-.mdc-ripple-surface--on-background.mdc-ripple-upgraded::after {
+.mdc-ripple-surface--on-background::before, 
+.mdc-ripple-surface--on-background::after {
 	background-color: var(--mdc-theme-ripple-on-background);
 }
 

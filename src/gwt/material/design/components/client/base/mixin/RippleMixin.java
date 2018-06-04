@@ -44,15 +44,17 @@ public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasR
 	@Override
 	public void setRipple(Ripple type) {
 		this.type = type;
+		
 		if (type == null) {
 			setStyle(null);
 		} else {
 			setStyle(type.getCssName());
 		}
-				
+		
 		if(jsElement == null) {
 			jsInit();
-		}
+		}				
+		
 	}
 
 	@Override
