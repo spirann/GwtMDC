@@ -79,18 +79,6 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	}
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;
-		var element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialRadioButton::jsElement = $wnd.mdc.radio.MDCRadio
-				.attachTo(element);
-	}-*/;
-
-	// /////////////////////////////////////////////////////////////
 	// Radio
 	// /////////////////////////////////////////////////////////////
 	private Div radio = new Div(CssName.MDC_RADIO);
@@ -111,13 +99,20 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 
 	public MaterialRadioButton() {
 		super();
-		setRipple(Ripple.SECONDARY);
-		setCircle(true);
 	}
+	
+	@Override
+	protected void jsInit() {
+		jsElement = jsInit(radio.getElement());
+	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+		return new $wnd.mdc.radio.MDCRadio(element);
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
@@ -133,21 +128,23 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 			putInHistory();
 		}
 
+		setRipple(Ripple.SECONDARY);
+		setCircle(true);
+		
 		addValueChangeListener(input.getElement());
 
-		jsInit();
+		super.onInitialize();
 	}
 
 	protected native void addValueChangeListener(Element element)/*-{
+		
 		var _this = this;
-		element
-				.addEventListener(
-						'change',
-						function(event) {
-							if (element.checked) {
-								_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-							}
-						});
+		element.addEventListener('change', function(event) {
+			if (element.checked) {
+				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
+			}
+		});
+		
 	}-*/;
 
 	@Override

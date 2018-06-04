@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasHref;
@@ -44,16 +46,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	public MaterialButton() {
 		super(CssName.MDC_BUTTON);
 	}
-	
-	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-		
-		if (getType() == null) {
-			setType(ButtonType.SECONDARY_RAISED);
-		}
-	}
-
+			
 	@Override
 	public String getText() {
 		return textMixin.getText();

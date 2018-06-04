@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasRipple;
@@ -32,7 +34,9 @@ import gwt.material.design.components.client.constants.Ripple;
 public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasRipple {
 
 	private Ripple type;
-
+	
+	private JavaScriptObject jsElement;
+	
 	public RippleMixin(final W widget) {
 		super(widget);
 	}
@@ -45,11 +49,22 @@ public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasR
 		} else {
 			setStyle(type.getCssName());
 		}
+				
+		if(jsElement == null) {
+			jsInit();
+		}
 	}
 
 	@Override
 	public Ripple getRipple() {
 		return type;
 	}
+	
+	private void jsInit() {
+		jsElement = jsInit(uiObject.getElement());
+	}
 
+	private native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.ripple.MDCRipple(element);
+	}-*/;
 }

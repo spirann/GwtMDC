@@ -177,9 +177,12 @@ public class MaterialWidget extends BaseWidget
 		setInitialClasses(initialClass);
 	}
 
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.base.MaterialWidget::getElement()();
-		this.@gwt.material.design.components.client.base.MaterialWidget::jsElement = element;
+	protected void jsInit() {
+		jsElement = jsInit(getElement());
+	}
+	
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return element;
 	}-*/;
 
 	@Override

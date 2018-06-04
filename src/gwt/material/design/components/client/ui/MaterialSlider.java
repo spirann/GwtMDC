@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.HasDiscrete;
@@ -45,17 +46,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	private boolean inputHandlerInitialized;
-
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialSlider::jsElement = $wnd.mdc.slider.MDCSlider
-				.attachTo(element);
-	}-*/;
 
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
@@ -86,8 +76,13 @@ public class MaterialSlider extends MaterialFormField<Double>
 	}
 
 	@Override
+	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+		return new $wnd.mdc.slider.MDCSlider(element);
+	}-*/;
+
+	
+	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		trackContainer.add(track);
 		trackContainer.add(markerContainer);
@@ -103,9 +98,10 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 		initializeChageEventListener();
 		initializeInputEventListener();
-		jsInit();
 
 		setupTrackMarker();
+		
+		super.onInitialize();
 
 	}
 

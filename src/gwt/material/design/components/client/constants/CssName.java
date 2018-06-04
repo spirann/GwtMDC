@@ -47,6 +47,7 @@ public interface CssName {
 	// RIPPLES
 	// //////////////////////////////////////////////////////
 	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
+	String MDC_RIPPLE_UPGRADED = "mdc-ripple-upgraded";
 	String MDC_RIPPLE_SURFACE_PRIMARY = "mdc-ripple-surface--primary";
 	String MDC_RIPPLE_SURFACE_SECONDARY = "mdc-ripple-surface--secondary";
 	String MDC_RIPPLE_SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
@@ -84,18 +85,18 @@ public interface CssName {
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";
-	String MDC_TYPOGRAPHY_ADJUST_MARGIN = "mdc-typography--adjust-margin";
-	String MDC_TYPOGRAPHY_DISPLAY_4 = "mdc-typography--display4";
-	String MDC_TYPOGRAPHY_DISPLAY_3 = "mdc-typography--display3";
-	String MDC_TYPOGRAPHY_DISPLAY_2 = "mdc-typography--display2";
-	String MDC_TYPOGRAPHY_DISPLAY_1 = "mdc-typography--display1";
-	String MDC_TYPOGRAPHY_HEADLINE = "mdc-typography--headline";
-	String MDC_TYPOGRAPHY_TITLE = "mdc-typography--title";
-	String MDC_TYPOGRAPHY_SUBHEADING_2 = "mdc-typography--subheading2";
-	String MDC_TYPOGRAPHY_SUBHEADING_1 = "mdc-typography--subheading1";
-	String MDC_TYPOGRAPHY_BODY_2 = "mdc-typography--body2";
+	String MDC_TYPOGRAPHY_HEADLINE_1 = "mdc-typography--headline1";
+	String MDC_TYPOGRAPHY_HEADLINE_2 = "mdc-typography--headline2";
+	String MDC_TYPOGRAPHY_HEADLINE_3 = "mdc-typography--headline3";
+	String MDC_TYPOGRAPHY_HEADLINE_4 = "mdc-typography--headline4";
+	String MDC_TYPOGRAPHY_HEADLINE_5 = "mdc-typography--headline5";
+	String MDC_TYPOGRAPHY_HEADLINE_6 = "mdc-typography--headline6";
 	String MDC_TYPOGRAPHY_BODY_1 = "mdc-typography--body1";
+	String MDC_TYPOGRAPHY_BODY_2 = "mdc-typography--body2";
 	String MDC_TYPOGRAPHY_CAPTION = "mdc-typography--caption";
+	String MDC_TYPOGRAPHY_BUTTON = "mdc-typography--button";
+	String MDC_TYPOGRAPHY_OVERLINE = "mdc-typography--overline";
+	
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
 	// //////////////////////////////////////////////////////
@@ -108,6 +109,7 @@ public interface CssName {
 	String MDC_TOP_APP_BAR__SECTION__ALIGN_END = "mdc-top-app-bar__section--align-end";
 	String MDC_TOP_APP_BAR__ACTION_ITEM = "mdc-top-app-bar__action-item";
 	String MDC_TOP_APP_BAR__FIXED = "mdc-top-app-bar--fixed";
+	String MDC_TOP_APP_BAR__FIXED_ADJUST = "mdc-top-app-bar--fixed-adjust";
 	String MDC_TOP_APP_BAR__PROMINENT = "mdc-top-app-bar--prominent";
 	String MDC_TOP_APP_BAR__SHORT = "mdc-top-app-bar--short";
 	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
@@ -191,26 +193,15 @@ public interface CssName {
 	String MDC_LAYOUT_CELL_ALIGN_MIDDLE = "mdc-layout-grid__cell--align-middle";
 	String MDC_LAYOUT_CELL_ALIGN_BOTTOM = "mdc-layout-grid__cell--align-bottom";
 	// //////////////////////////////////////////////////////
-	// GRID LIST
+	// IMAGE LIST
 	// //////////////////////////////////////////////////////
-	String MDC_GRID_LIST = "mdc-grid-list";
-	String MDC_GRID_LIST_TILES = "mdc-grid-list__tiles";
-	String MDC_GRID_LIST_HEADER_CAPTION = "mdc-grid-list--header-caption";
-	String MDC_GRID_LIST_ICON_ALIGN_START = "mdc-grid-list--with-icon-align-start";
-	String MDC_GRID_LIST_ICON_ALIGN_END = "mdc-grid-list--with-icon-align-end";
-	String MDC_GRID_LIST_TWO_LINE_CAPTION = "mdc-grid-list--twoline-caption";
-	// ------------------------------------------------------------------------
-	// + one of --> 16x9 | 2x3 | 3x2 | 4x3 | 3x4
-	// Ex.: mdc-grid-list--tile-aspect-16x9
-	String MDC_GRID_LIST_TILE_ASPECT = "mdc-grid-list--tile-aspect-";
-	// ------------------------------------------------------------------------
-	String MDC_GRID_TILE = "mdc-grid-tile";
-	String MDC_GRID_TILE_TITLE = "mdc-grid-tile__title";
-	String MDC_GRID_TILE_ICON = "mdc-grid-tile__icon";
-	String MDC_GRID_TILE_SUPPORT_TEXT = "mdc-grid-tile__support-text";
-	String MDC_GRID_TILE_PRIMARY = "mdc-grid-tile__primary";
-	String MDC_GRID_TILE_PRIMARY_CONTENT = "mdc-grid-tile__primary-content";
-	String MDC_GRID_TILE_SECONDARY = "mdc-grid-tile__secondary";
+	String MDC_IMAGE_LIST = "mdc-image-list";
+	String MDC_IMAGE_LIST__MASONRY = "mdc-image-list--masonry";
+	String MDC_IMAGE_LIST__ITEM = "mdc-image-list__item";
+	String MDC_IMAGE_LIST__IMAGE = "mdc-image-list__image";
+	String MDC_IMAGE_LIST__LABEL = "mdc-image-list__label";
+	String MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER = "mdc-image-list__image-aspect-container";
+	String MDC_IMAGE_LIST__SUPPORTING = "mdc-image-list__supporting";
 	// //////////////////////////////////////////////////////
 	// ICONS
 	// //////////////////////////////////////////////////////
@@ -220,12 +211,11 @@ public interface CssName {
 	// BUTTONS
 	// //////////////////////////////////////////////////////
 	String MDC_BUTTON = "mdc-button";
-	String MDC_BUTTON_DENSE = "mdc-button--dense";
 	String MDC_BUTTON_RAISED = "mdc-button--raised";
-	String MDC_BUTTON_COMPACT = "mdc-button--compact";
-	String MDC_BUTTON_PRIMARY = "mdc-button--primary";
-	String MDC_BUTTON_SECONDARY = "mdc-button--accent";
-	String MDC_BUTTON_STROKED = "mdc-button--stroked";
+	String MDC_BUTTON_UNELEVATED = "mdc-button--unelevated";
+	String MDC_BUTTON_OUTLINE = "mdc-button--outlined";
+	String MDC_BUTTON_DENSE = "mdc-button--dense";
+	String MDC_BUTTON_ICON = "mdc-button__icon";
 	// //////////////////////////////////////////////////////
 	// FAB - Floating Action Button
 	// //////////////////////////////////////////////////////

@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
@@ -45,16 +46,6 @@ import gwt.material.design.components.client.ui.html.Label;
 public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText, HasIndeterminate {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialCheckbox::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialCheckbox::jsElement = $wnd.mdc.checkbox.MDCCheckbox.attachTo(element);
-	}-*/;
-
-	// /////////////////////////////////////////////////////////////
 	// Checkbox
 	// /////////////////////////////////////////////////////////////
 	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
@@ -72,28 +63,34 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	public MaterialCheckbox() {
 		super();
-		setRipple(Ripple.SECONDARY);
-		setCircle(true);
 	}
 
 	@Override
+	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+		return new $wnd.mdc.checkbox.MDCCheckbox(element);
+	}-*/;
+
+	@Override
 	protected void onInitialize() {
+		
+		setRipple(Ripple.SECONDARY);
+		setCircle(true);
+
+		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
+
+		background.add(checkmark);
+		background.add(mixedmark);
+
+		checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
+		checkbox.add(input);
+		checkbox.add(background);
+
+		add(checkbox);
+		add(label);
+
+		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);		
+
 		super.onInitialize();
-
-			checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-
-			background.add(checkmark);
-			background.add(mixedmark);
-
-			checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
-			checkbox.add(input);
-			checkbox.add(background);
-
-			add(checkbox);
-			add(label);
-
-			jsInit();
-			checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
 	}
 
 	@Override

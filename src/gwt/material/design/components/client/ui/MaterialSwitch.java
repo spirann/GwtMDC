@@ -62,7 +62,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		divBackground.add(divKnob);
 
@@ -75,6 +74,8 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 
 		add(switch_);
 		add(label);
+		
+		super.onInitialize();
 	}
 
 	@Override

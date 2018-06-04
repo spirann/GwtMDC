@@ -85,7 +85,8 @@ a:active {
 	align-content: flex-start;
 	flex-direction: row;
 	flex-wrap: wrap;	
-	overflow-x: hidden; 
+	overflow-x: hidden;
+	position: relative; 
 }
 
 /* ==========================================================================

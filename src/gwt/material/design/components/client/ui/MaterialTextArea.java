@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
@@ -46,18 +47,6 @@ import gwt.material.design.components.client.ui.html.Textarea;
  */
 public class MaterialTextArea extends MaterialFormField<String>
 		implements HasText, HasLabel, HasDense, HasRequired, HasHelpText, HasPlaceholder {
-
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var textField = this.@gwt.material.design.components.client.ui.MaterialTextArea::textField;
-		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTextArea::jsElement = $wnd.mdc.textfield.MDCTextfield
-				.attachTo(element);
-	}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Textarea
@@ -93,10 +82,19 @@ public class MaterialTextArea extends MaterialFormField<String>
 	public MaterialTextArea() {
 		super();
 	}
+	
+	@Override
+	protected void jsInit() {
+		jsElement = jsInit(textField.getElement());
+	}
+
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.textfield.MDCTextfield(element);
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		label.addStyleName(CssName.MDC_TEXT_FIELD_LABEL);
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
@@ -111,8 +109,8 @@ public class MaterialTextArea extends MaterialFormField<String>
 
 		add(textField);
 		add(helper);
-
-		jsInit();
+		
+		super.onInitialize();
 	}
 
 	@Override

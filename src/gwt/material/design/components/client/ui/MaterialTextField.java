@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
@@ -52,17 +53,6 @@ import gwt.material.design.components.client.ui.html.Label;
  */
 public class MaterialTextField extends MaterialFormField<String> implements HasText, HasLabel, HasDense, HasRequired,
 		HasPattern, HasHelpText, HasPlaceholder, HasType<InputType>, HasInputMask {
-
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var textField = this.@gwt.material.design.components.client.ui.MaterialTextField::textField;
-		var element = textField.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTextField::jsElement = $wnd.mdc.textField.MDCTextField.attachTo(element);
-	}-*/;
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -102,11 +92,20 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	}
 
 	@Override
+	protected void jsInit() {
+		jsElement = jsInit(textField.getElement());
+	}
+
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.textField.MDCTextField(element);
+	}-*/;
+
+	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		input.setId("x");
-		//label.addStyleName("mdc-text-field__label--float-above");
+		// label.addStyleName("mdc-text-field__label--float-above");
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 		label.getElement().setAttribute("for", "x");
 
@@ -121,8 +120,8 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 
 		add(textField);
 		add(helper);
-
-		jsInit();
+		
+		super.onInitialize();
 	}
 
 	@Override

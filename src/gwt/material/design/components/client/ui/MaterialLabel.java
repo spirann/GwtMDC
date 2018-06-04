@@ -32,7 +32,7 @@ import gwt.material.design.components.client.ui.html.Label;
 public class MaterialLabel extends Label {
 
 	public MaterialLabel() {
-		super(CssName.MDC_TYPOGRAPHY_ADJUST_MARGIN);
+		super(CssName.MDC_TYPOGRAPHY);
 	}
 
 	@Override
