@@ -19,18 +19,33 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.user.client.ui.HasText;
+
+import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Span;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialToolbarRow extends Div {
+public class MaterialTopAppBarTitle extends Span implements HasText {
 
-	public MaterialToolbarRow() {
-		super(CssName.MDC_TOOLBAR_ROW);
+	protected final TextMixin<MaterialTopAppBarTitle> textMixin = new TextMixin<>(this);
+
+	public MaterialTopAppBarTitle() {
+		super(CssName.MDC_TOP_APP_BAR__TITLE);
+	}
+
+	@Override
+	public String getText() {
+		return textMixin.getText();
+	}
+
+	@Override
+	public void setText(String text) {
+		textMixin.setText(text);
 	}
 
 }

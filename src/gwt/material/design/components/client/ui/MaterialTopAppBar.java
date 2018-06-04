@@ -30,19 +30,19 @@ import gwt.material.design.components.client.ui.html.Header;
  * @author Richeli Vargas
  *
  */
-public class MaterialToAppBar extends Header implements HasType<TopAppBarType> {
+public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> {
 
 	@Override
 	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialToAppBar::getElement()();
-		this.@gwt.material.design.components.client.base.MaterialWidget::jsElement = new $wnd.MDCTopAppBar(element);
+		var element = this.@gwt.material.design.components.client.ui.MaterialTopAppBar::getElement()();
+		this.@gwt.material.design.components.client.base.MaterialWidget::jsElement = new $wnd.mdc.topAppBar.MDCTopAppBar(element);
 	}-*/;
 
-	protected final TypeMixin<MaterialToAppBar, TopAppBarType> typeMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialTopAppBar, TopAppBarType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialize = false;
 
-	public MaterialToAppBar() {
+	public MaterialTopAppBar() {
 		super(CssName.MDC_TOP_APP_BAR);
 	}
 

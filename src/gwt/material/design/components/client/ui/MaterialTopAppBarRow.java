@@ -27,10 +27,10 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialContent extends Div {
+public class MaterialTopAppBarRow extends Div {
 
-	public MaterialContent(){
-		super(CssName.MDC_CONTENT, CssName.MDC_TYPOGRAPHY);
+	public MaterialTopAppBarRow() {
+		super(CssName.MDC_TOP_APP_BAR__ROW);
 	}
 
 }

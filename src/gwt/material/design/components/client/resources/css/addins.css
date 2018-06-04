@@ -746,11 +746,6 @@ a:active {
    Menu adjust
    ========================================================================== */
 
-.mdc-simple-menu {
-	background-color: var(--mdc-theme-background, #fff);
-	border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(255,255,255,0.24));
-}
-
 /* ==========================================================================
    Configure Ripple background
    ========================================================================== */

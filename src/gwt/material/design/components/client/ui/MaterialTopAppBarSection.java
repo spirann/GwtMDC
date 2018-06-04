@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.mixin.StyleEnabledMixin;
 import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssType;
@@ -32,12 +31,11 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialToolbarSection extends Section {
+public class MaterialTopAppBarSection extends Section {
 
 	public enum Align implements CssType {
 
-		START(CssName.MDC_TOOLBAR_SECTION_ALIGN_START), CENTER(CssName.MDC_TOOLBAR_SECTION_ALIGN_CENTER), END(
-				CssName.MDC_TOOLBAR_SECTION_ALIGN_END);
+		START(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_START), END(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_END);
 
 		private final String cssClass;
 
@@ -51,24 +49,22 @@ public class MaterialToolbarSection extends Section {
 		}
 
 		public static Align fromStyleName(final String styleName) {
-			return EnumHelper.fromStyleName(styleName, Align.class, CENTER);
+			return EnumHelper.fromStyleName(styleName, Align.class, START);
 		}
 	};
 
-	protected final StyleMixin<MaterialToolbarSection> alignMixin = new StyleMixin<>(this);
-	protected final StyleEnabledMixin<MaterialToolbarSection> shrinkToFitMixin = new StyleEnabledMixin<>(this,
-			CssName.MDC_TOOLBAR_SECTION_SHRINK_TO_FIT);
+	protected final StyleMixin<MaterialTopAppBarSection> alignMixin = new StyleMixin<>(this);
 
-	public MaterialToolbarSection() {
-		super(CssName.MDC_TOOLBAR_SECTION);
+	public MaterialTopAppBarSection() {
+		super(CssName.MDC_TOP_APP_BAR__SECTION);
 		setRole(Role.TOOLBAR);
 	}
 
 	/**
 	 * Toolbar sections are aligned to the toolbar’s center. You can change this
 	 * behavior by applying mdc-toolbar__section--align-start or
-	 * mdc-toolbar__section--align-end to align the sections to the start or the
-	 * end of the toolbar (respectively).
+	 * mdc-toolbar__section--align-end to align the sections to the start or the end
+	 * of the toolbar (respectively).
 	 * 
 	 * @param align
 	 */
@@ -80,19 +76,4 @@ public class MaterialToolbarSection extends Section {
 		Align.fromStyleName(alignMixin.getStyle());
 	}
 
-	/**
-	 * Toolbar sections are laid out using flexbox. Each section will take up an
-	 * equal amount of space within the toolbar by default. But you can
-	 * accommodate very long section (very long title) by adding
-	 * mdc-toolbar__section--shrink-to-fit to other sections.
-	 * 
-	 * @param shrinkToFit
-	 */
-	public void setShrinkToFit(final boolean shrinkToFit) {
-		shrinkToFitMixin.setEnabled(shrinkToFit);
-	}
-
-	public boolean isShrinkToFit() {
-		return shrinkToFitMixin.isEnabled();
-	}
 }

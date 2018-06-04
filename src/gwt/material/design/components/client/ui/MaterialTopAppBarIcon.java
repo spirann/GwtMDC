@@ -33,17 +33,17 @@ import gwt.material.design.components.client.ui.html.Anchor;
  * @author Richeli Vargas
  *
  */
-public class MaterialToolbarIcon extends Anchor implements HasType<IconType>, HasHref {
+public class MaterialTopAppBarIcon extends Anchor implements HasType<IconType>, HasHref {
 
-	protected final AttributeMixin<MaterialToolbarIcon> hrefMixin = new AttributeMixin<>(this, "href");
-	protected final AttributeMixin<MaterialToolbarIcon> targetMixin = new AttributeMixin<>(this, "target");
-	protected final IconMixin<MaterialToolbarIcon> iconMixin = new IconMixin<>(this);
+	protected final AttributeMixin<MaterialTopAppBarIcon> hrefMixin = new AttributeMixin<>(this, "href");
+	protected final AttributeMixin<MaterialTopAppBarIcon> targetMixin = new AttributeMixin<>(this, "target");
+	protected final IconMixin<MaterialTopAppBarIcon> iconMixin = new IconMixin<>(this);
 
-	public MaterialToolbarIcon() {
-		super(CssName.MDC_TOOLBAR_ICON_MENU);
+	public MaterialTopAppBarIcon() {
+		super(CssName.MATERIAL_ICONS, CssName.MDC_TOP_APP_BAR__NAVEGATION_ICON);
 	}
 
-	public MaterialToolbarIcon(final IconType type) {
+	public MaterialTopAppBarIcon(final IconType type) {
 		this();
 		setType(type);
 	}

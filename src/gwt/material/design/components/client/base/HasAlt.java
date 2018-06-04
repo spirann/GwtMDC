@@ -17,20 +17,18 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui;
+package gwt.material.design.components.client.base;
 
-import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialContent extends Div {
-
-	public MaterialContent(){
-		super(CssName.MDC_CONTENT, CssName.MDC_TYPOGRAPHY);
-	}
+public interface HasAlt {
+	
+	public void setAlt(String alt);
+	
+	public String getAlt();
 
 }

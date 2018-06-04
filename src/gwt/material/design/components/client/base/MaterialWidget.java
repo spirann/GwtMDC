@@ -103,7 +103,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel {
 
 	static {
 		autoInit();
@@ -146,6 +146,8 @@ public class MaterialWidget extends BaseWidget
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final RoleMixin<MaterialWidget> roleMixin = new RoleMixin<>(this);
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
+	protected final AttributeMixin<MaterialWidget> altMixin = new AttributeMixin<>(this, "alt");
+	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
@@ -714,5 +716,25 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public HideOn getHideOn() {
 		return hideOnMixin.getType();
+	}
+
+	@Override
+	public void setAriaLabel(String ariaLabel) {
+		ariaLabelMixin.setAttribute(ariaLabel);
+	}
+
+	@Override
+	public String getAriaLabel() {
+		return ariaLabelMixin.getAttribute();
+	}
+
+	@Override
+	public void setAlt(String alt) {
+		altMixin.setAttribute(alt);
+	}
+
+	@Override
+	public String getAlt() {
+		return altMixin.getAttribute();
 	}
 }
