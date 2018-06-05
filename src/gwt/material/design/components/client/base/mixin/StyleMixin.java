@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -29,46 +28,18 @@ public class StyleMixin<H extends Widget> extends AbstractMixin<H> {
 
 	private String style;
 
-	private HandlerRegistration handler;
-
 	public StyleMixin(final H widget) {
 		super(widget);
 	}
 
-	@Override
-	public void setUiObject(H uiObject) {
-		super.setUiObject(uiObject);
-
-		// Clean up previous handler
-		if (handler != null) {
-			handler.removeHandler();
-			handler = null;
-		}
-	}
-
 	public void setStyle(String styles) {
-
-		if (!uiObject.isAttached() && handler == null) {
-			handler = uiObject.addAttachHandler(event -> {
-				if (event.isAttached()) {
-					applyStyle(styles);
-				} else if (handler != null) {
-					handler.removeHandler();
-					handler = null;
-				}
-			});
-		} else {
-			applyStyle(styles);
-		}
-
-	}
-
-	public void applyStyle(String styles) {
+		
 		if (this.style != null && !this.style.isEmpty()) {
 			for (String style : this.style.split(" ")) {
 				uiObject.removeStyleName(style);
 			}
 		}
+		
 		this.style = styles;
 
 		if (styles != null && !styles.isEmpty()) {
@@ -76,6 +47,7 @@ public class StyleMixin<H extends Widget> extends AbstractMixin<H> {
 				uiObject.addStyleName(style);
 			}
 		}
+		
 	}
 
 	public String getStyle() {

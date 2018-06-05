@@ -22,22 +22,21 @@ package gwt.material.design.components.client.ui;
 import gwt.material.design.components.client.base.HasInset;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Hr;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialListDivider extends Div implements HasInset {
+public class MaterialListDivider extends Hr implements HasInset {
 
 	protected final ApplyStyleMixin<MaterialListDivider> insetMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_LIST_DIVIDER_INSET);
 
 	public MaterialListDivider() {
 		super(CssName.MDC_LIST_DIVIDER);
-		setRole(Role.SEPARATOR);
+		//setRole(Role.SEPARATOR);
 	}
 
 	public MaterialListDivider(final boolean inset) {

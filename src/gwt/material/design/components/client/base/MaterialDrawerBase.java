@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.base;
 
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Widget;
@@ -36,20 +35,13 @@ import gwt.material.design.components.client.ui.html.Nav;
  */
 public class MaterialDrawerBase extends Aside implements HasOpen {
 
-	protected JavaScriptObject jsElement;
+	
 	protected Nav content = new Nav(CssName.MDC_DRAWER_DRAWER);
 
 	private HandlerRegistration handler;
 
 	protected MaterialDrawerBase(final String primaryClass) {
 		super(CssName.MDC_DRAWER, primaryClass);
-	}
-
-	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-		jsElement = getElement();
-		content.setBackgroundColor(Color.MDC_THEME_BACKGROUND);
 	}
 
 	@Override
@@ -109,13 +101,13 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 
 	@Override
 	public native boolean isOpen()/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		return drawer && drawer.style.display != "none";
 	}-*/;
 
 	protected native void setNativeOpen(boolean open)/*-{
 
-		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 
 		if (open) {
 			drawer.style.display = "flex";

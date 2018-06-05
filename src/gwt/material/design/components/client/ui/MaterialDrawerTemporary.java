@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+
 import gwt.material.design.components.client.base.MaterialDrawerBase;
 import gwt.material.design.components.client.constants.CssName;
 
@@ -29,33 +32,29 @@ import gwt.material.design.components.client.constants.CssName;
  */
 public class MaterialDrawerTemporary extends MaterialDrawerBase {
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected native void jsInit() /*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialDrawerTemporary::getElement()();
-		this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement = $wnd.mdc.drawer.MDCTemporaryDrawer.attachTo(element);
-	}-*/;
-
 	public MaterialDrawerTemporary() {
 		super(CssName.MDC_DRAWER_TEMPORARY);
 	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.drawer.MDCTemporaryDrawer(element);
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		jsInit();
 	}
 
 	@Override
 	public native boolean isOpen()/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		return drawer && drawer.open;
 	}-*/;
 
 	@Override
 	protected native void setNativeOpen(boolean open)/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialDrawerBase::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		drawer.open = open;
 	}-*/;
 

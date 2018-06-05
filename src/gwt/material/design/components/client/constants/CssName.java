@@ -46,13 +46,15 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// RIPPLES
 	// //////////////////////////////////////////////////////
-	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
-	String MDC_RIPPLE_UPGRADED = "mdc-ripple-upgraded";
-	String MDC_RIPPLE_SURFACE_PRIMARY = "mdc-ripple-surface--primary";
-	String MDC_RIPPLE_SURFACE_SECONDARY = "mdc-ripple-surface--secondary";
-	String MDC_RIPPLE_SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
-	String MDC_RIPPLE_SURFACE_ON_SECONDARY = "mdc-ripple-surface--on-secondary";
-	String MDC_RIPPLE_SURFACE_ON_BACKGROUND = "mdc-ripple-surface--on-background";
+	String MDC_RIPPLE__SURFACE = "mdc-ripple-surface";
+	String MDC_RIPPLE__UPGRADED = "mdc-ripple-upgraded";
+	String MDC_RIPPLE__UPGRADED_UNBOUNDED = "mdc-ripple-upgraded--unbounded";
+	String MDC_RIPPLE__SURFACE_NONE = "mdc-ripple-surface--none";
+	String MDC_RIPPLE__SURFACE_PRIMARY = "mdc-ripple-surface--primary";
+	String MDC_RIPPLE__SURFACE_SECONDARY = "mdc-ripple-surface--secondary";
+	String MDC_RIPPLE__SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
+	String MDC_RIPPLE__SURFACE_ON_SECONDARY = "mdc-ripple-surface--on-secondary";
+	String MDC_RIPPLE__SURFACE_ON_BACKGROUND = "mdc-ripple-surface--on-background";
 	// //////////////////////////////////////////////////////
 	// ELEVATION
 	// //////////////////////////////////////////////////////
@@ -110,8 +112,12 @@ public interface CssName {
 	String MDC_TOP_APP_BAR__ACTION_ITEM = "mdc-top-app-bar__action-item";
 	String MDC_TOP_APP_BAR__FIXED = "mdc-top-app-bar--fixed";
 	String MDC_TOP_APP_BAR__FIXED_ADJUST = "mdc-top-app-bar--fixed-adjust";
+	String MDC_TOP_APP_BAR__DENSE = "mdc-top-app-bar--dense";
+	String MDC_TOP_APP_BAR__DENSE_FIXED_ADJUST = "mdc-top-app-bar--dense-fixed-adjust";	
 	String MDC_TOP_APP_BAR__PROMINENT = "mdc-top-app-bar--prominent";
+	String MDC_TOP_APP_BAR__PROIMINENT_FIXED_ADJUST = "mdc-top-app-bar--prominent-fixed-adjust";	
 	String MDC_TOP_APP_BAR__SHORT = "mdc-top-app-bar--short";
+	String MDC_TOP_APP_BAR__SHORT_FIXED_ADJUST = "mdc-top-app-bar--short-fixed-adjust";
 	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
 	// //////////////////////////////////////////////////////
 	// TAB BAR
@@ -235,10 +241,11 @@ public interface CssName {
 	String MDC_LIST_AVATAR_LIST = "mdc-list--avatar-list";
 	String MDC_LIST_DENSE = "mdc-list--dense";
 	String MDC_LIST_ITEM = "mdc-list-item";
-	String MDC_LIST_ITEM_START_DETAIL = "mdc-list-item__start-detail";
-	String MDC_LIST_ITEM_END_DETAIL = "mdc-list-item__end-detail";
-	String MDC_LIST_ITEM_TEXT = "mdc-list-item__text";
-	String MDC_LIST_ITEM_TEXT_SECONDARY = "mdc-list-item__text__secondary";
+	String MDC_LIST_ITEM__SELECTED = "mdc-list-item--selected";
+	String MDC_LIST_ITEM__START_DETAIL = "mdc-list-item__start-detail";
+	String MDC_LIST_ITEM__END_DETAIL = "mdc-list-item__end-detail";
+	String MDC_LIST_ITEM__TEXT = "mdc-list-item__text";
+	String MDC_LIST_ITEM__TEXT_SECONDARY = "mdc-list-item__text__secondary";
 	// //////////////////////////////////////////////////////
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////

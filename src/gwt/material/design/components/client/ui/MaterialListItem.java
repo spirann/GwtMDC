@@ -56,6 +56,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
 
+	private boolean selected = false;
 	private boolean initialized = false;
 
 	public MaterialListItem() {
@@ -69,25 +70,25 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 
 			ariaHiddenMixin.setAttribute(true);
 
-			avatar.addStyleName(CssName.MDC_LIST_ITEM_START_DETAIL);
+			avatar.addStyleName(CssName.MDC_LIST_ITEM__START_DETAIL);
 			avatar.setCircle(true);
 
 			if (avatar.getUrl() != null && !avatar.getUrl().isEmpty()) {
 				insert(avatar, 0);
 			}
 
-			icon.addStyleName(CssName.MDC_LIST_ITEM_START_DETAIL);
+			icon.addStyleName(CssName.MDC_LIST_ITEM__START_DETAIL);
 			icon.setCircle(true);
 
 			if (icon.getType() != null) {
-				removeDatail(getElement(), CssName.MDC_LIST_ITEM_START_DETAIL);
+				removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 				insert(icon, 0);
 			}
 
-			primaryText.addStyleName(CssName.MDC_LIST_ITEM_TEXT);
+			primaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT);
 			add(primaryText);
 
-			secondaryText.addStyleName(CssName.MDC_LIST_ITEM_TEXT_SECONDARY);
+			secondaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT_SECONDARY);
 			primaryText.add(secondaryText);
 
 			initialized = true;
@@ -114,7 +115,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 
 	@UiChild(tagname = "start")
 	public void addStartDetail(final Widget widget, final boolean prevent) {
-		insertDetail(widget, CssName.MDC_LIST_ITEM_START_DETAIL, Appender.START);
+		insertDetail(widget, CssName.MDC_LIST_ITEM__START_DETAIL, Appender.START);
 		if (prevent) {
 			prevent(widget.getElement());
 		}
@@ -122,7 +123,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 
 	@UiChild(tagname = "end")
 	public void addEndDetail(final Widget widget, final boolean prevent) {
-		insertDetail(widget, CssName.MDC_LIST_ITEM_END_DETAIL, Appender.END);
+		insertDetail(widget, CssName.MDC_LIST_ITEM__END_DETAIL, Appender.END);
 		if (prevent) {
 			prevent(widget.getElement());
 		}
@@ -188,7 +189,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 
 	@Override
 	public void setIcon(IconType iconType) {
-		removeDatail(getElement(), CssName.MDC_LIST_ITEM_START_DETAIL);
+		removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		icon.setType(iconType);
 
 		if (icon.getType() != null && isAttached() && icon.getParent() == null) {
@@ -203,7 +204,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 	}
 
 	public void setAvatarUrl(final String url) {
-		removeDatail(getElement(), CssName.MDC_LIST_ITEM_START_DETAIL);
+		removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		avatar.setUrl(url);
 
 		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null) {
@@ -229,4 +230,19 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 	public void setAvatarBackgroundColor(Color color) {
 		avatar.setBackgroundColor(color);
 	}
+
+	public boolean isSelected() {
+		return selected;
+	}
+
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+		
+		removeStyleName(CssName.MDC_LIST_ITEM__SELECTED);
+		
+		if(selected) {
+			addStyleName(CssName.MDC_LIST_ITEM__SELECTED);
+		}
+	}
+	
 }

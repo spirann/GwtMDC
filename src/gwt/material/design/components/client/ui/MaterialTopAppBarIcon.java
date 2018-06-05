@@ -25,7 +25,6 @@ import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Anchor;
 
 /**
@@ -46,14 +45,6 @@ public class MaterialTopAppBarIcon extends Anchor implements HasType<IconType>, 
 	public MaterialTopAppBarIcon(final IconType type) {
 		this();
 		setType(type);
-	}
-
-	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-		if (getRipple() == null) {
-			setRipple(Ripple.SECONDARY);
-		}
 	}
 
 	@Override

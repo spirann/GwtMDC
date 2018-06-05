@@ -28,18 +28,18 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  */
 public enum Ripple implements CssType {
 
-	NONE("mdc-ripple-surface--none" + " " + CssName.MDC_RIPPLE_UPGRADED),
-	DEFAULT(CssName.MDC_RIPPLE_UPGRADED),
-	PRIMARY(CssName.MDC_RIPPLE_SURFACE_PRIMARY + " " + CssName.MDC_RIPPLE_UPGRADED),
-	SECONDARY(CssName.MDC_RIPPLE_SURFACE_SECONDARY + " " + CssName.MDC_RIPPLE_UPGRADED),
-	ON_PRIMARY(CssName.MDC_RIPPLE_SURFACE_ON_PRIMARY + " " + CssName.MDC_RIPPLE_UPGRADED),
-	ON_SECONDARY(CssName.MDC_RIPPLE_SURFACE_ON_SECONDARY + " " + CssName.MDC_RIPPLE_UPGRADED),
-	ON_BACKGROUND(CssName.MDC_RIPPLE_SURFACE_ON_BACKGROUND + " " + CssName.MDC_RIPPLE_UPGRADED);
+	DEFAULT			(""),
+	NONE			(CssName.MDC_RIPPLE__SURFACE_NONE),
+	PRIMARY			(CssName.MDC_RIPPLE__SURFACE_PRIMARY),
+	SECONDARY		(CssName.MDC_RIPPLE__SURFACE_SECONDARY),
+	ON_PRIMARY		(CssName.MDC_RIPPLE__SURFACE_ON_PRIMARY),
+	ON_SECONDARY	(CssName.MDC_RIPPLE__SURFACE_ON_SECONDARY),
+	ON_BACKGROUND	(CssName.MDC_RIPPLE__SURFACE_ON_BACKGROUND);
 
     private final String cssClass;
 
     Ripple(final String cssClass) {
-        this.cssClass = cssClass;
+        this.cssClass = CssName.MDC_RIPPLE__UPGRADED_UNBOUNDED + " " + CssName.MDC_RIPPLE__UPGRADED + cssClass;
     }
 
     @Override

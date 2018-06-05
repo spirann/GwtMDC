@@ -39,10 +39,7 @@ public class MaterialIcon extends Icon implements HasType<IconType>, HasHref {
 
 	public MaterialIcon() {
 		super(CssName.MATERIAL_ICONS);
-		setDisabledClass(CssName.MATERIAL_ICONS_DISABLED);
-		setWidth("24px");
-		setHeight("24px");
-		setPadding(8);
+		//setDisabledClass(CssName.MATERIAL_ICONS_DISABLED);
 	}
 
 	public MaterialIcon(final IconType type) {

@@ -86,8 +86,16 @@ a:active {
 	flex-direction: row;
 	flex-wrap: wrap;	
 	overflow-x: hidden;
-	position: relative; 
+	position: relative;
+	z-index: 0; 
 }
+
+/* ==========================================================================
+   Config default component content
+   ========================================================================== */
+.mdc-top-app-bar {
+	z-index: 4;
+}   
 
 /* ==========================================================================
    Adjust icon position
@@ -117,28 +125,6 @@ a:active {
 	flex: one;
 	width: 100%;
 	text-align: left;
-}
-
-/* ==========================================================================
-   Adjust Toolbar
-   ========================================================================== */
-
-.mdc-toolbar {
-	display: flex;
-	justify-content: flex-start;
-	align-content: flex-start;
-	align-items: center;	
-	flex-direction: column;
-}
-
-.mdc-toolbar__section {
-	align-items: center;
-	align-content: center;
-}
-
-.mdc-toolbar img {
-	align-self: center;
-	margin: 0 0 0 16px;
 }
 
 /* ==========================================================================
@@ -187,9 +173,6 @@ a:active {
     background-color: var(--mdc-theme-ripple-on-primary);
 }
 
-.mdc-toolbar .mdc-tab {
-	height: 64px;
-}
 /* if has text only
 .mdc-tab-bar:not(.mdc-tab-bar--icon-tabs):not(.mdc-tab-bar--icons-with-text) {
 	bottom: -12px;
@@ -330,6 +313,14 @@ a:active {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
+
+.mdc-drawer--permanent,
+.mdc-drawer--persistent {
+	height: 100%;
+	overflow-y: auto; 
+}
+
+/*
 .mdc-drawer--permanent,
 .mdc-drawer--persistent {
 	height: 100%;
@@ -381,7 +372,7 @@ a:active {
 .mdc-temporary-drawer__toolbar-spacer {
 	border-bottom-color: var(--mdc-theme-text-hint-on-background);
 }
-
+*/
 
 /* ==========================================================================
    Adjust dialog color
@@ -435,19 +426,14 @@ a:active {
    Button
    ========================================================================== */
 
-.mdc-button--primary::before,
-.mdc-button--primary::after {
-	background-color: var(--mdc-theme-ripple-primary);
+.mdc-button[dir="rtl"] .mdc-button__icon {
+	margin-left: 8px;
+	margin-right: 0px;
 }
 
-.mdc-button--accent::before,
-.mdc-button--accent::after {
-	background-color: var(--mdc-theme-ripple-secondary);
-}
-
-.mdc-button--primary[disabled].mdc-button--raised,
-.mdc-button--accent[disabled].mdc-button--raised {
-    opacity: 0.26;
+.mdc-button .mdc-button__icon {
+	margin-left: 0px;
+	margin-right: 8px;
 }
 
 /* ==========================================================================

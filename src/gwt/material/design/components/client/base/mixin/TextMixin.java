@@ -25,13 +25,13 @@ import com.google.gwt.user.client.ui.UIObject;
  * @author Richeli Vargas
  */
 public class TextMixin<T extends UIObject> extends AbstractMixin<T> {
-
+	
     public TextMixin(final T uiObject) {
         super(uiObject);
     }
 
     public String getText() {
-        return uiObject.getElement().getInnerText();
+    	return uiObject.getElement().getInnerText();
     }
 
     public void setText(final String text) {

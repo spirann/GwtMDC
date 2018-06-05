@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -32,12 +35,6 @@ import gwt.material.design.components.client.ui.html.Header;
  */
 public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> {
 
-	@Override
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialTopAppBar::getElement()();
-		this.@gwt.material.design.components.client.base.MaterialWidget::jsElement = new $wnd.mdc.topAppBar.MDCTopAppBar(element);
-	}-*/;
-
 	protected final TypeMixin<MaterialTopAppBar, TopAppBarType> typeMixin = new TypeMixin<>(this);
 
 	private boolean initialize = false;
@@ -46,6 +43,12 @@ public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> 
 		super(CssName.MDC_TOP_APP_BAR);
 	}
 
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.topAppBar.MDCTopAppBar(element);
+	}-*/;
+
+	
 	@Override
 	public void setType(TopAppBarType type) {
 		typeMixin.setType(type);
