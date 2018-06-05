@@ -27,6 +27,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.HasSelected;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
@@ -41,7 +43,7 @@ import gwt.material.design.components.client.ui.html.Li;
  * @author Richeli Vargas
  *
  */
-public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
+public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, HasSelected {
 
 	private MaterialIcon icon = new MaterialIcon();
 	private MaterialImage avatar = new MaterialImage();
@@ -55,8 +57,8 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 	private final TextMixin<Label> secondaryTextMixin = new TextMixin<>(secondaryText);
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
+	private final ApplyStyleMixin<MaterialListItem> selectedMixin = new ApplyStyleMixin<>(this, CssName.MDC_LIST_ITEM__SELECTED);
 
-	private boolean selected = false;
 	private boolean initialized = false;
 
 	public MaterialListItem() {
@@ -231,18 +233,14 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon {
 		avatar.setBackgroundColor(color);
 	}
 
+	@Override
 	public boolean isSelected() {
-		return selected;
+		return selectedMixin.isApplied();
 	}
 
+	@Override
 	public void setSelected(boolean selected) {
-		this.selected = selected;
-		
-		removeStyleName(CssName.MDC_LIST_ITEM__SELECTED);
-		
-		if(selected) {
-			addStyleName(CssName.MDC_LIST_ITEM__SELECTED);
-		}
+		selectedMixin.setApply(selected);
 	}
 	
 }

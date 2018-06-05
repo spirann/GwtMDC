@@ -203,6 +203,7 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_IMAGE_LIST = "mdc-image-list";
 	String MDC_IMAGE_LIST__MASONRY = "mdc-image-list--masonry";
+	String MDC_IMAGE_LIST__WITH_TEXT_PROTECTION = "mdc-image-list--with-text-protection";
 	String MDC_IMAGE_LIST__ITEM = "mdc-image-list__item";
 	String MDC_IMAGE_LIST__IMAGE = "mdc-image-list__image";
 	String MDC_IMAGE_LIST__LABEL = "mdc-image-list__label";

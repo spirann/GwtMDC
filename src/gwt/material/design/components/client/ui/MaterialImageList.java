@@ -1,0 +1,88 @@
+/*
+ * #%L
+ * Gwt Material Design Components
+ * %%
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+package gwt.material.design.components.client.ui;
+
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.ui.html.Ul;
+
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
+public class MaterialImageList extends Ul {
+
+	private final ApplyStyleMixin<MaterialImageList> masontyMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_IMAGE_LIST__MASONRY);
+	private final ApplyStyleMixin<MaterialImageList> withTextProtectionMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_IMAGE_LIST__WITH_TEXT_PROTECTION);
+
+	public MaterialImageList() {
+		super(CssName.MDC_IMAGE_LIST);
+	}
+
+	public boolean isMasonry() {
+		return masontyMixin.isApplied();
+	}
+
+	public void setMasonry(boolean masonry) {
+		masontyMixin.setApply(masonry);
+	}
+
+	public boolean isWithTextProtection() {
+		return withTextProtectionMixin.isApplied();
+	}
+
+	public void setWithTextProtection(boolean withTextProtection) {
+		withTextProtectionMixin.setApply(withTextProtection);
+	}
+
+	public void setDesktopCols(int columns) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
+	}
+
+	public void setTabletCols(int columns) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
+	}
+
+	public void setPhoneCols(int columns) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
+	}
+
+	public void setGap(int gap) {
+		setDesktopGap(gap);
+		setTabletGap(gap);
+		setPhoneGap(gap);
+	}
+
+	public void setDesktopGap(int gap) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
+	}
+
+	public void setTabletGap(int gap) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
+	}
+
+	public void setPhoneGap(int gap) {
+		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
+	}
+}

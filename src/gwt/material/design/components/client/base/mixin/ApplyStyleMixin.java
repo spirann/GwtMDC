@@ -51,33 +51,13 @@ public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 	
 	public void setApply(boolean apply) {
 		this.apply = apply;
-		
-		if (!uiObject.isAttached() && handler == null) {
-			
-			handler = uiObject.addAttachHandler(event -> {
-				if (event.isAttached()) {
-					apply(apply);
-				} else if (handler != null) {
-					handler.removeHandler();
-					handler = null;
-				}
-			});
-			
-		} else {
-			apply(apply);
-		}
-	}
-	
-	private void apply(boolean apply){
-		
 		setStyle(null);
 
 		if (apply) {
 			setStyle(cssClass);
 		}
-		
 	}
-
+	
 	public boolean isApplied() {
 		return apply;
 	}
