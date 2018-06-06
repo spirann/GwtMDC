@@ -28,6 +28,7 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  */
 public enum Typography implements CssType {
 
+	
 	HEADLINE_1(CssName.MDC_TYPOGRAPHY_HEADLINE_1),
 	HEADLINE_2(CssName.MDC_TYPOGRAPHY_HEADLINE_2),
 	HEADLINE_3(CssName.MDC_TYPOGRAPHY_HEADLINE_3),

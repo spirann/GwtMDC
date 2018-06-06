@@ -33,11 +33,8 @@ public class AspectRatioMixin<W extends Widget> extends StyleMixin<W> implements
 
 	private AspectRatio aspectRatio;
 
-	private String cssClass;
-	
-	public AspectRatioMixin(final W widget, final String cssClass) {
+	public AspectRatioMixin(final W widget) {
 		super(widget);
-		this.cssClass = cssClass;
 	}
 	
 	@Override
@@ -46,7 +43,7 @@ public class AspectRatioMixin<W extends Widget> extends StyleMixin<W> implements
 		if (aspectRatio == null) {
 			setStyle(null);
 		} else {
-			setStyle(cssClass + aspectRatio.getCssName());
+			setStyle(aspectRatio.getCssName());
 		}
 	}
 	

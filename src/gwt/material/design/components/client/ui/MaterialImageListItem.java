@@ -1,24 +1,28 @@
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.HasAspectRatio;
 import gwt.material.design.components.client.base.HasImage;
 import gwt.material.design.components.client.base.HasLabel;
+import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
+import gwt.material.design.components.client.constants.AspectRatio;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Li;
 import gwt.material.design.components.client.ui.html.Span;
 
-public class MaterialImageListItem extends Li implements HasImage, HasLabel {
+public class MaterialImageListItem extends Li implements HasImage, HasLabel, HasAspectRatio {
 
-	private MaterialImage img;
+	private Div imageContent = new Div();
+	private MaterialImage image;
 	private Div supportingDiv = new Div(CssName.MDC_IMAGE_LIST__SUPPORTING);
 	private Span label = new Span(CssName.MDC_IMAGE_LIST__LABEL);
-	private boolean aspect = true;
+		
+	private final AspectRatioMixin<Div> aspectRatioMixin = new AspectRatioMixin<Div>(imageContent);
 
 	public MaterialImageListItem() {
 		super(CssName.MDC_IMAGE_LIST__ITEM);
@@ -39,65 +43,48 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel {
 
 	protected void drawImage() {
 
-		if (img != null) {
-			img.getParent().removeFromParent();
-		}
+		image = new MaterialImage();
+		image.addStyleName(CssName.MDC_IMAGE_LIST__IMAGE);
+		
+		imageContent.clear();
+		imageContent.removeStyleName(CssName.MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER);
 
-		img = new MaterialImage();
-		img.addStyleName(CssName.MDC_IMAGE_LIST__IMAGE);
-		
-		final Div div;
-
-		if (aspect) {
-			
-			img.setLayoutPosition(Position.RELATIVE);
-			img.setHeight("auto");
-			img.setPaddingBottom(0);
-			img.setMarginBottom(0);
-			
-			div = new Div(CssName.MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER);
-			div.setHeight("auto");
-			div.setPaddingBottom(0);
-						
-		} else {
-			div = new Div();
+		if (getAspectRatio() != null && !getAspectRatio().equals(AspectRatio.DEFAULT)) {			
+			imageContent.addStyleName(CssName.MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER);
 		}
-		
-		
-		div.add(img);
-		
-		
-		insert(div, 0);
+				
+		imageContent.add(image);		
+		insert(imageContent, 0);
 		
 	}
 
 	@Override
 	public void setUrl(String url) {
-		drawImage();
-		img.setUrl(url);
+		//drawImage();
+		//image.setUrl(url);
 	}
 
 	@Override
 	public String getUrl() {
-		return img == null ? null : img.getUrl();
+		return image == null ? null : image.getUrl();
 	}
 
 	@Override
 	public void setResource(ImageResource resource) {
 		drawImage();
-		img.setResource(resource);
+		image.setResource(resource);
 	}
 
 	@Override
 	public ImageResource getResource() {
-		return img == null ? null : img.getResource();
+		return image == null ? null : image.getResource();
 	}
 
 	@Override
 	public void setLabel(String label) {
 		this.label.setText(label);
 
-		if (label == null || label.isEmpty()) {
+		if ((label == null || label.isEmpty()) && supportingDiv.getChildrenList().size() < 2) {
 			supportingDiv.setDisplay(Display.NONE);
 		} else {
 			supportingDiv.setDisplay(Display.FLEX);
@@ -109,15 +96,17 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel {
 		return label.getText();
 	}
 
-	public boolean isAspect() {
-		return aspect;
+	@Override
+	public void setAspectRatio(AspectRatio aspectRatio) {
+		aspectRatioMixin.setAspectRatio(aspectRatio);
+		
+		if (image != null) {
+			setUrl(image.getUrl());
+		}
 	}
 
-	public void setAspect(boolean aspect) {
-		this.aspect = aspect;
-
-		if (img != null) {
-			setUrl(img.getUrl());
-		}
+	@Override
+	public AspectRatio getAspectRatio() {
+		return aspectRatioMixin.getAspectRatio();
 	}
 }
