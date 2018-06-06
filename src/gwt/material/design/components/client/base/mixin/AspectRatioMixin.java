@@ -31,7 +31,7 @@ import gwt.material.design.components.client.constants.AspectRatio;
  */
 public class AspectRatioMixin<W extends Widget> extends StyleMixin<W> implements HasAspectRatio {
 
-	private AspectRatio aspectRatio;
+	private AspectRatio aspectRatio = AspectRatio.DEFAULT;
 
 	public AspectRatioMixin(final W widget) {
 		super(widget);

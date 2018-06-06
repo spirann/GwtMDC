@@ -60,8 +60,8 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 
 	@Override
 	public void setUrl(String url) {
-		//drawImage();
-		//image.setUrl(url);
+		drawImage();
+		image.setUrl(url);
 	}
 
 	@Override
