@@ -21,9 +21,11 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
@@ -39,12 +41,13 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialButton extends Button implements HasType<ButtonType>, HasHref, HasText, HasIcon {
+public class MaterialButton extends Button implements HasType<ButtonType>, HasHref, HasText, HasIcon, HasDense {
 
 	protected final Span label = new Span();
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
+	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON_DENSE);
 
 	
 	protected MaterialIcon icon;
@@ -130,6 +133,16 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 		}
 		
 		icon.setType(iconType);
+	}
+
+	@Override
+	public void setDense(boolean dense) {
+		denseMixin.setApply(dense);
+	}
+
+	@Override
+	public boolean isDense() {
+		return denseMixin.isApplied();
 	}
 
 }

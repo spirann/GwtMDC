@@ -21,7 +21,7 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasColumns;
+import gwt.material.design.components.client.base.HasCellColumns;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.ScreenSize;
 
@@ -30,7 +30,7 @@ import gwt.material.design.components.client.constants.ScreenSize;
  * @author Richeli Vargas
  *
  */
-public class ColumnsMixin<T extends UIObject & HasColumns> extends AbstractMixin<T> implements HasColumns {
+public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractMixin<T> implements HasCellColumns {
 
 	private int cols = 0;
 	private int colsDesktop = 0;
@@ -50,19 +50,19 @@ public class ColumnsMixin<T extends UIObject & HasColumns> extends AbstractMixin
 	}
 
 	@Override
-	public void setColsDesktop(int columns) {
+	public void setDesktopCols(int columns) {
 		setColumns(colsDesktop, columns, ScreenSize.DESKTOP);
 		colsDesktop = columns;
 	}
 
 	@Override
-	public void setColsTablet(int columns) {
+	public void setTabletCols(int columns) {
 		setColumns(colsTablet, columns, ScreenSize.TABLET);
 		colsTablet = columns;
 	}
 
 	@Override
-	public void setColsPhone(int columns) {
+	public void setPhoneCols(int columns) {
 		setColumns(colsPhone, columns, ScreenSize.PHONE);
 		colsPhone = columns;
 	}

@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import gwt.material.design.components.client.base.HasColumns;
+import gwt.material.design.components.client.base.HasGap;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssProperty;
@@ -29,7 +31,7 @@ import gwt.material.design.components.client.ui.html.Ul;
  * @author Richeli Vargas
  *
  */
-public class MaterialImageList extends Ul {
+public class MaterialImageList extends Ul implements HasColumns, HasGap {
 
 	private final ApplyStyleMixin<MaterialImageList> masontyMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_IMAGE_LIST__MASONRY);
@@ -56,32 +58,46 @@ public class MaterialImageList extends Ul {
 		withTextProtectionMixin.setApply(withTextProtection);
 	}
 
+	@Override
+	public void setCols(int columns) {
+		setDesktopCols(columns);
+		setTabletCols(columns);
+		setPhoneCols(columns);
+	}
+	
+	@Override
 	public void setDesktopCols(int columns) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
 	}
 
+	@Override
 	public void setTabletCols(int columns) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
 	}
 
+	@Override
 	public void setPhoneCols(int columns) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
 	}
 
+	@Override
 	public void setGap(int gap) {
 		setDesktopGap(gap);
 		setTabletGap(gap);
 		setPhoneGap(gap);
 	}
 
+	@Override
 	public void setDesktopGap(int gap) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
 	}
 
+	@Override
 	public void setTabletGap(int gap) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
 	}
 
+	@Override
 	public void setPhoneGap(int gap) {
 		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
 	}

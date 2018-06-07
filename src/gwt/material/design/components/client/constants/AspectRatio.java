@@ -27,7 +27,7 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  *
  */
 public enum AspectRatio implements CssType {
-
+	
 	DEFAULT(""),
 	ASPECT_1x1("mdc-aspect-1x1"),
 	ASPECT_16x9("mdc-aspect-16x9"),

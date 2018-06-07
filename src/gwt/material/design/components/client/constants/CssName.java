@@ -229,7 +229,6 @@ public interface CssName {
 	String MDC_FAB = "mdc-fab";
 	String MDC_FAB_ICON = "mdc-fab__icon";
 	String MDC_FAB_MINI = "mdc-fab--mini";
-	String MDC_FAB_PLAIN = "mdc-fab--plain";
 	String MDC_FAB_FIXED = "mdc-fab--fixed";
 	// //////////////////////////////////////////////////////
 	// LIST

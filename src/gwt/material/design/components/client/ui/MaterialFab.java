@@ -55,7 +55,8 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		add(icon);
+		add(icon);		
+		addClickHandler(event -> getElement().blur());
 	}
 
 	@Override

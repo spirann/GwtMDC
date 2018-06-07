@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -42,24 +43,15 @@ import gwt.material.design.components.client.ui.html.Icon;
  */
 public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialIconToggle::jsElement = $wnd.mdc.iconToggle.MDCIconToggle
-				.attachTo(element);
-	}-*/;
-
 	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
 	protected final AttributeMixin<MaterialIconToggle> toggleOffMixin = new AttributeMixin<>(this, "data-toggle-off");
 	protected final AttributeMixin<MaterialIconToggle> ariaPressedMixin = new AttributeMixin<>(this, "aria-pressed");
 
 	protected Color colorOn;
+	protected Color backgroundColorOn;
 
 	protected Color colorOff;
+	protected Color backgroundColorOff;
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -72,23 +64,33 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	}
 
 	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.iconToggle.MDCIconToggle(element);
+	}-*/;
+
+	
+	@Override
 	protected void onInitialize() {
-		super.onInitialize();
-		jsInit();
+		
 		initializeChageEventListener();
 		updateColor();
+		
+		addClickHandler(event -> getElement().blur());
+		
+		super.onInitialize();
 	}
 
 	public native void initializeChageEventListener()/*-{
+		
 		var _this = this;
+		
 		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
-		element
-				.addEventListener(
-						'MDCIconToggle:change',
-						function() {
-							_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
-							_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
-						});
+		
+		element.addEventListener('MDCIconToggle:change', function() {
+			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
+			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
+		});
+		
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {
@@ -104,12 +106,21 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	}
 
 	protected void updateColor() {
+		
 		if (getValue() && colorOn != null) {
 			setColor(colorOn);
 		} else if (!getValue() && colorOff != null) {
 			setColor(colorOff);
 		} else {
 			setColor(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
+		}
+		
+		if (getValue() && backgroundColorOn != null) {
+			setBackgroundColor(backgroundColorOn);
+		} else if (!getValue() && backgroundColorOff != null) {
+			setBackgroundColor(backgroundColorOff);
+		} else {
+			setBackgroundColor(Color.TRANSPARENT);
 		}
 	}
 
@@ -163,5 +174,21 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	public void setColorOff(Color colorOff) {
 		this.colorOff = colorOff;
+	}
+
+	public Color getBackgroundColorOn() {
+		return backgroundColorOn;
+	}
+
+	public void setBackgroundColorOn(Color backgroundColorOn) {
+		this.backgroundColorOn = backgroundColorOn;
+	}
+
+	public Color getBackgroundColorOff() {
+		return backgroundColorOff;
+	}
+
+	public void setBackgroundColorOff(Color backgroundColorOff) {
+		this.backgroundColorOff = backgroundColorOff;
 	}
 }

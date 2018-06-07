@@ -29,7 +29,7 @@ import gwt.material.design.components.client.ui.html.Ul;
  * @author Richeli Vargas
  *
  */
-public class MaterialList extends Ul implements HasDense{
+public class MaterialList extends Ul implements HasDense {
 
 	protected final ApplyStyleMixin<MaterialList> avatarMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_LIST_AVATAR_LIST);

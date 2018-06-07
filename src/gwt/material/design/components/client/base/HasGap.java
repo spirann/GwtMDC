@@ -17,34 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.constants;
-
-import gwt.material.design.components.client.utils.helper.EnumHelper;
+package gwt.material.design.components.client.base;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public enum ButtonType implements CssType {
+public interface HasGap {
 
-	DEFAULT(""),
-	RAISED(CssName.MDC_BUTTON_RAISED),
-	UNELEVATED(CssName.MDC_BUTTON_UNELEVATED),
-	OUTLINE(CssName.MDC_BUTTON_OUTLINE);
+	public void setGap(int gap);
 
-    private final String cssClass;
+	public void setDesktopGap(int gap);
 
-    ButtonType(final String cssClass) {
-        this.cssClass = cssClass;
-    }
+	public void setTabletGap(int gap);
 
-    @Override
-    public String getCssName() {
-        return cssClass;
-    }
-
-    public static ButtonType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, ButtonType.class, DEFAULT);
-    }
+	public void setPhoneGap(int gap);
+	
 }

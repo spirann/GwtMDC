@@ -31,9 +31,7 @@ public enum FabType implements CssType {
 	DEFAULT(""),
 	MINI(CssName.MDC_FAB_MINI),
 	FIXED(CssName.MDC_FAB_FIXED),
-	PLAIN(CssName.MDC_FAB_PLAIN),
-	MINI_PLAIN(CssName.MDC_FAB_MINI + " " + CssName.MDC_FAB_PLAIN),
-	FIXED_PLAIN(CssName.MDC_FAB_FIXED + " " + CssName.MDC_FAB_PLAIN);
+	MINI_FIXED(CssName.MDC_FAB_MINI + " " + CssName.MDC_FAB_FIXED);
 
     private final String cssClass;
 

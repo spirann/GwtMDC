@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasColumns;
+import gwt.material.design.components.client.base.HasCellColumns;
 import gwt.material.design.components.client.base.mixin.ColumnsMixin;
 import gwt.material.design.components.client.base.mixin.StyleMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -32,7 +32,7 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialLayoutCell extends Div implements HasColumns {
+public class MaterialLayoutCell extends Div implements HasCellColumns {
 
 	public enum Align implements CssType {
 
@@ -89,18 +89,18 @@ public class MaterialLayoutCell extends Div implements HasColumns {
 	}
 
 	@Override
-	public void setColsDesktop(int columns) {
-		columnsMixin.setColsDesktop(columns);
+	public void setDesktopCols(int columns) {
+		columnsMixin.setDesktopCols(columns);
 	}
 
 	@Override
-	public void setColsTablet(int columns) {
-		columnsMixin.setColsTablet(columns);
+	public void setTabletCols(int columns) {
+		columnsMixin.setTabletCols(columns);
 	}
 
 	@Override
-	public void setColsPhone(int columns) {
-		columnsMixin.setColsPhone(columns);
+	public void setPhoneCols(int columns) {
+		columnsMixin.setPhoneCols(columns);
 	}
 
 	@Override

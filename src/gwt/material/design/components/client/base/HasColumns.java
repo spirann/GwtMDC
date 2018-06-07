@@ -28,12 +28,10 @@ public interface HasColumns {
 
 	public void setCols(int columns);
 
-	public void setColsDesktop(int columns);
+	public void setDesktopCols(int columns);
 
-	public void setColsTablet(int columns);
+	public void setTabletCols(int columns);
 
-	public void setColsPhone(int columns);
-
-	public void setOrder(int order);
+	public void setPhoneCols(int columns);
 	
 }
