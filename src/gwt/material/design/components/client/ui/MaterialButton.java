@@ -63,8 +63,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 			setRipple(Ripple.DEFAULT);
 		}
 		
-		add(label);
-				
+		add(label);				
 		addClickHandler(event -> getElement().blur());
 		
 		super.onInitialize();

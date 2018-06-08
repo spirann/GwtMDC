@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -53,16 +54,6 @@ public class MaterialDialog extends Aside
 		implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
 
 	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement = $wnd.mdc.dialog.MDCDialog.attachTo(element);
-	}-*/;
-
-	// /////////////////////////////////////////////////////////////
 	// Dialog
 	// /////////////////////////////////////////////////////////////
 	protected Div surface = new Div(CssName.MDC_DIALOG_SURFACE);
@@ -91,10 +82,8 @@ public class MaterialDialog extends Aside
 	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialDialog> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
 	protected final AttributeMixin<MaterialDialog> ariaLabelledbyMixin = new AttributeMixin<>(this, "aria-labelledby");
-	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this,
-			"aria-describedby");
-	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body,
-			CssName.MDC_DIALOG_BODY_SCROLLABLE);
+	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG_BODY_SCROLLABLE);
 
 	private HandlerRegistration handler;
 
@@ -104,19 +93,32 @@ public class MaterialDialog extends Aside
 	}
 	
 	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.dialog.MDCDialog(element);
+	}-*/;
+	
+	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 		
 		header.add(headerTitle);
 
-		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
-		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
+		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);		
+		//cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
 		cancel.addStyleName(CssName.MDC_DIALOG_ACTION);
+		cancel.addClickHandler(event -> {
+			close();
+			fireCancelEvent();
+		});
 		footer.add(cancel);
 
 		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
-		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
+		
+		//accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
 		accept.addStyleName(CssName.MDC_DIALOG_ACTION);
+		accept.addClickHandler(event -> {
+			close();
+			fireAcceptEvent();
+		});
 		footer.add(accept);
 
 		surface.add(header);
@@ -127,7 +129,8 @@ public class MaterialDialog extends Aside
 
 		initializeAcceptEventListener();
 		initializeCancelEventListener();
-		jsInit();
+		
+		super.onInitialize();
 	}
 
 	@Override
@@ -203,19 +206,19 @@ public class MaterialDialog extends Aside
 
 	@Override
 	public native boolean isOpen()/*-{
-		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		return dialog && dialog.open;
 	}-*/;
 
 	@Override
 	public native void open()/*-{
-		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		dialog.show();
 	}-*/;
 
 	@Override
 	public native void close()/*-{
-		var dialog = this.@gwt.material.design.components.client.ui.MaterialDialog::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		dialog.close();
 	}-*/;
 

@@ -21,10 +21,12 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.RootPanel;
 
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
@@ -38,17 +40,6 @@ import gwt.material.design.components.client.ui.html.Div;
  *
  */
 public class MaterialSnackbar extends Div implements HasText {
-
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialSnackbar::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement = $wnd.mdc.snackbar.MDCSnackbar
-				.attachTo(element);
-	}-*/;
 
 	protected Div text = new Div(CssName.MDC_SNACKBAR_TEXT);
 	protected Div actionWrapper = new Div(CssName.MDC_SNACKBAR_ACTION_WRAPPER);
@@ -66,24 +57,28 @@ public class MaterialSnackbar extends Div implements HasText {
 	public MaterialSnackbar() {
 		super(CssName.MDC_SNACKBAR);
 	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.snackbar.MDCSnackbar(element);
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		actionWrapper.add(action);
 
 		add(text);
 		add(actionWrapper);
 
-		jsInit();
+		super.onInitialize();
 	}
 
 	protected native void show(final String text, final String actionText, final boolean actionOnBottom,
 			final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 
 		var _action = null;
 
@@ -107,12 +102,12 @@ public class MaterialSnackbar extends Div implements HasText {
 	}-*/;
 
 	public native void setDismissesOnAction(final boolean dismissesOnAction) /*-{
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 
 	public native boolean isDismissesOnAction() /*-{
-		var snackbar = _this.@gwt.material.design.components.client.ui.MaterialSnackbar::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 
@@ -174,5 +169,19 @@ public class MaterialSnackbar extends Div implements HasText {
 	public void setTimeout(int timeout) {
 		this.timeout = timeout;
 	}
-
+	
+	public static void showSnackBar(final String text) {
+		showSnackBar(text, null, null);
+	}
+	
+	public static void showSnackBar(final String text, final String actionText, final ClickHandler actionHandler) {
+		
+		final MaterialSnackbar snackbar = new MaterialSnackbar();		
+		snackbar.setText(text);		
+		snackbar.setActionText(actionText);
+		snackbar.addClickHandler(actionHandler);
+		RootPanel.get().add(snackbar);
+		snackbar.show();
+		
+	}
 }
