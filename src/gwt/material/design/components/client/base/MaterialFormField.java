@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.base;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -51,6 +53,11 @@ public class MaterialFormField<T> extends Div implements HasValue<T> {
 	public MaterialFormField(final String primaryClass, final String ... initialClasses) {
 		super(primaryClass, initialClasses);
 	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.formField.MDCFormField(element);
+	}-*/;
 	
 	@Override
 	protected void onLoad() {

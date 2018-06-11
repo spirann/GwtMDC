@@ -234,18 +234,19 @@ public interface CssName {
 	// LIST
 	// //////////////////////////////////////////////////////
 	String MDC_LIST_GROUP = "mdc-list-group";
-	String MDC_LIST_GROUP_SUBHEADER = "mdc-list-group__subheader";
+	String MDC_LIST_GROUP__SUBHEADER = "mdc-list-group__subheader";
 	String MDC_LIST_DIVIDER = "mdc-list-divider";
-	String MDC_LIST_DIVIDER_INSET = "mdc-list-divider--inset";
+	String MDC_LIST_DIVIDER__INSET = "mdc-list-divider--inset";
 	String MDC_LIST = "mdc-list";
-	String MDC_LIST_AVATAR_LIST = "mdc-list--avatar-list";
-	String MDC_LIST_DENSE = "mdc-list--dense";
+	String MDC_LIST__TWO_LINE = "mdc-list--two-line";
+	String MDC_LIST__AVATAR_LIST = "mdc-list--avatar-list";
+	String MDC_LIST__DENSE = "mdc-list--dense";
 	String MDC_LIST_ITEM = "mdc-list-item";
 	String MDC_LIST_ITEM__SELECTED = "mdc-list-item--selected";
 	String MDC_LIST_ITEM__START_DETAIL = "mdc-list-item__start-detail";
 	String MDC_LIST_ITEM__END_DETAIL = "mdc-list-item__end-detail";
 	String MDC_LIST_ITEM__TEXT = "mdc-list-item__text";
-	String MDC_LIST_ITEM__TEXT_SECONDARY = "mdc-list-item__text__secondary";
+	String MDC_LIST_ITEM__TEXT_SECONDARY = "mdc-list-item__secondary-text";
 	// //////////////////////////////////////////////////////
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////

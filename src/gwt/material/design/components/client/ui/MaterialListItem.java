@@ -34,6 +34,7 @@ import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.Flex;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.ui.html.Li;
@@ -83,18 +84,19 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 			icon.setCircle(true);
 
 			if (icon.getType() != null) {
-				removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
+				//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 				insert(icon, 0);
 			}
 
 			primaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT);
+			primaryText.setFlex(Flex.ONE);
 			add(primaryText);
 
 			secondaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT_SECONDARY);
 			primaryText.add(secondaryText);
 
 			initialized = true;
-
+			
 		}
 
 		super.onLoad();
@@ -110,7 +112,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	}-*/;
 
 	private void insertDetail(final Widget widget, final String detailClass, final int detailPos) {
-		removeDatail(getElement(), detailClass);
+		//removeDatail(getElement(), detailClass);
 		widget.addStyleName(detailClass);
 		insert(widget, detailPos);
 	}
@@ -131,7 +133,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		}
 	}
 
-	private native void prevent(final Element element)/*-{
+	protected native void prevent(final Element element)/*-{
 
 		var event = function(evt) {
 			evt.stopPropagation();
@@ -191,7 +193,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	@Override
 	public void setIcon(IconType iconType) {
-		removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
+		//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		icon.setType(iconType);
 
 		if (icon.getType() != null && isAttached() && icon.getParent() == null) {
@@ -206,11 +208,11 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	}
 
 	public void setAvatarUrl(final String url) {
-		removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
+		//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		avatar.setUrl(url);
 
 		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null) {
-			insert(avatar, 0);
+			insert(avatar, getWidgetIndex(primaryText));
 		} else if ((avatar.getUrl() == null || avatar.getUrl().isEmpty()) && avatar.getParent() != null) {
 			avatar.removeFromParent();
 		}

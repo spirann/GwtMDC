@@ -111,8 +111,7 @@ public class MaterialDialog extends Aside
 		});
 		footer.add(cancel);
 
-		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);
-		
+		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);		
 		//accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
 		accept.addStyleName(CssName.MDC_DIALOG_ACTION);
 		accept.addClickHandler(event -> {

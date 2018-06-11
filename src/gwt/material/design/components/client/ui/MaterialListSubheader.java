@@ -30,6 +30,6 @@ import gwt.material.design.components.client.ui.html.H3;
 public class MaterialListSubheader extends H3 {
 
 	public MaterialListSubheader() {
-		super(CssName.MDC_LIST_GROUP_SUBHEADER);
+		super(CssName.MDC_LIST_GROUP__SUBHEADER);
 	}
 }

@@ -66,33 +66,57 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	}
 
 	@Override
-	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+	protected void jsInit() {
+		super.jsInit();
+		final JavaScriptObject inputElement = getInputElemente(checkbox.getElement());
+		setInputElemente(jsElement, inputElement);
+	}
+
+	protected native JavaScriptObject getInputElemente(final Element element)/*-{
 		return new $wnd.mdc.checkbox.MDCCheckbox(element);
+	}-*/;
+	
+	protected native void setInputElemente(final JavaScriptObject element, final JavaScriptObject input)/*-{
+		element.input = input;		
 	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		
 		setRipple(Ripple.SECONDARY);
 		setCircle(true);
-
+		
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-
+		
 		background.add(checkmark);
 		background.add(mixedmark);
-
+		
 		checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
 		checkbox.add(input);
 		checkbox.add(background);
-
+			
 		add(checkbox);
 		add(label);
+		
+		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
 
-		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);		
-
+		prevent(checkbox.getElement());
 		super.onInitialize();
+	
 	}
 
+	protected native void prevent(final Element element)/*-{
+
+		var event = function(evt) {
+			evt.stopPropagation();
+			evt.cancelBubble = true;
+		};
+
+		element.addEventListener('click', event);
+		element.addEventListener('mousedown', event);
+		element.addEventListener('pointerdown', event);
+
+	}-*/;
+	
 	@Override
 	public void setId(String id) {
 		input.setId(id);

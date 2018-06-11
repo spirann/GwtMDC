@@ -416,60 +416,6 @@ a:active {
 	overflow-y: auto; 
 }
 
-/*
-.mdc-drawer--permanent,
-.mdc-drawer--persistent {
-	height: 100%;
-}  
-
-.mdc-drawer .mdc-drawer__drawer {
-	max-height: 100%;
-	overflow-y: auto; 
-}
-
-.mdc-permanent-drawer .mdc-list-group__subheader,
-.mdc-temporary-drawer .mdc-list-group__subheader,
-.mdc-permanent-drawer .mdc-list-item,
-.mdc-temporary-drawer .mdc-list-item {
-	padding-left: 8px;
-}
- 
-.mdc-permanent-drawer,
-.mdc-permanent-drawer .mdc-list-group, 
-.mdc-persistent-drawer,
-.mdc-persistent-drawer__drawer {
-	margin-bottom: 0;
-	padding-bottom: 0;
-	height: 100% !important;
-	min-height: 100% !important;
-}
-
-.mdc-permanent-drawer .mdc-list-group,
-.mdc-persistent-drawer .mdc-list-group,
-.mdc-temporary-drawer .mdc-list-group {
-	overflow-y: auto;
-	overflow-x: hidden; 
-}
-
-.mdc-permanent-drawer,
-.mdc-persistent-drawer__drawer,
-.mdc-temporary-drawer__drawer {
-	border-right-color: var(--mdc-theme-text-hint-on-background);
-}
-
-[dir="rtl"] .mdc-permanent-drawer, .mdc-permanent-drawer[dir="rtl"],
-[dir="rtl"] .mdc-persistent-drawer__drawer, .mdc-persistent-drawer__drawer[dir="rtl"],
-[dir="rtl"] .mdc-temporary-drawer__drawer, .mdc-temporary-drawer__drawer[dir="rtl"] {
-	border-left-color: var(--mdc-theme-text-hint-on-background);
-}
-
-.mdc-permanent-drawer__toolbar-spacer,
-.mdc-persistent-drawer__toolbar-spacer,
-.mdc-temporary-drawer__toolbar-spacer {
-	border-bottom-color: var(--mdc-theme-text-hint-on-background);
-}
-*/
-
 /* ==========================================================================
    Adjust dialog color
    ========================================================================== */

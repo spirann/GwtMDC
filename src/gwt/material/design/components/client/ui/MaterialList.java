@@ -32,10 +32,13 @@ import gwt.material.design.components.client.ui.html.Ul;
 public class MaterialList extends Ul implements HasDense {
 
 	protected final ApplyStyleMixin<MaterialList> avatarMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_LIST_AVATAR_LIST);
+			CssName.MDC_LIST__AVATAR_LIST);
 	
 	protected final ApplyStyleMixin<MaterialList> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_LIST_DENSE);
+			CssName.MDC_LIST__DENSE);
+	
+	protected final ApplyStyleMixin<MaterialList> twoLinesMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_LIST__TWO_LINE);
 	
 	public MaterialList(){
 		super(CssName.MDC_LIST);
@@ -53,5 +56,13 @@ public class MaterialList extends Ul implements HasDense {
 	@Override
 	public boolean isDense() {
 		return denseMixin.isApplied();
+	}
+	
+	public void setTwoLines(boolean twoLines) {
+		twoLinesMixin.setApply(twoLines);
+	}
+
+	public boolean isTwoLines() {
+		return twoLinesMixin.isApplied();
 	}
 }
