@@ -177,7 +177,7 @@ public class MaterialWidget extends BaseWidget
 		setInitialClasses(initialClass);
 	}
 
-	protected void jsInit() {
+	protected void jsInit() {		
 		jsElement = jsInit(getElement());
 	}
 	

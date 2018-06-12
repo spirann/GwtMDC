@@ -82,7 +82,8 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	@Override
 	protected void onInitialize() {
-		setRipple(Ripple.SECONDARY);
+		//setRipple(Ripple.SECONDARY);
+		
 		setCircle(true);
 		
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
@@ -98,8 +99,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		add(label);
 		
 		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
-
-		prevent(checkbox.getElement());
+		
 		super.onInitialize();
 	
 	}

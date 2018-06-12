@@ -104,7 +104,7 @@ public class MaterialDialog extends Aside
 
 		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);		
 		//cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
-		cancel.addStyleName(CssName.MDC_DIALOG_ACTION);
+		cancel.addStyleName(CssName.MDC_DIALOG_ACTION);		
 		cancel.addClickHandler(event -> {
 			close();
 			fireCancelEvent();

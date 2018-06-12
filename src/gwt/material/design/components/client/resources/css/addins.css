@@ -597,7 +597,8 @@ a:active {
     }
 }
 
-.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background, .mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background {
+.mdc-checkbox--anim-checked-unchecked .mdc-checkbox__background, 
+.mdc-checkbox--anim-indeterminate-unchecked .mdc-checkbox__background {
   -webkit-animation: mdc-checkbox-fade-out-secondary 180ms linear;
           animation: mdc-checkbox-fade-out-secondary 180ms linear; }
 
