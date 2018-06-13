@@ -35,6 +35,7 @@ import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.ui.html.Icon;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
@@ -75,7 +76,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 		initializeChageEventListener();
 		updateColor();
 		
-		addClickHandler(event -> getElement().blur());
+		addClickHandler(event -> JsUtils.clearFocus());
 		
 		super.onInitialize();
 	}

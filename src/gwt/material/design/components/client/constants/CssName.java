@@ -265,11 +265,12 @@ public interface CssName {
 	String MDC_RADIO_INNER_CIRCLE = "mdc-radio__inner-circle";
 	// Checkbox
 	String MDC_CHECKBOX = "mdc-checkbox";
-	String MDC_CHECKBOX_DISABLED = "mdc-checkbox--disabled";
-	String MDC_CHECKBOX_NATIVE_CONTROL = "mdc-checkbox__native-control";
-	String MDC_CHECKBOX_BACKGROUND = "mdc-checkbox__background";
-	String MDC_CHECKBOX_CHECKMARK = "mdc-checkbox__checkmark";
-	String MDC_CHECKBOX_MIXEDMARK = "mdc-checkbox__mixedmark";
+	String MDC_CHECKBOX__DISABLED = "mdc-checkbox--disabled";
+	String MDC_CHECKBOX__NATIVE_CONTROL = "mdc-checkbox__native-control";
+	String MDC_CHECKBOX__BACKGROUND = "mdc-checkbox__background";
+	String MDC_CHECKBOX__CHECKMARK = "mdc-checkbox__checkmark";
+	String MDC_CHECKBOX__CHECKMARK_PATH = "mdc-checkbox__checkmark-path";
+	String MDC_CHECKBOX__MIXEDMARK = "mdc-checkbox__mixedmark";
 	// Slider
 	String MDC_SLIDER = "mdc-slider";
 	String MDC_SLIDER_DISCRETE = "mdc-slider--discrete";

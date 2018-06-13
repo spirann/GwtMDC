@@ -38,6 +38,7 @@ import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
@@ -107,7 +108,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	}
 	
 	@Override
-	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.radio.MDCRadio(element);
 	}-*/;
 
@@ -128,10 +129,11 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 			putInHistory();
 		}
 
-		setRipple(Ripple.SECONDARY);
 		setCircle(true);
 		
 		addValueChangeListener(input.getElement());
+		
+		addClickHandler(event -> JsUtils.clearFocus());
 
 		super.onInitialize();
 	}

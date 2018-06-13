@@ -37,6 +37,7 @@ import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
@@ -49,10 +50,10 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// Checkbox
 	// /////////////////////////////////////////////////////////////
 	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
-	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX_NATIVE_CONTROL);
-	protected Div background = new Div(CssName.MDC_CHECKBOX_BACKGROUND);
+	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX__NATIVE_CONTROL);
+	protected Div background = new Div(CssName.MDC_CHECKBOX__BACKGROUND);
 	protected MaterialSvg checkmark = new MaterialSvg();
-	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX_MIXEDMARK);
+	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX__MIXEDMARK);
 	protected Label label = new Label();
 
 	// /////////////////////////////////////////////////////////////
@@ -82,16 +83,16 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 
 	@Override
 	protected void onInitialize() {
-		//setRipple(Ripple.SECONDARY);
 		
 		setCircle(true);
 		
+		checkmark.addStyleName(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-		
+				
 		background.add(checkmark);
 		background.add(mixedmark);
-		
-		checkbox.setDisabledClass(CssName.MDC_CHECKBOX_DISABLED);
+				
+		checkbox.setDisabledClass(CssName.MDC_CHECKBOX__DISABLED);
 		checkbox.add(input);
 		checkbox.add(background);
 			
@@ -100,22 +101,10 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		
 		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
 		
+		addClickHandler(event -> JsUtils.clearFocus());
+		
 		super.onInitialize();
-	
 	}
-
-	protected native void prevent(final Element element)/*-{
-
-		var event = function(evt) {
-			evt.stopPropagation();
-			evt.cancelBubble = true;
-		};
-
-		element.addEventListener('click', event);
-		element.addEventListener('mousedown', event);
-		element.addEventListener('pointerdown', event);
-
-	}-*/;
 	
 	@Override
 	public void setId(String id) {
@@ -127,7 +116,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	public String getId() {
 		return input.getId();
 	}
-
+	
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		checkedMixin.setChecked(value);

@@ -35,6 +35,7 @@ import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Span;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
@@ -64,7 +65,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 		}
 		
 		add(label);				
-		addClickHandler(event -> getElement().blur());
+		addClickHandler(event -> JsUtils.clearFocus());
 		
 		super.onInitialize();
 	}
