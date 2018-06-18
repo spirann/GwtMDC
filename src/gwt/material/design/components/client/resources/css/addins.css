@@ -113,7 +113,6 @@ a:active {
 	flex-wrap: wrap;	
 	overflow-x: hidden;
 	position: relative;
-	z-index: 0; 
 }
 
 /* ==========================================================================
@@ -420,6 +419,10 @@ a:active {
    Adjust dialog color
    ========================================================================== */
 
+.mdc-dialog__footer__button {
+	padding: 0 16px 0 16px;
+}
+
 .mdc-dialog__header,
 .mdc-dialog__footer__button {
 	color: var(--mdc-theme-text-primary-on-background);
@@ -510,10 +513,21 @@ a:active {
 	position: fixed;
 	bottom: 1rem;
 	right: 1rem;
-	z-index: 1;
+	z-index: 4;
 
 	-webkit-transition: bottom 0.5s;    	
     transition: bottom 0.5s;
+}
+
+.mdc-fab--fixed > label:empty {
+	display: none;
+}
+
+@media ( min-width : 1024px) {
+	.mdc-fab--fixed {
+		bottom: 1.5rem;
+		right: 1.5rem;
+	}
 }
 
 /* ---------------------

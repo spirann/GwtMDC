@@ -95,8 +95,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 			secondaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT_SECONDARY);
 			primaryText.add(secondaryText);
 
-			initialized = true;
-			
+			initialized = true;			
 		}
 
 		super.onLoad();
