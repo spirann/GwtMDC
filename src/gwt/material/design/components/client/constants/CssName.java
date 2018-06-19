@@ -179,10 +179,12 @@ public interface CssName {
 	// SNACKBAR
 	// //////////////////////////////////////////////////////
 	String MDC_SNACKBAR = "mdc-snackbar";
-	String MDC_SNACKBAR_ALIGN_START = "mdc-snackbar--align-start";
-	String MDC_SNACKBAR_TEXT = "mdc-snackbar__text";
-	String MDC_SNACKBAR_ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
-	String MDC_SNACKBAR_ACTION_BUTTON = "mdc-snackbar__action-button";	
+	String MDC_SNACKBAR__ALIGN_START = "mdc-snackbar--align-start";
+	String MDC_SNACKBAR__MULTILINE = "mdc-snackbar--multiline";
+	String MDC_SNACKBAR__ACTION_ON_BUTTON = "mdc-snackbar--action-on-bottom";
+	String MDC_SNACKBAR__TEXT = "mdc-snackbar__text";
+	String MDC_SNACKBAR__ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
+	String MDC_SNACKBAR__ACTION_BUTTON = "mdc-snackbar__action-button";	
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////

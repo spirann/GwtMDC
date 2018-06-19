@@ -30,6 +30,7 @@ import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
@@ -63,6 +64,10 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	@Override
 	protected void onInitialize() {
 
+		// Adjust to use the correct space 
+		setHeight("48px");
+		//setPaddingLeft(6);
+		
 		divBackground.add(divKnob);
 
 		switch_.setPadding(8);
@@ -74,6 +79,8 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 
 		add(switch_);
 		add(label);
+		
+		addClickHandler(event -> JsUtils.clearFocus());
 		
 		super.onInitialize();
 	}

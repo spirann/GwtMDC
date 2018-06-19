@@ -505,6 +505,7 @@ a:active {
 	margin-right: -6px;
 }
 
+
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
@@ -533,6 +534,27 @@ a:active {
 /* ---------------------
    Ajust for Snackbars
    ---------------------  */
+.mdc-snackbar--action-on-bottom .mdc-snackbar__text {
+	margin: 16px 0 16px 0 !important;
+	width: 100%;
+	text-align: left;
+}
+
+.mdc-snackbar--action-on-bottom .mdc-snackbar__action-wrapper {
+	
+}
+   
+.mdc-snackbar--multiline .mdc-snackbar__text {
+	margin: 16px 0 16px 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2;
+	line-height: 1.5rem;
+	height: calc(1.5rem * 2);
+}
+
 @media (max-width: 599px) {
 
 	.mdc-snackbar--multiline.mdc-snackbar--active ~ .mdc-fab--fixed {		
@@ -549,13 +571,6 @@ a:active {
 		transition: bottom 0.25s;    
 	}
 	
-}
-
-@media ( min-width : 1024px) {
-	.mdc-fab--fixed {
-		bottom: 1.5rem;
-		right: 1.5rem;
-	}
 }
 
 /* ==========================================================================
