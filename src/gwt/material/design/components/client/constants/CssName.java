@@ -92,7 +92,9 @@ public interface CssName {
 	String MDC_TYPOGRAPHY_HEADLINE_3 = "mdc-typography--headline3";
 	String MDC_TYPOGRAPHY_HEADLINE_4 = "mdc-typography--headline4";
 	String MDC_TYPOGRAPHY_HEADLINE_5 = "mdc-typography--headline5";
-	String MDC_TYPOGRAPHY_HEADLINE_6 = "mdc-typography--headline6";
+	String MDC_TYPOGRAPHY_HEADLINE_6 = "mdc-typography--headline6";	
+	String MDC_TYPOGRAPHY_SUBTITLE_1 = "mdc-typography--subtitle1";
+	String MDC_TYPOGRAPHY_SUBTITLE_2 = "mdc-typography--subtitle2";	
 	String MDC_TYPOGRAPHY_BODY_1 = "mdc-typography--body1";
 	String MDC_TYPOGRAPHY_BODY_2 = "mdc-typography--body2";
 	String MDC_TYPOGRAPHY_CAPTION = "mdc-typography--caption";

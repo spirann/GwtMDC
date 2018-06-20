@@ -236,8 +236,9 @@ a:active {
 
 .mdc-tab,
 .mdc-tab-bar-scroller__indicator,
-.mdc-tab-bar-scroller__indicator__inner {
-	color: var(--mdc-tab-bar--color, var(--mdc-theme-secondary)) !important;
+.mdc-tab-bar-scroller__indicator__inner,
+.mdc-tab__icon {
+	color: var(--mdc-tab-bar--color, var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54))) !important;
 	opacity: 0.82;
 }
 
@@ -247,22 +248,23 @@ a:active {
 	opacity: 1.0;
 }
 
-.mdc-tab--active {
-	color: var(--mdc-tab-bar--active-color, var(--mdc-theme-secondary)) !important;
+.mdc-tab--active,
+.mdc-tab--active .mdc-tab__icon {
+	color: var(--mdc-tab-bar--active-color, var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87))) !important;
 }
 
 .mdc-tab-bar__indicator {
-	background-color: var(--mdc-tab-bar--active-color, var(--mdc-theme-secondary)) !important;
+	background-color: var(--mdc-tab-bar--active-color, var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87))) !important;
 }
 
 .mdc-tab.mdc-ripple-upgraded::after,
 .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--ripple-color, var(--mdc-theme-ripple-secondary)) !important;
+    background-color: var(--mdc-tab-bar--ripple-color, var(--mdc-theme-ripple-on-background)) !important;
 }
 
 .mdc-tab--active.mdc-ripple-upgraded::after,
 .mdc-tab--active.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--active-ripple-color, var(--mdc-theme-ripple-secondary)) !important;
+    background-color: var(--mdc-tab-bar--active-ripple-color, var(--mdc-theme-ripple-on-background)) !important;
 }
 
 
