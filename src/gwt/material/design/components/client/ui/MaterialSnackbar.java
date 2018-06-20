@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Div;
@@ -44,7 +45,7 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	protected Div text = new Div(CssName.MDC_SNACKBAR__TEXT);
 	protected Div actionWrapper = new Div(CssName.MDC_SNACKBAR__ACTION_WRAPPER);
-	protected Button action = new Button(CssName.MDC_BUTTON, CssName.MDC_SNACKBAR__ACTION_BUTTON);
+	protected Button action = new Button(CssName.MDC_SNACKBAR__ACTION_BUTTON);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
 	protected final ApplyStyleMixin<MaterialSnackbar> atStartMixin = new ApplyStyleMixin<>(this, CssName.MDC_SNACKBAR__ALIGN_START);
@@ -140,6 +141,10 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	public void setActionText(final String text) {
 		actionText = text;
+	}
+	
+	public void setActionColor(final Color color) {
+		action.setTextColor(color);
 	}
 
 	@Override

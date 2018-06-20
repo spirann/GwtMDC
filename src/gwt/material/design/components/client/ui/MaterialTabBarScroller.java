@@ -20,17 +20,17 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.HasChangeHandlers;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.TabBarTextColor;
 import gwt.material.design.components.client.constants.TabBarType;
 import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Div;
@@ -42,41 +42,37 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, HasChangeHandlers {
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTabBarScroller::jsElement = $wnd.mdc.tabs.MDCTabBarScroller
-				.attachTo(element);
-	}-*/;
-
 	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
 			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
 	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
 			CssName.MATERIAL_ICONS);
 
 	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME);
-	protected MaterialTabBar tabBar = new MaterialTabBar();
+	protected MaterialTabBar tabBar = new MaterialTabBar() {
+		@Override
+		protected native JavaScriptObject jsInit(final Element element)/*-{
+			return new $wnd.mdc.tabs.MDCTabBarFoundation(element);
+		}-*/;
+	};
 
 	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
 			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
 	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
 			CssName.MATERIAL_ICONS);
 
-	protected final TypeMixin<MaterialTabBarScroller, TabBarTextColor> colorMixin = new TypeMixin<>(this);
-
 	private boolean initialized = false;
 
 	public MaterialTabBarScroller() {
 		super(CssName.MDC_TAB_BAR_SCROLLER);
 	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.tabs.MDCTabBarScroller(element);
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		backIndicatorInner.getElement().setAttribute("aria-label", "scroll back button");
 		backIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_BEFORE.getCssName());
@@ -92,8 +88,8 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		super.add(scrollerBackIndicator);
 		super.add(scrollerFrame);
 		super.add(scrollerForwardIndicator);
-
-		jsInit();
+		
+		super.onInitialize();
 	}
 
 	@Override
@@ -124,14 +120,17 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		tabBar.setActiveTabIndex(activeTabIndex);
 	}
 
+	public void setActiveColor(Color color) {
+		tabBar.setActiveColor(color);
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_COLOR, color.getCssName());
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName(0.24));	
+	}
+	
 	@Override
 	public void setTextColor(Color color) {
 		super.setTextColor(color);
-		backIndicatorInner.setTextColor(color);
-		forwardIndicatorInner.setTextColor(color);
-	}
-
-	public void setColorScheme(TabBarTextColor barColor) {
-		colorMixin.setType(barColor);
+		tabBar.setTextColor(color);
+		setStyleProperty(CssProperty.MDC_TAB_BAR__COLOR, color.getCssName());
+		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName(0.24));	
 	}
 }

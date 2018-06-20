@@ -234,176 +234,37 @@ a:active {
    Adjust tab
    ========================================================================== */
 
-/* ----------------------------------- 
-	Default color is text on primary 
--------------------------------------- */
-.mdc-tab-bar {
-	margin: 0;
-}
-   
-.mdc-tab {
-	color: var(--mdc-theme-text-secondary-on-primary, rgba(0, 0, 0, 0.54));
+.mdc-tab,
+.mdc-tab-bar-scroller__indicator,
+.mdc-tab-bar-scroller__indicator__inner {
+	color: var(--mdc-tab-bar--color, var(--mdc-theme-secondary)) !important;
+	opacity: 0.82;
 }
 
-.mdc-tab:hover,
 .mdc-tab:focus,
+.mdc-tab--active,
+.mdc-tab-bar-scroller__indicator__inner:hover {
+	opacity: 1.0;
+}
+
 .mdc-tab--active {
-	color: var(--mdc-theme-text-primary-on-primary, rgba(0, 0, 0, 0.54));
+	color: var(--mdc-tab-bar--active-color, var(--mdc-theme-secondary)) !important;
 }
 
 .mdc-tab-bar__indicator {
-	background-color: var(--mdc-theme-text-primary-on-primary, rgba(0, 0, 0, 0.54));
+	background-color: var(--mdc-tab-bar--active-color, var(--mdc-theme-secondary)) !important;
 }
 
-.mdc-tab-bar-scroller__indicator {
-	color: var(--mdc-theme-text-secondary-on-primary, rgba(0, 0, 0, 0.54));
+.mdc-tab.mdc-ripple-upgraded::after,
+.mdc-tab.mdc-ripple-upgraded::before {
+    background-color: var(--mdc-tab-bar--ripple-color, var(--mdc-theme-ripple-secondary)) !important;
 }
 
-.mdc-tab-bar-scroller__indicator:hover {
-	color: var(--mdc-theme-text-primary-on-primary, rgba(0, 0, 0, 0.54));
-}   
-
-.mdc-tab-bar .mdc-tab.mdc-ripple-upgraded::after,
-.mdc-tab-bar .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-theme-ripple-on-primary);
+.mdc-tab--active.mdc-ripple-upgraded::after,
+.mdc-tab--active.mdc-ripple-upgraded::before {
+    background-color: var(--mdc-tab-bar--active-ripple-color, var(--mdc-theme-ripple-secondary)) !important;
 }
 
-/* if has text only
-.mdc-tab-bar:not(.mdc-tab-bar--icon-tabs):not(.mdc-tab-bar--icons-with-text) {
-	bottom: -12px;
-}
-*/
-/* ---------------------------- 
-		Primary color 
-------------------------------- */
-
-.mdc-tab-bar__primary .mdc-tab {
-	color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 0.30;
-}
-
-.mdc-tab-bar__primary .mdc-tab:hover,
-.mdc-tab-bar__primary .mdc-tab:focus,
-.mdc-tab-bar__primary .mdc-tab--active {
-	color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 1.0;
-}
-
-.mdc-tab-bar__primary .mdc-tab-bar__indicator {
-	background-color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__primary .mdc-tab-bar-scroller__indicator {
-	color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 0.30;
-}
-
-.mdc-tab-bar__primary .mdc-tab-bar-scroller__indicator:hover {
-	color: var(--mdc-theme-primary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 1.0;
-}   
-
-.mdc-tab-bar__primary .mdc-tab.mdc-ripple-upgraded::after,
-.mdc-tab-bar__primary .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-theme-ripple-primary) !important;
-}
-
-/* ---------------------------- 
-	Text on Secondary color 
-------------------------------- */
-
-.mdc-tab-bar__on_secondary .mdc-tab {
-	color: var(--mdc-theme-text-secondary-on-secondary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_secondary .mdc-tab:hover,
-.mdc-tab-bar__on_secondary .mdc-tab:focus,
-.mdc-tab-bar__on_secondary .mdc-tab--active {
-	color: var(--mdc-theme-text-primary-on-secondary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_secondary .mdc-tab-bar__indicator {
-	background-color: var(--mdc-theme-text-primary-on-secondary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_secondary .mdc-tab-bar-scroller__indicator {
-	color: var(--mdc-theme-text-secondary-on-secondary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_secondary .mdc-tab-bar-scroller__indicator:hover {
-	color: var(--mdc-theme-text-primary-on-secondary, rgba(0, 0, 0, 0.54)) !important;
-}   
-
-.mdc-tab-bar__on_secondary .mdc-tab.mdc-ripple-upgraded::after,
-.mdc-tab-bar__on_secondary .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-theme-ripple-on-secondary) !important;
-}
-
-/* ---------------------------- 
-		Secondary color 
-------------------------------- */
-
-.mdc-tab-bar__secondary .mdc-tab {
-	color: var(--mdc-theme-secondary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 0.30;
-}
-
-.mdc-tab-bar__secondary .mdc-tab:hover,
-.mdc-tab-bar__secondary .mdc-tab:focus,
-.mdc-tab-bar__secondary .mdc-tab--active {
-	color: var(--mdc-theme-secondary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 1.0;
-}
-
-.mdc-tab-bar__secondary .mdc-tab-bar__indicator {
-	background-color: var(--mdc-theme-secondary, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__secondary .mdc-tab-bar-scroller__indicator {
-	color: var(--mdc-theme-secondary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 0.30;
-}
-
-.mdc-tab-bar__secondary .mdc-tab-bar-scroller__indicator:hover {
-	color: var(--mdc-theme-secondary, rgba(0, 0, 0, 0.54)) !important;
-	opacity: 1.0;
-}   
-
-.mdc-tab-bar__secondary .mdc-tab.mdc-ripple-upgraded::after,
-.mdc-tab-bar__secondary .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-theme-ripple-secondary) !important;
-}
-
-/* ---------------------------- 
-	Text on Background color 
-------------------------------- */
-
-.mdc-tab-bar__on_background .mdc-tab {
-	color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_background .mdc-tab:hover,
-.mdc-tab-bar__on_background .mdc-tab:focus,
-.mdc-tab-bar__on_background .mdc-tab--active {
-	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_background .mdc-tab-bar__indicator {
-	background-color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_background .mdc-tab-bar-scroller__indicator {
-	color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54)) !important;
-}
-
-.mdc-tab-bar__on_background .mdc-tab-bar-scroller__indicator:hover {
-	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.54)) !important;
-}   
-
-.mdc-tab-bar__on_background .mdc-tab.mdc-ripple-upgraded::after,
-.mdc-tab-bar__on_background .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-theme-ripple-on-background) !important;
-}
 
 /* ==========================================================================
    Adjust drawer
@@ -540,8 +401,8 @@ a:active {
 	text-align: left;
 }
 
-.mdc-snackbar--action-on-bottom .mdc-snackbar__action-wrapper {
-	
+.mdc-snackbar__action-button {
+	color: var(--mdc-theme-secondary);
 }
    
 .mdc-snackbar--multiline .mdc-snackbar__text {

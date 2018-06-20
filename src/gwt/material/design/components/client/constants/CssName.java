@@ -132,7 +132,7 @@ public interface CssName {
 	String MDC_TAB_BAR = "mdc-tab-bar";
 	String MDC_TAB_BAR_ICON_TABS = "mdc-tab-bar--icon-tabs";
 	String MDC_TAB_BAR_ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
-	String MDC_TAB_BAR_INDICATOR = "mdc-tab-bar__indicator";
+	String MDC_TAB_BAR__INDICATOR = "mdc-tab-bar__indicator";
 	String MDC_TAB_BAR_INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
 	String MDC_TAB = "mdc-tab";
 	String MDC_TAB_PANEL = "mdc-tab-panel";

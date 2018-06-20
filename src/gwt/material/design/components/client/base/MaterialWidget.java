@@ -181,6 +181,10 @@ public class MaterialWidget extends BaseWidget
 		jsElement = jsInit(getElement());
 	}
 	
+	public JavaScriptObject asJavaScriptObject() {
+		return jsElement;
+	}
+	
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return element;
 	}-*/;

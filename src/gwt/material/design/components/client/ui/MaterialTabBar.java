@@ -30,9 +30,10 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.constants.TabBarTextColor;
 import gwt.material.design.components.client.constants.TabBarType;
 import gwt.material.design.components.client.ui.html.Nav;
 import gwt.material.design.components.client.ui.html.Span;
@@ -44,29 +45,9 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChangeHandlers {
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
+	protected Span indicator = new Span(CssName.MDC_TAB_BAR__INDICATOR);
 
-	protected native void jsInit()/*-{
-
-		var element = this.@gwt.material.design.components.client.ui.MaterialTabBar::getElement()();
-
-		if (element.parentNode.className
-				.indexOf('mdc-tab-bar-scroller__scroll-frame') > -1) {
-			return this.@gwt.material.design.components.client.ui.MaterialTabBar::jsElement = new $wnd.mdc.tabs.MDCTabBarFoundation(
-					element);
-		} else {
-			return this.@gwt.material.design.components.client.ui.MaterialTabBar::jsElement = $wnd.mdc.tabs.MDCTabBar
-					.attachTo(element);
-		}
-
-	}-*/;
-
-	protected Span indicator = new Span(CssName.MDC_TAB_BAR_INDICATOR);
 	protected final TypeMixin<MaterialTabBar, TabBarType> typeMixin = new TypeMixin<>(this);
-	protected final TypeMixin<MaterialTabBar, TabBarTextColor> colorMixin = new TypeMixin<>(this);
 	protected int activeTabIndex = -1;
 
 	public MaterialTabBar() {
@@ -75,14 +56,16 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 	}
 
 	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.tabs.MDCTabBar(element);
+	}-*/;
+
+	@Override
 	protected void onInitialize() {
+		super.add(indicator);
 		super.onInitialize();
 
-		super.add(indicator);
-
 		addChangeEvent(getElement());
-
-		jsInit();
 		preventDefaultClick(true);
 		loadFirstSelected();
 
@@ -91,14 +74,11 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 	protected native void addChangeEvent(Element element)/*-{
 
 		var _this = this;
-		element
-				.addEventListener(
-						'MDCTabBar:change',
-						function(tabs) {
-							var dynamicTabBar = tabs.detail;
-							var nthChildIndex = dynamicTabBar.activeTabIndex;
-							_this.@gwt.material.design.components.client.ui.MaterialTabBar::setActiveTabIndex(I)(nthChildIndex);
-						});
+		element.addEventListener('MDCTabBar:change', function(tabs) {
+			var dynamicTabBar = tabs.detail;
+			var nthChildIndex = dynamicTabBar.activeTabIndex;
+			_this.@gwt.material.design.components.client.ui.MaterialTabBar::setActiveTabIndex(I)(nthChildIndex);
+		});
 
 	}-*/;
 
@@ -108,6 +88,20 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 
 	protected void loadFirstSelected() {
 
+		//
+		// First select tab
+		//
+		if (activeTabIndex > -1 && activeTabIndex < getWidgetCount() - 1) {
+			final Widget widget = getWidget(activeTabIndex);
+			if (widget instanceof MaterialTab) {
+				((MaterialTab) widget).setActive(true);
+			}
+		}
+
+		//
+		// Throws event from selected tab
+		// The tab can be selected directly by it self
+		//
 		for (int i = 0; i < getWidgetCount(); i++) {
 
 			final Widget child = getWidget(i);
@@ -151,7 +145,7 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 
 	protected native void preventDefaultClick(final boolean prevent)/*-{
 
-		var tabBar = this.@gwt.material.design.components.client.ui.MaterialTabBar::jsElement;
+		var tabBar = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		if (tabBar) {
 			tabBar.preventDefaultOnClick = prevent;
 		}
@@ -181,8 +175,13 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 	}
 
 	protected native void setNativeActiveTabIndex(final int activeTabIndex)/*-{
-		var tabBar = this.@gwt.material.design.components.client.ui.MaterialTabBar::jsElement;
+		var tabBar = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		tabBar.activeTabIndex = activeTabIndex;
+	}-*/;
+
+	protected native void setNativeActiveTab(final JavaScriptObject tab)/*-{
+		var tabBar = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		tabBar.activeTab = tab;
 	}-*/;
 
 	@Override
@@ -204,7 +203,16 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 		}, ChangeEvent.getType());
 	}
 
-	public void setColorScheme(TabBarTextColor barColor) {
-		colorMixin.setType(barColor);
+	@Override
+	public void setTextColor(final Color color) {
+		super.setTextColor(color);
+		setStyleProperty(CssProperty.MDC_TAB_BAR__COLOR, color.getCssName());
+		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName(0.24));
+	}
+
+	public void setActiveColor(final Color color) {
+		super.setTextColor(color);
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_COLOR, color.getCssName());
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName(0.24));
 	}
 }

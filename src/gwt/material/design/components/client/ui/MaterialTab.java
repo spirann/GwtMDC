@@ -40,9 +40,9 @@ import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Span;
 
@@ -51,18 +51,7 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialTab extends MaterialWidget implements HasHref, HasText, HasIcon {
-
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialTab::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialTab::jsElement = new $wnd.mdc.tabs.MDCTabFoundation(
-				element);
-	}-*/;
+public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon {
 
 	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB_ICON);
 	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
@@ -77,13 +66,17 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 	private HandlerRegistration handler;
 
 	public MaterialTab() {
-		super(HtmlElements.A.createElement(), CssName.MDC_TAB);
+		super(CssName.MDC_TAB);
 		setRole(Role.TAB);
 	}
 
 	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.tabs.MDCTab(element);
+	}-*/;
+
+	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		if (getIcon() != null) {
 			add(icon);
@@ -91,10 +84,32 @@ public class MaterialTab extends MaterialWidget implements HasHref, HasText, Has
 
 		add(label);
 
-		jsInit();
-
+		if (!(getParent() instanceof MaterialTabBar)) {
+			super.onInitialize();
+		}
+		
 		updateTarget();
+		preventDefaultClick(true);
+		addChangeEvent(getElement());
 	}
+
+	protected native void addChangeEvent(Element element)/*-{
+
+		var _this = this;
+		element.addEventListener('MDCTab:selected', function(event) {
+			console.log('I was selected');
+		});
+
+	}-*/;
+
+	protected native void preventDefaultClick(final boolean prevent)/*-{
+
+		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		if (tab) {
+			tab.preventDefaultOnClick = prevent;
+		}
+
+	}-*/;
 
 	protected void updateTarget() {
 
