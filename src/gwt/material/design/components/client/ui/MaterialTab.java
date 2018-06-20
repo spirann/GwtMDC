@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.HasSelectionHandlers;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
@@ -42,6 +43,8 @@ import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.events.SelectionEvent;
+import gwt.material.design.components.client.handlers.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Span;
@@ -51,7 +54,7 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon {
+public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, HasSelectionHandlers<MaterialTab> {
 
 	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB_ICON);
 	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
@@ -90,14 +93,14 @@ public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon {
 		
 		updateTarget();
 		preventDefaultClick(true);
-		addChangeEvent(getElement());
+		addNativeSelectEvent(getElement());
 	}
 
-	protected native void addChangeEvent(Element element)/*-{
+	protected native void addNativeSelectEvent(Element element)/*-{
 
 		var _this = this;
 		element.addEventListener('MDCTab:selected', function(event) {
-			console.log('I was selected');
+			_this.@gwt.material.design.components.client.ui.MaterialTab::fireSelectionEvent()();
 		});
 
 	}-*/;
@@ -152,6 +155,15 @@ public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon {
 				timer.schedule(50);
 			}
 		});
+	}
+	
+	protected void fireSelectionEvent() {
+		SelectionEvent.fire(this, this);
+	}	
+	
+	@Override
+	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
+		return addHandler(handler, SelectionEvent.getType());
 	}
 
 	@Override
