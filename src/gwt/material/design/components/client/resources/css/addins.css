@@ -480,7 +480,7 @@ a:active {
 /* ==========================================================================
    Slider color adjust
    ========================================================================== */
-
+/*
 .mdc-slider__track-container {
 	background-color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
 }
@@ -505,7 +505,7 @@ a:active {
   	fill: var(--mdc-theme-secondary);
   	stroke: var(--mdc-theme-secondary);
 }
-
+*/
 /* ==========================================================================
    Switch color adjust
    ========================================================================== */

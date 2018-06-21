@@ -76,7 +76,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 	}
 
 	@Override
-	protected native JavaScriptObject jsInit(final Element elemnt)/*-{
+	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.slider.MDCSlider(element);
 	}-*/;
 
@@ -125,12 +125,9 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected native void initializeChageEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		element
-				.addEventListener(
-						'MDCSlider:change',
-						function() {
-							_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-						});
+		element.addEventListener('MDCSlider:change', function() {
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+		});
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
@@ -140,15 +137,11 @@ public class MaterialSlider extends MaterialFormField<Double>
 		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinMarker;
 		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
 
-		element
-				.addEventListener(
-						'MDCSlider:input',
-						function() {
-							pinMarkerElement.innerText = parseFloat(
-									_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()())
-									.toFixed(0);
-							_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-						});
+		element.addEventListener('MDCSlider:input', function() {
+			pinMarkerElement.innerText = parseFloat(_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()()).toFixed(0);
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+		});
+		
 	}-*/;
 
 	@Override
