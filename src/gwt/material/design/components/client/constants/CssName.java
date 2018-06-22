@@ -277,17 +277,17 @@ public interface CssName {
 	String MDC_CHECKBOX__MIXEDMARK = "mdc-checkbox__mixedmark";
 	// Slider
 	String MDC_SLIDER = "mdc-slider";
-	String MDC_SLIDER_DISCRETE = "mdc-slider--discrete";
-	String MDC_SLIDER_DISPLAY_MARKERS = "mdc-slider--display-markers";
-	String MDC_SLIDER_TRACK_CONTAINER = "mdc-slider__track-container";
+	String MDC_SLIDER__DISCRETE = "mdc-slider--discrete";
+	String MDC_SLIDER__DISPLAY_MARKERS = "mdc-slider--display-markers";
+	String MDC_SLIDER__TRACK_CONTAINER = "mdc-slider__track-container";
 	String MDC_SLIDER_TRACK_MARKER = "mdc-slider__track-marker";
-	String MDC_SLIDER_TRACK_MARKER_CONTAINER = "mdc-slider__track-marker-container";
-	String MDC_SLIDER_TRACK = "mdc-slider__track";
-	String MDC_SLIDER_THUMB_CONTAINER = "mdc-slider__thumb-container";
-	String MDC_SLIDER_THUMB = "mdc-slider__thumb";
-	String MDC_SLIDER_FOCUS_RING = "mdc-slider__focus-ring";
-	String MDC_SLIDER_PIN = "mdc-slider__pin";
-	String MDC_SLIDER_PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
+	String MDC_SLIDER__TRACK_MARKER_CONTAINER = "mdc-slider__track-marker-container";
+	String MDC_SLIDER__TRACK = "mdc-slider__track";
+	String MDC_SLIDER__THUMB_CONTAINER = "mdc-slider__thumb-container";
+	String MDC_SLIDER__THUMB = "mdc-slider__thumb";
+	String MDC_SLIDER__FOCUS_RING = "mdc-slider__focus-ring";
+	String MDC__SLIDER__PIN = "mdc-slider__pin";
+	String MDC_SLIDER__PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
 	// Switch
 	String MDC_SWITCH = "mdc-switch";
 	String MDC_SWITCH_DISABLED = "mdc-switch--disabled";

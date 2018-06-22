@@ -49,4 +49,11 @@ public interface CssProperty {
 	String MDC_TAB_BAR__RIPPLE_COLOR = "--mdc-tab-bar--ripple-color";
 	String MDC_TAB_BAR__ACTIVE_COLOR = "--mdc-tab-bar--active-color";
 	String MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR = "--mdc-tab-bar--active-ripple-color";
+	// ////////////////////////////////////////////////////////////////////////////
+	// Slider
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_SLIDER__COLOR = "--mdc-slider--color";
+	String MDC_SLIDER__BACKGROUND_COLOR = "--mdc-slider--background-color";
+	String MDC_SLIDER__TEXT_COLOR = "--mdc-slider--text-color";
+	
 }

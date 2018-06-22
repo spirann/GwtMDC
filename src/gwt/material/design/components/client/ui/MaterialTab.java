@@ -23,11 +23,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.StyleInjector;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.DOM;
-import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -48,6 +46,7 @@ import gwt.material.design.components.client.handlers.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Span;
+import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
@@ -142,19 +141,7 @@ public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, Ha
 
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
-		return super.addClickHandler(new ClickHandler() {
-			@Override
-			public void onClick(ClickEvent event) {
-				final Timer timer = new Timer() {
-
-					@Override
-					public void run() {
-						handler.onClick(event);
-					}
-				};
-				timer.schedule(50);
-			}
-		});
+		return super.addClickHandler(event -> TimerHelper.schedule(50, () -> handler.onClick(event)));
 	}
 	
 	protected void fireSelectionEvent() {

@@ -29,13 +29,16 @@ import gwt.material.design.components.client.base.HasMarkers;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.handlers.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
+import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
@@ -45,80 +48,58 @@ import gwt.material.design.components.client.ui.html.Span;
 public class MaterialSlider extends MaterialFormField<Double>
 		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
-	private boolean inputHandlerInitialized;
+	// /////////////////////////////////////////////////////////////
+	// Slider
+	// /////////////////////////////////////////////////////////////	
+	protected Div trackContainer = new Div(CssName.MDC_SLIDER__TRACK_CONTAINER);
+	protected Div track = new Div(CssName.MDC_SLIDER__TRACK);	
+	protected Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);	
+	protected Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);	
+	protected Div focusRing = new Div(CssName.MDC_SLIDER__FOCUS_RING);
+	protected Div pin = new Div(CssName.MDC__SLIDER__PIN);
+	protected Span pinValueMarker = new Span(CssName.MDC_SLIDER__PIN_VALUE_MARKER);
 
+	// /////////////////////////////////////////////////////////////
+	// Mixins
+	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
 	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
 	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
 	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled", "false");
 	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_SLIDER_DISCRETE);
+			CssName.MDC_SLIDER__DISCRETE);
 	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_SLIDER_DISPLAY_MARKERS);
-
-	// /////////////////////////////////////////////////////////////
-	// Slider
-	// /////////////////////////////////////////////////////////////
-	protected Div slider = new Div(CssName.MDC_SLIDER);
-	protected Div trackContainer = new Div(CssName.MDC_SLIDER_TRACK_CONTAINER);
-	protected Div track = new Div(CssName.MDC_SLIDER_TRACK);
-	protected Div markerContainer = new Div(CssName.MDC_SLIDER_TRACK_MARKER_CONTAINER);
-	protected Div thumbContainer = new Div(CssName.MDC_SLIDER_THUMB_CONTAINER);
-	protected Div focusRing = new Div(CssName.MDC_SLIDER_FOCUS_RING);
-	protected Div pin = new Div(CssName.MDC_SLIDER_PIN);
-	protected Span pinMarker = new Span(CssName.MDC_SLIDER_PIN_VALUE_MARKER);
+			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
-		super();
+		super(CssName.MDC_SLIDER);
 		setRole(Role.SLIDER);
-		setWidth("100%");
 	}
-
+	
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.slider.MDCSlider(element);
 	}-*/;
 
-	
 	@Override
 	protected void onInitialize() {
 
 		trackContainer.add(track);
 		trackContainer.add(markerContainer);
 
-		pin.add(pinMarker);
+		pin.add(pinValueMarker);		
 		thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
-		thumbContainer.add(focusRing);
+		thumbContainer.add(focusRing);		
 		thumbContainer.add(pin);
-
-		slider.add(trackContainer);
-		slider.add(thumbContainer);
-		add(slider);
-
+		
+		add(trackContainer);
+		add(thumbContainer);
+		
 		initializeChageEventListener();
 		initializeInputEventListener();
 
-		setupTrackMarker();
-		
-		super.onInitialize();
-
-	}
-
-	protected void setupTrackMarker() {
-
-		if (initialized) {
-
-			final int count = (int) ((getMax() - getMin()) / getStep());
-			markerContainer.clear();
-			if (isMarkers()) {
-				for (int i = 0; i < count; i++) {
-					final Div div = new Div(CssName.MDC_SLIDER_TRACK_MARKER);
-					markerContainer.add(div);
-				}
-			}
-
-		}
+		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
 
 	}
 
@@ -133,21 +114,45 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected native void initializeInputEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-
-		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinMarker;
-		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
-
-		element.addEventListener('MDCSlider:input', function() {
-			pinMarkerElement.innerText = parseFloat(_this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()()).toFixed(0);
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+		element.addEventListener('MDCSlider:input', function() {								
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();	
+			 _this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
 		});
-		
+	}-*/;
+	
+	protected native void draw()/*-{
+	
+		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinValueMarker;
+		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
+		var value = this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()();
+		var formattedValue = parseFloat(value).toFixed(0);
+		pinMarkerElement.innerText = formattedValue;
+
+		if (value < 100.0) {
+			pinMarkerElement.style.fontSize = "0.875rem";
+		} else if (value < 1000.0) {
+			pinMarkerElement.style.fontSize = "0.745rem";
+		} else if (value < 10000.0) {
+			pinMarkerElement.style.fontSize = "0.645rem";
+		} else {
+			// Default size
+			pinMarkerElement.style.fontSize = "0.875rem";
+		}
+
+	}-*/;
+	
+	protected native void nativeSetValue(final Double value)/*-{
+		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		slider.value = value;
 	}-*/;
 
 	@Override
 	public void setValue(Double value, boolean fireEvents) {
 		valuenowMixin.setAttribute(value);
 		super.setValue(value, fireEvents);
+		if(initialized) {
+			nativeSetValue(value);
+		}
 	}
 
 	@Override
@@ -157,7 +162,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setMin(final double min) {
 		valueminMixin.setAttribute(min);
-		setupTrackMarker();
 	}
 
 	public double getMin() {
@@ -166,25 +170,18 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setMax(final double max) {
 		valuemaxMixin.setAttribute(max);
-		setupTrackMarker();
 	}
 
 	public double getMax() {
 		return valuemaxMixin.getAttributeAsDouble();
 	}
-
+	
+	protected void fireInputEvent() {
+		InputEvent.fire(this, getValue());
+	}
+	
 	@Override
 	public HandlerRegistration addInputHandler(InputHandler<Double> handler) {
-
-		if (!inputHandlerInitialized) {
-			inputHandlerInitialized = true;
-			addHandler(new InputHandler<Double>() {
-				public void onInput(InputEvent<Double> event) {
-					InputEvent.fire(MaterialSlider.this, getValue());
-				}
-			}, InputEvent.getType());
-		}
-
 		return addHandler(handler, InputEvent.getType());
 	}
 
@@ -200,7 +197,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 
 	public void setStep(final Double step) {
 		dataStepMixin.setAttribute(step);
-		setupTrackMarker();
 	}
 
 	public Double getStep() {
@@ -210,7 +206,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 	@Override
 	public void setMarkers(boolean markers) {
 		markersMixin.setApply(markers);
-		setupTrackMarker();
 	}
 
 	@Override
@@ -222,5 +217,20 @@ public class MaterialSlider extends MaterialFormField<Double>
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
 		enabledMixin.setAttribute(!enabled);
+	}
+	
+	@Override
+	public void setTextColor(final Color color) {
+		setStyleProperty(CssProperty.MDC_SLIDER__TEXT_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssProperty.MDC_SLIDER__COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssProperty.MDC_SLIDER__BACKGROUND_COLOR, color.getCssName());
 	}
 }
