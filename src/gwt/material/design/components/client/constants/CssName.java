@@ -309,12 +309,12 @@ public interface CssName {
 	// LINEAR PROGRESS
 	// //////////////////////////////////////////////////////
 	String MDC_LINEAR_PROGRESS = "mdc-linear-progress";
-	String MDC_LINEAR_PROGRESS_INDETERMINATE = "mdc-linear-progress--indeterminate";
-	String MDC_LINEAR_PROGRESS_REVERSED = "mdc-linear-progress--reversed";
-	String MDC_LINEAR_PROGRESS_BUFFERING_DOTS = "mdc-linear-progress__buffering-dots";
-	String MDC_LINEAR_PROGRESS_BUFFER = "mdc-linear-progress__buffer";
-	String MDC_LINEAR_PROGRESS_BAR = "mdc-linear-progress__bar";
-	String MDC_LINEAR_PROGRESS_PRIMARY_BAR = "mdc-linear-progress__primary-bar";
-	String MDC_LINEAR_PROGRESS_SECONDARY_BAR = "mdc-linear-progress__secondary-bar";
-	String MDC_LINEAR_PROGRESS_BAR_INNER = "mdc-linear-progress__bar-inner";
+	String MDC_LINEAR_PROGRESS__INDETERMINATE = "mdc-linear-progress--indeterminate";
+	String MDC_LINEAR_PROGRESS__REVERSED = "mdc-linear-progress--reversed";
+	String MDC_LINEAR_PROGRESS__BUFFERING_DOTS = "mdc-linear-progress__buffering-dots";
+	String MDC_LINEAR_PROGRESS__BUFFER = "mdc-linear-progress__buffer";
+	String MDC_LINEAR_PROGRESS__BAR = "mdc-linear-progress__bar";
+	String MDC_LINEAR_PROGRESS__PRIMARY_BAR = "mdc-linear-progress__primary-bar";
+	String MDC_LINEAR_PROGRESS__SECONDARY_BAR = "mdc-linear-progress__secondary-bar";
+	String MDC_LINEAR_PROGRESS__BAR_INNER = "mdc-linear-progress__bar-inner";
 }

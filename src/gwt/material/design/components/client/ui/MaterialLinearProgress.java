@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasBuffer;
 import gwt.material.design.components.client.base.HasIndeterminate;
@@ -39,29 +40,18 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialLinearProgress extends Div implements HasReverse, HasIndeterminate, HasProgress, HasBuffer {
 
-	// /////////////////////////////////////////////////////////////
-	// Initialize java script component
-	// /////////////////////////////////////////////////////////////
-	protected JavaScriptObject jsElement;
-
-	protected native void jsInit()/*-{
-		var element = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::getElement()();
-		this.@gwt.material.design.components.client.ui.MaterialLinearProgress::jsElement = $wnd.mdc.linearProgress.MDCLinearProgress
-				.attachTo(element);
-	}-*/;
-
 	protected final ApplyStyleMixin<MaterialLinearProgress> indeterminateMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_LINEAR_PROGRESS_INDETERMINATE);
+			CssName.MDC_LINEAR_PROGRESS__INDETERMINATE);
 
 	protected final ApplyStyleMixin<MaterialLinearProgress> reverseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_LINEAR_PROGRESS_REVERSED);
+			CssName.MDC_LINEAR_PROGRESS__REVERSED);
 
-	protected Div bufferingDots = new Div(CssName.MDC_LINEAR_PROGRESS_BUFFERING_DOTS);
-	protected Div buffer_ = new Div(CssName.MDC_LINEAR_PROGRESS_BUFFER);
-	protected Div primaryBar = new Div(CssName.MDC_LINEAR_PROGRESS_BAR, CssName.MDC_LINEAR_PROGRESS_PRIMARY_BAR);
-	protected Span primaryInner = new Span(CssName.MDC_LINEAR_PROGRESS_BAR_INNER);
-	protected Div secondaryBar = new Div(CssName.MDC_LINEAR_PROGRESS_BAR, CssName.MDC_LINEAR_PROGRESS_SECONDARY_BAR);
-	protected Span secondaryInner = new Span(CssName.MDC_LINEAR_PROGRESS_BAR_INNER);
+	protected Div bufferingDots = new Div(CssName.MDC_LINEAR_PROGRESS__BUFFERING_DOTS);
+	protected Div buffer_ = new Div(CssName.MDC_LINEAR_PROGRESS__BUFFER);
+	protected Div primaryBar = new Div(CssName.MDC_LINEAR_PROGRESS__BAR, CssName.MDC_LINEAR_PROGRESS__PRIMARY_BAR);
+	protected Span primaryInner = new Span(CssName.MDC_LINEAR_PROGRESS__BAR_INNER);
+	protected Div secondaryBar = new Div(CssName.MDC_LINEAR_PROGRESS__BAR, CssName.MDC_LINEAR_PROGRESS__SECONDARY_BAR);
+	protected Span secondaryInner = new Span(CssName.MDC_LINEAR_PROGRESS__BAR_INNER);
 
 	protected Double progress = 0.0;
 	protected double buffer = 1.0;
@@ -70,14 +60,14 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 		super(CssName.MDC_LINEAR_PROGRESS);
 		setRole(Role.PROGRESS_BAR);
 	}
-
-	native String btoa(String b64) /*-{
-		return btoa(b64);
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.linearProgress.MDCLinearProgress(element);
 	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 
 		primaryBar.add(primaryInner);
 		secondaryBar.add(secondaryInner);
@@ -87,11 +77,10 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 		add(primaryBar);
 		add(secondaryBar);
 
-		jsInit();
+		super.onInitialize();
 
 		setBuffer(buffer);
 		setProgress(progress);
-
 	}
 
 	@Override
@@ -129,11 +118,10 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 
 		var bufferingDots = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::bufferingDots;
 		var bufferingDotsElement = bufferingDots.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		var linearProgress = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::jsElement;
+		var linearProgress = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 
 		if (linearProgress) {
-			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100)
-					+ "% - 6px)";
+			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100) + "% - 6px)";
 			linearProgress.buffer = buffer;
 		}
 
@@ -151,8 +139,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	public native void setProgress(double progress)/*-{
 
 		this.@gwt.material.design.components.client.ui.MaterialLinearProgress::progress = progress;
-
-		var linearProgress = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::jsElement;
+		var linearProgress = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 
 		if (linearProgress) {
 			linearProgress.progress = progress;
