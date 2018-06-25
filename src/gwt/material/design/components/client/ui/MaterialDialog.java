@@ -31,6 +31,7 @@ import gwt.material.design.components.client.base.HasScrollable;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Role;
@@ -56,26 +57,26 @@ public class MaterialDialog extends Aside
 	// /////////////////////////////////////////////////////////////
 	// Dialog
 	// /////////////////////////////////////////////////////////////
-	protected Div surface = new Div(CssName.MDC_DIALOG_SURFACE);
-	protected Header header = new Header(CssName.MDC_DIALOG_HEADER);
-	protected H2 headerTitle = new H2(CssName.MDC_DIALOG_HEADER_TITLE) {
+	protected Div surface = new Div(CssName.MDC_DIALOG__SURFACE);
+	protected Header header = new Header(CssName.MDC_DIALOG__HEADER);
+	protected H2 headerTitle = new H2(CssName.MDC_DIALOG__HEADER_TITLE) {
 		@Override
 		public void setId(String id) {
 			super.setId(id);
 			ariaLabelledbyMixin.setAttribute(id);
 		}
 	};
-	protected Section body = new Section(CssName.MDC_DIALOG_BODY) {
+	protected Section body = new Section(CssName.MDC_DIALOG__BODY) {
 		@Override
 		public void setId(String id) {
 			super.setId(id);
 			ariaDescribedbyMixin.setAttribute(id);
 		}
 	};
-	protected Footer footer = new Footer(CssName.MDC_DIALOG_FOOTER);
+	protected Footer footer = new Footer(CssName.MDC_DIALOG__FOOTER);
 	protected MaterialButton accept = new MaterialButton();
 	protected MaterialButton cancel = new MaterialButton();
-	protected Div backdrop = new Div(CssName.MDC_DIALOG_BACKDROP);
+	protected Div backdrop = new Div(CssName.MDC_DIALOG__BACKDROP);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
@@ -83,7 +84,7 @@ public class MaterialDialog extends Aside
 	protected final AttributeMixin<MaterialDialog> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
 	protected final AttributeMixin<MaterialDialog> ariaLabelledbyMixin = new AttributeMixin<>(this, "aria-labelledby");
 	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this, "aria-describedby");
-	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG_BODY_SCROLLABLE);
+	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG__BODY_SCROLLABLE);
 
 	private HandlerRegistration handler;
 
@@ -102,18 +103,18 @@ public class MaterialDialog extends Aside
 		
 		header.add(headerTitle);
 
-		cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);		
-		//cancel.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_CANCEL);
-		cancel.addStyleName(CssName.MDC_DIALOG_ACTION);		
+		cancel.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);		
+		cancel.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON_CANCEL);
+		cancel.addStyleName(CssName.MDC_DIALOG__ACTION);		
 		cancel.addClickHandler(event -> {
 			close();
 			fireCancelEvent();
 		});
 		footer.add(cancel);
 
-		accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON);		
-		//accept.addStyleName(CssName.MDC_DIALOG_FOOTER_BUTTON_ACCEPT);
-		accept.addStyleName(CssName.MDC_DIALOG_ACTION);
+		accept.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);		
+		accept.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON_ACCEPT);
+		accept.addStyleName(CssName.MDC_DIALOG__ACTION);
 		accept.addClickHandler(event -> {
 			close();
 			fireAcceptEvent();
@@ -126,8 +127,8 @@ public class MaterialDialog extends Aside
 		super.add(surface);
 		super.add(backdrop);
 
-		initializeAcceptEventListener();
-		initializeCancelEventListener();
+		//initializeAcceptEventListener();
+		//initializeCancelEventListener();
 		
 		super.onInitialize();
 	}
@@ -291,6 +292,14 @@ public class MaterialDialog extends Aside
 		accept.setType(type);
 	}
 	
+	public void setAcceptTextColor(final Color color) {
+		accept.setTextColor(color);
+	}
+	
+	public void setAcceptBackgroundColor(final Color color) {
+		accept.setBackgroundColor(color);
+	}
+	
 	public ButtonType getAcceptType(){
 		return accept.getType();
 	}
@@ -315,6 +324,14 @@ public class MaterialDialog extends Aside
 
 	public boolean isCancelEnabled() {
 		return cancel.isEnabled();
+	}
+	
+	public void setCancelTextColor(final Color color) {
+		cancel.setTextColor(color);
+	}
+	
+	public void setCancelBackgroundColor(final Color color) {
+		cancel.setBackgroundColor(color);
 	}
 	
 	public void setCancelType(final ButtonType type){

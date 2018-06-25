@@ -84,7 +84,6 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 			icon.setCircle(true);
 
 			if (icon.getType() != null) {
-				//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 				insert(icon, 0);
 			}
 
@@ -95,6 +94,8 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 			secondaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT_SECONDARY);
 			primaryText.add(secondaryText);
 
+			addClickHandler(event -> event.stopPropagation());
+			
 			initialized = true;			
 		}
 
@@ -111,7 +112,6 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	}-*/;
 
 	private void insertDetail(final Widget widget, final String detailClass, final int detailPos) {
-		//removeDatail(getElement(), detailClass);
 		widget.addStyleName(detailClass);
 		insert(widget, detailPos);
 	}
@@ -128,6 +128,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	public void addEndDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM__END_DETAIL, Appender.END);
 		if (prevent) {
+			widget.getElement().setAttribute("prevent", "true");
 			prevent(widget.getElement());
 		}
 	}
@@ -140,6 +141,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		};
 
 		element.addEventListener('click', event);
+		element.addEventListener('toggle', event);
 		element.addEventListener('mousedown', event);
 		element.addEventListener('pointerdown', event);
 
@@ -192,7 +194,6 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	@Override
 	public void setIcon(IconType iconType) {
-		//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		icon.setType(iconType);
 
 		if (icon.getType() != null && isAttached() && icon.getParent() == null) {
@@ -207,7 +208,6 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	}
 
 	public void setAvatarUrl(final String url) {
-		//removeDatail(getElement(), CssName.MDC_LIST_ITEM__START_DETAIL);
 		avatar.setUrl(url);
 
 		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null) {

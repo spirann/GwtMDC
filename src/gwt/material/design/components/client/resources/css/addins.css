@@ -287,17 +287,23 @@ a:active {
 	padding: 0 16px 0 16px;
 }
 
-.mdc-dialog__header,
-.mdc-dialog__footer__button {
+.mdc-dialog__header {
 	color: var(--mdc-theme-text-primary-on-background);
+	background-color: var(--mdc-theme-background);
 }
 
 .mdc-dialog__body {
 	color: var(--mdc-theme-text-secondary-on-background);
+	background-color:  var(--mdc-theme-background);
 }
 
-.mdc-dialog__action {
-	color: var(--mdc-theme-text-secondary-on-background);
+.mdc-dialog__footer {
+	color: var(--mdc-theme-secondary);	
+}
+
+.mdc-dialog__footer .mdc-button--raised {
+	color: var(--mdc-theme-text-primary-on-secondary);
+	background-color: var(--mdc-theme-secondary);	
 }
 
 /* ==========================================================================

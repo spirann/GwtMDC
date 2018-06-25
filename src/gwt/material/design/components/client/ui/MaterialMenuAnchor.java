@@ -30,6 +30,6 @@ import gwt.material.design.components.client.ui.html.Div;
 public class MaterialMenuAnchor extends Div {
 
 	public MaterialMenuAnchor() {
-		super(CssName.MDC_MENU_ANCHOR);
+		super(CssName.MDC_MENU__ANCHOR);
 	}
 }

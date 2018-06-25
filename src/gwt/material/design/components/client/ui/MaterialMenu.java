@@ -21,7 +21,9 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasCloseHandlers;
@@ -46,13 +48,14 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected MaterialList items = new MaterialList();
 
 	private boolean quickOpen = false;
-	
+	private boolean closeOnClick = false;
+
 	private HandlerRegistration handler;
 
 	public MaterialMenu() {
 		super(CssName.MDC_MENU);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.menu.MDCMenu(element);
@@ -60,15 +63,27 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 	@Override
 	protected void onInitialize() {
-		
-		items.addStyleName(CssName.MDC_MENU_ITEMS);
+
+		items.addStyleName(CssName.MDC_MENU__ITEMS);
 		items.setRole(Role.MENU);
-		items.getElement().setAttribute("aria-hidden", "true");	
-		
+		items.getElement().setAttribute("aria-hidden", "true");
+
 		super.add(items);
 		super.onInitialize();
+
+		addNativeCloseEvent(getElement());
+
 	}
-	
+
+	protected native void addNativeCloseEvent(Element element)/*-{
+
+		var _this = this;
+		element.addEventListener('MDCMenu:cancel', function(event) {
+			_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
+		});
+
+	}-*/;
+
 	@Override
 	protected void onUnload() {
 		super.onUnload();
@@ -84,6 +99,22 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 		if (child instanceof HasRole && !(child instanceof MaterialListDivider)) {
 			((HasRole) child).setRole(Role.MENU_ITEM);
 		}
+
+		child.addDomHandler(event -> {
+
+			final String innerHtml = child.getElement().getInnerHTML();
+			final boolean prevent = innerHtml.contains("prevent=\"true\"");
+			
+			if (((child instanceof HasEnabled) 
+					&& !((HasEnabled) child).isEnabled()) || prevent) {
+				return;
+			}
+			
+			if (closeOnClick) {
+				close();
+			}
+
+		}, ClickEvent.getType());
 
 		items.add(child);
 	}
@@ -105,7 +136,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 	@Override
 	public void setOpen(boolean open) {
-		
+
 		if (!isAttached() && handler == null) {
 
 			handler = addAttachHandler(event -> {
@@ -135,11 +166,12 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	}
 
 	protected native void setNativeOpen(boolean open)/*-{
+
 		var _this = this;
 		var menu = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		var quickOpen = this.@gwt.material.design.components.client.ui.MaterialMenu::quickOpen;
 		var oldOpen = menu.open;
-		
+
 		menu.quickOpen = quickOpen;
 		menu.open = open;
 
@@ -185,11 +217,20 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 		}, OpenEvent.getType());
 	}
 
-	public boolean isQuickOpen(){
+	public boolean isQuickOpen() {
 		return quickOpen;
 	}
 
 	public void setQuickOpen(final boolean quickOpen) {
 		this.quickOpen = quickOpen;
 	}
+
+	public boolean isCloseOnClick() {
+		return closeOnClick;
+	}
+
+	public void setCloseOnClick(boolean closeOnClick) {
+		this.closeOnClick = closeOnClick;
+	}
+
 }
