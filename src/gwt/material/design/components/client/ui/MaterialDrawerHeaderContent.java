@@ -31,7 +31,7 @@ public class MaterialDrawerHeaderContent extends Div {
 
 	
 	public MaterialDrawerHeaderContent() {
-		super(CssName.MDC_DRAWER_HEADER_CONTENT);
+		super(CssName.MDC_DRAWER__HEADER_CONTENT);
 	}
 	
 }

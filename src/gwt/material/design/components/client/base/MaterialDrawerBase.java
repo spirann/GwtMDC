@@ -36,7 +36,7 @@ import gwt.material.design.components.client.ui.html.Nav;
 public class MaterialDrawerBase extends Aside implements HasOpen {
 
 	
-	protected Nav content = new Nav(CssName.MDC_DRAWER_DRAWER);
+	protected Nav content = new Nav(CssName.MDC_DRAWER__DRAWER);
 
 	private HandlerRegistration handler;
 

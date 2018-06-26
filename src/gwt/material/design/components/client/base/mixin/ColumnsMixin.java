@@ -76,12 +76,12 @@ public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractM
 	private void setColumns(final int oldCols, final int newCols, final ScreenSize screenSize) {
 
 		if (oldCols >= 1 && oldCols <= 12) {
-			uiObject.removeStyleName(CssName.MDC_LAYOUT_CELL_SPAN.replace("{columns}", String.valueOf(oldCols))
+			uiObject.removeStyleName(CssName.MDC_LAYOUT_GRID__CELL__SPAN.replace("{columns}", String.valueOf(oldCols))
 					.replace("-{screen_size}", screenSize == null ? "" : "-" + screenSize.getCssName()));
 		}
 
 		if (newCols >= 1 && newCols <= 12) {
-			uiObject.addStyleName(CssName.MDC_LAYOUT_CELL_SPAN.replace("{columns}", String.valueOf(newCols))
+			uiObject.addStyleName(CssName.MDC_LAYOUT_GRID__CELL__SPAN.replace("{columns}", String.valueOf(newCols))
 					.replace("-{screen_size}", screenSize == null ? "" : "-" + screenSize.getCssName()));
 		}
 	}
@@ -89,12 +89,12 @@ public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractM
 	private void setOrder(final int oldOrder, final int newOrder) {
 
 		if (oldOrder >= 1 && oldOrder <= 12) {
-			uiObject.removeStyleName(CssName.MDC_LAYOUT_CELL_ORDER
+			uiObject.removeStyleName(CssName.MDC_LAYOUT_GRID__CELL__ORDER
 					.replace("{number}", String.valueOf(oldOrder)));
 		}
 
 		if (newOrder >= 1 && newOrder <= 12) {
-			uiObject.addStyleName(CssName.MDC_LAYOUT_CELL_ORDER
+			uiObject.addStyleName(CssName.MDC_LAYOUT_GRID__CELL__ORDER
 					.replace("{number}", String.valueOf(newOrder)));
 		}
 	}

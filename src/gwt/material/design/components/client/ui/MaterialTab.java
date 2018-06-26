@@ -55,15 +55,15 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
  */
 public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, HasSelectionHandlers<MaterialTab> {
 
-	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB_ICON);
-	protected Span label = new Span(CssName.MDC_TAB_ICON_TEXT);
+	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB__ICON);
+	protected Span label = new Span(CssName.MDC_TAB__ICON_TEXT);
 
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final IconMixin<MaterialWidget> iconMixin = new IconMixin<>(icon);
 	protected final HrefMixin<MaterialTab> hrefMixin = new HrefMixin<>(this);
 	protected final AttributeMixin<MaterialTab> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 
-	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB_ACTIVE);
+	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB__ACTIVE);
 
 	private HandlerRegistration handler;
 

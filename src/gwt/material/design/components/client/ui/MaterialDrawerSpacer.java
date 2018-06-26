@@ -31,7 +31,7 @@ public class MaterialDrawerSpacer extends Div {
 
 	
 	public MaterialDrawerSpacer() {
-		super(CssName.MDC_DRAWER_TOOLBAR_SPACER);
+		super(CssName.MDC_DRAWER__TOOLBAR_SPACER);
 	}
 	
 }

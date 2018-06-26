@@ -43,9 +43,9 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	// Switch
 	// /////////////////////////////////////////////////////////////
 	protected Div switch_ = new Div(CssName.MDC_SWITCH);
-	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH_NATIVE_CONTROL);
-	protected Div divBackground = new Div(CssName.MDC_SWITCH_BACKGROUND);
-	protected Div divKnob = new Div(CssName.MDC_SWITCH_KNOB);
+	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH__NATIVE_CONTROL);
+	protected Div divBackground = new Div(CssName.MDC_SWITCH__BACKGROUND);
+	protected Div divKnob = new Div(CssName.MDC_SWITCH__KNOB);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
@@ -71,11 +71,11 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 		divBackground.add(divKnob);
 
 		switch_.setPadding(8);
-		switch_.setDisabledClass(CssName.MDC_SWITCH_DISABLED);
+		switch_.setDisabledClass(CssName.MDC_SWITCH__DISABLED);
 		switch_.add(input);
 		switch_.add(divBackground);
 
-		label.addStyleName(CssName.MDC_SWITCH_LABEL);
+		label.addStyleName(CssName.MDC_SWITCH__LABEL);
 
 		add(switch_);
 		add(label);

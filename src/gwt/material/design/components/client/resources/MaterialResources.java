@@ -61,4 +61,8 @@ public interface MaterialResources extends ClientBundle {
 	@MimeType("image/svg+xml")
 	TextResource mdcSliderThumb();
 	
+	@Source("image/mdc-chip__checkmark.svg")
+	@MimeType("image/svg+xml")
+	TextResource mdcChipCheckmark();
+	
 }

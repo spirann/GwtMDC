@@ -30,6 +30,6 @@ import gwt.material.design.components.client.ui.html.Header;
 public class MaterialDrawerHeader extends Header {
 
 	public MaterialDrawerHeader() {
-		super(CssName.MDC_DRAWER_HEADER);
+		super(CssName.MDC_DRAWER__HEADER);
 	}
 }

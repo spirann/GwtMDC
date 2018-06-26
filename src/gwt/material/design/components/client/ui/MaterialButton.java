@@ -48,7 +48,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
-	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON_DENSE);
+	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON__DENSE);
 
 	
 	protected MaterialIcon icon;
@@ -128,7 +128,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 		
 		if(icon == null) {
 			icon = new MaterialIcon();
-			icon.addStyleName(CssName.MDC_BUTTON_ICON);
+			icon.addStyleName(CssName.MDC_BUTTON__ICON);
 			insert(icon, 0);
 		}
 		

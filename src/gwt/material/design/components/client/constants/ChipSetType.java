@@ -23,29 +23,19 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
  * 
- * @author Richeli Vargas
+ * @author Richeli Vargas 
  *
  */
-public enum Typography implements CssType {
+public enum ChipSetType implements CssType {
 
-	
-	HEADLINE_1(CssName.MDC_TYPOGRAPHY__HEADLINE_1),
-	HEADLINE_2(CssName.MDC_TYPOGRAPHY__HEADLINE_2),
-	HEADLINE_3(CssName.MDC_TYPOGRAPHY__HEADLINE_3),
-	HEADLINE_4(CssName.MDC_TYPOGRAPHY__HEADLINE_4),
-	HEADLINE_5(CssName.MDC_TYPOGRAPHY__HEADLINE_5),
-	HEADLINE_6(CssName.MDC_TYPOGRAPHY__HEADLINE_6),
-	SUBTITLE_1(CssName.MDC_TYPOGRAPHY__SUBTITLE_1),
-	SUBTITLE_2(CssName.MDC_TYPOGRAPHY__SUBTITLE_2),
-	BODY_1(CssName.MDC_TYPOGRAPHY__BODY_1),
-	BODY_2(CssName.MDC_TYPOGRAPHY__BODY_2),
-	CAPTION(CssName.MDC_TYPOGRAPHY__CAPTION),
-	BUTTON(CssName.MDC_TYPOGRAPHY__BUTTON),
-	OVERLINE(CssName.MDC_TYPOGRAPHY__OVERLINE);
+	DEFAULT(""),
+	INPUT(CssName.MDC_CHIP_SET__INPUT),
+	CHOICE(CssName.MDC_CHIP_SET__CHOICE),
+	FILTER(CssName.MDC_CHIP_SET__FILTER);
 
     private final String cssClass;
 
-    Typography(final String cssClass) {
+    ChipSetType(final String cssClass) {
         this.cssClass = cssClass;
     }
 
@@ -54,7 +44,8 @@ public enum Typography implements CssType {
         return cssClass;
     }
 
-    public static Typography fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, Typography.class, BODY_1);
+    public static ChipSetType fromStyleName(final String styleName) {
+        return EnumHelper.fromStyleName(styleName, ChipSetType.class, DEFAULT);
     }
 }
+

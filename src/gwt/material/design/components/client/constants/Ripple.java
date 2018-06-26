@@ -29,17 +29,17 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 public enum Ripple implements CssType {
 
 	DEFAULT			(""),
-	NONE			(CssName.MDC_RIPPLE__SURFACE_NONE),
-	PRIMARY			(CssName.MDC_RIPPLE__SURFACE_PRIMARY),
-	SECONDARY		(CssName.MDC_RIPPLE__SURFACE_SECONDARY),
-	ON_PRIMARY		(CssName.MDC_RIPPLE__SURFACE_ON_PRIMARY),
-	ON_SECONDARY	(CssName.MDC_RIPPLE__SURFACE_ON_SECONDARY),
-	ON_BACKGROUND	(CssName.MDC_RIPPLE__SURFACE_ON_BACKGROUND);
+	NONE			(CssName.MDC_RIPPLE_SURFACE__NONE),
+	PRIMARY			(CssName.MDC_RIPPLE_SURFACE__PRIMARY),
+	SECONDARY		(CssName.MDC_RIPPLE_SURFACE__SECONDARY),
+	ON_PRIMARY		(CssName.MDC_RIPPLE_SURFACE__ON_PRIMARY),
+	ON_SECONDARY	(CssName.MDC_RIPPLE_SURFACE__ON_SECONDARY),
+	ON_BACKGROUND	(CssName.MDC_RIPPLE_SURFACE__ON_BACKGROUND);
 
     private final String cssClass;
 
     Ripple(final String cssClass) {
-        this.cssClass = CssName.MDC_RIPPLE__UPGRADED_UNBOUNDED + " " + CssName.MDC_RIPPLE__UPGRADED + cssClass;
+        this.cssClass = CssName.MDC_RIPPLE_UPGRADED__UNBOUNDED + " " + CssName.MDC_RIPPLE_UPGRADED + cssClass;
     }
 
     @Override

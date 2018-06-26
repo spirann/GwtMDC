@@ -30,7 +30,7 @@ import gwt.material.design.components.client.constants.CssName;
 public class MaterialDrawerPermanent extends MaterialDrawerBase {
 
 	public MaterialDrawerPermanent() {
-		super(CssName.MDC_DRAWER_PERMANENT);
+		super(CssName.MDC_DRAWER__PERMANENT);
 	}
 
 }

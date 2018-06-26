@@ -29,9 +29,9 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 public enum ButtonType implements CssType {
 
 	DEFAULT(""),
-	RAISED(CssName.MDC_BUTTON_RAISED),
-	UNELEVATED(CssName.MDC_BUTTON_UNELEVATED),
-	OUTLINE(CssName.MDC_BUTTON_OUTLINE);
+	RAISED(CssName.MDC_BUTTON__RAISED),
+	UNELEVATED(CssName.MDC_BUTTON__UNELEVATED),
+	OUTLINE(CssName.MDC_BUTTON__OUTLINE);
 
     private final String cssClass;
 

@@ -36,9 +36,9 @@ public class MaterialLayoutCell extends Div implements HasCellColumns {
 
 	public enum Align implements CssType {
 
-		TOP(CssName.MDC_LAYOUT_CELL_ALIGN_TOP), 
-		MIDDLE(CssName.MDC_LAYOUT_CELL_ALIGN_MIDDLE), 
-		BOTTOM(CssName.MDC_LAYOUT_CELL_ALIGN_BOTTOM);
+		TOP(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_TOP), 
+		MIDDLE(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_MIDDLE), 
+		BOTTOM(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_BOTTOM);
 
 		private final String cssClass;
 
@@ -60,7 +60,7 @@ public class MaterialLayoutCell extends Div implements HasCellColumns {
 	protected final StyleMixin<MaterialLayoutCell> alignMixin = new StyleMixin<>(this);
 
 	public MaterialLayoutCell() {
-		super(CssName.MDC_LAYOUT_CELL);
+		super(CssName.MDC_LAYOUT_GRID__CELL);
 	}
 
 	/**

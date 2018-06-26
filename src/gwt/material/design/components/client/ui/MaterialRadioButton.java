@@ -83,10 +83,10 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	// Radio
 	// /////////////////////////////////////////////////////////////
 	private Div radio = new Div(CssName.MDC_RADIO);
-	private Input input = new Input(InputType.RADIO, CssName.MDC_RADIO_NATIVE_CONTROL);
-	private Div divBackground = new Div(CssName.MDC_RADIO_BACKGROUND);
-	private Div divOuterCircle = new Div(CssName.MDC_RADIO_OUTER_CIRCLE);
-	private Div divInnerCircle = new Div(CssName.MDC_RADIO_INNER_CIRCLE);
+	private Input input = new Input(InputType.RADIO, CssName.MDC_RADIO__NATIVE_CONTROL);
+	private Div divBackground = new Div(CssName.MDC_RADIO__BACKGROUND);
+	private Div divOuterCircle = new Div(CssName.MDC_RADIO__OUTER_CIRCLE);
+	private Div divInnerCircle = new Div(CssName.MDC_RADIO__INNER_CIRCLE);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
@@ -118,7 +118,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 
-		radio.setDisabledClass(CssName.MDC_RADIO_DISABLED);
+		radio.setDisabledClass(CssName.MDC_RADIO__DISABLED);
 		radio.add(input);
 		radio.add(divBackground);
 

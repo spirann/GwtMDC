@@ -29,9 +29,9 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 public enum FabType implements CssType {
 
 	DEFAULT(""),
-	MINI(CssName.MDC_FAB_MINI),
-	FIXED(CssName.MDC_FAB_FIXED),
-	MINI_FIXED(CssName.MDC_FAB_MINI + " " + CssName.MDC_FAB_FIXED);
+	MINI(CssName.MDC_FAB__MINI),
+	FIXED(CssName.MDC_FAB__FIXED),
+	MINI_FIXED(CssName.MDC_FAB__MINI + " " + CssName.MDC_FAB__FIXED);
 
     private final String cssClass;
 

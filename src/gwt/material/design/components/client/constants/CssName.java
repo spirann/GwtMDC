@@ -29,7 +29,7 @@ public interface CssName {
 	// PRISM JS
 	//
 	// //////////////////////////////////////////////////////
-	String MDC_CODE_EXAMPLE = "mdc-code-example";
+	String MDC_CODE__EXAMPLE = "mdc-code-example";
 	String MDC_CODE = "mdc-code";
 	String PRISM_LANGUAGE_MARKUP = "language-markup";
 	// //////////////////////////////////////////////////////
@@ -46,40 +46,40 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// RIPPLES
 	// //////////////////////////////////////////////////////
-	String MDC_RIPPLE__SURFACE = "mdc-ripple-surface";
-	String MDC_RIPPLE__UPGRADED = "mdc-ripple-upgraded";
-	String MDC_RIPPLE__UPGRADED_UNBOUNDED = "mdc-ripple-upgraded--unbounded";
-	String MDC_RIPPLE__SURFACE_NONE = "mdc-ripple-surface--none";
-	String MDC_RIPPLE__SURFACE_PRIMARY = "mdc-ripple-surface--primary";
-	String MDC_RIPPLE__SURFACE_SECONDARY = "mdc-ripple-surface--secondary";
-	String MDC_RIPPLE__SURFACE_ON_PRIMARY = "mdc-ripple-surface--on-primary";
-	String MDC_RIPPLE__SURFACE_ON_SECONDARY = "mdc-ripple-surface--on-secondary";
-	String MDC_RIPPLE__SURFACE_ON_BACKGROUND = "mdc-ripple-surface--on-background";
+	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
+	String MDC_RIPPLE_UPGRADED = "mdc-ripple-upgraded";
+	String MDC_RIPPLE_UPGRADED__UNBOUNDED = "mdc-ripple-upgraded--unbounded";
+	String MDC_RIPPLE_SURFACE__NONE = "mdc-ripple-surface--none";
+	String MDC_RIPPLE_SURFACE__PRIMARY = "mdc-ripple-surface--primary";
+	String MDC_RIPPLE_SURFACE__SECONDARY = "mdc-ripple-surface--secondary";
+	String MDC_RIPPLE_SURFACE__ON_PRIMARY = "mdc-ripple-surface--on-primary";
+	String MDC_RIPPLE_SURFACE__ON_SECONDARY = "mdc-ripple-surface--on-secondary";
+	String MDC_RIPPLE_SURFACE__ON_BACKGROUND = "mdc-ripple-surface--on-background";
 	// //////////////////////////////////////////////////////
 	// ELEVATION
 	// //////////////////////////////////////////////////////
-	String MDC_ELEVATION_Z0 = "mdc-elevation--z0";
-	String MDC_ELEVATION_Z1 = "mdc-elevation--z1";
-	String MDC_ELEVATION_Z2 = "mdc-elevation--z2";
-	String MDC_ELEVATION_Z3 = "mdc-elevation--z3";
-	String MDC_ELEVATION_Z4 = "mdc-elevation--z4";
-	String MDC_ELEVATION_Z5 = "mdc-elevation--z5";
-	String MDC_ELEVATION_Z6 = "mdc-elevation--z6";
-	String MDC_ELEVATION_Z7 = "mdc-elevation--z7";
-	String MDC_ELEVATION_Z8 = "mdc-elevation--z8";
-	String MDC_ELEVATION_Z9 = "mdc-elevation--z9";
-	String MDC_ELEVATION_Z10 = "mdc-elevation--z10";
-	String MDC_ELEVATION_Z11 = "mdc-elevation--z11";
-	String MDC_ELEVATION_Z12 = "mdc-elevation--z12";
-	String MDC_ELEVATION_Z13 = "mdc-elevation--z13";
-	String MDC_ELEVATION_Z14 = "mdc-elevation--z14";
-	String MDC_ELEVATION_Z15 = "mdc-elevation--z15";
-	String MDC_ELEVATION_Z16 = "mdc-elevation--z16";
-	String MDC_ELEVATION_Z17 = "mdc-elevation--z17";
-	String MDC_ELEVATION_Z18 = "mdc-elevation--z18";
-	String MDC_ELEVATION_Z19 = "mdc-elevation--z19";
-	String MDC_ELEVATION_Z20 = "mdc-elevation--z20";
-	String MDC_ELEVATION_Z21 = "mdc-elevation--z21";
+	String MDC_ELEVATION__Z0 = "mdc-elevation--z0";
+	String MDC_ELEVATION__Z1 = "mdc-elevation--z1";
+	String MDC_ELEVATION__Z2 = "mdc-elevation--z2";
+	String MDC_ELEVATION__Z3 = "mdc-elevation--z3";
+	String MDC_ELEVATION__Z4 = "mdc-elevation--z4";
+	String MDC_ELEVATION__Z5 = "mdc-elevation--z5";
+	String MDC_ELEVATION__Z6 = "mdc-elevation--z6";
+	String MDC_ELEVATION__Z7 = "mdc-elevation--z7";
+	String MDC_ELEVATION__Z8 = "mdc-elevation--z8";
+	String MDC_ELEVATION__Z9 = "mdc-elevation--z9";
+	String MDC_ELEVATION__Z10 = "mdc-elevation--z10";
+	String MDC_ELEVATION__Z11 = "mdc-elevation--z11";
+	String MDC_ELEVATION__Z12 = "mdc-elevation--z12";
+	String MDC_ELEVATION__Z13 = "mdc-elevation--z13";
+	String MDC_ELEVATION__Z14 = "mdc-elevation--z14";
+	String MDC_ELEVATION__Z15 = "mdc-elevation--z15";
+	String MDC_ELEVATION__Z16 = "mdc-elevation--z16";
+	String MDC_ELEVATION__Z17 = "mdc-elevation--z17";
+	String MDC_ELEVATION__Z18 = "mdc-elevation--z18";
+	String MDC_ELEVATION__Z19 = "mdc-elevation--z19";
+	String MDC_ELEVATION__Z20 = "mdc-elevation--z20";
+	String MDC_ELEVATION__Z21 = "mdc-elevation--z21";
 	String MDC_ELEVATION_Z22 = "mdc-elevation--z22";
 	String MDC_ELEVATION_Z23 = "mdc-elevation--z23";
 	String MDC_ELEVATION_Z24 = "mdc-elevation--z24";
@@ -87,20 +87,20 @@ public interface CssName {
 	// TYPOGRAPHY
 	// //////////////////////////////////////////////////////
 	String MDC_TYPOGRAPHY = "mdc-typography";
-	String MDC_TYPOGRAPHY_HEADLINE_1 = "mdc-typography--headline1";
-	String MDC_TYPOGRAPHY_HEADLINE_2 = "mdc-typography--headline2";
-	String MDC_TYPOGRAPHY_HEADLINE_3 = "mdc-typography--headline3";
-	String MDC_TYPOGRAPHY_HEADLINE_4 = "mdc-typography--headline4";
-	String MDC_TYPOGRAPHY_HEADLINE_5 = "mdc-typography--headline5";
-	String MDC_TYPOGRAPHY_HEADLINE_6 = "mdc-typography--headline6";	
-	String MDC_TYPOGRAPHY_SUBTITLE_1 = "mdc-typography--subtitle1";
-	String MDC_TYPOGRAPHY_SUBTITLE_2 = "mdc-typography--subtitle2";	
-	String MDC_TYPOGRAPHY_BODY_1 = "mdc-typography--body1";
-	String MDC_TYPOGRAPHY_BODY_2 = "mdc-typography--body2";
-	String MDC_TYPOGRAPHY_CAPTION = "mdc-typography--caption";
-	String MDC_TYPOGRAPHY_BUTTON = "mdc-typography--button";
-	String MDC_TYPOGRAPHY_OVERLINE = "mdc-typography--overline";
-	
+	String MDC_TYPOGRAPHY__HEADLINE_1 = "mdc-typography--headline1";
+	String MDC_TYPOGRAPHY__HEADLINE_2 = "mdc-typography--headline2";
+	String MDC_TYPOGRAPHY__HEADLINE_3 = "mdc-typography--headline3";
+	String MDC_TYPOGRAPHY__HEADLINE_4 = "mdc-typography--headline4";
+	String MDC_TYPOGRAPHY__HEADLINE_5 = "mdc-typography--headline5";
+	String MDC_TYPOGRAPHY__HEADLINE_6 = "mdc-typography--headline6";
+	String MDC_TYPOGRAPHY__SUBTITLE_1 = "mdc-typography--subtitle1";
+	String MDC_TYPOGRAPHY__SUBTITLE_2 = "mdc-typography--subtitle2";
+	String MDC_TYPOGRAPHY__BODY_1 = "mdc-typography--body1";
+	String MDC_TYPOGRAPHY__BODY_2 = "mdc-typography--body2";
+	String MDC_TYPOGRAPHY__CAPTION = "mdc-typography--caption";
+	String MDC_TYPOGRAPHY__BUTTON = "mdc-typography--button";
+	String MDC_TYPOGRAPHY__OVERLINE = "mdc-typography--overline";
+
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
 	// //////////////////////////////////////////////////////
@@ -115,9 +115,9 @@ public interface CssName {
 	String MDC_TOP_APP_BAR__FIXED = "mdc-top-app-bar--fixed";
 	String MDC_TOP_APP_BAR__FIXED_ADJUST = "mdc-top-app-bar--fixed-adjust";
 	String MDC_TOP_APP_BAR__DENSE = "mdc-top-app-bar--dense";
-	String MDC_TOP_APP_BAR__DENSE_FIXED_ADJUST = "mdc-top-app-bar--dense-fixed-adjust";	
+	String MDC_TOP_APP_BAR__DENSE_FIXED_ADJUST = "mdc-top-app-bar--dense-fixed-adjust";
 	String MDC_TOP_APP_BAR__PROMINENT = "mdc-top-app-bar--prominent";
-	String MDC_TOP_APP_BAR__PROIMINENT_FIXED_ADJUST = "mdc-top-app-bar--prominent-fixed-adjust";	
+	String MDC_TOP_APP_BAR__PROIMINENT_FIXED_ADJUST = "mdc-top-app-bar--prominent-fixed-adjust";
 	String MDC_TOP_APP_BAR__SHORT = "mdc-top-app-bar--short";
 	String MDC_TOP_APP_BAR__SHORT_FIXED_ADJUST = "mdc-top-app-bar--short-fixed-adjust";
 	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
@@ -125,37 +125,34 @@ public interface CssName {
 	// TAB BAR
 	// //////////////////////////////////////////////////////
 	String MDC_TAB_BAR_SCROLLER = "mdc-tab-bar-scroller";
-	String MDC_TAB_BAR_SCROLLER_INDICATOR = "mdc-tab-bar-scroller__indicator";
-	String MDC_TAB_BAR_SCROLLER_INDICATOR_BACK = "mdc-tab-bar-scroller__indicator--back";
-	String MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD = "mdc-tab-bar-scroller__indicator--forward";
-	String MDC_TAB_BAR_SCROLLER_INDICATOR_INNER = "mdc-tab-bar-scroller__indicator__inner";
-	String MDC_TAB_BAR_SCROLLER_SCROLL_FRAME = "mdc-tab-bar-scroller__scroll-frame";
-	String MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";
+	String MDC_TAB_BAR_SCROLLER__INDICATOR = "mdc-tab-bar-scroller__indicator";
+	String MDC_TAB_BAR_SCROLLER__INDICATOR__BACK = "mdc-tab-bar-scroller__indicator--back";
+	String MDC_TAB_BAR_SCROLLER__INDICATOR__FORWARD = "mdc-tab-bar-scroller__indicator--forward";
+	String MDC_TAB_BAR_SCROLLER__INDICATOR__INNER = "mdc-tab-bar-scroller__indicator__inner";
+	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME = "mdc-tab-bar-scroller__scroll-frame";
+	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME__TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";
 	String MDC_TAB_BAR = "mdc-tab-bar";
-	String MDC_TAB_BAR_ICON_TABS = "mdc-tab-bar--icon-tabs";
-	String MDC_TAB_BAR_ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
+	String MDC_TAB_BAR__ICON_TABS = "mdc-tab-bar--icon-tabs";
+	String MDC_TAB_BAR__ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
 	String MDC_TAB_BAR__INDICATOR = "mdc-tab-bar__indicator";
-	String MDC_TAB_BAR_INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
+	String MDC_TAB_BAR__INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
 	String MDC_TAB = "mdc-tab";
 	String MDC_TAB_PANEL = "mdc-tab-panel";
-	String MDC_TAB_ICON = "mdc-tab__icon";
-	String MDC_TAB_ICON_TEXT = "mdc-tab__icon-text";
-	String MDC_TAB_ACTIVE = "mdc-tab--active";
+	String MDC_TAB__ICON = "mdc-tab__icon";
+	String MDC_TAB__ICON_TEXT = "mdc-tab__icon-text";
+	String MDC_TAB__ACTIVE = "mdc-tab--active";
 	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
 	String MDC_DRAWER = "mdc-drawer";
-	String MDC_DRAWER_DRAWER = "mdc-drawer__drawer";
-	String MDC_DRAWER_TOOLBAR_SPACER = "mdc-drawer__toolbar-spacer";
-	String MDC_DRAWER_HEADER = "mdc-drawer__header";
-	String MDC_DRAWER_HEADER_CONTENT = "mdc-drawer__header-content";
-	String MDC_DRAWER_CONTENT = "mdc-drawer__content";
-	// Permanet
-	String MDC_DRAWER_PERMANENT = "mdc-drawer--permanent";
-	// Persistent
-	String MDC_DRAWER_PERSISTENT = "mdc-drawer--persistent";
-	// Temporary
-	String MDC_DRAWER_TEMPORARY = "mdc-drawer--temporary";
+	String MDC_DRAWER__DRAWER = "mdc-drawer__drawer";
+	String MDC_DRAWER__TOOLBAR_SPACER = "mdc-drawer__toolbar-spacer";
+	String MDC_DRAWER__HEADER = "mdc-drawer__header";
+	String MDC_DRAWER__HEADER_CONTENT = "mdc-drawer__header-content";
+	String MDC_DRAWER__CONTENT = "mdc-drawer__content";
+	String MDC_DRAWER__PERMANENT = "mdc-drawer--permanent";
+	String MDC_DRAWER__PERSISTENT = "mdc-drawer--persistent";
+	String MDC_DRAWER__TEMPORARY = "mdc-drawer--temporary";
 	// //////////////////////////////////////////////////////
 	// MENU
 	// //////////////////////////////////////////////////////
@@ -186,7 +183,7 @@ public interface CssName {
 	String MDC_SNACKBAR__ACTION_ON_BUTTON = "mdc-snackbar--action-on-bottom";
 	String MDC_SNACKBAR__TEXT = "mdc-snackbar__text";
 	String MDC_SNACKBAR__ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
-	String MDC_SNACKBAR__ACTION_BUTTON = "mdc-snackbar__action-button";	
+	String MDC_SNACKBAR__ACTION_BUTTON = "mdc-snackbar__action-button";
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////
@@ -195,13 +192,13 @@ public interface CssName {
 	// LAYOUT GRID
 	// //////////////////////////////////////////////////////
 	String MDC_LAYOUT_GRID = "mdc-layout-grid";
-	String MDC_LAYOUT_GRID_INNER = "mdc-layout-grid__inner";
-	String MDC_LAYOUT_CELL = "mdc-layout-grid__cell";
-	String MDC_LAYOUT_CELL_SPAN = "mdc-layout-grid__cell--span-{columns}-{screen_size}";
-	String MDC_LAYOUT_CELL_ORDER = "mdc-layout-grid__cell--order-{number}";
-	String MDC_LAYOUT_CELL_ALIGN_TOP = "mdc-layout-grid__cell--align-top";
-	String MDC_LAYOUT_CELL_ALIGN_MIDDLE = "mdc-layout-grid__cell--align-middle";
-	String MDC_LAYOUT_CELL_ALIGN_BOTTOM = "mdc-layout-grid__cell--align-bottom";
+	String MDC_LAYOUT_GRID__INNER = "mdc-layout-grid__inner";
+	String MDC_LAYOUT_GRID__CELL = "mdc-layout-grid__cell";
+	String MDC_LAYOUT_GRID__CELL__SPAN = "mdc-layout-grid__cell--span-{columns}-{screen_size}";
+	String MDC_LAYOUT_GRID__CELL__ORDER = "mdc-layout-grid__cell--order-{number}";
+	String MDC_LAYOUT_GRID__CELL__ALIGN_TOP = "mdc-layout-grid__cell--align-top";
+	String MDC_LAYOUT_GRID__CELL__ALIGN_MIDDLE = "mdc-layout-grid__cell--align-middle";
+	String MDC_LAYOUT_GRID__CELL__ALIGN_BOTTOM = "mdc-layout-grid__cell--align-bottom";
 	// //////////////////////////////////////////////////////
 	// IMAGE LIST
 	// //////////////////////////////////////////////////////
@@ -217,23 +214,23 @@ public interface CssName {
 	// ICONS
 	// //////////////////////////////////////////////////////
 	String MATERIAL_ICONS = "material-icons";
-	String MATERIAL_ICONS_DISABLED = "material-icons--disabled";
+	String MATERIAL_ICONS__DISABLED = "material-icons--disabled";
 	// //////////////////////////////////////////////////////
 	// BUTTONS
 	// //////////////////////////////////////////////////////
 	String MDC_BUTTON = "mdc-button";
-	String MDC_BUTTON_RAISED = "mdc-button--raised";
-	String MDC_BUTTON_UNELEVATED = "mdc-button--unelevated";
-	String MDC_BUTTON_OUTLINE = "mdc-button--outlined";
-	String MDC_BUTTON_DENSE = "mdc-button--dense";
-	String MDC_BUTTON_ICON = "mdc-button__icon";
+	String MDC_BUTTON__RAISED = "mdc-button--raised";
+	String MDC_BUTTON__UNELEVATED = "mdc-button--unelevated";
+	String MDC_BUTTON__OUTLINE = "mdc-button--outlined";
+	String MDC_BUTTON__DENSE = "mdc-button--dense";
+	String MDC_BUTTON__ICON = "mdc-button__icon";
 	// //////////////////////////////////////////////////////
 	// FAB - Floating Action Button
 	// //////////////////////////////////////////////////////
 	String MDC_FAB = "mdc-fab";
-	String MDC_FAB_ICON = "mdc-fab__icon";
-	String MDC_FAB_MINI = "mdc-fab--mini";
-	String MDC_FAB_FIXED = "mdc-fab--fixed";
+	String MDC_FAB__ICON = "mdc-fab__icon";
+	String MDC_FAB__MINI = "mdc-fab--mini";
+	String MDC_FAB__FIXED = "mdc-fab--fixed";
 	// //////////////////////////////////////////////////////
 	// LIST
 	// //////////////////////////////////////////////////////
@@ -255,19 +252,40 @@ public interface CssName {
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////
 	String MDC_ICON_TOGGLE = "mdc-icon-toggle";
-	String MDC_ICON_TOGGLE_DISABLED = "mdc-icon-toggle--disabled";
+	String MDC_ICON_TOGGLE__DISABLED = "mdc-icon-toggle--disabled";
+	// //////////////////////////////////////////////////////
+	// CHIP
+	// //////////////////////////////////////////////////////
+	String MDC_CHIP_SET = "mdc-chip-set";
+	String MDC_CHIP_SET__INPUT = "mdc-chip-set--input";
+	String MDC_CHIP_SET__CHOICE = "mdc-chip-set--choice";
+	String MDC_CHIP_SET__FILTER = "mdc-chip-set--filter";
+	String MDC_CHIP = "mdc-chip";
+	String MDC_CHIP__SELECTED = "mdc-chip--selected";
+	String MDC_CHIP__TEXT = "mdc-chip__text";
+	String MDC_CHIP__ICON = "mdc-chip__icon";
+	String MDC_CHIP__ICON__LEADING = "mdc-chip__icon--leading";
+	String MDC_CHIP__ICON__LEADING_HIDDEN = "mdc-chip__icon--leading-hidden";
+	String MDC_CHIP__ICON__TRAILING = "mdc-chip__icon--trailing";
+	String MDC_CHIP__ICON__CHECKMARK = "mdc-chip__checkmark";
+	String MDC_CHIP__ICON__CHECKMARK__SVG = "mdc-chip__checkmark-svg";
+	String MDC_CHIP__ICON__CHECKMARK__PATH = "mdc-chip__checkmark-path";
 	// //////////////////////////////////////////////////////
 	// INPUTS AND CONTROLS
 	// //////////////////////////////////////////////////////
 	String MDC_FORM_FIELD = "mdc-form-field";
+	// //////////////////////////////////////////////////////
 	// Radio Button
+	// //////////////////////////////////////////////////////
 	String MDC_RADIO = "mdc-radio";
-	String MDC_RADIO_DISABLED = "mdc-radio--disabled";
-	String MDC_RADIO_NATIVE_CONTROL = "mdc-radio__native-control";
-	String MDC_RADIO_BACKGROUND = "mdc-radio__background";
-	String MDC_RADIO_OUTER_CIRCLE = "mdc-radio__outer-circle";
-	String MDC_RADIO_INNER_CIRCLE = "mdc-radio__inner-circle";
+	String MDC_RADIO__DISABLED = "mdc-radio--disabled";
+	String MDC_RADIO__NATIVE_CONTROL = "mdc-radio__native-control";
+	String MDC_RADIO__BACKGROUND = "mdc-radio__background";
+	String MDC_RADIO__OUTER_CIRCLE = "mdc-radio__outer-circle";
+	String MDC_RADIO__INNER_CIRCLE = "mdc-radio__inner-circle";
+	// //////////////////////////////////////////////////////
 	// Checkbox
+	// //////////////////////////////////////////////////////
 	String MDC_CHECKBOX = "mdc-checkbox";
 	String MDC_CHECKBOX__DISABLED = "mdc-checkbox--disabled";
 	String MDC_CHECKBOX__NATIVE_CONTROL = "mdc-checkbox__native-control";
@@ -275,12 +293,14 @@ public interface CssName {
 	String MDC_CHECKBOX__CHECKMARK = "mdc-checkbox__checkmark";
 	String MDC_CHECKBOX__CHECKMARK_PATH = "mdc-checkbox__checkmark-path";
 	String MDC_CHECKBOX__MIXEDMARK = "mdc-checkbox__mixedmark";
+	// //////////////////////////////////////////////////////
 	// Slider
+	// //////////////////////////////////////////////////////
 	String MDC_SLIDER = "mdc-slider";
 	String MDC_SLIDER__DISCRETE = "mdc-slider--discrete";
 	String MDC_SLIDER__DISPLAY_MARKERS = "mdc-slider--display-markers";
 	String MDC_SLIDER__TRACK_CONTAINER = "mdc-slider__track-container";
-	String MDC_SLIDER_TRACK_MARKER = "mdc-slider__track-marker";
+	String MDC_SLIDER__TRACK_MARKER = "mdc-slider__track-marker";
 	String MDC_SLIDER__TRACK_MARKER_CONTAINER = "mdc-slider__track-marker-container";
 	String MDC_SLIDER__TRACK = "mdc-slider__track";
 	String MDC_SLIDER__THUMB_CONTAINER = "mdc-slider__thumb-container";
@@ -288,14 +308,18 @@ public interface CssName {
 	String MDC_SLIDER__FOCUS_RING = "mdc-slider__focus-ring";
 	String MDC__SLIDER__PIN = "mdc-slider__pin";
 	String MDC_SLIDER__PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
+	// //////////////////////////////////////////////////////
 	// Switch
+	// //////////////////////////////////////////////////////
 	String MDC_SWITCH = "mdc-switch";
-	String MDC_SWITCH_DISABLED = "mdc-switch--disabled";
-	String MDC_SWITCH_NATIVE_CONTROL = "mdc-switch__native-control";
-	String MDC_SWITCH_BACKGROUND = "mdc-switch__background";
-	String MDC_SWITCH_KNOB = "mdc-switch__knob";
-	String MDC_SWITCH_LABEL = "mdc-switch-label";
+	String MDC_SWITCH__DISABLED = "mdc-switch--disabled";
+	String MDC_SWITCH__NATIVE_CONTROL = "mdc-switch__native-control";
+	String MDC_SWITCH__BACKGROUND = "mdc-switch__background";
+	String MDC_SWITCH__KNOB = "mdc-switch__knob";
+	String MDC_SWITCH__LABEL = "mdc-switch-label";
+	// //////////////////////////////////////////////////////
 	// Textfield
+	// //////////////////////////////////////////////////////
 	String MDC_TEXT_FIELD = "mdc-text-field";
 	String MDC_TEXT_FIELD_INPUT = "mdc-text-field__input";
 	String MDC_TEXT_FIELD_LABEL = "mdc-text-field__label";

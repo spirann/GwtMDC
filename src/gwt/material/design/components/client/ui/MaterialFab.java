@@ -40,7 +40,7 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialFab extends Button implements HasType<FabType>, HasHref, HasIcon {
 
-	protected Span icon = new Span(CssName.MDC_FAB_ICON);
+	protected Span icon = new Span(CssName.MDC_FAB__ICON);
 
 	protected final HrefMixin<MaterialFab> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialFab, FabType> typeMixin = new TypeMixin<>(this);

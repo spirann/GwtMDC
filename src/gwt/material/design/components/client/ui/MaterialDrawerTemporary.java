@@ -33,7 +33,7 @@ import gwt.material.design.components.client.constants.CssName;
 public class MaterialDrawerTemporary extends MaterialDrawerBase {
 
 	public MaterialDrawerTemporary() {
-		super(CssName.MDC_DRAWER_TEMPORARY);
+		super(CssName.MDC_DRAWER__TEMPORARY);
 	}
 	
 	@Override

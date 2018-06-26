@@ -42,12 +42,12 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, HasChangeHandlers {
 
-	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_BACK);
-	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
+	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER__INDICATOR,
+			CssName.MDC_TAB_BAR_SCROLLER__INDICATOR__BACK);
+	protected Anchor backIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER__INDICATOR__INNER,
 			CssName.MATERIAL_ICONS);
 
-	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME);
+	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER__SCROLL_FRAME);
 	protected MaterialTabBar tabBar = new MaterialTabBar() {
 		@Override
 		protected native JavaScriptObject jsInit(final Element element)/*-{
@@ -55,9 +55,9 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		}-*/;
 	};
 
-	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR,
-			CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_FORWARD);
-	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER_INDICATOR_INNER,
+	protected Div scrollerForwardIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER__INDICATOR,
+			CssName.MDC_TAB_BAR_SCROLLER__INDICATOR__FORWARD);
+	protected Anchor forwardIndicatorInner = new Anchor(CssName.MDC_TAB_BAR_SCROLLER__INDICATOR__INNER,
 			CssName.MATERIAL_ICONS);
 
 	private boolean initialized = false;
@@ -78,7 +78,7 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		backIndicatorInner.getElement().setInnerText(IconType.NAVIGATE_BEFORE.getCssName());
 		scrollerBackIndicator.add(backIndicatorInner);
 
-		tabBar.addStyleName(CssName.MDC_TAB_BAR_SCROLLER_SCROLL_FRAME_TABS);
+		tabBar.addStyleName(CssName.MDC_TAB_BAR_SCROLLER__SCROLL_FRAME__TABS);
 		scrollerFrame.add(tabBar);
 
 		forwardIndicatorInner.getElement().setAttribute("aria-label", "scroll forward button");

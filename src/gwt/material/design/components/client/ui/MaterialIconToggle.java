@@ -59,7 +59,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	public MaterialIconToggle() {
 		super(CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
 		setRole(Role.BUTTON);
-		setDisabledClass(CssName.MDC_ICON_TOGGLE_DISABLED);
+		setDisabledClass(CssName.MDC_ICON_TOGGLE__DISABLED);
 		setRipple(Ripple.DEFAULT);
 		setCircle(true);
 	}

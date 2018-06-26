@@ -22,35 +22,38 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.MaterialDrawerBase;
+import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.ChipSetType;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawerPersistent extends MaterialDrawerBase {
+public class MaterialChipSet extends Div implements HasType<ChipSetType> {
 
-	public MaterialDrawerPersistent() {
-		super(CssName.MDC_DRAWER__PERSISTENT);
+	protected final TypeMixin<MaterialChipSet, ChipSetType> typeMixin = new TypeMixin<>(this);
+	
+	public MaterialChipSet(){
+		super(CssName.MDC_CHIP_SET);
+	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.chips.MDCChipSet(element);
+	}-*/;
+
+	@Override
+	public void setType(ChipSetType type) {
+		typeMixin.setType(type);
 	}
 
 	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.drawer.MDCPersistentDrawer(element);
-	}-*/;
-	
-	@Override
-	public native boolean isOpen()/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		return drawer && drawer.open;
-	}-*/;
-
-	@Override
-	protected native void setNativeOpen(boolean open)/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		drawer.open = open;
-	}-*/;
+	public ChipSetType getType() {
+		return typeMixin.getType();
+	}
 
 }

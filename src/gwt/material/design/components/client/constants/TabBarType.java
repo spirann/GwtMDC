@@ -29,8 +29,8 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
 public enum TabBarType implements CssType {
 
 	TEXT(""),
-	ICON(CssName.MDC_TAB_BAR_ICON_TABS),
-	ICON_WITH_TEXT(CssName.MDC_TAB_BAR_ICONS_WITH_TEXT);
+	ICON(CssName.MDC_TAB_BAR__ICON_TABS),
+	ICON_WITH_TEXT(CssName.MDC_TAB_BAR__ICONS_WITH_TEXT);
 
     private final String cssClass;
 
