@@ -100,6 +100,15 @@ public interface CssName {
 	String MDC_TYPOGRAPHY__CAPTION = "mdc-typography--caption";
 	String MDC_TYPOGRAPHY__BUTTON = "mdc-typography--button";
 	String MDC_TYPOGRAPHY__OVERLINE = "mdc-typography--overline";
+	// //////////////////////////////////////////////////////
+	// SHAPE
+	// //////////////////////////////////////////////////////
+	String MDC_SHAPE_CONTAINER = "mdc-shape-container";
+	String MDC_SHAPE_CONTAINER__CORNER = "mdc-shape-container__corner";
+	String MDC_SHAPE_CONTAINER__CORNER__TOP_LEFT = "mdc-shape-container__corner--top-left";
+	String MDC_SHAPE_CONTAINER__CORNER__TOP_RIGHT = "mdc-shape-container__corner--top-right";
+	String MDC_SHAPE_CONTAINER__CORNER__BOTTOM_LEFT = "mdc-shape-container__corner--bottom-left";
+	String MDC_SHAPE_CONTAINER__CORNER__BOTTOM_RIGHT = "mdc-shape-container__corner--bottom-right";
 
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
@@ -211,6 +220,21 @@ public interface CssName {
 	String MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER = "mdc-image-list__image-aspect-container";
 	String MDC_IMAGE_LIST__SUPPORTING = "mdc-image-list__supporting";
 	// //////////////////////////////////////////////////////
+	// CARD
+	// //////////////////////////////////////////////////////
+	String MDC_CARD = "mdc-card";
+	String MDC_CARD__MEDIA = "mdc-card__media";
+	String MDC_CARD__MEDIA__SQUARE = "mdc-card__media--square";
+	String MDC_CARD__MEDIA__16_9 = "mdc-card__media--16-9";
+	String MDC_CARD__MEDIA_CONTENT = "mdc-card__media-content";
+	String MDC_CARD__CONTENT = "mdc-card__content";
+	String MDC_CARD__ACTIONS = "mdc-card__actions";
+	String MDC_CARD__ACTION = "mdc-card__action";
+	String MDC_CARD__ACTIONS_BUTTONS = "mdc-card__action-buttons";
+	String MDC_CARD__ACTION_BUTTON = "mdc-card__action--button";
+	String MDC_CARD__ACTIONS_ICONS = "mdc-card__action-icons";
+	String MDC_CARD__ACTION_ICON = "mdc-card__action--icon";
+	// //////////////////////////////////////////////////////
 	// ICONS
 	// //////////////////////////////////////////////////////
 	String MATERIAL_ICONS = "material-icons";
@@ -248,6 +272,10 @@ public interface CssName {
 	String MDC_LIST_ITEM__END_DETAIL = "mdc-list-item__end-detail";
 	String MDC_LIST_ITEM__TEXT = "mdc-list-item__text";
 	String MDC_LIST_ITEM__TEXT_SECONDARY = "mdc-list-item__secondary-text";
+	// //////////////////////////////////////////////////////
+	// ICON BUTTON
+	// //////////////////////////////////////////////////////
+	String MDC_ICON_BUTTON = "mdc-icon-button";
 	// //////////////////////////////////////////////////////
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////

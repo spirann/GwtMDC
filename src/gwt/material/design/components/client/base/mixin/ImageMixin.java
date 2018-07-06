@@ -48,7 +48,7 @@ public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> 
 	}
 
 	/**
-	 * @param resource ImageResource or  TextResource
+	 * @param resource ImageResource
 	 */
 	@Override
 	public void setResource(ImageResource resource) {

@@ -67,6 +67,8 @@ public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasR
 	}
 
 	private native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.ripple.MDCRipple(element);
+		var jsElement = new $wnd.mdc.ripple.MDCRipple(element);
+		jsElement.unbounded = true;
+		return jsElement;
 	}-*/;
 }

@@ -411,6 +411,49 @@ a:active {
 }
 
 /* ==========================================================================
+   Card
+   ========================================================================== */
+.mdc-card__content {
+	width: 100%;
+}
+.mdc-card__content:empty {
+	display: none;
+}
+
+/* ==========================================================================
+   Shape deafults
+   ========================================================================== */
+
+.mdc-shape-container__corner--top-left,
+.mdc-shape-container__corner--top-right,
+.mdc-shape-container__corner--bottom-left,
+.mdc-shape-container__corner--bottom-right {	
+	width: 16px;
+	height: 16px;
+	background-color: var(--mdc-theme-background);
+}
+
+.mdc-shape-container__corner--top-left {	
+	top: -8px;
+	left: -8px;
+}
+
+.mdc-shape-container__corner--top-right {	
+	top: -8px;
+	right: -8px;
+}
+
+.mdc-shape-container__corner--bottom-left {	
+	bottom: -8px;
+	left: -8px;
+}
+
+.mdc-shape-container__corner--bottom-right {	
+	bottom: -8px;
+	right: -8px;
+}
+
+/* ==========================================================================
    Snackbars
    ========================================================================== */
 

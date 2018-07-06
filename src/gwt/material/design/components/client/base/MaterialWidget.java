@@ -237,18 +237,6 @@ public class MaterialWidget extends BaseWidget
 		jsInit();
 	}
 
-	/*
-	 * @Override public void setStyleName(String style) { super.setStyleName(style);
-	 * if (initialize) { upgradeElement(getElement()); } }
-	 * 
-	 * @Override public void setStylePrimaryName(String style) {
-	 * super.setStylePrimaryName(style); if (initialize) {
-	 * upgradeElement(getElement()); } }
-	 * 
-	 * @Override public void addStyleName(String style) { super.addStyleName(style);
-	 * if (initialize) { upgradeElement(getElement()); } }
-	 */
-
 	@Override
 	public void add(Widget child) {
 		super.add(child, (Element) getElement());
