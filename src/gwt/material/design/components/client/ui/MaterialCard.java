@@ -26,6 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasAspectRatio;
 import gwt.material.design.components.client.base.HasImage;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
 import gwt.material.design.components.client.constants.AspectRatio;
@@ -48,6 +49,8 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 	private Div buttons = new Div(CssName.MDC_CARD__ACTIONS_BUTTONS);
 	private Div icons = new Div(CssName.MDC_CARD__ACTIONS_ICONS);
 
+	protected final ApplyStyleMixin<MaterialCard> outlineMixin = new ApplyStyleMixin<>(this, CssName.MDC_CARD__OUTLINE);
+	
 	public MaterialCard() {
 		super(CssName.MDC_CARD);
 	}
@@ -85,7 +88,7 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 		content.add(chield);
 	}
 
-	@UiChild(tagname = "buttons")
+	@UiChild(tagname = "button")
 	public void addButtons(final Widget chield) {
 		chield.addStyleName(CssName.MDC_CARD__ACTION);
 		chield.addStyleName(CssName.MDC_CARD__ACTION_BUTTON);
@@ -93,7 +96,7 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 		add(actions);
 	}
 
-	@UiChild(tagname = "icons")
+	@UiChild(tagname = "icon")
 	public void addIcons(final Widget chield) {
 		chield.addStyleName(CssName.MDC_CARD__ACTION);
 		chield.addStyleName(CssName.MDC_CARD__ACTION_ICON);
@@ -131,6 +134,14 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 		return media.getAspectRatio();
 	}
 
+	public void setOutline(final boolean outline) {
+		outlineMixin.setApply(outline);
+	}
+	
+	public boolean isOutline() {
+		return outlineMixin.isApplied(); 
+	}
+	
 	protected class CardMedia extends Div implements HasImage, HasAspectRatio {
 
 		private Div mediaContent = new Div(CssName.MDC_CARD__MEDIA_CONTENT);

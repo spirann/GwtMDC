@@ -223,6 +223,7 @@ public interface CssName {
 	// CARD
 	// //////////////////////////////////////////////////////
 	String MDC_CARD = "mdc-card";
+	String MDC_CARD__OUTLINE = "mdc-card--outlined";
 	String MDC_CARD__MEDIA = "mdc-card__media";
 	String MDC_CARD__MEDIA__SQUARE = "mdc-card__media--square";
 	String MDC_CARD__MEDIA__16_9 = "mdc-card__media--16-9";

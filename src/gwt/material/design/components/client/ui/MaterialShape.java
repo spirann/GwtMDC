@@ -112,8 +112,8 @@ public class MaterialShape extends Div {
 
 	public void setCornerSize(final int pixels) {
 
-		final String size = (pixels * 1.4142135623730951) + "";
-		final String position = (-1d * ((pixels * 1.4142135623730951) / 2d)) + "";
+		final String size = (pixels * 1.4142135623730951) + "px";
+		final String position = (-1d * ((pixels * 1.4142135623730951) / 2d)) + "px";
 
 		cornerTopLeft.setSize(size, size);
 		cornerTopLeft.setTop(position);
