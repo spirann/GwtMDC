@@ -41,7 +41,6 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FlexDirection;
 import gwt.material.design.components.client.constants.InputType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
@@ -166,12 +165,12 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	}
 
 	@Override
-	public void setRipple(Ripple ripple) {
-		textField.setRipple(ripple);
+	public void setRipple(Color color) {
+		textField.setRipple(color);
 	}
 
 	@Override
-	public Ripple getRipple() {
+	public Color getRipple() {
 		return textField.getRipple();
 	}
 

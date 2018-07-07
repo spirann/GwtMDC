@@ -32,12 +32,8 @@ public class Li extends MaterialWidget {
 	public Li() {
 		super(HtmlElements.LI.createElement());
 	}
-
-	public Li(final String primaryClass) {
-		super(HtmlElements.LI.createElement(), primaryClass);
-	}
-
-	public Li(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.LI.createElement(), primaryClass, initialClasses);
+	
+	public Li(final String... initialClasses) {
+		super(HtmlElements.LI.createElement(), initialClasses);
 	}
 }

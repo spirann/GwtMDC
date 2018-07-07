@@ -33,11 +33,7 @@ public class Footer extends MaterialWidget {
 		super(HtmlElements.FOOTER.createElement());
 	}
 
-	public Footer(final String primaryClass) {
-		super(HtmlElements.FOOTER.createElement(), primaryClass);
-	}
-	
-	public Footer(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.FOOTER.createElement(), primaryClass, initialClasses);
+	public Footer(final String ... initialClasses) {
+		super(HtmlElements.FOOTER.createElement(), initialClasses);
 	}
 }

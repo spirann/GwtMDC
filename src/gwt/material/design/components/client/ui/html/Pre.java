@@ -33,12 +33,8 @@ public class Pre extends MaterialWidget {
 		super(HtmlElements.PRE.createElement());
 	}
 	
-	public Pre(final String primaryClass) {
-		super(HtmlElements.PRE.createElement(), primaryClass);
-	}
-	
-	public Pre(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.PRE.createElement(), primaryClass, initialClasses);
+	public Pre(final String ... initialClasses) {
+		super(HtmlElements.PRE.createElement(), initialClasses);
 	}
 	
 }

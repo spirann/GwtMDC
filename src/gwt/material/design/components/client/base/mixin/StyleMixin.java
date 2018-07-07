@@ -27,13 +27,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class StyleMixin<H extends Widget> extends AbstractMixin<H> {
 
 	private String style;
-
+	
 	public StyleMixin(final H widget) {
 		super(widget);
 	}
 
 	public void setStyle(String styles) {
-		
+
 		if (this.style != null && !this.style.isEmpty()) {
 			for (String style : this.style.split(" ")) {
 				uiObject.removeStyleName(style);

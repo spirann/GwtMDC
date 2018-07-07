@@ -19,9 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 
 /**
@@ -32,16 +32,26 @@ import gwt.material.design.components.client.constants.Role;
 public class MaterialIconButton extends MaterialIcon {
 
 	public MaterialIconButton() {
-		super();
-		addStyleName(CssName.MDC_ICON_BUTTON);
+		super(CssName.MDC_ICON_BUTTON);		
 		setRole(Role.BUTTON);
-		setRipple(Ripple.DEFAULT);
 		setCircle(true);
 	}
 	
 	public MaterialIconButton(final IconType type) {
 		this();
 		setType(type);
+	}
+	
+	@Override
+	protected void onInitialize() {		
+		ripleMixin.initialize();		
+		super.onInitialize();
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		super.setColor(color);
+		setRipple(color);
 	}
 	
 }

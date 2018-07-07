@@ -33,11 +33,7 @@ public class Main extends MaterialWidget {
 		super(HtmlElements.MAIN.createElement());
 	}
 
-	public Main(final String primaryClass) {
-		super(HtmlElements.MAIN.createElement(), primaryClass);
-	}
-
-	public Main(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.MAIN.createElement(), primaryClass, initialClasses);
+	public Main(final String... initialClasses) {
+		super(HtmlElements.MAIN.createElement(), initialClasses);
 	}
 }

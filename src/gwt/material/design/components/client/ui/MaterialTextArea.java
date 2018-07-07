@@ -35,7 +35,6 @@ import gwt.material.design.components.client.base.mixin.RequiredMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FlexDirection;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.ui.html.Textarea;
@@ -157,12 +156,12 @@ public class MaterialTextArea extends MaterialFormField<String>
 	}
 
 	@Override
-	public void setRipple(Ripple ripple) {
-		textField.setRipple(ripple);
+	public void setRipple(Color color) {
+		textField.setRipple(color);
 	}
 
 	@Override
-	public Ripple getRipple() {
+	public Color getRipple() {
 		return textField.getRipple();
 	}
 

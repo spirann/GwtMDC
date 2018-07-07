@@ -25,6 +25,10 @@ package gwt.material.design.components.client.constants;
 public interface CssProperty {
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Ripple
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_RIPPLE__COLOR = "--mdc-ripple--color";
+	// ////////////////////////////////////////////////////////////////////////////
 	// Image List
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP = "--mdc-image-list--column-count-desktop";
@@ -55,5 +59,5 @@ public interface CssProperty {
 	String MDC_SLIDER__COLOR = "--mdc-slider--color";
 	String MDC_SLIDER__BACKGROUND_COLOR = "--mdc-slider--background-color";
 	String MDC_SLIDER__TEXT_COLOR = "--mdc-slider--text-color";
-	
+
 }

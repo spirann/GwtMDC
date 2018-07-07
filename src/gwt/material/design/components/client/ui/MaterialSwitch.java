@@ -26,7 +26,6 @@ import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
@@ -120,12 +119,12 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	}
 
 	@Override
-	public void setRipple(Ripple ripple) {
-		switch_.setRipple(ripple);
+	public void setRipple(Color color) {
+		switch_.setRipple(color);
 	}
 
 	@Override
-	public Ripple getRipple() {
+	public Color getRipple() {
 		return switch_.getRipple();
 	}
 

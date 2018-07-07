@@ -32,12 +32,8 @@ public class Header extends MaterialWidget {
 	public Header() {
 		super(HtmlElements.HEADER.createElement());
 	}
-
-	public Header(final String primaryClass) {
-		super(HtmlElements.HEADER.createElement(), primaryClass);
-	}
 	
-	public Header(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.HEADER.createElement(), primaryClass, initialClasses);
+	public Header(final String ... initialClasses) {
+		super(HtmlElements.HEADER.createElement(), initialClasses);
 	}
 }

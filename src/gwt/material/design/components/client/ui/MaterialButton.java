@@ -32,7 +32,6 @@ import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Span;
 import gwt.material.design.components.client.utils.JsUtils;
@@ -50,7 +49,6 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON__DENSE);
 
-	
 	protected MaterialIcon icon;
 	
 	public MaterialButton() {
@@ -60,9 +58,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	@Override
 	protected void onInitialize() {
 		
-		if(getRipple() == null) {
-			setRipple(Ripple.DEFAULT);
-		}
+		ripleMixin.initialize();
 		
 		add(label);				
 		addClickHandler(event -> JsUtils.clearFocus());
@@ -127,8 +123,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 		}
 		
 		if(icon == null) {
-			icon = new MaterialIcon();
-			icon.addStyleName(CssName.MDC_BUTTON__ICON);
+			icon = new MaterialIcon(CssName.MDC_BUTTON__ICON);
 			insert(icon, 0);
 		}
 		

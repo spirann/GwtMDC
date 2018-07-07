@@ -32,12 +32,8 @@ public class Code extends Text {
 		super(HtmlElements.CODE.createElement());
 	}
 
-	public Code(final String primaryClass) {
-		super(HtmlElements.CODE.createElement(), primaryClass);
-	}
-
-	public Code(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.CODE.createElement(), primaryClass, initialClasses);
+	public Code(final String... initialClasses) {
+		super(HtmlElements.CODE.createElement(), initialClasses);
 	}
 
 }

@@ -32,12 +32,8 @@ public class Nav extends MaterialWidget {
 	public Nav() {
 		super(HtmlElements.NAV.createElement());
 	}
-
-	public Nav(final String primaryClass) {
-		super(HtmlElements.NAV.createElement(), primaryClass);
-	}
-
-	public Nav(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.NAV.createElement(), primaryClass, initialClasses);
+	
+	public Nav(final String... initialClasses) {
+		super(HtmlElements.NAV.createElement(), initialClasses);
 	}
 }

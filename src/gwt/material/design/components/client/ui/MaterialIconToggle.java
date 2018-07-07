@@ -32,7 +32,6 @@ import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.utils.JsUtils;
@@ -58,9 +57,8 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	public MaterialIconToggle() {
 		super(CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
-		setRole(Role.BUTTON);
 		setDisabledClass(CssName.MDC_ICON_TOGGLE__DISABLED);
-		setRipple(Ripple.DEFAULT);
+		setRole(Role.BUTTON);
 		setCircle(true);
 	}
 
@@ -110,10 +108,13 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 		
 		if (getValue() && colorOn != null) {
 			setColor(colorOn);
+			setRipple(colorOn);
 		} else if (!getValue() && colorOff != null) {
 			setColor(colorOff);
+			setRipple(colorOff);
 		} else {
 			setColor(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
+			setRipple(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
 		}
 		
 		if (getValue() && backgroundColorOn != null) {

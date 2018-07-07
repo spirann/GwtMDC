@@ -33,12 +33,8 @@ public class Anchor extends MaterialWidget {
 		super(HtmlElements.A.createElement());
 	}
 	
-	public Anchor(final String primaryClass) {
-		super(HtmlElements.A.createElement(), primaryClass);
-	}
-	
-	public Anchor(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.A.createElement(), primaryClass, initialClasses);
+	public Anchor(final String ... initialClasses) {
+		super(HtmlElements.A.createElement(), initialClasses);
 	}
 	
 }

@@ -32,13 +32,9 @@ public class Img extends MaterialWidget {
 	public Img() {
 		super(HtmlElements.IMG.createElement());
 	}
-
-	public Img(final String primaryClass) {
-		super(HtmlElements.IMG.createElement(), primaryClass);
-	}
-
-	public Img(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.IMG.createElement(), primaryClass, initialClasses);
+	
+	public Img(final String... initialClasses) {
+		super(HtmlElements.IMG.createElement(), initialClasses);
 	}
 
 }

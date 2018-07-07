@@ -33,12 +33,8 @@ public class Textarea extends MaterialWidget {
 		super(HtmlElements.TEXTAREA.createElement());
 	}
 
-	public Textarea(final String primaryClass) {
-		super(HtmlElements.TEXTAREA.createElement(), primaryClass);
-	}
-	
-	public Textarea(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.TEXTAREA.createElement(), primaryClass, initialClasses);
+	public Textarea(final String ... initialClasses) {
+		super(HtmlElements.TEXTAREA.createElement(), initialClasses);
 	}
 
 	public native void setRows(int rows)/*-{

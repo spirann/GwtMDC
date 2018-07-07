@@ -33,12 +33,8 @@ public class Ul extends MaterialWidget {
 		super(HtmlElements.UL.createElement());
 	}
 
-	public Ul(final String primaryClass) {
-		super(HtmlElements.UL.createElement(), primaryClass);
-	}
-
-	public Ul(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.UL.createElement(), primaryClass, initialClasses);
+	public Ul(final String... initialClasses) {
+		super(HtmlElements.UL.createElement(), initialClasses);
 	}
 
 }

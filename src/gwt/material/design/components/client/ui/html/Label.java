@@ -32,11 +32,7 @@ public class Label extends Text {
 		super(HtmlElements.LABEL.createElement());
 	}
 
-	public Label(final String primaryClass) {
-		super(HtmlElements.LABEL.createElement(), primaryClass);
-	}
-
-	public Label(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.LABEL.createElement(), primaryClass, initialClasses);
+	public Label(final String... initialClasses) {
+		super(HtmlElements.LABEL.createElement(), initialClasses);
 	}
 }

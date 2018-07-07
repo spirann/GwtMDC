@@ -33,11 +33,7 @@ public class Button extends MaterialWidget {
 		super(HtmlElements.BUTTON.createElement());
 	}
 	
-	public Button(final String primaryClass) {
-		super(HtmlElements.BUTTON.createElement(), primaryClass);
-	}
-	
-	public Button(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.BUTTON.createElement(), primaryClass, initialClasses);
+	public Button(final String ... initialClasses) {
+		super(HtmlElements.BUTTON.createElement(), initialClasses);
 	}
 }

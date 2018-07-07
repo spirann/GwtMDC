@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.base;
 
-import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.constants.Color;
 
 /**
  * 
@@ -28,8 +28,8 @@ import gwt.material.design.components.client.constants.Ripple;
  */
 public interface HasRipple {
 
-	void setRipple(Ripple ripple);
+	void setRipple(Color ripple);
 	
-	Ripple getRipple();
+	Color getRipple();
 	
 }

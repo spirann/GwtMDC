@@ -80,9 +80,9 @@ import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.RoleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.Elevation;
 import gwt.material.design.components.client.constants.HideOn;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.DragEndEvent;
 import gwt.material.design.components.client.events.DragEnterEvent;
@@ -167,13 +167,8 @@ public class MaterialWidget extends BaseWidget
 		setElement(element);
 	}
 
-	public MaterialWidget(Element element, String primaryClass) {
+	public MaterialWidget(Element element, String... initialClass) {
 		this(element);
-		setPrimaryClass(primaryClass);
-	}
-
-	public MaterialWidget(Element element, String primaryClass, String... initialClass) {
-		this(element, primaryClass);
 		setInitialClasses(initialClass);
 	}
 
@@ -673,18 +668,12 @@ public class MaterialWidget extends BaseWidget
 	}
 
 	@Override
-	public void setRipple(Ripple ripple) {
-
-		ripleMixin.setRipple(ripple);
-
-		if (ripple != null && getAutoInitData() == null) {
-			setAutoInitData(AutoInitData.MDC_RIPPLE);
-		}
-
+	public void setRipple(Color color) {
+		ripleMixin.setRipple(color);
 	}
 
 	@Override
-	public Ripple getRipple() {
+	public Color getRipple() {
 		return ripleMixin.getRipple();
 	}
 

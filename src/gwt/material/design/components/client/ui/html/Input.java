@@ -46,23 +46,14 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 		this();
 		setType(type);
 	}
-
-	public Input(final InputType type, final String primaryClass) {
-		super(HtmlElements.INPUT.createElement(), primaryClass);
+	
+	public Input(final InputType type, final String ... initialClasses) {
+		super(HtmlElements.INPUT.createElement(), initialClasses);
 		setType(type);
 	}
 	
-	public Input(final InputType type, final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.INPUT.createElement(), primaryClass, initialClasses);
-		setType(type);
-	}
-
-	public Input(final String primaryClass) {
-		super(HtmlElements.INPUT.createElement(), primaryClass);
-	}
-	
-	public Input(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.INPUT.createElement(), primaryClass, initialClasses);
+	public Input(final String ... initialClasses) {
+		super(HtmlElements.INPUT.createElement(), initialClasses);
 	}
 
 	@Override

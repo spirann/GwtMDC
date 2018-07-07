@@ -33,11 +33,7 @@ public class Body extends MaterialWidget {
 		super(HtmlElements.BODY.createElement());
 	}
 	
-	public Body(final String primaryClass) {
-		super(HtmlElements.BODY.createElement(), primaryClass);
-	}
-	
-	public Body(final String primaryClass, final String ... initialClasses) {
-		super(HtmlElements.BODY.createElement(), primaryClass, initialClasses);
+	public Body(final String ... initialClasses) {
+		super(HtmlElements.BODY.createElement(), initialClasses);
 	}
 }

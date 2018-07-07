@@ -725,36 +725,37 @@ a:active {
 /* ==========================================================================
    Configure Ripple background
    ========================================================================== */
-.mdc-ripple-surface--none::before, 
-.mdc-ripple-surface--none::after {
+.mdc-ripple-surface--color::before, 
+.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color);
+}
+
+.mdc-icon-button.mdc-ripple-surface--color::before, 
+.mdc-icon-button.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.38)));
+}
+
+.mdc-icon-button[disabled].mdc-ripple-surface--color::before, 
+.mdc-icon-button[disabled].mdc-ripple-surface--color::after {
 	background-color: transparent;
 }
-    
-.mdc-ripple-surface--primary::before, 
-.mdc-ripple-surface--primary:after {
-	background-color: var(--mdc-theme-ripple-primary);
+
+.mdc-button--raised.mdc-ripple-surface--color::before, 
+.mdc-button--raised.mdc-ripple-surface--color::after,
+.mdc-button--unelevated.mdc-ripple-surface--color::before, 
+.mdc-button--unelevated.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-primary-on-primary));
 }
 
-.mdc-ripple-surface--secondary::before, 
-.mdc-ripple-surface--secondary::after {
-	background-color: var(--mdc-theme-ripple-secondary);
+.mdc-button:not(.mdc-button--raised):not(.mdc-button--unelevated).mdc-ripple-surface--color::before, 
+.mdc-button:not(.mdc-button--raised):not(.mdc-button--unelevated).mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, var(--mdc-theme-primary));
 }
 
-.mdc-ripple-surface--on-primary::before, 
-.mdc-ripple-surface--on-primary::after {
-	background-color: var(--mdc-theme-ripple-on-primary);
+.mdc-fab.mdc-ripple-surface--color::before, 
+.mdc-fab.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-primary-on-secondary));
 }
-
-.mdc-ripple-surface--on-secondary::before, 
-.mdc-ripple-surface--on-secondary::after {
-	background-color: var(--mdc-theme-ripple-on-secondary);
-}
-
-.mdc-ripple-surface--on-background::before, 
-.mdc-ripple-surface--on-background::after {
-	background-color: var(--mdc-theme-ripple-on-background);
-}
-
 
 /* ==========================================================================
    Configure placeholder color

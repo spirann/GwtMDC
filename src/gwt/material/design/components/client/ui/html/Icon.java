@@ -32,12 +32,8 @@ public class Icon extends MaterialWidget {
 	public Icon() {
 		super(HtmlElements.I.createElement());
 	}
-
-	public Icon(final String primaryClass) {
-		super(HtmlElements.I.createElement(), primaryClass);
-	}
-
-	public Icon(final String primaryClass, String... initialClasses) {
-		super(HtmlElements.I.createElement(), primaryClass, initialClasses);
+	
+	public Icon(String... initialClasses) {
+		super(HtmlElements.I.createElement(), initialClasses);
 	}
 }

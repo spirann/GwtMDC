@@ -46,12 +46,8 @@ public class MaterialFormField<T> extends Div implements HasValue<T> {
 		this(CssName.MDC_FORM_FIELD);
 	}
 	
-	protected MaterialFormField(final String primaryClass) {
-		super(primaryClass);
-	}
-	
-	public MaterialFormField(final String primaryClass, final String ... initialClasses) {
-		super(primaryClass, initialClasses);
+	public MaterialFormField(final String ... initialClasses) {
+		super(initialClasses);
 	}
 	
 	@Override

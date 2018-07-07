@@ -33,12 +33,8 @@ public class Div extends MaterialWidget {
 		super(HtmlElements.DIV.createElement());
 	}
 
-	public Div(final String primaryClass) {
-		super(HtmlElements.DIV.createElement(), primaryClass);
-	}
-
-	public Div(final String primaryClass, final String... initialClasses) {
-		super(HtmlElements.DIV.createElement(), primaryClass, initialClasses);
+	public Div(final String... initialClasses) {
+		super(HtmlElements.DIV.createElement(), initialClasses);
 	}
 	
 }

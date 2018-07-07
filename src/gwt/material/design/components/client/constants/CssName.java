@@ -49,12 +49,7 @@ public interface CssName {
 	String MDC_RIPPLE_SURFACE = "mdc-ripple-surface";
 	String MDC_RIPPLE_UPGRADED = "mdc-ripple-upgraded";
 	String MDC_RIPPLE_UPGRADED__UNBOUNDED = "mdc-ripple-upgraded--unbounded";
-	String MDC_RIPPLE_SURFACE__NONE = "mdc-ripple-surface--none";
-	String MDC_RIPPLE_SURFACE__PRIMARY = "mdc-ripple-surface--primary";
-	String MDC_RIPPLE_SURFACE__SECONDARY = "mdc-ripple-surface--secondary";
-	String MDC_RIPPLE_SURFACE__ON_PRIMARY = "mdc-ripple-surface--on-primary";
-	String MDC_RIPPLE_SURFACE__ON_SECONDARY = "mdc-ripple-surface--on-secondary";
-	String MDC_RIPPLE_SURFACE__ON_BACKGROUND = "mdc-ripple-surface--on-background";
+	String MDC_RIPPLE_SURFACE__COLOR = "mdc-ripple-surface--color";
 	// //////////////////////////////////////////////////////
 	// ELEVATION
 	// //////////////////////////////////////////////////////

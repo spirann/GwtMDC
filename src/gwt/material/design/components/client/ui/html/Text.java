@@ -45,12 +45,8 @@ public class Text extends MaterialWidget implements HasText, HasTypography, HasF
 		super(element);
 	}
 
-	protected Text(Element element, String primaryClass) {
-		super(element, primaryClass);
-	}
-
-	protected Text(Element element, String primaryClass, String... initialClass) {
-		super(element, primaryClass, initialClass);
+	protected Text(Element element, String... initialClass) {
+		super(element, initialClass);
 	}
 
 	@Override

@@ -24,7 +24,11 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasRipple;
-import gwt.material.design.components.client.constants.Ripple;
+import gwt.material.design.components.client.constants.AutoInitData;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
@@ -33,42 +37,71 @@ import gwt.material.design.components.client.constants.Ripple;
  */
 public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasRipple {
 
-	private Ripple type;
-	
+	private Color color;
+
 	private JavaScriptObject jsElement;
-	
+
+	private String rippleClass = CssName.MDC_RIPPLE_SURFACE + " " + CssName.MDC_RIPPLE_UPGRADED + " "
+			+ CssName.MDC_RIPPLE_UPGRADED__UNBOUNDED + " " + CssName.MDC_RIPPLE_SURFACE__COLOR;
+
 	public RippleMixin(final W widget) {
 		super(widget);
+		
 	}
 
 	@Override
-	public void setRipple(Ripple type) {
-		this.type = type;
+	public void setRipple(Color color) {
 		
-		if (type == null) {
-			setStyle(null);
+		this.color = color;
+
+		if (color == null) {
+
+			if (jsElement != null) {
+				uninitialize();
+			}
+
 		} else {
-			setStyle(type.getCssName());
+			
+			if (jsElement == null) {
+				initialize();
+			}
+
+			StyleHelper.setStyleProperty(uiObject.getElement(), CssProperty.MDC_RIPPLE__COLOR, color.getCssName());
 		}
-		
-		if(jsElement == null) {
-			jsInit();
-		}				
-		
+
 	}
 
 	@Override
-	public Ripple getRipple() {
-		return type;
+	public Color getRipple() {
+		return color;
 	}
 	
+	public void initialize() {
+		setStyle(rippleClass);
+		uiObject.getElement().setAttribute("data-mdc-auto-init", AutoInitData.MDC_RIPPLE.getCssName());
+		jsInit();
+	}
+	
+	public void uninitialize() {
+		deactivate(jsElement);
+		jsElement = null;
+		setStyle(null);
+	}
+
 	private void jsInit() {
 		jsElement = jsInit(uiObject.getElement());
 	}
 
 	private native JavaScriptObject jsInit(final Element element)/*-{
 		var jsElement = new $wnd.mdc.ripple.MDCRipple(element);
-		jsElement.unbounded = true;
+		//jsElement.unbounded = true;
 		return jsElement;
 	}-*/;
+
+	private native void deactivate(final JavaScriptObject element)/*-{
+		if (element) {
+			jsElement.deactivate();
+		}
+	}-*/;
+
 }

@@ -34,12 +34,8 @@ public class Hr extends MaterialWidget {
 		super(Document.get().createElement("hr"));
 	}
 
-	public Hr(final String primaryClass) {
-		super(Document.get().createElement("hr"), primaryClass);
-	}
-
-	public Hr(final String primaryClass, final String... initialClasses) {
-		super(Document.get().createElement("hr"), primaryClass, initialClasses);
+	public Hr(final String... initialClasses) {
+		super(Document.get().createElement("hr"), initialClasses);
 	}
 	
 }

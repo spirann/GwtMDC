@@ -32,7 +32,6 @@ import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
-import gwt.material.design.components.client.constants.Ripple;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
@@ -151,12 +150,12 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	}
 
 	@Override
-	public void setRipple(Ripple ripple) {
-		checkbox.setRipple(ripple);
+	public void setRipple(Color color) {
+		checkbox.setRipple(color);
 	}
 
 	@Override
-	public Ripple getRipple() {
+	public Color getRipple() {
 		return checkbox.getRipple();
 	}
 
