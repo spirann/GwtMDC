@@ -117,7 +117,6 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 
-		radio.setDisabledClass(CssName.MDC_RADIO__DISABLED);
 		radio.add(input);
 		radio.add(divBackground);
 

@@ -102,7 +102,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
-		implements HasId, HasInitialClasses, HasEnabled, HasDisabledClass, HasInteractionHandlers, HasAllFocusHandlers,
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
 		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel {
 
 	static {
@@ -611,16 +611,6 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
-	}
-
-	@Override
-	public String getDisabledClass() {
-		return enabledMixin.getDisabledClass();
-	}
-
-	@Override
-	public void setDisabledClass(String disabledClass) {
-		enabledMixin.setDisabledClass(disabledClass);
 	}
 
 	@Override

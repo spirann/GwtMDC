@@ -31,7 +31,7 @@ import gwt.material.design.components.client.base.HasDisabledClass;
  * @author Richeli Vargas
  *
  */
-public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabled & HasDisabledClass>
+public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabled>
 		extends AbstractMixin<T> implements HasEnabled, HasDisabledClass {
 
 	private static final String DISABLED = "disabled";

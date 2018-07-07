@@ -70,7 +70,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 		divBackground.add(divKnob);
 
 		switch_.setPadding(8);
-		switch_.setDisabledClass(CssName.MDC_SWITCH__DISABLED);
 		switch_.add(input);
 		switch_.add(divBackground);
 

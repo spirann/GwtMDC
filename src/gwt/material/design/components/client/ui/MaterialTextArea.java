@@ -102,7 +102,7 @@ public class MaterialTextArea extends MaterialFormField<String>
 
 		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
 
-		textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
+		//textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
 		textField.add(textarea);
 		textField.add(label);
 

@@ -112,7 +112,7 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 
 		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
 
-		textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
+		//textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
 		textField.add(input);
 		textField.add(label);
 		textField.add(new Div("mdc-text-field__bottom-line"));

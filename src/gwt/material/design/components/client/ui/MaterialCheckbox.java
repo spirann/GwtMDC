@@ -91,7 +91,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		background.add(checkmark);
 		background.add(mixedmark);
 				
-		checkbox.setDisabledClass(CssName.MDC_CHECKBOX__DISABLED);
 		checkbox.add(input);
 		checkbox.add(background);
 			

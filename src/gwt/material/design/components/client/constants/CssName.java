@@ -234,7 +234,6 @@ public interface CssName {
 	// ICONS
 	// //////////////////////////////////////////////////////
 	String MATERIAL_ICONS = "material-icons";
-	String MATERIAL_ICONS__DISABLED = "material-icons--disabled";
 	// //////////////////////////////////////////////////////
 	// BUTTONS
 	// //////////////////////////////////////////////////////
@@ -276,7 +275,6 @@ public interface CssName {
 	// ICON TOGGLE
 	// //////////////////////////////////////////////////////
 	String MDC_ICON_TOGGLE = "mdc-icon-toggle";
-	String MDC_ICON_TOGGLE__DISABLED = "mdc-icon-toggle--disabled";
 	// //////////////////////////////////////////////////////
 	// CHIP
 	// //////////////////////////////////////////////////////
@@ -302,7 +300,6 @@ public interface CssName {
 	// Radio Button
 	// //////////////////////////////////////////////////////
 	String MDC_RADIO = "mdc-radio";
-	String MDC_RADIO__DISABLED = "mdc-radio--disabled";
 	String MDC_RADIO__NATIVE_CONTROL = "mdc-radio__native-control";
 	String MDC_RADIO__BACKGROUND = "mdc-radio__background";
 	String MDC_RADIO__OUTER_CIRCLE = "mdc-radio__outer-circle";
@@ -311,7 +308,6 @@ public interface CssName {
 	// Checkbox
 	// //////////////////////////////////////////////////////
 	String MDC_CHECKBOX = "mdc-checkbox";
-	String MDC_CHECKBOX__DISABLED = "mdc-checkbox--disabled";
 	String MDC_CHECKBOX__NATIVE_CONTROL = "mdc-checkbox__native-control";
 	String MDC_CHECKBOX__BACKGROUND = "mdc-checkbox__background";
 	String MDC_CHECKBOX__CHECKMARK = "mdc-checkbox__checkmark";
@@ -336,7 +332,6 @@ public interface CssName {
 	// Switch
 	// //////////////////////////////////////////////////////
 	String MDC_SWITCH = "mdc-switch";
-	String MDC_SWITCH__DISABLED = "mdc-switch--disabled";
 	String MDC_SWITCH__NATIVE_CONTROL = "mdc-switch__native-control";
 	String MDC_SWITCH__BACKGROUND = "mdc-switch__background";
 	String MDC_SWITCH__KNOB = "mdc-switch__knob";

@@ -26,6 +26,16 @@ a:active {
     color: var(--mdc-theme-secondary);
 }
 
+[disabled] {
+    filter: grayscale(100%);
+    pointer-events: none;
+    cursor: default;
+}
+
+/* ==========================================================================
+   Extra align
+   ========================================================================== */
+
 .left-align {
 	margin-left: 0;
 	margin-right: auto;
@@ -351,16 +361,15 @@ a:active {
 	margin-right: 8px;
 }
 
-.mdc-fab,
-.mdc-icon-toggle {
-	overflow: hidden;
-}
-
 /* ==========================================================================
    Icon toggle
    ========================================================================== */
-.mdc-icon-toggle--disabled {
+.mdc-icon-toggle[disabled] {
 	opacity: 0.26;
+	color: rgba(0, 0, 0, 0.38);
+  	/* @alternate */
+  	color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
+  	pointer-events: none; 
 }   
 
 .mdc-icon-toggle.mdc-list-item__start-detail {
@@ -405,9 +414,9 @@ a:active {
    Chip
    ========================================================================== */
 
-.mdc-chip-set:not(.mdc-chip-set--filter) .mdc-chip__icon--leading:empty,
-.mdc-chip__icon--trailing:empty {
-	/* display: none; */
+.mdc-chip[disabled] {
+	opacity: 0.37;
+	cursor: default;
 }
 
 /* ==========================================================================
@@ -502,7 +511,7 @@ a:active {
 /* ==========================================================================
    Material disabled adjust
    ========================================================================== */
-.material-icons--disabled {
+.material-icons[disabled] {
 	opacity: 0.26;
 }
 
@@ -730,14 +739,19 @@ a:active {
 	background-color: var(--mdc-ripple--color);
 }
 
+[disabled].mdc-ripple-surface--color::before, 
+[disabled].mdc-ripple-surface--color::after {
+	background-color: transparent;
+}
+
 .mdc-icon-button.mdc-ripple-surface--color::before, 
 .mdc-icon-button.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.38)));
 }
 
-.mdc-icon-button[disabled].mdc-ripple-surface--color::before, 
-.mdc-icon-button[disabled].mdc-ripple-surface--color::after {
-	background-color: transparent;
+.mdc-chip:not([disabled]).mdc-ripple-surface--color::before, 
+.mdc-chip:not([disabled]).mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, rgba(0, 0, 0, 0.87));
 }
 
 .mdc-button--raised.mdc-ripple-surface--color::before, 
