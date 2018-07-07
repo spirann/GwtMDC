@@ -83,6 +83,8 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	@Override
 	protected void onInitialize() {
 		
+		label.setFor(input.getId());
+		
 		setCircle(true);
 		
 		checkmark.addStyleName(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
@@ -103,18 +105,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		
 		super.onInitialize();
 	}
-	
-	@Override
-	public void setId(String id) {
-		input.setId(id);
-		label.setFor(input.getId());
-	}
 
-	@Override
-	public String getId() {
-		return input.getId();
-	}
-	
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		checkedMixin.setChecked(value);

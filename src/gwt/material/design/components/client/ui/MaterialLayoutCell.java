@@ -83,6 +83,9 @@ public class MaterialLayoutCell extends Div implements HasCellColumns {
 		return Align.fromStyleName(alignMixin.getStyle());
 	}
 
+	/**
+	 * Material design’s responsive UI is based on a column-variate grid layout. It has 12 columns on desktop, 8 columns on tablet and 4 columns on phone.
+	 */
 	@Override
 	public void setCols(int columns) {
 		columnsMixin.setCols(columns);

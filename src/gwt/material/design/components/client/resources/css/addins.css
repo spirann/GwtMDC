@@ -244,6 +244,9 @@ a:active {
 /* ==========================================================================
    Adjust tab
    ========================================================================== */
+.mdc-tab[disabled] {
+	opacity: 0.37;
+}
 
 .mdc-tab,
 .mdc-tab-bar-scroller__indicator,
@@ -319,6 +322,10 @@ a:active {
 /* ==========================================================================
    Adjust list color
    ========================================================================== */
+.mdc-list-item[disabled] {
+	opacity: 0.37;
+}
+
 .mdc-list-item,
 .mdc-list-item * {
 	cursor: pointer;
@@ -422,9 +429,14 @@ a:active {
 /* ==========================================================================
    Card
    ========================================================================== */
+.mdc-card[disabled] {
+	opacity: 0.37;	
+}
+
 .mdc-card__content {
 	width: 100%;
 }
+
 .mdc-card__content:empty {
 	display: none;
 }
@@ -432,6 +444,9 @@ a:active {
 /* ==========================================================================
    Shape deafults
    ========================================================================== */
+.mdc-shape-container[disabled] {
+	opacity: 0.37;	
+}
 
 .mdc-shape-container__corner--top-left,
 .mdc-shape-container__corner--top-right,
@@ -610,6 +625,22 @@ a:active {
    Textfield color adjust
    ========================================================================== */
 
+:root {
+  --mdc-floating-label-ink-color: red;	
+}
+
+  .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-floating-label {
+    color: var(--mdc-theme-primary, #6200ee); }
+
+.mdc-floating-label--float-above {
+	color: var(--mdc-theme-primary, #6200ee);
+}
+
+.mdc-select:not (.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-line-ripple {
+	background-color: var(--mdc-theme-primary, #6200ee);
+}
+
+/*
 .mdc-textfield,
 .mdc-textfield__input,
 .mdc-textfield__label {
@@ -646,12 +677,12 @@ a:active {
 .mdc-textfield:not(.mdc-textfield--disabled) .mdc-textfield__input {
 	border-bottom: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
 }
-
+*/
 /* -------------------------------------------------------------------
  * Adjust help text margins
  * ------------------------------------------------------------------- 
  */
- 
+ /*
  .mdc-textfield--disabled + .mdc-textfield-helptext {
  	color: var(--mdc-theme-text-disabled-on-background);
  }
@@ -663,12 +694,12 @@ a:active {
 	overflow: hidden;
   	text-overflow: ellipsis;
 }
-
+*/
 /* -------------------------------------------------------------------
  * If Textfield has a placeholder the label it make the label to up
  * ------------------------------------------------------------------- 
  */
-
+/*
 .mdc-textfield__input[placeholder]:not([placeholder=""]) + .mdc-textfield__label {
       -webkit-transform: translateY(-100%) scale(0.75, 0.75);
               transform: translateY(-100%) scale(0.75, 0.75);
@@ -678,10 +709,12 @@ a:active {
     -webkit-transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923);
             transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923); 
 }
-
+*/
 /* ==========================================================================
    TextArea color adjust
    ========================================================================== */
+
+/*
 
 .mdc-textfield--multiline .mdc-textfield__input {
     border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
@@ -690,6 +723,9 @@ a:active {
 .mdc-textfield--multiline .mdc-textfield__input:focus {
 	border-color: var(--mdc-theme-secondary, #3f51b5); 
 }
+
+
+*/
 
 /* ==========================================================================
    Layout Grid adjust
@@ -769,6 +805,11 @@ a:active {
 .mdc-fab.mdc-ripple-surface--color::before, 
 .mdc-fab.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-primary-on-secondary));
+}
+
+.mdc-list-item.mdc-ripple-surface--color::before, 
+.mdc-list-item.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.87)));
 }
 
 /* ==========================================================================

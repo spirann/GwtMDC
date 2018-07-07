@@ -19,26 +19,44 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasId;
 
 /**
  * @author Richeli Vargas
  */
-public class IdMixin<T extends UIObject & HasId> extends AbstractMixin<T> implements HasId {
+public class IdMixin<T extends Widget & HasId> extends AbstractMixin<T> implements HasId {
 
-    public IdMixin(final T uiObject) {
-        super(uiObject);
-    }
+	private String id;
+	private HandlerRegistration handlerRegistration;
 
-    @Override
-    public void setId(final String id) {
-        uiObject.getElement().setId(id);
-    }
+	public IdMixin(final T uiObject) {
+		super(uiObject);
+	}
 
-    @Override
-    public String getId() {
-        return uiObject.getElement().getId();
-    }
+	@Override
+	public void setId(final String id) {
+		this.id = id;
+
+		if (uiObject.isAttached()) {
+			uiObject.getElement().setId(id);
+		} else {
+			
+			if(handlerRegistration != null) {
+				handlerRegistration.removeHandler();
+			}
+			
+			handlerRegistration = uiObject.addAttachHandler(event -> {
+				uiObject.getElement().setId(id);
+				handlerRegistration.removeHandler();
+			});
+		}
+	}
+
+	@Override
+	public String getId() {
+		return id;
+	}
 }

@@ -39,7 +39,6 @@ import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.RequiredMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.FlexDirection;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
@@ -56,20 +55,15 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
-	protected Div textField = new Div(CssName.MDC_TEXT_FIELD);
-	protected Input input = new Input(InputType.TEXT, CssName.MDC_TEXT_FIELD_INPUT);
+	protected Input input = new Input(InputType.TEXT, CssName.MDC_TEXT_FIELD__INPUT);
+	protected Label label = new Label(CssName.MDC_FLOATING_LABEL);
+	protected Div lineRipple = new Div(CssName.MDC_LINE_RIPPLE);
 
 	// /////////////////////////////////////////////////////////////
 	// Label
 	// /////////////////////////////////////////////////////////////
-	protected Label label = new Label(CssName.MDC_TEXT_FIELD_LABEL);
-	protected Label helper = new Label() {
-		@Override
-		public void setId(String id) {
-			super.setId(id);
-			input.getElement().setAttribute("aria-controls", id);
-		}
-	};
+	
+	protected Label helper = new Label();
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
@@ -87,12 +81,7 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 			CssName.MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG);
 
 	public MaterialTextField() {
-		super();
-	}
-
-	@Override
-	protected void jsInit() {
-		jsElement = jsInit(textField.getElement());
+		super(CssName.MDC_TEXT_FIELD);
 	}
 
 	@Override
@@ -103,35 +92,13 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	@Override
 	protected void onInitialize() {
 
-		input.setId("x");
-		// label.addStyleName("mdc-text-field__label--float-above");
-		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
-		label.getElement().setAttribute("for", "x");
+		label.setFor(input.getId());
 
-		setFlexDirection(FlexDirection.COLUMN);
-
-		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
-
-		//textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
-		textField.add(input);
-		textField.add(label);
-		textField.add(new Div("mdc-text-field__bottom-line"));
-
-		add(textField);
-		add(helper);
+		add(input);
+		add(label);
+		add(lineRipple);
 		
 		super.onInitialize();
-	}
-
-	@Override
-	public void setId(String id) {
-		input.setId(id);
-		label.setFor(input.getId());
-	}
-
-	@Override
-	public String getId() {
-		return input.getId();
 	}
 
 	@Override
@@ -162,16 +129,6 @@ public class MaterialTextField extends MaterialFormField<String> implements HasT
 	@Override
 	public void setText(String text) {
 		setValue(text);
-	}
-
-	@Override
-	public void setRipple(Color color) {
-		textField.setRipple(color);
-	}
-
-	@Override
-	public Color getRipple() {
-		return textField.getRipple();
 	}
 
 	@Override

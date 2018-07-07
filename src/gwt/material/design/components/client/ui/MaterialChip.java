@@ -25,7 +25,6 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasImage;
 import gwt.material.design.components.client.base.mixin.TextMixin;
-import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;

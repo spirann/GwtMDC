@@ -51,7 +51,7 @@ public class MaterialTextArea extends MaterialFormField<String>
 	// Textarea
 	// /////////////////////////////////////////////////////////////
 	protected Div textField = new Div(CssName.MDC_TEXT_FIELD, CssName.MDC_TEXT_FIELD_MULTILINE);
-	protected Textarea textarea = new Textarea(CssName.MDC_TEXT_FIELD_INPUT);
+	protected Textarea textarea = new Textarea(CssName.MDC_TEXT_FIELD__INPUT);
 
 	// /////////////////////////////////////////////////////////////
 	// Label

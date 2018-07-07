@@ -59,20 +59,8 @@ public class MaterialDialog extends Aside
 	// /////////////////////////////////////////////////////////////
 	protected Div surface = new Div(CssName.MDC_DIALOG__SURFACE);
 	protected Header header = new Header(CssName.MDC_DIALOG__HEADER);
-	protected H2 headerTitle = new H2(CssName.MDC_DIALOG__HEADER_TITLE) {
-		@Override
-		public void setId(String id) {
-			super.setId(id);
-			ariaLabelledbyMixin.setAttribute(id);
-		}
-	};
-	protected Section body = new Section(CssName.MDC_DIALOG__BODY) {
-		@Override
-		public void setId(String id) {
-			super.setId(id);
-			ariaDescribedbyMixin.setAttribute(id);
-		}
-	};
+	protected H2 headerTitle = new H2(CssName.MDC_DIALOG__HEADER_TITLE);
+	protected Section body = new Section(CssName.MDC_DIALOG__BODY);
 	protected Footer footer = new Footer(CssName.MDC_DIALOG__FOOTER);
 	protected MaterialButton accept = new MaterialButton();
 	protected MaterialButton cancel = new MaterialButton();
@@ -127,6 +115,9 @@ public class MaterialDialog extends Aside
 		super.add(surface);
 		super.add(backdrop);
 
+		ariaLabelledbyMixin.setAttribute(headerTitle.getId());
+		ariaDescribedbyMixin.setAttribute(body.getId());
+		
 		//initializeAcceptEventListener();
 		//initializeCancelEventListener();
 		

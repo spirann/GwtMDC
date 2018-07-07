@@ -153,7 +153,6 @@ public class MaterialWidget extends BaseWidget
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 
-	private String primaryClass;
 	private String[] initialClasses;
 
 	private List<Appender> onLoadAdd;
@@ -161,9 +160,11 @@ public class MaterialWidget extends BaseWidget
 	protected boolean initialized = false;
 
 	public MaterialWidget() {
+		setId(IdHelper.createUniqueUiId());
 	}
 
 	public MaterialWidget(Element element) {
+		this();
 		setElement(element);
 	}
 
@@ -187,14 +188,6 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-
-		if (getId() == null) {
-			setId(IdHelper.createUniqueUiId());
-		}
-
-		if (getPrimaryClass() != null && !getPrimaryClass().isEmpty()) {
-			setStylePrimaryName(getPrimaryClass());
-		}
 
 		if (initialClasses != null) {
 			for (String initial : initialClasses) {
@@ -290,15 +283,6 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public String[] getInitialClasses() {
 		return initialClasses;
-	}
-
-	public void setPrimaryClass(final String primaryClass) {
-		this.primaryClass = primaryClass;
-		setStylePrimaryName(primaryClass);
-	}
-
-	public String getPrimaryClass() {
-		return primaryClass;
 	}
 
 	/**

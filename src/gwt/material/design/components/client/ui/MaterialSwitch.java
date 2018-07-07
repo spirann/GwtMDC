@@ -62,6 +62,8 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 
 	@Override
 	protected void onInitialize() {
+		
+		label.setFor(input.getId());
 
 		// Adjust to use the correct space 
 		setHeight("48px");
@@ -81,17 +83,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 		addClickHandler(event -> JsUtils.clearFocus());
 		
 		super.onInitialize();
-	}
-
-	@Override
-	public void setId(String id) {
-		input.setId(id);
-		label.setFor(input.getId());
-	}
-
-	@Override
-	public String getId() {
-		return input.getId();
 	}
 
 	@Override

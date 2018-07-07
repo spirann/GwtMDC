@@ -71,6 +71,8 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 		if (!initialized) {
 
+			ripleMixin.initialize();
+			
 			ariaHiddenMixin.setAttribute(true);
 
 			avatar.addStyleName(CssName.MDC_LIST_ITEM__START_DETAIL);

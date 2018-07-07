@@ -100,22 +100,25 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 			((HasRole) child).setRole(Role.MENU_ITEM);
 		}
 
-		child.addDomHandler(event -> {
+		if (!(child instanceof MaterialListDivider)) {
 
-			final String innerHtml = child.getElement().getInnerHTML();
-			final boolean prevent = innerHtml.contains("prevent=\"true\"");
+			child.addDomHandler(event -> {
+
+				final String innerHtml = child.getElement().getInnerHTML();
+				final boolean prevent = innerHtml.contains("prevent=\"true\"");
+
+				if (((child instanceof HasEnabled) && !((HasEnabled) child).isEnabled()) || prevent) {
+					return;
+				}
+
+				if (closeOnClick) {
+					close();
+				}
+
+			}, ClickEvent.getType());
 			
-			if (((child instanceof HasEnabled) 
-					&& !((HasEnabled) child).isEnabled()) || prevent) {
-				return;
-			}
-			
-			if (closeOnClick) {
-				close();
-			}
-
-		}, ClickEvent.getType());
-
+		}
+		
 		items.add(child);
 	}
 

@@ -114,6 +114,8 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	@Override
 	protected void onInitialize() {
 
+		label.setFor(input.getId());
+		
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 
@@ -146,17 +148,6 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		});
 		
 	}-*/;
-
-	@Override
-	public void setId(String id) {
-		input.setId(id);
-		label.getElement().setAttribute("for", input.getId());
-	}
-
-	@Override
-	public String getId() {
-		return input.getId();
-	}
 
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {

@@ -24,19 +24,15 @@ import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.IndexedPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasDisabledClass;
-
 /**
  * 
  * @author Richeli Vargas
  *
  */
 public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabled>
-		extends AbstractMixin<T> implements HasEnabled, HasDisabledClass {
+		extends AbstractMixin<T> implements HasEnabled {
 
 	private static final String DISABLED = "disabled";
-
-	private String disabledClass;
 
 	private HandlerRegistration handler;
 
@@ -76,43 +72,20 @@ public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabl
 		}
 	}
 
-	public String getDisabledClass() {
-		return disabledClass;
-	}
-
-	public void setDisabledClass(String disabledClass) {
-		this.disabledClass = disabledClass;
-	}
-
 	@SuppressWarnings("unchecked")
 	private void applyEnabled(boolean enabled, T element) {
 
-		final String disabledClass;
-
-		if (element instanceof HasDisabledClass) {
-			disabledClass = ((HasDisabledClass) element).getDisabledClass();
-		} else {
-			disabledClass = null;
-		}
-
 		if (enabled) {
 			element.getElement().removeAttribute(DISABLED);
-			if (disabledClass != null) {
-				element.getElement().removeClassName(disabledClass);
-			}
 		} else {
 			element.getElement().setAttribute(DISABLED, "");
-			if (disabledClass != null) {
-				element.getElement().addClassName(disabledClass);
-			}
 		}
 
 		for (int index = 0; index < element.getWidgetCount(); index++) {
 
 			final Widget widget = element.getWidget(index);
 
-			if (widget instanceof Widget && widget instanceof IndexedPanel.ForIsWidget && widget instanceof HasEnabled
-					&& widget instanceof HasDisabledClass) {
+			if (widget instanceof Widget && widget instanceof IndexedPanel.ForIsWidget && widget instanceof HasEnabled) {
 				applyEnabled(enabled, (T) widget);
 			}
 		}

@@ -339,8 +339,13 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// Textfield
 	// //////////////////////////////////////////////////////
+	String MDC_FLOATING_LABEL = "mdc-floating-label";
+	String MDC_LINE_RIPPLE = "mdc-line-ripple";
+	
 	String MDC_TEXT_FIELD = "mdc-text-field";
-	String MDC_TEXT_FIELD_INPUT = "mdc-text-field__input";
+	String MDC_TEXT_FIELD__INPUT = "mdc-text-field__input";
+	
+	
 	String MDC_TEXT_FIELD_LABEL = "mdc-text-field__label";
 	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";
 	String MDC_TEXT_FIELD_DENSE = "mdc-text-field--dense";
