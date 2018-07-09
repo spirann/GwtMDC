@@ -194,4 +194,21 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask {
 	public void setText(String text) {
 		textFieldBase.setText(text);
 	}
+	
+	public void setMinLength(final int length) {
+		textFieldBase.setMinLength(length);
+	}
+
+	public int getMinLength() {
+		return textFieldBase.getMinLength();
+	}
+
+	public void setMaxLength(final int length) {
+		textFieldBase.setMaxLength(length);
+	}
+
+	public int getMaxLength() {
+		return textFieldBase.getMaxLength(); 
+	}
+	
 }

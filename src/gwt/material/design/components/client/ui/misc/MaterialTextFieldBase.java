@@ -71,6 +71,8 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
 	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final AttributeMixin<MaterialTextFieldBase> minLengthMixin = new AttributeMixin<>(this, "minlength");
+	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
 
 	public MaterialTextFieldBase() {
@@ -174,26 +176,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public String getAriaDescribedBy() {
 		return ariaDescribedByMixin.getAttribute();
 	}	
-
-	@Override
-	public boolean isRequired() {
-		return requeridMixin.isRequired();
-	}
-
-	@Override
-	public void setRequired(boolean value) {
-		requeridMixin.setRequired(value);
-	};
-
-	@Override
-	public void setPattern(String pattern) {
-		patternMixin.setPattern(pattern);
-	}
-
-	@Override
-	public String getPattern() {
-		return patternMixin.getPattern();
-	}
 	
 	@Override
 	public void setPlaceholder(String placeholder) {
@@ -224,7 +206,43 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public TextFieldType getType() {
 		return typeMixin.getType();
 	}
+	
+	public void setMinLength(final int length) {
+		minLengthMixin.setAttribute(length);
+	}
 
+	public int getMinLength() {
+		return minLengthMixin.getAttributeAsInteger();
+	}
+
+	public void setMaxLength(final int length) {
+		maxLengthMixin.setAttribute(length);
+	}
+
+	public int getMaxLength() {
+		return maxLengthMixin.getAttributeAsInteger();
+	}
+	
+	@Override
+	public boolean isRequired() {
+		return requeridMixin.isRequired();
+	}
+
+	@Override
+	public void setRequired(boolean value) {
+		requeridMixin.setRequired(value);
+	};
+
+	@Override
+	public void setPattern(String pattern) {
+		patternMixin.setPattern(pattern);
+	}
+
+	@Override
+	public String getPattern() {
+		return patternMixin.getPattern();
+	}
+	
 	@Override
 	public void setInputMask(String inputMask) {
 		inputMaskMixin.setInputMask(inputMask);
