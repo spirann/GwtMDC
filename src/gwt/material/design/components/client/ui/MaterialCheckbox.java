@@ -51,7 +51,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
 	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX__NATIVE_CONTROL);
 	protected Div background = new Div(CssName.MDC_CHECKBOX__BACKGROUND);
-	protected MaterialSvg checkmark = new MaterialSvg();
+	protected MaterialSvg checkmark = new MaterialSvg(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
 	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX__MIXEDMARK);
 	protected Label label = new Label();
 
@@ -87,7 +87,6 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		
 		setCircle(true);
 		
-		checkmark.addStyleName(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
 				
 		background.add(checkmark);

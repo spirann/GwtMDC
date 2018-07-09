@@ -43,7 +43,7 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	protected MaterialIcon iconTrailing = new MaterialIcon();
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
-	protected MaterialSvg checkmarkSvg = new MaterialSvg();
+	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
 
@@ -58,7 +58,6 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 
 		ripleMixin.initialize();
 		
-		checkmarkSvg.addStyleName(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
 		checkmarkSvg.setResource(MaterialResources.INSTANCE.mdcChipCheckmark());
 
 		checkmark.add(checkmarkSvg);

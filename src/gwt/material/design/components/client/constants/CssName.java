@@ -342,16 +342,22 @@ public interface CssName {
 	String MDC_FLOATING_LABEL = "mdc-floating-label";
 	String MDC_LINE_RIPPLE = "mdc-line-ripple";
 	
+	String MDC_TEXT_FIELD_CONTAINER = "mdc-text-field-container";
 	String MDC_TEXT_FIELD = "mdc-text-field";
+	String MDC_TEXT_FIELD__LABEL = "mdc-text-field__label";
 	String MDC_TEXT_FIELD__INPUT = "mdc-text-field__input";
+	String MDC_TEXT_FIELD__HELPER_TEXT = "mdc-text-field-helper-text";
+	String MDC_TEXT_FIELD__HELPER_TEXT_PERSISTENT = "mdc-text-field-helper-text--persistent";
+	String MDC_TEXT_FIELD__HELPER_TEXT_VALIDATION_MSG = "mdc-text-field-helper-text--validation-msg";
+	String MDC_TEXT_FIELD__DENSE = "mdc-text-field--dense";
+	String MDC_TEXT_FIELD__BOX = "mdc-text-field--box";
+	String MDC_TEXT_FIELD__OUTLINED = "mdc-text-field--outlined";
+	String MDC_TEXT_FIELD__FULLWIDTH = "mdc-text-field--fullwidth";
+	String MDC_NOTCHED_OUTLINE = "mdc-notched-outline";
+	String MDC_NOTCHED_OUTLINE__IDLE = "mdc-notched-outline__idle";
 	
 	
-	String MDC_TEXT_FIELD_LABEL = "mdc-text-field__label";
-	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";
-	String MDC_TEXT_FIELD_DENSE = "mdc-text-field--dense";
-	String MDC_TEXT_FIELD_HELPTEXT = "mdc-text-field-helptext";
-	String MDC_TEXT_FIELD_HELPTEXT_PERSISTENT = "mdc-text-field-helptext--persistent";
-	String MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG = "mdc-text-field-helptext--validation-msg";
+	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";	
 	String MDC_TEXT_FIELD_MULTILINE = "mdc-text-field--multiline";
 	// //////////////////////////////////////////////////////
 	// LINEAR PROGRESS

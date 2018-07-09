@@ -17,25 +17,27 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.ui.misc;
+
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface HasHelpText {
+public class MaterialLineRipple extends Div {
 
-	public void setHelpText(final String text);
+	public MaterialLineRipple() {
+		super(CssName.MDC_LINE_RIPPLE);
+	}
 	
-	public String getHelpText();
-	
-	public void setHelpTextPersistent(boolean persistent);
-	
-	public boolean isHelpTextPersistent();
-		
-	public void setHelpTextValidation(boolean validation);
-	
-	public boolean isHelpTextValidation();
-	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.lineRipple.MDCLineRipple(element);
+	}-*/;
 }

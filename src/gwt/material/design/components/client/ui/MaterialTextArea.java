@@ -24,7 +24,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
-import gwt.material.design.components.client.base.HasHelpText;
+import gwt.material.design.components.client.base.HasHelperText;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
@@ -45,7 +45,7 @@ import gwt.material.design.components.client.ui.html.Textarea;
  *
  */
 public class MaterialTextArea extends MaterialFormField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasHelpText, HasPlaceholder {
+		implements HasText, HasLabel, HasDense, HasRequired, HasHelperText, HasPlaceholder {
 
 	// /////////////////////////////////////////////////////////////
 	// Textarea
@@ -72,11 +72,11 @@ public class MaterialTextArea extends MaterialFormField<String>
 	protected final PlaceholderMixin<Textarea> placeholderMixin = new PlaceholderMixin<>(textarea);
 
 	protected final ApplyStyleMixin<MaterialTextArea> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD_DENSE);
+			CssName.MDC_TEXT_FIELD__DENSE);
 	protected final ApplyStyleMixin<Label> helpPersistentMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXT_FIELD_HELPTEXT_PERSISTENT);
+			CssName.MDC_TEXT_FIELD__HELPER_TEXT_PERSISTENT);
 	protected final ApplyStyleMixin<Label> helpValidationMixin = new ApplyStyleMixin<>(helper,
-			CssName.MDC_TEXT_FIELD_HELPTEXT_VALIDATION_MSG);
+			CssName.MDC_TEXT_FIELD__HELPER_TEXT_VALIDATION_MSG);
 
 	public MaterialTextArea() {
 		super();
@@ -95,12 +95,12 @@ public class MaterialTextArea extends MaterialFormField<String>
 	@Override
 	protected void onInitialize() {
 
-		label.addStyleName(CssName.MDC_TEXT_FIELD_LABEL);
+		label.addStyleName(CssName.MDC_TEXT_FIELD__LABEL);
 		label.setTextColor(Color.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND);
 
 		setFlexDirection(FlexDirection.COLUMN);
 
-		helper.addStyleName(CssName.MDC_TEXT_FIELD_HELPTEXT);
+		helper.addStyleName(CssName.MDC_TEXT_FIELD__HELPER_TEXT);
 
 		//textField.setDisabledClass(CssName.MDC_TEXT_FIELD_DISABLED);
 		textField.add(textarea);
@@ -200,32 +200,32 @@ public class MaterialTextArea extends MaterialFormField<String>
 		requeridMixin.setRequired(value);
 	};
 
-	public void setHelpText(final String text) {
+	public void setHelperText(final String text) {
 		helper.setText(text);
 	}
 
 	@Override
-	public String getHelpText() {
+	public String getHelperText() {
 		return helper.getText();
 	}
 
 	@Override
-	public void setHelpTextPersistent(boolean persistent) {
+	public void setHelperTextPersistent(boolean persistent) {
 		helpPersistentMixin.setApply(persistent);
 	}
 
 	@Override
-	public boolean isHelpTextPersistent() {
+	public boolean isHelperTextPersistent() {
 		return helpPersistentMixin.isApplied();
 	}
 
 	@Override
-	public void setHelpTextValidation(boolean validation) {
+	public void setHelperTextValidation(boolean validation) {
 		helpValidationMixin.setApply(validation);
 	}
 
 	@Override
-	public boolean isHelpTextValidation() {
+	public boolean isHelperTextValidation() {
 		return helpValidationMixin.isApplied();
 	}
 

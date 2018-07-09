@@ -38,6 +38,10 @@ public class MaterialSvg extends Div implements HasSvg {
 	public MaterialSvg() {
 		super();
 	}
+	
+	public MaterialSvg(final String... initialClasses) {
+		super(initialClasses);
+	}
 
 	@Override
 	public void setResource(TextResource resource) {

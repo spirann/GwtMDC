@@ -65,4 +65,8 @@ public interface MaterialResources extends ClientBundle {
 	@MimeType("image/svg+xml")
 	TextResource mdcChipCheckmark();
 	
+	@Source("image/mdc-notched-outline.svg")
+	@MimeType("image/svg+xml")
+	TextResource mdcNotchedOutline();
+	
 }
