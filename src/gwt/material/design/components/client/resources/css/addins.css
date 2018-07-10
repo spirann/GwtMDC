@@ -625,9 +625,19 @@ a:active {
    Textfield color adjust
    ========================================================================== */
 
+/* -------------------------------------------------------------------
+ * Adjust disabled style
+ * ------------------------------------------------------------------- 
+ */
+
 .mdc-text-field-container[disabled] {
 	opacity: 0.37;
 }
+
+/* -------------------------------------------------------------------
+ * Add property to change color
+ * ------------------------------------------------------------------- 
+ */
 
 .mdc-text-field {
 	caret-color: var(--mdc-text-field--color, #000);
@@ -686,6 +696,35 @@ a:active {
 
 .mdc-text-field .mdc-line-ripple {
     background-color: var(--mdc-text-field--focused-color, var(--mdc-theme-primary, #6200ee)); 
+}
+
+/* -------------------------------------------------------------------
+ * Create error class
+ * ------------------------------------------------------------------- 
+ */
+ 
+.mdc-text-field[status="error"] {
+	caret-color: #b00020 !important;;
+}
+
+.mdc-text-field[status="error"] .mdc-floating-label {
+	color: #b00020 !important;
+}
+
+.mdc-text-field[status="error"] .mdc-notched-outline__idle {
+	border-color: #b00020 !important;
+}
+
+.mdc-text-field[status="error"] .mdc-notched-outline__path {
+	stroke: #b00020 !important;
+}
+
+.mdc-text-field[status="error"] .mdc-text-field__input {
+	border-bottom-color: #b00020 !important;
+}
+
+.mdc-text-field[status="error"] .mdc-line-ripple {
+    background-color: #b00020 !important;
 }
 
 /*

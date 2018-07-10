@@ -53,6 +53,8 @@ import gwt.material.design.components.client.ui.html.Input;
 public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense, HasRequired,
 		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask {
 
+	public static enum Status {DEFAULT, ERROR, SUCESS};
+	
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
@@ -73,6 +75,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
 	protected final AttributeMixin<MaterialTextFieldBase> minLengthMixin = new AttributeMixin<>(this, "minlength");
 	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
+	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
 
 	public MaterialTextFieldBase() {
@@ -231,6 +234,8 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	@Override
 	public void setRequired(boolean value) {
 		requeridMixin.setRequired(value);
+		
+		statusMixin.setAttribute(Status.ERROR.toString().toLowerCase());
 	};
 
 	@Override
