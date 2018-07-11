@@ -682,7 +682,7 @@ a:active {
     color: var(--mdc-text-field--color, rgba(0, 0, 0, 0.6)); 
 }
 
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-floating-label {
+.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]):not([state]) .mdc-floating-label {
 	color: var(--mdc-text-field--focused-color, var(--mdc-theme-primary, #6200ee)) !important;
 }
 
@@ -699,33 +699,68 @@ a:active {
 }
 
 /* -------------------------------------------------------------------
- * Create error class
+ * Configure state class
  * ------------------------------------------------------------------- 
  */
- 
-.mdc-text-field[status="error"] {
-	caret-color: #b00020 !important;;
+
+/* State = SUCCESS */
+.mdc-text-field[state="success"] {
+	caret-color: #00b020 !important;
 }
 
-.mdc-text-field[status="error"] .mdc-floating-label {
+.mdc-text-field[state="success"] .mdc-floating-label,
+.mdc-text-field[state="success"] + .mdc-text-field-helper-text {
+	color: #00b020 !important;
+}
+
+.mdc-text-field[state="success"] .mdc-notched-outline__idle {
+	border-color: #00b020 !important;
+}
+
+.mdc-text-field[state="success"] .mdc-notched-outline__path {
+	stroke: #00b020 !important;
+}
+
+.mdc-text-field[state="success"] .mdc-text-field__input {
+	border-bottom-color: #00b020 !important;
+}
+
+.mdc-text-field[state="success"] .mdc-line-ripple {
+    background-color: #00b020 !important;
+}
+
+
+ /* State = ERROR */
+.mdc-text-field[state="error"] {
+	caret-color: #b00020 !important;
+}
+
+.mdc-text-field[state="error"] .mdc-floating-label,
+.mdc-text-field[state="error"] + .mdc-text-field-helper-text {
 	color: #b00020 !important;
 }
 
-.mdc-text-field[status="error"] .mdc-notched-outline__idle {
+.mdc-text-field[state="error"] .mdc-notched-outline__idle {
 	border-color: #b00020 !important;
 }
 
-.mdc-text-field[status="error"] .mdc-notched-outline__path {
+.mdc-text-field[state="error"] .mdc-notched-outline__path {
 	stroke: #b00020 !important;
 }
 
-.mdc-text-field[status="error"] .mdc-text-field__input {
+.mdc-text-field[state="error"] .mdc-text-field__input {
 	border-bottom-color: #b00020 !important;
 }
 
-.mdc-text-field[status="error"] .mdc-line-ripple {
+.mdc-text-field[state="error"] .mdc-line-ripple {
     background-color: #b00020 !important;
 }
+
+
+
+
+
+
 
 /*
 .mdc-textfield,

@@ -29,6 +29,7 @@ import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
+import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
@@ -37,11 +38,13 @@ import gwt.material.design.components.client.base.mixin.InputMaskMixin;
 import gwt.material.design.components.client.base.mixin.PatternMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.RequiredMixin;
+import gwt.material.design.components.client.base.mixin.StateMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.InputType;
+import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.ui.html.Input;
 
@@ -51,9 +54,7 @@ import gwt.material.design.components.client.ui.html.Input;
  *
  */
 public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense, HasRequired,
-		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask {
-
-	public static enum Status {DEFAULT, ERROR, SUCESS};
+		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState {
 	
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -77,6 +78,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
+	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -234,8 +236,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	@Override
 	public void setRequired(boolean value) {
 		requeridMixin.setRequired(value);
-		
-		statusMixin.setAttribute(Status.ERROR.toString().toLowerCase());
 	};
 
 	@Override
@@ -256,5 +256,15 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	@Override
 	public String getInputMask() {
 		return inputMaskMixin.getInputMask();
+	}
+
+	@Override
+	public void setState(State state) {
+		stateMixin.setState(state);
+	}
+
+	@Override
+	public State getState() {
+		return stateMixin.getState();
 	}
 }

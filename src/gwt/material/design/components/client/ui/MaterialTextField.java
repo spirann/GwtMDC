@@ -28,9 +28,11 @@ import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
+import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
@@ -42,7 +44,7 @@ import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask {
+HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -209,6 +211,16 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask {
 
 	public int getMaxLength() {
 		return textFieldBase.getMaxLength(); 
+	}
+
+	@Override
+	public void setState(State state) {
+		textFieldBase.setState(state);
+	}
+
+	@Override
+	public State getState() {
+		return textFieldBase.getState();
 	}
 	
 }
