@@ -18,10 +18,10 @@
   --mdc-theme-text-disabled-on-secondary: rgba(0, 0, 0, 0.5);
   --mdc-theme-text-icon-on-secondary: rgba(0, 0, 0, 0.5);
   
-  --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
-  --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.54);
-  --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.12);
-  --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.38);
+  --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 1.0);
+  --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.85);
+  --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.6);
+  --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.38);
   
   --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);

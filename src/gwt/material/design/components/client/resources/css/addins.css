@@ -15,6 +15,10 @@ textarea {
 	font-family: "Roboto", monospace;
 }
 
+label {
+	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
+}
+
 i, button, a {
 	cursor: pointer;
 }
@@ -30,6 +34,7 @@ a:active {
     filter: grayscale(100%);
     pointer-events: none;
     cursor: default;
+    color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24));
 }
 
 /* ==========================================================================
@@ -142,6 +147,14 @@ a:active {
 	align-items: center;
 	justify-content: center;
 	align-content: center;
+}
+
+.material-icons {
+	color: var(--mdc-theme-text-primary-on-background);
+}
+
+.material-icons[disabled] {
+	color: var(--mdc-theme-text-disabled-on-background);
 }
 
 
@@ -273,12 +286,12 @@ a:active {
 
 .mdc-tab.mdc-ripple-upgraded::after,
 .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--ripple-color) !important;
+    background-color: var(--mdc-tab-bar--ripple-color, var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54))) !important;
 }
 
 .mdc-tab--active.mdc-ripple-upgraded::after,
 .mdc-tab--active.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--active-ripple-color) !important;
+    background-color: var(--mdc-tab-bar--active-ripple-color, var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87))) !important;
 }
 
 
@@ -395,6 +408,10 @@ a:active {
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
+
+.mdc-fab * {
+	color: var(--mdc-theme-on-secondary, #fff);
+}
 
 .mdc-fab--fixed {
 	position: fixed;
@@ -537,16 +554,19 @@ a:active {
 	opacity: 0.26;
 }
 
-.mdc-form-field input,
-.mdc-form-field label,
-.mdc-form-field textarea {
-	color: var(--mdc-theme-text-primary-on-background);
-    text-shadow: none;
-}
-
 /* ==========================================================================
    RadioButton color adjust
    ========================================================================== */
+  .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__outer-circle,
+  [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
+  .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__inner-circle,
+  [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__inner-circle {
+    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
+
+.mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
+    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54)); 
+}
 
 .mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {   
     background-color: var(--mdc-theme-secondary);
@@ -564,74 +584,133 @@ a:active {
    Checkbox color adjust
    ========================================================================== */
 
+.mdc-checkbox__native-control:disabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
+	border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); 
+ }
+
+.mdc-checkbox__native-control:disabled:checked ~ .mdc-checkbox__background,
+.mdc-checkbox__native-control:disabled:indeterminate ~ .mdc-checkbox__background {
+	border-color: transparent;
+	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); 
+}
+
+.mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
+	border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.26));
+}
+
 /* ==========================================================================
    Slider color adjust
    ========================================================================== */
 
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track {
+.mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track {
     background-color: #018786;
     /* @alternate */
     background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-container {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-container {
     background-color: var(--mdc-slider--background-color, rgba(1, 135, 134, 0.26)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-marker::after,
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-marker-container::after {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker::after,
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker-container::after {
     background-color: #018786;
     /* @alternate */
     background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__thumb {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__thumb {
     fill: #018786;
     /* @alternate */
     fill: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786));
     stroke: #018786;
     /* @alternate */
     stroke: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__focus-ring {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__focus-ring {
     background-color: #018786;
     /* @alternate */
     background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__pin {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
     background-color: #018786;
     /* @alternate */
     background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__pin {
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
     color: white;
     /* @alternate */
-    color: var(--mdc-slider--text-color, var(--mdc-theme-text-primary-on-dark, white)); }
+    color: var(--mdc-slider--text-color, var(--mdc-theme-text-primary-on-dark, white)); }    
+  .mdc-slider--disabled .mdc-slider__thumb {
+      stroke: #9a9a9a;
+      fill: #9a9a9a; }
 
 /* ==========================================================================
    Switch color adjust
    ========================================================================== */
+
 .mdc-switch__background {
-	background-color: var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
-}   
+	border-radius: 7px;
+	background-color: #fff;
+}	
+
+.mdc-switch__background::before {
+	background-color: var(--mdc-theme-text-hint-on-background, #fafafa));
+	border-color: var(--mdc-theme-text-hint-on-background, #fafafa));
+	opacity: 0.24;
+}
+
+.mdc-switch__native-control:enabled:not(:checked) ~ .mdc-switch__background .mdc-switch__knob {
+	background-color: var(--mdc-theme-text-secondary-on-background, #9e9e9e));
+	border-color: var(--mdc-theme-text-secondary-on-background, #9e9e9e);	
+}
 
 .mdc-switch__native-control:checked ~ .mdc-switch__background::before {
 	background-color: var(--mdc-theme-secondary, #3f51b5);
-	opacity: 0.24;
+	border-color: var(--mdc-theme-secondary, #3f51b5);
 }
 
 .mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob,
 .mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob::before {
   	background-color: var(--mdc-theme-secondary, #3f51b5);
 }
-   
-.mdc-switch__native-control:not(checked) ~ .mdc-switch__background .mdc-switch__knob,
-.mdc-switch__native-control:not(checked) ~ .mdc-switch__background .mdc-switch__knob::before {
-  	background-color:  #ddd;
+
+
+.mdc-switch__native-control:disabled ~ .mdc-switch__background {
+	background-color: var(--mdc-theme-text-disabled-on-background, #000);
 }
+
+.mdc-switch__native-control:disabled ~ .mdc-switch__background::before {
+	background-color: var(--mdc-theme-text-disabled-on-background, #000);
+	opacity: .24;
+}
+
+.mdc-switch__native-control:disabled ~ .mdc-switch__background .mdc-switch__knob {
+	border-width: 1px;
+	border-color: var(--mdc-theme-text-primary-on-background, #bdbdbd);
+	background-color: var(--mdc-theme-text-primary-on-background, #bdbdbd); 
+}
+  
 
 /* ==========================================================================
    Textfield color adjust
    ========================================================================== */
 
+:root {
+	--mdc-text-field--color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.24));
+	--mdc-text-field--focused-color: var(--mdc-theme-primary, rgba(0, 0, 0, 1.0));
+}
+
+.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,  
+.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) + .mdc-text-field-helper-text {
+    color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.6)); 
+}
+ 
+.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));	
+}
+
 /* -------------------------------------------------------------------
  * Adjust disabled style
  * ------------------------------------------------------------------- 
  */
+.mdc-text-field[disabled] * {
+	color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;
+}
 
-.mdc-text-field-container[disabled] {
-	opacity: 0.37;
+.mdc-text-field[disabled] .mdc-text-field__input {
+	border-bottom-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;
 }
 
 /* -------------------------------------------------------------------
@@ -686,16 +765,25 @@ a:active {
 	color: var(--mdc-text-field--focused-color, var(--mdc-theme-primary, #6200ee)) !important;
 }
 
-.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input {
-    border-bottom-color: var(--mdc-text-field--color, rgba(0, 0, 0, 0.87)); 
-}
-
-.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input:hover {
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input,
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input:hover {    
     border-bottom-color: var(--mdc-text-field--color, rgba(0, 0, 0, 0.87)); 
 }
 
 .mdc-text-field .mdc-line-ripple {
     background-color: var(--mdc-text-field--focused-color, var(--mdc-theme-primary, #6200ee)); 
+}
+
+.mdc-text-field--box:not(.mdc-text-field--disabled):not([disabled]) {
+    background-color: rgb(127,127,127, 0.3);
+}
+
+.mdc-text-field--box[disabled] {
+	background-color: rgb(127,127,127, 0.2);
+}
+
+.mdc-text-field--box::before, .mdc-text-field--box::after {
+    background-color: rgba(0, 0, 0, 0.87); 
 }
 
 /* -------------------------------------------------------------------
