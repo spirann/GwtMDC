@@ -11,35 +11,30 @@
   --mdc-theme-text-hint-on-primary: rgba(255, 255, 255, 0.5);  
   --mdc-theme-text-disabled-on-primary: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-primary: rgba(255, 255, 255, 0.5);
-  --mdc-theme-ripple-on-primary: rgba(255, 255, 255, 0.12);
   
   --mdc-theme-text-primary-on-secondary: black;
   --mdc-theme-text-secondary-on-secondary: rgba(0, 0, 0, 0.7);
   --mdc-theme-text-hint-on-secondary: rgba(0, 0, 0, 0.5);
   --mdc-theme-text-disabled-on-secondary: rgba(0, 0, 0, 0.5);
   --mdc-theme-text-icon-on-secondary: rgba(0, 0, 0, 0.5);
-  --mdc-theme-ripple-on-secondary: rgba(0, 0, 0, 0.12);
   
   --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 0.87);
   --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.54);
   --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.12);
   --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.38);
   --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.38);
-  --mdc-theme-ripple-on-background: rgba(255, 255, 255, 0.12);
   
   --mdc-theme-text-primary-on-light: rgba(0, 0, 0, 0.87);
   --mdc-theme-text-secondary-on-light: rgba(0, 0, 0, 0.54);
   --mdc-theme-text-hint-on-light: rgba(0, 0, 0, 0.38);
   --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.38);
   --mdc-theme-text-icon-on-light: rgba(0, 0, 0, 0.38);
-  --mdc-theme-ripple-on-light: rgba(0, 0, 0, 0.12);
   
   --mdc-theme-text-primary-on-dark: white;
   --mdc-theme-text-secondary-on-dark: rgba(255, 255, 255, 0.7);
   --mdc-theme-text-hint-on-dark: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-disabled-on-dark: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-dark: rgba(255, 255, 255, 0.5);
-  --mdc-theme-ripple-on-dark: rgba(255, 255, 255, 0.12); 
   
   /* ============================== */
   /* Used only in source code view 	*/

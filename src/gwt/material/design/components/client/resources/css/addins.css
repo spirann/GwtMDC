@@ -273,12 +273,12 @@ a:active {
 
 .mdc-tab.mdc-ripple-upgraded::after,
 .mdc-tab.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--ripple-color, var(--mdc-theme-ripple-on-background)) !important;
+    background-color: var(--mdc-tab-bar--ripple-color) !important;
 }
 
 .mdc-tab--active.mdc-ripple-upgraded::after,
 .mdc-tab--active.mdc-ripple-upgraded::before {
-    background-color: var(--mdc-tab-bar--active-ripple-color, var(--mdc-theme-ripple-on-background)) !important;
+    background-color: var(--mdc-tab-bar--active-ripple-color) !important;
 }
 
 

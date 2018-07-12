@@ -123,35 +123,30 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY, textHintOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY, textDisabledOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY, textIconOnPrimary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_PRIMARY, rippleOnPrimary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_SECONDARY, textPrimaryOnSecondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_SECONDARY, textSecondaryOnSecondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_SECONDARY, textHintOnSecondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_SECONDARY, textDisabledOnSecondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_SECONDARY, textIconOnSecondary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_SECONDARY, rippleOnSecondary));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND, textHintOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND, textDisabledOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_BACKGROUND, rippleOnBackground));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT, textPrimaryOnLight));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT, textSecondaryOnLight));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT, textHintOnLight));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT, textDisabledOnLight));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT, textIconOnLight));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_LIGHT, rippleOnLight));
 		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK, textPrimaryOnDark));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK, textSecondaryOnDark));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK, textHintOnDark));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK, textDisabledOnDark));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK, textIconOnDark));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_ON_DARK, rippleOnDark));
 		//
 		text.append(loadProperty("--mdc-theme-code-background", codeBackground));
 		text.append(loadProperty("--mdc-theme-code-String", codeString));
