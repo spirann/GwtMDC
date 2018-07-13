@@ -21,6 +21,7 @@ package gwt.material.design.components.client.base;
 
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
@@ -92,6 +93,10 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
 	public void setTextAlign(final TextAlign textAlign) {
 		setStyleProperty("text-align", textAlign.getCssName());
+	}
+	
+	public void setCursor(Cursor cursor) {
+		setStyleProperty("cursor", cursor.getCssName());
 	}
 
 	public void setPadding(final int padding) {

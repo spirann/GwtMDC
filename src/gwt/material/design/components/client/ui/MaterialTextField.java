@@ -19,10 +19,13 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasHelperText;
+import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
@@ -32,7 +35,9 @@ import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.State;
+import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
@@ -44,7 +49,7 @@ import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState {
+HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -223,4 +228,25 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState {
 		return textFieldBase.getState();
 	}
 	
+	@Override
+	public IconType getIcon() {
+		return textFieldBase.getIcon();
+	}
+
+	@Override
+	public void setIcon(IconType iconType) {
+		textFieldBase.setIcon(iconType);
+	}
+
+	public HandlerRegistration addIconClickHandler(ClickHandler handler) {
+		return textFieldBase.addIconClickHandler(handler);
+	}
+	
+	public TextFieldIconPosition getIconPosition() {
+		return textFieldBase.getIconPosition();
+	}
+
+	public void setIconPosition(TextFieldIconPosition iconPosition) {
+		textFieldBase.setIconPosition(iconPosition);
+	}
 }

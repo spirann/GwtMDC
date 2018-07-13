@@ -149,14 +149,6 @@ a:active {
 	align-content: center;
 }
 
-.material-icons {
-	color: var(--mdc-theme-text-primary-on-background);
-}
-
-.material-icons[disabled] {
-	color: var(--mdc-theme-text-disabled-on-background);
-}
-
 
 /* ==========================================================================
    Adjust code
@@ -379,6 +371,15 @@ a:active {
 .mdc-button .mdc-button__icon {
 	margin-left: 0px;
 	margin-right: 8px;
+}
+
+
+.mdc-icon-button {
+	color: var(--mdc-theme-text-primary-on-background);
+}
+
+.mdc-icon-button[disabled] {
+	color: var(--mdc-theme-text-disabled-on-background);
 }
 
 /* ==========================================================================
@@ -692,13 +693,23 @@ a:active {
 	--mdc-text-field--focused-color: var(--mdc-theme-primary, rgba(0, 0, 0, 1.0));
 }
 
-.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,  
+.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
+.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,  
 .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) + .mdc-text-field-helper-text {
     color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.6)); 
 }
  
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
+.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon {
 	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));	
+}
+
+.mdc-text-field__icon:empty {
+	display: none;
+}
+
+.mdc-text-field--fullwidth:not(.mdc-text-field--textarea) .mdc-text-field__input {
+	padding-top: 10px;
 }
 
 /* -------------------------------------------------------------------
@@ -711,6 +722,10 @@ a:active {
 
 .mdc-text-field[disabled] .mdc-text-field__input {
 	border-bottom-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;
+}
+
+.mdc-text-field__input:required + .mdc-floating-label:empty::after {
+	content: ""; 
 }
 
 /* -------------------------------------------------------------------
@@ -787,6 +802,55 @@ a:active {
 }
 
 /* -------------------------------------------------------------------
+ * Adjust icon in full width
+ * ------------------------------------------------------------------- 
+ */
+
+/* standard */
+
+.mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 48px);
+	padding-left: 48px;
+}
+
+[dir="rtl"] .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 48px);
+	padding-right: 48px;
+}
+
+.mdc-text-field--fullwidth.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 48px);
+	padding-right: 48px;
+}
+
+[dir="rtl"] .mdc-text-field--fullwidth.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 48px);
+	padding-left: 48px;
+} 
+
+/* dense */
+
+.mdc-text-field--fullwidth.mdc-text-field--dense.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-left: 38px;
+}
+
+[dir="rtl"] .mdc-text-field--fullwidth.mdc-text-field--dense.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-right: 38px;
+}
+
+.mdc-text-field--fullwidth.mdc-text-field--dense.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-right: 38px;
+}
+
+[dir="rtl"] .mdc-text-field--fullwidth.mdc-text-field--dense.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-left: 38px;
+} 
+
+/* -------------------------------------------------------------------
  * Configure state class
  * ------------------------------------------------------------------- 
  */
@@ -796,6 +860,7 @@ a:active {
 	caret-color: #00b020 !important;
 }
 
+.mdc-text-field[state="success"] .mdc-text-field__icon,
 .mdc-text-field[state="success"] .mdc-floating-label,
 .mdc-text-field[state="success"] + .mdc-text-field-helper-text {
 	color: #00b020 !important;
@@ -823,6 +888,7 @@ a:active {
 	caret-color: #b00020 !important;
 }
 
+.mdc-text-field[state="error"] .mdc-text-field__icon,
 .mdc-text-field[state="error"] .mdc-floating-label,
 .mdc-text-field[state="error"] + .mdc-text-field-helper-text {
 	color: #b00020 !important;
@@ -843,99 +909,6 @@ a:active {
 .mdc-text-field[state="error"] .mdc-line-ripple {
     background-color: #b00020 !important;
 }
-
-
-
-
-
-
-
-/*
-.mdc-textfield,
-.mdc-textfield__input,
-.mdc-textfield__label {
-	width: 100%;
-}
-
-.mdc-textfield--box.mdc-textfield--focused .mdc-textfield__bottom-line,
-.mdc-textfield--focused.mdc-textfield--upgraded:not(.mdc-textfield--fullwidth):not(.mdc-textfield--multiline):not(.mdc-textfield--box)::after {
-    background-color: var(--mdc-theme-secondary, #3f51b5);
-}
-
-.mdc-textfield--focused .mdc-textfield__label {
-  	color: var(--mdc-theme-secondary, #3f51b5) !important; 
-}
-
-.mdc-textfield__input:focus,
-.mdc-textfield--multiline .mdc-textfield__input:focus,
-.mdc-textfield:not(.mdc-textfield--upgraded) .mdc-textfield__input:focus {
-    border-color: var(--mdc-theme-secondary, #3f51b5);
-}
-
-.mdc-textfield:not(.mdc-textfield--disabled):not(.mdc-textfield--focused) .mdc-textfield__input:required:invalid + .mdc-textfield__label {
-    color: #d50000 !important; 
-}
-
-.mdc-textfield--disabled .mdc-textfield__input {
-	color: var(--mdc-theme-text-primary-on-background);
-}
-
-.mdc-textfield:not(.mdc-textfield--disabled) .mdc-textfield__input:required:invalid {
-	border-bottom: 1px solid #d50000;
-}
-
-.mdc-textfield:not(.mdc-textfield--disabled) .mdc-textfield__input {
-	border-bottom: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
-}
-*/
-/* -------------------------------------------------------------------
- * Adjust help text margins
- * ------------------------------------------------------------------- 
- */
- /*
- .mdc-textfield--disabled + .mdc-textfield-helptext {
- 	color: var(--mdc-theme-text-disabled-on-background);
- }
- 
-.mdc-textfield-helptext {
-	margin-top: -4px;
-	margin-left: -4px;	
-	max-width: 100%;
-	overflow: hidden;
-  	text-overflow: ellipsis;
-}
-*/
-/* -------------------------------------------------------------------
- * If Textfield has a placeholder the label it make the label to up
- * ------------------------------------------------------------------- 
- */
-/*
-.mdc-textfield__input[placeholder]:not([placeholder=""]) + .mdc-textfield__label {
-      -webkit-transform: translateY(-100%) scale(0.75, 0.75);
-              transform: translateY(-100%) scale(0.75, 0.75);
-}
-
-.mdc-textfield--dense .mdc-textfield__input[placeholder]:not([placeholder=""]) + .mdc-textfield__label {
-    -webkit-transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923);
-            transform: translateY(calc(-100% - 2px)) scale(0.923, 0.923); 
-}
-*/
-/* ==========================================================================
-   TextArea color adjust
-   ========================================================================== */
-
-/*
-
-.mdc-textfield--multiline .mdc-textfield__input {
-    border: 1px solid var(--mdc-theme-text-hint-on-background, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-textfield--multiline .mdc-textfield__input:focus {
-	border-color: var(--mdc-theme-secondary, #3f51b5); 
-}
-
-
-*/
 
 /* ==========================================================================
    Layout Grid adjust

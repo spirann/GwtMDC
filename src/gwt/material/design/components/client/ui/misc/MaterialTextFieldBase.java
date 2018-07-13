@@ -21,9 +21,13 @@ package gwt.material.design.components.client.ui.misc;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
+import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
@@ -43,9 +47,12 @@ import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
+import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
+import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
 
 /**
@@ -53,9 +60,9 @@ import gwt.material.design.components.client.ui.html.Input;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense, HasRequired,
-		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState {
-	
+public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense,
+		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon {
+
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
@@ -63,22 +70,27 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected MaterialFloatLabel label = new MaterialFloatLabel();
 	protected MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
-	
+	protected MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
+
 	// /////////////////////////////////////////////////////////////
-	// Style mixin
+	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
-	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
-	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
+	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this,
+			"aria-controls");
+	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this,
+			"aria-describedby");
 	protected final AttributeMixin<MaterialTextFieldBase> minLengthMixin = new AttributeMixin<>(this, "minlength");
 	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
+	protected final TypeMixin<MaterialTextFieldBase, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
 
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -94,11 +106,12 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 		label.setFor(input.getId());
 
+		add(icon);
 		add(input);
 		add(label);
 		add(lineRipple);
 		add(notchedOutline);
-		
+
 		super.onInitialize();
 	}
 
@@ -131,7 +144,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public void setText(String text) {
 		setValue(text);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		input.setTextColor(color);
@@ -141,11 +154,11 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public void setColor(Color color) {
 		setStyleProperty(CssProperty.MDC_TEXTFIELD__COLOR, color.getCssName());
 	}
-	
+
 	public void setFocusedColor(Color color) {
 		setStyleProperty(CssProperty.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}
-	
+
 	@Override
 	public void setLabel(String label) {
 		this.label.setText(label);
@@ -165,7 +178,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public boolean isDense() {
 		return denseMixin.isApplied();
 	}
-	
+
 	public void setAriaControls(String target) {
 		ariaControlsMixin.setAttribute(target);
 	}
@@ -173,15 +186,15 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public String getAriaControls() {
 		return ariaControlsMixin.getAttribute();
 	}
-	
+
 	public void setAriaDescribedBy(String target) {
 		ariaDescribedByMixin.setAttribute(target);
 	}
 
 	public String getAriaDescribedBy() {
 		return ariaDescribedByMixin.getAttribute();
-	}	
-	
+	}
+
 	@Override
 	public void setPlaceholder(String placeholder) {
 		placeholderMixin.setPlaceholder(placeholder);
@@ -192,7 +205,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		return placeholderMixin.getPlaceholder();
 	}
 
-
 	public void setInputType(InputType type) {
 		input.setType(type);
 	}
@@ -200,8 +212,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public InputType getInputType() {
 		return input.getType();
 	}
-	
-	
+
 	@Override
 	public void setType(TextFieldType type) {
 		typeMixin.setType(type);
@@ -211,7 +222,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public TextFieldType getType() {
 		return typeMixin.getType();
 	}
-	
+
 	public void setMinLength(final int length) {
 		minLengthMixin.setAttribute(length);
 	}
@@ -227,7 +238,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public int getMaxLength() {
 		return maxLengthMixin.getAttributeAsInteger();
 	}
-	
+
 	@Override
 	public boolean isRequired() {
 		return requeridMixin.isRequired();
@@ -247,7 +258,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	public String getPattern() {
 		return patternMixin.getPattern();
 	}
-	
+
 	@Override
 	public void setInputMask(String inputMask) {
 		inputMaskMixin.setInputMask(inputMask);
@@ -266,5 +277,41 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	@Override
 	public State getState() {
 		return stateMixin.getState();
+	}
+
+	@Override
+	public IconType getIcon() {
+		return icon.getType();
+	}
+
+	@Override
+	public void setIcon(IconType iconType) {
+		icon.setType(iconType);
+
+		if (iconPositionMixin.getType() != null) {
+			
+			removeStyleName(iconPositionMixin.getType().getCssName());
+			
+			if (iconType != null) {
+				addStyleName(iconPositionMixin.getType().getCssName());
+			}
+		}
+	}
+
+	public HandlerRegistration addIconClickHandler(ClickHandler handler) {
+		icon.setCursor(Cursor.POINTER);
+		return icon.addClickHandler(handler);
+	}
+	
+	public TextFieldIconPosition getIconPosition() {
+		return iconPositionMixin.getType();
+	}
+
+	public void setIconPosition(TextFieldIconPosition iconPosition) {
+		iconPositionMixin.setType(iconPosition);
+		
+		if(icon.getType() == null && iconPosition != null) {
+			removeStyleName(iconPositionMixin.getType().getCssName());
+		}
 	}
 }

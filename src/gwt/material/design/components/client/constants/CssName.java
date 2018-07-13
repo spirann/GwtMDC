@@ -355,6 +355,9 @@ public interface CssName {
 	String MDC_TEXT_FIELD__FULLWIDTH = "mdc-text-field--fullwidth";
 	String MDC_NOTCHED_OUTLINE = "mdc-notched-outline";
 	String MDC_NOTCHED_OUTLINE__IDLE = "mdc-notched-outline__idle";
+	String MDC_TEXT_FIELD__ICON = "mdc-text-field__icon";
+	String MDC_TEXT_FIELD__WITH_LEADING_ICON = "mdc-text-field--with-leading-icon";
+	String MDC_TEXT_FIELD__WITH_TRAILING_ICON = "mdc-text-field--with-trailing-icon";
 	
 	
 	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";	
