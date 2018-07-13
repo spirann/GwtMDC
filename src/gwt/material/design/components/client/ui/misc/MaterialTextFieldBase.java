@@ -79,12 +79,9 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__DENSE);
-	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this,
-			"aria-controls");
-	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this,
-			"aria-describedby");
+	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
+	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
+	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
 	protected final AttributeMixin<MaterialTextFieldBase> minLengthMixin = new AttributeMixin<>(this, "minlength");
 	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
