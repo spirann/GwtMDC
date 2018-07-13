@@ -207,12 +207,12 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 	public void setTextColor(final Color color) {
 		super.setTextColor(color);
 		setStyleProperty(CssProperty.MDC_TAB_BAR__COLOR, color.getCssName());
-		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName(0.24));
+		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName());
 	}
 
 	public void setActiveColor(final Color color) {
 		super.setTextColor(color);
 		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_COLOR, color.getCssName());
-		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName(0.24));
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName());
 	}
 }

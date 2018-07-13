@@ -123,7 +123,7 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 	public void setActiveColor(Color color) {
 		tabBar.setActiveColor(color);
 		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_COLOR, color.getCssName());
-		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName(0.24));	
+		setStyleProperty(CssProperty.MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR, color.getCssName());	
 	}
 	
 	@Override
@@ -131,6 +131,6 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 		super.setTextColor(color);
 		tabBar.setTextColor(color);
 		setStyleProperty(CssProperty.MDC_TAB_BAR__COLOR, color.getCssName());
-		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName(0.24));	
+		setStyleProperty(CssProperty.MDC_TAB_BAR__RIPPLE_COLOR, color.getCssName());	
 	}
 }

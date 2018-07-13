@@ -709,7 +709,7 @@ a:active {
 }
 
 .mdc-text-field--fullwidth:not(.mdc-text-field--textarea) .mdc-text-field__input {
-	padding-top: 10px;
+	padding-top: 18px;
 }
 
 /* -------------------------------------------------------------------
@@ -726,6 +726,12 @@ a:active {
 
 .mdc-text-field__input:required + .mdc-floating-label:empty::after {
 	content: ""; 
+}
+
+.mdc-text-field--fullwidth.mdc-text-field--disabled:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input,
+.mdc-text-field--fullwidth[disabled]:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input {
+	height: 36px;
+	border-bottom: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;	
 }
 
 /* -------------------------------------------------------------------
@@ -800,6 +806,19 @@ a:active {
 .mdc-text-field--box::before, .mdc-text-field--box::after {
     background-color: rgba(0, 0, 0, 0.87); 
 }
+
+ .mdc-text-field--fullwidth:not(.mdc-text-field--focused):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea) {
+ 	/* border-bottom-color: var(--mdc-text-field--color, rgba(0, 0, 0, 0.87)) !important; */
+}
+
+.mdc-text-field--fullwidth:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+	height: 36px;
+}
+
+.mdc-text-field--fullwidth:not([state]):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+	border-bottom: 1px solid var(--mdc-text-field--color, rgba(0, 0, 0, 0.87)) !important;	
+}
+
 
 /* -------------------------------------------------------------------
  * Adjust icon in full width
@@ -882,6 +901,10 @@ a:active {
     background-color: #00b020 !important;
 }
 
+.mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+	border-bottom: 1px solid #00b020 !important;	
+}
+
 
  /* State = ERROR */
 .mdc-text-field[state="error"] {
@@ -908,6 +931,10 @@ a:active {
 
 .mdc-text-field[state="error"] .mdc-line-ripple {
     background-color: #b00020 !important;
+}
+
+.mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+	border-bottom: 1px solid #b00020 !important;	
 }
 
 /* ==========================================================================
