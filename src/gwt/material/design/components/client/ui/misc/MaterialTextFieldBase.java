@@ -76,18 +76,21 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
-	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
-	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
-	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
-	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
-	protected final AttributeMixin<MaterialTextFieldBase> minLengthMixin = new AttributeMixin<>(this, "minlength");
-	protected final AttributeMixin<MaterialTextFieldBase> maxLengthMixin = new AttributeMixin<>(this, "maxlength");
+	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
+	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this,
+			"aria-controls");
+	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this,
+			"aria-describedby");
+	protected final AttributeMixin<Input> minLengthMixin = new AttributeMixin<>(input, "minlength");
+	protected final AttributeMixin<Input> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
+	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
+	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
 
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -110,6 +113,8 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		add(notchedOutline);
 
 		super.onInitialize();
+
+		input.addKeyUpHandler(event -> validateLenght());
 	}
 
 	@Override
@@ -131,6 +136,23 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		}
 
 	}-*/;
+
+	protected void validateLenght() {
+
+		final int actualLenght = getText().length();
+		final int minLength = minLengthMixin.getAttributeAsInteger();
+		final int maxLength = maxLengthMixin.getAttributeAsInteger();
+
+		if(isRequired() && actualLenght == 0) {
+			setState(State.ERROR);
+		} else if (minLength > actualLenght) {
+			setState(State.ERROR);
+		} else if (maxLength > 0 && maxLength < actualLenght) {
+			setState(State.ERROR);
+		} else {
+			setState(State.DEFAULT);
+		}
+	}
 
 	@Override
 	public String getText() {
@@ -286,9 +308,9 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		icon.setType(iconType);
 
 		if (iconPositionMixin.getType() != null) {
-			
+
 			removeStyleName(iconPositionMixin.getType().getCssName());
-			
+
 			if (iconType != null) {
 				addStyleName(iconPositionMixin.getType().getCssName());
 			}
@@ -299,15 +321,15 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		icon.setCursor(Cursor.POINTER);
 		return icon.addClickHandler(handler);
 	}
-	
+
 	public TextFieldIconPosition getIconPosition() {
 		return iconPositionMixin.getType();
 	}
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
 		iconPositionMixin.setType(iconPosition);
-		
-		if(icon.getType() == null && iconPosition != null) {
+
+		if (icon.getType() == null && iconPosition != null) {
 			removeStyleName(iconPositionMixin.getType().getCssName());
 		}
 	}
