@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Cursor;
@@ -54,6 +55,7 @@ import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
+import gwt.material.design.components.client.vanillaMasker.VMasker;
 
 /**
  * 
@@ -114,7 +116,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 		super.onInitialize();
 
-		input.addKeyUpHandler(event -> validateLenght());
+		addKeyUpHandler(event -> validateLenght());
 	}
 
 	@Override
@@ -139,6 +141,15 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 	protected void validateLenght() {
 
+		//GWT.log("aqui: " + VMasker.toPattern(getText(), "(99) 99999-9999", "x"));
+		// funcionou
+		final String mask = getInputMask();
+		GWT.log("mask: " + mask);
+		setInputMask(null);
+		GWT.log("aqui sem: " + getText());
+		setInputMask(mask);
+		GWT.log("aqui com: " + getText());
+		
 		final int actualLenght = getText().length();
 		final int minLength = minLengthMixin.getAttributeAsInteger();
 		final int maxLength = maxLengthMixin.getAttributeAsInteger();
