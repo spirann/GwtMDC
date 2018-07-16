@@ -141,14 +141,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 	protected void validateLenght() {
 
-		//GWT.log("aqui: " + VMasker.toPattern(getText(), "(99) 99999-9999", "x"));
-		// funcionou
-		final String mask = getInputMask();
-		GWT.log("mask: " + mask);
-		setInputMask(null);
-		GWT.log("aqui sem: " + getText());
-		setInputMask(mask);
-		GWT.log("aqui com: " + getText());
+		GWT.log("aqui com: " + VMasker.fromPattern(getText(), getInputMask()));
 		
 		final int actualLenght = getText().length();
 		final int minLength = minLengthMixin.getAttributeAsInteger();
