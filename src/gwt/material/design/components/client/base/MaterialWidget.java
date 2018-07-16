@@ -103,7 +103,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex {
 
 	static {
 		autoInit();
@@ -148,6 +148,7 @@ public class MaterialWidget extends BaseWidget
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
 	protected final AttributeMixin<MaterialWidget> altMixin = new AttributeMixin<>(this, "alt");
 	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
+	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
@@ -694,5 +695,15 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public String getAlt() {
 		return altMixin.getAttribute();
+	}
+	
+	@Override
+	public void setTabindex(int tabindex) {
+		tabindexMixin.setAttribute(tabindex);
+	}
+
+	@Override
+	public int getTabindex() {
+		return tabindexMixin.getAttributeAsInteger();
 	}
 }

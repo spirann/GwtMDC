@@ -12,6 +12,10 @@ public class VMasker {
 	public static native void maskPattern(Element element, String mask)/*-{
 		$wnd.VMasker(element).maskPattern(mask);
 	}-*/;
+	
+	public static native void unMask(Element element)/*-{
+		$wnd.VMasker(element).unMask();
+	}-*/;
 
 	/**
 	 * 9 - Numbers <br/>

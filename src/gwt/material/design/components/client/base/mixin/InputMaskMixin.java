@@ -24,6 +24,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasInputMask;
+import gwt.material.design.components.client.vanillaMasker.VMasker;
 
 /**
  * 
@@ -41,7 +42,9 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 	}
 
 	/**
-	 * S - Any char 9 - Numbers A - Letters
+	 * 9 - Numbers <br/>
+	 * A - Letters <br/>
+	 * S - Alphanumeric
 	 */
 	@Override
 	public void setInputMask(String inputMask) {
@@ -53,10 +56,10 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 			handlerRegistration = null;
 		}
 
-		unMask(uiObject.getElement());
+		VMasker.unMask(uiObject.getElement());
 
 		if (inputMask != null) {
-			setInputMask(uiObject.getElement(), inputMask);
+			VMasker.maskPattern(uiObject.getElement(), inputMask);
 			uiObject.getElement().setAttribute(INPUT_MASK, inputMask);
 		}
 	}
@@ -66,13 +69,13 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 		final String mask = uiObject.getElement().getAttribute(INPUT_MASK);
 		return mask == null || mask.isEmpty() ? null : mask;
 	}
-
-	protected native void setInputMask(Element element, String inputMask)/*-{
-		$wnd.VMasker(element).maskPattern(inputMask);
-	}-*/;
-
-	protected native void unMask(Element element)/*-{
-		$wnd.VMasker(element).unMask();
+	
+	public String getValue() {
+		return VMasker.fromPattern(getValue(uiObject.getElement()), getInputMask());
+	}
+	
+	protected native String getValue(final Element element) /*-{
+		return element.value;
 	}-*/;
 
 }

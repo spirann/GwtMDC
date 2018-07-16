@@ -19,16 +19,14 @@
  */
 package gwt.material.design.components.client.ui.misc;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Cursor;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.HasIconClickHandlers;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
@@ -53,9 +51,10 @@ import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
+import gwt.material.design.components.client.events.IconClickEvent;
+import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
-import gwt.material.design.components.client.vanillaMasker.VMasker;
 
 /**
  * 
@@ -63,7 +62,7 @@ import gwt.material.design.components.client.vanillaMasker.VMasker;
  *
  */
 public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense,
-		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon {
+		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -108,6 +107,12 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 		label.setFor(input.getId());
 
+		icon.addClickHandler(event -> {
+			event.preventDefault();
+			event.stopPropagation();
+			IconClickEvent.fire(this);			
+		});
+		
 		add(icon);
 		add(input);
 		add(label);
@@ -115,17 +120,14 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		add(notchedOutline);
 
 		super.onInitialize();
-
-		addKeyUpHandler(event -> validateLenght());
 	}
 
+	
 	@Override
-	public native String getValue()/*-{
-		var textfield = this.@gwt.material.design.components.client.ui.misc.MaterialTextFieldBase::input;
-		var element = textfield.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		return element.value;
-	}-*/;
-
+	public String getValue() {
+		return inputMaskMixin.getValue();
+	}
+	
 	@Override
 	public native void setValue(String value, boolean fireEvents)/*-{
 
@@ -141,8 +143,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 	protected void validateLenght() {
 
-		GWT.log("aqui com: " + VMasker.fromPattern(getText(), getInputMask()));
-		
 		final int actualLenght = getText().length();
 		final int minLength = minLengthMixin.getAttributeAsInteger();
 		final int maxLength = maxLengthMixin.getAttributeAsInteger();
@@ -321,9 +321,13 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		}
 	}
 
-	public HandlerRegistration addIconClickHandler(ClickHandler handler) {
-		icon.setCursor(Cursor.POINTER);
-		return icon.addClickHandler(handler);
+	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {	
+		icon.setTabindex(0);
+		return addHandler(event -> {
+			if (isEnabled()) {
+				handler.onClick(event);
+			}
+		}, IconClickEvent.getType());
 	}
 
 	public TextFieldIconPosition getIconPosition() {
@@ -337,4 +341,5 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 			removeStyleName(iconPositionMixin.getType().getCssName());
 		}
 	}
+	
 }

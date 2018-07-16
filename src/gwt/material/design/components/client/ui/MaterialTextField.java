@@ -19,13 +19,13 @@
  */
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasHelperText;
 import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.HasIconClickHandlers;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
 import gwt.material.design.components.client.base.HasPattern;
@@ -36,9 +36,11 @@ import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
+import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
@@ -49,7 +51,7 @@ import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon {
+HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -124,12 +126,12 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 		return textFieldBase.getInputMask();
 	}
 
-	public void setInputType(TextFieldType type) {
-		textFieldBase.setType(type);
+	public void setInputType(InputType type) {
+		textFieldBase.setInputType(type);
 	}
 
-	public TextFieldType getInputType() {
-		return textFieldBase.getType();
+	public InputType getInputType() {
+		return textFieldBase.getInputType();
 	}
 	
 	@Override
@@ -238,7 +240,8 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 		textFieldBase.setIcon(iconType);
 	}
 
-	public HandlerRegistration addIconClickHandler(ClickHandler handler) {
+	@Override
+	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		return textFieldBase.addIconClickHandler(handler);
 	}
 	
