@@ -40,6 +40,8 @@ import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
+import gwt.material.design.components.client.events.TextFieldValidationEvent.HasTextFieldValidationHandlers;
+import gwt.material.design.components.client.events.TextFieldValidationEvent.TextFieldValidationHandler;
 import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
@@ -51,7 +53,7 @@ import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers {
+HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidationHandlers {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -251,5 +253,10 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
 		textFieldBase.setIconPosition(iconPosition);
+	}
+	
+	@Override
+	public HandlerRegistration addTextFieldValidationHandler(TextFieldValidationHandler handler) {
+		return textFieldBase.addTextFieldValidationHandler(handler);
 	}
 }

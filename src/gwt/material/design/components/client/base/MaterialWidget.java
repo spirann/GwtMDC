@@ -103,7 +103,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby {
 
 	static {
 		autoInit();
@@ -140,7 +140,7 @@ public class MaterialWidget extends BaseWidget
 	// /////////////////////////////////////////////////////////////
 	// Mixin list
 	// /////////////////////////////////////////////////////////////
-	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);;
+	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
@@ -148,6 +148,8 @@ public class MaterialWidget extends BaseWidget
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
 	protected final AttributeMixin<MaterialWidget> altMixin = new AttributeMixin<>(this, "alt");
 	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
+	protected final AttributeMixin<MaterialWidget> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
+	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
 	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
@@ -687,6 +689,26 @@ public class MaterialWidget extends BaseWidget
 		return ariaLabelMixin.getAttribute();
 	}
 
+	@Override
+	public void setAriaControls(String target) {
+		ariaControlsMixin.setAttribute(target);
+	}
+
+	@Override
+	public String getAriaControls() {
+		return ariaControlsMixin.getAttribute();
+	}
+
+	@Override
+	public void setAriaDescribedBy(String target) {
+		ariaDescribedByMixin.setAttribute(target);
+	}
+
+	@Override
+	public String getAriaDescribedBy() {
+		return ariaDescribedByMixin.getAttribute();
+	}
+	
 	@Override
 	public void setAlt(String alt) {
 		altMixin.setAttribute(alt);

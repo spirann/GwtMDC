@@ -52,6 +52,9 @@ import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent;
+import gwt.material.design.components.client.events.TextFieldValidationEvent;
+import gwt.material.design.components.client.events.TextFieldValidationEvent.HasTextFieldValidationHandlers;
+import gwt.material.design.components.client.events.TextFieldValidationEvent.TextFieldValidationHandler;
 import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
@@ -62,7 +65,7 @@ import gwt.material.design.components.client.ui.html.Input;
  *
  */
 public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense,
-		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers {
+		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidationHandlers {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -78,21 +81,16 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__DENSE);
-	protected final AttributeMixin<MaterialTextFieldBase> ariaControlsMixin = new AttributeMixin<>(this,
-			"aria-controls");
-	protected final AttributeMixin<MaterialTextFieldBase> ariaDescribedByMixin = new AttributeMixin<>(this,
-			"aria-describedby");
+	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);	
 	protected final AttributeMixin<Input> minLengthMixin = new AttributeMixin<>(input, "minlength");
 	protected final AttributeMixin<Input> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
-	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 	protected final TypeMixin<MaterialTextFieldBase, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
+	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-
+	
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
 	}
@@ -119,6 +117,8 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		add(lineRipple);
 		add(notchedOutline);
 
+		addKeyUpHandler(event -> fireTextFieldValidation());
+		
 		super.onInitialize();
 	}
 
@@ -141,22 +141,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 
 	}-*/;
 
-	protected void validateLenght() {
-
-		final int actualLenght = getText().length();
-		final int minLength = minLengthMixin.getAttributeAsInteger();
-		final int maxLength = maxLengthMixin.getAttributeAsInteger();
-
-		if(isRequired() && actualLenght == 0) {
-			setState(State.ERROR);
-		} else if (minLength > actualLenght) {
-			setState(State.ERROR);
-		} else if (maxLength > 0 && maxLength < actualLenght) {
-			setState(State.ERROR);
-		} else {
-			setState(State.DEFAULT);
-		}
-	}
+	
 
 	@Override
 	public String getText() {
@@ -200,22 +185,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	@Override
 	public boolean isDense() {
 		return denseMixin.isApplied();
-	}
-
-	public void setAriaControls(String target) {
-		ariaControlsMixin.setAttribute(target);
-	}
-
-	public String getAriaControls() {
-		return ariaControlsMixin.getAttribute();
-	}
-
-	public void setAriaDescribedBy(String target) {
-		ariaDescribedByMixin.setAttribute(target);
-	}
-
-	public String getAriaDescribedBy() {
-		return ariaDescribedByMixin.getAttribute();
 	}
 
 	@Override
@@ -341,5 +310,29 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 			removeStyleName(iconPositionMixin.getType().getCssName());
 		}
 	}
+
+	protected void fireTextFieldValidation() {
+		TextFieldValidationEvent.fire(this, getValue(), isRequired(), getMinLength(), getMaxLength());
+	}
 	
+	protected void applyValidation(final Boolean isValid) {
+		if(isValid == null) {
+			setState(State.DEFAULT);
+		} else if (isValid) {
+			setState(State.SUCCESS);
+		} else {
+			setState(State.ERROR);
+		}		
+	}
+
+	@Override
+	public HandlerRegistration addTextFieldValidationHandler(TextFieldValidationHandler handler) {
+		return addHandler(event -> {
+			
+			final Boolean isValid = handler.validate(event);
+			applyValidation(isValid);
+			return isValid;
+			
+		}, TextFieldValidationEvent.getType());
+	}
 }
