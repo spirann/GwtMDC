@@ -143,32 +143,27 @@ public class JQuery {
 
     // Generic UIObject Query
 
-    @JsOverlay
-    @SuppressWarnings("unchecked")
+    @JsOverlay    
     public static <T extends UIObject> JQueryElement $(T uiObject) {
         return $(uiObject.getElement());
     }
 
     @JsOverlay
-    @SuppressWarnings("unchecked")
     public static <T extends UIObject> JQueryElement $(T uiObject, Element context) {
         return $(uiObject.getElement(), context);
     }
 
     @JsOverlay
-    @SuppressWarnings("unchecked")
     public static <T extends UIObject> JQueryElement $(T uiObject, gwt.material.design.components.client.jquery.core.Element context) {
         return $(uiObject.getElement(), context);
     }
 
     @JsOverlay
-    @SuppressWarnings("unchecked")
     public static <T extends UIObject> JQueryElement $(T uiObject, JQueryElement context) {
         return $(uiObject.getElement(), context);
     }
 
     @JsOverlay
-    @SuppressWarnings("unchecked")
     public static <T extends UIObject> JQueryElement $(T uiObject, UIObject context) {
         return $(uiObject.getElement(), context.getElement());
     }

@@ -42,7 +42,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.SelectionEvent;
-import gwt.material.design.components.client.handlers.SelectionHandler;
+import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Anchor;
 import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Span;

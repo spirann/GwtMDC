@@ -1,6 +1,6 @@
 package gwt.material.design.components.client.base;
 
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 public interface HasTextFieldValidation {
 

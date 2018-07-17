@@ -22,24 +22,24 @@ package gwt.material.design.components.client.events;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-import gwt.material.design.components.client.base.HasInputHandlers;
-import gwt.material.design.components.client.events.InputEvent.InputHandler;
+import gwt.material.design.components.client.base.HasValidationHandlers;
+import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
+public class ValidationEvent<T> extends GwtEvent<ValidationHandler<T>> {
 
-	public interface InputHandler<T> extends EventHandler {
-		void onInput(InputEvent<T> event);
+	public interface ValidationHandler<T> extends EventHandler {
+		void onValidate(ValidationEvent<T> event);
 	}
 
 	/**
 	 * Handler type.
 	 */
-	private static Type<InputHandler<?>> TYPE;
+	private static Type<ValidationHandler<?>> TYPE;
 
 	/**
 	 * Fires a value change event on all registered handlers in the handler manager.
@@ -52,9 +52,9 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 * @param value
 	 *            the value
 	 */
-	public static <T> void fire(HasInputHandlers<T> source, T value) {
+	public static <T> void fire(HasValidationHandlers<T> source, T value) {
 		if (TYPE != null) {
-			InputEvent<T> event = new InputEvent<T>(value);
+			ValidationEvent<T> event = new ValidationEvent<T>(value);
 			source.fireEvent(event);
 		}
 	}
@@ -73,9 +73,9 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 * @param newValue
 	 *            the newValue, may be null
 	 */
-	public static <T> void fireIfNotEqual(HasInputHandlers<T> source, T oldValue, T newValue) {
+	public static <T> void fireIfNotEqual(HasValidationHandlers<T> source, T oldValue, T newValue) {
 		if (shouldFire(source, oldValue, newValue)) {
-			InputEvent<T> event = new InputEvent<T>(newValue);
+			ValidationEvent<T> event = new ValidationEvent<T>(newValue);
 			source.fireEvent(event);
 		}
 	}
@@ -85,9 +85,9 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<InputHandler<?>> getType() {
+	public static Type<ValidationHandler<?>> getType() {
 		if (TYPE == null) {
-			TYPE = new Type<InputHandler<?>>();
+			TYPE = new Type<ValidationHandler<?>>();
 		}
 		return TYPE;
 	}
@@ -106,11 +106,11 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 *            the new value
 	 * @return whether the event should be fired
 	 */
-	protected static <T> boolean shouldFire(HasInputHandlers<T> source, T oldValue, T newValue) {
+	protected static <T> boolean shouldFire(HasValidationHandlers<T> source, T oldValue, T newValue) {
 		return TYPE != null && oldValue != newValue && (oldValue == null || !oldValue.equals(newValue));
 	}
 
-	private final T value;
+	private final T result;
 
 	/**
 	 * Creates a value change event.
@@ -118,15 +118,15 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 * @param value
 	 *            the value
 	 */
-	protected InputEvent(T value) {
-		this.value = value;
+	protected ValidationEvent(T result) {
+		this.result = result;
 	}
 
 	// The instance knows its BeforeSelectionHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Override
-	public final Type<InputHandler<T>> getAssociatedType() {
+	public final Type<ValidationHandler<T>> getAssociatedType() {
 		return (Type) TYPE;
 	}
 
@@ -135,18 +135,18 @@ public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 	 * 
 	 * @return the value
 	 */
-	public T getValue() {
-		return value;
+	public T getResult() {
+		return result;
 	}
 
 	@Override
 	public String toDebugString() {
-		return super.toDebugString() + getValue();
+		return super.toDebugString() + getResult();
 	}
 
 	@Override
-	protected void dispatch(InputHandler<T> handler) {
-		handler.onInput(this);
+	protected void dispatch(ValidationHandler<T> handler) {
+		handler.onValidate(this);
 	}
 
 }

@@ -32,7 +32,8 @@ public class Element extends Node {
     @JsProperty
     public native DOMTokenList getClassList();
     
-    public native void addEventListener(String event, Function fn);
+    @SuppressWarnings("rawtypes")
+	public native void addEventListener(String event, Function fn);
     
     public native Object querySelector(String selector);
     

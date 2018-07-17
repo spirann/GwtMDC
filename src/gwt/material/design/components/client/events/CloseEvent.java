@@ -19,10 +19,11 @@
  */
 package gwt.material.design.components.client.events;
 
+import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
 import gwt.material.design.components.client.base.HasCloseHandlers;
-import gwt.material.design.components.client.handlers.CloseHandler;
+import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
 
 /**
  * 
@@ -31,14 +32,18 @@ import gwt.material.design.components.client.handlers.CloseHandler;
  */
 public class CloseEvent extends GwtEvent<CloseHandler> {
 
+	public static interface CloseHandler extends EventHandler {
+		void onClose(CloseEvent event);
+	}
+
 	/**
 	 * Handler type.
 	 */
 	public static final Type<CloseHandler> TYPE = new Type<CloseHandler>();
 
 	/**
-	 * Fires a value change event on all registered handlers in the handler
-	 * manager. If no such handlers exist, this method will do nothing.
+	 * Fires a value change event on all registered handlers in the handler manager.
+	 * If no such handlers exist, this method will do nothing.
 	 * 
 	 * @param <T>
 	 *            the old value type

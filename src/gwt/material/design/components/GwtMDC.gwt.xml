@@ -9,6 +9,7 @@
 
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
+  <inherits name="com.google.gwt.i18n.I18N"/>
   
   <!-- Specify the app entry point class.                         -->
   <entry-point class='gwt.material.design.components.client.GwtMDC'/>
@@ -23,5 +24,12 @@
   
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>  
+  
+  <!-- Supported languages -->
+  <extend-property name="locale" values="en"/>
+  <extend-property name="locale" values="pt_BR" /> 
+  
+  <!-- Default language --> 
+  <set-property-fallback name="locale" value="en"/>
   
 </module>

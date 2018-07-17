@@ -17,24 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.SelectionEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface SelectionHandler<V> extends EventHandler {
+public class CepValidator {
+    
+    public static boolean isValid (final String cep) {
 
-	/**
-	 * Called when {@link SelectionEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link SelectionEvent} that was fired
-	 */
-	void onSelect(SelectionEvent<V> event);
+        if(cep == null || cep.isEmpty()){
+            return false;
+        }
+        
+        return !(cep.trim().length() != 8 || !cep.trim().matches("^[0-9]*\\d"));
+    }
+    
 }

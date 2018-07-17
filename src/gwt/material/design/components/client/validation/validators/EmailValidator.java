@@ -17,25 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.InputEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface InputHandler<T> extends EventHandler {
+public class EmailValidator {
 
-	/**
-	 * Called when {@link ValueChangeEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link ValueChangeEvent} that was fired
-	 */
-	void onInput(InputEvent<T> event);
+    public static boolean isValid(final String email) {
+
+        if (email == null || email.isEmpty()) {
+            return false;
+        }
+        
+        return email.matches(
+                "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+    }
+
 }

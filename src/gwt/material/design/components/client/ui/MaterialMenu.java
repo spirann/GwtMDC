@@ -33,9 +33,9 @@ import gwt.material.design.components.client.base.HasRole;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
+import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
 import gwt.material.design.components.client.events.OpenEvent;
-import gwt.material.design.components.client.handlers.CloseHandler;
-import gwt.material.design.components.client.handlers.OpenHandler;
+import gwt.material.design.components.client.events.OpenEvent.OpenHandler;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**

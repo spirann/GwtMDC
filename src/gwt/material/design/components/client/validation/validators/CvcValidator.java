@@ -17,25 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.CloseEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface CloseHandler extends EventHandler {
+public class CvcValidator {
 
-	/**
-	 * Called when {@link ValueChangeEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link ValueChangeEvent} that was fired
-	 */
-	void onClose(CloseEvent event);
+    public static boolean isValid(final String cvc) {
+        
+        if(cvc == null || cvc.trim().isEmpty() || !cvc.replaceAll("[0-9]", "").isEmpty()){
+            return false;
+        }
+        
+        return cvc.trim().length() == 3;
+    }
+    
 }

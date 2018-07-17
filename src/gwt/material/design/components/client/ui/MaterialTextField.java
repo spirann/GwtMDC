@@ -34,6 +34,7 @@ import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.HasValidationHandlers;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
@@ -41,11 +42,13 @@ import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
-import gwt.material.design.components.client.handlers.IconClickHandler;
+import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
+import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.Validation.Result;
+import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 /**
  * 
@@ -53,25 +56,33 @@ import gwt.material.design.components.client.validation.TextFieldValidation;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation {
+		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
+		HasTextFieldValidation, HasValidationHandlers<Result> {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
-	
+
 	public MaterialTextField() {
 		super(CssName.MDC_TEXT_FIELD_CONTAINER);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
-	
+
 		textFieldBase.setAriaControls(helper.getId());
 		textFieldBase.setAriaDescribedBy(helper.getId());
+
+		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));		
 		
 		add(textFieldBase);
 		add(helper);
-		
+
 		super.onInitialize();
+	}
+
+	@Override
+	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
+		return textFieldBase.addValidationHandler(handler);
 	}
 
 	@Override
@@ -83,7 +94,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public String getHelperText() {
 		return helper.getHelperText();
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		textFieldBase.setTextColor(color);
@@ -93,10 +104,10 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public void setColor(Color color) {
 		textFieldBase.setColor(color);
 	}
-	
+
 	public void setFocusedColor(Color color) {
 		textFieldBase.setFocusedColor(color);
-	}	
+	}
 
 	@Override
 	public void setHelperTextPersistent(boolean persistent) {
@@ -135,7 +146,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public InputType getInputType() {
 		return textFieldBase.getInputType();
 	}
-	
+
 	@Override
 	public void setType(TextFieldType type) {
 		textFieldBase.setType(type);
@@ -205,7 +216,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public void setText(String text) {
 		textFieldBase.setText(text);
 	}
-	
+
 	public void setMinLength(final int length) {
 		textFieldBase.setMinLength(length);
 	}
@@ -219,7 +230,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	}
 
 	public int getMaxLength() {
-		return textFieldBase.getMaxLength(); 
+		return textFieldBase.getMaxLength();
 	}
 
 	@Override
@@ -231,7 +242,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public State getState() {
 		return textFieldBase.getState();
 	}
-	
+
 	@Override
 	public IconType getIcon() {
 		return textFieldBase.getIcon();
@@ -246,7 +257,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		return textFieldBase.addIconClickHandler(handler);
 	}
-	
+
 	public TextFieldIconPosition getIconPosition() {
 		return textFieldBase.getIconPosition();
 	}
@@ -254,7 +265,7 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
 		textFieldBase.setIconPosition(iconPosition);
 	}
-	
+
 	public TextFieldValidation getValidation() {
 		return textFieldBase.getValidation();
 	}

@@ -17,25 +17,27 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.CancelEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface CancelHandler extends EventHandler {
+public class FullNameValidator {
 
-	/**
-	 * Called when {@link ValueChangeEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link ValueChangeEvent} that was fired
-	 */
-	void onCancel(CancelEvent event);
+    public static boolean isValid(final String fullName) {
+
+        if (fullName == null || fullName.isEmpty()) {
+            return false;
+        }
+        
+        final String[] names = fullName.split(" ");
+        
+        if(names == null){
+        	return false;
+        }
+        
+        return fullName.replaceAll(" ", "").length() >= 5 && (names.length >= 2 ? !names[0].equalsIgnoreCase(names[1]) : false);
+    }
+
 }

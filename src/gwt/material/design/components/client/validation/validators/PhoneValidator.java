@@ -17,25 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.AcceptEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface AcceptHandler extends EventHandler {
+public class PhoneValidator {
 
-	/**
-	 * Called when {@link ValueChangeEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link ValueChangeEvent} that was fired
-	 */
-	void onAccept(AcceptEvent event);
+    public static boolean isValid(final String phone) {
+
+        if (phone == null || phone.trim().isEmpty() 
+                || !phone.replaceAll("[0-9]", "").isEmpty() || phone.startsWith("0")) {
+            return false;
+        }
+        return phone.trim().length() == 11 || phone.trim().length() == 10;
+    }
+
 }

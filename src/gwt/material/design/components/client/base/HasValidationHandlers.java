@@ -17,17 +17,18 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
+package gwt.material.design.components.client.base;
 
-import com.google.gwt.event.shared.EventHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.events.IconClickEvent;
+import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface IconClickHandler extends EventHandler {
-	void onClick(IconClickEvent event);
+public interface HasValidationHandlers<T> extends HasHandlers {
+	HandlerRegistration addValidationHandler(ValidationHandler<T> handler);
 }

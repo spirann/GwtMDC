@@ -34,7 +34,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
-import gwt.material.design.components.client.handlers.InputHandler;
+import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;

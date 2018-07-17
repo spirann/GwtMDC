@@ -17,25 +17,16 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.handlers;
-
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.shared.EventHandler;
-
-import gwt.material.design.components.client.events.OpenEvent;
+package gwt.material.design.components.client.validation.validators;
 
 /**
- * 
- * @author Richeli Vargas
  *
+ * @author Richeli Vargas
  */
-public interface OpenHandler extends EventHandler {
+public class RgValidator {
 
-	/**
-	 * Called when {@link ValueChangeEvent} is fired.
-	 * 
-	 * @param event
-	 *            the {@link ValueChangeEvent} that was fired
-	 */
-	void onOpen(OpenEvent event);
+    public static boolean isValid(final String rg) {        
+        return (rg != null && !rg.trim().isEmpty() && rg.replaceAll("[0-9]", "").isEmpty());
+    }
+    
 }

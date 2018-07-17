@@ -35,6 +35,7 @@ import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.HasValidationHandlers;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
@@ -53,18 +54,22 @@ import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent;
-import gwt.material.design.components.client.handlers.IconClickHandler;
+import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
+import gwt.material.design.components.client.events.ValidationEvent;
+import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.Validation.Result;
+import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense,
-		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation {
+public class MaterialTextFieldBase extends MaterialFormField<String>
+		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>,
+		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -80,7 +85,8 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
 	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);	
+	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
 	protected final AttributeMixin<Input> minLengthMixin = new AttributeMixin<>(input, "minlength");
 	protected final AttributeMixin<Input> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
 	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
@@ -89,12 +95,12 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Validation
 	// /////////////////////////////////////////////////////////////
 	protected TextFieldValidation validation;
-	
+
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
 	}
@@ -112,9 +118,9 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		icon.addClickHandler(event -> {
 			event.preventDefault();
 			event.stopPropagation();
-			IconClickEvent.fire(this);			
+			IconClickEvent.fire(this);
 		});
-		
+
 		add(icon);
 		add(input);
 		add(label);
@@ -122,24 +128,58 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		add(notchedOutline);
 
 		addKeyUpHandler(event -> fireValidation());
-		
+
 		super.onInitialize();
 	}
 
 	protected void fireValidation() {
-		
-		if(validation == null) {
+
+		if (validation == null) {
 			return;
-		}		
+		}
+
+		final Result result = validation.validate(getValue(), isRequired(), getMinLength(), getMaxLength());
 		
-		setState(validation.validate(getValue(), isRequired(), getMinLength(), getMaxLength()));
+		if(result == null) {
+			return;
+		}
+		
+		applyResultValidation(result);		
+		
+		fireValidationEvent(result);
+	}
+
+	protected void applyResultValidation(final Result result) {
+		setState(result.getState());
+	}
+
+	public TextFieldValidation getValidation() {
+		return validation;
+	}
+
+	public void setValidation(TextFieldValidation validation) {
+		this.validation = validation;
+	}
+
+	protected void fireValidationEvent(final Result result) {
+		ValidationEvent.fire(this, result);
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
+		return addHandler(event -> {
+			// if (isEnabled()) {
+			handler.onValidate((ValidationEvent<Result>) (ValidationEvent<?>) event);
+			// }
+		}, ValidationEvent.getType());
+	}
+
 	@Override
 	public String getValue() {
 		return inputMaskMixin.getValue();
 	}
-	
+
 	@Override
 	public native void setValue(String value, boolean fireEvents)/*-{
 
@@ -152,8 +192,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		}
 
 	}-*/;
-
-	
 
 	@Override
 	public String getText() {
@@ -302,7 +340,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		}
 	}
 
-	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {	
+	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		icon.setTabindex(0);
 		return addHandler(event -> {
 			if (isEnabled()) {
@@ -321,14 +359,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		if (icon.getType() == null && iconPosition != null) {
 			removeStyleName(iconPositionMixin.getType().getCssName());
 		}
-	}
-	
-	public TextFieldValidation getValidation() {
-		return validation;
-	}
-
-	public void setValidation(TextFieldValidation validation) {
-		this.validation = validation;
 	}
 
 }

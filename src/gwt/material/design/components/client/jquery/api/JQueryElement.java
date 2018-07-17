@@ -44,6 +44,7 @@ import jsinterop.annotations.JsType;
  *
  * @author Richeli Vargas
  */
+@SuppressWarnings({"rawtypes", "unchecked"})
 @JsType(name = "jQuery", isNative = true)
 public class JQueryElement extends Node {
 
@@ -54,7 +55,7 @@ public class JQueryElement extends Node {
      * @param <T> the target type
      * @return this object as a different type
      */
-    @JsOverlay
+	@JsOverlay
     public final <T extends JQueryElement> T cast() {
         return (T) this;
     }
@@ -416,7 +417,7 @@ public class JQueryElement extends Node {
      * @param handler A function to execute each time the event is triggered.
      * @return self {@link JQueryElement}
      */
-    public native JQueryElement bind(String eventType, Object eventData, EventFunc1 handler);
+	public native JQueryElement bind(String eventType, Object eventData, EventFunc1 handler);
 
     /**
      * Attach a handler to an event for the elements.
