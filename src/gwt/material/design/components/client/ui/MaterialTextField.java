@@ -32,6 +32,7 @@ import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
+import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
@@ -40,12 +41,11 @@ import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
-import gwt.material.design.components.client.events.TextFieldValidationEvent.HasTextFieldValidationHandlers;
-import gwt.material.design.components.client.events.TextFieldValidationEvent.TextFieldValidationHandler;
 import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
+import gwt.material.design.components.client.validation.TextFieldValidation;
 
 /**
  * 
@@ -53,7 +53,7 @@ import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidationHandlers {
+HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation {
 
 	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -255,8 +255,11 @@ HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasI
 		textFieldBase.setIconPosition(iconPosition);
 	}
 	
-	@Override
-	public HandlerRegistration addTextFieldValidationHandler(TextFieldValidationHandler handler) {
-		return textFieldBase.addTextFieldValidationHandler(handler);
+	public TextFieldValidation getValidation() {
+		return textFieldBase.getValidation();
+	}
+
+	public void setValidation(TextFieldValidation validation) {
+		textFieldBase.setValidation(validation);
 	}
 }

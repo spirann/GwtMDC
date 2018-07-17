@@ -875,68 +875,104 @@ a:active {
  * Configure state class
  * ------------------------------------------------------------------- 
  */
+ 
+:root {
+	--mdc-state--success: #00b020;
+	--mdc-state--warning: #FF8F00;
+	--mdc-state--error: #b00020;
+}
 
 /* State = SUCCESS */
 .mdc-text-field[state="success"] {
-	caret-color: #00b020 !important;
+	caret-color: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field[state="success"] .mdc-text-field__icon,
 .mdc-text-field[state="success"] .mdc-floating-label,
 .mdc-text-field[state="success"] + .mdc-text-field-helper-text {
-	color: #00b020 !important;
+	color: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field[state="success"] .mdc-notched-outline__idle {
-	border-color: #00b020 !important;
+	border-color: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field[state="success"] .mdc-notched-outline__path {
-	stroke: #00b020 !important;
+	stroke: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field[state="success"] .mdc-text-field__input {
-	border-bottom-color: #00b020 !important;
+	border-bottom-color: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field[state="success"] .mdc-line-ripple {
-    background-color: #00b020 !important;
+    background-color: var(--mdc-state--success, #00b020) !important;
 }
 
 .mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
-	border-bottom: 1px solid #00b020 !important;	
+	border-bottom: 1px solid var(--mdc-state--success, #00b020) !important;	
 }
 
+ /* State = WARNING */
+.mdc-text-field[state="warning"] {
+	caret-color: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field[state="warning"] .mdc-text-field__icon,
+.mdc-text-field[state="warning"] .mdc-floating-label,
+.mdc-text-field[state="warning"] + .mdc-text-field-helper-text {
+	color: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field[state="warning"] .mdc-notched-outline__idle {
+	border-color: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field[state="warning"] .mdc-notched-outline__path {
+	stroke: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field[state="warning"] .mdc-text-field__input {
+	border-bottom-color: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field[state="warning"] .mdc-line-ripple {
+    background-color: var(--mdc-state--warning, #FF8F00) !important;
+}
+
+.mdc-text-field--fullwidth[state="warning"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+	border-bottom: 1px solid var(--mdc-state--warning, #FF8F00) !important;	
+}
 
  /* State = ERROR */
 .mdc-text-field[state="error"] {
-	caret-color: #b00020 !important;
+	caret-color: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field[state="error"] .mdc-text-field__icon,
 .mdc-text-field[state="error"] .mdc-floating-label,
 .mdc-text-field[state="error"] + .mdc-text-field-helper-text {
-	color: #b00020 !important;
+	color: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field[state="error"] .mdc-notched-outline__idle {
-	border-color: #b00020 !important;
+	border-color: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field[state="error"] .mdc-notched-outline__path {
-	stroke: #b00020 !important;
+	stroke: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field[state="error"] .mdc-text-field__input {
-	border-bottom-color: #b00020 !important;
+	border-bottom-color: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field[state="error"] .mdc-line-ripple {
-    background-color: #b00020 !important;
+    background-color: var(--mdc-state--error, #b00020) !important;
 }
 
 .mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
-	border-bottom: 1px solid #b00020 !important;	
+	border-bottom: 1px solid var(--mdc-state--error, #b00020) !important;	
 }
 
 /* ==========================================================================

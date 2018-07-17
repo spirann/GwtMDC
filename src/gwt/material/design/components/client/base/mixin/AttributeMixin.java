@@ -26,55 +26,72 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
 
-    private String attribute;
+	private String attribute;
 
-    public AttributeMixin(final T widget, String attribute) {
-    	super(widget);
-        this.attribute = attribute;
-    }
-    
-    public AttributeMixin(final T widget, String attribute, String value) {
-        this(widget, attribute);
-        this.uiObject.getElement().setAttribute(attribute, value);
-    }
+	public AttributeMixin(final T widget, String attribute) {
+		super(widget);
+		this.attribute = attribute;
+	}
 
-    public void setAttribute(String value) {
-    	
-    	uiObject.getElement().removeAttribute(attribute);
-    	
-        if (value != null) {
-            uiObject.getElement().setAttribute(attribute, value);
-        }
-    }
+	public AttributeMixin(final T widget, String attribute, String value) {
+		this(widget, attribute);
+		this.uiObject.getElement().setAttribute(attribute, value);
+	}
 
-    public void setAttribute(int value) {
-        setAttribute(String.valueOf(value));
-    }
+	public void setAttribute(String value) {
 
-    public void setAttribute(double value) {
-        setAttribute(String.valueOf(value));
-    }
+		uiObject.getElement().removeAttribute(attribute);
 
-    public void setAttribute(boolean value) {
-        setAttribute(String.valueOf(value));
-    }
+		if (value != null) {
+			uiObject.getElement().setAttribute(attribute, value);
+		}
+	}
 
-    public String getAttribute() {
-        return uiObject.getElement().getAttribute(attribute);
-    }
+	public void setAttribute(int value) {
+		setAttribute(String.valueOf(value));
+	}
 
-    public int getAttributeAsInteger() {
-    	final String attribute = getAttribute();
-        return attribute == null || attribute.isEmpty() ? 0 : Integer.parseInt(attribute);
-    }
+	public void setAttribute(double value) {
+		setAttribute(String.valueOf(value));
+	}
 
-    public double getAttributeAsDouble() {
-    	final String attribute = getAttribute();
-        return attribute == null || attribute.isEmpty() ? 0.0 : Double.parseDouble(attribute);
-    }
+	public void setAttribute(boolean value) {
+		setAttribute(String.valueOf(value));
+	}
 
-    public boolean getAttributeAsBoolean() {
-    	final String attribute = getAttribute();
-        return attribute == null || attribute.isEmpty() ? false : Boolean.parseBoolean(attribute);
-    }
+	public String getAttribute() {
+		return getAttribute("");
+	}
+
+	public String getAttribute(final String defaultValue) {
+		final String value = uiObject.getElement().getAttribute(attribute);
+		return value.isEmpty() ? defaultValue : value;
+	}
+
+	public int getAttributeAsInteger() {
+		return getAttributeAsInteger(0);
+	}
+
+	public int getAttributeAsInteger(final int defaultValue) {
+		final String attribute = getAttribute();
+		return attribute == null || attribute.isEmpty() ? defaultValue : Integer.parseInt(attribute);
+	}
+
+	public double getAttributeAsDouble() {
+		return getAttributeAsDouble(0.0);
+	}
+
+	public double getAttributeAsDouble(final double defaultValue) {
+		final String attribute = getAttribute();
+		return attribute == null || attribute.isEmpty() ? defaultValue : Double.parseDouble(attribute);
+	}
+
+	public boolean getAttributeAsBoolean() {
+		return getAttributeAsBoolean(false);
+	}
+
+	public boolean getAttributeAsBoolean(final boolean defaultValue) {
+		final String attribute = getAttribute();
+		return attribute == null || attribute.isEmpty() ? defaultValue : Boolean.parseBoolean(attribute);
+	}
 }

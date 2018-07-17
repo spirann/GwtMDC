@@ -33,6 +33,7 @@ import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
+import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
@@ -52,12 +53,10 @@ import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent;
-import gwt.material.design.components.client.events.TextFieldValidationEvent;
-import gwt.material.design.components.client.events.TextFieldValidationEvent.HasTextFieldValidationHandlers;
-import gwt.material.design.components.client.events.TextFieldValidationEvent.TextFieldValidationHandler;
 import gwt.material.design.components.client.handlers.IconClickHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
+import gwt.material.design.components.client.validation.TextFieldValidation;
 
 /**
  * 
@@ -65,7 +64,7 @@ import gwt.material.design.components.client.ui.html.Input;
  *
  */
 public class MaterialTextFieldBase extends MaterialFormField<String> implements HasText, HasLabel, HasDense,
-		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidationHandlers {
+		HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -90,6 +89,11 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
 	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
 	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
+	
+	// /////////////////////////////////////////////////////////////
+	// Validation
+	// /////////////////////////////////////////////////////////////
+	protected TextFieldValidation validation;
 	
 	public MaterialTextFieldBase() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -117,11 +121,19 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 		add(lineRipple);
 		add(notchedOutline);
 
-		addKeyUpHandler(event -> fireTextFieldValidation());
+		addKeyUpHandler(event -> fireValidation());
 		
 		super.onInitialize();
 	}
 
+	protected void fireValidation() {
+		
+		if(validation == null) {
+			return;
+		}		
+		
+		setState(validation.validate(getValue(), isRequired(), getMinLength(), getMaxLength()));
+	}
 	
 	@Override
 	public String getValue() {
@@ -228,7 +240,7 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 	}
 
 	public int getMaxLength() {
-		return maxLengthMixin.getAttributeAsInteger();
+		return maxLengthMixin.getAttributeAsInteger(Integer.MAX_VALUE);
 	}
 
 	@Override
@@ -310,29 +322,13 @@ public class MaterialTextFieldBase extends MaterialFormField<String> implements 
 			removeStyleName(iconPositionMixin.getType().getCssName());
 		}
 	}
-
-	protected void fireTextFieldValidation() {
-		TextFieldValidationEvent.fire(this, getValue(), isRequired(), getMinLength(), getMaxLength());
-	}
 	
-	protected void applyValidation(final Boolean isValid) {
-		if(isValid == null) {
-			setState(State.DEFAULT);
-		} else if (isValid) {
-			setState(State.SUCCESS);
-		} else {
-			setState(State.ERROR);
-		}		
+	public TextFieldValidation getValidation() {
+		return validation;
 	}
 
-	@Override
-	public HandlerRegistration addTextFieldValidationHandler(TextFieldValidationHandler handler) {
-		return addHandler(event -> {
-			
-			final Boolean isValid = handler.validate(event);
-			applyValidation(isValid);
-			return isValid;
-			
-		}, TextFieldValidationEvent.getType());
+	public void setValidation(TextFieldValidation validation) {
+		this.validation = validation;
 	}
+
 }

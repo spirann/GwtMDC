@@ -26,8 +26,9 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  */
 public enum State implements CssType {
 	
-	DEFAULT(""), 
-	SUCCESS("success"), 
+	NONE(""), 
+	SUCCESS("success"),
+	WARNING("warning"),
 	ERROR("error");
 
 	private final String cssClass;
@@ -42,6 +43,6 @@ public enum State implements CssType {
 	}
 
 	public static State fromStyleName(final String styleName) {
-		return EnumHelper.fromStyleName(styleName, State.class, DEFAULT);
+		return EnumHelper.fromStyleName(styleName, State.class, NONE);
 	}
 }
