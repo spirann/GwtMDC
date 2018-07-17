@@ -714,6 +714,14 @@ a:active {
 	padding-top: 18px;
 }
 
+.mdc-text-field--textarea .mdc-text-field__input {
+	resize: none;
+}
+
+.mdc-text-field--textarea .mdc-floating-label {
+	background-color: transparent; 
+}
+
 /* -------------------------------------------------------------------
  * Adjust disabled style
  * ------------------------------------------------------------------- 

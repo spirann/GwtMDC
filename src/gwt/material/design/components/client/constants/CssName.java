@@ -344,6 +344,7 @@ public interface CssName {
 	
 	String MDC_TEXT_FIELD_CONTAINER = "mdc-text-field-container";
 	String MDC_TEXT_FIELD = "mdc-text-field";
+	String MDC_TEXT_FIELD__TEXTAREA = "mdc-text-field--textarea";
 	String MDC_TEXT_FIELD__LABEL = "mdc-text-field__label";
 	String MDC_TEXT_FIELD__INPUT = "mdc-text-field__input";
 	String MDC_TEXT_FIELD__HELPER_TEXT = "mdc-text-field-helper-text";

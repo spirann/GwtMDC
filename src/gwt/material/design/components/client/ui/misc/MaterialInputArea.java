@@ -17,36 +17,38 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui;
+package gwt.material.design.components.client.ui.misc;
 
-import gwt.material.design.components.client.ui.misc.MaterialInput;
-import gwt.material.design.components.client.ui.misc.MaterialInputArea;
+import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.ui.html.Textarea;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTextArea extends MaterialTextField {
-	
-	public MaterialTextArea() {
+public class MaterialInputArea extends MaterialInput {
+
+	public MaterialInputArea() {
 		super();
+		addStyleName(CssName.MDC_TEXT_FIELD__TEXTAREA);
+	}
+	
+	@Override
+	protected MaterialWidget constructInput() {
+		return new Textarea(CssName.MDC_TEXT_FIELD__INPUT);
 	}
 
-	@Override
-	protected MaterialInput contructInput() {
-		return new MaterialInputArea();
-	}
-	
 	public void setRows(int rows) {
-		if (field instanceof MaterialInputArea) {
-			((MaterialInputArea) field).setRows(rows);
+		if (input instanceof Textarea) {
+			((Textarea) input).setRows(rows);
 		}
 	}
 
 	public void setCols(int cols) {
-		if (field instanceof MaterialInputArea) {
-			((MaterialInputArea) field).setCols(cols);
+		if (input instanceof Textarea) {
+			((Textarea) input).setCols(cols);
 		}
 	}
 }

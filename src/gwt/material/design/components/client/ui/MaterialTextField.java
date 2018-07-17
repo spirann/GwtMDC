@@ -28,7 +28,6 @@ import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasIconClickHandlers;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
-import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
@@ -45,7 +44,7 @@ import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.ui.misc.MaterialTextFieldBase;
+import gwt.material.design.components.client.ui.misc.MaterialInput;
 import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ui.TextFieldValidation;
@@ -56,25 +55,29 @@ import gwt.material.design.components.client.validation.ui.TextFieldValidation;
  *
  */
 public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
-		HasPattern, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
+		HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
 		HasTextFieldValidation, HasValidationHandlers<Result> {
 
-	protected final MaterialTextFieldBase textFieldBase = new MaterialTextFieldBase();
+	protected final MaterialInput field = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
 
 	public MaterialTextField() {
 		super(CssName.MDC_TEXT_FIELD_CONTAINER);
 	}
 
+	protected MaterialInput contructInput() {
+		return new MaterialInput();
+	}
+	
 	@Override
 	protected void onInitialize() {
 
-		textFieldBase.setAriaControls(helper.getId());
-		textFieldBase.setAriaDescribedBy(helper.getId());
+		field.setAriaControls(helper.getId());
+		field.setAriaDescribedBy(helper.getId());
 
 		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));		
 		
-		add(textFieldBase);
+		add(field);
 		add(helper);
 
 		super.onInitialize();
@@ -82,7 +85,7 @@ public class MaterialTextField extends Div implements HasHelperText, HasText, Ha
 
 	@Override
 	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
-		return textFieldBase.addValidationHandler(handler);
+		return field.addValidationHandler(handler);
 	}
 
 	@Override
@@ -97,16 +100,16 @@ public class MaterialTextField extends Div implements HasHelperText, HasText, Ha
 
 	@Override
 	public void setTextColor(Color color) {
-		textFieldBase.setTextColor(color);
+		field.setTextColor(color);
 	}
 
 	@Override
 	public void setColor(Color color) {
-		textFieldBase.setColor(color);
+		field.setColor(color);
 	}
 
 	public void setFocusedColor(Color color) {
-		textFieldBase.setFocusedColor(color);
+		field.setFocusedColor(color);
 	}
 
 	@Override
@@ -131,146 +134,136 @@ public class MaterialTextField extends Div implements HasHelperText, HasText, Ha
 
 	@Override
 	public void setInputMask(String inputMask) {
-		textFieldBase.setInputMask(inputMask);
+		field.setInputMask(inputMask);
 	}
 
 	@Override
 	public String getInputMask() {
-		return textFieldBase.getInputMask();
+		return field.getInputMask();
 	}
 
 	public void setInputType(InputType type) {
-		textFieldBase.setInputType(type);
+		field.setInputType(type);
 	}
 
 	public InputType getInputType() {
-		return textFieldBase.getInputType();
+		return field.getInputType();
 	}
 
 	@Override
 	public void setType(TextFieldType type) {
-		textFieldBase.setType(type);
+		field.setType(type);
 	}
 
 	@Override
 	public TextFieldType getType() {
-		return textFieldBase.getType();
+		return field.getType();
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		textFieldBase.setPlaceholder(placeholder);
+		field.setPlaceholder(placeholder);
 	}
 
 	@Override
 	public String getPlaceholder() {
-		return textFieldBase.getPlaceholder();
-	}
-
-	@Override
-	public void setPattern(String pattern) {
-		textFieldBase.setPattern(pattern);
-	}
-
-	@Override
-	public String getPattern() {
-		return textFieldBase.getPattern();
+		return field.getPlaceholder();
 	}
 
 	@Override
 	public void setRequired(boolean required) {
-		textFieldBase.setRequired(required);
+		field.setRequired(required);
 	}
 
 	@Override
 	public boolean isRequired() {
-		return textFieldBase.isRequired();
+		return field.isRequired();
 	}
 
 	@Override
 	public void setDense(boolean dense) {
-		textFieldBase.setDense(dense);
+		field.setDense(dense);
 	}
 
 	@Override
 	public boolean isDense() {
-		return textFieldBase.isDense();
+		return field.isDense();
 	}
 
 	@Override
 	public void setLabel(String label) {
-		textFieldBase.setLabel(label);
+		field.setLabel(label);
 	}
 
 	@Override
 	public String getLabel() {
-		return textFieldBase.getLabel();
+		return field.getLabel();
 	}
 
 	@Override
 	public String getText() {
-		return textFieldBase.getText();
+		return field.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		textFieldBase.setText(text);
+		field.setText(text);
 	}
 
 	public void setMinLength(final int length) {
-		textFieldBase.setMinLength(length);
+		field.setMinLength(length);
 	}
 
 	public int getMinLength() {
-		return textFieldBase.getMinLength();
+		return field.getMinLength();
 	}
 
 	public void setMaxLength(final int length) {
-		textFieldBase.setMaxLength(length);
+		field.setMaxLength(length);
 	}
 
 	public int getMaxLength() {
-		return textFieldBase.getMaxLength();
+		return field.getMaxLength();
 	}
 
 	@Override
 	public void setState(State state) {
-		textFieldBase.setState(state);
+		field.setState(state);
 	}
 
 	@Override
 	public State getState() {
-		return textFieldBase.getState();
+		return field.getState();
 	}
 
 	@Override
 	public IconType getIcon() {
-		return textFieldBase.getIcon();
+		return field.getIcon();
 	}
 
 	@Override
 	public void setIcon(IconType iconType) {
-		textFieldBase.setIcon(iconType);
+		field.setIcon(iconType);
 	}
 
 	@Override
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
-		return textFieldBase.addIconClickHandler(handler);
+		return field.addIconClickHandler(handler);
 	}
 
 	public TextFieldIconPosition getIconPosition() {
-		return textFieldBase.getIconPosition();
+		return field.getIconPosition();
 	}
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		textFieldBase.setIconPosition(iconPosition);
+		field.setIconPosition(iconPosition);
 	}
 
 	public TextFieldValidation getValidation() {
-		return textFieldBase.getValidation();
+		return field.getValidation();
 	}
 
 	public void setValidation(TextFieldValidation validation) {
-		textFieldBase.setValidation(validation);
+		field.setValidation(validation);
 	}
 }

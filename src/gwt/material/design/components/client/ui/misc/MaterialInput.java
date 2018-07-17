@@ -29,7 +29,6 @@ import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasIconClickHandlers;
 import gwt.material.design.components.client.base.HasInputMask;
 import gwt.material.design.components.client.base.HasLabel;
-import gwt.material.design.components.client.base.HasPattern;
 import gwt.material.design.components.client.base.HasPlaceholder;
 import gwt.material.design.components.client.base.HasRequired;
 import gwt.material.design.components.client.base.HasState;
@@ -37,10 +36,10 @@ import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.HasValidationHandlers;
 import gwt.material.design.components.client.base.MaterialFormField;
+import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.InputMaskMixin;
-import gwt.material.design.components.client.base.mixin.PatternMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.RequiredMixin;
 import gwt.material.design.components.client.base.mixin.StateMixin;
@@ -67,14 +66,14 @@ import gwt.material.design.components.client.validation.ui.TextFieldValidation;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextFieldBase extends MaterialFormField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasPattern, HasPlaceholder, HasType<TextFieldType>,
+public class MaterialInput extends MaterialFormField<String>
+		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>,
 		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
-	protected Input input = new Input(InputType.TEXT, CssName.MDC_TEXT_FIELD__INPUT);
+	protected MaterialWidget input = constructInput();
 	protected MaterialFloatLabel label = new MaterialFloatLabel();
 	protected MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
@@ -83,25 +82,24 @@ public class MaterialTextFieldBase extends MaterialFormField<String>
 	// /////////////////////////////////////////////////////////////
 	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
-	protected final RequiredMixin<Input> requeridMixin = new RequiredMixin<>(input);
-	protected final PlaceholderMixin<Input> placeholderMixin = new PlaceholderMixin<>(input);
-	protected final ApplyStyleMixin<MaterialTextFieldBase> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__DENSE);
-	protected final AttributeMixin<Input> minLengthMixin = new AttributeMixin<>(input, "minlength");
-	protected final AttributeMixin<Input> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
-	protected final AttributeMixin<MaterialTextFieldBase> statusMixin = new AttributeMixin<>(this, "status");
-	protected final TypeMixin<MaterialTextFieldBase, TextFieldType> typeMixin = new TypeMixin<>(this);
-	protected final TypeMixin<MaterialTextFieldBase, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
-	protected final StateMixin<MaterialTextFieldBase> stateMixin = new StateMixin<>(this);
-	protected final PatternMixin<Input> patternMixin = new PatternMixin<>(input);
-	protected final InputMaskMixin<Input> inputMaskMixin = new InputMaskMixin<>(input);
+	protected final RequiredMixin<MaterialWidget> requeridMixin = new RequiredMixin<>(input);
+	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);	
+	protected final AttributeMixin<MaterialWidget> minLengthMixin = new AttributeMixin<>(input, "minlength");
+	protected final AttributeMixin<MaterialWidget> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
+	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
+	
+	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
+	protected final AttributeMixin<MaterialInput> statusMixin = new AttributeMixin<>(this, "status");
+	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
+	protected final StateMixin<MaterialInput> stateMixin = new StateMixin<>(this);
 
 	// /////////////////////////////////////////////////////////////
 	// Validation
 	// /////////////////////////////////////////////////////////////
 	protected TextFieldValidation validation;
-
-	public MaterialTextFieldBase() {
+	
+	public MaterialInput() {
 		super(CssName.MDC_TEXT_FIELD);
 	}
 
@@ -109,6 +107,10 @@ public class MaterialTextFieldBase extends MaterialFormField<String>
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.textField.MDCTextField(element);
 	}-*/;
+
+	protected MaterialWidget constructInput() {
+		return new Input(InputType.TEXT, CssName.MDC_TEXT_FIELD__INPUT);
+	}
 
 	@Override
 	protected void onInitialize() {
@@ -183,12 +185,12 @@ public class MaterialTextFieldBase extends MaterialFormField<String>
 	@Override
 	public native void setValue(String value, boolean fireEvents)/*-{
 
-		var textfield = this.@gwt.material.design.components.client.ui.misc.MaterialTextFieldBase::input;
+		var textfield = this.@gwt.material.design.components.client.ui.misc.MaterialInput::input;
 		var element = textfield.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		element.value = value;
 
 		if (fireEvents) {
-			this.@gwt.material.design.components.client.ui.misc.MaterialTextFieldBase::fireChangeEvent()();
+			this.@gwt.material.design.components.client.ui.misc.MaterialInput::fireChangeEvent()();
 		}
 
 	}-*/;
@@ -248,11 +250,16 @@ public class MaterialTextFieldBase extends MaterialFormField<String>
 	}
 
 	public void setInputType(InputType type) {
-		input.setType(type);
+		if(input instanceof Input) {
+			((Input) input).setType(type);	
+		}		
 	}
 
-	public InputType getInputType() {
-		return input.getType();
+	public InputType getInputType() {		
+		if(input instanceof Input) {
+			return ((Input) input).getType();	
+		}		
+		return null;
 	}
 
 	@Override
@@ -290,16 +297,6 @@ public class MaterialTextFieldBase extends MaterialFormField<String>
 	public void setRequired(boolean value) {
 		requeridMixin.setRequired(value);
 	};
-
-	@Override
-	public void setPattern(String pattern) {
-		patternMixin.setPattern(pattern);
-	}
-
-	@Override
-	public String getPattern() {
-		return patternMixin.getPattern();
-	}
 
 	@Override
 	public void setInputMask(String inputMask) {
