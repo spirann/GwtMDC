@@ -21,13 +21,14 @@ package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.ui.misc.MaterialInput;
 import gwt.material.design.components.client.ui.misc.MaterialInputArea;
+import gwt.material.design.components.client.ui.misc.MaterialInputBox;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTextArea extends MaterialTextField {
+public class MaterialTextArea extends MaterialInputBox {
 	
 	public MaterialTextArea() {
 		super();

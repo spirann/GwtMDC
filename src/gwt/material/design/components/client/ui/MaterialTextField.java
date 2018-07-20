@@ -34,207 +34,21 @@ import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.HasValidationHandlers;
-import gwt.material.design.components.client.constants.Color;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
-import gwt.material.design.components.client.constants.State;
-import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
-import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
-import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.ui.misc.MaterialInput;
-import gwt.material.design.components.client.ui.misc.MaterialTextFieldHelper;
+import gwt.material.design.components.client.ui.misc.MaterialInputBox;
 import gwt.material.design.components.client.validation.Validation.Result;
-import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTextField extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
+public class MaterialTextField extends MaterialInputBox implements HasHelperText, HasText, HasLabel, HasDense, HasRequired,
 		HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
 		HasTextFieldValidation, HasValidationHandlers<Result> {
-
-	protected final MaterialInput field = contructInput();
-	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
-
-	public MaterialTextField() {
-		super(CssName.MDC_TEXT_FIELD_CONTAINER);
-	}
-
-	protected MaterialInput contructInput() {
-		return new MaterialInput();
-	}
-	
-	@Override
-	protected void onInitialize() {
-
-		field.setAriaControls(helper.getId());
-		field.setAriaDescribedBy(helper.getId());
-
-		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));		
-		
-		add(field);
-		add(helper);
-
-		super.onInitialize();
-	}
-
-	@Override
-	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
-		return field.addValidationHandler(handler);
-	}
-
-	@Override
-	public void setHelperText(String text) {
-		helper.setHelperText(text);
-	}
-
-	@Override
-	public String getHelperText() {
-		return helper.getHelperText();
-	}
-
-	@Override
-	public void setTextColor(Color color) {
-		field.setTextColor(color);
-	}
-
-	@Override
-	public void setColor(Color color) {
-		field.setColor(color);
-	}
-
-	public void setFocusedColor(Color color) {
-		field.setFocusedColor(color);
-	}
-
-	@Override
-	public void setHelperTextPersistent(boolean persistent) {
-		helper.setHelperTextPersistent(persistent);
-	}
-
-	@Override
-	public boolean isHelperTextPersistent() {
-		return helper.isHelperTextPersistent();
-	}
-
-	@Override
-	public void setHelperTextValidation(boolean validation) {
-		helper.setHelperTextValidation(validation);
-	}
-
-	@Override
-	public boolean isHelperTextValidation() {
-		return helper.isHelperTextValidation();
-	}
-
-	@Override
-	public void setInputMask(String inputMask) {
-		field.setInputMask(inputMask);
-	}
-
-	@Override
-	public String getInputMask() {
-		return field.getInputMask();
-	}
-
-	public void setInputType(InputType type) {
-		field.setInputType(type);
-	}
-
-	public InputType getInputType() {
-		return field.getInputType();
-	}
-
-	@Override
-	public void setType(TextFieldType type) {
-		field.setType(type);
-	}
-
-	@Override
-	public TextFieldType getType() {
-		return field.getType();
-	}
-
-	@Override
-	public void setPlaceholder(String placeholder) {
-		field.setPlaceholder(placeholder);
-	}
-
-	@Override
-	public String getPlaceholder() {
-		return field.getPlaceholder();
-	}
-
-	@Override
-	public void setRequired(boolean required) {
-		field.setRequired(required);
-	}
-
-	@Override
-	public boolean isRequired() {
-		return field.isRequired();
-	}
-
-	@Override
-	public void setDense(boolean dense) {
-		field.setDense(dense);
-	}
-
-	@Override
-	public boolean isDense() {
-		return field.isDense();
-	}
-
-	@Override
-	public void setLabel(String label) {
-		field.setLabel(label);
-	}
-
-	@Override
-	public String getLabel() {
-		return field.getLabel();
-	}
-
-	@Override
-	public String getText() {
-		return field.getText();
-	}
-
-	@Override
-	public void setText(String text) {
-		field.setText(text);
-	}
-
-	public void setMinLength(final int length) {
-		field.setMinLength(length);
-	}
-
-	public int getMinLength() {
-		return field.getMinLength();
-	}
-
-	public void setMaxLength(final int length) {
-		field.setMaxLength(length);
-	}
-
-	public int getMaxLength() {
-		return field.getMaxLength();
-	}
-
-	@Override
-	public void setState(State state) {
-		field.setState(state);
-	}
-
-	@Override
-	public State getState() {
-		return field.getState();
-	}
 
 	@Override
 	public IconType getIcon() {
@@ -251,19 +65,42 @@ public class MaterialTextField extends Div implements HasHelperText, HasText, Ha
 		return field.addIconClickHandler(handler);
 	}
 
-	public TextFieldIconPosition getIconPosition() {
-		return field.getIconPosition();
+	@Override
+	public void setType(TextFieldType type) {
+		field.setType(type);
 	}
 
-	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		field.setIconPosition(iconPosition);
+	@Override
+	public TextFieldType getType() {
+		return field.getType();
 	}
 
-	public TextFieldValidation getValidation() {
-		return field.getValidation();
+	public void setInputType(InputType type) {
+		field.setInputType(type);
 	}
 
-	public void setValidation(TextFieldValidation validation) {
-		field.setValidation(validation);
+	public InputType getInputType() {
+		return field.getInputType();
 	}
+	
+	@Override
+	public void setRequired(boolean required) {
+		field.setRequired(required);
+	}
+
+	@Override
+	public boolean isRequired() {
+		return field.isRequired();
+	}
+
+	@Override
+	public void setInputMask(String inputMask) {
+		field.setInputMask(inputMask);
+	}
+
+	@Override
+	public String getInputMask() {
+		return field.getInputMask();
+	}
+
 }
