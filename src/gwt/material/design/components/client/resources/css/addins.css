@@ -416,6 +416,17 @@ a:active {
 	color: var(--mdc-theme-on-secondary, #fff);
 }
 
+.mdc-fab__label:empty,
+.mdc-fab__icon:empty {
+	display: none;
+}
+
+.mdc-fab--extended[dir="rtl"] .mdc-fab__icon {
+      /* @noflip */
+      margin-left: 12px;
+      /* @noflip */
+      margin-right: -8px; }
+
 .mdc-fab--fixed {
 	position: fixed;
 	bottom: 1rem;

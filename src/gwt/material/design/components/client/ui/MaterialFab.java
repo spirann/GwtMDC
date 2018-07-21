@@ -19,11 +19,15 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.user.client.ui.HasText;
+
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
+import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FabType;
@@ -37,16 +41,20 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialFab extends Button implements HasType<FabType>, HasHref, HasIcon {
+public class MaterialFab extends Button implements HasType<FabType>, HasHref, HasText, HasIcon {
 
-	protected Span icon = new Span(CssName.MDC_FAB__ICON);
+	protected Span icon = new Span(CssName.MDC_FAB__ICON, CssName.MATERIAL_ICONS);
+	protected Span label = new Span(CssName.MDC_FAB__LABEL);
 
+	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialFab> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialFab, FabType> typeMixin = new TypeMixin<>(this);
 	protected final IconMixin<Span> iconMixin = new IconMixin<>(icon);
+	protected final ApplyStyleMixin<MaterialFab> extendedMixin = new ApplyStyleMixin<>(this, CssName.MDC_FAB__EXTENDED);
+	protected final ApplyStyleMixin<MaterialFab> exitedMixin = new ApplyStyleMixin<>(this, CssName.MDC_FAB__EXITED);
 
 	public MaterialFab() {
-		super(CssName.MDC_FAB, CssName.MATERIAL_ICONS);
+		super(CssName.MDC_FAB);
 		setRole(Role.BUTTON);
 	}
 
@@ -55,12 +63,24 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 		
 		ripleMixin.initialize();
 		
-		add(icon);		
+		add(icon);
+		add(label);
 		addClickHandler(event -> getElement().blur());
 
 		super.onInitialize();
 	}
 
+	@Override
+	public String getText() {
+		return textMixin.getText();
+	}
+
+	@Override
+	public void setText(String text) {		
+		textMixin.setText(text);
+		extendedMixin.setApply(text != null && !text.trim().isEmpty());
+	}
+	
 	@Override
 	public void setHref(String href) {
 		hrefMixin.setHref(href);
@@ -99,5 +119,13 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	@Override
 	public void setIcon(IconType iconType) {
 		iconMixin.setIcon(iconType);
+	}
+	
+	public void setExited(final boolean isExited) {
+		exitedMixin.setApply(isExited);
+	}
+	
+	public boolean isExited() {
+		return exitedMixin.isApplied();
 	}
 }

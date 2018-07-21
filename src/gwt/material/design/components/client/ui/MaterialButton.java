@@ -44,6 +44,7 @@ import gwt.material.design.components.client.utils.JsUtils;
 public class MaterialButton extends Button implements HasType<ButtonType>, HasHref, HasText, HasIcon, HasDense {
 
 	protected final Span label = new Span();
+	
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
