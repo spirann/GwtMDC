@@ -292,6 +292,22 @@ a:active {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
+.mdc-drawer__header-content {
+	background-color: var(--mdc-theme-primary, #fff);
+}
+
+.mdc-drawer__header-content label:not[class*="subtitle"]:not([class*="caption"]) {
+	color: var(--mdc-theme-text-primary-on-primary, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-drawer__header-content label[class*="subtitle"],
+.mdc-drawer__header-content label[class*="caption"] {
+	color: var(--mdc-theme-text-secondary-on-primary, #ccc);
+}
+
+.mdc-drawer__content {
+	background-color: var(--mdc-theme-background, #fff);
+}
 
 .mdc-drawer--permanent,
 .mdc-drawer--persistent {
@@ -492,11 +508,15 @@ a:active {
 	color: var(--mdc-theme-text-secondary-on-surface, #ccc);
 }
 
-.mdc-card__action--button.mdc-button {
+.mdc-card__action--button.mdc-button,
+.mdc-card__action--button.material-icons,
+.mdc-card__action--button.mdc-icon-button {
 	color: var(--mdc-theme-text-primary-on-surface, rgba(0, 0, 0, 0.38));
 }
 
-.mdc-card__action-icons {
+.mdc-card__action--icon.mdc-button,
+.mdc-card__action--icon.material-icons,
+.mdc-card__action--icon.mdc-icon-button {
 	color: var(--mdc-theme-text-icon-on-surface, rgba(0, 0, 0, 0.38));
 }
 

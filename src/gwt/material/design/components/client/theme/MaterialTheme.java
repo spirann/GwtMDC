@@ -36,44 +36,31 @@ public class MaterialTheme implements Serializable {
 	private String primary;
 	private String secondary;
 	private String background;
-	//
-	private String ripplePrimary;
-	private String rippleSecondary;
+	private String surface;
 	//
 	private String textPrimaryOnPrimary;
 	private String textSecondaryOnPrimary;
 	private String textHintOnPrimary;
 	private String textDisabledOnPrimary;
 	private String textIconOnPrimary;
-	private String rippleOnPrimary;
 	//
 	private String textPrimaryOnSecondary;
 	private String textSecondaryOnSecondary;
 	private String textHintOnSecondary;
 	private String textDisabledOnSecondary;
 	private String textIconOnSecondary;
-	private String rippleOnSecondary;
 	//
 	private String textPrimaryOnBackground;
 	private String textSecondaryOnBackground;
 	private String textHintOnBackground;
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
-	private String rippleOnBackground;
 	//
-	private String textPrimaryOnLight;
-	private String textSecondaryOnLight;
-	private String textHintOnLight;
-	private String textDisabledOnLight;
-	private String textIconOnLight;
-	private String rippleOnLight;
-	//
-	private String textPrimaryOnDark;
-	private String textSecondaryOnDark;
-	private String textHintOnDark;
-	private String textDisabledOnDark;
-	private String textIconOnDark;
-	private String rippleOnDark;
+	private String textPrimaryOnSurface;
+	private String textSecondaryOnSurface;
+	private String textHintOnSurface;
+	private String textDisabledOnSurface;
+	private String textIconOnSurface;
 	//
 	private String codeBackground;
 	private String codeString;
@@ -115,9 +102,6 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_BACKGROUND, background));
 		//
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_PRIMARY, ripplePrimary));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_RIPPLE_SECONDARY, rippleSecondary));
-		//
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY, textPrimaryOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY, textSecondaryOnPrimary));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY, textHintOnPrimary));
@@ -136,17 +120,11 @@ public class MaterialTheme implements Serializable {
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND, textDisabledOnBackground));
 		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground));
 		//
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_LIGHT, textPrimaryOnLight));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_LIGHT, textSecondaryOnLight));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_LIGHT, textHintOnLight));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_LIGHT, textDisabledOnLight));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_LIGHT, textIconOnLight));
-		//
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_DARK, textPrimaryOnDark));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_DARK, textSecondaryOnDark));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_DARK, textHintOnDark));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_DARK, textDisabledOnDark));
-		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_DARK, textIconOnDark));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_SURFACE, textPrimaryOnSurface));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_SURFACE, textSecondaryOnSurface));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_SURFACE, textHintOnSurface));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_SURFACE, textDisabledOnSurface));
+		text.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_SURFACE, textIconOnSurface));
 		//
 		text.append(loadProperty("--mdc-theme-code-background", codeBackground));
 		text.append(loadProperty("--mdc-theme-code-String", codeString));
@@ -345,86 +323,59 @@ public class MaterialTheme implements Serializable {
 	public void setTextIconOnBackground(String textIconOnBackground) {
 		this.textIconOnBackground = textIconOnBackground;
 	}
-
-	public String getTextPrimaryOnLight() {
-		return textPrimaryOnLight;
+	
+	public String getSurface() {
+		return surface;
 	}
 
-	public void setTextPrimaryOnLight(String textPrimaryOnLight) {
-		this.textPrimaryOnLight = textPrimaryOnLight;
+	public void setSurface(String surface) {
+		this.surface = surface;
 	}
 
-	public String getTextSecondaryOnLight() {
-		return textSecondaryOnLight;
+	public String getTextPrimaryOnSurface() {
+		return textPrimaryOnSurface;
 	}
 
-	public void setTextSecondaryOnLight(String textSecondaryOnLight) {
-		this.textSecondaryOnLight = textSecondaryOnLight;
+	public void setTextPrimaryOnSurface(String textPrimaryOnSurface) {
+		this.textPrimaryOnSurface = textPrimaryOnSurface;
 	}
 
-	public String getTextHintOnLight() {
-		return textHintOnLight;
+	public String getTextSecondaryOnSurface() {
+		return textSecondaryOnSurface;
 	}
 
-	public void setTextHintOnLight(String textHintOnLight) {
-		this.textHintOnLight = textHintOnLight;
+	public void setTextSecondaryOnSurface(String textSecondaryOnSurface) {
+		this.textSecondaryOnSurface = textSecondaryOnSurface;
 	}
 
-	public String getTextDisabledOnLight() {
-		return textDisabledOnLight;
+	public String getTextHintOnSurface() {
+		return textHintOnSurface;
 	}
 
-	public void setTextDisabledOnLight(String textDisabledOnLight) {
-		this.textDisabledOnLight = textDisabledOnLight;
+	public void setTextHintOnSurface(String textHintOnSurface) {
+		this.textHintOnSurface = textHintOnSurface;
 	}
 
-	public String getTextIconOnLight() {
-		return textIconOnLight;
+	public String getTextDisabledOnSurface() {
+		return textDisabledOnSurface;
 	}
 
-	public void setTextIconOnLight(String textIconOnLight) {
-		this.textIconOnLight = textIconOnLight;
+	public void setTextDisabledOnSurface(String textDisabledOnSurface) {
+		this.textDisabledOnSurface = textDisabledOnSurface;
 	}
 
-	public String getTextPrimaryOnDark() {
-		return textPrimaryOnDark;
+	public String getTextIconOnSurface() {
+		return textIconOnSurface;
 	}
 
-	public void setTextPrimaryOnDark(String textPrimaryOnDark) {
-		this.textPrimaryOnDark = textPrimaryOnDark;
+	public void setTextIconOnSurface(String textIconOnSurface) {
+		this.textIconOnSurface = textIconOnSurface;
 	}
-
-	public String getTextSecondaryOnDark() {
-		return textSecondaryOnDark;
-	}
-
-	public void setTextSecondaryOnDark(String textSecondaryOnDark) {
-		this.textSecondaryOnDark = textSecondaryOnDark;
-	}
-
-	public String getTextHintOnDark() {
-		return textHintOnDark;
-	}
-
-	public void setTextHintOnDark(String textHintOnDark) {
-		this.textHintOnDark = textHintOnDark;
-	}
-
-	public String getTextDisabledOnDark() {
-		return textDisabledOnDark;
-	}
-
-	public void setTextDisabledOnDark(String textDisabledOnDark) {
-		this.textDisabledOnDark = textDisabledOnDark;
-	}
-
-	public String getTextIconOnDark() {
-		return textIconOnDark;
-	}
-
-	public void setTextIconOnDark(String textIconOnDark) {
-		this.textIconOnDark = textIconOnDark;
-	}
+	
+	/*
+	 * 
+	 * 
+	 */
 
 	public String getCodeBackground() {
 		return codeBackground;
@@ -664,62 +615,6 @@ public class MaterialTheme implements Serializable {
 
 	public void setCodeTokenImportant(String codeTokenImportant) {
 		this.codeTokenImportant = codeTokenImportant;
-	}
-
-	public String getRipplePrimary() {
-		return ripplePrimary;
-	}
-
-	public void setRipplePrimary(String ripplePrimary) {
-		this.ripplePrimary = ripplePrimary;
-	}
-
-	public String getRippleSecondary() {
-		return rippleSecondary;
-	}
-
-	public void setRippleSecondary(String rippleSecondary) {
-		this.rippleSecondary = rippleSecondary;
-	}
-
-	public String getRippleOnPrimary() {
-		return rippleOnPrimary;
-	}
-
-	public void setRippleOnPrimary(String rippleOnPrimary) {
-		this.rippleOnPrimary = rippleOnPrimary;
-	}
-
-	public String getRippleOnSecondary() {
-		return rippleOnSecondary;
-	}
-
-	public void setRippleOnSecondary(String rippleOnSecondary) {
-		this.rippleOnSecondary = rippleOnSecondary;
-	}
-
-	public String getRippleOnBackground() {
-		return rippleOnBackground;
-	}
-
-	public void setRippleOnBackground(String rippleOnBackground) {
-		this.rippleOnBackground = rippleOnBackground;
-	}
-
-	public String getRippleOnLight() {
-		return rippleOnLight;
-	}
-
-	public void setRippleOnLight(String rippleOnLight) {
-		this.rippleOnLight = rippleOnLight;
-	}
-
-	public String getRippleOnDark() {
-		return rippleOnDark;
-	}
-
-	public void setRippleOnDark(String rippleOnDark) {
-		this.rippleOnDark = rippleOnDark;
 	}
 	
 }

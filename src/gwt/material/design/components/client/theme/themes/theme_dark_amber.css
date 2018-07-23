@@ -1,8 +1,8 @@
 :root {
   --mdc-theme-primary: #424242;
   --mdc-theme-secondary: #FFC400;
-  --mdc-theme-background: #000;
-  --mdc-theme-surface: #333;
+  --mdc-theme-background: #333;
+  --mdc-theme-surface: #666;
   
   --mdc-theme-text-primary-on-primary: white;
   --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
