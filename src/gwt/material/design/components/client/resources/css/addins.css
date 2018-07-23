@@ -457,6 +457,17 @@ a:active {
 	cursor: default;
 }
 
+.mdc-chip.mdc-chip--selected,
+.mdc-chip.mdc-chip--selected .mdc-chip__text,
+.mdc-chip.mdc-chip--selected .mdc-chip__icon,
+.mdc-chip.mdc-chip--selected .mdc-chip__icon:hover {
+	color: var(--mdc-theme-text-primary-on-surface, var(--mdc-theme-primary, #6200ee));
+}
+
+.mdc-chip .mdc-chip__checkmark-path {
+	stroke: var(--mdc-theme-text-primary-on-surface, var(--mdc-theme-primary, #6200ee));
+}
+
 /* ==========================================================================
    Card
    ========================================================================== */
@@ -471,6 +482,24 @@ a:active {
 .mdc-card__content:empty {
 	display: none;
 }
+
+.mdc-card label:not[class*="subtitle"]:not([class*="caption"]) {
+	color: var(--mdc-theme-text-primary-on-surface, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-card label[class*="subtitle"],
+.mdc-card label[class*="caption"] {
+	color: var(--mdc-theme-text-secondary-on-surface, #ccc);
+}
+
+.mdc-card__action--button.mdc-button {
+	color: var(--mdc-theme-text-primary-on-surface, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-card__action-icons {
+	color: var(--mdc-theme-text-icon-on-surface, rgba(0, 0, 0, 0.38));
+}
+
 
 /* ==========================================================================
    Shape deafults
