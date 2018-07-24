@@ -1251,6 +1251,55 @@ a:active {
 }
 
 /* ==========================================================================
+   ADD-INS
+   ========================================================================== */
+
+.mdc-color-palette {
+	display: flex;
+	flex-direction: column;
+}
+
+.mdc-color-palette__title {
+	width: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.mdc-color-palette__title:first-child {
+	flex: one;
+}
+
+.mdc-color-palette__button_group {
+	display: flex;
+}
+
+.mdc-color-palette__label {
+	font-size: 8pt;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+}
+
+.mdc-color-palette__label,
+.mdc-color-palette__button {
+	width: 28px;
+	min-width: 28px;
+	max-width: 28px;
+	height: 28px;
+	min-height: 28px;
+	max-height: 28px;
+	border: 1px solid rgba(127,127,127,0.5);
+	cursor: pointer;
+}
+
+.mdc-color-palette__button_selected {
+	border-radius: 50%; 
+}
+
+/* ==========================================================================
    Configure placeholder color
    ========================================================================== */
 

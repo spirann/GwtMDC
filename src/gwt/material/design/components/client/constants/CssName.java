@@ -363,7 +363,6 @@ public interface CssName {
 	String MDC_TEXT_FIELD__WITH_LEADING_ICON = "mdc-text-field--with-leading-icon";
 	String MDC_TEXT_FIELD__WITH_TRAILING_ICON = "mdc-text-field--with-trailing-icon";
 	
-	
 	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";	
 	String MDC_TEXT_FIELD_MULTILINE = "mdc-text-field--multiline";
 	// //////////////////////////////////////////////////////
@@ -378,4 +377,16 @@ public interface CssName {
 	String MDC_LINEAR_PROGRESS__PRIMARY_BAR = "mdc-linear-progress__primary-bar";
 	String MDC_LINEAR_PROGRESS__SECONDARY_BAR = "mdc-linear-progress__secondary-bar";
 	String MDC_LINEAR_PROGRESS__BAR_INNER = "mdc-linear-progress__bar-inner";
+	
+	// //////////////////////////////////////////////////////
+	//
+	// ADD-INS
+	//
+	// //////////////////////////////////////////////////////
+	String MDC_COLOR_PALETTE = "mdc-color-palette";
+	String MDC_COLOR_PALETTE__TITLE = "mdc-color-palette__title";
+	String MDC_COLOR_PALETTE__LABEL = "mdc-color-palette__label";
+	String MDC_COLOR_PALETTE__BUTTON_GROUP = "mdc-color-palette__button_group";
+	String MDC_COLOR_PALETTE__BUTTON = "mdc-color-palette__button";
+	String MDC_COLOR_PALETTE__BUTTON_SELECTED = "mdc-color-palette__button_selected";
 }

@@ -2353,205 +2353,205 @@ public enum Color implements CssType {
 	 */
 	BROWN_900(62, 39, 35),
 
-	// GREY
+	// GRAY
 	/**
-	 * The color GREY with an RGB value of rgb(158, 158, 158).
+	 * The color GRAY with an RGB value of rgb(158, 158, 158).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(158, 158,
 	 * 158);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY(158, 158, 158),
+	GRAY(158, 158, 158),
 
 	/**
-	 * The color GREY 50 with an RGB value of rgb(250, 250, 250).
+	 * The color GRAY 50 with an RGB value of rgb(250, 250, 250).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(250, 250,
 	 * 250);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_50(250, 250, 250),
+	GRAY_50(250, 250, 250),
 
 	/**
-	 * The color GREY 100 with an RGB value of rgb(245, 245, 245).
+	 * The color GRAY 100 with an RGB value of rgb(245, 245, 245).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(245, 245,
 	 * 245);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_100(245, 245, 245),
+	GRAY_100(245, 245, 245),
 
 	/**
-	 * The color GREY 200 with an RGB value of rgb(238, 238, 238).
+	 * The color GRAY 200 with an RGB value of rgb(238, 238, 238).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(238, 238,
 	 * 238);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_200(238, 238, 238),
+	GRAY_200(238, 238, 238),
 
 	/**
-	 * The color GREY 300 with an RGB value of rgb(224, 224, 224).
+	 * The color GRAY 300 with an RGB value of rgb(224, 224, 224).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(224, 224,
 	 * 224);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_300(224, 224, 224),
+	GRAY_300(224, 224, 224),
 
 	/**
-	 * The color GREY 400 with an RGB value of rgb(189, 189, 189).
+	 * The color GRAY 400 with an RGB value of rgb(189, 189, 189).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(189, 189,
 	 * 189);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_400(189, 189, 189),
+	GRAY_400(189, 189, 189),
 
 	/**
-	 * The color GREY 500 with an RGB value of rgb(158, 158, 158).
+	 * The color GRAY 500 with an RGB value of rgb(158, 158, 158).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(158, 158,
 	 * 158);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_500(158, 158, 158),
+	GRAY_500(158, 158, 158),
 
 	/**
-	 * The color GREY 600 with an RGB value of rgb(117, 117, 117).
+	 * The color GRAY 600 with an RGB value of rgb(117, 117, 117).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(117, 117,
 	 * 117);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_600(117, 117, 117),
+	GRAY_600(117, 117, 117),
 
 	/**
-	 * The color GREY 700 with an RGB value of rgb(97, 97, 97).
+	 * The color GRAY 700 with an RGB value of rgb(97, 97, 97).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(97, 97,
 	 * 97);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_700(97, 97, 97),
+	GRAY_700(97, 97, 97),
 
 	/**
-	 * The color GREY 800 with an RGB value of rgb(66, 66, 66).
+	 * The color GRAY 800 with an RGB value of rgb(66, 66, 66).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(66, 66,
 	 * 66);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_800(66, 66, 66),
+	GRAY_800(66, 66, 66),
 
 	/**
-	 * The color GREY 900 with an RGB value of rgb(33, 33, 33).
+	 * The color GRAY 900 with an RGB value of rgb(33, 33, 33).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(33, 33,
 	 * 33);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	GREY_900(33, 33, 33),
+	GRAY_900(33, 33, 33),
 
-	// BLUE GREY
+	// BLUE GRAY
 	/**
-	 * The color BLUE GREY with an RGB value of rgb(96, 125, 139).
+	 * The color BLUE GRAY with an RGB value of rgb(96, 125, 139).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(96, 125,
 	 * 139);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY(96, 125, 139),
+	BLUE_GRAY(96, 125, 139),
 
 	/**
-	 * The color BLUE GREY 50 with an RGB value of rgb(236, 239, 241).
+	 * The color BLUE GRAY 50 with an RGB value of rgb(236, 239, 241).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(236, 239,
 	 * 241);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_50(236, 239, 241),
+	BLUE_GRAY_50(236, 239, 241),
 
 	/**
-	 * The color BLUE GREY 100 with an RGB value of rgb(207, 216, 220).
+	 * The color BLUE GRAY 100 with an RGB value of rgb(207, 216, 220).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(207, 216,
 	 * 220);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_100(207, 216, 220),
+	BLUE_GRAY_100(207, 216, 220),
 
 	/**
-	 * The color BLUE GREY 200 with an RGB value of rgb(176, 190, 197).
+	 * The color BLUE GRAY 200 with an RGB value of rgb(176, 190, 197).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(176, 190,
 	 * 197);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_200(176, 190, 197),
+	BLUE_GRAY_200(176, 190, 197),
 
 	/**
-	 * The color BLUE GREY 300 with an RGB value of rgb(144, 164, 174).
+	 * The color BLUE GRAY 300 with an RGB value of rgb(144, 164, 174).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(144, 164,
 	 * 174);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_300(144, 164, 174),
+	BLUE_GRAY_300(144, 164, 174),
 
 	/**
-	 * The color BLUE GREY 400 with an RGB value of rgb(120, 144, 156).
+	 * The color BLUE GRAY 400 with an RGB value of rgb(120, 144, 156).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(120, 144,
 	 * 156);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_400(120, 144, 156),
+	BLUE_GRAY_400(120, 144, 156),
 
 	/**
-	 * The color BLUE GREY 500 with an RGB value of rgb(96, 125, 139).
+	 * The color BLUE GRAY 500 with an RGB value of rgb(96, 125, 139).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(96, 125,
 	 * 139);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_500(96, 125, 139),
+	BLUE_GRAY_500(96, 125, 139),
 
 	/**
-	 * The color BLUE GREY 600 with an RGB value of rgb(84, 110, 122).
+	 * The color BLUE GRAY 600 with an RGB value of rgb(84, 110, 122).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(84, 110,
 	 * 122);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_600(84, 110, 122),
+	BLUE_GRAY_600(84, 110, 122),
 
 	/**
-	 * The color BLUE GREY 700 with an RGB value of rgb(69, 90, 100).
+	 * The color BLUE GRAY 700 with an RGB value of rgb(69, 90, 100).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(69, 90,
 	 * 100);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_700(69, 90, 100),
+	BLUE_GRAY_700(69, 90, 100),
 
 	/**
-	 * The color BLUE GREY 800 with an RGB value of rgb(55, 71, 79).
+	 * The color BLUE GRAY 800 with an RGB value of rgb(55, 71, 79).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(55, 71,
 	 * 79);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_800(55, 71, 79),
+	BLUE_GRAY_800(55, 71, 79),
 
 	/**
-	 * The color BLUE GREY 900 with an RGB value of rgb(38, 50, 56).
+	 * The color BLUE GRAY 900 with an RGB value of rgb(38, 50, 56).
 	 * <div style="border:1px solid
 	 * black;width:40px;height:20px;background-color:rgb(38, 50,
 	 * 56);float:right;margin: 0 10px 0 0"></div><br/>
 	 * <br/>
 	 */
-	BLUE_GREY_900(38, 50, 56);
+	BLUE_GRAY_900(38, 50, 56);
 
 	private String css;
 	// private int red;
