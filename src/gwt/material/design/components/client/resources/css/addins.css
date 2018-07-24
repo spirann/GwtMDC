@@ -429,7 +429,7 @@ a:active {
    ========================================================================== */
 
 .mdc-fab * {
-	color: var(--mdc-theme-on-secondary, #fff);
+	color: var(--mdc-theme-text-primary-on-secondary, #fff);
 }
 
 .mdc-fab__label:empty,
