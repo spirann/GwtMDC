@@ -105,18 +105,10 @@ public class MaterialColorPalette extends MaterialFormField<Color> {
 
 	};
 
-	protected Label selectedName = new Label();
-	protected Label selectedValue = new Label();
-	
 	protected Map<Color, Div> items = new LinkedHashMap<>();
 
 	public MaterialColorPalette() {
 		super(CssName.MDC_COLOR_PALETTE);
-
-		final Div div = new Div(CssName.MDC_COLOR_PALETTE__TITLE);
-		div.add(selectedName);
-		div.add(selectedValue);
-		add(div);
 		
 		final Div contentLabels = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
 		for (String name : COLORS_NAMES) {
@@ -165,8 +157,6 @@ public class MaterialColorPalette extends MaterialFormField<Color> {
 			selected.addStyleName(CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
 		}
 		
-		selectedName.setText(value.toString());
-		selectedValue.setText(value.getCssName());
 	}
 
 }

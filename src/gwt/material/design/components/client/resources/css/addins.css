@@ -1259,14 +1259,6 @@ a:active {
 	flex-direction: column;
 }
 
-.mdc-color-palette__title {
-	width: 100%;
-	display: flex;
-	align-content: center;
-	align-items: center;
-	justify-content: space-between;
-}
-
 .mdc-color-palette__title:first-child {
 	flex: one;
 }

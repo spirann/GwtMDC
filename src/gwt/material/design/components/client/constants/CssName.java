@@ -384,7 +384,6 @@ public interface CssName {
 	//
 	// //////////////////////////////////////////////////////
 	String MDC_COLOR_PALETTE = "mdc-color-palette";
-	String MDC_COLOR_PALETTE__TITLE = "mdc-color-palette__title";
 	String MDC_COLOR_PALETTE__LABEL = "mdc-color-palette__label";
 	String MDC_COLOR_PALETTE__BUTTON_GROUP = "mdc-color-palette__button_group";
 	String MDC_COLOR_PALETTE__BUTTON = "mdc-color-palette__button";
