@@ -357,4 +357,34 @@ public class MaterialDialog extends Aside
 	public void setPaddingTop(int paddingTop) {
 		body.setPaddingTop(paddingTop);
 	}
+	
+	@Override
+	public void setWidth(String width) {
+		surface.setWidth(width);
+	}
+	
+	@Override
+	public void setMaxWidth(String maxWidth) {
+		surface.setMaxWidth(maxWidth);
+	}
+	
+	@Override
+	public void setMinWidth(String minWidth) {
+		surface.setMinWidth(minWidth);
+	}
+	
+	@Override
+	public void setHeight(String height) {
+		surface.setHeight(height);
+	}
+	
+	@Override
+	public void setMaxHeight(String maxHeight) {
+		surface.setMaxHeight(maxHeight);
+	}
+	
+	@Override
+	public void setMinHeight(String minHeight) {
+		surface.setMinHeight(minHeight);
+	}
 }

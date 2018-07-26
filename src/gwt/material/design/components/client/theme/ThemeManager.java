@@ -35,7 +35,7 @@ public class ThemeManager {
 	private static StyleElement currentTheme;
 
 	public static void applyTheme(final MaterialTheme theme) {
-		applyTheme(theme.getText());
+		applyTheme(theme.getAsText());
 	}
 	
 	public static void applyTheme(final TextResource resource) {
