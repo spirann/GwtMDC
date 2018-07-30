@@ -664,6 +664,13 @@ a:active {
 /* ==========================================================================
    Slider color adjust
    ========================================================================== */
+.mdc-slider:not(.mdc-slider--discrete) .mdc-slider__pin {
+	display: none;
+}
+
+.mdc-slider:not(.mdc-slider--display-markers) .mdc-slider__track-marker-container {
+	display: none;
+}
 
 .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track {
     background-color: #018786;

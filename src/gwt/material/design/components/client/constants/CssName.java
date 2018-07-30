@@ -329,7 +329,7 @@ public interface CssName {
 	String MDC_SLIDER__THUMB_CONTAINER = "mdc-slider__thumb-container";
 	String MDC_SLIDER__THUMB = "mdc-slider__thumb";
 	String MDC_SLIDER__FOCUS_RING = "mdc-slider__focus-ring";
-	String MDC__SLIDER__PIN = "mdc-slider__pin";
+	String MDC_SLIDER__PIN = "mdc-slider__pin";
 	String MDC_SLIDER__PIN_VALUE_MARKER = "mdc-slider__pin-value-marker";
 	// //////////////////////////////////////////////////////
 	// Switch

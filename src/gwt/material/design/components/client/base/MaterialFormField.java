@@ -54,11 +54,6 @@ public class MaterialFormField<T> extends Div implements HasValue<T> {
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.formField.MDCFormField(element);
 	}-*/;
-	
-	@Override
-	protected void onLoad() {
-		super.onLoad();
-	}
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());

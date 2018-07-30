@@ -21,6 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.HasDiscrete;
@@ -56,21 +57,19 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);	
 	protected Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);	
 	protected Div focusRing = new Div(CssName.MDC_SLIDER__FOCUS_RING);
-	protected Div pin = new Div(CssName.MDC__SLIDER__PIN);
+	protected Div pin = new Div(CssName.MDC_SLIDER__PIN);
 	protected Span pinValueMarker = new Span(CssName.MDC_SLIDER__PIN_VALUE_MARKER);
-
+	
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
-	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin", "0");
-	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow", "0");
-	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax", "0");
-	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step", "0");
-	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled", "false");
-	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE);
-	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin");
+	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow");
+	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax");
+	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step");
+	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled");
+	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE);
+	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
@@ -88,10 +87,11 @@ public class MaterialSlider extends MaterialFormField<Double>
 		trackContainer.add(track);
 		trackContainer.add(markerContainer);
 
-		pin.add(pinValueMarker);		
+		pin.add(pinValueMarker);
+	
 		thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
-		thumbContainer.add(focusRing);		
 		thumbContainer.add(pin);
+		thumbContainer.add(focusRing);	
 		
 		add(trackContainer);
 		add(thumbContainer);
@@ -99,7 +99,10 @@ public class MaterialSlider extends MaterialFormField<Double>
 		initializeChageEventListener();
 		initializeInputEventListener();
 
+		setLayoutPosition(Position.RELATIVE);
+		
 		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
+		//super.onInitialize();
 
 	}
 
@@ -114,9 +117,9 @@ public class MaterialSlider extends MaterialFormField<Double>
 	protected native void initializeInputEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		element.addEventListener('MDCSlider:input', function() {								
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();	
-			 _this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
+		element.addEventListener('MDCSlider:input', function() {											
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
 		});
 	}-*/;
 	
@@ -125,6 +128,7 @@ public class MaterialSlider extends MaterialFormField<Double>
 		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinValueMarker;
 		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
 		var value = this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()();
+		
 		var formattedValue = parseFloat(value).toFixed(0);
 		pinMarkerElement.innerText = formattedValue;
 

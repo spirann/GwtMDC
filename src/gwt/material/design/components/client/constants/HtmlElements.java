@@ -54,6 +54,7 @@ public enum HtmlElements {
 	IMG("img"),
 	P("p"),
 	SVG("svg"),
+	SVG__CIRCLE("circle"),
 	PATH("path"),
 	H1("h1"),
 	H2("h2"),
