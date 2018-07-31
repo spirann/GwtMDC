@@ -19,13 +19,17 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.MaterialFormField;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
+import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
@@ -42,40 +46,39 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	// Switch
 	// /////////////////////////////////////////////////////////////
 	protected Div switch_ = new Div(CssName.MDC_SWITCH);
+	protected Div track = new Div(CssName.MDC_SWITCH__TRACK);
 	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH__NATIVE_CONTROL);
-	protected Div divBackground = new Div(CssName.MDC_SWITCH__BACKGROUND);
-	protected Div divKnob = new Div(CssName.MDC_SWITCH__KNOB);
+	protected Div thumbUnderlay = new Div(CssName.MDC_SWITCH__THUMB_UNDERLAY);
+	protected Div thumb = new Div(CssName.MDC_SWITCH__THUMB);
+	
 
 	// /////////////////////////////////////////////////////////////
 	// Label
 	// /////////////////////////////////////////////////////////////
-	protected Label label = new Label();
+	protected Label label = new Label(CssName.MDC_SWITCH__LABEL);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
 	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
+	protected final ApplyStyleMixin<Div> checkedStyleMixin = new ApplyStyleMixin<>(switch_, CssName.MDC_SWITCH__CHECKED);
 
 	public MaterialSwitch() {
-		super();
+		super(CssName.MDC_SWITCH_WRAPPER);
 	}
 
 	@Override
 	protected void onInitialize() {
 		
+		input.setRole(Role.SWITCH);
+		
 		label.setFor(input.getId());
 
-		// Adjust to use the correct space 
-		setHeight("48px");
-		//setPaddingLeft(6);
-		
-		divBackground.add(divKnob);
-
-		switch_.setPadding(8);
-		switch_.add(input);
-		switch_.add(divBackground);
-
-		label.addStyleName(CssName.MDC_SWITCH__LABEL);
+		thumb.add(input);
+		thumbUnderlay.add(thumb);
+				
+		switch_.add(track);
+		switch_.add(thumbUnderlay);
 
 		add(switch_);
 		add(label);
@@ -84,10 +87,21 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 		
 		super.onInitialize();
 	}
+	
+	@Override
+	protected void jsInit() {
+		jsElement = jsInit(switch_.getElement());
+	}
+	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.switchControl.MDCSwitch(element);
+	}-*/;
 
 	@Override
 	public void setValue(Boolean value, boolean fireEvents) {
 		checkedMixin.setChecked(value);
+		checkedStyleMixin.setApply(value);
 		if (fireEvents) {
 			fireChangeEvent();
 		}

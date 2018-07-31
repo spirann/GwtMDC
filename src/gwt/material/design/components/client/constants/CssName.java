@@ -334,11 +334,14 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// Switch
 	// //////////////////////////////////////////////////////
+	String MDC_SWITCH_WRAPPER = "mdc-switch-wrapper";
 	String MDC_SWITCH = "mdc-switch";
+	String MDC_SWITCH__CHECKED = "mdc-switch--checked";
+	String MDC_SWITCH__TRACK = "mdc-switch__track";
+	String MDC_SWITCH__THUMB_UNDERLAY = "mdc-switch__thumb-underlay";
+	String MDC_SWITCH__THUMB = "mdc-switch__thumb";
 	String MDC_SWITCH__NATIVE_CONTROL = "mdc-switch__native-control";
-	String MDC_SWITCH__BACKGROUND = "mdc-switch__background";
-	String MDC_SWITCH__KNOB = "mdc-switch__knob";
-	String MDC_SWITCH__LABEL = "mdc-switch-label";
+	String MDC_SWITCH__LABEL = "mdc-switch-label";	
 	// //////////////////////////////////////////////////////
 	// Textfield
 	// //////////////////////////////////////////////////////

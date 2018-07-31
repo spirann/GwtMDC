@@ -38,7 +38,8 @@ public enum Role implements CssType {
 	PROGRESS_BAR("progressbar"),
 	SEPARATOR("separator"),
 	MENU("menu"),
-	MENU_ITEM("menuitem");
+	MENU_ITEM("menuitem"),
+	SWITCH("switch");
 
     private final String cssClass;
 

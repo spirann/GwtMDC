@@ -710,48 +710,32 @@ a:active {
    Switch color adjust
    ========================================================================== */
 
-.mdc-switch__background {
-	border-radius: 7px;
-	background-color: #fff;
-}	
-
-.mdc-switch__background::before {
-	background-color: var(--mdc-theme-text-hint-on-background, #fafafa));
-	border-color: var(--mdc-theme-text-hint-on-background, #fafafa));
-	opacity: 0.24;
+.mdc-switch-wrapper {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: flex-start;
+	height: 36px;
+	overflow: visible;
 }
 
-.mdc-switch__native-control:enabled:not(:checked) ~ .mdc-switch__background .mdc-switch__knob {
-	background-color: var(--mdc-theme-text-secondary-on-background, #9e9e9e));
-	border-color: var(--mdc-theme-text-secondary-on-background, #9e9e9e);	
+.mdc-switch-wrapper[dir="rtl"] {
+	justify-content: flex-end;
 }
 
-.mdc-switch__native-control:checked ~ .mdc-switch__background::before {
-	background-color: var(--mdc-theme-secondary, #3f51b5);
-	border-color: var(--mdc-theme-secondary, #3f51b5);
+.mdc-switch-label:empty {
+	display: none;	
 }
 
-.mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob,
-.mdc-switch__native-control:checked ~ .mdc-switch__background .mdc-switch__knob::before {
-  	background-color: var(--mdc-theme-secondary, #3f51b5);
+.mdc-switch-label {
+	margin-left: 16px;
+	margin-right: 0;
 }
 
-
-.mdc-switch__native-control:disabled ~ .mdc-switch__background {
-	background-color: var(--mdc-theme-text-disabled-on-background, #000);
+[dir="rtl"] .mdc-switch-label {
+	margin-left: 0;
+	margin-right: 16px;
 }
-
-.mdc-switch__native-control:disabled ~ .mdc-switch__background::before {
-	background-color: var(--mdc-theme-text-disabled-on-background, #000);
-	opacity: .24;
-}
-
-.mdc-switch__native-control:disabled ~ .mdc-switch__background .mdc-switch__knob {
-	border-width: 1px;
-	border-color: var(--mdc-theme-text-primary-on-background, #bdbdbd);
-	background-color: var(--mdc-theme-text-primary-on-background, #bdbdbd); 
-}
-  
 
 /* ==========================================================================
    Textfield color adjust
