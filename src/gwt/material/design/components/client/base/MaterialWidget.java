@@ -103,7 +103,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby {
+		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
 
 	static {
 		autoInit();
@@ -150,6 +150,7 @@ public class MaterialWidget extends BaseWidget
 	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
 	protected final AttributeMixin<MaterialWidget> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
 	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final AttributeMixin<MaterialWidget> ariaSelectedMixin = new AttributeMixin<>(this, "aria-selected");
 	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
@@ -727,5 +728,15 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public int getTabindex() {
 		return tabindexMixin.getAttributeAsInteger();
+	}
+
+	@Override
+	public void setAriaSelected(boolean selected) {
+		ariaSelectedMixin.setAttribute(selected);
+	}
+
+	@Override
+	public boolean isAreaSelected() {
+		return ariaSelectedMixin.getAttributeAsBoolean();
 	}
 }

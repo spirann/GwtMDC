@@ -19,12 +19,12 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.gargoylesoftware.htmlunit.javascript.host.event.Event;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -32,28 +32,45 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialTabBar extends Div {
+public class MaterialTabScroller extends Div {
 
-	protected MaterialTabScroller scrollArea = new MaterialTabScroller();
-
-	public MaterialTabBar() {
-		super(CssName.MDC_TAB_BAR);
-		setRole(Role.TAB_BAR);
+	protected Div scrollArea = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_AREA);
+	protected Div scrollContent = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_CONTENT);
+	
+	private MaterialTab selectedTab;
+	
+	public MaterialTabScroller() {
+		super(CssName.MDC_TAB_SCROLLER);
 	}
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabBar.MDCTabBar(element);
+		return new $wnd.mdc.tabScroller.MDCTabScroller(element);
 	}-*/;
-
+	
 	@Override
 	protected void onInitialize() {
-		super.add(scrollArea);
+		scrollArea.add(scrollContent);		
+		super.add(scrollArea);		
 		super.onInitialize();
 	}
-
+	
 	@Override
 	public void add(Widget child) {
-		scrollArea.add(child);
+		
+		if(child instanceof MaterialTab) {
+			((MaterialTab) child).addSelectionHandler(Event -> {
+				
+				if(selectedTab != null) {
+					selectedTab.setActive(false);
+				}
+				
+				selectedTab = (MaterialTab) child;
+				selectedTab.setActive(true);
+				
+			});
+		}
+		
+		scrollContent.add(child);
 	}
 }

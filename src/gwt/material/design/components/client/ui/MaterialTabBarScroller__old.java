@@ -40,7 +40,7 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, HasChangeHandlers {
+public class MaterialTabBarScroller__old extends Div implements HasType<TabBarType>, HasChangeHandlers {
 
 	protected Div scrollerBackIndicator = new Div(CssName.MDC_TAB_BAR_SCROLLER__INDICATOR,
 			CssName.MDC_TAB_BAR_SCROLLER__INDICATOR__BACK);
@@ -48,7 +48,7 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 			CssName.MATERIAL_ICONS);
 
 	protected Div scrollerFrame = new Div(CssName.MDC_TAB_BAR_SCROLLER__SCROLL_FRAME);
-	protected MaterialTabBar tabBar = new MaterialTabBar() {
+	protected MaterialTabBar__old tabBar = new MaterialTabBar__old() {
 		@Override
 		protected native JavaScriptObject jsInit(final Element element)/*-{
 			return new $wnd.mdc.tabBar.MDCTabBarFoundation(element);
@@ -62,13 +62,13 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 
 	private boolean initialized = false;
 
-	public MaterialTabBarScroller() {
-		super(CssName.MDC_TAB_BAR_SCROLLER);
+	public MaterialTabBarScroller__old() {
+		super(CssName.MDC_TAB_SCROLLER);
 	}
 	
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabBarScroller.MDCTabBarScroller(element);
+		return new $wnd.mdc.tabScroller.MDCTabScroller(element);
 	}-*/;
 
 	@Override

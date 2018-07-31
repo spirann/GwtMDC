@@ -21,39 +21,47 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Span;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTabBar extends Div {
+public class MaterialTabIndicator extends Span {
 
-	protected MaterialTabScroller scrollArea = new MaterialTabScroller();
-
-	public MaterialTabBar() {
-		super(CssName.MDC_TAB_BAR);
-		setRole(Role.TAB_BAR);
+	protected Span indicatorContent = new Span(CssName.MDC_TAB_INDICATOR__CONTENT, CssName.MDC_TAB_INDICATOR__CONTENT__UNDERLINE);
+	
+	protected ActiveMixin<MaterialTabIndicator> activeMixin = new ActiveMixin<>(this, CssName.MDC_TAB_INDICATOR__ACTIVE);
+	
+	public MaterialTabIndicator() {
+		super(CssName.MDC_TAB_INDICATOR);
 	}
-
+	
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabBar.MDCTabBar(element);
+		return new $wnd.mdc.tabIndicator.MDCTabIndicator(element);
 	}-*/;
-
+	
 	@Override
 	protected void onInitialize() {
-		super.add(scrollArea);
+
+		add(indicatorContent);
+		
 		super.onInitialize();
 	}
-
+	
 	@Override
-	public void add(Widget child) {
-		scrollArea.add(child);
+	public void setActive(boolean active) {
+		super.setActive(active);
+		activeMixin.setActive(active);
+	}
+	
+	@Override
+	public boolean isActive() {
+		return activeMixin.isActive();
 	}
 }

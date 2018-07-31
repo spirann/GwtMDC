@@ -19,130 +19,73 @@
  */
 package gwt.material.design.components.client.ui;
 
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style;
-import com.google.gwt.dom.client.StyleInjector;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.HasActive;
 import gwt.material.design.components.client.base.HasSelectionHandlers;
-import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
-import gwt.material.design.components.client.base.mixin.HrefMixin;
-import gwt.material.design.components.client.base.mixin.IconMixin;
-import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
-import gwt.material.design.components.client.ui.html.Anchor;
-import gwt.material.design.components.client.ui.html.Icon;
+import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, HasSelectionHandlers<MaterialTab> {
+public class MaterialTab extends Button implements HasText, HasActive, HasSelectionHandlers<MaterialTab> {
 
-	protected Icon icon = new Icon(CssName.MATERIAL_ICONS, CssName.MDC_TAB__ICON);
-	protected Span label = new Span(CssName.MDC_TAB__ICON_TEXT);
-
-	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
-	protected final IconMixin<MaterialWidget> iconMixin = new IconMixin<>(icon);
-	protected final HrefMixin<MaterialTab> hrefMixin = new HrefMixin<>(this);
-	protected final AttributeMixin<MaterialTab> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
-
-	protected final ApplyStyleMixin<MaterialTab> activeMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB__ACTIVE);
-
-	private HandlerRegistration handler;
-
+	protected Span content = new Span(CssName.MDC_TAB__CONTENT);
+	protected Span label = new Span(CssName.MDC_TAB__TEXT_LABEL);
+	
+	protected MaterialTabIndicator indicator = new MaterialTabIndicator();
+	
+	protected Span ripple = new Span(CssName.MDC_TAB__RIPPLE);
+	
+	protected ActiveMixin<MaterialTab> activeMixin = new ActiveMixin<>(this, CssName.MDC_TAB__ACTIVE);
+	
 	public MaterialTab() {
 		super(CssName.MDC_TAB);
 		setRole(Role.TAB);
 	}
-
+	
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.tab.MDCTab(element);
-	}-*/;
-
+	}-*/;	
+	
 	@Override
 	protected void onInitialize() {
 
-		if (getIcon() != null) {
-			add(icon);
-		}
+		setTabindex(-1);
+		setAriaSelected(false);
 
-		add(label);
-
-		if (!(getParent() instanceof MaterialTabBar)) {
-			super.onInitialize();
-		}
+		content.add(label);
 		
-		updateTarget();
-		preventDefaultClick(true);
+		add(content);		
+		add(indicator);		
+		add(ripple);
+		
 		addNativeSelectEvent(getElement());
+		
+		super.onInitialize();
 	}
 
 	protected native void addNativeSelectEvent(Element element)/*-{
 
 		var _this = this;
-		element.addEventListener('MDCTab:selected', function(event) {
+		element.addEventListener('MDCTab:interacted', function(event) {
 			_this.@gwt.material.design.components.client.ui.MaterialTab::fireSelectionEvent()();
 		});
-
+	
 	}-*/;
-
-	protected native void preventDefaultClick(final boolean prevent)/*-{
-
-		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		if (tab) {
-			tab.preventDefaultOnClick = prevent;
-		}
-
-	}-*/;
-
-	protected void updateTarget() {
-
-		if (getTarget() != null && !getTarget().isEmpty()) {
-
-			final Element target = DOM.getElementById(getTarget());
-			if (target == null) {
-
-				final String style;
-				if (isActive()) {
-					style = "#" + getTarget() + "{ display: block; }";
-				} else {
-					style = "#" + getTarget() + "{ display: none; }";
-				}
-
-				StyleInjector.injectStylesheetAtEnd(style);
-
-			} else {
-				if (isActive()) {
-					target.getStyle().setDisplay(Style.Display.BLOCK);
-				} else {
-					target.getStyle().setDisplay(Style.Display.NONE);
-				}
-			}
-		}
-	}
-
-	@Override
-	public HandlerRegistration addClickHandler(ClickHandler handler) {
-		return super.addClickHandler(event -> TimerHelper.schedule(50, () -> handler.onClick(event)));
-	}
 	
 	protected void fireSelectionEvent() {
 		SelectionEvent.fire(this, this);
@@ -152,72 +95,28 @@ public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, Ha
 	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
 		return addHandler(handler, SelectionEvent.getType());
 	}
-
-	@Override
-	public void setActive(boolean active) {
-		setActive(active, true);
-	}
-
-	protected void setActive(boolean active, boolean notifyParent) {
-		super.setActive(active);
-		activeMixin.setApply(active);
-
-		updateTarget();
-
-		if (notifyParent && isAttached()) {
-
-			final Widget widget = getParent();
-
-			if (widget instanceof MaterialTabBar) {
-				final MaterialTabBar materialTabBar = (MaterialTabBar) widget;
-				materialTabBar.setActiveTabIndex(materialTabBar.getWidgetIndex(this));
-			}
-		}
-	}
-
+	
 	@Override
 	public String getText() {
-		return textMixin.getText();
+		return label.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		textMixin.setText(text);
+		label.setText(text);
 	}
-
+	
 	@Override
-	public void setHref(String href) {
-		hrefMixin.setHref(href);
+	public void setActive(boolean active) {
+		super.setActive(active);
+		activeMixin.setActive(active);
+		indicator.setActive(active);
+		setAriaSelected(active);		
+		setTabindex(active ? 0 : -1);
 	}
-
+	
 	@Override
-	public String getHref() {
-		return hrefMixin.getHref();
+	public boolean isActive() {
+		return activeMixin.isActive();
 	}
-
-	@Override
-	public void setTarget(String target) {
-		ariaControlsMixin.setAttribute(target);
-	}
-
-	@Override
-	public String getTarget() {
-		return ariaControlsMixin.getAttribute();
-	}
-
-	@Override
-	public IconType getIcon() {
-		return iconMixin.getIcon();
-	}
-
-	@Override
-	public void setIcon(IconType iconType) {
-
-		if (iconType != null && isAttached() && !icon.isAttached()) {
-			insert(icon, 0);
-		}
-
-		iconMixin.setIcon(iconType);
-	}
-
 }

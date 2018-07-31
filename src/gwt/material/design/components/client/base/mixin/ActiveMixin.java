@@ -28,13 +28,18 @@ import gwt.material.design.components.client.base.MaterialWidget;
  * @author Richeli Vargas
  */
 public class ActiveMixin<T extends Widget & HasActive> extends AbstractMixin<T> implements HasActive {
-	private static final String ACTIVE = "active";
+	private String styleName = "active";
 
 	private boolean active;
 	private MaterialWidget target;
 
 	public ActiveMixin(final T widget) {
 		super(widget);
+	}
+	
+	public ActiveMixin(final T widget, final String styleName) {
+		this(widget);
+		this.styleName = styleName;
 	}
 
 	public ActiveMixin(final T widget, final MaterialWidget target) {
@@ -54,10 +59,10 @@ public class ActiveMixin<T extends Widget & HasActive> extends AbstractMixin<T> 
 
 	protected void applyActiveStyle(Widget widget, boolean active) {
 		
-		widget.removeStyleName(ACTIVE);
+		widget.removeStyleName(styleName);
 		
 		if (active) {			
-			widget.addStyleName(ACTIVE);
+			widget.addStyleName(styleName);
 		}
 	}
 

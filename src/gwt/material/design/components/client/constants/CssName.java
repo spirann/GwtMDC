@@ -134,17 +134,35 @@ public interface CssName {
 	String MDC_TAB_BAR_SCROLLER__INDICATOR__FORWARD = "mdc-tab-bar-scroller__indicator--forward";
 	String MDC_TAB_BAR_SCROLLER__INDICATOR__INNER = "mdc-tab-bar-scroller__indicator__inner";
 	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME = "mdc-tab-bar-scroller__scroll-frame";
-	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME__TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";
-	String MDC_TAB_BAR = "mdc-tab-bar";
+	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME__TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";	
 	String MDC_TAB_BAR__ICON_TABS = "mdc-tab-bar--icon-tabs";
 	String MDC_TAB_BAR__ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
 	String MDC_TAB_BAR__INDICATOR = "mdc-tab-bar__indicator";
-	String MDC_TAB_BAR__INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";
-	String MDC_TAB = "mdc-tab";
+	String MDC_TAB_BAR__INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";	
 	String MDC_TAB_PANEL = "mdc-tab-panel";
 	String MDC_TAB__ICON = "mdc-tab__icon";
 	String MDC_TAB__ICON_TEXT = "mdc-tab__icon-text";
+	
+	
+	//
+	
+	String MDC_TAB_BAR = "mdc-tab-bar";
+	
+	String MDC_TAB_SCROLLER = "mdc-tab-scroller";
+	String MDC_TAB_SCROLLER__SCROLL_AREA = "mdc-tab-scroller__scroll-area";
+	String MDC_TAB_SCROLLER__SCROLL_CONTENT = "mdc-tab-scroller__scroll-content";
+
+	String MDC_TAB = "mdc-tab";
 	String MDC_TAB__ACTIVE = "mdc-tab--active";
+	String MDC_TAB__CONTENT = "mdc-tab__content";
+	String MDC_TAB__TEXT_LABEL = "mdc-tab__text-label";
+	String MDC_TAB__RIPPLE = "mdc-tab__ripple";
+	
+	String MDC_TAB_INDICATOR = "mdc-tab-indicator";
+	String MDC_TAB_INDICATOR__ACTIVE = "mdc-tab-indicator--active";
+	String MDC_TAB_INDICATOR__CONTENT = "mdc-tab-indicator__content";
+	String MDC_TAB_INDICATOR__CONTENT__UNDERLINE = "mdc-tab-indicator__content--underline";
+	
 	// //////////////////////////////////////////////////////
 	// DRAWER
 	// //////////////////////////////////////////////////////
