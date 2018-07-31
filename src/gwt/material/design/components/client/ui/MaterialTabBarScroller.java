@@ -51,7 +51,7 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 	protected MaterialTabBar tabBar = new MaterialTabBar() {
 		@Override
 		protected native JavaScriptObject jsInit(final Element element)/*-{
-			return new $wnd.mdc.tabs.MDCTabBarFoundation(element);
+			return new $wnd.mdc.tabBar.MDCTabBarFoundation(element);
 		}-*/;
 	};
 
@@ -68,7 +68,7 @@ public class MaterialTabBarScroller extends Div implements HasType<TabBarType>, 
 	
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabs.MDCTabBarScroller(element);
+		return new $wnd.mdc.tabBarScroller.MDCTabBarScroller(element);
 	}-*/;
 
 	@Override

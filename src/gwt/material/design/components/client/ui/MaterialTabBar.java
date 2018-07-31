@@ -57,7 +57,7 @@ public class MaterialTabBar extends Nav implements HasType<TabBarType>, HasChang
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabs.MDCTabBar(element);
+		return new $wnd.mdc.tabBar.MDCTabBar(element);
 	}-*/;
 
 	@Override

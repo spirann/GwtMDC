@@ -74,7 +74,7 @@ public class MaterialTab extends Anchor implements HasHref, HasText, HasIcon, Ha
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.tabs.MDCTab(element);
+		return new $wnd.mdc.tab.MDCTab(element);
 	}-*/;
 
 	@Override
