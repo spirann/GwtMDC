@@ -21,7 +21,6 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.HasDiscrete;
@@ -99,8 +98,6 @@ public class MaterialSlider extends MaterialFormField<Double>
 		initializeChageEventListener();
 		initializeInputEventListener();
 
-		setLayoutPosition(Position.RELATIVE);
-		
 		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
 		//super.onInitialize();
 
@@ -143,6 +140,11 @@ public class MaterialSlider extends MaterialFormField<Double>
 			pinMarkerElement.style.fontSize = "0.875rem";
 		}
 
+	}-*/;
+	
+	protected native void layout()/*-{
+		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		slider.layout();
 	}-*/;
 	
 	protected native void nativeSetValue(final Double value)/*-{
