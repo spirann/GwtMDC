@@ -33,6 +33,7 @@ import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Button;
+import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 
 /**
@@ -42,11 +43,9 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialTab extends Button implements HasText, HasActive, HasSelectionHandlers<MaterialTab> {
 
-	protected Span content = new Span(CssName.MDC_TAB__CONTENT);
-	protected Span label = new Span(CssName.MDC_TAB__TEXT_LABEL);
-	
-	protected MaterialTabIndicator indicator = new MaterialTabIndicator();
-	
+	protected Div content = new Div(CssName.MDC_TAB__CONTENT);
+	protected Span label = new Span(CssName.MDC_TAB__TEXT_LABEL);	
+	protected MaterialTabIndicator indicator = new MaterialTabIndicator();	
 	protected Span ripple = new Span(CssName.MDC_TAB__RIPPLE);
 	
 	protected ActiveMixin<MaterialTab> activeMixin = new ActiveMixin<>(this, CssName.MDC_TAB__ACTIVE);
