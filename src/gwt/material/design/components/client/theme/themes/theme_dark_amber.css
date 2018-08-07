@@ -22,11 +22,11 @@
   --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.38);
 
-  --mdc-theme-text-primary-on-surface: white;
-  --mdc-theme-text-secondary-on-surface: rgba(255, 255, 255, 0.7);
-  --mdc-theme-text-hint-on-surface: rgba(255, 255, 255, 0.5);
-  --mdc-theme-text-disabled-on-surface: rgba(255, 255, 255, 0.5);
-  --mdc-theme-text-icon-on-surface: rgba(255, 255, 255, 0.5);
+  --mdc-theme-on-surface: white;
+  
+  --mdc-state--success: #00b020;
+  --mdc-state--warning: #FF8F00;
+  --mdc-state--error: #b00020;
   
   /* ============================== */
   /* Used only in source code view 	*/

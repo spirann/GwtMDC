@@ -49,9 +49,5 @@ public interface ThemeAttribute {
 	String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
 	String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
 	//
-	String MDC_THEME_TEXT_PRIMARY_ON_SURFACE = "--mdc-theme-text-primary-on-surface";
-	String MDC_THEME_TEXT_SECONDARY_ON_SURFACE = "--mdc-theme-text-secondary-on-surface";
-	String MDC_THEME_TEXT_HINT_ON_SURFACE = "--mdc-theme-text-hint-on-surface";
-	String MDC_THEME_TEXT_DISABLED_ON_SURFACE = "--mdc-theme-text-disabled-on-surface";
-	String MDC_THEME_TEXT_ICON_ON_SURFACE = "--mdc-theme-text-icon-on-surface";
+	String MDC_THEME_ON_SURFACE = "--mdc-theme-on-surface";
 }

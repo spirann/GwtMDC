@@ -140,7 +140,6 @@ public interface CssName {
 	String MDC_TAB_BAR__INDICATOR = "mdc-tab-bar__indicator";
 	String MDC_TAB_BAR__INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";	
 	String MDC_TAB_PANEL = "mdc-tab-panel";
-	String MDC_TAB__ICON = "mdc-tab__icon";
 	String MDC_TAB__ICON_TEXT = "mdc-tab__icon-text";
 	
 	
@@ -156,6 +155,7 @@ public interface CssName {
 	String MDC_TAB__ACTIVE = "mdc-tab--active";
 	String MDC_TAB__CONTENT = "mdc-tab__content";
 	String MDC_TAB__TEXT_LABEL = "mdc-tab__text-label";
+	String MDC_TAB__ICON = "mdc-tab__icon";
 	String MDC_TAB__RIPPLE = "mdc-tab__ripple";
 	
 	String MDC_TAB_INDICATOR = "mdc-tab-indicator";

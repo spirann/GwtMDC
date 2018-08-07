@@ -57,11 +57,7 @@ public class MaterialTheme implements Serializable {
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
 	//
-	private String textPrimaryOnSurface;
-	private String textSecondaryOnSurface;
-	private String textHintOnSurface;
-	private String textDisabledOnSurface;
-	private String textIconOnSurface;
+	private String themeOnSurface;
 	//
 	private String codeBackground;
 	private String codeString;
@@ -145,14 +141,7 @@ public class MaterialTheme implements Serializable {
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
 		//
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_SURFACE, textPrimaryOnSurface))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_SURFACE, textSecondaryOnSurface))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_SURFACE, textHintOnSurface)).append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_SURFACE, textDisabledOnSurface))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_SURFACE, textIconOnSurface)).append(separator);
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SURFACE, themeOnSurface)).append(separator);
 		//
 		if (withCodeStyle) {
 			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground)).append(separator);
@@ -247,11 +236,7 @@ public class MaterialTheme implements Serializable {
 	}
 
 	public void setSurfaceTextColor(final Color color) {
-		setTextPrimaryOnSurface(color.getCssName(textPrimaryAlpha));
-		setTextSecondaryOnSurface(color.getCssName(textSecondaryAlpha));
-		setTextHintOnSurface(color.getCssName(textHintAlpha));
-		setTextDisabledOnSurface(color.getCssName(textDisabledAlpha));
-		setTextIconOnSurface(color.getCssName(textIconAlpha));
+		setThemeOnSurface(color.getCssName(textPrimaryAlpha));
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -435,45 +420,13 @@ public class MaterialTheme implements Serializable {
 		this.surface = surface;
 	}
 
-	public String getTextPrimaryOnSurface() {
-		return textPrimaryOnSurface;
+	public String getThemeOnSurface() {
+		return themeOnSurface;
 	}
 
-	public void setTextPrimaryOnSurface(String textPrimaryOnSurface) {
-		this.textPrimaryOnSurface = textPrimaryOnSurface;
-	}
-
-	public String getTextSecondaryOnSurface() {
-		return textSecondaryOnSurface;
-	}
-
-	public void setTextSecondaryOnSurface(String textSecondaryOnSurface) {
-		this.textSecondaryOnSurface = textSecondaryOnSurface;
-	}
-
-	public String getTextHintOnSurface() {
-		return textHintOnSurface;
-	}
-
-	public void setTextHintOnSurface(String textHintOnSurface) {
-		this.textHintOnSurface = textHintOnSurface;
-	}
-
-	public String getTextDisabledOnSurface() {
-		return textDisabledOnSurface;
-	}
-
-	public void setTextDisabledOnSurface(String textDisabledOnSurface) {
-		this.textDisabledOnSurface = textDisabledOnSurface;
-	}
-
-	public String getTextIconOnSurface() {
-		return textIconOnSurface;
-	}
-
-	public void setTextIconOnSurface(String textIconOnSurface) {
-		this.textIconOnSurface = textIconOnSurface;
-	}
+	public void setThemeOnSurface(String themeOnSurface) {
+		this.themeOnSurface = themeOnSurface;
+	}	
 
 	/*
 	 * 
