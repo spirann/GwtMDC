@@ -31,7 +31,7 @@ import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
@@ -227,16 +227,16 @@ public class MaterialSlider extends MaterialFormField<Double>
 	
 	@Override
 	public void setTextColor(final Color color) {
-		setStyleProperty(CssProperty.MDC_SLIDER__TEXT_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_SLIDER__TEXT_COLOR, color.getCssName());
 	}
 	
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssProperty.MDC_SLIDER__COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_SLIDER__COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssProperty.MDC_SLIDER__BACKGROUND_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_SLIDER__BACKGROUND_COLOR, color.getCssName());
 	}
 }

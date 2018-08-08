@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
@@ -43,15 +44,8 @@ public class MaterialIconButton extends MaterialIcon {
 	}
 	
 	@Override
-	protected void onInitialize() {		
-		ripleMixin.initialize();		
-		super.onInitialize();
-	}
-	
-	@Override
 	public void setColor(Color color) {
-		super.setColor(color);
-		setRipple(color);
+		setStyleProperty(CssMixin.MDC_ICON_BUTTON_INK_COLOR, color.getCssName());
 	}
 	
 }

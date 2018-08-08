@@ -386,38 +386,6 @@ a:active {
 	margin-right: 8px;
 }
 
-.mdc-icon-button {
-	color: var(--mdc-theme-primary);
-}
-
-.mdc-icon-button[disabled] {
-	color: var(--mdc-theme-text-disabled-on-background);
-}
-
-/* ==========================================================================
-   Icon toggle
-   ========================================================================== */
-.mdc-icon-toggle[disabled] {
-	opacity: 0.26;
-	color: rgba(0, 0, 0, 0.38);
-  	/* @alternate */
-  	color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
-  	pointer-events: none; 
-}   
-
-.mdc-icon-toggle.mdc-list-item__start-detail {
-	width: 36px;
-	height: 36px;
-	margin-left: -6px;
-}
-
-.mdc-icon-toggle.mdc-list-item__end-detail {
-	width: 36px;
-	height: 36px;
-	margin-right: -6px;
-}
-
-
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
@@ -666,51 +634,6 @@ a:active {
 .mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
 	border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.26));
 }
-
-/* ==========================================================================
-   Slider color adjust
-   ========================================================================== */
-.mdc-slider:not(.mdc-slider--discrete) .mdc-slider__pin {
-	display: none;
-}
-
-.mdc-slider:not(.mdc-slider--display-markers) .mdc-slider__track-marker-container {
-	display: none;
-}
-
-.mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track {
-    background-color: #018786;
-    /* @alternate */
-    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-container {
-    background-color: var(--mdc-slider--background-color, rgba(1, 135, 134, 0.26)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker::after,
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker-container::after {
-    background-color: #018786;
-    /* @alternate */
-    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__thumb {
-    fill: #018786;
-    /* @alternate */
-    fill: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786));
-    stroke: #018786;
-    /* @alternate */
-    stroke: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__focus-ring {
-    background-color: #018786;
-    /* @alternate */
-    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
-    background-color: #018786;
-    /* @alternate */
-    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
-  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
-    color: white;
-    /* @alternate */
-    color: var(--mdc-slider--text-color, var(--mdc-theme-text-primary-on-dark, white)); }    
-  .mdc-slider--disabled .mdc-slider__thumb {
-      stroke: #9a9a9a;
-      fill: #9a9a9a; }
 
 /* ==========================================================================
    Switch color adjust
@@ -1214,11 +1137,6 @@ a:active {
 [disabled].mdc-ripple-surface--color::before, 
 [disabled].mdc-ripple-surface--color::after {
 	background-color: transparent;
-}
-
-.mdc-icon-button.mdc-ripple-surface--color::before, 
-.mdc-icon-button.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.38)));
 }
 
 .mdc-chip:not([disabled]).mdc-ripple-surface--color::before, 

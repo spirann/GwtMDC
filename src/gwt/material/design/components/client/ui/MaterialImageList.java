@@ -23,7 +23,7 @@ import gwt.material.design.components.client.base.HasColumns;
 import gwt.material.design.components.client.base.HasGap;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.ui.html.Ul;
 
 /**
@@ -67,17 +67,17 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 	
 	@Override
 	public void setDesktopCols(int columns) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
 	}
 
 	@Override
 	public void setTabletCols(int columns) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
 	}
 
 	@Override
 	public void setPhoneCols(int columns) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
 	}
 
 	@Override
@@ -89,16 +89,16 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 
 	@Override
 	public void setDesktopGap(int gap) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
 	}
 
 	@Override
 	public void setTabletGap(int gap) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
 	}
 
 	@Override
 	public void setPhoneGap(int gap) {
-		setStyleProperty(CssProperty.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
+		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
 	}
 }

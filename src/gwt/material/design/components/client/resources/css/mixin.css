@@ -1,0 +1,93 @@
+:root {
+	
+	/* Button */
+	--mdc-button-container-fill-color: var(--mdc-theme-primary);
+	--mdc-button-icon-color: var(--mdc-theme-primary);
+	--mdc-button-ink-color: var(--mdc-theme-primary);
+	--mdc-button-corner-radius: 4px;
+	--mdc-button-outline-color: var(--mdc-theme-primary);
+	
+	/* Fab */
+	--mdc-fab-container-color: var(--mdc-theme-secondary);
+	--mdc-fab-ink-color: var(--mdc-theme-on-secondary);
+	
+	/* Icon button */
+	--mdc-icon-button-ink-color: var(--mdc-theme-primary);
+	
+	/* Icon toggle */
+	--mdc-icon-toggle-ink-color: var(--mdc-theme-primary);
+	
+	/* Card */
+	--mdc-card-fill-color: var(--mdc-theme-surface);
+	--mdc-card-outline: var(--mdc-theme-surface);
+	--mdc-card-corner-radius: 4px;
+	
+	/* Chip */
+	--mdc-chip-corner-radius: 16px;
+	--mdc-chip-fill-color-accessible: none;
+	--mdc-chip-fill-color: none;
+	--mdc-chip-ink-color: none;
+	--mdc-chip-selected-ink-color: none;
+	--mdc-chip-outline-width: 2px;
+	--mdc-chip-outline-style: solid;
+	--mdc-chip-outline-color: none;
+	--mdc-chip-leading-icon-color: none;
+	--mdc-chip-trailing-icon-color: none;
+	
+	/* Linear progress */
+	--mdc-linear-progress-bar-color: none;
+	--mdc-linear-progress-buffer-color: none;
+	
+	/* Slider */
+	--mdc-slider-highlight-color: none;
+  	--mdc-slider-rail-color: none;
+  	--mdc-slider-rail-tick-mark-color: none;
+  	--mdc-slider-thumb-color: none;
+  	--mdc-slider-focus-halo-color: none;
+  	--mdc-slider-value-pin-fill-color-accessible: none;
+}
+
+/* ==========================================================================
+   Icon button
+   ========================================================================== */
+.mdc-icon-button {
+	color: var(--mdc-icon-button-ink-color);
+}
+
+.mdc-icon-button[disabled] {
+	color: var(--mdc-theme-text-disabled-on-background);
+}
+
+.mdc-icon-button.mdc-ripple-surface--color::before, 
+.mdc-icon-button.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-icon-button-ink-color);
+}
+
+/* ==========================================================================
+   Icon toggle
+   ========================================================================== */
+.mdc-icon-toggle {
+	color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));
+}
+
+.mdc-icon-toggle[disabled] {
+	opacity: 0.26;
+	color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));
+}   
+
+.mdc-icon-toggle.mdc-list-item__start-detail {
+	width: 36px;
+	height: 36px;
+	margin-left: -6px;
+}
+
+.mdc-icon-toggle.mdc-list-item__end-detail {
+	width: 36px;
+	height: 36px;
+	margin-right: -6px;
+}
+
+.mdc-icon-toggle.mdc-ripple-surface--color::before, 
+.mdc-icon-toggle.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));
+}

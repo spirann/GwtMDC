@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
@@ -69,7 +70,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	
 	@Override
 	protected void onInitialize() {
-		
+		ripleMixin.initialize();
 		initializeChageEventListener();
 		updateColor();
 		
@@ -103,21 +104,14 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 		return addDomHandler(handler, ChangeEvent.getType());
 	}
 
-	protected void updateColor() {
-		
-		if (getValue() && colorOn != null) {
-			setColor(colorOn);
-			setRipple(colorOn);
-		} else if (!getValue() && colorOff != null) {
-			setColor(colorOff);
-			setRipple(colorOff);
-		} 
-		
-		if (getValue() && backgroundColorOn != null) {
+	protected void updateColor() {		
+		if (getValue()) {
+			setStyleProperty(CssMixin.MDC_ICON_TOGGLE_INK_COLOR, colorOn.getCssName());
 			setBackgroundColor(backgroundColorOn);
-		} else if (!getValue() && backgroundColorOff != null) {
+		} else {
+			setStyleProperty(CssMixin.MDC_ICON_TOGGLE_INK_COLOR, colorOff.getCssName());
 			setBackgroundColor(backgroundColorOff);
-		}
+		} 
 	}
 
 	protected void fireChangeEvent() {

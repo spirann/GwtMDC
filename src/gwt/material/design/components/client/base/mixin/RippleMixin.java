@@ -27,8 +27,6 @@ import gwt.material.design.components.client.base.HasRipple;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssProperty;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
@@ -55,18 +53,13 @@ public class RippleMixin<W extends Widget> extends StyleMixin<W> implements HasR
 		this.color = color;
 
 		if (color == null) {
-
 			if (jsElement != null) {
 				uninitialize();
 			}
-
-		} else {
-			
+		} else {			
 			if (jsElement == null) {
 				initialize();
 			}
-
-			StyleHelper.setStyleProperty(uiObject.getElement(), CssProperty.MDC_RIPPLE__COLOR, color.getCssName());
 		}
 
 	}

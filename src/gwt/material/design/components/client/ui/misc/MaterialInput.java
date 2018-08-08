@@ -46,7 +46,7 @@ import gwt.material.design.components.client.base.mixin.StateMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
@@ -212,11 +212,11 @@ public class MaterialInput extends MaterialFormField<String>
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssProperty.MDC_TEXTFIELD__COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__COLOR, color.getCssName());
 	}
 
 	public void setFocusedColor(Color color) {
-		setStyleProperty(CssProperty.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}
 
 	@Override
@@ -358,4 +358,21 @@ public class MaterialInput extends MaterialFormField<String>
 		}
 	}
 
+	@Override
+	public void setWidth(String width) {
+		super.setWidth(width);
+		input.setWidth(width);
+	}
+	
+	@Override
+	public void setMaxWidth(String maxWidth) {
+		super.setMaxWidth(maxWidth);
+		input.setMaxWidth(maxWidth);
+	}
+	
+	@Override
+	public void setMinHeight(String minHeight) {
+		super.setMinHeight(minHeight);
+		input.setMinHeight(minHeight);
+	}
 }

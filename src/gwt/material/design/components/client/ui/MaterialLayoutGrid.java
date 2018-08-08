@@ -24,7 +24,7 @@ import gwt.material.design.components.client.base.HasGap;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Align;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssProperty;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -68,15 +68,15 @@ public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
 	}
 	
 	public void setDesktopCellMargin(int margin) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
 	}
 	
 	public void setTabletCellMargin(int margin) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
 	}
 	
 	public void setPhoneCellMargin(int margin) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
 	}
 
 	public void setCellGutter(int gutter) {
@@ -86,15 +86,15 @@ public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
 	}
 	
 	public void setDesktopCellGutter(int gutter) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
 	}
 	
 	public void setTabletCellGutter(int gutter) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
 	}
 	
 	public void setPhoneCellGutter(int gutter) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
 	}
 	
 	
@@ -107,20 +107,20 @@ public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
 	
 	@Override
 	public void setDesktopGap(int gap) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gap + "px");
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_DESKTOP, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, gap + "px");
 	}
 	
 	@Override
 	public void setTabletGap(int gap) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_TABLET, gap + "px");
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_TABLET, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, gap + "px");
 	}
 	
 	@Override
 	public void setPhoneGap(int gap) {
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_GUTTER_PHONE, gap + "px");
-		setStyleProperty(CssProperty.MDC_LAYOUT_GRID_MARGIN_PHONE, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gap + "px");
+		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, gap + "px");
 	}
 	
 	/**

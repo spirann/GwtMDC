@@ -201,4 +201,25 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	public void setValidation(TextFieldValidation validation) {
 		field.setValidation(validation);
 	}
+	
+	@Override
+	public void setWidth(String width) {
+		super.setWidth(width);
+		field.setWidth(width);
+		helper.setWidth(width);
+	}
+	
+	@Override
+	public void setMaxWidth(String maxWidth) {
+		super.setMaxWidth(maxWidth);
+		field.setMaxWidth(maxWidth);
+		helper.setMaxWidth(maxWidth);
+	}
+	
+	@Override
+	public void setMinHeight(String minHeight) {
+		super.setMinHeight(minHeight);
+		field.setMinHeight(minHeight);
+		helper.setMinHeight(minHeight);
+	}
 }
