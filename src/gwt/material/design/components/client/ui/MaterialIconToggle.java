@@ -47,11 +47,11 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	protected final AttributeMixin<MaterialIconToggle> toggleOffMixin = new AttributeMixin<>(this, "data-toggle-off");
 	protected final AttributeMixin<MaterialIconToggle> ariaPressedMixin = new AttributeMixin<>(this, "aria-pressed");
 
-	protected Color colorOn;
-	protected Color backgroundColorOn;
+	protected Color colorOn = Color.MDC_THEME_SECONDARY;
+	protected Color backgroundColorOn = Color.TRANSPARENT;
 
-	protected Color colorOff;
-	protected Color backgroundColorOff;
+	protected Color colorOff = Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND;
+	protected Color backgroundColorOff = Color.TRANSPARENT;
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -111,17 +111,12 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 		} else if (!getValue() && colorOff != null) {
 			setColor(colorOff);
 			setRipple(colorOff);
-		} else {
-			setColor(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
-			setRipple(Color.MDC_THEME_TEXT_ICON_ON_BACKGROUND);
-		}
+		} 
 		
 		if (getValue() && backgroundColorOn != null) {
 			setBackgroundColor(backgroundColorOn);
 		} else if (!getValue() && backgroundColorOff != null) {
 			setBackgroundColor(backgroundColorOff);
-		} else {
-			setBackgroundColor(Color.TRANSPARENT);
 		}
 	}
 

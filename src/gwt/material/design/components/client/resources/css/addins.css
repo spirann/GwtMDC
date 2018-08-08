@@ -256,7 +256,7 @@ a:active {
    Adjust tab
    ========================================================================== */
 :root {
-	--mdc-tab--text-color: var(--mdc-theme-on-surface, rgba(0, 0, 0, 0.24));
+	--mdc-tab--text-color: var(--mdc-theme-surface, rgba(0, 0, 0, 0.24));
 	--mdc-tab--actived-text-color: var(--mdc-theme-on-primary, rgba(0, 0, 0, 1.0));
 }
 
@@ -288,16 +288,16 @@ a:active {
    Adjust drawer
    ========================================================================== */
 .mdc-drawer__header-content {
-	background-color: var(--mdc-theme-primary, #fff);
+	background-color: var(--mdc-theme-primary, #fff);	
 }
 
-.mdc-drawer__header-content label:not[class*="subtitle"]:not([class*="caption"]) {
+.mdc-drawer__header-content label {
 	color: var(--mdc-theme-on-primary, rgba(0, 0, 0, 0.38));
 }
 
 .mdc-drawer__header-content label[class*="subtitle"],
 .mdc-drawer__header-content label[class*="caption"] {
-	color: var(--mdc-theme-on-surface, #ccc);
+	color: var(--mdc-theme-surface, #ccc);
 }
 
 .mdc-drawer__content {
@@ -386,9 +386,8 @@ a:active {
 	margin-right: 8px;
 }
 
-
 .mdc-icon-button {
-	color: var(--mdc-theme-text-primary-on-background);
+	color: var(--mdc-theme-primary);
 }
 
 .mdc-icon-button[disabled] {
@@ -477,6 +476,18 @@ a:active {
 
 .mdc-chip .mdc-chip__checkmark-path {
 	stroke: var(--mdc-theme-on-surface, var(--mdc-theme-primary, #6200ee));
+}
+
+.mdc-chip-set {
+	padding: 0;
+}
+
+.mdc-chip-set > div:first-child {
+	margin-left: 0;
+}
+
+.mdc-chip-set > div:last-child {
+	margin-right: 0;
 }
 
 /* ==========================================================================
@@ -709,7 +720,7 @@ a:active {
 	display: flex;
 	align-content: center;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: flex-end;
 	height: 36px;
 	overflow: visible;
 }
@@ -726,6 +737,7 @@ a:active {
 	margin-left: 16px;
 	margin-right: 0;
 }
+
 
 [dir="rtl"] .mdc-switch-label {
 	margin-left: 0;
