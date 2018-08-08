@@ -4,25 +4,15 @@
   --mdc-theme-background: #333;
   --mdc-theme-surface: #666;
   
-  --mdc-theme-text-primary-on-primary: white;
-  --mdc-theme-text-secondary-on-primary: rgba(255, 255, 255, 0.7);
-  --mdc-theme-text-hint-on-primary: rgba(255, 255, 255, 0.5);  
-  --mdc-theme-text-disabled-on-primary: rgba(255, 255, 255, 0.5);
-  --mdc-theme-text-icon-on-primary: rgba(255, 255, 255, 0.5);
-  
-  --mdc-theme-text-primary-on-secondary: black;
-  --mdc-theme-text-secondary-on-secondary: rgba(0, 0, 0, 0.7);
-  --mdc-theme-text-hint-on-secondary: rgba(0, 0, 0, 0.5);
-  --mdc-theme-text-disabled-on-secondary: rgba(0, 0, 0, 0.5);
-  --mdc-theme-text-icon-on-secondary: rgba(0, 0, 0, 0.5);
+  --mdc-theme-on-primary: white;  
+  --mdc-theme-on-secondary: black;
+  --mdc-theme-on-surface: white;
   
   --mdc-theme-text-primary-on-background: rgba(255, 255, 255, 1.0);
   --mdc-theme-text-secondary-on-background: rgba(255, 255, 255, 0.85);
   --mdc-theme-text-hint-on-background: rgba(255, 255, 255, 0.6);
   --mdc-theme-text-disabled-on-background: rgba(255, 255, 255, 0.5);
   --mdc-theme-text-icon-on-background: rgba(255, 255, 255, 0.38);
-
-  --mdc-theme-on-surface: white;
   
   --mdc-state--success: #00b020;
   --mdc-state--warning: #FF8F00;

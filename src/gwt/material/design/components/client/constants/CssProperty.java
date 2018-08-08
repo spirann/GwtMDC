@@ -55,10 +55,8 @@ public interface CssProperty {
 	// ////////////////////////////////////////////////////////////////////////////
 	// Tab bar
 	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_TAB_BAR__COLOR = "--mdc-tab-bar--color";
-	String MDC_TAB_BAR__RIPPLE_COLOR = "--mdc-tab-bar--ripple-color";
-	String MDC_TAB_BAR__ACTIVE_COLOR = "--mdc-tab-bar--active-color";
-	String MDC_TAB_BAR__ACTIVE_RIPPLE_COLOR = "--mdc-tab-bar--active-ripple-color";
+	String MDC_TAB__TEXT_COLOR = "--mdc-tab--text-color";
+	String MDC_TAB__ACTIVED_TEXT_COLOR = "--mdc-tab--actived-text-color";
 	// ////////////////////////////////////////////////////////////////////////////
 	// Slider
 	// ////////////////////////////////////////////////////////////////////////////

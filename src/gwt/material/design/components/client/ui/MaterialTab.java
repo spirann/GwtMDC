@@ -28,7 +28,9 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.HasActive;
 import gwt.material.design.components.client.base.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.ActiveMixin;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssProperty;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
@@ -117,5 +119,14 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 	@Override
 	public boolean isActive() {
 		return activeMixin.isActive();
+	}
+	
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssProperty.MDC_TAB__TEXT_COLOR, color.getCssName());
+	}
+	
+	public void setActiveTextColor(Color color) {
+		setStyleProperty(CssProperty.MDC_TAB__ACTIVED_TEXT_COLOR, color.getCssName());
 	}
 }

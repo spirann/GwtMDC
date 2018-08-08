@@ -39,25 +39,15 @@ public class MaterialTheme implements Serializable {
 	private String background;
 	private String surface;
 	//
-	private String textPrimaryOnPrimary;
-	private String textSecondaryOnPrimary;
-	private String textHintOnPrimary;
-	private String textDisabledOnPrimary;
-	private String textIconOnPrimary;
-	//
-	private String textPrimaryOnSecondary;
-	private String textSecondaryOnSecondary;
-	private String textHintOnSecondary;
-	private String textDisabledOnSecondary;
-	private String textIconOnSecondary;
+	private String themeOnPrimary;
+	private String themeOnSecondary;
+	private String themeOnSurface;
 	//
 	private String textPrimaryOnBackground;
 	private String textSecondaryOnBackground;
 	private String textHintOnBackground;
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
-	//
-	private String themeOnSurface;
 	//
 	private String codeBackground;
 	private String codeString;
@@ -110,25 +100,11 @@ public class MaterialTheme implements Serializable {
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_BACKGROUND, background)).append(separator);
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_SURFACE, surface)).append(separator);
 		//
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_PRIMARY, textPrimaryOnPrimary))
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_PRIMARY, themeOnPrimary))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_PRIMARY, textSecondaryOnPrimary))
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SECONDARY, themeOnSecondary))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_PRIMARY, textHintOnPrimary)).append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_PRIMARY, textDisabledOnPrimary))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_PRIMARY, textIconOnPrimary)).append(separator);
-		//
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_SECONDARY, textPrimaryOnSecondary))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_SECONDARY, textSecondaryOnSecondary))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_SECONDARY, textHintOnSecondary))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_SECONDARY, textDisabledOnSecondary))
-				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_SECONDARY, textIconOnSecondary))
-				.append(separator);
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SURFACE, themeOnSurface)).append(separator);
 		//
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground))
 				.append(separator);
@@ -140,8 +116,6 @@ public class MaterialTheme implements Serializable {
 				.append(separator);
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
-		//
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SURFACE, themeOnSurface)).append(separator);
 		//
 		if (withCodeStyle) {
 			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground)).append(separator);
@@ -200,11 +174,7 @@ public class MaterialTheme implements Serializable {
 	}
 
 	public void setPrimaryTextColor(final Color color) {
-		setTextPrimaryOnPrimary(color.getCssName(textPrimaryAlpha));
-		setTextSecondaryOnPrimary(color.getCssName(textSecondaryAlpha));
-		setTextHintOnPrimary(color.getCssName(textHintAlpha));
-		setTextDisabledOnPrimary(color.getCssName(textDisabledAlpha));
-		setTextIconOnPrimary(color.getCssName(textIconAlpha));
+		setThemeOnPrimary(color.getCssName(textPrimaryAlpha));
 	}
 
 	public void setSecondaryColor(final Color color) {
@@ -212,11 +182,7 @@ public class MaterialTheme implements Serializable {
 	}
 
 	public void setSecondaryTextColor(final Color color) {
-		setTextPrimaryOnSecondary(color.getCssName(textPrimaryAlpha));
-		setTextSecondaryOnSecondary(color.getCssName(textSecondaryAlpha));
-		setTextHintOnSecondary(color.getCssName(textHintAlpha));
-		setTextDisabledOnSecondary(color.getCssName(textDisabledAlpha));
-		setTextIconOnSecondary(color.getCssName(textIconAlpha));
+		setThemeOnSecondary(color.getCssName(textPrimaryAlpha));
 	}
 
 	public void setBackgroundColor(final Color color) {
@@ -292,84 +258,20 @@ public class MaterialTheme implements Serializable {
 		this.background = background;
 	}
 
-	public String getTextPrimaryOnPrimary() {
-		return textPrimaryOnPrimary;
+	public String getThemeOnPrimary() {
+		return themeOnPrimary;
 	}
 
-	public void setTextPrimaryOnPrimary(String textPrimaryOnPrimary) {
-		this.textPrimaryOnPrimary = textPrimaryOnPrimary;
+	public void setThemeOnPrimary(String themeOnPrimary) {
+		this.themeOnPrimary = themeOnPrimary;
 	}
 
-	public String getTextSecondaryOnPrimary() {
-		return textSecondaryOnPrimary;
+	public String getThemeOnSecondary() {
+		return themeOnSecondary;
 	}
 
-	public void setTextSecondaryOnPrimary(String textSecondaryOnPrimary) {
-		this.textSecondaryOnPrimary = textSecondaryOnPrimary;
-	}
-
-	public String getTextHintOnPrimary() {
-		return textHintOnPrimary;
-	}
-
-	public void setTextHintOnPrimary(String textHintOnPrimary) {
-		this.textHintOnPrimary = textHintOnPrimary;
-	}
-
-	public String getTextDisabledOnPrimary() {
-		return textDisabledOnPrimary;
-	}
-
-	public void setTextDisabledOnPrimary(String textDisabledOnPrimary) {
-		this.textDisabledOnPrimary = textDisabledOnPrimary;
-	}
-
-	public String getTextIconOnPrimary() {
-		return textIconOnPrimary;
-	}
-
-	public void setTextIconOnPrimary(String textIconOnPrimary) {
-		this.textIconOnPrimary = textIconOnPrimary;
-	}
-
-	public String getTextPrimaryOnSecondary() {
-		return textPrimaryOnSecondary;
-	}
-
-	public void setTextPrimaryOnSecondary(String textPrimaryOnSecondary) {
-		this.textPrimaryOnSecondary = textPrimaryOnSecondary;
-	}
-
-	public String getTextSecondaryOnSecondary() {
-		return textSecondaryOnSecondary;
-	}
-
-	public void setTextSecondaryOnSecondary(String textSecondaryOnSecondary) {
-		this.textSecondaryOnSecondary = textSecondaryOnSecondary;
-	}
-
-	public String getTextHintOnSecondary() {
-		return textHintOnSecondary;
-	}
-
-	public void setTextHintOnSecondary(String textHintOnSecondary) {
-		this.textHintOnSecondary = textHintOnSecondary;
-	}
-
-	public String getTextDisabledOnSecondary() {
-		return textDisabledOnSecondary;
-	}
-
-	public void setTextDisabledOnSecondary(String textDisabledOnSecondary) {
-		this.textDisabledOnSecondary = textDisabledOnSecondary;
-	}
-
-	public String getTextIconOnSecondary() {
-		return textIconOnSecondary;
-	}
-
-	public void setTextIconOnSecondary(String textIconOnSecondary) {
-		this.textIconOnSecondary = textIconOnSecondary;
+	public void setThemeOnSecondary(String themeOnSecondary) {
+		this.themeOnSecondary = themeOnSecondary;
 	}
 
 	public String getTextPrimaryOnBackground() {

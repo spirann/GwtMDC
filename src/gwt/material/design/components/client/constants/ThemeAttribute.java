@@ -31,23 +31,14 @@ public interface ThemeAttribute {
 	String MDC_THEME_BACKGROUND = "--mdc-theme-background";
 	String MDC_THEME_SURFACE = "--mdc-theme-surface";
 	//
-	String MDC_THEME_TEXT_PRIMARY_ON_PRIMARY = "--mdc-theme-text-primary-on-primary";
-	String MDC_THEME_TEXT_SECONDARY_ON_PRIMARY = "--mdc-theme-text-secondary-on-primary";
-	String MDC_THEME_TEXT_HINT_ON_PRIMARY = "--mdc-theme-text-hint-on-primary";
-	String MDC_THEME_TEXT_DISABLED_ON_PRIMARY = "--mdc-theme-text-disabled-on-primary";
-	String MDC_THEME_TEXT_ICON_ON_PRIMARY = "--mdc-theme-text-icon-on-primary";
-	//
-	String MDC_THEME_TEXT_PRIMARY_ON_SECONDARY = "--mdc-theme-text-primary-on-secondary";
-	String MDC_THEME_TEXT_SECONDARY_ON_SECONDARY = "--mdc-theme-text-secondary-on-secondary";
-	String MDC_THEME_TEXT_HINT_ON_SECONDARY = "--mdc-theme-text-hint-on-secondary";
-	String MDC_THEME_TEXT_DISABLED_ON_SECONDARY = "--mdc-theme-text-disabled-on-secondary";
-	String MDC_THEME_TEXT_ICON_ON_SECONDARY = "--mdc-theme-text-icon-on-secondary";
+	String MDC_THEME_ON_PRIMARY = "--mdc-theme-on-primary";
+	String MDC_THEME_ON_SECONDARY = "--mdc-theme-on-secondary";
+	String MDC_THEME_ON_SURFACE = "--mdc-theme-on-surface";
 	//
 	String MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND = "--mdc-theme-text-primary-on-background";
 	String MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND = "--mdc-theme-text-secondary-on-background";
 	String MDC_THEME_TEXT_HINT_ON_BACKGROUND = "--mdc-theme-text-hint-on-background";
 	String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
 	String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
-	//
-	String MDC_THEME_ON_SURFACE = "--mdc-theme-on-surface";
+	
 }
