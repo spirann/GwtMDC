@@ -91,3 +91,49 @@
 .mdc-icon-toggle.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));
 }
+
+/* ==========================================================================
+   Slider color adjust
+   ========================================================================== */
+.mdc-slider:not(.mdc-slider--discrete) .mdc-slider__pin {
+	display: none;
+}
+
+.mdc-slider:not(.mdc-slider--display-markers) .mdc-slider__track-marker-container {
+	display: none;
+}
+
+.mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track {
+    background-color: #018786;
+    /* @alternate */
+    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-container {
+    background-color: var(--mdc-slider--background-color, rgba(1, 135, 134, 0.26)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker::after,
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__track-marker-container::after {
+    background-color: #018786;
+    /* @alternate */
+    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__thumb {
+    fill: #018786;
+    /* @alternate */
+    fill: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786));
+    stroke: #018786;
+    /* @alternate */
+    stroke: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__focus-ring {
+    background-color: #018786;
+    /* @alternate */
+    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
+    background-color: #018786;
+    /* @alternate */
+    background-color: var(--mdc-slider--color, var(--mdc-theme-secondary, #018786)); }
+  .mdc-slider:not(.mdc-slider--disabled):not([disabled]) .mdc-slider__pin {
+    color: white;
+    /* @alternate */
+    color: var(--mdc-slider--text-color, var(--mdc-theme-text-primary-on-dark, white)); }    
+  .mdc-slider--disabled .mdc-slider__thumb {
+      stroke: #9a9a9a;
+      fill: #9a9a9a; }
+
