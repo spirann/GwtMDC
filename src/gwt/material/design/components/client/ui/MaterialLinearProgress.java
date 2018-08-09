@@ -28,6 +28,7 @@ import gwt.material.design.components.client.base.HasProgress;
 import gwt.material.design.components.client.base.HasReverse;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.ui.html.Div;
@@ -147,16 +148,12 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 
 	}-*/;
 
-	public void setProgressColor(final Color color) {
-		primaryInner.setBackgroundColor(color);
-		secondaryInner.setBackgroundColor(color);
+	public void setIndicatorColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_LINEAR_PROGRESS__INDICATOR_COLOR, color.getCssName());
 	}
 
-	public void setBufferColor(final Color color) {
-		final String css = color.getCssName();
-		buffer_.setBackgroundColor(color);
-		bufferingDots.setBackgroundImage("radial-gradient(ellipse 4px 4px at center, " + css + " 0%, " + css + " 47%, "
-				+ css + " 47%, transparent 47%, transparent 48%)");
+	public void setTrackColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_LINEAR_PROGRESS__TRACK_COLOR, color.getCssName());
 	}
 
 }

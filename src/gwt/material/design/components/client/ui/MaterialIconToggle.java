@@ -106,10 +106,10 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 
 	protected void updateColor() {		
 		if (getValue()) {
-			setStyleProperty(CssMixin.MDC_ICON_TOGGLE_INK_COLOR, colorOn.getCssName());
+			setStyleProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOn.getCssName());
 			setBackgroundColor(backgroundColorOn);
 		} else {
-			setStyleProperty(CssMixin.MDC_ICON_TOGGLE_INK_COLOR, colorOff.getCssName());
+			setStyleProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOff.getCssName());
 			setBackgroundColor(backgroundColorOff);
 		} 
 	}

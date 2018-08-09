@@ -101,9 +101,9 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers,
-		HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
+public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn,
+		HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
 
 	static {
 		autoInit();
@@ -149,7 +149,8 @@ public class MaterialWidget extends BaseWidget
 	protected final AttributeMixin<MaterialWidget> altMixin = new AttributeMixin<>(this, "alt");
 	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
 	protected final AttributeMixin<MaterialWidget> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
-	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this, "aria-describedby");
+	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this,
+			"aria-describedby");
 	protected final AttributeMixin<MaterialWidget> ariaSelectedMixin = new AttributeMixin<>(this, "aria-selected");
 	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
@@ -177,14 +178,14 @@ public class MaterialWidget extends BaseWidget
 		setInitialClasses(initialClass);
 	}
 
-	protected void jsInit() {		
+	protected void jsInit() {
 		jsElement = jsInit(getElement());
 	}
-	
+
 	public JavaScriptObject asJavaScriptObject() {
 		return jsElement;
 	}
-	
+
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return element;
 	}-*/;
@@ -307,7 +308,7 @@ public class MaterialWidget extends BaseWidget
 
 	@Override
 	public WidgetCollection getChildren() {
-		return super.getChildren();
+		return super.getChildren();		
 	}
 
 	public List<Widget> getChildrenList() {
@@ -709,7 +710,7 @@ public class MaterialWidget extends BaseWidget
 	public String getAriaDescribedBy() {
 		return ariaDescribedByMixin.getAttribute();
 	}
-	
+
 	@Override
 	public void setAlt(String alt) {
 		altMixin.setAttribute(alt);
@@ -719,7 +720,7 @@ public class MaterialWidget extends BaseWidget
 	public String getAlt() {
 		return altMixin.getAttribute();
 	}
-	
+
 	@Override
 	public void setTabindex(int tabindex) {
 		tabindexMixin.setAttribute(tabindex);

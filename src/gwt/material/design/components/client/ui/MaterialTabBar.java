@@ -21,10 +21,13 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.HasSelectionHandlers;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -32,7 +35,7 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialTabBar extends Div {
+public class MaterialTabBar extends Div implements HasSelectionHandlers<MaterialTab> {
 
 	protected MaterialTabScroller scrollArea = new MaterialTabScroller();
 
@@ -55,5 +58,14 @@ public class MaterialTabBar extends Div {
 	@Override
 	public void add(Widget child) {
 		scrollArea.add(child);
+	}
+	
+	public void scrollTo(final int index) {
+		scrollArea.scrollTo(index);
+	}
+	
+	@Override
+	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
+		return scrollArea.addSelectionHandler(handler);
 	}
 }

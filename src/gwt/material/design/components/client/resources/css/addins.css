@@ -253,38 +253,6 @@ a:active {
 }
 
 /* ==========================================================================
-   Adjust tab
-   ========================================================================== */
-:root {
-	--mdc-tab--text-color: var(--mdc-theme-surface, rgba(0, 0, 0, 0.24));
-	--mdc-tab--actived-text-color: var(--mdc-theme-on-primary, rgba(0, 0, 0, 1.0));
-}
-
-.mdc-tab[disabled] {
-	opacity: 0.37;
-}
-
-.mdc-tab-bar {
-	background-color: var(--mdc-theme-primary, rgba(0, 0, 0, 0));
-}
-
- .mdc-tab .mdc-tab__text-label,
- .mdc-tab .mdc-tab__icon {
-    color: var(--mdc-tab--text-color, #000); 
-}
-
-.mdc-tab--active .mdc-tab__text-label,
-.mdc-tab--active .mdc-tab__icon {
-    color: var(--mdc-tab--actived-text-color, #000); 
-}
-
-.mdc-tab-indicator > .mdc-tab-indicator__content--underline,
-.mdc-tab__ripple::before, 
-.mdc-tab__ripple::after {
-    background-color: var(--mdc-tab--actived-text-color, #6200ee); 
-}    
-
-/* ==========================================================================
    Adjust drawer
    ========================================================================== */
 .mdc-drawer__header-content {
@@ -1099,29 +1067,6 @@ a:active {
 	align-items: flex-start;
 	justify-content: flex-start;
 }
-
-/* ==========================================================================
-   Linear Progress adjust
-   ========================================================================== */
-
-.mdc-linear-progress .mdc-linear-progress__bar-inner {
-    background-color: var(--mdc-theme-secondary, #ff4081); 
-}
-
-.mdc-linear-progress__buffering-dots {
-	right: 0;
-	background-image: radial-gradient(ellipse 4px 4px at center, var(--mdc-theme-text-hint-on-background, #e6e6e6) 0%, var(--mdc-theme-text-hint-on-background, #e6e6e6) 47%, var(--mdc-theme-text-hint-on-background, #e6e6e6) 47%, transparent 47%, transparent 48%);
-	opacity: 0.75;
-}
-
-.mdc-linear-progress--reversed .mdc-linear-progress__buffering-dots {
-	left: 0;
-}
-
-.mdc-linear-progress__buffer {
-	background-color: var(--mdc-theme-text-hint-on-background, #e6e6e6);
-}
-
 /* ==========================================================================
    Menu adjust
    ========================================================================== */

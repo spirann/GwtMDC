@@ -225,18 +225,27 @@ public class MaterialSlider extends MaterialFormField<Double>
 		enabledMixin.setAttribute(!enabled);
 	}
 	
-	@Override
-	public void setTextColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__TEXT_COLOR, color.getCssName());
+	public void setTrackColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_COLOR, color.getCssName());
 	}
 	
-	@Override
-	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__COLOR, color.getCssName());
+	public void setTrackFillColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_FILL_COLOR, color.getCssName());
 	}
-
-	@Override
-	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__BACKGROUND_COLOR, color.getCssName());
+	
+	public void setTickMarkerColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__TICK_MARKER_COLOR, color.getCssName());
+	}
+	
+	public void setSliderThumbColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__SLIDER_THUMB_COLOR, color.getCssName());
+	}
+	
+	public void setPinColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__PIN_COLOR, color.getCssName());
+	}
+	
+	public void setValuePinColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SLIDER__VALUE_PIN_COLOR, color.getCssName());
 	}
 }

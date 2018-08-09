@@ -28,9 +28,9 @@ import gwt.material.design.components.client.base.MaterialWidget;
  * @author Richeli Vargas
  */
 public class ActiveMixin<T extends Widget & HasActive> extends AbstractMixin<T> implements HasActive {
-	private String styleName = "active";
+	private String styleName = "undefined";
 
-	private boolean active;
+	private boolean active = false;
 	private MaterialWidget target;
 
 	public ActiveMixin(final T widget) {

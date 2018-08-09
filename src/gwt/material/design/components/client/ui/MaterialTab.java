@@ -29,8 +29,8 @@ import gwt.material.design.components.client.base.HasActive;
 import gwt.material.design.components.client.base.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.constants.Color;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
@@ -65,9 +65,6 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 	@Override
 	protected void onInitialize() {
 
-		setTabindex(-1);
-		setAriaSelected(false);
-
 		content.add(label);
 		
 		add(content);		
@@ -77,13 +74,25 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 		addNativeSelectEvent(getElement());
 		
 		super.onInitialize();
+
+		//setActive(isActive());
 	}
 
 	protected native void addNativeSelectEvent(Element element)/*-{
 
 		var _this = this;
 		element.addEventListener('MDCTab:interacted', function(event) {
+			
+			var tab = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+			var active = tab.active;
+			
+			console.log('event: ' + event.detail.tab.active);
+			console.log('event: ' + event.detail.tab);
+			console.log('active 1: ' + active);
+			
+			_this.@gwt.material.design.components.client.ui.MaterialTab::setActive(Z)(active);
 			_this.@gwt.material.design.components.client.ui.MaterialTab::fireSelectionEvent()();
+									
 		});
 	
 	}-*/;
@@ -93,7 +102,7 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 	}	
 	
 	@Override
-	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
+	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {		
 		return addHandler(handler, SelectionEvent.getType());
 	}
 	
@@ -107,18 +116,33 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 		label.setText(text);
 	}
 	
+	protected native void setNativeActive(boolean active)/*-{
+		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		tab.active = active; 
+	}-*/;
+	
+	protected native boolean isNativeActive()/*-{
+		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		return tab.active; 
+	}-*/;
+	
+	public void setActive2(boolean active) {
+		activeMixin.setActive(active);
+	}
+	
 	@Override
 	public void setActive(boolean active) {
 		super.setActive(active);
 		activeMixin.setActive(active);
-		indicator.setActive(active);
-		setAriaSelected(active);		
-		setTabindex(active ? 0 : -1);
+		//indicator.setActive(active);
+		//setAriaSelected(active);		
+		//setTabindex(active ? 0 : -1);
+		//setNativeActive(active);
 	}
 	
 	@Override
-	public boolean isActive() {
-		return activeMixin.isActive();
+	public boolean isActive() {		
+		return initialized && isNativeActive();
 	}
 	
 	@Override
