@@ -19,7 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.core.client.GWT;
+import java.util.LinkedList;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -40,9 +42,9 @@ public class MaterialTabScroller extends Div implements HasSelectionHandlers<Mat
 
 	protected Div scrollArea = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_AREA);
 	protected Div scrollContent = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_CONTENT);
-	
+
 	private MaterialTab selectedTab;
-	
+
 	protected MaterialTabScroller() {
 		super(CssName.MDC_TAB_SCROLLER);
 	}
@@ -51,51 +53,64 @@ public class MaterialTabScroller extends Div implements HasSelectionHandlers<Mat
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.tabScroller.MDCTabScroller(element);
 	}-*/;
-	
+
 	@Override
 	protected void onInitialize() {
-		scrollArea.add(scrollContent);		
-		super.add(scrollArea);		
+		scrollArea.add(scrollContent);
+		super.add(scrollArea);
+
+		// Select the first item if nothing is selected
+		if (selectedTab == null && scrollContent.getWidgetCount() > 0) {
+			selectedTab = (MaterialTab) scrollContent.getWidget(0);
+			selectedTab.setActive(true);
+		}
+
 		super.onInitialize();
 	}
-		
+
 	protected native void scrollTo(final int tab)/*-{
 		var scroller = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		scroller.scrollTo(tab);		
+		scroller.scrollTo(tab);
 	}-*/;
-	
+
 	@Override
 	public void add(Widget child) {
-		
-		if(child instanceof MaterialTab) {
-			
-			final boolean isEmpty = scrollContent.getChildrenList().isEmpty();
-			GWT.log("isEmpty: " + isEmpty);
-			((MaterialTab) child).setActive(isEmpty);			
+
+		if (child instanceof MaterialTab) {
 			((MaterialTab) child).addSelectionHandler(event -> {
 				/*
-				if(selectedTab != null) {
-					selectedTab.setActive(false);
-				}
-				
-				selectedTab = (MaterialTab) child;
-				selectedTab.setActive(true);				
-				*/
+				 * if(selectedTab != null) { selectedTab.setActive(false); }
+				 * 
+				 * selectedTab = (MaterialTab) child; selectedTab.setActive(true);
+				 */
 				selectedTab = (MaterialTab) child;
 				fireSelectionEvent(selectedTab);
-				
 			});
 		}
-		
+
 		scrollContent.add(child);
 	}
-	
+
 	protected void fireSelectionEvent(final MaterialTab tab) {
 		SelectionEvent.fire(this, tab);
-	}	
-	
+	}
+
 	@Override
 	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
 		return addHandler(handler, SelectionEvent.getType());
+	}
+
+	public List<MaterialTab> getTabs() {
+		final List<MaterialTab> tabs = new LinkedList<>();
+
+		for (int i = 0; i < scrollContent.getWidgetCount(); i++) {
+
+			final Widget widget = scrollContent.getWidget(i);
+			if (widget instanceof MaterialTab) {
+				tabs.add((MaterialTab) widget);
+			}
+		}
+
+		return tabs;
 	}
 }

@@ -86,9 +86,7 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 			var tab = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 			var active = tab.active;
 			
-			console.log('event: ' + event.detail.tab.active);
-			console.log('event: ' + event.detail.tab);
-			console.log('active 1: ' + active);
+			console.log('event: ' + event.detail.tab.active);			
 			
 			_this.@gwt.material.design.components.client.ui.MaterialTab::setActive(Z)(active);
 			_this.@gwt.material.design.components.client.ui.MaterialTab::fireSelectionEvent()();
@@ -126,23 +124,16 @@ public class MaterialTab extends Button implements HasText, HasActive, HasSelect
 		return tab.active; 
 	}-*/;
 	
-	public void setActive2(boolean active) {
-		activeMixin.setActive(active);
-	}
-	
 	@Override
 	public void setActive(boolean active) {
 		super.setActive(active);
 		activeMixin.setActive(active);
-		//indicator.setActive(active);
-		//setAriaSelected(active);		
-		//setTabindex(active ? 0 : -1);
-		//setNativeActive(active);
+		indicator.setActive(active);
 	}
 	
 	@Override
 	public boolean isActive() {		
-		return initialized && isNativeActive();
+		return activeMixin.isActive();
 	}
 	
 	@Override

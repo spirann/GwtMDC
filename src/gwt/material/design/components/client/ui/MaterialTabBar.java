@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -67,5 +69,9 @@ public class MaterialTabBar extends Div implements HasSelectionHandlers<Material
 	@Override
 	public HandlerRegistration addSelectionHandler(SelectionHandler<MaterialTab> handler) {
 		return scrollArea.addSelectionHandler(handler);
+	}
+	
+	public List<MaterialTab> getTabs(){
+		return scrollArea.getTabs();
 	}
 }
