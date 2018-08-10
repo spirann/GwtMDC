@@ -17,33 +17,18 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.constants;
+package gwt.material.design.components.client.base;
 
-import gwt.material.design.components.client.utils.helper.EnumHelper;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
+
+import gwt.material.design.components.client.events.ActiveEvent.ActiveHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public enum TabBarType implements CssType {
-
-	TEXT(""),
-	ICON(CssName.MDC_TAB_BAR__ICON_TABS),
-	ICON_WITH_TEXT(CssName.MDC_TAB_BAR__ICONS_WITH_TEXT);
-
-    private final String cssClass;
-
-    TabBarType(final String cssClass) {
-        this.cssClass = cssClass;
-    }
-
-    @Override
-    public String getCssName() {
-        return cssClass;
-    }
-
-    public static TabBarType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, TabBarType.class, TEXT);
-    }
+public interface HasActiveHandlers<V> extends HasHandlers {
+	HandlerRegistration addActiveHandler(ActiveHandler<V> handler);
 }

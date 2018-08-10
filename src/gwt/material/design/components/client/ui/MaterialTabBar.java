@@ -26,9 +26,12 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.HasSelectionHandlers;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.constants.TabScrollerAlign;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -37,7 +40,7 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialTabBar extends Div implements HasSelectionHandlers<MaterialTab> {
+public class MaterialTabBar extends Div implements HasAlign<TabScrollerAlign>, HasSelectionHandlers<MaterialTab> {
 
 	protected MaterialTabScroller scrollArea = new MaterialTabScroller();
 
@@ -62,8 +65,16 @@ public class MaterialTabBar extends Div implements HasSelectionHandlers<Material
 		scrollArea.add(child);
 	}
 	
-	public void scrollTo(final int index) {
-		scrollArea.scrollTo(index);
+	public void setSelectedTab(final int index) {
+		scrollArea.setSelectedTab(index);
+	}
+	
+	public void setSelectedTab(final MaterialTab tab) {
+		scrollArea.setSelectedTab(tab);
+	}
+
+	public MaterialTab getSelectedTab() {
+		return scrollArea.getSelectedTab();
 	}
 	
 	@Override
@@ -73,5 +84,29 @@ public class MaterialTabBar extends Div implements HasSelectionHandlers<Material
 	
 	public List<MaterialTab> getTabs(){
 		return scrollArea.getTabs();
+	}
+	
+	@Override
+	public void setAlign(final TabScrollerAlign align) {
+		scrollArea.setAlign(align);
+	}
+
+	@Override
+	public TabScrollerAlign getAlign() {
+		return scrollArea.getAlign();
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		scrollArea.setColor(color);
+	}
+	
+	@Override
+	public void setTextColor(Color color) {
+		scrollArea.setTextColor(color);
+	}
+
+	public void setActiveColor(Color color) {
+		scrollArea.setActiveColor(color);
 	}
 }

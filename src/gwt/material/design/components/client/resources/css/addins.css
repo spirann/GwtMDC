@@ -306,41 +306,6 @@ a:active {
 }
 
 /* ==========================================================================
-   Adjust list color
-   ========================================================================== */
-.mdc-list-item[disabled] {
-	opacity: 0.37;
-}
-
-.mdc-list-item,
-.mdc-list-item * {
-	cursor: pointer;
-}
-   
-.mdc-list-item .mdc-list-item__start-detail  {
-	color: var(--mdc-theme-text-primary-on-background);
-	margin-right: 16px;
-}
-
-.mdc-list-item .mdc-list-item__start-detail:not(.material-icons)  {
-	width: 40px;
-	height: 40px;
-}
-
-.mdc-list--avatar-list .mdc-list-item__start-detail:not(img) {
-	width: 24px;
-	height: 24px;
-}
-
-.mdc-list-divider {
-	background-color: var(--mdc-theme-text-hint-on-background);
-}
-
-.mdc-list-group__subheader {
-	color: var(--mdc-theme-text-secondary-on-background);
-}
-
-/* ==========================================================================
    Button
    ========================================================================== */
 

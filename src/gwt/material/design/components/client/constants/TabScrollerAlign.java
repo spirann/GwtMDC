@@ -17,25 +17,29 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.constants;
 
-import gwt.material.design.components.client.constants.Align;
+import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
- * 
  * @author Richeli Vargas
- *
  */
-public interface HasAlign<A extends Align> {
-    /**
-     * 
-     * @param align
-     */
-    void setAlign(A align);
+public enum TabScrollerAlign implements Align, CssType {
+	START(CssName.MDC_TAB_SCROLLER__ALIGN_START), END(CssName.MDC_TAB_SCROLLER__ALIGN_END), CENTER(
+			CssName.MDC_TAB_SCROLLER__ALIGN_CENTER), NONE("");
 
-    /**
-     * 
-     * @return
-     */
-    A getAlign();
+	private final String cssClass;
+
+	TabScrollerAlign(final String cssClass) {
+		this.cssClass = cssClass;
+	}
+
+	@Override
+	public String getCssName() {
+		return cssClass;
+	}
+
+	public static TabScrollerAlign fromStyleName(final String styleName) {
+		return EnumHelper.fromStyleName(styleName, TabScrollerAlign.class, NONE);
+	}
 }

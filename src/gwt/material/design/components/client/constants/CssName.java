@@ -127,29 +127,15 @@ public interface CssName {
 	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
 	// //////////////////////////////////////////////////////
 	// TAB BAR
-	// //////////////////////////////////////////////////////
-	String MDC_TAB_BAR_SCROLLER = "mdc-tab-bar-scroller";
-	String MDC_TAB_BAR_SCROLLER__INDICATOR = "mdc-tab-bar-scroller__indicator";
-	String MDC_TAB_BAR_SCROLLER__INDICATOR__BACK = "mdc-tab-bar-scroller__indicator--back";
-	String MDC_TAB_BAR_SCROLLER__INDICATOR__FORWARD = "mdc-tab-bar-scroller__indicator--forward";
-	String MDC_TAB_BAR_SCROLLER__INDICATOR__INNER = "mdc-tab-bar-scroller__indicator__inner";
-	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME = "mdc-tab-bar-scroller__scroll-frame";
-	String MDC_TAB_BAR_SCROLLER__SCROLL_FRAME__TABS = "mdc-tab-bar-scroller__scroll-frame__tabs";	
-	String MDC_TAB_BAR__ICON_TABS = "mdc-tab-bar--icon-tabs";
-	String MDC_TAB_BAR__ICONS_WITH_TEXT = "mdc-tab-bar--icons-with-text";
-	String MDC_TAB_BAR__INDICATOR = "mdc-tab-bar__indicator";
-	String MDC_TAB_BAR__INDICATOR_ACCENT = "mdc-tab-bar--indicator-accent";	
-	String MDC_TAB_PANEL = "mdc-tab-panel";
-	String MDC_TAB__ICON_TEXT = "mdc-tab__icon-text";
-	
-	
-	//
-	
+	// //////////////////////////////////////////////////////	
 	String MDC_TAB_BAR = "mdc-tab-bar";
 	
 	String MDC_TAB_SCROLLER = "mdc-tab-scroller";
 	String MDC_TAB_SCROLLER__SCROLL_AREA = "mdc-tab-scroller__scroll-area";
 	String MDC_TAB_SCROLLER__SCROLL_CONTENT = "mdc-tab-scroller__scroll-content";
+	String MDC_TAB_SCROLLER__ALIGN_START = "mdc-tab-scroller--align-start";
+	String MDC_TAB_SCROLLER__ALIGN_END = "mdc-tab-scroller--align-end";
+	String MDC_TAB_SCROLLER__ALIGN_CENTER = "mdc-tab-scroller--align-center";
 
 	String MDC_TAB = "mdc-tab";
 	String MDC_TAB__ACTIVE = "mdc-tab--active";
@@ -157,6 +143,7 @@ public interface CssName {
 	String MDC_TAB__TEXT_LABEL = "mdc-tab__text-label";
 	String MDC_TAB__ICON = "mdc-tab__icon";
 	String MDC_TAB__RIPPLE = "mdc-tab__ripple";
+	String MDC_TAB__STACKED = "mdc-tab--stacked";
 	
 	String MDC_TAB_INDICATOR = "mdc-tab-indicator";
 	String MDC_TAB_INDICATOR__ACTIVE = "mdc-tab-indicator--active";
@@ -278,16 +265,19 @@ public interface CssName {
 	String MDC_LIST_GROUP__SUBHEADER = "mdc-list-group__subheader";
 	String MDC_LIST_DIVIDER = "mdc-list-divider";
 	String MDC_LIST_DIVIDER__INSET = "mdc-list-divider--inset";
+	
 	String MDC_LIST = "mdc-list";
 	String MDC_LIST__TWO_LINE = "mdc-list--two-line";
-	String MDC_LIST__AVATAR_LIST = "mdc-list--avatar-list";
+	String MDC_LIST__AVATAR_LIST = "mdc-list--avatar-list";	
 	String MDC_LIST__DENSE = "mdc-list--dense";
+	
 	String MDC_LIST_ITEM = "mdc-list-item";
 	String MDC_LIST_ITEM__SELECTED = "mdc-list-item--selected";
-	String MDC_LIST_ITEM__START_DETAIL = "mdc-list-item__start-detail";
-	String MDC_LIST_ITEM__END_DETAIL = "mdc-list-item__end-detail";
+	String MDC_LIST_ITEM__GRAPHIC = "mdc-list-item__graphic";
 	String MDC_LIST_ITEM__TEXT = "mdc-list-item__text";
-	String MDC_LIST_ITEM__TEXT_SECONDARY = "mdc-list-item__secondary-text";
+	String MDC_LIST_ITEM__TEXT_PRIMARY_TEXT = "mdc-list-item__primary-text";
+	String MDC_LIST_ITEM__TEXT_SECONDARY_TEXT = "mdc-list-item__secondary-text";
+	String MDC_LIST_ITEM__META = "mdc-list-item__meta";
 	// //////////////////////////////////////////////////////
 	// ICON BUTTON
 	// //////////////////////////////////////////////////////

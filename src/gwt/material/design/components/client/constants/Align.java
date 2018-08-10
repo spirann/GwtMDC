@@ -19,26 +19,8 @@
  */
 package gwt.material.design.components.client.constants;
 
-import gwt.material.design.components.client.utils.helper.EnumHelper;
-
 /**
  * @author Richeli Vargas
  */
-public enum Align implements CssType {
-	LEFT("left-align"), CENTER("center-align"), RIGHT("right-align");
-
-	private final String cssClass;
-
-	Align(final String cssClass) {
-		this.cssClass = cssClass;
-	}
-
-	@Override
-	public String getCssName() {
-		return cssClass;
-	}
-
-	public static Align fromStyleName(final String styleName) {
-		return EnumHelper.fromStyleName(styleName, Align.class, CENTER);
-	}
+public interface Align {
 }

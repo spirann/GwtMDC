@@ -17,25 +17,31 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.constants;
 
-import gwt.material.design.components.client.constants.Align;
+import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
- * 
  * @author Richeli Vargas
- *
  */
-public interface HasAlign<A extends Align> {
-    /**
-     * 
-     * @param align
-     */
-    void setAlign(A align);
+public enum LayoutCellAlign implements Align, CssType {
+	
+	TOP(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_TOP), 
+	MIDDLE(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_MIDDLE), 
+	BOTTOM(CssName.MDC_LAYOUT_GRID__CELL__ALIGN_BOTTOM);
 
-    /**
-     * 
-     * @return
-     */
-    A getAlign();
+	private final String cssClass;
+
+	LayoutCellAlign(final String cssClass) {
+		this.cssClass = cssClass;
+	}
+
+	@Override
+	public String getCssName() {
+		return cssClass;
+	}
+
+	public static LayoutCellAlign fromStyleName(final String styleName) {
+		return EnumHelper.fromStyleName(styleName, LayoutCellAlign.class, TOP);
+	}
 }

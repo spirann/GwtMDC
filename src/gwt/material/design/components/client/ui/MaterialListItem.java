@@ -31,13 +31,13 @@ import gwt.material.design.components.client.base.HasSelected;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
-import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.Flex;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.ui.html.Li;
+import gwt.material.design.components.client.ui.html.Span;
 
 /**
  * 
@@ -48,14 +48,13 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	private MaterialIcon icon = new MaterialIcon();
 	private MaterialImage avatar = new MaterialImage();
-	private Label primaryText = new Label();
-	private Label secondaryText = new Label();
+	private Span textContent = new Span(CssName.MDC_LIST_ITEM__TEXT);
+	private Label primaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_PRIMARY_TEXT);
+	private Label secondaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_SECONDARY_TEXT);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
-	// /////////////////////////////////////////////////////////////
-	private final TextMixin<Label> primaryTextMixin = new TextMixin<>(primaryText);
-	private final TextMixin<Label> secondaryTextMixin = new TextMixin<>(secondaryText);
+	// /////////////////////////////////////////////////////////////	
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
 	private final ApplyStyleMixin<MaterialListItem> selectedMixin = new ApplyStyleMixin<>(this, CssName.MDC_LIST_ITEM__SELECTED);
@@ -65,7 +64,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	public MaterialListItem() {
 		super(CssName.MDC_LIST_ITEM);
 	}
-
+	
 	@Override
 	protected void onLoad() {
 
@@ -75,28 +74,24 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 			
 			ariaHiddenMixin.setAttribute(true);
 
-			avatar.addStyleName(CssName.MDC_LIST_ITEM__START_DETAIL);
+			avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
 			avatar.setCircle(true);
 
 			if (avatar.getUrl() != null && !avatar.getUrl().isEmpty()) {
 				insert(avatar, 0);
 			}
 
-			icon.addStyleName(CssName.MDC_LIST_ITEM__START_DETAIL);
+			icon.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
 			icon.setCircle(true);
 
 			if (icon.getType() != null) {
 				insert(icon, 0);
 			}
 
-			primaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT);
-			primaryText.setFlex(Flex.ONE);
-			add(primaryText);
-
-			secondaryText.addStyleName(CssName.MDC_LIST_ITEM__TEXT_SECONDARY);
-			primaryText.add(secondaryText);
-
-			addClickHandler(event -> event.stopPropagation());
+			textContent.add(primaryText);
+			textContent.add(secondaryText);
+			
+			add(textContent);
 			
 			initialized = true;			
 		}
@@ -120,7 +115,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	@UiChild(tagname = "start")
 	public void addStartDetail(final Widget widget, final boolean prevent) {
-		insertDetail(widget, CssName.MDC_LIST_ITEM__START_DETAIL, Appender.START);
+		insertDetail(widget, CssName.MDC_LIST_ITEM__GRAPHIC, Appender.START);
 		if (prevent) {
 			prevent(widget.getElement());
 		}
@@ -128,7 +123,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	@UiChild(tagname = "end")
 	public void addEndDetail(final Widget widget, final boolean prevent) {
-		insertDetail(widget, CssName.MDC_LIST_ITEM__END_DETAIL, Appender.END);
+		insertDetail(widget, CssName.MDC_LIST_ITEM__META, Appender.END);
 		if (prevent) {
 			widget.getElement().setAttribute("prevent", "true");
 			prevent(widget.getElement());
@@ -151,22 +146,20 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 
 	@Override
 	public String getText() {
-		return primaryTextMixin.getText();
+		return primaryText.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		primaryText.clear();
-		primaryTextMixin.setText(text);
-		primaryText.add(secondaryText);
+		primaryText.setText(text);
 	}
 
 	public String getTextSecondary() {
-		return secondaryTextMixin.getText();
+		return secondaryText.getText();
 	}
 
 	public void setTextSecondary(String text) {
-		secondaryTextMixin.setText(text);
+		secondaryText.setText(text);
 	}
 
 	@Override
@@ -219,11 +212,22 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		}
 	}
 
-	@Override
-	public void setTextColor(Color color) {
-		primaryText.setTextColor(color);
+	public void setPrimaryTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__PRIMARY_TEXT_COLOR, color.getCssName());
 	}
-
+	
+	public void setSecondaryTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__SECONDARY_TEXT_COLOR, color.getCssName());
+	}
+	
+	public void setGraphicColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__GRAPHIC_COLOR, color.getCssName());
+	}
+	
+	public void setMetaColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__META_COLOR, color.getCssName());
+	}
+	
 	public void setIconColor(Color color) {
 		icon.setTextColor(color);
 	}

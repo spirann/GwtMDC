@@ -17,25 +17,28 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.constants;
 
-import gwt.material.design.components.client.constants.Align;
+import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
- * 
  * @author Richeli Vargas
- *
  */
-public interface HasAlign<A extends Align> {
-    /**
-     * 
-     * @param align
-     */
-    void setAlign(A align);
+public enum TopAppBarAlign implements Align, CssType {
+	START(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_START), END(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_END);
 
-    /**
-     * 
-     * @return
-     */
-    A getAlign();
+	private final String cssClass;
+
+	TopAppBarAlign(final String cssClass) {
+		this.cssClass = cssClass;
+	}
+
+	@Override
+	public String getCssName() {
+		return cssClass;
+	}
+
+	public static TopAppBarAlign fromStyleName(final String styleName) {
+		return EnumHelper.fromStyleName(styleName, TopAppBarAlign.class, START);
+	}
 }

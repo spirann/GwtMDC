@@ -22,9 +22,9 @@ package gwt.material.design.components.client.ui;
 import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.HasGap;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
-import gwt.material.design.components.client.constants.Align;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.LayoutGridAlign;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -53,9 +53,9 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
+public class MaterialLayoutGrid extends Div implements HasAlign<LayoutGridAlign>, HasGap {
 	
-	protected final TypeMixin<MaterialLayoutGrid, Align> alignMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialLayoutGrid, LayoutGridAlign> alignMixin = new TypeMixin<>(this);
 
 	public MaterialLayoutGrid() {
 		super(CssName.MDC_LAYOUT_GRID);
@@ -127,7 +127,7 @@ public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
 	 * 
 	 */
 	@Override
-	public void setAlign(Align align) {
+	public void setAlign(LayoutGridAlign align) {
 		alignMixin.setType(align);
 	}
 
@@ -135,7 +135,7 @@ public class MaterialLayoutGrid extends Div implements HasAlign, HasGap {
 	 * 
 	 */
 	@Override
-	public Align getAlign() {
+	public LayoutGridAlign getAlign() {
 		return alignMixin.getType();
 	}
 

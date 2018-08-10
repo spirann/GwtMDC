@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
+
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -44,8 +47,17 @@ public class MaterialList extends Ul implements HasDense {
 		super(CssName.MDC_LIST);
 	}
 	
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return new $wnd.mdc.list.MDCList(element);
+	}-*/;
+	
 	public void setHasAvatar(final boolean hasAvatar) {
 		avatarMixin.setApply(hasAvatar);
+	}
+	
+	public boolean hasAvatar() {
+		return avatarMixin.isApplied();
 	}
 
 	@Override

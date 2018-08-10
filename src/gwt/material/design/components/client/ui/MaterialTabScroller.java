@@ -27,22 +27,31 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.HasSelectionHandlers;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.TabScrollerAlign;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTabScroller extends Div implements HasSelectionHandlers<MaterialTab> {
+public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlign>, HasSelectionHandlers<MaterialTab> {
 
 	protected Div scrollArea = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_AREA);
 	protected Div scrollContent = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_CONTENT);
 
+	protected final TypeMixin<MaterialTabScroller, TabScrollerAlign> alignMixin = new TypeMixin<>(this);
+	
+	private Integer selectedTabIndex;
 	private MaterialTab selectedTab;
 
 	protected MaterialTabScroller() {
@@ -59,38 +68,64 @@ public class MaterialTabScroller extends Div implements HasSelectionHandlers<Mat
 		scrollArea.add(scrollContent);
 		super.add(scrollArea);
 
-		// Select the first item if nothing is selected
-		if (selectedTab == null && scrollContent.getWidgetCount() > 0) {
-			selectedTab = (MaterialTab) scrollContent.getWidget(0);
-			selectedTab.setActive(true);
-		}
+		addKeyUpHandler(event -> {
 
-		super.onInitialize();
+		});
+
+		super.onInitialize();		
+	}
+	
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		setSelectedTab(selectedTabIndex == null ? 0 : selectedTabIndex);
 	}
 
-	protected native void scrollTo(final int tab)/*-{
-		var scroller = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		scroller.scrollTo(tab);
-	}-*/;
+	public void setSelectedTab(final int index) {
+		
+		selectedTabIndex = index;
+		
+		if(!initialized) {
+			return;
+		}
+		
+		final MaterialTab tab = (MaterialTab) scrollContent.getWidget(index);		
+		if(selectedTab != null && tab == selectedTab) {
+			return;
+		}
+		
+		setSelectedTab(tab);
+	}
+	
+	public void setSelectedTab(final MaterialTab tab) {
+		final boolean isFirst = selectedTab == null;		
+		selectedTab = tab;
+		if(isFirst) {
+			selectedTab.setActive(true);
+		} else {
+			JsUtils.doClick(selectedTab.getElement());
+		}
+	}
+
+	public MaterialTab getSelectedTab() {
+		return selectedTab;
+	}
 
 	@Override
 	public void add(Widget child) {
 
 		if (child instanceof MaterialTab) {
-			((MaterialTab) child).addSelectionHandler(event -> {
-				/*
-				 * if(selectedTab != null) { selectedTab.setActive(false); }
-				 * 
-				 * selectedTab = (MaterialTab) child; selectedTab.setActive(true);
-				 */
-				selectedTab = (MaterialTab) child;
-				fireSelectionEvent(selectedTab);
+			((MaterialTab) child).addActiveHandler(event -> {
+				if (event.getValue()) {
+					selectedTab = (MaterialTab) child;
+					fireSelectionEvent(selectedTab);
+				}
 			});
 		}
 
 		scrollContent.add(child);
 	}
-
+	
 	protected void fireSelectionEvent(final MaterialTab tab) {
 		SelectionEvent.fire(this, tab);
 	}
@@ -112,5 +147,33 @@ public class MaterialTabScroller extends Div implements HasSelectionHandlers<Mat
 		}
 
 		return tabs;
+	}
+	
+	@Override
+	public void setAlign(final TabScrollerAlign align) {
+		alignMixin.setType(align);
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	@Override
+	public TabScrollerAlign getAlign() {
+		return alignMixin.getType();
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setTextColor(color);
+	}
+	
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
+	}
+
+	public void setActiveColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TAB__ACTIVED_COLOR, color.getCssName());
 	}
 }

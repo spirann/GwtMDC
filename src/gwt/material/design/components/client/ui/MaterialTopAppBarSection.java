@@ -19,41 +19,21 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.mixin.StyleMixin;
+import gwt.material.design.components.client.base.HasAlign;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.CssType;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.constants.TopAppBarAlign;
 import gwt.material.design.components.client.ui.html.Section;
-import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTopAppBarSection extends Section {
+public class MaterialTopAppBarSection extends Section implements HasAlign<TopAppBarAlign> {
 
-	public enum Align implements CssType {
-
-		START(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_START), END(CssName.MDC_TOP_APP_BAR__SECTION__ALIGN_END);
-
-		private final String cssClass;
-
-		Align(final String cssClass) {
-			this.cssClass = cssClass;
-		}
-
-		@Override
-		public String getCssName() {
-			return cssClass;
-		}
-
-		public static Align fromStyleName(final String styleName) {
-			return EnumHelper.fromStyleName(styleName, Align.class, START);
-		}
-	};
-
-	protected final StyleMixin<MaterialTopAppBarSection> alignMixin = new StyleMixin<>(this);
+	protected final TypeMixin<MaterialTopAppBarSection, TopAppBarAlign> alignMixin = new TypeMixin<>(this);
 
 	public MaterialTopAppBarSection() {
 		super(CssName.MDC_TOP_APP_BAR__SECTION);
@@ -68,12 +48,14 @@ public class MaterialTopAppBarSection extends Section {
 	 * 
 	 * @param align
 	 */
-	public void setAlign(final Align align) {
-		alignMixin.setStyle(align.getCssName());
+	@Override
+	public void setAlign(final TopAppBarAlign align) {
+		alignMixin.setType(align);
 	}
 
-	public void getAlign() {
-		Align.fromStyleName(alignMixin.getStyle());
+	@Override
+	public TopAppBarAlign getAlign() {
+		return alignMixin.getType();
 	}
 
 }

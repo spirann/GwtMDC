@@ -51,6 +51,20 @@ public interface CssMixin {
 	String MDC_SLIDER__VALUE_PIN_COLOR = "--mdc-slider-value-pin-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Tab bar
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_TAB__COLOR = "--mdc-tab-color";
+	String MDC_TAB__ACTIVED_COLOR = "--mdc-tab-actived-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// List
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_LIST_ITEM__GRAPHIC_COLOR = "--mdc-list-item-graphic-ink-color";
+	String MDC_LIST_ITEM__PRIMARY_TEXT_COLOR = "--mdc-list-item-primary-text-ink-color";
+	String MDC_LIST_ITEM__SECONDARY_TEXT_COLOR = "--mdc-list-item-secondary-text-ink-color";
+	String MDC_LIST_ITEM__META_COLOR = "--mdc-list-item-meta-ink-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// OLD
 	// ////////////////////////////////////////////////////////////////////////////
 
@@ -78,10 +92,5 @@ public interface CssMixin {
 	String MDC_LAYOUT_GRID_GUTTER_DESKTOP = "--mdc-layout-grid-gutter-desktop";
 	String MDC_LAYOUT_GRID_GUTTER_TABLET = "--mdc-layout-grid-gutter-tablet";
 	String MDC_LAYOUT_GRID_GUTTER_PHONE = "--mdc-layout-grid-gutter-phone";
-	// ////////////////////////////////////////////////////////////////////////////
-	// Tab bar
-	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_TAB__TEXT_COLOR = "--mdc-tab--text-color";
-	String MDC_TAB__ACTIVED_TEXT_COLOR = "--mdc-tab--actived-text-color";
 
 }
