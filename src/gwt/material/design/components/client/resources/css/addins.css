@@ -1071,11 +1071,6 @@ a:active {
 	background-color: var(--mdc-ripple--color, var(--mdc-theme-on-secondary));
 }
 
-.mdc-list-item.mdc-ripple-surface--color::before, 
-.mdc-list-item.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, var(--mdc-theme-text-icon-on-background, rgba(0, 0, 0, 0.87)));
-}
-
 /* ==========================================================================
    ADD-INS
    ========================================================================== */

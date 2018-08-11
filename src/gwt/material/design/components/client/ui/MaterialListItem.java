@@ -66,39 +66,34 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	}
 	
 	@Override
-	protected void onLoad() {
+	protected void onInitialize() {
 
-		if (!initialized) {
+		ripleMixin.initialize();
+		
+		ariaHiddenMixin.setAttribute(true);
 
-			ripleMixin.initialize();
-			
-			ariaHiddenMixin.setAttribute(true);
+		avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
+		avatar.setCircle(true);
 
-			avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
-			avatar.setCircle(true);
-
-			if (avatar.getUrl() != null && !avatar.getUrl().isEmpty()) {
-				insert(avatar, 0);
-			}
-
-			icon.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
-			icon.setCircle(true);
-
-			if (icon.getType() != null) {
-				insert(icon, 0);
-			}
-
-			textContent.add(primaryText);
-			textContent.add(secondaryText);
-			
-			add(textContent);
-			
-			initialized = true;			
+		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty()) {
+			insert(avatar, 0);
 		}
 
-		super.onLoad();
-	}
+		icon.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
+		icon.setCircle(true);
 
+		if (icon.getType() != null) {
+			insert(icon, 0);
+		}
+
+		textContent.add(primaryText);
+		textContent.add(secondaryText);
+		
+		add(textContent);
+
+		super.onInitialize();
+	}
+	
 	private native void removeDatail(final Element element, final String className)/*-{
 		var elements = element.getElementsByClassName(className);
 		var i;
@@ -212,7 +207,8 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		}
 	}
 
-	public void setPrimaryTextColor(Color color) {
+	@Override
+	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__PRIMARY_TEXT_COLOR, color.getCssName());
 	}
 	
