@@ -25,6 +25,8 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasImage;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;
@@ -38,9 +40,8 @@ import gwt.material.design.components.client.ui.html.Div;
 public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 
 	protected MaterialImage imageLeading = new MaterialImage();
-	protected MaterialIcon iconLeading = new MaterialIcon();
-	
-	protected MaterialIcon iconTrailing = new MaterialIcon();
+	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);	
+	protected MaterialIcon iconTrailing = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
 	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
@@ -59,18 +60,10 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 		ripleMixin.initialize();
 		
 		checkmarkSvg.setResource(MaterialResources.INSTANCE.mdcChipCheckmark());
-
 		checkmark.add(checkmarkSvg);
 
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON);
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON__LEADING);
-				
-		iconLeading.addStyleName(CssName.MDC_CHIP__ICON);
-		iconLeading.addStyleName(CssName.MDC_CHIP__ICON__LEADING);
-
-		iconTrailing.setType(IconType.CANCEL);
-		iconTrailing.addStyleName(CssName.MDC_CHIP__ICON);
-		iconTrailing.addStyleName(CssName.MDC_CHIP__ICON__TRAILING);
 		
 		if (iconLeading.getType() != null) {
 			add(iconLeading);
@@ -172,5 +165,28 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	public ImageResource getResource() {
 		return imageLeading.getResource();
 	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setBackground(null);
+		super.setBackgroundColor(color);
+		setStyleProperty(CssMixin.MDC_CHIP_CONTAINER_FILL_COLOR, color.getCssName());
+	}
 
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHIP__TEXT_COLOR, color.getCssName());
+	}
+	
+	public void setIconColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHIP_ICON_LEADING_COLOR, color.getCssName());
+	}
+	
+	public void setCloseColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHIP_ICON_TREALING_COLOR, color.getCssName());
+	}
+	
+	public void setSelectColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHIP_ICON_SELECTED_COLOR, color.getCssName());
+	}
 }

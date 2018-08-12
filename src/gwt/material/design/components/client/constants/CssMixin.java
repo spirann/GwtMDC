@@ -41,6 +41,27 @@ public interface CssMixin {
 	String MDC_ICON_TOGGLE__INK_COLOR = "--mdc-icon-toggle-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Radio button
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_RADIO_BUTTON__CHECKED_COLOR = "--mdc-radio-checked-color";
+	String MDC_RADIO_BUTTON__UNCHECKED_COLOR = "--mdc-radio-unchecked-color";
+	String MDC_RADIO_BUTTON__LABEL_COLOR = "--mdc-radio-label-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// Checkbox
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_CHECKBOX__CHECKED_COLOR = "--mdc-checkbox-checked-color";
+	String MDC_CHECKBOX__UNCHECKED_COLOR = "--mdc-checkbox-unchecked-color";
+	String MDC_CHECKBOX__LABEL_COLOR = "--mdc-checkbox-label-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// Switch
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_SWITCH__CHECKED_COLOR = "--mdc-switch-checked-color";
+	String MDC_SWITCH__UNCHECKED_COLOR = "--mdc-switch-unchecked-color";
+	String MDC_SWITCH__LABEL_COLOR = "--mdc-switch-label-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// Slider
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_SLIDER__TRACK_COLOR = "--mdc-slider-track-color";
@@ -65,6 +86,19 @@ public interface CssMixin {
 	String MDC_LIST_ITEM__META_COLOR = "--mdc-list-item-meta-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Chip
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_CHIP__CORNER_RADIUS = "--mdc-chip-corner-radius";
+	String MDC_CHIP_CONTAINER_FILL_COLOR = "--mdc-chip-container-fill-color";
+	String MDC_CHIP__OUTLINE_WIDTH = "--mdc-chip-outline-width";
+	String MDC_CHIP__OUTLINE_STYLE = "--mdc-chip-outline-style";
+	String MDC_CHIP__OUTLINE_COLOR = "--mdc-chip-outline-color";
+	String MDC_CHIP__TEXT_COLOR = "--mdc-chip-text-color";
+	String MDC_CHIP_ICON_LEADING_COLOR = "--mdc-chip-icon_leading-color";
+	String MDC_CHIP_ICON_TREALING_COLOR = "--mdc-chip-icon_trailing-color";
+	String MDC_CHIP_ICON_SELECTED_COLOR = "--mdc-chip-icon_selected-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// OLD
 	// ////////////////////////////////////////////////////////////////////////////
 
@@ -83,6 +117,7 @@ public interface CssMixin {
 	String MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP = "--mdc-image-list--column-gap-desktop";
 	String MDC_IMAGE_LIST_COLUMN_GAP_TABLET = "--mdc-image-list--column-gap-tablet";
 	String MDC_IMAGE_LIST_COLUMN_GAP_PHONE = "--mdc-image-list--column-gap-phone";
+
 	// ////////////////////////////////////////////////////////////////////////////
 	// Layout Grid
 	// ////////////////////////////////////////////////////////////////////////////

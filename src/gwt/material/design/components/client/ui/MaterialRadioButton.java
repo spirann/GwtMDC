@@ -32,6 +32,7 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.ui.html.Div;
@@ -86,11 +87,7 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	private Div divBackground = new Div(CssName.MDC_RADIO__BACKGROUND);
 	private Div divOuterCircle = new Div(CssName.MDC_RADIO__OUTER_CIRCLE);
 	private Div divInnerCircle = new Div(CssName.MDC_RADIO__INNER_CIRCLE);
-
-	// /////////////////////////////////////////////////////////////
-	// Label
-	// /////////////////////////////////////////////////////////////
-	private Label label = new Label();
+	private Label label = new Label(CssName.MDC_RADIO__LABEL);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
@@ -207,5 +204,13 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return radio.addClickHandler(handler);
+	}
+	
+	public void setCheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_RADIO_BUTTON__CHECKED_COLOR, color.getCssName());
+	}
+	
+	public void setUncheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_RADIO_BUTTON__UNCHECKED_COLOR, color.getCssName());
 	}
 }

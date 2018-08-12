@@ -525,82 +525,6 @@ a:active {
 }
 
 /* ==========================================================================
-   RadioButton color adjust
-   ========================================================================== */
-  .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__outer-circle,
-  [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__outer-circle {
-    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
-  .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__inner-circle,
-  [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__inner-circle {
-    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
-
-.mdc-radio .mdc-radio__native-control:enabled:not(:checked) + .mdc-radio__background .mdc-radio__outer-circle {
-    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54)); 
-}
-
-.mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__inner-circle {   
-    background-color: var(--mdc-theme-secondary);
-}
-
-.mdc-radio__outer-circle {    
-    border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-}
-
-.mdc-radio__native-control:checked + .mdc-radio__background .mdc-radio__outer-circle {
-	border-color: var(--mdc-theme-secondary);
-}
-
-/* ==========================================================================
-   Checkbox color adjust
-   ========================================================================== */
-
-.mdc-checkbox__native-control:disabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
-	border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); 
- }
-
-.mdc-checkbox__native-control:disabled:checked ~ .mdc-checkbox__background,
-.mdc-checkbox__native-control:disabled:indeterminate ~ .mdc-checkbox__background {
-	border-color: transparent;
-	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); 
-}
-
-.mdc-checkbox__native-control:enabled:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
-	border-color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.26));
-}
-
-/* ==========================================================================
-   Switch color adjust
-   ========================================================================== */
-
-.mdc-switch-wrapper {
-	display: flex;
-	align-content: center;
-	align-items: center;
-	justify-content: flex-end;
-	height: 36px;
-	overflow: visible;
-}
-
-.mdc-switch-wrapper[dir="rtl"] {
-	justify-content: flex-end;
-}
-
-.mdc-switch-label:empty {
-	display: none;	
-}
-
-.mdc-switch-label {
-	margin-left: 16px;
-	margin-right: 0;
-}
-
-
-[dir="rtl"] .mdc-switch-label {
-	margin-left: 0;
-	margin-right: 16px;
-}
-
-/* ==========================================================================
    Textfield color adjust
    ========================================================================== */
 
@@ -1047,11 +971,6 @@ a:active {
 [disabled].mdc-ripple-surface--color::before, 
 [disabled].mdc-ripple-surface--color::after {
 	background-color: transparent;
-}
-
-.mdc-chip:not([disabled]).mdc-ripple-surface--color::before, 
-.mdc-chip:not([disabled]).mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, rgba(0, 0, 0, 0.87));
 }
 
 .mdc-button--raised.mdc-ripple-surface--color::before, 

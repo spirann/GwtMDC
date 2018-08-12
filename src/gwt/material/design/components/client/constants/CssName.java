@@ -315,6 +315,7 @@ public interface CssName {
 	String MDC_RADIO__BACKGROUND = "mdc-radio__background";
 	String MDC_RADIO__OUTER_CIRCLE = "mdc-radio__outer-circle";
 	String MDC_RADIO__INNER_CIRCLE = "mdc-radio__inner-circle";
+	String MDC_RADIO__LABEL = "mdc-radio__label";
 	// //////////////////////////////////////////////////////
 	// Checkbox
 	// //////////////////////////////////////////////////////
@@ -324,6 +325,7 @@ public interface CssName {
 	String MDC_CHECKBOX__CHECKMARK = "mdc-checkbox__checkmark";
 	String MDC_CHECKBOX__CHECKMARK_PATH = "mdc-checkbox__checkmark-path";
 	String MDC_CHECKBOX__MIXEDMARK = "mdc-checkbox__mixedmark";
+	String MDC_CHECKBOX__LABEL = "mdc-checkbox__label";
 	// //////////////////////////////////////////////////////
 	// Slider
 	// //////////////////////////////////////////////////////

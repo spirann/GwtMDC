@@ -1,22 +1,22 @@
 :root {
-  --mdc-theme-primary: rgba(0,0,0,1);
+  --mdc-theme-primary: #000;
   --mdc-theme-secondary:  #FFC400;
-  --mdc-theme-background: rgba(255,255,255,1);
-  --mdc-theme-surface: rgba(255,255,255,1);
+  --mdc-theme-background: #FFF;
+  --mdc-theme-surface: #FFF;
   
-  --mdc-theme-on-primary:  white;
-  --mdc-theme-on-secondary:  black;
-  --mdc-theme-on-surface: rgba(0,0,0,1);
+  --mdc-theme-on-primary:  #FFF;
+  --mdc-theme-on-secondary:  #000;
+  --mdc-theme-on-surface: #000;
   
   --mdc-theme-text-primary-on-background: rgba(0,0,0,1);
   --mdc-theme-text-secondary-on-background: rgba(0,0,0,0.7);
   --mdc-theme-text-hint-on-background: rgba(0,0,0,0.6);
-  --mdc-theme-text-disabled-on-background: rgba(0,0,0,0.5);
   --mdc-theme-text-icon-on-background: rgba(0,0,0,0.6);
+  --mdc-theme-text-disabled-on-background: rgba(0,0,0,0.5);
   
-  --mdc-state--success: #00b020;
+  --mdc-state--success: #00B020;
   --mdc-state--warning: #FF8F00;
-  --mdc-state--error: #b00020;
+  --mdc-state--error: #B00020;
   
   /* ============================== */
   /* Used only in source code view 	*/

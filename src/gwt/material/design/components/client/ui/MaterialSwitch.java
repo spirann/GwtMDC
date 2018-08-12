@@ -27,6 +27,7 @@ import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.Role;
@@ -50,11 +51,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH__NATIVE_CONTROL);
 	protected Div thumbUnderlay = new Div(CssName.MDC_SWITCH__THUMB_UNDERLAY);
 	protected Div thumb = new Div(CssName.MDC_SWITCH__THUMB);
-	
-
-	// /////////////////////////////////////////////////////////////
-	// Label
-	// /////////////////////////////////////////////////////////////
 	protected Label label = new Label(CssName.MDC_SWITCH__LABEL);
 
 	// /////////////////////////////////////////////////////////////
@@ -140,5 +136,13 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
+	}
+	
+	public void setCheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SWITCH__CHECKED_COLOR, color.getCssName());
+	}
+	
+	public void setUncheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SWITCH__UNCHECKED_COLOR, color.getCssName());
 	}
 }

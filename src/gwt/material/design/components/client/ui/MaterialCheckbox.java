@@ -30,6 +30,7 @@ import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.resources.MaterialResources;
@@ -53,7 +54,7 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	protected Div background = new Div(CssName.MDC_CHECKBOX__BACKGROUND);
 	protected MaterialSvg checkmark = new MaterialSvg(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
 	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX__MIXEDMARK);
-	protected Label label = new Label();
+	protected Label label = new Label(CssName.MDC_CHECKBOX__LABEL);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
@@ -161,5 +162,13 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return checkbox.addClickHandler(handler);
+	}
+	
+	public void setCheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
+	}
+	
+	public void setUncheckedColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
 	}
 }
