@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
@@ -28,8 +30,10 @@ import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -37,10 +41,10 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
+public class MaterialChip extends MaterialSelectedField implements HasText, HasIcon, HasImage {
 
 	protected MaterialImage imageLeading = new MaterialImage();
-	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);	
+	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);
 	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
@@ -51,25 +55,31 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	protected boolean closeable = false;
 
 	public MaterialChip() {
-		super(CssName.MDC_CHIP);
+		super(HtmlElements.DIV.createElement(), CssName.MDC_CHIP__SELECTED, CssName.MDC_CHIP);
 	}
+
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return element;
+	}-*/;
 
 	@Override
 	protected void onInitialize() {
 
+		fireChangeOnClick = true;
 		ripleMixin.initialize();
-		
+
 		checkmarkSvg.setResource(MaterialResources.INSTANCE.mdcChipCheckmark());
 		checkmark.add(checkmarkSvg);
 
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON);
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON__LEADING);
-		
+
 		if (iconLeading.getType() != null) {
 			add(iconLeading);
 		}
-		
-		if(imageLeading.getUrl() != null && !imageLeading.getUrl().isEmpty()) {
+
+		if (imageLeading.getUrl() != null && !imageLeading.getUrl().isEmpty()) {
 			add(imageLeading);
 		}
 
@@ -106,7 +116,7 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 		}
 
 	}
-	
+
 	public boolean isCloseable() {
 		return closeable;
 	}
@@ -132,7 +142,7 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	@Override
 	public void setUrl(String url) {
 		imageLeading.setUrl(url);
-		
+
 		if (url == null && imageLeading.getParent() != null) {
 			imageLeading.removeFromParent();
 		}
@@ -149,9 +159,9 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 
 	@Override
 	public void setResource(ImageResource resource) {
-		
+
 		imageLeading.setResource(resource);
-		
+
 		if (resource == null && imageLeading.getParent() != null) {
 			imageLeading.removeFromParent();
 		}
@@ -165,7 +175,7 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	public ImageResource getResource() {
 		return imageLeading.getResource();
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setBackground(null);
@@ -177,17 +187,17 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHIP__TEXT_COLOR, color.getCssName());
 	}
-	
+
 	public void setIconColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHIP_ICON_LEADING_COLOR, color.getCssName());
 	}
-	
+
 	public void setCloseColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHIP_ICON_TREALING_COLOR, color.getCssName());
 	}
-	
+
 	public void setSelectColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHIP_ICON_SELECTED_COLOR, color.getCssName());
 	}
-	
+
 }

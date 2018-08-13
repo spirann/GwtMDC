@@ -29,23 +29,21 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.MaterialFormField;
-import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
-import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialRadioButton extends MaterialFormField<Boolean> implements HasName, HasText {
+public class MaterialRadioButton extends MaterialSelectedField implements HasName, HasText {
 
 	// ////////////////////////////////////////////////////////////////
 	// Control for change value in RadioButton group
@@ -89,13 +87,9 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	private Div divInnerCircle = new Div(CssName.MDC_RADIO__INNER_CIRCLE);
 	private Label label = new Label(CssName.MDC_RADIO__LABEL);
 
-	// /////////////////////////////////////////////////////////////
-	// Style mixin
-	// /////////////////////////////////////////////////////////////
-	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
-
 	public MaterialRadioButton() {
-		super();
+		super(CssName.MDC_FORM_FIELD);
+		super.initializeSelectedMixin(input);
 	}
 	
 	@Override
@@ -122,19 +116,17 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		add(radio);
 		add(label);
 
-		if (getValue()) {
+		if (isSelected()) {
 			putInHistory();
 		}
 
 		setCircle(true);
 		
 		addValueChangeListener(input.getElement());
-		
-		addClickHandler(event -> JsUtils.clearFocus());
 
 		super.onInitialize();
 	}
-
+	
 	protected native void addValueChangeListener(Element element)/*-{
 		
 		var _this = this;
@@ -147,18 +139,9 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 	}-*/;
 
 	@Override
-	public void setValue(Boolean value, boolean fireEvents) {
-		checkedMixin.setChecked(value);
-		putInHistory(fireEvents);
-
-		if (fireEvents) {
-			fireChangeEvent();
-		}
-	}
-
-	@Override
-	public Boolean getValue() {
-		return checkedMixin.isChecked();
+	public void setSelected(boolean selected, boolean fireEvents) {
+		super.setSelected(selected, fireEvents);
+		putInHistory(fireEvents);		
 	}
 
 	@Override
@@ -206,11 +189,11 @@ public class MaterialRadioButton extends MaterialFormField<Boolean> implements H
 		return radio.addClickHandler(handler);
 	}
 	
-	public void setCheckedColor(final Color color) {
+	public void setSelectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_RADIO_BUTTON__CHECKED_COLOR, color.getCssName());
 	}
 	
-	public void setUncheckedColor(final Color color) {
+	public void setUnselectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_RADIO_BUTTON__UNCHECKED_COLOR, color.getCssName());
 	}
 }

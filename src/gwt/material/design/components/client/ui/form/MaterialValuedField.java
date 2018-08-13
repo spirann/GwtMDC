@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.ui.form;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
@@ -36,17 +36,17 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialFormField<T> extends Div implements HasValue<T> {
+public class MaterialValuedField<T> extends Div implements HasValue<T> {
 
 	private boolean valueChangeHandlerInitialized;
 
 	private T value;
 
-	protected MaterialFormField() {
+	protected MaterialValuedField() {
 		this(CssName.MDC_FORM_FIELD);
 	}
 	
-	public MaterialFormField(final String ... initialClasses) {
+	public MaterialValuedField(final String ... initialClasses) {
 		super(initialClasses);
 	}
 	
@@ -60,7 +60,7 @@ public class MaterialFormField<T> extends Div implements HasValue<T> {
 	}
 
 	protected void fireChangeEvent() {
-		ValueChangeEvent.fire(MaterialFormField.this, getValue());
+		ValueChangeEvent.fire(MaterialValuedField.this, getValue());
 	}
 
 	@Override

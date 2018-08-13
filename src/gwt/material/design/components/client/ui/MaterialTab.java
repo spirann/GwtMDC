@@ -117,23 +117,15 @@ public class MaterialTab extends Button implements HasText, HasIcon, HasActive, 
 	}-*/;
 
 	protected void active() {
-
 		final Widget parent = getParent();
-
 		if (parent != null && parent instanceof MaterialWidget) {
-
 			final MaterialWidget materialWidget = (MaterialWidget) parent;
 			TimerHelper.schedule(1, () -> {
-
 				materialWidget.getChildrenList().stream().filter(child -> child instanceof MaterialTab && child != this)
 						.forEach(child -> ((MaterialTab) child).setActive(false));
-
 				active(true);
-
 			});
-
 		}
-
 	}
 
 	protected void active(boolean active) {

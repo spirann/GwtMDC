@@ -26,25 +26,23 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasIndeterminate;
-import gwt.material.design.components.client.base.MaterialFormField;
-import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.resources.MaterialResources;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
-import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasText, HasIndeterminate {
+public class MaterialCheckbox extends MaterialSelectedField implements HasText, HasIndeterminate {
 
 	// /////////////////////////////////////////////////////////////
 	// Checkbox
@@ -59,11 +57,11 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
-	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
 	protected final IndeterminateMixin<Input> indeterminateMixin = new IndeterminateMixin<>(input);
 
 	public MaterialCheckbox() {
-		super();
+		super(CssName.MDC_FORM_FIELD);
+		super.initializeSelectedMixin(input);
 	}
 
 	@Override
@@ -100,25 +98,10 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		add(label);
 		
 		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
-		
-		addClickHandler(event -> JsUtils.clearFocus());
-		
+				
 		super.onInitialize();
 	}
-
-	@Override
-	public void setValue(Boolean value, boolean fireEvents) {
-		checkedMixin.setChecked(value);
-		if (fireEvents) {
-			fireChangeEvent();
-		}
-	}
-
-	@Override
-	public Boolean getValue() {
-		return checkedMixin.isChecked();
-	}
-
+	
 	@Override
 	public boolean isIndeterminate() {
 		return indeterminateMixin.isIndeterminate();
@@ -164,11 +147,11 @@ public class MaterialCheckbox extends MaterialFormField<Boolean> implements HasT
 		return checkbox.addClickHandler(handler);
 	}
 	
-	public void setCheckedColor(final Color color) {
+	public void setSelectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
 	}
 	
-	public void setUncheckedColor(final Color color) {
+	public void setUnselectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
 	}
 }

@@ -19,6 +19,12 @@ label {
 	color: var(--mdc-theme-text-primary-on-background, rgba(0, 0, 0, 0.87));
 }
 
+i, button, a {
+	cursor: pointer;
+	border: none;
+    outline:none;
+}
+
 i {
 	font-family: 'Material Icons';
 	font-weight: normal;
@@ -28,24 +34,11 @@ i {
 	word-wrap: normal;
 	white-space: nowrap;
 	direction: ltr;
-
-  /* Support for all WebKit browsers. */
-  -webkit-font-smoothing: antialiased;
-  /* Support for Safari and Chrome. */
-  text-rendering: optimizeLegibility;
-
-  /* Support for Firefox. */
-  -moz-osx-font-smoothing: grayscale;
-
-  /* Support for IE. */
-  font-feature-settings: 'liga';
+	-webkit-font-smoothing: antialiased;
+	text-rendering: optimizeLegibility;
+	-moz-osx-font-smoothing: grayscale;
+	font-feature-settings: 'liga';
 	transform: rotate(0.03deg);
-}
-
-i, button, a {
-	cursor: pointer;
-	border: none;
-    outline:none;
 }
 
 a:link,

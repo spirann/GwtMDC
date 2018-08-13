@@ -26,7 +26,6 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import gwt.material.design.components.client.base.HasDiscrete;
 import gwt.material.design.components.client.base.HasInputHandlers;
 import gwt.material.design.components.client.base.HasMarkers;
-import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
@@ -36,6 +35,7 @@ import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
+import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
@@ -45,7 +45,7 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialSlider extends MaterialFormField<Double>
+public class MaterialSlider extends MaterialValuedField<Double>
 		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	// /////////////////////////////////////////////////////////////

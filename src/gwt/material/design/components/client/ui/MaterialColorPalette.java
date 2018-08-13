@@ -6,13 +6,13 @@ import java.util.Map;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 
-public class MaterialColorPalette extends MaterialFormField<Color> {
+public class MaterialColorPalette extends MaterialValuedField<Color> {
 
 	protected static final String[] COLORS_NAMES = { "", "50", "100", "200", "300", "400", "500", "600", "700", "800",
 			"900", "A100", "A200", "A400", "A700" };

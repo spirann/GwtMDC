@@ -35,7 +35,6 @@ import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.HasValidationHandlers;
-import gwt.material.design.components.client.base.MaterialFormField;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
@@ -57,6 +56,7 @@ import gwt.material.design.components.client.events.IconClickEvent.IconClickHand
 import gwt.material.design.components.client.events.ValidationEvent;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
+import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ui.TextFieldValidation;
@@ -66,7 +66,7 @@ import gwt.material.design.components.client.validation.ui.TextFieldValidation;
  * @author Richeli Vargas
  *
  */
-public class MaterialInput extends MaterialFormField<String>
+public class MaterialInput extends MaterialValuedField<String>
 		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>,
 		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
 

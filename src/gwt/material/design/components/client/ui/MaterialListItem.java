@@ -27,16 +27,15 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasHref;
 import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.HasSelected;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Label;
-import gwt.material.design.components.client.ui.html.Li;
 import gwt.material.design.components.client.ui.html.Span;
 
 /**
@@ -44,7 +43,7 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, HasSelected {
+public class MaterialListItem extends MaterialSelectedField implements HasHref, HasText, HasIcon {
 
 	private MaterialIcon icon = new MaterialIcon();
 	private MaterialImage avatar = new MaterialImage();
@@ -57,12 +56,11 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 	// /////////////////////////////////////////////////////////////	
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
-	private final ApplyStyleMixin<MaterialListItem> selectedMixin = new ApplyStyleMixin<>(this, CssName.MDC_LIST_ITEM__SELECTED);
 
 	private boolean initialized = false;
 
 	public MaterialListItem() {
-		super(CssName.MDC_LIST_ITEM);
+		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM__SELECTED, CssName.MDC_LIST_ITEM);
 	}
 	
 	@Override
@@ -92,7 +90,7 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		add(textContent);
 
 		super.onInitialize();
-	}
+	}	
 	
 	private native void removeDatail(final Element element, final String className)/*-{
 		var elements = element.getElementsByClassName(className);
@@ -113,6 +111,16 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		insertDetail(widget, CssName.MDC_LIST_ITEM__GRAPHIC, Appender.START);
 		if (prevent) {
 			prevent(widget.getElement());
+		}
+				
+		if(widget instanceof MaterialCheckbox) {
+			final MaterialCheckbox checkbox = (MaterialCheckbox) widget;
+			checkbox.addSelectionHandler(event -> setSelected(event.getValue(), false));
+		}
+		
+		if(widget instanceof MaterialRadioButton) {
+			final MaterialRadioButton radioButton = (MaterialRadioButton) widget;
+			radioButton.addSelectionHandler(event -> setSelected(event.getValue(), false));
 		}
 	}
 
@@ -236,14 +244,4 @@ public class MaterialListItem extends Li implements HasHref, HasText, HasIcon, H
 		avatar.setBackgroundColor(color);
 	}
 
-	@Override
-	public boolean isSelected() {
-		return selectedMixin.isApplied();
-	}
-
-	@Override
-	public void setSelected(boolean selected) {
-		selectedMixin.setApply(selected);
-	}
-	
 }

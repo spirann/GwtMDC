@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -27,38 +27,34 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class ApplyStyleMixin<T extends Widget> extends StyleMixin<T> {
 
+	// It is to work with and without css class
 	private boolean apply = false;
 	
 	private final String cssClass; 
-	
-	private HandlerRegistration handler;
 	
 	public ApplyStyleMixin(final T widget, final String cssClass) {
 		super(widget);
 		this.cssClass = cssClass;
 	}
-	
-	@Override
-	public void setUiObject(T uiObject) {
-		super.setUiObject(uiObject);
-
-		// Clean up previous handler
-		if (handler != null) {
-			handler.removeHandler();
-			handler = null;
-		}
-	}
-	
+		
 	public void setApply(boolean apply) {
 		this.apply = apply;
 		setStyle(null);
-
 		if (apply) {
 			setStyle(cssClass);
 		}
 	}
+
+	protected native boolean isApplied(Element element, String cssClass)/*-{
+		return element.classList.contains(cssClass);
+	}-*/;
 	
 	public boolean isApplied() {
+		
+		if(cssClass != null) {
+			apply = isApplied(uiObject.getElement(), cssClass);
+		}
+		
 		return apply;
 	}
 }

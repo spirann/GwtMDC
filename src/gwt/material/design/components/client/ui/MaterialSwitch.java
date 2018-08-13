@@ -23,25 +23,22 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.MaterialFormField;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
-import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;
-import gwt.material.design.components.client.utils.JsUtils;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialSwitch extends MaterialFormField<Boolean> implements HasText {
+public class MaterialSwitch extends MaterialSelectedField implements HasText {
 
 	// /////////////////////////////////////////////////////////////
 	// Switch
@@ -53,15 +50,10 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	protected Div thumb = new Div(CssName.MDC_SWITCH__THUMB);
 	protected Label label = new Label(CssName.MDC_SWITCH__LABEL);
 
-	// /////////////////////////////////////////////////////////////
-	// Style mixin
-	// /////////////////////////////////////////////////////////////
-	protected final CheckedMixin<Input> checkedMixin = new CheckedMixin<>(input);
-	protected final ApplyStyleMixin<Div> checkedStyleMixin = new ApplyStyleMixin<>(switch_, CssName.MDC_SWITCH__CHECKED);
-
 	public MaterialSwitch() {
 		super(CssName.MDC_SWITCH_WRAPPER);
-	}
+		super.initializeSelectedMixin(switch_, CssName.MDC_SWITCH__CHECKED, input);
+	}	
 
 	@Override
 	protected void onInitialize() {
@@ -78,9 +70,7 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 
 		add(switch_);
 		add(label);
-		
-		addClickHandler(event -> JsUtils.clearFocus());
-		
+				
 		super.onInitialize();
 	}
 	
@@ -93,20 +83,6 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.switchControl.MDCSwitch(element);
 	}-*/;
-
-	@Override
-	public void setValue(Boolean value, boolean fireEvents) {
-		checkedMixin.setChecked(value);
-		checkedStyleMixin.setApply(value);
-		if (fireEvents) {
-			fireChangeEvent();
-		}
-	}
-
-	@Override
-	public Boolean getValue() {
-		return checkedMixin.isChecked();
-	}
 
 	@Override
 	public String getText() {
@@ -138,11 +114,11 @@ public class MaterialSwitch extends MaterialFormField<Boolean> implements HasTex
 		label.setTextColor(color);
 	}
 	
-	public void setCheckedColor(final Color color) {
+	public void setSelectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SWITCH__CHECKED_COLOR, color.getCssName());
 	}
 	
-	public void setUncheckedColor(final Color color) {
+	public void setUnselectedColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SWITCH__UNCHECKED_COLOR, color.getCssName());
 	}
 }
