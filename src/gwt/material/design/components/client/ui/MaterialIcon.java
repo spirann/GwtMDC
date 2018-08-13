@@ -46,6 +46,11 @@ public class MaterialIcon extends Icon implements HasType<IconType>, HasHref {
 		addStyleName(CssName.MATERIAL_ICONS);
 	}
 	
+	public MaterialIcon(final IconType type, String... initialClasses) {
+		this(initialClasses);
+		setType(type);
+	}
+	
 	public MaterialIcon(final IconType type) {
 		this();
 		setType(type);

@@ -41,7 +41,7 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 
 	protected MaterialImage imageLeading = new MaterialImage();
 	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);	
-	protected MaterialIcon iconTrailing = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
+	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
 	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
@@ -189,4 +189,5 @@ public class MaterialChip extends Div implements HasText, HasIcon, HasImage {
 	public void setSelectColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHIP_ICON_SELECTED_COLOR, color.getCssName());
 	}
+	
 }

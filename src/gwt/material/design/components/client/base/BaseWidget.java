@@ -22,6 +22,7 @@ package gwt.material.design.components.client.base;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Cursor;
+import com.google.gwt.dom.client.Style.OutlineStyle;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
@@ -201,6 +202,18 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
 	public void setZIndex(final int zIndex) {
 		setStyleProperty("z-index", String.valueOf(zIndex));
+	}
+	
+	public void setOutlineWidth(final int borderWidth) {
+		setStyleProperty("outline-width", borderWidth + "px");
+	}
+	
+	public void setOutilineColor(final Color color) {
+		setStyleProperty("outline-color", color.getCssName());
+	}
+	
+	public void setOutlineStyle(final OutlineStyle outlineStyle) {
+		setStyleProperty("outline-style", outlineStyle.getCssName());
 	}
 
 	public void setBorderWidth(final int borderWidth) {

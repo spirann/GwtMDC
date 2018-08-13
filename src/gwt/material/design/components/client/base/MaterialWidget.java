@@ -616,8 +616,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public void setRtl(boolean rtl) {
 		if (rtl) {
 			rtlMixin.setAttribute("rtl");
+			setStyleProperty("direction", "rtl");
 		} else {
 			rtlMixin.setAttribute(null);
+			setStyleProperty("direction", "ltr");
 		}
 	}
 
