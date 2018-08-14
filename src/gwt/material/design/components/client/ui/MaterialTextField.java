@@ -34,6 +34,7 @@ import gwt.material.design.components.client.base.HasState;
 import gwt.material.design.components.client.base.HasTextFieldValidation;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.HasValidationHandlers;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.TextFieldType;
@@ -60,6 +61,11 @@ public class MaterialTextField extends MaterialInputBox implements HasHelperText
 		field.setIcon(iconType);
 	}
 
+	@Override
+	public void setIconColor(Color color) {
+		field.setIconColor(color);
+	}
+	
 	@Override
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		return field.addIconClickHandler(handler);

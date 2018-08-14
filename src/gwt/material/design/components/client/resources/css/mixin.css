@@ -2,19 +2,20 @@
 	
 	--mdc-track-opacity: .38;
 	--mdc-container-opacity: .12;
+	--mdc-selected-opacity: .08;
 	--mdc-track-background-opacity: linear-gradient(rgba(255, 255, 255, calc(1.0 - var(--mdc-track-opacity))), rgba(255, 255, 255, calc(1.0 - var(--mdc-track-opacity)))) no-repeat;
 	--mdc-container-background-opacity: linear-gradient(rgba(255, 255, 255, calc(1.0 - var(--mdc-container-opacity))), rgba(255, 255, 255, calc(1.0 - var(--mdc-container-opacity)))) no-repeat;
+	--mdc-selected-background-opacity: linear-gradient(rgba(255, 255, 255, calc(1.0 - var(--mdc-selected-opacity))), rgba(255, 255, 255, calc(1.0 - var(--mdc-selected-opacity)))) no-repeat;
 	
 	/* Button */
 	--mdc-button-fill-color: transparent;
 	--mdc-button-ink-color: var(--mdc-theme-primary);
 	--mdc-button-outline-color: var(--mdc-theme-primary);
 	--mdc-button-raised-fill-color: var(--mdc-theme-primary);
-	--mdc-button-raised-ink-color: var(--mdc-theme-on-primary);	
-	--mdc-button-corner-radius: 4px;		
+	--mdc-button-raised-ink-color: var(--mdc-theme-on-primary);		
 	
 	/* Fab */
-	--mdc-fab-container-color: var(--mdc-theme-secondary);
+	--mdc-fab-fill-color: var(--mdc-theme-secondary);
 	--mdc-fab-ink-color: var(--mdc-theme-on-secondary);
 	
 	/* Icon button */
@@ -75,7 +76,7 @@
 }
 
 /* ==========================================================================
-   Adjust Snackbar
+   Snackbar
    ========================================================================== */
 .mdc-snackbar {
 	z-index: 1;}
@@ -138,7 +139,37 @@
 .mdc-icon-toggle.mdc-ripple-surface--color::before, 
 .mdc-icon-toggle.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-icon-toggle-ink-color);}
-
+	
+/* ==========================================================================
+   Floating FAB
+   ========================================================================== */
+.mdc-fab {
+	color: var(--mdc-fab-ink-color);
+	background-color: var(--mdc-fab-fill-color);}
+.mdc-fab * {
+	color: var(--mdc-fab-ink-color);}
+.mdc-fab.mdc-ripple-surface--color::before, 
+.mdc-fab.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-fab-ink-color);}		
+.mdc-fab__label:empty,
+.mdc-fab__icon:empty {
+	display: none;}
+.mdc-fab--extended[dir="rtl"] .mdc-fab__icon {
+	margin-left: 12px;
+	margin-right: -8px;}
+.mdc-fab--fixed > label:empty {
+	display: none;}
+.mdc-fab--fixed {
+	position: fixed;
+	bottom: 1rem;
+	right: 1rem;
+	z-index: 4;
+	-webkit-transition: bottom 0.5s;    	
+    transition: bottom 0.5s;}
+@media ( min-width : 1024px) {
+	.mdc-fab--fixed {
+		bottom: 1.5rem;
+		right: 1.5rem;}}
 /* ==========================================================================
    Slider
    ========================================================================== */ 
@@ -334,13 +365,24 @@
 /* ==========================================================================
    Chip
    ========================================================================== */
-.mdc-chip,
-.mdc-chip-set--choice .mdc-chip--selected {
+.mdc-chip[disabled] {
+	opacity: 0.37;
+	cursor: default;}
+.mdc-chip {
 	border-radius: var(--mdc-chip-corner-radius);
 	background-color: transparent;
 	background: 
         var(--mdc-container-background-opacity),
-		linear-gradient(var(--mdc-chip-container-fill-color), var(--mdc-chip-container-fill-color)) no-repeat;}	
+		linear-gradient(var(--mdc-chip-container-fill-color), var(--mdc-chip-container-fill-color)) no-repeat;}
+.mdc-chip-set--choice .mdc-chip--selected {
+	border-radius: var(--mdc-chip-corner-radius);
+	background-color: transparent;
+	background: 
+        var(--mdc-selected-background-opacity),
+		linear-gradient(var(--mdc-chip-container-fill-color), var(--mdc-chip-container-fill-color)) no-repeat;}
+.mdc-chip--outlined {
+	border: 1px solid var(--mdc-chip-text-color);
+	background: none;}			
 .mdc-chip.mdc-ripple-surface--color::before,
 .mdc-chip.mdc-ripple-surface--color::after,
 .mdc-chip.mdc-chip--selected.mdc-ripple-surface--color::before,
@@ -365,8 +407,15 @@
 	display: none;
 }
     
-    
-    
+/* ==========================================================================
+   Chip set
+   ========================================================================== */  
+.mdc-chip-set {
+	padding: 0;}
+.mdc-chip-set > div:first-child {
+	margin-left: 0;}
+.mdc-chip-set > div:last-child {
+	margin-right: 0;}
     
     	
     

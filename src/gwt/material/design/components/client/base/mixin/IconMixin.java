@@ -22,6 +22,8 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.IconType;
 
 /**
@@ -49,6 +51,15 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 			uiObject.getElement().setInnerHTML("");
 		} else {
 			uiObject.getElement().setInnerHTML(iconType.getCssName());
+		}
+	}
+
+	@Override
+	public void setIconColor(Color color) {
+		if(uiObject instanceof MaterialWidget) {
+			((MaterialWidget) uiObject).setColor(color);
+		} else {
+			uiObject.getElement().getStyle().setColor(color.getCssName());
 		}
 	}
 

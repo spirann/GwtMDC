@@ -336,6 +336,11 @@ public class MaterialInput extends MaterialValuedField<String>
 			}
 		}
 	}
+	
+	@Override
+	public void setIconColor(Color color) {
+		icon.setColor(color);
+	}
 
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		icon.setTabindex(0);

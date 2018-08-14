@@ -294,6 +294,7 @@ public interface CssName {
 	String MDC_CHIP_SET__CHOICE = "mdc-chip-set--choice";
 	String MDC_CHIP_SET__FILTER = "mdc-chip-set--filter";
 	String MDC_CHIP = "mdc-chip";
+	String MDC_CHIP__OUTLINE = "mdc-chip--outlined";
 	String MDC_CHIP__SELECTED = "mdc-chip--selected";
 	String MDC_CHIP__TEXT = "mdc-chip__text";
 	String MDC_CHIP__ICON = "mdc-chip__icon";

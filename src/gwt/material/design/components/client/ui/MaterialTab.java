@@ -120,6 +120,11 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 		icon.setType(iconType);
 	}
 	
+	@Override
+	public void setIconColor(Color color) {
+		icon.setColor(color);
+	}
+	
 	public void setStacked(final boolean stacked) {
 		stackedMixin.setApply(stacked);
 	}

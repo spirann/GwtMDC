@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base;
 
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.IconType;
 
 /**
@@ -38,5 +39,11 @@ public interface HasIcon {
      * @param iconType
      */
     void setIcon(IconType iconType);
+    
+    /**
+     * 
+     * @param color
+     */
+    void setIconColor(Color color);
 
 }

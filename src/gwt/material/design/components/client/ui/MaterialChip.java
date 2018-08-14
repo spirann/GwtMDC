@@ -29,12 +29,16 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasImage;
+import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.ChipType;
 import gwt.material.design.components.client.constants.ChipSetType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.form.MaterialSelectedField;
@@ -45,10 +49,10 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialChip extends MaterialSelectedField implements HasText, HasIcon, HasImage {
+public class MaterialChip extends MaterialSelectedField implements HasType<ChipType>, HasText, HasIcon, HasImage {
 
 	// ////////////////////////////////////////////////////////////////
-	// Control for change value in RadioButton group
+	// Control for change value in RadioChip group
 	// Because the event is not trigger when another radio is selected
 	// ////////////////////////////////////////////////////////////////
 	protected final static Map<String, MaterialChip> history = new HashMap<>();
@@ -99,13 +103,13 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 
 	protected MaterialImage imageLeading = new MaterialImage();
 	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);
-	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON,
-			CssName.MDC_CHIP__ICON__TRAILING);
+	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
 	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
+	protected final TypeMixin<MaterialChip, ChipType> typeMixin = new TypeMixin<>(this);
 
 	protected boolean closeable = false;
 
@@ -171,6 +175,16 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 		textMixin.setText(text);
 	}
 
+	@Override
+	public void setType(ChipType type) {
+		typeMixin.setType(type);
+	}
+
+	@Override
+	public ChipType getType() {
+		return typeMixin.getType();
+	}
+	
 	public void setCloseable(final boolean closeable) {
 
 		this.closeable = closeable;
@@ -187,6 +201,18 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 
 	public boolean isCloseable() {
 		return closeable;
+	}
+	
+	public void setCloseableColor(final Color color) {
+		iconTrailing.setColor(color);
+	}
+	
+	public void setShowCheckmark(final boolean show) {
+		if(show) {
+			checkmark.setDisplay(Display.INITIAL);
+		} else {
+			checkmark.setDisplay(Display.NONE);
+		}
 	}
 
 	@Override
