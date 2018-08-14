@@ -106,7 +106,7 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 		setStyleProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
 	}
 
-	public void setActiveColor(Color color) {
+	public void setSelectedColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TAB__ACTIVED_COLOR, color.getCssName());
 	}
 

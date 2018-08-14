@@ -60,12 +60,14 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	private boolean initialized = false;
 
 	public MaterialListItem() {
-		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM__SELECTED, CssName.MDC_LIST_ITEM);
+		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM);
+		super.initializeSelectedMixin(CssName.MDC_LIST_ITEM__SELECTED);
 	}
 	
 	@Override
 	protected void onInitialize() {
 
+		fireChangeOnClick = false;
 		ripleMixin.initialize();
 		
 		ariaHiddenMixin.setAttribute(true);
