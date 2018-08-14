@@ -44,6 +44,12 @@ public class MaterialIconButton extends MaterialIcon {
 	}
 	
 	@Override
+	protected void onInitialize() {
+		ripleMixin.initialize();
+		super.onInitialize();
+	}
+	
+	@Override
 	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_ICON_BUTTON__INK_COLOR, color.getCssName());
 	}

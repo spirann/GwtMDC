@@ -30,6 +30,8 @@ import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Button;
@@ -44,36 +46,33 @@ import gwt.material.design.components.client.utils.JsUtils;
 public class MaterialButton extends Button implements HasType<ButtonType>, HasHref, HasText, HasIcon, HasDense {
 
 	protected final Span label = new Span();
-	
+
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
 	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON__DENSE);
 
 	protected MaterialIcon icon;
-	
+
 	public MaterialButton() {
 		super(CssName.MDC_BUTTON);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
-		
 		ripleMixin.initialize();
-		
-		add(label);				
+		add(label);
 		addClickHandler(event -> JsUtils.clearFocus());
-		
 		super.onInitialize();
 	}
-			
+
 	@Override
 	public String getText() {
 		return textMixin.getText();
 	}
 
 	@Override
-	public void setText(String text) {		
+	public void setText(String text) {
 		textMixin.setText(text);
 	}
 
@@ -113,21 +112,21 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	}
 
 	@Override
-	public void setIcon(IconType iconType) {	
-		
-		if(iconType == null) {
-			if(icon != null) {
-				icon.removeFromParent();	
+	public void setIcon(IconType iconType) {
+
+		if (iconType == null) {
+			if (icon != null) {
+				icon.removeFromParent();
 			}
 			icon = null;
 			return;
 		}
-		
-		if(icon == null) {
+
+		if (icon == null) {
 			icon = new MaterialIcon(CssName.MDC_BUTTON__ICON);
 			insert(icon, 0);
 		}
-		
+
 		icon.setType(iconType);
 	}
 
@@ -141,4 +140,20 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 		return denseMixin.isApplied();
 	}
 
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_BUTTON__FILL_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_BUTTON_RAISED__FILL_COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_BUTTON__INK_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_BUTTON__OUTLINE_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_BUTTON_RAISED__INK_COLOR, color.getCssName());
+	}
+
+	public void setIconColor(Color color) {
+		icon.setTextColor(color);
+	}
 }

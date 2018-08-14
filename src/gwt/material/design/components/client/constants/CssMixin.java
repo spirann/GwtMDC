@@ -25,6 +25,15 @@ package gwt.material.design.components.client.constants;
 public interface CssMixin {
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Icon toggle
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_BUTTON__FILL_COLOR = "--mdc-button-fill-color";
+	String MDC_BUTTON__INK_COLOR = "--mdc-button-ink-color";
+	String MDC_BUTTON__OUTLINE_COLOR = "--mdc-button-outline-color";
+	String MDC_BUTTON_RAISED__FILL_COLOR = "--mdc-button-raised-fill-color";
+	String MDC_BUTTON_RAISED__INK_COLOR = "--mdc-button-raised-ink-color";	
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// Icon button
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_ICON_BUTTON__INK_COLOR = "--mdc-icon-button-ink-color";

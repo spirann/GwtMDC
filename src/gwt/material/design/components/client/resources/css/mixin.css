@@ -6,11 +6,12 @@
 	--mdc-container-background-opacity: linear-gradient(rgba(255, 255, 255, calc(1.0 - var(--mdc-container-opacity))), rgba(255, 255, 255, calc(1.0 - var(--mdc-container-opacity)))) no-repeat;
 	
 	/* Button */
-	--mdc-button-container-fill-color: var(--mdc-theme-primary);
-	--mdc-button-icon-color: var(--mdc-theme-primary);
+	--mdc-button-fill-color: transparent;
 	--mdc-button-ink-color: var(--mdc-theme-primary);
-	--mdc-button-corner-radius: 4px;
 	--mdc-button-outline-color: var(--mdc-theme-primary);
+	--mdc-button-raised-fill-color: var(--mdc-theme-primary);
+	--mdc-button-raised-ink-color: var(--mdc-theme-on-primary);	
+	--mdc-button-corner-radius: 4px;		
 	
 	/* Fab */
 	--mdc-fab-container-color: var(--mdc-theme-secondary);
@@ -74,6 +75,40 @@
 }
 
 /* ==========================================================================
+   Adjust Snackbar
+   ========================================================================== */
+.mdc-snackbar {
+	z-index: 1;}
+
+/* ==========================================================================
+   Button
+   ========================================================================== */
+.mdc-button .mdc-button__icon {
+	margin-left: 0px;
+	margin-right: 8px;}
+.mdc-button[dir="rtl"] .mdc-button__icon {
+	margin-left: 8px;
+	margin-right: 0px;}
+.mdc-button:not(:disabled) {
+    color: var(--mdc-button-ink-color);
+    background-color: var(--mdc-button-fill-color);}
+.mdc-button::before, .mdc-button::after,
+.mdc-button--raised:not(:disabled),
+.mdc-button--unelevated:not(:disabled) {
+	color: var(--mdc-button-raised-ink-color);
+	background-color: var(--mdc-button-raised-fill-color);}
+.mdc-button--outlined:not(:disabled) {
+	border-color: var(--mdc-button-ink-color);}
+.mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::before, 
+.mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::after {
+	background-color: var(--mdc-button-ink-color);}	
+.mdc-button--raised.mdc-ripple-surface--color::before, 
+.mdc-button--raised.mdc-ripple-surface--color::after,
+.mdc-button--unelevated.mdc-ripple-surface--color::before, 
+.mdc-button--unelevated.mdc-ripple-surface--color::after {
+	background-color: var(--mdc-button-raised-ink-color);}	
+
+/* ==========================================================================
    Icon button
    ========================================================================== */
 .mdc-icon-button {
@@ -102,7 +137,7 @@
 	margin-right: -6px;}
 .mdc-icon-toggle.mdc-ripple-surface--color::before, 
 .mdc-icon-toggle.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));}
+	background-color: var(--mdc-icon-toggle-ink-color);}
 
 /* ==========================================================================
    Slider
