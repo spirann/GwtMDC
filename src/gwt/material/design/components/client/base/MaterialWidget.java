@@ -70,7 +70,6 @@ import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
-import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
@@ -102,7 +101,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasActive, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn,
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn,
 		HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
 
 	static {
@@ -142,7 +141,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	// /////////////////////////////////////////////////////////////
 	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
-	protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
+	//protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final RoleMixin<MaterialWidget> roleMixin = new RoleMixin<>(this);
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
@@ -600,16 +599,6 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public void setEnabled(boolean enabled) {
 		enabledMixin.setEnabled(enabled);
-	}
-
-	@Override
-	public boolean isActive() {
-		return activeMixin.isActive();
-	}
-
-	@Override
-	public void setActive(boolean active) {
-		activeMixin.setActive(active);
 	}
 
 	@Override

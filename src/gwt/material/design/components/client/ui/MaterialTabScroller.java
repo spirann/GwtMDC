@@ -67,11 +67,6 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	protected void onInitialize() {
 		scrollArea.add(scrollContent);
 		super.add(scrollArea);
-
-		addKeyUpHandler(event -> {
-
-		});
-
 		super.onInitialize();		
 	}
 	
@@ -101,7 +96,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 		final boolean isFirst = selectedTab == null;		
 		selectedTab = tab;
 		if(isFirst) {
-			selectedTab.setActive(true);
+			selectedTab.setSelected(true, false);
 		} else {
 			JsUtils.doClick(selectedTab.getElement());
 		}
@@ -115,7 +110,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	public void add(Widget child) {
 
 		if (child instanceof MaterialTab) {
-			((MaterialTab) child).addActiveHandler(event -> {
+			((MaterialTab) child).addSelectionHandler(event -> {
 				if (event.getValue()) {
 					selectedTab = (MaterialTab) child;
 					fireSelectionEvent(selectedTab);
@@ -173,7 +168,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 		setStyleProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
 	}
 
-	public void setActiveColor(Color color) {
+	public void setSelectedColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TAB__ACTIVED_COLOR, color.getCssName());
 	}
 }

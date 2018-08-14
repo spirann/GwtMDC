@@ -21,34 +21,26 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
-import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasActive;
-import gwt.material.design.components.client.base.HasActiveHandlers;
 import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.events.ActiveEvent;
-import gwt.material.design.components.client.events.ActiveEvent.ActiveHandler;
-import gwt.material.design.components.client.ui.html.Button;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTab extends Button implements HasText, HasIcon, HasActive, HasActiveHandlers<Boolean> {
+public class MaterialTab extends MaterialSelectedField implements HasText, HasIcon {
 
 	protected Div content = new Div(CssName.MDC_TAB__CONTENT);
 	protected Span label = new Span(CssName.MDC_TAB__TEXT_LABEL);
@@ -56,11 +48,11 @@ public class MaterialTab extends Button implements HasText, HasIcon, HasActive, 
 	protected MaterialTabIndicator indicator = new MaterialTabIndicator();
 	protected Span ripple = new Span(CssName.MDC_TAB__RIPPLE);
 
-	protected ActiveMixin<MaterialTab> activeMixin = new ActiveMixin<>(this, CssName.MDC_TAB__ACTIVE);
 	protected final ApplyStyleMixin<MaterialTab> stackedMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB__STACKED);
 
 	public MaterialTab() {
-		super(CssName.MDC_TAB);
+		super(HtmlElements.BUTTON.createElement(), CssName.MDC_TAB);
+		super.initializeSelectedMixin(CssName.MDC_TAB__ACTIVE);
 		setRole(Role.TAB);
 	}
 
@@ -72,6 +64,8 @@ public class MaterialTab extends Button implements HasText, HasIcon, HasActive, 
 	@Override
 	protected void onInitialize() {
 
+		fireChangeOnClick = true;
+		
 		content.add(icon);
 		content.add(label);
 
@@ -79,21 +73,11 @@ public class MaterialTab extends Button implements HasText, HasIcon, HasActive, 
 		add(indicator);
 		add(ripple);
 
-		addClickHandler(event -> setActive(true));
-		addKeyUpHandler(event -> setActive(true));
+		
+		addKeyUpHandler(event -> setSelected(true));
 
 		super.onInitialize();
 
-		setActive(isActive());
-	}
-
-	protected void fireActiveEvent() {
-		ActiveEvent.fire(this, isActive());
-	}
-
-	@Override
-	public HandlerRegistration addActiveHandler(ActiveHandler<Boolean> handler) {
-		return addHandler(handler, ActiveEvent.getType());
 	}
 
 	@Override
@@ -106,49 +90,10 @@ public class MaterialTab extends Button implements HasText, HasIcon, HasActive, 
 		label.setText(text);
 	}
 
-	protected native void setNativeActive(boolean active)/*-{
-		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		tab.active = active;
-	}-*/;
-
-	protected native boolean isNativeActive()/*-{
-		var tab = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		return tab.active;
-	}-*/;
-
-	protected void active() {
-		final Widget parent = getParent();
-		if (parent != null && parent instanceof MaterialWidget) {
-			final MaterialWidget materialWidget = (MaterialWidget) parent;
-			TimerHelper.schedule(1, () -> {
-				materialWidget.getChildrenList().stream().filter(child -> child instanceof MaterialTab && child != this)
-						.forEach(child -> ((MaterialTab) child).setActive(false));
-				active(true);
-			});
-		}
-	}
-
-	protected void active(boolean active) {
-		setNativeActive(active);
-		activeMixin.setActive(active);
-		indicator.setActive(active);
-		fireActiveEvent();
-	}
-
 	@Override
-	public void setActive(boolean active) {
-
-		if (active == activeMixin.isActive()) {
-			return;
-		}
-
-		super.setActive(active);
-
-		if (active) {
-			active();
-		} else {
-			active(active);
-		}
+	public void setSelected(boolean selected, boolean fireEvents) {
+		super.setSelected(selected, fireEvents);
+		indicator.setSelected(selected, false);
 	}
 
 	@Override

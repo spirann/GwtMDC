@@ -22,8 +22,9 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.mixin.ActiveMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Span;
 
 /**
@@ -31,14 +32,13 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialTabIndicator extends Span {
+public class MaterialTabIndicator extends MaterialSelectedField {
 
 	protected Span indicatorContent = new Span(CssName.MDC_TAB_INDICATOR__CONTENT, CssName.MDC_TAB_INDICATOR__CONTENT__UNDERLINE);
 	
-	protected ActiveMixin<MaterialTabIndicator> activeMixin = new ActiveMixin<>(this, CssName.MDC_TAB_INDICATOR__ACTIVE);
-	
 	public MaterialTabIndicator() {
-		super(CssName.MDC_TAB_INDICATOR);
+		super(HtmlElements.SPAN.createElement(), CssName.MDC_TAB_INDICATOR);
+		super.initializeSelectedMixin(CssName.MDC_TAB_INDICATOR__ACTIVE);
 	}
 	
 	@Override
@@ -48,20 +48,8 @@ public class MaterialTabIndicator extends Span {
 	
 	@Override
 	protected void onInitialize() {
-
-		add(indicatorContent);
-		
+		add(indicatorContent);		
 		super.onInitialize();
 	}
 	
-	@Override
-	public void setActive(boolean active) {
-		super.setActive(active);
-		activeMixin.setActive(active);
-	}
-	
-	@Override
-	public boolean isActive() {
-		return activeMixin.isActive();
-	}
 }
