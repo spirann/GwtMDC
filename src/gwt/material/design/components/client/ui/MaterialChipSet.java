@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
@@ -36,11 +39,13 @@ import gwt.material.design.components.client.ui.html.Div;
 public class MaterialChipSet extends Div implements HasType<ChipSetType> {
 
 	protected final TypeMixin<MaterialChipSet, ChipSetType> typeMixin = new TypeMixin<>(this);
-	
-	public MaterialChipSet(){
+
+	protected List<MaterialChip> selectedChips = new LinkedList<>();
+
+	public MaterialChipSet() {
 		super(CssName.MDC_CHIP_SET);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.chips.MDCChipSet(element);

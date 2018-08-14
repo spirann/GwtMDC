@@ -23,26 +23,23 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
-import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.ui.html.Icon;
-import gwt.material.design.components.client.utils.JsUtils;
+import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
+public class MaterialIconToggle extends MaterialSelectedField {
 
 	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
 	protected final AttributeMixin<MaterialIconToggle> toggleOffMixin = new AttributeMixin<>(this, "data-toggle-off");
@@ -57,7 +54,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	private boolean valueChangeHandlerInitialized;
 
 	public MaterialIconToggle() {
-		super(CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
+		super(HtmlElements.I.createElement(), CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
 		setRole(Role.BUTTON);
 		setCircle(true);
 	}
@@ -72,10 +69,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	protected void onInitialize() {
 		ripleMixin.initialize();
 		initializeChageEventListener();
-		updateColor();
-		
-		addClickHandler(event -> JsUtils.clearFocus());
-		
+		updateColor();		
 		super.onInitialize();
 	}
 
@@ -105,7 +99,7 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 	}
 
 	protected void updateColor() {		
-		if (getValue()) {
+		if (isSelected()) {
 			setStyleProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOn.getCssName());
 			setBackgroundColor(backgroundColorOn);
 		} else {
@@ -113,41 +107,16 @@ public class MaterialIconToggle extends Icon implements HasValue<Boolean> {
 			setBackgroundColor(backgroundColorOff);
 		} 
 	}
-
-	protected void fireChangeEvent() {
-		ValueChangeEvent.fire(MaterialIconToggle.this, getValue());
-	}
-
+	
 	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Boolean> handler) {
-		// Initialization code
-		if (!valueChangeHandlerInitialized) {
-			valueChangeHandlerInitialized = true;
-			addChangeHandler(new ChangeHandler() {
-				public void onChange(ChangeEvent event) {
-					fireChangeEvent();
-				}
-			});
-		}
-		return addHandler(handler, ValueChangeEvent.getType());
+	public void setSelected(boolean selected, boolean fireEvents) {
+		this.ariaPressedMixin.setAttribute(selected);
+		super.setSelected(selected, fireEvents);
 	}
-
+	
 	@Override
-	public void setValue(final Boolean value) {
-		setValue(value, true);
-	}
-
-	@Override
-	public Boolean getValue() {
+	public boolean isSelected() {
 		return ariaPressedMixin.getAttributeAsBoolean();
-	}
-
-	@Override
-	public void setValue(final Boolean value, boolean fireEvents) {
-		this.ariaPressedMixin.setAttribute(value);
-		if (fireEvents) {
-			fireChangeEvent();
-		}
 	}
 
 	public Color getColorOn() {

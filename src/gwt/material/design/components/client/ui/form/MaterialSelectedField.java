@@ -52,6 +52,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 
 	public MaterialSelectedField(final Element element, final String... initialClasses) {
 		super(element, initialClasses);
+		initializeSelectedMixin();
 	}
 	
 	public MaterialSelectedField(final String... initialClasses) {
@@ -60,11 +61,19 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	
 	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass, Input checkedInput) {		
 		selectedMixin = new ApplyStyleMixin<>(widget, cssClass);
-		checkedMixin = new CheckedMixin<>(checkedInput);
+		if(checkedInput == null) {
+			checkedMixin = null;
+		} else {
+			checkedMixin = new CheckedMixin<>(checkedInput);
+		}
 	}
 	
 	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass) {
 		initializeSelectedMixin(widget, cssClass, null);
+	}
+	
+	protected void initializeSelectedMixin(String cssClass) {
+		initializeSelectedMixin(this, cssClass, null);
 	}
 	
 	protected void initializeSelectedMixin(Input checkedInput) {
@@ -76,13 +85,13 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 	
 	protected void initializeSelectedMixin() {
-		initializeSelectedMixin(null);
+		initializeSelectedMixin(this, "no_selected_class", null);
 	}
 		
 	@Override
 	protected void onInitialize() {
 		addClickHandler(event -> fireAutoSelect(event));
-		super.onInitialize();		
+		super.onInitialize();
 	}
 	
 	protected void fireAutoSelect(ClickEvent event) {

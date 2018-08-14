@@ -326,7 +326,9 @@
 	stroke: var(--mdc-chip-icon_selected-color);}		
 .mdc-chip__text {
 	color: var(--mdc-chip-text-color);}  	
-    
+.mdc-chip-set--filter .mdc-chip.mdc-chip--selected .mdc-chip__icon.mdc-chip__icon--leading {
+	display: none;
+}
     
     
     

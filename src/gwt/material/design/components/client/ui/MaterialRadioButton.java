@@ -56,25 +56,18 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	}
 
 	protected void putInHistory(final boolean fireEvent) {
-
 		final MaterialRadioButton old = history.get(getName());
-
 		if (fireEvent && old != null && old != this) {
 			old.fireChangeEvent();
 		}
-
 		history.put(getName(), this);
-
 	}
 
 	protected void removeFromHistory() {
-
 		final MaterialRadioButton old = history.get(getName());
-
 		if (old == this) {
 			history.remove(getName());
 		}
-
 	}
 
 	// /////////////////////////////////////////////////////////////

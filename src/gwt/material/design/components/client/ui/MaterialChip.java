@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ImageResource;
@@ -26,11 +29,12 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.HasIcon;
 import gwt.material.design.components.client.base.HasImage;
+import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.constants.ChipSetType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.form.MaterialSelectedField;
@@ -43,9 +47,60 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialChip extends MaterialSelectedField implements HasText, HasIcon, HasImage {
 
+	// ////////////////////////////////////////////////////////////////
+	// Control for change value in RadioButton group
+	// Because the event is not trigger when another radio is selected
+	// ////////////////////////////////////////////////////////////////
+	protected final static Map<String, MaterialChip> history = new HashMap<>();
+
+	protected void updateHistory() {
+		if (isSelected()) {
+			putInHistory(true);
+		} else {
+			removeFromHistory();
+		}
+	}
+
+	protected void putInHistory(final boolean fireEvent) {
+
+		if (getParent() == null || !(getParent() instanceof MaterialChipSet)) {
+			return;
+		}
+
+		final MaterialChipSet chipSet = (MaterialChipSet) getParent();
+
+		if (!chipSet.getType().equals(ChipSetType.CHOICE)) {
+			return;
+		}
+
+		final String parent = chipSet.getId();
+
+		final MaterialChip old = history.get(parent);
+		if (fireEvent && old != null && old != this) {
+			old.fireChangeEvent();
+		}
+
+		history.put(parent, this);
+	}
+
+	protected void removeFromHistory() {
+
+		if (getParent() == null) {
+			return;
+		}
+
+		final String parent = ((MaterialWidget) getParent()).getId();
+
+		final MaterialChip old = history.get(parent);
+		if (old == this) {
+			history.remove(parent);
+		}
+	}
+
 	protected MaterialImage imageLeading = new MaterialImage();
 	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);
-	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
+	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON,
+			CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
 	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
@@ -55,7 +110,8 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 	protected boolean closeable = false;
 
 	public MaterialChip() {
-		super(HtmlElements.DIV.createElement(), CssName.MDC_CHIP__SELECTED, CssName.MDC_CHIP);
+		super(CssName.MDC_CHIP);
+		super.initializeSelectedMixin(CssName.MDC_CHIP__SELECTED);
 	}
 
 	@Override
@@ -75,6 +131,8 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON);
 		imageLeading.addStyleName(CssName.MDC_CHIP__ICON__LEADING);
 
+		add(checkmark);
+
 		if (iconLeading.getType() != null) {
 			add(iconLeading);
 		}
@@ -83,7 +141,6 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 			add(imageLeading);
 		}
 
-		add(checkmark);
 		add(text);
 
 		if (closeable) {
@@ -91,6 +148,17 @@ public class MaterialChip extends MaterialSelectedField implements HasText, HasI
 		}
 
 		super.onInitialize();
+
+		if (isSelected()) {
+			updateHistory();
+		}
+
+	}
+
+	@Override
+	protected void fireChangeEvent() {
+		updateHistory();
+		super.fireChangeEvent();
 	}
 
 	@Override
