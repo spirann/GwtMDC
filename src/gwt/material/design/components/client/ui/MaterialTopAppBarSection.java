@@ -21,6 +21,8 @@ package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.HasAlign;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.constants.TopAppBarAlign;
@@ -58,4 +60,8 @@ public class MaterialTopAppBarSection extends Section implements HasAlign<TopApp
 		return alignMixin.getType();
 	}
 
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
+	}
 }

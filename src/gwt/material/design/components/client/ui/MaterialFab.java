@@ -30,6 +30,7 @@ import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FabType;
 import gwt.material.design.components.client.constants.IconType;
@@ -134,4 +135,15 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	public boolean isExited() {
 		return exitedMixin.isApplied();
 	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_FAB__FILL_COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
+	}
+
 }

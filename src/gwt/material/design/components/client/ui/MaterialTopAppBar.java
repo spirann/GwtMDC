@@ -24,6 +24,8 @@ import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.TopAppBarType;
 import gwt.material.design.components.client.ui.html.Header;
@@ -57,5 +59,15 @@ public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> 
 	@Override
 	public TopAppBarType getType() {
 		return typeMixin.getType();
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__FILL_COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
 }

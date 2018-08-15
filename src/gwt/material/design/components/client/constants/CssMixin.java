@@ -25,13 +25,25 @@ package gwt.material.design.components.client.constants;
 public interface CssMixin {
 
 	// ////////////////////////////////////////////////////////////////////////////
-	// Icon toggle
+	// Top app bar
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_TOP_APP_BAR__FILL_COLOR = "--mdc-top-app-bar-fill-color";
+	String MDC_TOP_APP_BAR__INK_COLOR = "--mdc-top-app-bar-ink-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// FAB
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_FAB__FILL_COLOR = "--mdc-fab-fill-color";
+	String MDC_FAB__INK_COLOR = "--mdc-fab-ink-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
+	// Button
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_BUTTON__FILL_COLOR = "--mdc-button-fill-color";
 	String MDC_BUTTON__INK_COLOR = "--mdc-button-ink-color";
 	String MDC_BUTTON__OUTLINE_COLOR = "--mdc-button-outline-color";
 	String MDC_BUTTON_RAISED__FILL_COLOR = "--mdc-button-raised-fill-color";
-	String MDC_BUTTON_RAISED__INK_COLOR = "--mdc-button-raised-ink-color";	
+	String MDC_BUTTON_RAISED__INK_COLOR = "--mdc-button-raised-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Icon button
@@ -39,7 +51,7 @@ public interface CssMixin {
 	String MDC_ICON_BUTTON__INK_COLOR = "--mdc-icon-button-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
-	// Icon toggle
+	// Linear progress
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_LINEAR_PROGRESS__INDICATOR_COLOR = "--mdc-linear-progress-indicator-color";
 	String MDC_LINEAR_PROGRESS__TRACK_COLOR = "--mdc-linear-progress-track-color";

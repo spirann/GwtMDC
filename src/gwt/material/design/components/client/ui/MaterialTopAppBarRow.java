@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -31,6 +33,11 @@ public class MaterialTopAppBarRow extends Div {
 
 	public MaterialTopAppBarRow() {
 		super(CssName.MDC_TOP_APP_BAR__ROW);
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
 
 }

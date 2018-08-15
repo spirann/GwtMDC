@@ -19,62 +19,36 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
-import gwt.material.design.components.client.base.mixin.IconMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.ui.html.Anchor;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTopAppBarIcon extends Anchor implements HasType<IconType>, HasHref {
-
-	protected final AttributeMixin<MaterialTopAppBarIcon> hrefMixin = new AttributeMixin<>(this, "href");
-	protected final AttributeMixin<MaterialTopAppBarIcon> targetMixin = new AttributeMixin<>(this, "target");
-	protected final IconMixin<MaterialTopAppBarIcon> iconMixin = new IconMixin<>(this);
+public class MaterialTopAppBarIcon extends MaterialIcon {
 
 	public MaterialTopAppBarIcon() {
-		super(CssName.MATERIAL_ICONS, CssName.MDC_TOP_APP_BAR__NAVEGATION_ICON);
+		super(CssName.MDC_TOP_APP_BAR__NAVEGATION_ICON);
 	}
 
 	public MaterialTopAppBarIcon(final IconType type) {
 		this();
 		setType(type);
 	}
-
+	
 	@Override
-	public void setType(IconType type) {
-		iconMixin.setIcon(type);
+	protected void onInitialize() {
+		ripleMixin.initialize();
+		super.onInitialize();
 	}
-
+	
 	@Override
-	public IconType getType() {
-		return iconMixin.getIcon();
-	}
-
-	@Override
-	public void setHref(String href) {
-		hrefMixin.setAttribute(href);
-	}
-
-	@Override
-	public String getHref() {
-		return hrefMixin.getAttribute();
-	}
-
-	@Override
-	public void setTarget(String target) {
-		targetMixin.setAttribute(target);
-	}
-
-	@Override
-	public String getTarget() {
-		return targetMixin.getAttribute();
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
 
 }

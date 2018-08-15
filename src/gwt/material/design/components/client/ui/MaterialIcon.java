@@ -39,11 +39,13 @@ public class MaterialIcon extends Icon implements HasType<IconType>, HasHref {
 
 	public MaterialIcon() {
 		super(CssName.MATERIAL_ICONS);
+		setCircle(true);
 	}
 	
 	public MaterialIcon(String... initialClasses) {
 		super(initialClasses);
 		addStyleName(CssName.MATERIAL_ICONS);
+		setCircle(true);
 	}
 	
 	public MaterialIcon(final IconType type, String... initialClasses) {

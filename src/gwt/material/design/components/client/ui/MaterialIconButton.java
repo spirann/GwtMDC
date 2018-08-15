@@ -35,7 +35,6 @@ public class MaterialIconButton extends MaterialIcon {
 	public MaterialIconButton() {
 		super(CssName.MDC_ICON_BUTTON);		
 		setRole(Role.BUTTON);
-		setCircle(true);
 	}
 	
 	public MaterialIconButton(final IconType type) {

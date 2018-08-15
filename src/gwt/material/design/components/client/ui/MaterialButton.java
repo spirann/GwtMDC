@@ -147,12 +147,13 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	}
 
 	@Override
-	public void setTextColor(Color color) {
+	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_BUTTON__INK_COLOR, color.getCssName());
 		setStyleProperty(CssMixin.MDC_BUTTON__OUTLINE_COLOR, color.getCssName());
 		setStyleProperty(CssMixin.MDC_BUTTON_RAISED__INK_COLOR, color.getCssName());
 	}
 
+	@Override
 	public void setIconColor(Color color) {
 		icon.setTextColor(color);
 	}

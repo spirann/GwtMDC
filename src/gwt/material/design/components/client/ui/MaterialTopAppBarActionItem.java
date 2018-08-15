@@ -19,62 +19,36 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
-import gwt.material.design.components.client.base.mixin.IconMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.ui.html.Anchor;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialTopAppBarActionItem extends Anchor implements HasType<IconType>, HasHref {
-
-	protected final AttributeMixin<MaterialTopAppBarActionItem> hrefMixin = new AttributeMixin<>(this, "href");
-	protected final AttributeMixin<MaterialTopAppBarActionItem> targetMixin = new AttributeMixin<>(this, "target");
-	protected final IconMixin<MaterialTopAppBarActionItem> iconMixin = new IconMixin<>(this);
+public class MaterialTopAppBarActionItem extends MaterialIcon {
 
 	public MaterialTopAppBarActionItem() {
-		super(CssName.MATERIAL_ICONS, CssName.MDC_TOP_APP_BAR__ACTION_ITEM);
+		super(CssName.MDC_TOP_APP_BAR__ACTION_ITEM);
 	}
 
-	public MaterialTopAppBarActionItem(final IconType type) {
+	public MaterialTopAppBarActionItem(final IconType icon) {
 		this();
-		setType(type);
+		setType(icon);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		ripleMixin.initialize();
+		super.onInitialize();
 	}
 
 	@Override
-	public void setType(IconType type) {
-		iconMixin.setIcon(type);
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
-
-	@Override
-	public IconType getType() {
-		return iconMixin.getIcon();
-	}
-
-	@Override
-	public void setHref(String href) {
-		hrefMixin.setAttribute(href);
-	}
-
-	@Override
-	public String getHref() {
-		return hrefMixin.getAttribute();
-	}
-
-	@Override
-	public void setTarget(String target) {
-		targetMixin.setAttribute(target);
-	}
-
-	@Override
-	public String getTarget() {
-		return targetMixin.getAttribute();
-	}
-
+	
 }
