@@ -51,10 +51,14 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	// ////////////////////////////////////////////////////////////////
 	protected final static Map<String, MaterialRadioButton> history = new HashMap<>();
 
-	protected void putInHistory() {
-		putInHistory(true);
+	protected void updateHistory() {
+		if (isSelected()) {
+			putInHistory(true);
+		} else {
+			removeFromHistory();
+		}
 	}
-
+	
 	protected void putInHistory(final boolean fireEvent) {
 		final MaterialRadioButton old = history.get(getName());
 		if (fireEvent && old != null && old != this) {
@@ -82,7 +86,7 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 
 	public MaterialRadioButton() {
 		super(CssName.MDC_FORM_FIELD);
-		super.initializeSelectedMixin(input);
+		super.initializeSelectedMixin(radio, CssName.MDC_RADIO__SELECTED, input);
 	}
 	
 	@Override
@@ -97,7 +101,6 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 
 	@Override
 	protected void onInitialize() {
-
 		label.setFor(input.getId());
 		
 		divBackground.add(divOuterCircle);
@@ -110,31 +113,18 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 		add(label);
 
 		if (isSelected()) {
-			putInHistory();
+			updateHistory();
 		}
 
 		setCircle(true);
-		
-		addValueChangeListener(input.getElement());
 
 		super.onInitialize();
 	}
 	
-	protected native void addValueChangeListener(Element element)/*-{
-		
-		var _this = this;
-		element.addEventListener('change', function(event) {
-			if (element.checked) {
-				_this.@gwt.material.design.components.client.ui.MaterialRadioButton::putInHistory()();
-			}
-		});
-		
-	}-*/;
-
 	@Override
-	public void setSelected(boolean selected, boolean fireEvents) {
-		super.setSelected(selected, fireEvents);
-		putInHistory(fireEvents);		
+	protected void fireChangeEvent() {
+		updateHistory();
+		super.fireChangeEvent();
 	}
 
 	@Override

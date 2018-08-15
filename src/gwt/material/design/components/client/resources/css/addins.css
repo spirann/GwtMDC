@@ -250,32 +250,6 @@ a:active {
 }
 
 /* ==========================================================================
-   Adjust drawer
-   ========================================================================== */
-.mdc-drawer__header-content {
-	background-color: var(--mdc-theme-primary, #fff);	
-}
-
-.mdc-drawer__header-content label {
-	color: var(--mdc-theme-on-primary, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-drawer__header-content label[class*="subtitle"],
-.mdc-drawer__header-content label[class*="caption"] {
-	color: var(--mdc-theme-surface, #ccc);
-}
-
-.mdc-drawer__content {
-	background-color: var(--mdc-theme-background, #fff);
-}
-
-.mdc-drawer--permanent,
-.mdc-drawer--persistent {
-	height: 100%;
-	overflow-y: auto; 
-}
-
-/* ==========================================================================
    Adjust dialog color
    ========================================================================== */
 
@@ -820,39 +794,6 @@ a:active {
 	align-content: flex-start;
 	align-items: flex-start;
 	justify-content: flex-start;
-}
-/* ==========================================================================
-   Menu adjust
-   ========================================================================== */
-
-/* ==========================================================================
-   Configure Ripple background
-   ========================================================================== */
-.mdc-ripple-surface--color::before, 
-.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color);
-}
-
-[disabled].mdc-ripple-surface--color::before, 
-[disabled].mdc-ripple-surface--color::after {
-	background-color: transparent;
-}
-
-.mdc-button--raised.mdc-ripple-surface--color::before, 
-.mdc-button--raised.mdc-ripple-surface--color::after,
-.mdc-button--unelevated.mdc-ripple-surface--color::before, 
-.mdc-button--unelevated.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, var(--mdc-theme-on-primary));
-}
-
-.mdc-button:not(.mdc-button--raised):not(.mdc-button--unelevated).mdc-ripple-surface--color::before, 
-.mdc-button:not(.mdc-button--raised):not(.mdc-button--unelevated).mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, var(--mdc-theme-primary));
-}
-
-.mdc-fab.mdc-ripple-surface--color::before, 
-.mdc-fab.mdc-ripple-surface--color::after {
-	background-color: var(--mdc-ripple--color, var(--mdc-theme-on-secondary));
 }
 
 /* ==========================================================================

@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiChild;
@@ -45,7 +46,7 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialListItem extends MaterialSelectedField implements HasHref, HasText, HasIcon {
 
-	private MaterialIcon icon = new MaterialIcon();
+	private MaterialIcon icon = new MaterialIcon(CssName.MDC_LIST_ITEM__GRAPHIC);
 	private MaterialImage avatar = new MaterialImage();
 	private Span textContent = new Span(CssName.MDC_LIST_ITEM__TEXT);
 	private Label primaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_PRIMARY_TEXT);
@@ -64,10 +65,13 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 		super.initializeSelectedMixin(CssName.MDC_LIST_ITEM__SELECTED);
 	}
 	
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		return element;
+	}-*/;
+	
 	@Override
 	protected void onInitialize() {
 
-		fireChangeOnClick = false;
 		ripleMixin.initialize();
 		
 		ariaHiddenMixin.setAttribute(true);
@@ -79,7 +83,6 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 			insert(avatar, 0);
 		}
 
-		icon.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
 		icon.setCircle(true);
 
 		if (icon.getType() != null) {
@@ -117,12 +120,12 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 				
 		if(widget instanceof MaterialCheckbox) {
 			final MaterialCheckbox checkbox = (MaterialCheckbox) widget;
-			checkbox.addSelectionHandler(event -> setSelected(event.getValue(), false));
+			checkbox.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
 		
 		if(widget instanceof MaterialRadioButton) {
 			final MaterialRadioButton radioButton = (MaterialRadioButton) widget;
-			radioButton.addSelectionHandler(event -> setSelected(event.getValue(), false));
+			radioButton.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
 	}
 
@@ -232,6 +235,18 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	
 	public void setMetaColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__META_COLOR, color.getCssName());
+	}
+	
+	public void setSelectedTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_PRIMARY_TEXT_COLOR, color.getCssName());
+	}
+	
+	public void setSelectedGraphicColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_GRAPHIC_COLOR, color.getCssName());
+	}
+	
+	public void setSelectedMetaColor(Color color) {
+		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_META_COLOR, color.getCssName());
 	}
 	
 	public void setIconColor(Color color) {

@@ -312,6 +312,7 @@ public interface CssName {
 	// Radio Button
 	// //////////////////////////////////////////////////////
 	String MDC_RADIO = "mdc-radio";
+	String MDC_RADIO__SELECTED = "mdc-radio--selected";
 	String MDC_RADIO__NATIVE_CONTROL = "mdc-radio__native-control";
 	String MDC_RADIO__BACKGROUND = "mdc-radio__background";
 	String MDC_RADIO__OUTER_CIRCLE = "mdc-radio__outer-circle";
@@ -321,6 +322,7 @@ public interface CssName {
 	// Checkbox
 	// //////////////////////////////////////////////////////
 	String MDC_CHECKBOX = "mdc-checkbox";
+	String MDC_CHECKBOX__SELECTED = "mdc-checkbox--selected";
 	String MDC_CHECKBOX__NATIVE_CONTROL = "mdc-checkbox__native-control";
 	String MDC_CHECKBOX__BACKGROUND = "mdc-checkbox__background";
 	String MDC_CHECKBOX__CHECKMARK = "mdc-checkbox__checkmark";

@@ -61,7 +61,7 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 
 	public MaterialCheckbox() {
 		super(CssName.MDC_FORM_FIELD);
-		super.initializeSelectedMixin(input);
+		super.initializeSelectedMixin(checkbox, CssName.MDC_CHECKBOX__SELECTED, input);
 	}
 
 	@Override

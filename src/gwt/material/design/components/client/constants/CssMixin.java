@@ -31,6 +31,12 @@ public interface CssMixin {
 	String MDC_TOP_APP_BAR__INK_COLOR = "--mdc-top-app-bar-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Drawer
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_DRAWER__FILL_COLOR = "--mdc-drawer-fill-color";
+	String MDC_DRAWER__INK_COLOR = "--mdc-drawer-ink-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// FAB
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_FAB__FILL_COLOR = "--mdc-fab-fill-color";
@@ -105,6 +111,9 @@ public interface CssMixin {
 	String MDC_LIST_ITEM__PRIMARY_TEXT_COLOR = "--mdc-list-item-primary-text-ink-color";
 	String MDC_LIST_ITEM__SECONDARY_TEXT_COLOR = "--mdc-list-item-secondary-text-ink-color";
 	String MDC_LIST_ITEM__META_COLOR = "--mdc-list-item-meta-ink-color";
+	String MDC_LIST_ITEM__SELECTED_GRAPHIC_COLOR = "--mdc-list-item-selected-graphic-ink-color";
+	String MDC_LIST_ITEM__SELECTED_PRIMARY_TEXT_COLOR = "--mdc-list-item-selected-primary-text-ink-color";
+	String MDC_LIST_ITEM__SELECTED_META_COLOR = "--mdc-list-item-selected-meta-ink-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Chip

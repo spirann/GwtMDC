@@ -24,6 +24,7 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Aside;
 import gwt.material.design.components.client.ui.html.Nav;
@@ -133,11 +134,6 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 	}
 
 	@Override
-	public void setBackgroundColor(Color color) {
-		content.setBackgroundColor(color);
-	}
-
-	@Override
 	public void setBackgroundImage(String url) {
 		content.setBackgroundImage(url);
 	}
@@ -145,5 +141,15 @@ public class MaterialDrawerBase extends Aside implements HasOpen {
 	@Override
 	public void setBackgroundImageResource(ImageResource imageResource) {
 		content.setBackgroundImageResource(imageResource);
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DRAWER__FILL_COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DRAWER__INK_COLOR, color.getCssName());
 	}
 }

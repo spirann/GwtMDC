@@ -91,6 +91,10 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setFontSize(final String fontSize) {
 		setStyleProperty("font-size", fontSize);
 	}
+	
+	public void setFontFamily(final String fontFamily) {
+		setStyleProperty("font-family", fontFamily);
+	}
 
 	public void setTextAlign(final TextAlign textAlign) {
 		setStyleProperty("text-align", textAlign.getCssName());

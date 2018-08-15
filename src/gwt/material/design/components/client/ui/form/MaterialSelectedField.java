@@ -77,15 +77,15 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 	
 	protected void initializeSelectedMixin(Input checkedInput) {
-		initializeSelectedMixin(this, "no_selected_class", checkedInput);
+		initializeSelectedMixin(this, "selected", checkedInput);
 	}
 	
 	private void defaultSelectedMixin() {
-		selectedMixin = new ApplyStyleMixin<>(this, "no_selected_class");
+		selectedMixin = new ApplyStyleMixin<>(this, "selected");
 	}
 	
 	protected void initializeSelectedMixin() {
-		initializeSelectedMixin(this, "no_selected_class", null);
+		initializeSelectedMixin(this, "selected", null);
 	}
 		
 	@Override
@@ -113,6 +113,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 
 	protected void fireChangeEvent() {
+		setSelected(isSelected(), false);
 		SelectionEvent.fire(MaterialSelectedField.this, isSelected());
 	}
 
@@ -122,6 +123,8 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 			valueChangeHandlerInitialized = true;
 			addChangeHandler(new ChangeHandler() {
 				public void onChange(ChangeEvent event) {
+					event.preventDefault();
+					event.stopPropagation();
 					fireChangeEvent();
 				}
 			});
