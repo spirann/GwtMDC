@@ -534,15 +534,12 @@ i.mdc-list-item__graphic {
 	color: var(--mdc-drawer-ink-color);
 	background-color: var(--mdc-drawer-fill-color);}
 .mdc-drawer__content .mdc-list-item:not(.mdc-list-item--selected) .mdc-list-item__graphic {
-	color: var(--mdc-drawer-ink-color);
-}	
-		
+	color: var(--mdc-drawer-ink-color);}			
 .mdc-drawer {	
 	--mdc-list-item-graphic-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-primary-text-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-secondary-text-ink-color: var(--mdc-drawer-ink-color);
-	--mdc-list-item-meta-ink-color: var(--mdc-drawer-ink-color);	
-	
+	--mdc-list-item-meta-ink-color: var(--mdc-drawer-ink-color);		
 	height: 100%;
 	overflow-y: auto;
 	color: var(--mdc-drawer-ink-color);
