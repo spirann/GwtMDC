@@ -88,6 +88,7 @@
 	--mdc-list-item-selected-graphic-ink-color: var(--mdc-theme-primary);
 	--mdc-list-item-selected-primary-text-ink-color: var(--mdc-theme-primary);
 	--mdc-list-item-selected-meta-ink-color: var(--mdc-theme-primary);
+
 }
 
 
@@ -573,6 +574,44 @@ i.mdc-list-item__graphic {
 		-webkit-transition: bottom 0.25s;    
 		transition: bottom 0.25s;}
 }		
+
+/* ==========================================================================
+   Adjust dialog color
+   ========================================================================== */
+:root {		
+	/* Dialog */
+	--mdc-dialog-header-fill-color: transparent;
+	--mdc-dialog-header-ink-color: var(--mdc-theme-on-surface);
+	--mdc-dialog-body-fill-color: var(--mdc-theme-surface);
+	--mdc-dialog-body-ink-color: var(--mdc-theme-on-surface);
+	--mdc-dialog-action-fill-color: transparent;
+	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
+	--mdc-dialog-action-raised-ink-color: var(--mdc-theme-on-primary);
+}    
+.mdc-dialog__surface {
+	color: var(--mdc-dialog-body-ink-color);
+	background-color:  var(--mdc-dialog-body-fill-color);
+	border-radius: 4px;}
+.mdc-dialog__footer__button {
+	padding: 0 16px 0 16px;}
+.mdc-dialog__header {
+	color: var(--mdc-dialog-header-ink-color);
+	background-color: var(--mdc-dialog-header-fill-color);}
+.mdc-dialog__body,
+.mdc-dialog__body .mdc-typography {
+	color: var(--mdc-dialog-body-ink-color);}
+.mdc-dialog__footer {
+	color: var(--mdc-dialog-action-ink-color);
+	background-color:  var(--mdc-dialog-action-fill-color);}
+/* Button into top app bar */
+.mdc-dialog__footer .mdc-button, 
+.mdc-dialog__footer .mdc-button--outlined:not(:disabled) {
+	--mdc-button-ink-color: var(--mdc-dialog-action-ink-color);}
+.mdc-dialog__footer .mdc-button--raised:not(:disabled),
+.mdc-dialog__footer .mdc-button--unelevated:not(:disabled) {
+	--mdc-button-raised-ink-color: var(--mdc-dialog-action-raised-ink-color);
+	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}	
+
 	
 	
 	

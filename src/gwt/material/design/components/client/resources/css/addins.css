@@ -250,33 +250,6 @@ a:active {
 }
 
 /* ==========================================================================
-   Adjust dialog color
-   ========================================================================== */
-
-.mdc-dialog__footer__button {
-	padding: 0 16px 0 16px;
-}
-
-.mdc-dialog__header {
-	color: var(--mdc-theme-text-primary-on-background);
-	background-color: var(--mdc-theme-background);
-}
-
-.mdc-dialog__body {
-	color: var(--mdc-theme-text-secondary-on-background);
-	background-color:  var(--mdc-theme-background);
-}
-
-.mdc-dialog__footer {
-	color: var(--mdc-theme-secondary);	
-}
-
-.mdc-dialog__footer .mdc-button--raised {
-	color: var(--mdc-theme-on-secondary);
-	background-color: var(--mdc-theme-secondary);	
-}
-
-/* ==========================================================================
    Card
    ========================================================================== */
 .mdc-card[disabled] {
