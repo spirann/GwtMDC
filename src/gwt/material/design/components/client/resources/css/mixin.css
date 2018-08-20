@@ -53,8 +53,11 @@
 	
 	/* Card */
 	--mdc-card-fill-color: var(--mdc-theme-surface);
-	--mdc-card-outline: var(--mdc-theme-surface);
-	--mdc-card-corner-radius: 4px;
+	--mdc-card-ink-color: var(--mdc-theme-on-surface); 
+	--mdc-card-button-color: var(--mdc-theme-primary);
+	--mdc-card-raised-button-ink-color: var(--mdc-theme-on-primary);
+	--mdc-card-icon-color: var(--mdc-theme-on-surface);
+	--mdc-card-raised-icon-ink-color: var(--mdc-theme-on-primary);
 	
 	/* Chip */
 	--mdc-chip-corner-radius: 16px;
@@ -88,6 +91,15 @@
 	--mdc-list-item-selected-graphic-ink-color: var(--mdc-theme-primary);
 	--mdc-list-item-selected-primary-text-ink-color: var(--mdc-theme-primary);
 	--mdc-list-item-selected-meta-ink-color: var(--mdc-theme-primary);
+		
+	/* Dialog */
+	--mdc-dialog-header-fill-color: transparent;
+	--mdc-dialog-header-ink-color: var(--mdc-theme-on-surface);
+	--mdc-dialog-body-fill-color: var(--mdc-theme-surface);
+	--mdc-dialog-body-ink-color: var(--mdc-theme-on-surface);
+	--mdc-dialog-action-fill-color: transparent;
+	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
+	--mdc-dialog-action-raised-ink-color: var(--mdc-theme-on-primary);
 
 }
 
@@ -526,10 +538,10 @@ i.mdc-list-item__graphic {
    ========================================================================== */
 .mdc-drawer__header-content {
 	background-color: var(--mdc-drawer-fill-color);}
-.mdc-drawer__header-content label {
+.mdc-drawer__header-content .mdc-typography {
 	color: var(--mdc-drawer-ink-color);}
-.mdc-drawer__header-content label[class*="subtitle"],
-.mdc-drawer__header-content label[class*="caption"] {
+.mdc-drawer__header-content .mdc-typography[class*="subtitle"],
+.mdc-drawer__header-content .mdc-typography[class*="caption"] {
 	opacity: .87;}
 .mdc-drawer__content {
 	color: var(--mdc-drawer-ink-color);
@@ -578,16 +590,6 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Adjust dialog color
    ========================================================================== */
-:root {		
-	/* Dialog */
-	--mdc-dialog-header-fill-color: transparent;
-	--mdc-dialog-header-ink-color: var(--mdc-theme-on-surface);
-	--mdc-dialog-body-fill-color: var(--mdc-theme-surface);
-	--mdc-dialog-body-ink-color: var(--mdc-theme-on-surface);
-	--mdc-dialog-action-fill-color: transparent;
-	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
-	--mdc-dialog-action-raised-ink-color: var(--mdc-theme-on-primary);
-}    
 .mdc-dialog__surface {
 	color: var(--mdc-dialog-body-ink-color);
 	background-color:  var(--mdc-dialog-body-fill-color);
@@ -612,9 +614,59 @@ i.mdc-list-item__graphic {
 	--mdc-button-raised-ink-color: var(--mdc-dialog-action-raised-ink-color);
 	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}	
 
-	
-	
-	
-	
-	
+/* ==========================================================================
+   Card
+   ========================================================================== */
+.mdc-card[disabled] {
+	opacity: 0.37;}
+.mdc-card__content {
+	width: 100%;
+	background-color: var(--mdc-card-fill-color);}
+.mdc-card__content:empty {
+	display: none;}
+.mdc-card .mdc-typography {
+	color: var(--mdc-card-ink-color);}
+.mdc-card .mdc-typography[class*="subtitle"],
+.mdc-card .mdc-typography[class*="caption"] {
+	opacity: .87;}
+/* general icon */
+.mdc-card__action--button(.mdc-icon-toggle):not(.mdc-icon-button):not(.mdc-button) {
+	color: var(--mdc-card-button-color);}
+.mdc-card__action--icon:not(.mdc-icon-toggle):not(.mdc-icon-button):not(.mdc-button) {
+	color: var(--mdc-card-icon-color);}
+/* icon toggle */
+.mdc-card__action--button.mdc-icon-toggle {
+	--mdc-icon-toggle-ink-color: var(--mdc-card-button-color);
+	color: var(--mdc-icon-toggle-ink-color);}
+.mdc-card__action--icon.mdc-icon-toggle {
+	--mdc-icon-toggle-ink-color: var(--mdc-card-icon-color);
+	color: var(--mdc-icon-toggle-ink-color);}
+/* icon button */
+.mdc-card__action--button.mdc-icon-button {
+	--mdc-icon-button-ink-color: var(--mdc-card-button-color);
+	color: var(--mdc-icon-button-ink-color);}
+.mdc-card__action--icon.mdc-icon-button {
+	--mdc-icon-button-ink-color: var(--mdc-card-icon-color);
+	color: var(--mdc-icon-button-ink-color);}		
+/* buttons */	
+.mdc-card__action--button.mdc-button, 
+.mdc-card__action--button.mdc-button--outlined:not(:disabled) {
+	--mdc-button-ink-color: var(--mdc-card-button-color);
+	color: var(--mdc-button-ink-color);}
+.mdc-card__action--button.mdc-button--raised:not(:disabled),
+.mdc-card__action--button.mdc-button--unelevated:not(:disabled) {
+	--mdc-button-raised-ink-color: var(--mdc-card-raised-button-ink-color);
+	--mdc-button-raised-fill-color: var(--mdc-card-button-color);
+	color: var(--mdc-button-raised-ink-color);
+	background-color: var(--mdc-button-raised-fill-color);}		
+.mdc-card__action--icon.mdc-button, 
+.mdc-card__action--icon.mdc-button--outlined:not(:disabled) {
+	--mdc-button-ink-color: var(--mdc-card-icon-color);
+	color: var(--mdc-button-ink-color);}
+.mdc-card__action--icon.mdc-button--raised:not(:disabled),
+.mdc-card__action--icon.mdc-button--unelevated:not(:disabled) {
+	--mdc-button-raised-ink-color: var(--mdc-card-raised-icon-ink-color);
+	--mdc-button-raised-fill-color: var(--mdc-card-icon-color);
+	color: var(--mdc-button-raised-ink-color);
+	background-color: var(--mdc-button-raised-fill-color);}	
 	

@@ -21,6 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -51,8 +52,7 @@ import gwt.material.design.components.client.ui.html.Section;
  * @author Richeli Vargas
  *
  */
-public class MaterialDialog extends Aside
-		implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
+public class MaterialDialog extends Aside implements HasAcceptHandlers, HasCancelHandlers, HasOpen, HasScrollable {
 
 	// /////////////////////////////////////////////////////////////
 	// Dialog
@@ -71,42 +71,57 @@ public class MaterialDialog extends Aside
 	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialDialog> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
 	protected final AttributeMixin<MaterialDialog> ariaLabelledbyMixin = new AttributeMixin<>(this, "aria-labelledby");
-	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this, "aria-describedby");
-	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body, CssName.MDC_DIALOG__BODY_SCROLLABLE);
+	protected final AttributeMixin<MaterialDialog> ariaDescribedbyMixin = new AttributeMixin<>(this,
+			"aria-describedby");
+	protected final ApplyStyleMixin<Section> scrollableMixin = new ApplyStyleMixin<>(body,
+			CssName.MDC_DIALOG__BODY_SCROLLABLE);
 
 	private HandlerRegistration handler;
+	
+	private boolean autoCloseOnCancel = true;
+	private boolean autoCloseOnAccept = true;
+	private final ClickHandler acceptHandler = event -> {
+		event.stopPropagation();
+		if (autoCloseOnCancel) {
+			close();
+		}
+		fireAcceptEvent();
+	};
+	private final ClickHandler cancelHandler = event -> {
+		event.stopPropagation();
+		if (autoCloseOnAccept) {
+			close();
+		}
+		fireCancelEvent();
+	};
 
 	public MaterialDialog() {
 		super(CssName.MDC_DIALOG);
 		setRole(Role.ALERT_DIALOG);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.dialog.MDCDialog(element);
 	}-*/;
-	
+
 	@Override
 	protected void onInitialize() {
-		
+
+		backdrop.addClickHandler(cancelHandler);
+
 		header.add(headerTitle);
 
-		cancel.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);		
+		cancel.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);
 		cancel.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON_CANCEL);
-		cancel.addStyleName(CssName.MDC_DIALOG__ACTION);		
-		cancel.addClickHandler(event -> {
-			close();
-			fireCancelEvent();
-		});
+		cancel.addStyleName(CssName.MDC_DIALOG__ACTION);
+		cancel.addClickHandler(cancelHandler);
 		footer.add(cancel);
 
-		accept.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);		
+		accept.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON);
 		accept.addStyleName(CssName.MDC_DIALOG__FOOTER_BUTTON_ACCEPT);
 		accept.addStyleName(CssName.MDC_DIALOG__ACTION);
-		accept.addClickHandler(event -> {
-			close();
-			fireAcceptEvent();
-		});
+		accept.addClickHandler(acceptHandler);
 		footer.add(accept);
 
 		surface.add(header);
@@ -117,10 +132,10 @@ public class MaterialDialog extends Aside
 
 		ariaLabelledbyMixin.setAttribute(headerTitle.getId());
 		ariaDescribedbyMixin.setAttribute(body.getId());
-		
-		//initializeAcceptEventListener();
-		//initializeCancelEventListener();
-		
+
+		initializeAcceptEventListener();
+		initializeCancelEventListener();
+
 		super.onInitialize();
 	}
 
@@ -207,6 +222,16 @@ public class MaterialDialog extends Aside
 		dialog.show();
 	}-*/;
 
+	public native void open(final Element target)/*-{
+		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		dialog.lastFocusedTarget = target;
+		dialog.show();
+	}-*/;
+
+	public void open(final Widget widget) {
+		open(widget.getElement());
+	}
+
 	@Override
 	public native void close()/*-{
 		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
@@ -216,7 +241,7 @@ public class MaterialDialog extends Aside
 	protected native void initializeAcceptEventListener()/*-{
 		var _this = this;
 		var element = _this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
-		element.addEventListener('MDCDialog:accept', function () {
+		element.addEventListener('MDCDialog:accept', function() {
 			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireAcceptEvent()();
 		});
 	}-*/;
@@ -224,7 +249,7 @@ public class MaterialDialog extends Aside
 	protected native void initializeCancelEventListener()/*-{
 		var _this = this;
 		var element = _this.@gwt.material.design.components.client.ui.MaterialDialog::getElement()();
-		element.addEventListener('MDCDialog:cancel', function () {
+		element.addEventListener('MDCDialog:cancel', function() {
 			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireCancelEvent()();
 		});
 	}-*/;
@@ -245,6 +270,22 @@ public class MaterialDialog extends Aside
 	@Override
 	public HandlerRegistration addCancelHandler(final CancelHandler handler) {
 		return addHandler(handler, CancelEvent.getType());
+	}
+
+	public boolean isAutoCloseOnCancel() {
+		return autoCloseOnCancel;
+	}
+
+	public void setAutoCloseOnCancel(boolean autoCloseOnCancel) {
+		this.autoCloseOnCancel = autoCloseOnCancel;
+	}
+
+	public boolean isAutoCloseOnAccept() {
+		return autoCloseOnAccept;
+	}
+
+	public void setAutoCloseOnAccept(boolean autoCloseOnAccept) {
+		this.autoCloseOnAccept = autoCloseOnAccept;
 	}
 
 	@Override
@@ -278,20 +319,20 @@ public class MaterialDialog extends Aside
 	public boolean isAcceptEnabled() {
 		return accept.isEnabled();
 	}
-	
-	public void setAcceptType(final ButtonType type){
+
+	public void setAcceptType(final ButtonType type) {
 		accept.setType(type);
 	}
-	
+
 	public void setAcceptTextColor(final Color color) {
 		accept.setTextColor(color);
 	}
-	
+
 	public void setAcceptBackgroundColor(final Color color) {
 		accept.setBackgroundColor(color);
 	}
-	
-	public ButtonType getAcceptType(){
+
+	public ButtonType getAcceptType() {
 		return accept.getType();
 	}
 
@@ -316,20 +357,20 @@ public class MaterialDialog extends Aside
 	public boolean isCancelEnabled() {
 		return cancel.isEnabled();
 	}
-	
+
 	public void setCancelTextColor(final Color color) {
 		cancel.setTextColor(color);
 	}
-	
+
 	public void setCancelBackgroundColor(final Color color) {
 		cancel.setBackgroundColor(color);
 	}
-	
-	public void setCancelType(final ButtonType type){
+
+	public void setCancelType(final ButtonType type) {
 		cancel.setType(type);
 	}
-	
-	public ButtonType getCancelType(){
+
+	public ButtonType getCancelType() {
 		return cancel.getType();
 	}
 
@@ -357,32 +398,32 @@ public class MaterialDialog extends Aside
 	public void setPaddingTop(int paddingTop) {
 		body.setPaddingTop(paddingTop);
 	}
-	
+
 	@Override
 	public void setWidth(String width) {
 		surface.setWidth(width);
 	}
-	
+
 	@Override
 	public void setMaxWidth(String maxWidth) {
 		surface.setMaxWidth(maxWidth);
 	}
-	
+
 	@Override
 	public void setMinWidth(String minWidth) {
 		surface.setMinWidth(minWidth);
 	}
-	
+
 	@Override
 	public void setHeight(String height) {
 		surface.setHeight(height);
 	}
-	
+
 	@Override
 	public void setMaxHeight(String maxHeight) {
 		surface.setMaxHeight(maxHeight);
 	}
-	
+
 	@Override
 	public void setMinHeight(String minHeight) {
 		surface.setMinHeight(minHeight);

@@ -249,42 +249,6 @@ a:active {
 	}
 }
 
-/* ==========================================================================
-   Card
-   ========================================================================== */
-.mdc-card[disabled] {
-	opacity: 0.37;	
-}
-
-.mdc-card__content {
-	width: 100%;
-}
-
-.mdc-card__content:empty {
-	display: none;
-}
-
-.mdc-card label:not[class*="subtitle"]:not([class*="caption"]) {
-	color: var(--mdc-theme-text-primary-on-surface, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-card label[class*="subtitle"],
-.mdc-card label[class*="caption"] {
-	color: var(--mdc-theme-text-secondary-on-surface, #ccc);
-}
-
-.mdc-card__action--button.mdc-button,
-.mdc-card__action--button.material-icons,
-.mdc-card__action--button.mdc-icon-button {
-	color: var(--mdc-theme-text-primary-on-surface, rgba(0, 0, 0, 0.38));
-}
-
-.mdc-card__action--icon.mdc-button,
-.mdc-card__action--icon.material-icons,
-.mdc-card__action--icon.mdc-icon-button {
-	color: var(--mdc-theme-text-icon-on-surface, rgba(0, 0, 0, 0.38));
-}
-
 
 /* ==========================================================================
    Shape deafults
