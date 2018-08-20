@@ -129,6 +129,22 @@ public interface CssMixin {
 	String MDC_CHIP_ICON_SELECTED_COLOR = "--mdc-chip-icon_selected-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Dialog
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_DIALOG__HEADER_FILL_COLOR = "--mdc-dialog-header-fill-color";
+	String MDC_DIALOG__HEADER_INK_COLOR = "--mdc-dialog-header-ink-color";
+	String MDC_DIALOG__BODY_FILL_COLOR = "--mdc-dialog-body-fill-color";
+	String MDC_DIALOG__BODY_INK_COLOR = "--mdc-dialog-body-ink-color";
+	String MDC_DIALOG__ACTION_FILL_COLOR = "--mdc-dialog-action-fill-color";
+	String MDC_DIALOG__ACTION_INK_COLOR = "--mdc-dialog-action-ink-color";
+	String MDC_DIALOG__ACTION_RAISED_INK_COLOR = "--mdc-dialog-action-raised-ink-color";
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// Shape
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_SHAPE__PARENT_FILL_COLOR = "--mdc-shape-parent-fill-color";
+			
+	// ////////////////////////////////////////////////////////////////////////////
 	// OLD
 	// ////////////////////////////////////////////////////////////////////////////
 

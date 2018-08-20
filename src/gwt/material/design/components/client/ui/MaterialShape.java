@@ -23,6 +23,7 @@ import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -103,11 +104,8 @@ public class MaterialShape extends Div {
 		widget.getElement().getStyle().setProperty("borderBottomStyle", style.getCssName());
 	}
 
-	public void setCornerColor(final Color color) {
-		cornerTopLeft.setBackgroundColor(color);
-		cornerTopRight.setBackgroundColor(color);
-		cornerBottomLeft.setBackgroundColor(color);
-		cornerBottomRight.setBackgroundColor(color);
+	public void setParentColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SHAPE__PARENT_FILL_COLOR, color.getCssName());
 	}
 
 	public void setCornerSize(final int pixels) {

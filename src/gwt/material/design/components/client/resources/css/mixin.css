@@ -99,8 +99,10 @@
 	--mdc-dialog-body-ink-color: var(--mdc-theme-on-surface);
 	--mdc-dialog-action-fill-color: transparent;
 	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
-	--mdc-dialog-action-raised-ink-color: var(--mdc-theme-on-primary);
+	--mdc-dialog-action-raised-ink-color: var(--mdc-dialog-body-fill-color);
 
+	/* Shape */
+	--mdc-shape-parent-fill-color: var(--mdc-theme-background);
 }
 
 
@@ -605,7 +607,7 @@ i.mdc-list-item__graphic {
 .mdc-dialog__footer {
 	color: var(--mdc-dialog-action-ink-color);
 	background-color:  var(--mdc-dialog-action-fill-color);}
-/* Button into top app bar */
+/* Button into dialog */
 .mdc-dialog__footer .mdc-button, 
 .mdc-dialog__footer .mdc-button--outlined:not(:disabled) {
 	--mdc-button-ink-color: var(--mdc-dialog-action-ink-color);}
@@ -669,4 +671,28 @@ i.mdc-list-item__graphic {
 	--mdc-button-raised-fill-color: var(--mdc-card-icon-color);
 	color: var(--mdc-button-raised-ink-color);
 	background-color: var(--mdc-button-raised-fill-color);}	
-	
+
+/* ==========================================================================
+   Shape deafults
+   ========================================================================== */
+.mdc-shape-container[disabled] {
+	opacity: 0.37;}
+.mdc-shape-container__corner--top-left,
+.mdc-shape-container__corner--top-right,
+.mdc-shape-container__corner--bottom-left,
+.mdc-shape-container__corner--bottom-right {	
+	width: 16px;
+	height: 16px;
+	background-color: var(--mdc-shape-parent-fill-color);}
+.mdc-shape-container__corner--top-left {	
+	top: -8px;
+	left: -8px;}
+.mdc-shape-container__corner--top-right {	
+	top: -8px;
+	right: -8px;}
+.mdc-shape-container__corner--bottom-left {	
+	bottom: -8px;
+	left: -8px;}
+.mdc-shape-container__corner--bottom-right {	
+	bottom: -8px;
+	right: -8px;}	

@@ -33,6 +33,7 @@ import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Role;
@@ -272,6 +273,34 @@ public class MaterialDialog extends Aside implements HasAcceptHandlers, HasCance
 		return addHandler(handler, CancelEvent.getType());
 	}
 
+	public void setHeaderBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__HEADER_FILL_COLOR, color.getCssName());
+	}
+	
+	public void setHeaderTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__HEADER_INK_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__BODY_FILL_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__BODY_INK_COLOR, color.getCssName());
+	}
+	
+	
+	public void setFooterBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_FILL_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_RAISED_INK_COLOR, color.getCssName());
+	}
+		
+	public void setFooterTextColor(Color color) {
+		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_INK_COLOR, color.getCssName());
+	}
+	
 	public boolean isAutoCloseOnCancel() {
 		return autoCloseOnCancel;
 	}
