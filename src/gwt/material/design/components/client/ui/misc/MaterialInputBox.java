@@ -77,6 +77,11 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	}
 
 	@Override
+	public void setBackgroundColor(Color color) {
+		field.setBackgroundColor(color);
+	}
+
+	@Override
 	public void setHelperText(String text) {
 		helper.setHelperText(text);
 	}

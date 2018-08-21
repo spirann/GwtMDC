@@ -19,16 +19,21 @@
  */
 package gwt.material.design.components.client.ui.html;
 
+import gwt.material.design.components.client.base.HasResize;
 import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.ResizeMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.constants.Resize;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class Textarea extends MaterialWidget {
+public class Textarea extends MaterialWidget implements HasResize {
 
+	protected final ResizeMixin<Textarea> resizeMixin = new ResizeMixin<>(this);
+	
 	public Textarea() {
 		super(HtmlElements.TEXTAREA.createElement());
 	}
@@ -46,4 +51,14 @@ public class Textarea extends MaterialWidget {
 		var element = this.@gwt.material.design.components.client.ui.html.Textarea::getElement()();
 		element.cols = cols;
 	}-*/;
+	
+	@Override
+	public void setResize(Resize resize) {
+		resizeMixin.setResize(resize);
+	}
+
+	@Override
+	public Resize getResize() {
+		return resizeMixin.getResize();
+	}
 }

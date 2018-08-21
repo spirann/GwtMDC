@@ -151,7 +151,9 @@ public interface CssMixin {
 	// ////////////////////////////////////////////////////////////////////////////
 	// Text Field
 	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_TEXTFIELD__COLOR = "--mdc-text-field--color";
+	String MDC_TEXTFIELD__TEXT_COLOR = "--mdc-text-field--ink-color";
+	String MDC_TEXTFIELD__FILL_COLOR = "--mdc-text-field--fill-color";
+	String MDC_TEXTFIELD__FOCUSED_TEXT_COLOR = "--mdc-text-field--focused-ink-color";
 	String MDC_TEXTFIELD__FOCUSED_COLOR = "--mdc-text-field--focused-color";
 
 	// ////////////////////////////////////////////////////////////////////////////

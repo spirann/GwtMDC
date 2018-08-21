@@ -17,50 +17,40 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc;
+package gwt.material.design.components.client.base.mixin;
+
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.HasResize;
-import gwt.material.design.components.client.base.MaterialWidget;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Resize;
-import gwt.material.design.components.client.ui.html.Textarea;
 
 /**
  * 
  * @author Richeli Vargas
- *
  */
-public class MaterialInputArea extends MaterialInput implements HasResize {
-
-	public MaterialInputArea() {
-		super();
-		addStyleName(CssName.MDC_TEXT_FIELD__TEXTAREA);
-	}
+public class ResizeMixin<T extends Widget & HasResize> extends AbstractMixin<T> implements HasResize {
 	
-	@Override
-	protected MaterialWidget constructInput() {
-		return new Textarea(CssName.MDC_TEXT_FIELD__INPUT);
-	}
-
-	public void setRows(int rows) {
-		if (input instanceof Textarea) {
-			((Textarea) input).setRows(rows);
-		}
-	}
-
-	public void setCols(int cols) {
-		if (input instanceof Textarea) {
-			((Textarea) input).setCols(cols);
-		}
-	}
+	private Resize resize;
 	
+	public ResizeMixin(final T uiObject) {
+		super(uiObject);
+	}
+
 	@Override
 	public void setResize(Resize resize) {
-		((Textarea) input).setResize(resize);
+		this.resize = resize;
+		
+		uiObject.getElement().getStyle().clearProperty("resize");	
+		
+		if(resize != null) {
+			uiObject.getElement().getStyle().setProperty("resize", resize.getCssName());
+		}
 	}
+
 
 	@Override
 	public Resize getResize() {
-		return ((Textarea) input).getResize();
+		return resize;
 	}
+
 }

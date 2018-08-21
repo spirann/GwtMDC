@@ -209,12 +209,17 @@ public class MaterialInput extends MaterialValuedField<String>
 	public void setTextColor(Color color) {
 		input.setTextColor(color);
 	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
+	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TEXTFIELD__COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
 	}
-
+	
 	public void setFocusedColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}

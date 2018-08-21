@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
+import gwt.material.design.components.client.base.HasResize;
+import gwt.material.design.components.client.constants.Resize;
 import gwt.material.design.components.client.ui.misc.MaterialInput;
 import gwt.material.design.components.client.ui.misc.MaterialInputArea;
 import gwt.material.design.components.client.ui.misc.MaterialInputBox;
@@ -28,7 +30,7 @@ import gwt.material.design.components.client.ui.misc.MaterialInputBox;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextArea extends MaterialInputBox {
+public class MaterialTextArea extends MaterialInputBox implements HasResize {
 	
 	public MaterialTextArea() {
 		super();
@@ -49,5 +51,15 @@ public class MaterialTextArea extends MaterialInputBox {
 		if (field instanceof MaterialInputArea) {
 			((MaterialInputArea) field).setCols(cols);
 		}
+	}
+	
+	@Override
+	public void setResize(Resize resize) {
+		((MaterialInputArea) field).setResize(resize);
+	}
+
+	@Override
+	public Resize getResize() {
+		return ((MaterialInputArea) field).getResize();
 	}
 }

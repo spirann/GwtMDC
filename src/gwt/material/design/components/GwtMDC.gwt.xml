@@ -21,6 +21,7 @@
   <stylesheet src="https://fonts.googleapis.com/css?family=Roboto:300,400,500"/> 
   <stylesheet src="https://fonts.googleapis.com/css?family=Roboto+Mono"/>
   <stylesheet src="https://fonts.googleapis.com/icon?family=Material+Icons"/> 	
+  <stylesheet src="https://fonts.googleapis.com/css?family=Google+Sans"/>
   
   <!-- allow Super Dev Mode -->
   <add-linker name="xsiframe"/>  
