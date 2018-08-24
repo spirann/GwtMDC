@@ -165,8 +165,8 @@ public class MaterialTheme implements Serializable {
 	private final double mainAlpha = 1.0;
 	private final double textPrimaryAlpha = 1.0;
 	private final double textSecondaryAlpha = 0.7;
-	private final double textHintAlpha = 0.6;
-	private final double textDisabledAlpha = 0.5;
+	private final double textHintAlpha = 0.54;
+	private final double textDisabledAlpha = 0.48;
 	private final double textIconAlpha = 0.6;
 
 	public void setPrimaryColor(final Color color) {

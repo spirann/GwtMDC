@@ -42,6 +42,8 @@ public class GwtMDC implements EntryPoint {
 
 	public void onModuleLoad() {
 
+		// https://gionkunz.github.io/chartist-js/getting-started.html
+		
 		// ///////////////////////////////////////////////////////////////
 		// Load main resources
 		// ///////////////////////////////////////////////////////////////
@@ -61,6 +63,7 @@ public class GwtMDC implements EntryPoint {
 
 	public static void loadJsResources() {
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
+		injectJs(MaterialResources.INSTANCE.chartistJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectJs(MaterialResources.INSTANCE.jqueryMaskJs());
 	}
@@ -73,7 +76,7 @@ public class GwtMDC implements EntryPoint {
 		}
 
 		// Load new styles
-		styles = new StyleElement[] { injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),
+		styles = new StyleElement[] { injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()), injectCss(MaterialResources.INSTANCE.chartistCss()),
 				injectCss(MaterialResources.INSTANCE.prismCss()), injectCss(MaterialResources.INSTANCE.addinsCss()), injectCss(MaterialResources.INSTANCE.mixinCss()) };
 
 	}

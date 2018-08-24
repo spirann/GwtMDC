@@ -23,6 +23,9 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasPlaceholder;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * @author Richeli Vargas
@@ -50,4 +53,9 @@ public class PlaceholderMixin<T extends UIObject> extends AbstractMixin<T> imple
 	protected native void setPlaceholder(Element element, String placeholder)/*-{
 		element.placeholder = placeholder;
 	}-*/;
+
+	@Override
+	public void setPlaceholderColor(Color color) {
+		StyleHelper.setStyleProperty(uiObject.getElement(), CssMixin.MDC_PLACEHOLDER__INK_COLOR, color.getCssName());
+	}
 }

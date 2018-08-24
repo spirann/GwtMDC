@@ -10,9 +10,9 @@
   
   --mdc-theme-text-primary-on-background: rgba(0,0,0,1);
   --mdc-theme-text-secondary-on-background: rgba(0,0,0,0.7);
-  --mdc-theme-text-hint-on-background: rgba(0,0,0,0.6);
+  --mdc-theme-text-hint-on-background: rgba(0,0,0,0.54);
   --mdc-theme-text-icon-on-background: rgba(0,0,0,0.6);
-  --mdc-theme-text-disabled-on-background: rgba(0,0,0,0.5);
+  --mdc-theme-text-disabled-on-background: rgba(0,0,0,0.48);
   
   --mdc-state--success: #00B020;
   --mdc-state--warning: #FF8F00;

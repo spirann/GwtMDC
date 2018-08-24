@@ -4,6 +4,9 @@
 	/* --mdc-font-family: "Roboto", monospace; */
 	--mdc-font-family: "Google Sans", monospace;
 	
+	/* Placeholder */
+	--mdc-placeholder-ink-color: var(--mdc-theme-text-hint-on-background);
+	
 	/* misc */
 	--mdc-track-opacity: .38;
 	--mdc-container-opacity: .12;
@@ -1056,6 +1059,42 @@ i.mdc-list-item__graphic {
 	border-color: var(--mdc-state--error) !important;}
 .mdc-text-field--textarea.mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
 	border: 1px solid var(--mdc-state--error) !important;}	
+
+/* ==========================================================================
+   Configure placeholder color
+   ========================================================================== */
+::-webkit-input-placeholder{
+	color: var(--mdc-placeholder-ink-color);}
+::-moz-placeholder{
+	color: var(--mdc-placeholder-ink-color);}
+:-ms-input-placeholder{
+	color: var(--mdc-placeholder-ink-color);}
+:-moz-placeholder {
+	color: var(--mdc-placeholder-ink-color);}
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
+  color: var(--mdc-placeholder-ink-color); }
+.mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder {
+  color: var(--mdc-placeholder-ink-color); }	
 
 /* ==========================================================================
    Adjust Image List

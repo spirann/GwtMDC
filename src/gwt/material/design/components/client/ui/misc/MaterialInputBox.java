@@ -134,6 +134,11 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	public String getPlaceholder() {
 		return field.getPlaceholder();
 	}
+	
+	@Override
+	public void setPlaceholderColor(Color color) {
+		field.setPlaceholderColor(color);
+	}
 
 	@Override
 	public void setDense(boolean dense) {

@@ -253,6 +253,11 @@ public class MaterialInput extends MaterialValuedField<String>
 	public String getPlaceholder() {
 		return placeholderMixin.getPlaceholder();
 	}
+	
+	@Override
+	public void setPlaceholderColor(Color color) {
+		placeholderMixin.setPlaceholderColor(color);	
+	}
 
 	public void setInputType(InputType type) {
 		if(input instanceof Input) {

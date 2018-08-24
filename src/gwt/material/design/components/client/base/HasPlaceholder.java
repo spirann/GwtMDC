@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.base;
 
+import gwt.material.design.components.client.constants.Color;
+
 /**
  * 
  * @author Richeli Vargas
@@ -29,5 +31,7 @@ public interface HasPlaceholder {
 	public void setPlaceholder(String placeholder);
 	
 	public String getPlaceholder();
+	
+	public void setPlaceholderColor(Color color);
 	
 }

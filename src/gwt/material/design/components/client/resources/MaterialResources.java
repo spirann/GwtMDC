@@ -38,6 +38,9 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/material-components-web.min.js")
 	TextResource materialComponentsWebJs();
 
+	@Source("js/chartist.min.js")
+	TextResource chartistJs();
+	
 	@Source("js/prism.js")
 	TextResource prismJs();
 
@@ -52,6 +55,9 @@ public interface MaterialResources extends ClientBundle {
 
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();
+	
+	@Source("css/chartist.min.css")
+	TextResource chartistCss();
 
 	// ////////////////////////////////////////
 	// Images
