@@ -43,6 +43,9 @@ public interface MaterialResources extends ClientBundle {
 	
 	@Source("js/prism.js")
 	TextResource prismJs();
+	
+	@Source("js/color-scheme.js")
+	TextResource colorSchemeJs();
 
 	@Source("css/prism.css")
 	TextResource prismCss();

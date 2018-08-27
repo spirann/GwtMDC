@@ -49,7 +49,7 @@ public enum Color implements CssType {
 	MDC_THEME_TEXT_DISABLED_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND + ")"),
 	//
 	MDC_THEME_TEXT_ICON_ON_BACKGROUND("var(" + ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND + ")"),
-	//	
+	//
 	MDC_THEME_ON_SURFACE("var(" + ThemeAttribute.MDC_THEME_ON_SURFACE + ")"),
 	//
 	BLACK(0, 0, 0, 1), WHITE(255, 255, 255, 1), TRANSPARENT(0, 0, 0, 0),
@@ -2530,6 +2530,7 @@ public enum Color implements CssType {
 	BLUE_GRAY_900(38, 50, 56);
 
 	private String css;
+	private String hex;
 	// private int red;
 	// private int green;
 	// private int blue;
@@ -2549,6 +2550,13 @@ public enum Color implements CssType {
 		// this.blue = blue;
 		// this.alpha = alpha;
 		this.css = "rgba(" + red + "," + green + "," + blue + "," + alpha + ")";
+		this.hex = toHex(red, green, blue);
+	}
+
+	private String toHex(int r, int g, int b) {
+		final StringBuilder sb = new StringBuilder();
+		sb.append('#').append(Integer.toHexString(r)).append(Integer.toHexString(g)).append(Integer.toHexString(b));
+		return sb.toString();
 	}
 
 	@Override
@@ -2566,6 +2574,10 @@ public enum Color implements CssType {
 		} else {
 			return css;
 		}
+	}
+
+	public String asHex() {
+		return hex;
 	}
 
 	/**
