@@ -22,25 +22,20 @@ package gwt.material.design.components.client.ui.chart;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.ui.html.Div;
-
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialPieChart extends Div {
-
-	public MaterialPieChart() {
-		super();
-	}
+public class MaterialPieChart extends MaterialChartBase {
 
 	@Override
 	protected JavaScriptObject jsInit(final Element element) {
-		return jsInit(element, new Double[] { 5d, 3d, 4d });
+		setValue(5d,4d,3d);
+		return jsElement;
 	}
 
-	protected native JavaScriptObject jsInit(final Element element, final Double[] values)/*-{
+	protected native JavaScriptObject jsInit(final Element element, final MaterialChartSerie[] values)/*-{
 
 		var data = {
 			series : values
@@ -51,19 +46,45 @@ public class MaterialPieChart extends Div {
 		};
 
 		return new $wnd.Chartist.Pie(element, {
-  			series: values,
-  			labels: values
+			series : values
 		}, {
-			donut: true,
-			donutWidth: 60,
-  			startAngle: 270,
-			showLabel: true
+			classNames : {
+				chartPie : 'ct-chart-pie',
+				chartDonut : 'ct-chart-donut',
+				series : 'ct-series',
+				slicePie : 'ct-slice-pie',
+				sliceDonut : 'ct-slice-donut',
+				sliceDonutSolid : 'ct-slice-donut-solid',
+				label : 'ct-label'
+			},
+			width : '100%',
+			height : '100%',
+			chartPadding : 0,
+			donut : true,
+			donutSolid : true,
+			donutWidth : '100%',
+			startAngle : 0,
+			showLabel : true,
+			labelOffset : 0,
+			labelDirection : 'neutral',
+			ignoreEmptyValues : false,
+			reverseData : false,
 		});
 
 	}-*/;
 
 	public void setValue(Double... values) {
-		jsElement = jsInit(getElement(), values);
-		
+
+		final MaterialChartSerie[] series = new MaterialChartSerie[values.length];
+		for (int i = 0; i < values.length; i++) {
+			final MaterialChartSerie s = new MaterialChartSerie();
+			s.value = values[i];
+			s.name = "S" + (i + 1);
+			s.meta = "S" + (i + 1);
+			series[i] = s;
+		}
+
+		jsElement = jsInit(getElement(), series);
+
 	}
 }
