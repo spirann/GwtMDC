@@ -77,8 +77,13 @@ public class GwtMDC implements EntryPoint {
 		}
 
 		// Load new styles
-		styles = new StyleElement[] { injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()), injectCss(MaterialResources.INSTANCE.chartistCss()),
-				injectCss(MaterialResources.INSTANCE.prismCss()), injectCss(MaterialResources.INSTANCE.addinsCss()), injectCss(MaterialResources.INSTANCE.mixinCss()) };
+		styles = new StyleElement[] { 
+				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()), 
+				injectCss(MaterialResources.INSTANCE.chartistCss()),
+				injectCss(MaterialResources.INSTANCE.prismCss()), 
+				injectCss(MaterialResources.INSTANCE.addinsCss()), 
+				injectCss(MaterialResources.INSTANCE.mixinCss()), 
+				injectCss(MaterialResources.INSTANCE.chartMixinCss()) };
 
 	}
 

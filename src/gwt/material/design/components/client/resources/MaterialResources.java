@@ -55,6 +55,9 @@ public interface MaterialResources extends ClientBundle {
 	
 	@Source("css/mixin.css")
 	TextResource mixinCss();
+	
+	@Source("css/chartist-mixin.css")
+	TextResource chartMixinCss();
 
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();

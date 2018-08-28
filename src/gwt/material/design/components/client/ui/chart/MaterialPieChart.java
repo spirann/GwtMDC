@@ -19,23 +19,70 @@
  */
 package gwt.material.design.components.client.ui.chart;
 
+import java.util.Arrays;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+
+import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.constants.ChartAspectRatio;
+import gwt.material.design.components.client.constants.PieChartType;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialPieChart extends MaterialChartBase {
+public class MaterialPieChart extends MaterialChartBase implements HasType<PieChartType> {
 
+	private PieChartType type = PieChartType.PIE;
+	private boolean donutSolid = false;
+	private boolean showLabel = true;
+	private boolean ignoreEmptyValues = false;
+	private boolean reverseData = false;
+	private String donutWidth = "36px";
+	
+	public MaterialPieChart() {
+		super();
+		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
+	}
+	
+	protected void jsInit() {
+		jsElement = jsInit(getElement());
+	}
+	
 	@Override
 	protected JavaScriptObject jsInit(final Element element) {
-		setValue(5d,4d,3d);
-		return jsElement;
+		
+		final double total;
+		boolean donut = true;
+		
+		if(getValue() == null || getValue().length == 0) {
+			total = 0;
+		} else switch (getType()) {
+		case GAUGE:
+			total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum() * 2;
+			break;
+		case PIE:	
+			donut = false;
+		case DONUT:
+		default:
+			total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum();
+			break;
+		}
+		
+		return jsInit(element, getValue(), donut, donutSolid, total, showLabel, ignoreEmptyValues, reverseData, donutWidth);
 	}
 
-	protected native JavaScriptObject jsInit(final Element element, final MaterialChartSerie[] values)/*-{
+	protected native JavaScriptObject jsInit(final Element element, 
+			final MaterialChartSerie[] values, 
+			final boolean donut, 
+			final boolean donutSolid,
+			final double total, 
+			final boolean showLabel,
+			final boolean ignoreEmptyValues,
+			final boolean reverseData,
+			final String donutWidth)/*-{
 
 		var data = {
 			series : values
@@ -57,23 +104,22 @@ public class MaterialPieChart extends MaterialChartBase {
 				sliceDonutSolid : 'ct-slice-donut-solid',
 				label : 'ct-label'
 			},
-			width : '100%',
-			height : '100%',
 			chartPadding : 0,
-			donut : true,
-			donutSolid : true,
-			donutWidth : '100%',
-			startAngle : 0,
-			showLabel : true,
+			donut : donut,
+			donutSolid : donutSolid,
+			donutWidth : donutWidth,
+			startAngle : 270,
+			showLabel : showLabel,
 			labelOffset : 0,
 			labelDirection : 'neutral',
-			ignoreEmptyValues : false,
-			reverseData : false,
+			ignoreEmptyValues : ignoreEmptyValues,
+			reverseData : reverseData,
+			total: total
 		});
 
 	}-*/;
 
-	public void setValue(Double... values) {
+	public void setValue(Double[] values) {
 
 		final MaterialChartSerie[] series = new MaterialChartSerie[values.length];
 		for (int i = 0; i < values.length; i++) {
@@ -84,7 +130,55 @@ public class MaterialPieChart extends MaterialChartBase {
 			series[i] = s;
 		}
 
-		jsElement = jsInit(getElement(), series);
-
+		setValue(series);
+		jsInit();
 	}
+
+	@Override
+	public void setType(PieChartType type) {
+		this.type = type;
+		redraw();
+	}
+
+	@Override
+	public PieChartType getType() {
+		return type;
+	}
+
+	public boolean isShowLabel() {
+		return showLabel;
+	}
+
+	public void setShowLabel(boolean showLabel) {
+		this.showLabel = showLabel;
+		redraw();
+	}
+
+	public boolean isIgnoreEmptyValues() {
+		return ignoreEmptyValues;
+	}
+
+	public void setIgnoreEmptyValues(boolean ignoreEmptyValues) {
+		this.ignoreEmptyValues = ignoreEmptyValues;
+		redraw();
+	}
+
+	public boolean isReverseData() {
+		return reverseData;
+	}
+
+	public void setReverseData(boolean reverseData) {
+		this.reverseData = reverseData;
+		redraw();
+	}
+
+	public String getDonutWidth() {
+		return donutWidth;
+	}
+
+	public void setDonutWidth(String donutWidth) {
+		this.donutWidth = donutWidth;
+		redraw();
+	}
+	
 }

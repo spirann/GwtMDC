@@ -8,15 +8,15 @@ import jsinterop.annotations.JsType;
 public class MaterialChartSerie {
 
 	@JsProperty
-    public double value;
+    protected double value;
 
     @JsProperty
-    public String name;
+    protected String name;
 
     @JsProperty
-    public String className;
+    protected String className;
     
     @JsProperty
-    public String meta;
-	
+    protected String meta;
+
 }

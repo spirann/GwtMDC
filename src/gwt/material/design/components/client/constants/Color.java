@@ -2555,8 +2555,13 @@ public enum Color implements CssType {
 
 	private String toHex(int r, int g, int b) {
 		final StringBuilder sb = new StringBuilder();
-		sb.append('#').append(Integer.toHexString(r)).append(Integer.toHexString(g)).append(Integer.toHexString(b));
+		sb.append('#').append(toHex(r)).append(toHex(g)).append(toHex(b));
 		return sb.toString();
+	}
+	
+	private String toHex(final int value) {		
+		final String hex = Integer.toHexString(value);		
+		return (hex.length() == 1 ? "0" : "") + hex;
 	}
 
 	@Override

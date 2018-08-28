@@ -49,6 +49,8 @@ public class MaterialTheme implements Serializable {
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
 	//
+	private String chartMainColor;
+	//
 	private String codeBackground;
 	private String codeString;
 	private String codeTokenComment;
@@ -116,6 +118,14 @@ public class MaterialTheme implements Serializable {
 				.append(separator);
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
+		
+		final String[] colors = generatePalette(chartMainColor.replace("#", ""));
+		
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[0], chartMainColor)).append(separator);
+		for(int i = 1; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length;i++) {
+			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], "#" + colors[i -1])).append(separator);
+		}
+		
 		//
 		if (withCodeStyle) {
 			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground)).append(separator);
@@ -155,6 +165,18 @@ public class MaterialTheme implements Serializable {
 		return text.toString();
 
 	}
+	
+	protected native String[] generatePalette(final String color)/*-{
+
+		var scm = new $wnd.ColorScheme;
+		scm.from_hex(color).scheme('analogic').distance(0.0)
+				.add_complement(true).variation('pastel').web_safe(true);
+
+		var colors = scm.colors();
+
+		return colors;
+
+	}-*/;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -179,6 +201,7 @@ public class MaterialTheme implements Serializable {
 
 	public void setSecondaryColor(final Color color) {
 		setSecondary(color.getCssName(mainAlpha));
+		setChartMainColor(color.asHex());
 	}
 
 	public void setSecondaryTextColor(final Color color) {
@@ -329,6 +352,20 @@ public class MaterialTheme implements Serializable {
 	public void setThemeOnSurface(String themeOnSurface) {
 		this.themeOnSurface = themeOnSurface;
 	}	
+
+	/*
+	 * 
+	 * 
+	 */
+
+	public String getChartMainColor() {
+		return chartMainColor;
+	}
+
+	public void setChartMainColor(String chartMainColor) {
+		this.chartMainColor = chartMainColor;
+	}
+	
 
 	/*
 	 * 
