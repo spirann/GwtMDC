@@ -65,7 +65,7 @@ public class GwtMDC implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectJs(MaterialResources.INSTANCE.chartistJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
-		injectJs(MaterialResources.INSTANCE.colorSchemeJs());
+		injectJs(MaterialResources.INSTANCE.chromaJs());
 		injectJs(MaterialResources.INSTANCE.jqueryMaskJs());
 	}
 

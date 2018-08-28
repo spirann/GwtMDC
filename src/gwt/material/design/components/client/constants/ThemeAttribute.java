@@ -26,22 +26,22 @@ package gwt.material.design.components.client.constants;
  */
 public interface ThemeAttribute {
 
-	String MDC_THEME_PRIMARY = "--mdc-theme-primary";
-	String MDC_THEME_SECONDARY = "--mdc-theme-secondary";
-	String MDC_THEME_BACKGROUND = "--mdc-theme-background";
-	String MDC_THEME_SURFACE = "--mdc-theme-surface";
+	public static final String MDC_THEME_PRIMARY = "--mdc-theme-primary";
+	public static final String MDC_THEME_SECONDARY = "--mdc-theme-secondary";
+	public static final String MDC_THEME_BACKGROUND = "--mdc-theme-background";
+	public static final String MDC_THEME_SURFACE = "--mdc-theme-surface";
 	//
-	String MDC_THEME_ON_PRIMARY = "--mdc-theme-on-primary";
-	String MDC_THEME_ON_SECONDARY = "--mdc-theme-on-secondary";
-	String MDC_THEME_ON_SURFACE = "--mdc-theme-on-surface";
+	public static final String MDC_THEME_ON_PRIMARY = "--mdc-theme-on-primary";
+	public static final String MDC_THEME_ON_SECONDARY = "--mdc-theme-on-secondary";
+	public static final String MDC_THEME_ON_SURFACE = "--mdc-theme-on-surface";
 	//
-	String MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND = "--mdc-theme-text-primary-on-background";
-	String MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND = "--mdc-theme-text-secondary-on-background";
-	String MDC_THEME_TEXT_HINT_ON_BACKGROUND = "--mdc-theme-text-hint-on-background";
-	String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
-	String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
+	public static final String MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND = "--mdc-theme-text-primary-on-background";
+	public static final String MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND = "--mdc-theme-text-secondary-on-background";
+	public static final String MDC_THEME_TEXT_HINT_ON_BACKGROUND = "--mdc-theme-text-hint-on-background";
+	public static final String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
+	public static final String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
 	
-	String[] MDC_CHARTIST__SERIES = {
+	public static final String[] MDC_CHARTIST__SERIES = {
 			"--mdc-chartist--series_a",
 			"--mdc-chartist--series_b",
 			"--mdc-chartist--series_c",

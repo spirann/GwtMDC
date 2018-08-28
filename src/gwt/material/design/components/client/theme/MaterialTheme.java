@@ -49,7 +49,8 @@ public class MaterialTheme implements Serializable {
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
 	//
-	private String chartMainColor;
+	private String chartStartColor;
+	private String chartEndColor;
 	//
 	private String codeBackground;
 	private String codeString;
@@ -89,9 +90,9 @@ public class MaterialTheme implements Serializable {
 	public String getAsText(final boolean withCodeStyle) {
 		return getAsText("\n", withCodeStyle);
 	}
-	
+
 	private final String identation = "\t";
-	
+
 	public String getAsText(final String separator, final boolean withCodeStyle) {
 
 		final StringBuilder text = new StringBuilder();
@@ -106,58 +107,92 @@ public class MaterialTheme implements Serializable {
 				.append(separator);
 		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SECONDARY, themeOnSecondary))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SURFACE, themeOnSurface)).append(separator);
+		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_ON_SURFACE, themeOnSurface))
+				.append(separator);
 		//
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground))
+		text.append(identation)
+				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_PRIMARY_ON_BACKGROUND, textPrimaryOnBackground))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground))
+		text.append(identation)
+				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_SECONDARY_ON_BACKGROUND, textSecondaryOnBackground))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND, textHintOnBackground))
+		text.append(identation)
+				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_HINT_ON_BACKGROUND, textHintOnBackground))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND, textDisabledOnBackground))
+		text.append(identation)
+				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_DISABLED_ON_BACKGROUND, textDisabledOnBackground))
 				.append(separator);
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
+		text.append(identation)
+				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
-		
-		final String[] colors = generatePalette(chartMainColor.replace("#", ""));
-		
-		text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[0], chartMainColor)).append(separator);
-		for(int i = 1; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length;i++) {
-			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], "#" + colors[i -1])).append(separator);
+
+		final String[] colors = generatePalette(chartStartColor, chartEndColor,
+				ThemeAttribute.MDC_CHARTIST__SERIES.length);
+
+		for (int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length; i++) {
+			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i]))
+					.append(separator);
 		}
-		
+
 		//
 		if (withCodeStyle) {
-			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground)).append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground))
+					.append(separator);
 			text.append(identation).append(loadProperty("--mdc-theme-code-String", codeString)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-comment", codeTokenComment)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-prolog", codeTokenProlog)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-doctype", codeTokenDoctype)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-cdata", codeTokenCdata)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-punctuation", codeTokenPunctuation)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-property", codeTokenProperty)).append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-comment", codeTokenComment))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-prolog", codeTokenProlog))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-doctype", codeTokenDoctype))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-cdata", codeTokenCdata))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-punctuation", codeTokenPunctuation))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-property", codeTokenProperty))
+					.append(separator);
 			text.append(identation).append(loadProperty("--mdc-theme-code-token-tag", codeTokenTag)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-constant", codeTokenConstant)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-symbol", codeTokenSymbol)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-deleted", codeTokenDeleted)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-boolean", codeTokenBoolean)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-number", codeTokenNumber)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-selector", codeTokenSelector)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-attr-name", codeTokenAttrName)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-String", codeTokenString)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-char", codeTokenChar)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-builtin", codeTokenBuiltin)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-inserted", codeTokenInserted)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-operator", codeTokenOperator)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-entity", codeTokenEntity)).append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-constant", codeTokenConstant))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-symbol", codeTokenSymbol))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-deleted", codeTokenDeleted))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-boolean", codeTokenBoolean))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-number", codeTokenNumber))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-selector", codeTokenSelector))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-attr-name", codeTokenAttrName))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-String", codeTokenString))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-char", codeTokenChar))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-builtin", codeTokenBuiltin))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-inserted", codeTokenInserted))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-operator", codeTokenOperator))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-entity", codeTokenEntity))
+					.append(separator);
 			text.append(identation).append(loadProperty("--mdc-theme-code-token-url", codeTokenUrl)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-variable", codeTokenVariable)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-atrule", codeTokenAtrule)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-attr-value", codeTokenAttrValue)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-function", codeTokenFunction)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-keyword", codeTokenKeyword)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-regex", codeTokenRegex)).append(separator);
-			text.append(identation).append(loadProperty("--mdc-theme-code-token-important", codeTokenImportant)).append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-variable", codeTokenVariable))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-atrule", codeTokenAtrule))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-attr-value", codeTokenAttrValue))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-function", codeTokenFunction))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-keyword", codeTokenKeyword))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-regex", codeTokenRegex))
+					.append(separator);
+			text.append(identation).append(loadProperty("--mdc-theme-code-token-important", codeTokenImportant))
+					.append(separator);
 		}
 		//
 		text.append("}");
@@ -165,17 +200,11 @@ public class MaterialTheme implements Serializable {
 		return text.toString();
 
 	}
-	
-	protected native String[] generatePalette(final String color)/*-{
 
-		var scm = new $wnd.ColorScheme;
-		scm.from_hex(color).scheme('analogic').distance(0.0)
-				.add_complement(true).variation('pastel').web_safe(true);
-
-		var colors = scm.colors();
-
+	protected native String[] generatePalette(final String colorStart, final String colorEnd, final int count)/*-{
+		var colors = $wnd.chroma.scale([ colorStart, colorEnd ]).mode('lch')
+				.colors(count);
 		return colors;
-
 	}-*/;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -201,7 +230,30 @@ public class MaterialTheme implements Serializable {
 
 	public void setSecondaryColor(final Color color) {
 		setSecondary(color.getCssName(mainAlpha));
-		setChartMainColor(color.asHex());
+		setChartColors(color);
+
+	}
+
+	public void setChartColors(final Color color) {
+
+		final Color s;
+		final Color e;
+
+		if (color.equals(Color.BLACK) || color.equals(Color.WHITE) || color.equals(Color.TRANSPARENT)) {
+			s = Color.BLACK;
+			e = Color.WHITE;
+		} else {
+			s = Color.valueOf(cleanedName(color) + "_900");
+			e = Color.valueOf(cleanedName(color) + "_50");
+		}
+
+		setChartStartColor(s.asHex());
+		setChartEndColor(e.asHex());
+	}
+
+	protected String cleanedName(final Color color) {
+		final String name = color.toString().replaceAll("\\d", "").replaceAll("_A", "");
+		return name.endsWith("_") ? name.substring(0, name.length() - 1) : name;
 	}
 
 	public void setSecondaryTextColor(final Color color) {
@@ -351,21 +403,28 @@ public class MaterialTheme implements Serializable {
 
 	public void setThemeOnSurface(String themeOnSurface) {
 		this.themeOnSurface = themeOnSurface;
-	}	
+	}
 
 	/*
 	 * 
 	 * 
 	 */
 
-	public String getChartMainColor() {
-		return chartMainColor;
+	public String getChartStartColor() {
+		return chartStartColor;
 	}
 
-	public void setChartMainColor(String chartMainColor) {
-		this.chartMainColor = chartMainColor;
+	public void setChartStartColor(String chartStartColor) {
+		this.chartStartColor = chartStartColor;
 	}
-	
+
+	public String getChartEndColor() {
+		return chartEndColor;
+	}
+
+	public void setChartEndColor(String chartEndColor) {
+		this.chartEndColor = chartEndColor;
+	}
 
 	/*
 	 * 
