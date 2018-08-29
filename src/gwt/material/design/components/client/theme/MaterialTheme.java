@@ -23,6 +23,7 @@ import java.io.Serializable;
 
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.ThemeAttribute;
+import gwt.material.design.components.client.utils.helper.ColorHelper;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
@@ -126,12 +127,12 @@ public class MaterialTheme implements Serializable {
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
 
-		final String[] colors = generatePalette(chartStartColor, chartEndColor,
+		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor,
 				ThemeAttribute.MDC_CHARTIST__SERIES.length);
 
 		for (int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length; i++) {
-			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i]))
-					.append(separator);
+			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i])).append(separator);
+			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], ColorHelper.getColorIn(colors[i]))).append(separator);
 		}
 
 		//
@@ -200,12 +201,6 @@ public class MaterialTheme implements Serializable {
 		return text.toString();
 
 	}
-
-	protected native String[] generatePalette(final String colorStart, final String colorEnd, final int count)/*-{
-		var colors = $wnd.chroma.scale([ colorStart, colorEnd ]).mode('lch')
-				.colors(count);
-		return colors;
-	}-*/;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////////////////////////////////

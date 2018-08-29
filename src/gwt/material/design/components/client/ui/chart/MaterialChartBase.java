@@ -125,4 +125,17 @@ public class MaterialChartBase extends BaseWidget implements HasValue<MaterialCh
 			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i].getCssName());			
 		}
 	}
+	
+	public void setLabelColors(String colors) {		
+		final String[] colorsArray = colors.split(" ");		
+		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colorsArray.length;i++) {			
+			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], Color.valueOf(colorsArray[i]).getCssName());			
+		}
+	}
+	
+	public void setLabelColors(Color... colors) {		
+		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colors.length;i++) {			
+			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], colors[i].getCssName());			
+		}
+	}
 }

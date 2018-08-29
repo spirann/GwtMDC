@@ -57,4 +57,20 @@ public interface ThemeAttribute {
 			"--mdc-chartist--series_m",
 			"--mdc-chartist--series_n",
 			"--mdc-chartist--series_o"};
+	public static final String[] MDC_CHARTIST__SERIES__LABEL = {
+			"--mdc-chartist--series_a--label",
+			"--mdc-chartist--series_b--label",
+			"--mdc-chartist--series_c--label",
+			"--mdc-chartist--series_d--label",
+			"--mdc-chartist--series_e--label",
+			"--mdc-chartist--series_f--label",
+			"--mdc-chartist--series_g--label",
+			"--mdc-chartist--series_h--label",
+			"--mdc-chartist--series_i--label",
+			"--mdc-chartist--series_j--label",
+			"--mdc-chartist--series_k--label",
+			"--mdc-chartist--series_l--label",
+			"--mdc-chartist--series_m--label",
+			"--mdc-chartist--series_n--label",
+			"--mdc-chartist--series_o--label"};
 }

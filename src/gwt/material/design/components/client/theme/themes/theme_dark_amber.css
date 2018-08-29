@@ -18,6 +18,37 @@
   --mdc-state--warning: #FF8F00;
   --mdc-state--error: #B00020;
   
+  --mdc-chartist--series_a: #ff6f00;
+  --mdc-chartist--series_a--label: #fff;
+  --mdc-chartist--series_b: #fe7d14;
+  --mdc-chartist--series_b--label: #fff;
+  --mdc-chartist--series_c: #fd8924;
+  --mdc-chartist--series_c--label: #fff;
+  --mdc-chartist--series_d: #fc9532;
+  --mdc-chartist--series_d--label: #fff;
+  --mdc-chartist--series_e: #fba041;
+  --mdc-chartist--series_e--label: #fff;
+  --mdc-chartist--series_f: #faaa4f;
+  --mdc-chartist--series_f--label: #fff;
+  --mdc-chartist--series_g: #f9b45e;
+  --mdc-chartist--series_g--label: #000;
+  --mdc-chartist--series_h: #f9be6d;
+  --mdc-chartist--series_h--label: #000;
+  --mdc-chartist--series_i: #f8c77c;
+  --mdc-chartist--series_i--label: #000;
+  --mdc-chartist--series_j: #f8d08c;
+  --mdc-chartist--series_j--label: #000;
+  --mdc-chartist--series_k: #f9d99d;
+  --mdc-chartist--series_k--label: #000;
+  --mdc-chartist--series_l: #fae1ad;
+  --mdc-chartist--series_l--label: #000;
+  --mdc-chartist--series_m: #fbe9be;
+  --mdc-chartist--series_m--label: #000;
+  --mdc-chartist--series_n: #fdf1d0;
+  --mdc-chartist--series_n--label: #000;
+  --mdc-chartist--series_o: #fff8e1;
+  --mdc-chartist--series_o--label: #000;
+  
   /* ============================== */
   /* Used only in source code view 	*/
   /* - MaterialCode 				*/

@@ -14,8 +14,71 @@
 	--mdc-chartist--series_l: #86797d;
 	--mdc-chartist--series_m: #b2c326;
 	--mdc-chartist--series_n: #6188e2;
-	--mdc-chartist--series_o: #a748ca; 
+	--mdc-chartist--series_o: #a748ca;
+	
+	--mdc-chartist--series_a--label: white;
+	--mdc-chartist--series_b--label: white;
+	--mdc-chartist--series_c--label: white;
+	--mdc-chartist--series_d--label: white;
+	--mdc-chartist--series_e--label: white;
+	--mdc-chartist--series_f--label: white;
+	--mdc-chartist--series_g--label: white;
+	--mdc-chartist--series_h--label: white;
+	--mdc-chartist--series_i--label: white;
+	--mdc-chartist--series_j--label: white;
+	--mdc-chartist--series_k--label: white;
+	--mdc-chartist--series_l--label: white;
+	--mdc-chartist--series_m--label: white;
+	--mdc-chartist--series_n--label: white;
+	--mdc-chartist--series_o--label: white;
+	 
 }
+
+.ct-label:nth-child(1) {
+	fill: var(--mdc-chartist--series_a--label);
+	color: var(--mdc-chartist--series_a--label);}
+	.ct-label:nth-child(2) {
+	fill: var(--mdc-chartist--series_b--label);
+	color: var(--mdc-chartist--series_b--label);}
+	.ct-label:nth-child(3) {
+	fill: var(--mdc-chartist--series_c--label);
+	color: var(--mdc-chartist--series_c--label);}
+	.ct-label:nth-child(4) {
+	fill: var(--mdc-chartist--series_d--label);
+	color: var(--mdc-chartist--series_d--label);}
+	.ct-label:nth-child(5) {
+	fill: var(--mdc-chartist--series_e--label);
+	color: var(--mdc-chartist--series_e--label);}
+	.ct-label:nth-child(6) {
+	fill: var(--mdc-chartist--series_f--label);
+	color: var(--mdc-chartist--series_f--label);}
+	.ct-label:nth-child(7) {
+	fill: var(--mdc-chartist--series_g--label);
+	color: var(--mdc-chartist--series_g--label);}
+	.ct-label:nth-child(8) {
+	fill: var(--mdc-chartist--series_h--label);
+	color: var(--mdc-chartist--series_h--label);}
+	.ct-label:nth-child(9) {
+	fill: var(--mdc-chartist--series_i--label);
+	color: var(--mdc-chartist--series_i--label);}
+	.ct-label:nth-child(10) {
+	fill: var(--mdc-chartist--series_j--label);
+	color: var(--mdc-chartist--series_j--label);}
+	.ct-label:nth-child(11) {
+	fill: var(--mdc-chartist--series_k--label);
+	color: var(--mdc-chartist--series_k--label);}
+	.ct-label:nth-child(12) {
+	fill: var(--mdc-chartist--series_l--label);
+	color: var(--mdc-chartist--series_l--label);}
+	.ct-label:nth-child(13) {
+	fill: var(--mdc-chartist--series_m--label);
+	color: var(--mdc-chartist--series_m--label);}
+	.ct-label:nth-child(14) {
+	fill: var(--mdc-chartist--series_n--label);
+	color: var(--mdc-chartist--series_n--label);}
+	.ct-label:nth-child(15) {
+	fill: var(--mdc-chartist--series_o--label);
+	color: var(--mdc-chartist--series_o--label);}			
 
 .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
 	stroke: var(--mdc-chartist--series_a);}
