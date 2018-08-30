@@ -1,3 +1,22 @@
+/*
+ * #%L
+ * Gwt Material Design Components
+ * %%
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package gwt.material.design.components.client.ui.chart;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -16,30 +35,56 @@ import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.ThemeAttribute;
+import gwt.material.design.components.client.ui.chart.js.JsChartClassNames;
+import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
 
-public class MaterialChartBase extends BaseWidget implements HasValue<MaterialChartSerie[]>, HasChartAspectRatio {
+/**
+ * 
+ * https://gionkunz.github.io/chartist-js/getting-started.html
+ * 
+ * @author Richeli Vargas
+ *
+ */
+public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget implements HasValue<V>, HasChartAspectRatio {
 
 	private boolean valueChangeHandlerInitialized;
 	
-	private MaterialChartSerie[] value;
+	private V value;
+	
+	protected O options;
 	
 	private boolean initialized = false;
 	
-	protected final ChartAspectRatioMixin<MaterialChartBase> aspectRatioMixin = new ChartAspectRatioMixin<>(this);
+	protected final ChartAspectRatioMixin<MaterialChartBase<V, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(this);
 	
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
 
-	public MaterialChartBase() {
+	public MaterialChartBase(O options) {
 		super();
 		setElement(HtmlElements.DIV.createElement());
+		
+		this.options = options;		
+		this.options.showLabel = true;
+		this.options.classNames = new JsChartClassNames();
+		this.options.classNames.chartPie = "ct-chart-pie";
+		this.options.classNames.chartDonut = "ct-chart-donut";
+		this.options.classNames.series = "ct-series";
+		this.options.classNames.slicePie = "ct-slice-pie";
+		this.options.classNames.sliceDonut = "ct-slice-donut";
+		this.options.classNames.sliceDonutSolid = "ct-slice-donut-solid";
+		this.options.classNames.label = "ct-label";
+		
 	}
 
 	@Override
 	protected void onLoad() {
 		super.onLoad();
+		
+		
+		
 		jsInit();
 		initialized = true;
 	}
@@ -51,14 +96,14 @@ public class MaterialChartBase extends BaseWidget implements HasValue<MaterialCh
 	}
 
 	protected void jsInit() {
-		jsElement = jsInit(getElement());
+		jsElement = jsInit(getElement(), getValue(), options);
 	}
 
 	public JavaScriptObject asJavaScriptObject() {
 		return jsElement;
 	}
 
-	protected JavaScriptObject jsInit(final Element element) {
+	protected JavaScriptObject jsInit(final Element element, final V value, final O options) {
 		return element;
 	}
 
@@ -71,7 +116,7 @@ public class MaterialChartBase extends BaseWidget implements HasValue<MaterialCh
 	}
 
 	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<MaterialChartSerie[]> handler) {
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<V> handler) {
 		// Initialization code
 		if (!valueChangeHandlerInitialized) {
 			valueChangeHandlerInitialized = true;
@@ -85,17 +130,17 @@ public class MaterialChartBase extends BaseWidget implements HasValue<MaterialCh
 	}
 
 	@Override
-	public void setValue(MaterialChartSerie[] value) {
+	public void setValue(V value) {
 		setValue(value, true);
 	}
 
 	@Override
-	public MaterialChartSerie[] getValue() {
+	public V getValue() {
 		return value;
 	}
 
 	@Override
-	public void setValue(MaterialChartSerie[] value, boolean fireEvents) {
+	public void setValue(V value, boolean fireEvents) {
 		this.value = value;
 		redraw();
 		if (fireEvents) {

@@ -27,103 +27,72 @@ import com.google.gwt.dom.client.Element;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.PieChartType;
+import gwt.material.design.components.client.ui.chart.js.JsChartSerie;
+import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialPieChart extends MaterialChartBase implements HasType<PieChartType> {
+public class MaterialPieChart extends MaterialChartBase<JsChartSerie[], JsPieChartOptions>
+		implements HasType<PieChartType> {
 
 	private PieChartType type = PieChartType.PIE;
-	private boolean donutSolid = false;
-	private boolean showLabel = true;
-	private boolean ignoreEmptyValues = false;
-	private boolean reverseData = false;
-	private String donutWidth = "36px";
-	
+
 	public MaterialPieChart() {
-		super();
+		super(new JsPieChartOptions());
 		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
-	}
-	
-	protected void jsInit() {
-		jsElement = jsInit(getElement());
-	}
-	
-	@Override
-	protected JavaScriptObject jsInit(final Element element) {
 		
-		final double total;
-		boolean donut = true;
-		
-		if(getValue() == null || getValue().length == 0) {
-			total = 0;
-		} else switch (getType()) {
-		case GAUGE:
-			total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum() * 2;
-			break;
-		case PIE:	
-			donut = false;
-		case DONUT:
-		default:
-			total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum();
-			break;
-		}
-		
-		return jsInit(element, getValue(), donut, donutSolid, total, showLabel, ignoreEmptyValues, reverseData, donutWidth);
+		options.donut = false;
+		options.donutSolid = true;
+		options.donutWidth = "36px";
+		options.startAngle = 270;
+		options.labelOffset = 0;
+		options.labelDirection = "neutral";
+		options.ignoreEmptyValues = false;
+		options.reverseData = false;
 	}
 
-	protected native JavaScriptObject jsInit(final Element element, 
-			final MaterialChartSerie[] values, 
-			final boolean donut, 
-			final boolean donutSolid,
-			final double total, 
-			final boolean showLabel,
-			final boolean ignoreEmptyValues,
-			final boolean reverseData,
-			final String donutWidth)/*-{
+	protected void jsInit() {
+
+		options.donut = true;
+
+		if (getValue() == null || getValue().length == 0) {
+			options.total = 0;
+		} else
+			switch (getType()) {
+			case GAUGE:
+				options.total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum() * 2;
+				break;
+			case PIE:
+				options.donut = false;
+			case DONUT:
+			default:
+				options.total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.value).sum();
+				break;
+			}
+
+		super.jsInit();
+	}
+
+	@Override
+	protected native JavaScriptObject jsInit(final Element element, final JsChartSerie[] value,
+			final JsPieChartOptions options)/*-{
 
 		var data = {
-			series : values
+  			series: value
 		};
 
-		var sum = function(a, b) {
-			return a + b
-		};
-
-		return new $wnd.Chartist.Pie(element, {
-			series : values
-		}, {
-			classNames : {
-				chartPie : 'ct-chart-pie',
-				chartDonut : 'ct-chart-donut',
-				series : 'ct-series',
-				slicePie : 'ct-slice-pie',
-				sliceDonut : 'ct-slice-donut',
-				sliceDonutSolid : 'ct-slice-donut-solid',
-				label : 'ct-label'
-			},
-			chartPadding : 0,
-			donut : donut,
-			donutSolid : donutSolid,
-			donutWidth : donutWidth,
-			startAngle : 270,
-			showLabel : showLabel,
-			labelOffset : 0,
-			labelDirection : 'neutral',
-			ignoreEmptyValues : ignoreEmptyValues,
-			reverseData : reverseData,
-			total: total
-		});
+		return new $wnd.Chartist.Pie(element, data, options);
 
 	}-*/;
 
 	public void setValue(Double[] values) {
 
-		final MaterialChartSerie[] series = new MaterialChartSerie[values.length];
+		final JsChartSerie[] series = new JsChartSerie[values.length];
 		for (int i = 0; i < values.length; i++) {
-			final MaterialChartSerie s = new MaterialChartSerie();
+			final JsChartSerie s = new JsChartSerie();
 			s.value = values[i];
 			s.name = "S" + (i + 1);
 			s.meta = "S" + (i + 1);
@@ -146,39 +115,39 @@ public class MaterialPieChart extends MaterialChartBase implements HasType<PieCh
 	}
 
 	public boolean isShowLabel() {
-		return showLabel;
+		return options.showLabel;
 	}
 
 	public void setShowLabel(boolean showLabel) {
-		this.showLabel = showLabel;
+		options.showLabel = showLabel;
 		redraw();
 	}
 
 	public boolean isIgnoreEmptyValues() {
-		return ignoreEmptyValues;
+		return options.ignoreEmptyValues;
 	}
 
 	public void setIgnoreEmptyValues(boolean ignoreEmptyValues) {
-		this.ignoreEmptyValues = ignoreEmptyValues;
+		options.ignoreEmptyValues = ignoreEmptyValues;
 		redraw();
 	}
 
 	public boolean isReverseData() {
-		return reverseData;
+		return options.reverseData;
 	}
 
 	public void setReverseData(boolean reverseData) {
-		this.reverseData = reverseData;
+		options.reverseData = reverseData;
 		redraw();
 	}
 
 	public String getDonutWidth() {
-		return donutWidth;
+		return options.donutWidth;
 	}
 
 	public void setDonutWidth(String donutWidth) {
-		this.donutWidth = donutWidth;
+		options.donutWidth = donutWidth;
 		redraw();
 	}
-	
+
 }

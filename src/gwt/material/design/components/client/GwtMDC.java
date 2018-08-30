@@ -41,8 +41,6 @@ public class GwtMDC implements EntryPoint {
 	private static StyleElement[] styles = {};
 
 	public void onModuleLoad() {
-
-		// https://gionkunz.github.io/chartist-js/getting-started.html
 		
 		// ///////////////////////////////////////////////////////////////
 		// Load main resources
