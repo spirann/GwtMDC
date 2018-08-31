@@ -35,7 +35,7 @@ import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialPieChart extends MaterialChartBase<JsChartSerie[], JsPieChartOptions>
+public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], JsPieChartOptions>
 		implements HasType<PieChartType> {
 
 	private PieChartType type = PieChartType.PIE;
@@ -43,7 +43,7 @@ public class MaterialPieChart extends MaterialChartBase<JsChartSerie[], JsPieCha
 	public MaterialPieChart() {
 		super(new JsPieChartOptions());
 		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
-		
+
 		options.donut = false;
 		options.donutSolid = true;
 		options.donutWidth = "36px";
@@ -77,32 +77,39 @@ public class MaterialPieChart extends MaterialChartBase<JsChartSerie[], JsPieCha
 	}
 
 	@Override
-	protected native JavaScriptObject jsInit(final Element element, final JsChartSerie[] value,
+	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie[] values,
+			final JsPieChartOptions options) {
+
+		final JsChartSerie[] jsValues = values == null ? new JsChartSerie[0] : Arrays.asList(values).stream().map(value -> {
+
+			final JsChartSerie jsValue = new JsChartSerie();
+			jsValue.value = value.getValue();
+			jsValue.name = value.getName();
+			jsValue.className = value.getClassName();
+			jsValue.meta = value.getMeta();
+
+			return jsValue;
+
+		}).toArray(JsChartSerie[]::new);
+		
+		final String[] labels = values == null ? new String[0] : Arrays.asList(values).stream().map(value -> value.getName() == null ? 
+				String.valueOf(value.getValue()) : value.getName()).toArray(String[]::new);
+
+		return jsInit(element, jsValues, labels, options);
+	}
+
+	protected native JavaScriptObject jsInit(final Element element, final JsChartSerie[] values, final String[] labels,
 			final JsPieChartOptions options)/*-{
 
 		var data = {
-  			series: value
+			labels : labels,
+			series : values
 		};
 
 		return new $wnd.Chartist.Pie(element, data, options);
 
 	}-*/;
-
-	public void setValue(Double[] values) {
-
-		final JsChartSerie[] series = new JsChartSerie[values.length];
-		for (int i = 0; i < values.length; i++) {
-			final JsChartSerie s = new JsChartSerie();
-			s.value = values[i];
-			s.name = "S" + (i + 1);
-			s.meta = "S" + (i + 1);
-			series[i] = s;
-		}
-
-		setValue(series);
-		jsInit();
-	}
-
+	
 	@Override
 	public void setType(PieChartType type) {
 		this.type = type;
