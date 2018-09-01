@@ -17,52 +17,23 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart;
+package gwt.material.design.components.client.ui.chart.js;
+
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialChartSerie {
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+public class JsLineChartOptions extends JsChartOptions {
 
-	public double value;
-
-    public String name;
-
-    public String className;
-    
-    public String meta;
-
-	public double getValue() {
-		return value;
-	}
-
-	public void setValue(double value) {
-		this.value = value;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getClassName() {
-		return className;
-	}
-
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
-	public String getMeta() {
-		return meta;
-	}
-
-	public void setMeta(String meta) {
-		this.meta = meta;
-	}
+	@JsProperty
+    public boolean fullWidth;
+	
+	@JsProperty
+    public boolean showArea;
 }

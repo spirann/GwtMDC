@@ -27,7 +27,10 @@ import com.google.gwt.dom.client.Element;
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.PieChartType;
-import gwt.material.design.components.client.ui.chart.js.JsChartSerie;
+import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
+import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
+import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
+import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
 
 /**
@@ -79,35 +82,12 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	@Override
 	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie[] values,
 			final JsPieChartOptions options) {
-
-		final JsChartSerie[] jsValues = values == null ? new JsChartSerie[0] : Arrays.asList(values).stream().map(value -> {
-
-			final JsChartSerie jsValue = new JsChartSerie();
-			jsValue.value = value.getValue();
-			jsValue.name = value.getName();
-			jsValue.className = value.getClassName();
-			jsValue.meta = value.getMeta();
-
-			return jsValue;
-
-		}).toArray(JsChartSerie[]::new);
-		
-		final String[] labels = values == null ? new String[0] : Arrays.asList(values).stream().map(value -> value.getName() == null ? 
-				String.valueOf(value.getValue()) : value.getName()).toArray(String[]::new);
-
-		return jsInit(element, jsValues, labels, options);
+		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 
-	protected native JavaScriptObject jsInit(final Element element, final JsChartSerie[] values, final String[] labels,
+	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
 			final JsPieChartOptions options)/*-{
-
-		var data = {
-			labels : labels,
-			series : values
-		};
-
 		return new $wnd.Chartist.Pie(element, data, options);
-
 	}-*/;
 	
 	@Override

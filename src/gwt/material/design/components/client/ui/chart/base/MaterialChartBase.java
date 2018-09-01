@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart;
+package gwt.material.design.components.client.ui.chart.base;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
@@ -82,9 +82,6 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		
-		
-		
 		jsInit();
 		initialized = true;
 	}
@@ -171,6 +168,10 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		}
 	}
 	
+	/**
+	 * 
+	 * @param colors Ex. "RED BLUE GREEN"
+	 */
 	public void setLabelColors(String colors) {		
 		final String[] colorsArray = colors.split(" ");		
 		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colorsArray.length;i++) {			
@@ -182,5 +183,32 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colors.length;i++) {			
 			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], colors[i].getCssName());			
 		}
+	}
+
+	public boolean isShowLabel() {
+		return options.showLabel;
+	}
+
+	public void setShowLabel(boolean showLabel) {
+		options.showLabel = showLabel;
+		redraw();
+	}
+	
+	public Double getHigh() {
+		return options.high;
+	}
+	
+	public void setHigh(final Double high) {
+		options.high = high;
+		redraw();
+	}
+
+	public Double getLow() {
+		return options.low;
+	}
+	
+	public void setLow(final Double low) {
+		options.low = low;
+		redraw();
 	}
 }

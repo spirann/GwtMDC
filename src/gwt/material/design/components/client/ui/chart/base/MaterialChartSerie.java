@@ -17,33 +17,52 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+package gwt.material.design.components.client.ui.chart.base;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartOptions {
+public class MaterialChartSerie {
 
-	@JsProperty
-    public JsChartClassNames classNames;
+	public double value;
 
-    @JsProperty
-    public double high;
+    public String name;
+
+    public String className;
     
-    @JsProperty
-    public double low;
-	
-    @JsProperty
-    public JsChartPadding chartPadding;
+    public String meta;
 
-    @JsProperty
-    public boolean showLabel;
+	public double getValue() {
+		return value;
+	}
 
+	public void setValue(double value) {
+		this.value = value;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getClassName() {
+		return className;
+	}
+
+	public void setClassName(String className) {
+		this.className = className;
+	}
+
+	public String getMeta() {
+		return meta;
+	}
+
+	public void setMeta(String meta) {
+		this.meta = meta;
+	}
 }

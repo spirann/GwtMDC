@@ -29,21 +29,12 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartOptions {
+public class JsChartData {
 
 	@JsProperty
-    public JsChartClassNames classNames;
+    public Object labels;
 
     @JsProperty
-    public double high;
-    
-    @JsProperty
-    public double low;
-	
-    @JsProperty
-    public JsChartPadding chartPadding;
-
-    @JsProperty
-    public boolean showLabel;
+    public Object series;
 
 }
