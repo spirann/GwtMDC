@@ -36,4 +36,17 @@ public class JsLineChartOptions extends JsChartOptions {
 	
 	@JsProperty
     public boolean showArea;
+	
+	@JsProperty
+	public boolean showPoint;
+	
+	@JsProperty
+	public boolean lineSmooth;
+	
+	@JsProperty
+	public JsAxis axisX;
+	
+	@JsProperty
+	public JsAxis axisY;
+	
 }

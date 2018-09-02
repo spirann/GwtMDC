@@ -22,11 +22,10 @@ package gwt.material.design.components.client.ui.chart;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.constants.PieChartType;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
+import gwt.material.design.components.client.ui.chart.js.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
 
@@ -35,46 +34,37 @@ import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][], JsLineChartOptions>
-		implements HasType<PieChartType> {
-
-	private PieChartType type = PieChartType.PIE;
+public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][], JsLineChartOptions> {
 
 	public MaterialLineChart() {
 		super(new JsLineChartOptions());
-		options.fullWidth = true;
+		
+		options.fullWidth = true;	
 		options.showArea = true;
-	}
-
-	protected void jsInit() {
-		super.jsInit();
+		options.showPoint = false;
+		options.lineSmooth = true;
+		options.low = 0;
+		
+		options.axisX = new JsAxis();
+		options.axisX.showGrid = false;
+		options.axisX.showLabel = false;
+		options.axisX.offset = 30;
+		
+		options.axisY = new JsAxis();
+		options.axisY.showGrid = false;
+		options.axisY.showLabel = false;
+		options.axisY.offset = 40;
 	}
 
 	@Override
 	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie[][] values,
 			final JsLineChartOptions options) {
-		
-		final JsChartData data = new JsChartData();
-		data.labels = new String[] {"1", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2", "2"};
-		data.series = ChartHelper.toValue(values);
-		
-		return jsInit(element, data, options);
+		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 
 	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
 			final JsLineChartOptions options)/*-{
 		return new $wnd.Chartist.Line(element, data, options);
 	}-*/;
-	
-	@Override
-	public void setType(PieChartType type) {
-		this.type = type;
-		redraw();
-	}
-
-	@Override
-	public PieChartType getType() {
-		return type;
-	}
 
 }

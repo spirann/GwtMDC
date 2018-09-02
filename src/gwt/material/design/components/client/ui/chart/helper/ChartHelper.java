@@ -78,7 +78,7 @@ public class ChartHelper {
 	public static JsChartData toNativeData(final MaterialChartSerie[][] series) {
 		final JsChartData data = new JsChartData();
 		data.series = toNativeSerie(series);
-		data.labels = toLabel(series);
+		data.labels = toLabel(series == null || series.length == 0 ? null : series[0]);
 		return data;
 	}
 	
