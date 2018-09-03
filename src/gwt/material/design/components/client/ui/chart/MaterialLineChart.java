@@ -22,6 +22,7 @@ package gwt.material.design.components.client.ui.chart;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
@@ -38,18 +39,20 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 
 	public MaterialLineChart() {
 		super(new JsLineChartOptions());
-		
-		options.fullWidth = true;	
-		options.showArea = true;
+		setChartAspectRatio(ChartAspectRatio.ASPECT_1x4);
+		options.fullWidth = false;
+		options.showArea = false;
 		options.showPoint = false;
-		options.lineSmooth = true;
+		options.lineSmooth = false;
 		options.low = 0;
-		
+		options.divisor = 4;
+		//options.ticks = new int[] {10, 20, 30, 40};
+
 		options.axisX = new JsAxis();
 		options.axisX.showGrid = false;
 		options.axisX.showLabel = false;
 		options.axisX.offset = 30;
-		
+
 		options.axisY = new JsAxis();
 		options.axisY.showGrid = false;
 		options.axisY.showLabel = false;

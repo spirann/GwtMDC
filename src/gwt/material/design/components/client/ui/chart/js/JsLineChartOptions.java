@@ -49,4 +49,10 @@ public class JsLineChartOptions extends JsChartOptions {
 	@JsProperty
 	public JsAxis axisY;
 	
+	@JsProperty
+	public int divisor;
+	
+	@JsProperty
+	public int[] ticks;
+	
 }
