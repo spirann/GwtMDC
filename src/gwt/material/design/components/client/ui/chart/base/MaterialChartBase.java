@@ -33,6 +33,7 @@ import gwt.material.design.components.client.base.HasChartAspectRatio;
 import gwt.material.design.components.client.base.mixin.ChartAspectRatioMixin;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.ThemeAttribute;
 import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
@@ -144,6 +145,11 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		return aspectRatioMixin.getChartAspectRatio();
 	}
 
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL__INK_COLOR, color.getCssName());
+	}
+	
 	public void setColors(String colors) {		
 		final String[] colorsArray = colors.split(" ");		
 		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colorsArray.length;i++) {			
@@ -154,23 +160,6 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	public void setColors(Color... colors) {		
 		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length;i++) {			
 			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i].getCssName());			
-		}
-	}
-	
-	/**
-	 * 
-	 * @param colors Ex. "RED BLUE GREEN"
-	 */
-	public void setLabelColors(String colors) {		
-		final String[] colorsArray = colors.split(" ");		
-		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colorsArray.length;i++) {			
-			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], Color.valueOf(colorsArray[i]).getCssName());			
-		}
-	}
-	
-	public void setLabelColors(Color... colors) {		
-		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colors.length;i++) {			
-			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], colors[i].getCssName());			
 		}
 	}
 

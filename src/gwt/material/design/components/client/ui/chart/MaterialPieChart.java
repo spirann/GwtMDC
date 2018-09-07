@@ -26,12 +26,14 @@ import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.PieChartType;
+import gwt.material.design.components.client.constants.ThemeAttribute;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
-import gwt.material.design.components.client.ui.chart.js.JsLineChartClassNames;
+import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
 
 /**
@@ -48,22 +50,14 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		super(new JsPieChartOptions());
 		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
 
-		final JsLineChartClassNames classNames = new JsLineChartClassNames();
-		classNames.chart = "ct-chart-line";
-		classNames.label = "ct-label";
-		classNames.labelGroup = "ct-labels";
+		final JsPieChartClassNames classNames = new JsPieChartClassNames();
+		classNames.chartPie = "ct-chart-pie";
+		classNames.chartDonut = "ct-chart-donut";
 		classNames.series = "ct-series";
-		classNames.line = "ct-line";
-		classNames.point = "ct-point";
-		classNames.area = "ct-area";		
-		classNames.grid = "ct-grid";		
-		classNames.gridGroup = "ct-grids";		
-		classNames.gridBackground = "ct-grid-background";
-		classNames.vertical = "ct-vertical";		
-		classNames.horizontal = "ct-horizontal";		
-		classNames.start = "ct-start";		
-		classNames.end = "ct-end";
-		
+		classNames.slicePie = "ct-slice-pie";
+		classNames.sliceDonut = "ct-slice-donut";
+		classNames.sliceDonutSolid = "ct-slice-donut-solid";
+		classNames.label = "ct-label ct-chart-pie--label";		
 		options.classNames = classNames;
 
 		options.showLabel = true;
@@ -157,4 +151,20 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		redraw();
 	}
 
+	/**
+	 * 
+	 * @param colors Ex. "RED BLUE GREEN"
+	 */
+	public void setLabelColors(String colors) {		
+		final String[] colorsArray = colors.split(" ");		
+		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colorsArray.length;i++) {			
+			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], Color.valueOf(colorsArray[i]).getCssName());			
+		}
+	}
+	
+	public void setLabelColors(Color... colors) {		
+		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES__LABEL.length && i < colors.length;i++) {			
+			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], colors[i].getCssName());			
+		}
+	}
 }

@@ -3349,6 +3349,16 @@ var Chartist = {
    *
    */
   function createChart(options) {
+	
+	if (this.data.labels)
+		this.data.labels = Array.from(this.data.labels);
+	if (this.data.series) {
+		this.data.series = Array.from(this.data.series);
+		var count = this.data.series.length;
+		for(var i=0; i<count; i++)
+			this.data.series[i] = Array.from(this.data.series[i]);
+	}		
+	
     var data = Chartist.normalizeData(this.data, options.reverseData, true);
 
     // Create new svg object
@@ -3379,7 +3389,6 @@ var Chartist = {
       axisY = options.axisY.type.call(Chartist, Chartist.Axis.units.y, data.normalized.series, chartRect, options.axisY);
     }
     
-    axisX.ticks = Array.from(axisX.ticks);
     axisX.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
     axisY.createGridAndLabels(gridGroup, labelGroup, this.supportsForeignObject, options, this.eventEmitter);
 
@@ -3406,7 +3415,6 @@ var Chartist = {
       var pathCoordinates = [],
         pathData = [];
         
-      data.normalized.series[seriesIndex] = Array.from(data.normalized.series[seriesIndex]);
       data.normalized.series[seriesIndex].forEach(function(value, valueIndex) {
         var p = {
           x: chartRect.x1 + axisX.projectValue(value, valueIndex, data.normalized.series[seriesIndex]),

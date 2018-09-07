@@ -23,13 +23,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
-import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
+import gwt.material.design.components.client.ui.chart.js.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.JsLineChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
-import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
 
 /**
  * 
@@ -41,43 +41,41 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 	public MaterialLineChart() {
 		super(new JsLineChartOptions());
 		setChartAspectRatio(ChartAspectRatio.ASPECT_3x4);
-		
-		final JsPieChartClassNames classNames = new JsPieChartClassNames();
-		classNames.chartPie = "ct-chart-pie";
-		classNames.chartDonut = "ct-chart-donut";
-		classNames.series = "ct-series";
-		classNames.slicePie = "ct-slice-pie";
-		classNames.sliceDonut = "ct-slice-donut";
-		classNames.sliceDonutSolid = "ct-slice-donut-solid";
-		classNames.label = "ct-label";		
-		options.classNames = classNames;
-		
-		options.high = 1000;
-		options.low = 0;
-		
-		options.fullWidth = true;
-		options.divisor = 4;
-		/*
-		options.fullWidth = true;
-		options.showArea = false;
-		options.showPoint = false;
-		options.lineSmooth = false;
-		options.high = 100;
-		options.low = 0;
-		// options.divisor = 4;
-		options.height = "100px";
-		// options.ticks = new int[] {1,10,20,30};
 
+		final JsLineChartClassNames classNames = new JsLineChartClassNames();
+		classNames.chart = "ct-chart-line";
+		classNames.label = "ct-label";
+		classNames.labelGroup = "ct-labels";
+		classNames.series = "ct-series";
+		classNames.line = "ct-line";
+		classNames.point = "ct-point";
+		classNames.area = "ct-area";
+		classNames.grid = "ct-grid";
+		classNames.gridGroup = "ct-grids";
+		classNames.gridBackground = "ct-grid-background";
+		classNames.vertical = "ct-vertical";
+		classNames.horizontal = "ct-horizontal";
+		classNames.start = "ct-start";
+		classNames.end = "ct-end";
+		options.classNames = classNames;
+
+		//options.high = 100;
+		//options.low = 0;
+		/*
+		 * options.fullWidth = true; options.divisor = 4; options.fullWidth = true;
+		 * options.showArea = false; options.showPoint = false; options.lineSmooth =
+		 * false; options.high = 100; options.low = 0; // options.divisor = 4;
+		 * options.height = "100px"; // options.ticks = new int[] {1,10,20,30};
+		 */
 		options.axisX = new JsAxis();
-		options.axisX.showGrid = false;
-		options.axisX.showLabel = false;
-		options.axisX.offset = 30;
+		options.axisX.showGrid = true;
+		options.axisX.showLabel = true;
+		// options.axisX.offset = 30;
 
 		options.axisY = new JsAxis();
-		options.axisY.showGrid = false;
-		options.axisY.showLabel = false;
-		options.axisY.offset = 40;*/
-		setBackgroundColor(Color.BLUE);
+		options.axisY.showGrid = true;
+		options.axisY.showLabel = true;
+		// options.axisY.offset = 40;
 
 	}
 

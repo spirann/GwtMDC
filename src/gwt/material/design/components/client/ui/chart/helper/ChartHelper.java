@@ -47,7 +47,7 @@ public class ChartHelper {
 		final int countSeries = series.length;
 		final JsArray[] arrays = new JsArray[countSeries];
 		for (int i = 0; i < countSeries; i++) {
-			arrays[i] = JsHelper.toJsArray(toValue(series[i]));
+			arrays[i] = JsHelper.toJsArray(toJsChartSerie(series[i]));
 		}
 
 		data.series = JsHelper.toJsArray(arrays);
