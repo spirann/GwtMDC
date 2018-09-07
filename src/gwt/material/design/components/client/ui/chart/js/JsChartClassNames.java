@@ -30,26 +30,11 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class JsChartClassNames {
-
-    @JsProperty
-    public String chartPie;
-
-    @JsProperty
-    public String chartDonut;
-    
-    @JsProperty
-    public String series;
-    
-    @JsProperty
-    public String slicePie;
-    
-    @JsProperty
-    public String sliceDonut;
-    
-    @JsProperty
-    public String sliceDonutSolid;
     
     @JsProperty
     public String label;
+    
+    @JsProperty
+    public String series;
 
 }

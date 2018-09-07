@@ -35,7 +35,6 @@ import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.ThemeAttribute;
-import gwt.material.design.components.client.ui.chart.js.JsChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
 
 /**
@@ -66,17 +65,7 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		super();
 		setElement(HtmlElements.DIV.createElement());
 		
-		this.options = options;		
-		this.options.showLabel = true;
-		this.options.classNames = new JsChartClassNames();
-		this.options.classNames.chartPie = "ct-chart-pie";
-		this.options.classNames.chartDonut = "ct-chart-donut";
-		this.options.classNames.series = "ct-series";
-		this.options.classNames.slicePie = "ct-slice-pie";
-		this.options.classNames.sliceDonut = "ct-slice-donut";
-		this.options.classNames.sliceDonutSolid = "ct-slice-donut-solid";
-		this.options.classNames.label = "ct-label";
-		
+		this.options = options;
 	}
 
 	@Override

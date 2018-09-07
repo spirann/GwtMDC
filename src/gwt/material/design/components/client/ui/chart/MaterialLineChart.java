@@ -23,12 +23,13 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
-import gwt.material.design.components.client.ui.chart.js.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
+import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
 
 /**
  * 
@@ -39,14 +40,33 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 
 	public MaterialLineChart() {
 		super(new JsLineChartOptions());
-		setChartAspectRatio(ChartAspectRatio.ASPECT_1x4);
-		options.fullWidth = false;
+		setChartAspectRatio(ChartAspectRatio.ASPECT_3x4);
+		
+		final JsPieChartClassNames classNames = new JsPieChartClassNames();
+		classNames.chartPie = "ct-chart-pie";
+		classNames.chartDonut = "ct-chart-donut";
+		classNames.series = "ct-series";
+		classNames.slicePie = "ct-slice-pie";
+		classNames.sliceDonut = "ct-slice-donut";
+		classNames.sliceDonutSolid = "ct-slice-donut-solid";
+		classNames.label = "ct-label";		
+		options.classNames = classNames;
+		
+		options.high = 1000;
+		options.low = 0;
+		
+		options.fullWidth = true;
+		options.divisor = 4;
+		/*
+		options.fullWidth = true;
 		options.showArea = false;
 		options.showPoint = false;
 		options.lineSmooth = false;
+		options.high = 100;
 		options.low = 0;
-		options.divisor = 4;
-		//options.ticks = new int[] {10, 20, 30, 40};
+		// options.divisor = 4;
+		options.height = "100px";
+		// options.ticks = new int[] {1,10,20,30};
 
 		options.axisX = new JsAxis();
 		options.axisX.showGrid = false;
@@ -56,12 +76,19 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		options.axisY = new JsAxis();
 		options.axisY.showGrid = false;
 		options.axisY.showLabel = false;
-		options.axisY.offset = 40;
+		options.axisY.offset = 40;*/
+		setBackgroundColor(Color.BLUE);
+
 	}
 
 	@Override
-	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie[][] values,
+	protected JavaScriptObject jsInit(final Element element, MaterialChartSerie[][] values,
 			final JsLineChartOptions options) {
+
+		if (values == null) {
+			values = new MaterialChartSerie[0][0];
+		}
+
 		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 

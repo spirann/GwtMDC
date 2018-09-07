@@ -31,6 +31,7 @@ import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.JsLineChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
 
 /**
@@ -47,6 +48,25 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		super(new JsPieChartOptions());
 		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
 
+		final JsLineChartClassNames classNames = new JsLineChartClassNames();
+		classNames.chart = "ct-chart-line";
+		classNames.label = "ct-label";
+		classNames.labelGroup = "ct-labels";
+		classNames.series = "ct-series";
+		classNames.line = "ct-line";
+		classNames.point = "ct-point";
+		classNames.area = "ct-area";		
+		classNames.grid = "ct-grid";		
+		classNames.gridGroup = "ct-grids";		
+		classNames.gridBackground = "ct-grid-background";
+		classNames.vertical = "ct-vertical";		
+		classNames.horizontal = "ct-horizontal";		
+		classNames.start = "ct-start";		
+		classNames.end = "ct-end";
+		
+		options.classNames = classNames;
+
+		options.showLabel = true;
 		options.donut = false;
 		options.donutSolid = true;
 		options.donutWidth = "36px";

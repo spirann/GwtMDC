@@ -42,4 +42,7 @@ public class JsAxis {
 
     @JsProperty
     public int offset;
+    
+    @JsProperty
+    public String[] ticks;
 }

@@ -29,33 +29,43 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsLineChartOptions extends JsChartOptions {
+public class JsLineChartClassNames extends JsChartClassNames {
 
-	@JsProperty
-    public boolean fullWidth;
 	
-	@JsProperty
-    public boolean showArea;
-	
-	@JsProperty
-	public boolean showPoint;
-	
-	@JsProperty
-	public boolean lineSmooth;
-	
-	@JsProperty
-	public boolean stretch;
-	
-	@JsProperty
-	public JsAxis axisX;
-	
-	@JsProperty
-	public JsAxis axisY;
-	
-	@JsProperty
-	public int divisor;
-	
-	@JsProperty
-	public int[] ticks;
-		
+    @JsProperty
+    public String chart;
+
+    @JsProperty
+    public String labelGroup;
+    
+    @JsProperty
+    public String line;
+    
+    @JsProperty
+    public String point;
+    
+    @JsProperty
+    public String area;
+    
+    @JsProperty
+    public String grid;
+    
+    @JsProperty
+    public String gridGroup;
+    
+    @JsProperty
+    public String gridBackground;
+    
+    @JsProperty
+    public String vertical;
+    
+    @JsProperty
+    public String horizontal;
+    
+    @JsProperty
+    public String start;
+    
+    @JsProperty
+    public String end;
+
 }

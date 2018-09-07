@@ -36,7 +36,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.JsUtils;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 
 /**
  * 
@@ -62,7 +62,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected void onInitialize() {
 		ripleMixin.initialize();
 		add(label);
-		addClickHandler(event -> JsUtils.clearFocus());
+		addClickHandler(event -> JsHelper.clearFocus());
 		super.onInitialize();
 	}
 

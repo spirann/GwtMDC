@@ -35,7 +35,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Input;
-import gwt.material.design.components.client.utils.JsUtils;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -100,7 +100,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 			TimerHelper.schedule(1, () -> fireChangeEvent());
 		}		
 
-		JsUtils.clearFocus();
+		JsHelper.clearFocus();
 	}	
 	
 	@Override

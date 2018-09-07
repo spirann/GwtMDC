@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.chart.js;
 
+import com.google.gwt.core.client.JsArray;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -28,13 +30,14 @@ import jsinterop.annotations.JsType;
  * @author Richeli Vargas
  *
  */
+@SuppressWarnings("rawtypes")
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class JsChartData {
 
 	@JsProperty
-    public Object labels;
-
-    @JsProperty
-    public Object series;
+    public JsArray labels;
+	
+	@JsProperty
+    public JsArray series;
 
 }

@@ -14,7 +14,7 @@ import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Li;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.JsUtils;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 
 public class MaterialImageListItem extends Li implements HasImage, HasLabel, HasAspectRatio {
 
@@ -35,7 +35,7 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 		setLabel(getLabel());
 		supportingDiv.insert(label, 0);
 		add(supportingDiv);
-		addClickHandler(event -> JsUtils.clearFocus());
+		addClickHandler(event -> JsHelper.clearFocus());
 	}
 	
 	@UiChild(tagname = "supporting")

@@ -127,8 +127,7 @@ public class MaterialTheme implements Serializable {
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
 
-		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor,
-				ThemeAttribute.MDC_CHARTIST__SERIES.length);
+		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor, ThemeAttribute.MDC_CHARTIST__SERIES.length);
 
 		for (int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length; i++) {
 			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i])).append(separator);

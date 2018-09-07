@@ -37,7 +37,7 @@ import gwt.material.design.components.client.constants.TabScrollerAlign;
 import gwt.material.design.components.client.events.SelectionEvent;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.JsUtils;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 
 /**
  * 
@@ -98,7 +98,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 		if(isFirst) {
 			selectedTab.setSelected(true, false);
 		} else {
-			JsUtils.doClick(selectedTab.getElement());
+			JsHelper.doClick(selectedTab.getElement());
 		}
 	}
 
