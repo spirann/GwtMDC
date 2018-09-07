@@ -146,7 +146,7 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	}
 
 	@Override
-	public void setColor(Color color) {
+	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL__INK_COLOR, color.getCssName());
 	}
 	

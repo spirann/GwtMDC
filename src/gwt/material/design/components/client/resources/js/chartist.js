@@ -3405,7 +3405,7 @@ var Chartist = {
         'ct:series-name': series.name,
         'ct:meta': Chartist.serialize(series.meta)
       });
-
+      
       // Use series class from series data or if not set generate one
       seriesElement.addClass([
         options.classNames.series,
