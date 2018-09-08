@@ -41,36 +41,4 @@ public interface ThemeAttribute {
 	public static final String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
 	public static final String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
 	
-	public static final String[] MDC_CHARTIST__SERIES = {
-			"--mdc-chartist--series_a",
-			"--mdc-chartist--series_b",
-			"--mdc-chartist--series_c",
-			"--mdc-chartist--series_d",
-			"--mdc-chartist--series_e",
-			"--mdc-chartist--series_f",
-			"--mdc-chartist--series_g",
-			"--mdc-chartist--series_h",
-			"--mdc-chartist--series_i",
-			"--mdc-chartist--series_j",
-			"--mdc-chartist--series_k",
-			"--mdc-chartist--series_l",
-			"--mdc-chartist--series_m",
-			"--mdc-chartist--series_n",
-			"--mdc-chartist--series_o"};
-	public static final String[] MDC_CHARTIST__SERIES__LABEL = {
-			"--mdc-chartist--series_a--label",
-			"--mdc-chartist--series_b--label",
-			"--mdc-chartist--series_c--label",
-			"--mdc-chartist--series_d--label",
-			"--mdc-chartist--series_e--label",
-			"--mdc-chartist--series_f--label",
-			"--mdc-chartist--series_g--label",
-			"--mdc-chartist--series_h--label",
-			"--mdc-chartist--series_i--label",
-			"--mdc-chartist--series_j--label",
-			"--mdc-chartist--series_k--label",
-			"--mdc-chartist--series_l--label",
-			"--mdc-chartist--series_m--label",
-			"--mdc-chartist--series_n--label",
-			"--mdc-chartist--series_o--label"};
 }

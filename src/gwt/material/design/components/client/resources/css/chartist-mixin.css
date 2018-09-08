@@ -15,76 +15,131 @@
 	--mdc-chartist--series_m: #b2c326;
 	--mdc-chartist--series_n: #6188e2;
 	--mdc-chartist--series_o: #a748ca;
+	--mdc-chartist--series_p: #a748ca;
+	--mdc-chartist--series_q: #a748ca;
+	--mdc-chartist--series_r: #a748ca;
+	--mdc-chartist--series_s: #a748ca;
+	--mdc-chartist--series_t: #a748ca;
+	--mdc-chartist--series_u: #a748ca;
+	--mdc-chartist--series_v: #a748ca;
+	--mdc-chartist--series_w: #a748ca;
+	--mdc-chartist--series_x: #a748ca;
+	--mdc-chartist--series_y: #a748ca;
+	--mdc-chartist--series_z: #a748ca;
 	
-	--mdc-chartist--series_a--label: white;
-	--mdc-chartist--series_b--label: white;
-	--mdc-chartist--series_c--label: white;
-	--mdc-chartist--series_d--label: white;
-	--mdc-chartist--series_e--label: white;
-	--mdc-chartist--series_f--label: white;
-	--mdc-chartist--series_g--label: white;
-	--mdc-chartist--series_h--label: white;
-	--mdc-chartist--series_i--label: white;
-	--mdc-chartist--series_j--label: white;
-	--mdc-chartist--series_k--label: white;
-	--mdc-chartist--series_l--label: white;
-	--mdc-chartist--series_m--label: white;
-	--mdc-chartist--series_n--label: white;
-	--mdc-chartist--series_o--label: white;
+	--mdc-chartist--label_a: white;
+	--mdc-chartist--label_b: white;
+	--mdc-chartist--label_c: white;
+	--mdc-chartist--label_d: white;
+	--mdc-chartist--label_e: white;
+	--mdc-chartist--label_f: white;
+	--mdc-chartist--label_g: white;
+	--mdc-chartist--label_h: white;
+	--mdc-chartist--label_i: white;
+	--mdc-chartist--label_j: white;
+	--mdc-chartist--label_k: white;
+	--mdc-chartist--label_l: white;
+	--mdc-chartist--label_m: white;
+	--mdc-chartist--label_n: white;
+	--mdc-chartist--label_o: white;
+	--mdc-chartist--label_p: white;
+	--mdc-chartist--label_q: white;
+	--mdc-chartist--label_r: white;
+	--mdc-chartist--label_s: white;
+	--mdc-chartist--label_t: white;
+	--mdc-chartist--label_u: white;
+	--mdc-chartist--label_v: white;
+	--mdc-chartist--label_w: white;
+	--mdc-chartist--label_x: white;
+	--mdc-chartist--label_y: white;
+	--mdc-chartist--label_z: white;
 	
-	--mdc-chartist--label--ink-color: var(--mdc-theme-text-primary-on-background);
+	--mdc-chartist--label: var(--mdc-theme-text-primary-on-background);
 	 
 }
 
 .ct-label {
-	fill: var(--mdc-chartist--label--ink-color);
-	color: var(--mdc-chartist--label--ink-color);}
+	fill: var(--mdc-chartist--label);
+	color: var(--mdc-chartist--label);}
 
-.ct-chart-pie--label:nth-child(1) {
-	fill: var(--mdc-chartist--series_a--label);
-	color: var(--mdc-chartist--series_a--label);}
-	.ct-chart-pie--label:nth-child(2) {
-	fill: var(--mdc-chartist--series_b--label);
-	color: var(--mdc-chartist--series_b--label);}
-	.ct-chart-pie--label:nth-child(3) {
-	fill: var(--mdc-chartist--series_c--label);
-	color: var(--mdc-chartist--series_c--label);}
-	.ct-chart-pie--label:nth-child(4) {
-	fill: var(--mdc-chartist--series_d--label);
-	color: var(--mdc-chartist--series_d--label);}
-	.ct-chart-pie--label:nth-child(5) {
-	fill: var(--mdc-chartist--series_e--label);
-	color: var(--mdc-chartist--series_e--label);}
-	.ct-chart-pie--label:nth-child(6) {
-	fill: var(--mdc-chartist--series_f--label);
-	color: var(--mdc-chartist--series_f--label);}
-	.ct-chart-pie--label:nth-child(7) {
-	fill: var(--mdc-chartist--series_g--label);
-	color: var(--mdc-chartist--series_g--label);}
-	.ct-chart-pie--label:nth-child(8) {
-	fill: var(--mdc-chartist--series_h--label);
-	color: var(--mdc-chartist--series_h--label);}
-	.ct-chart-pie--label:nth-child(9) {
-	fill: var(--mdc-chartist--series_i--label);
-	color: var(--mdc-chartist--series_i--label);}
-	.ct-chart-pie--label:nth-child(10) {
-	fill: var(--mdc-chartist--series_j--label);
-	color: var(--mdc-chartist--series_j--label);}
-	.ct-chart-pie--label:nth-child(11) {
-	fill: var(--mdc-chartist--series_k--label);
-	color: var(--mdc-chartist--series_k--label);}
-	.ct-chart-pie--label:nth-child(12) {
-	fill: var(--mdc-chartist--series_l--label);
-	color: var(--mdc-chartist--series_l--label);}
-	.ct-chart-pie--label:nth-child(13) {
-	fill: var(--mdc-chartist--series_m--label);
-	color: var(--mdc-chartist--series_m--label);}
-	.ct-chart-pie--label:nth-child(14) {
-	fill: var(--mdc-chartist--series_n--label);
-	color: var(--mdc-chartist--series_n--label);}
-	.ct-chart-pie--label:nth-child(15) {
-	fill: var(--mdc-chartist--series_o--label);
-	color: var(--mdc-chartist--series_o--label);}			
+:not(.ct-labels) .ct-label:nth-child(1) {
+	fill: var(--mdc-chartist--label_a);
+	color: var(--mdc-chartist--label_a);}
+	:not(.ct-labels) .ct-label:nth-child(2) {
+	fill: var(--mdc-chartist--label_b);
+	color: var(--mdc-chartist--label_b);}
+	:not(.ct-labels) .ct-label:nth-child(3) {
+	fill: var(--mdc-chartist--label_c);
+	color: var(--mdc-chartist--label_c);}
+	:not(.ct-labels) .ct-label:nth-child(4) {
+	fill: var(--mdc-chartist--label_d);
+	color: var(--mdc-chartist--label_d);}
+	:not(.ct-labels) .ct-label:nth-child(5) {
+	fill: var(--mdc-chartist--label_e);
+	color: var(--mdc-chartist--label_e);}
+	:not(.ct-labels) .ct-label:nth-child(6) {
+	fill: var(--mdc-chartist--label_f);
+	color: var(--mdc-chartist--label_f);}
+	:not(.ct-labels) .ct-label:nth-child(7) {
+	fill: var(--mdc-chartist--label_g);
+	color: var(--mdc-chartist--label_g);}
+	:not(.ct-labels) .ct-label:nth-child(8) {
+	fill: var(--mdc-chartist--label_h);
+	color: var(--mdc-chartist--label_h);}
+	:not(.ct-labels) .ct-label:nth-child(9) {
+	fill: var(--mdc-chartist--label_i);
+	color: var(--mdc-chartist--label_i);}
+	:not(.ct-labels) .ct-label:nth-child(10) {
+	fill: var(--mdc-chartist--label_j);
+	color: var(--mdc-chartist--label_j);}
+	:not(.ct-labels) .ct-label:nth-child(11) {
+	fill: var(--mdc-chartist--label_k);
+	color: var(--mdc-chartist--label_k);}
+	:not(.ct-labels) .ct-label:nth-child(12) {
+	fill: var(--mdc-chartist--label_l);
+	color: var(--mdc-chartist--label_l);}
+	:not(.ct-labels) .ct-label:nth-child(13) {
+	fill: var(--mdc-chartist--label_m);
+	color: var(--mdc-chartist--label_m);}
+	:not(.ct-labels) .ct-label:nth-child(14) {
+	fill: var(--mdc-chartist--label_n);
+	color: var(--mdc-chartist--label_n);}
+	:not(.ct-labels) .ct-label:nth-child(15) {
+	fill: var(--mdc-chartist--label_o);
+	color: var(--mdc-chartist--label_o);}	
+	:not(.ct-labels) .ct-label:nth-child(16) {
+	fill: var(--mdc-chartist--label_p);
+	color: var(--mdc-chartist--label_p);}
+	:not(.ct-labels) .ct-label:nth-child(17) {
+	fill: var(--mdc-chartist--label_q);
+	color: var(--mdc-chartist--label_q);}
+	:not(.ct-labels) .ct-label:nth-child(18) {
+	fill: var(--mdc-chartist--label_r);
+	color: var(--mdc-chartist--label_r);}
+	:not(.ct-labels) .ct-label:nth-child(19) {
+	fill: var(--mdc-chartist--label_s);
+	color: var(--mdc-chartist--label_s);}
+	:not(.ct-labels) .ct-label:nth-child(20) {
+	fill: var(--mdc-chartist--label_t);
+	color: var(--mdc-chartist--label_t);}
+	:not(.ct-labels) .ct-label:nth-child(21) {
+	fill: var(--mdc-chartist--label_u);
+	color: var(--mdc-chartist--label_u);}
+	:not(.ct-labels) .ct-label:nth-child(22) {
+	fill: var(--mdc-chartist--label_v);
+	color: var(--mdc-chartist--label_v);}
+	:not(.ct-labels) .ct-label:nth-child(23) {
+	fill: var(--mdc-chartist--label_w);
+	color: var(--mdc-chartist--label_w);}
+	:not(.ct-labels) .ct-label:nth-child(24) {
+	fill: var(--mdc-chartist--label_x);
+	color: var(--mdc-chartist--label_x);}
+	:not(.ct-labels) .ct-label:nth-child(25) {
+	fill: var(--mdc-chartist--label_y);
+	color: var(--mdc-chartist--label_y);}
+	:not(.ct-labels) .ct-label:nth-child(26) {
+	fill: var(--mdc-chartist--label_z);
+	color: var(--mdc-chartist--label_z);}		
 
 .ct-series-a .ct-bar, .ct-series-a .ct-line, .ct-series-a .ct-point, .ct-series-a .ct-slice-donut {
 	stroke: var(--mdc-chartist--series_a);}
@@ -161,3 +216,58 @@
 	stroke: var(--mdc-chartist--series_o); }
 .ct-series-o .ct-area, .ct-series-o .ct-slice-donut-solid, .ct-series-o .ct-slice-pie {
 	fill: var(--mdc-chartist--series_o);}
+/* ----------------- */
+.ct-series-p .ct-bar, .ct-series-p .ct-line, .ct-series-p .ct-point, .ct-series-p .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_p); }
+.ct-series-p .ct-area, .ct-series-p .ct-slice-donut-solid, .ct-series-p .ct-slice-pie {
+	fill: var(--mdc-chartist--series_p);}
+
+.ct-series-q .ct-bar, .ct-series-q .ct-line, .ct-series-q .ct-point, .ct-series-q .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_q); }
+.ct-series-q .ct-area, .ct-series-q .ct-slice-donut-solid, .ct-series-q .ct-slice-pie {
+	fill: var(--mdc-chartist--series_q);}
+	
+.ct-series-r .ct-bar, .ct-series-r .ct-line, .ct-series-r .ct-point, .ct-series-r .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_r); }
+.ct-series-r .ct-area, .ct-series-r .ct-slice-donut-solid, .ct-series-r .ct-slice-pie {
+	fill: var(--mdc-chartist--series_r);}
+	
+.ct-series-s .ct-bar, .ct-series-s .ct-line, .ct-series-s .ct-point, .ct-series-s .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_s); }
+.ct-series-s .ct-area, .ct-series-s .ct-slice-donut-solid, .ct-series-s .ct-slice-pie {
+	fill: var(--mdc-chartist--series_s);}
+	
+.ct-series-t .ct-bar, .ct-series-t .ct-line, .ct-series-t .ct-point, .ct-series-t .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_t); }
+.ct-series-t .ct-area, .ct-series-t .ct-slice-donut-solid, .ct-series-t .ct-slice-pie {
+	fill: var(--mdc-chartist--series_t);}
+	
+.ct-series-u .ct-bar, .ct-series-u .ct-line, .ct-series-u .ct-point, .ct-series-u .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_u); }
+.ct-series-u .ct-area, .ct-series-u .ct-slice-donut-solid, .ct-series-u .ct-slice-pie {
+	fill: var(--mdc-chartist--series_u);}
+	
+.ct-series-v .ct-bar, .ct-series-v .ct-line, .ct-series-v .ct-point, .ct-series-v .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_v); }
+.ct-series-v .ct-area, .ct-series-v .ct-slice-donut-solid, .ct-series-v .ct-slice-pie {
+	fill: var(--mdc-chartist--series_v);}
+	
+.ct-series-w .ct-bar, .ct-series-w .ct-line, .ct-series-w .ct-point, .ct-series-w .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_w); }
+.ct-series-w .ct-area, .ct-series-w .ct-slice-donut-solid, .ct-series-w .ct-slice-pie {
+	fill: var(--mdc-chartist--series_w);}
+	
+.ct-series-x .ct-bar, .ct-series-x .ct-line, .ct-series-x .ct-point, .ct-series-x .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_x); }
+.ct-series-x .ct-area, .ct-series-x .ct-slice-donut-solid, .ct-series-x .ct-slice-pie {
+	fill: var(--mdc-chartist--series_x);}
+	
+.ct-series-y .ct-bar, .ct-series-y .ct-line, .ct-series-y .ct-point, .ct-series-y .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_y); }
+.ct-series-y .ct-area, .ct-series-y .ct-slice-donut-solid, .ct-series-y .ct-slice-pie {
+	fill: var(--mdc-chartist--series_y);}
+	
+.ct-series-z .ct-bar, .ct-series-z .ct-line, .ct-series-z .ct-point, .ct-series-z .ct-slice-donut {
+	stroke: var(--mdc-chartist--series_z); }
+.ct-series-z .ct-area, .ct-series-z .ct-slice-donut-solid, .ct-series-z .ct-slice-pie {
+	fill: var(--mdc-chartist--series_z);}

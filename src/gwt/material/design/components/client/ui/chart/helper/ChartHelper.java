@@ -11,6 +11,20 @@ import gwt.material.design.components.client.utils.helper.JsHelper;
 
 public class ChartHelper {
 
+	public static final int maxSeries() {
+		return 26;
+	}
+	
+	/**
+	 * Return the letter from index serie
+	 * 
+	 * @param seriesIndex
+	 * @return
+	 */
+	public static native String alphaNumerate(final int seriesIndex)/*-{
+		return $wnd.Chartist.alphaNumerate(seriesIndex);
+	}-*/;
+	
 	/**
 	 * Convert MaterialChartSerie to JsChartData
 	 * 

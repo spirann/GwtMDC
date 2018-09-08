@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.chart.base;
 
+import gwt.material.design.components.client.constants.Color;
+
 /**
  * 
  * @author Richeli Vargas
@@ -26,43 +28,51 @@ package gwt.material.design.components.client.ui.chart.base;
  */
 public class MaterialChartSerie {
 
-	public double value;
+	private final double value;
 
-    public String name;
+	private final String name;
 
-    public String className;
+	private final String className;
     
-    public String meta;
+	private final String meta;
+
+	private final Color color;
+    
+	public MaterialChartSerie(double value, String name) {
+		this(value, name, null, null, null);
+	}
+	
+	public MaterialChartSerie(double value, String name, Color color) {
+		this(value, name, null, null, color);
+	}
+	
+	public MaterialChartSerie(double value, String name, String className, String meta, Color color) {
+		super();
+		this.value = value;
+		this.name = name;
+		this.className = className;
+		this.meta = meta;
+		this.color = color;
+	}
 
 	public double getValue() {
 		return value;
 	}
-
-	public void setValue(double value) {
-		this.value = value;
-	}
-
+	
 	public String getName() {
 		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public String getClassName() {
 		return className;
 	}
 
-	public void setClassName(String className) {
-		this.className = className;
-	}
-
 	public String getMeta() {
 		return meta;
 	}
 
-	public void setMeta(String meta) {
-		this.meta = meta;
+	public Color getColor() {
+		return color;
 	}
+	
 }

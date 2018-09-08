@@ -35,7 +35,7 @@ import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.constants.ThemeAttribute;
+import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
 
 /**
@@ -147,19 +147,19 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL__INK_COLOR, color.getCssName());
+		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL, color.getCssName());
 	}
 	
 	public void setColors(String colors) {		
 		final String[] colorsArray = colors.split(" ");		
-		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colorsArray.length;i++) {			
-			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], Color.valueOf(colorsArray[i]).getCssName());			
+		for(int i = 0; i < colorsArray.length;i++) {			
+			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), Color.valueOf(colorsArray[i]).getCssName());			
 		}
 	}
 	
 	public void setColors(Color... colors) {		
-		for(int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length;i++) {			
-			setStyleProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i].getCssName());			
+		for(int i = 0; i < colors.length;i++) {			
+			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());			
 		}
 	}
 

@@ -22,7 +22,9 @@ package gwt.material.design.components.client.theme;
 import java.io.Serializable;
 
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.ThemeAttribute;
+import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.utils.helper.ColorHelper;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
@@ -127,11 +129,11 @@ public class MaterialTheme implements Serializable {
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
 
-		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor, ThemeAttribute.MDC_CHARTIST__SERIES.length);
+		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor, ChartHelper.maxSeries());
 
-		for (int i = 0; i < ThemeAttribute.MDC_CHARTIST__SERIES.length && i < colors.length; i++) {
-			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES[i], colors[i])).append(separator);
-			text.append(identation).append(loadProperty(ThemeAttribute.MDC_CHARTIST__SERIES__LABEL[i], ColorHelper.getColorIn(colors[i]))).append(separator);
+		for (int i = 0; i < colors.length; i++) {
+			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i])).append(separator);
+			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), ColorHelper.getColorIn(colors[i]))).append(separator);
 		}
 
 		//
