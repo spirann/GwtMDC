@@ -98,6 +98,9 @@ public class MaterialTheme implements Serializable {
 
 	public String getAsText(final String separator, final boolean withCodeStyle) {
 
+		final String p = loadProperty(ThemeAttribute.MDC_THEME_PRIMARY, primary);
+		final String s = loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary);
+		
 		final StringBuilder text = new StringBuilder();
 		text.append(":root {").append(separator);
 		//
@@ -128,14 +131,23 @@ public class MaterialTheme implements Serializable {
 		text.append(identation)
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
-/*
-		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor, ChartHelper.maxSeries());
 
-		for (int i = 0; i < colors.length; i++) {
-			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i])).append(separator);
-			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), ColorHelper.getColorIn(colors[i]))).append(separator);
+		if (chartStartColor != null && chartEndColor != null) {
+			//final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor,
+			//		ChartHelper.maxSeries());
+			
+			final String[] colors = ColorHelper.generateColloredPalette(ChartHelper.maxSeries() / 4, chartStartColor, chartEndColor);
+
+			for (int i = 0; i < colors.length; i++) {
+				text.append(identation).append(
+						loadProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i]))
+						.append(separator);
+				text.append(identation)
+						.append(loadProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i),
+								ColorHelper.getColorIn(colors[i])))
+						.append(separator);
+			}
 		}
-*/
 		//
 		if (withCodeStyle) {
 			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground))

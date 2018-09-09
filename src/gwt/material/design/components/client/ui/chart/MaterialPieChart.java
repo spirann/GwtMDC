@@ -24,7 +24,6 @@ import java.util.Arrays;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.RootPanel;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
@@ -39,7 +38,6 @@ import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
 import gwt.material.design.components.client.utils.helper.ColorHelper;
-import gwt.material.design.components.client.utils.helper.ColorHelper.BlendMode;
 import gwt.material.design.components.client.utils.helper.ColorHelper.MixMode;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
@@ -161,7 +159,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	@Override
 	protected void redraw() {
 		super.redraw();
-		paint();
+		//paint();
 	}
 	
 	protected void paint() {

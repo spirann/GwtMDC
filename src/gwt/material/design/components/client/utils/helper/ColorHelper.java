@@ -78,8 +78,11 @@ public class ColorHelper {
 	 */
 	public static native String[] generatePalette(final String colorStart, final String colorEnd,
 			final int count)/*-{
-		return $wnd.chroma.scale([ colorStart, colorEnd ]).mode('lch').colors(
-				count);
+		return $wnd.chroma.scale([ colorStart, colorEnd ]).mode('lch').colors(count);
+	}-*/;
+	
+	public static native String[] generateColloredPalette(final int count, final String... colors)/*-{
+		return $wnd.chroma.scale(Array.from(colors)).colors(count);
 	}-*/;
 
 	/**
