@@ -128,14 +128,14 @@ public class MaterialTheme implements Serializable {
 		text.append(identation)
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
-
+/*
 		final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor, ChartHelper.maxSeries());
 
 		for (int i = 0; i < colors.length; i++) {
 			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i])).append(separator);
 			text.append(identation).append(loadProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), ColorHelper.getColorIn(colors[i]))).append(separator);
 		}
-
+*/
 		//
 		if (withCodeStyle) {
 			text.append(identation).append(loadProperty("--mdc-theme-code-background", codeBackground))

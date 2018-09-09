@@ -216,7 +216,7 @@
 	stroke: var(--mdc-chartist--series_o); }
 .ct-series-o .ct-area, .ct-series-o .ct-slice-donut-solid, .ct-series-o .ct-slice-pie {
 	fill: var(--mdc-chartist--series_o);}
-/* ----------------- */
+
 .ct-series-p .ct-bar, .ct-series-p .ct-line, .ct-series-p .ct-point, .ct-series-p .ct-slice-donut {
 	stroke: var(--mdc-chartist--series_p); }
 .ct-series-p .ct-area, .ct-series-p .ct-slice-donut-solid, .ct-series-p .ct-slice-pie {
