@@ -82,7 +82,7 @@ public class ColorHelper {
 	}-*/;
 	
 	public static native String[] generateColloredPalette(final int count, final String... colors)/*-{
-		return $wnd.chroma.scale(Array.from(colors)).colors(count);
+		return $wnd.chroma.scale(Array.from(colors)).padding([0, 0.2]).correctLightness().colors(count);
 	}-*/;
 
 	/**
@@ -147,6 +147,16 @@ public class ColorHelper {
 		return $wnd.chroma(color).brighten();
 	}-*/;
 
+	/**
+	 * Similar to darken, but the opposite direction
+	 * 
+	 * @param color
+	 * @return
+	 */
+	public static native String saturate(final String color, final int saturation)/*-{
+		return $wnd.chroma(color).saturate(saturation);
+	}-*/;
+	
 	/**
 	 * https://gka.github.io/chroma.js/
 	 * 

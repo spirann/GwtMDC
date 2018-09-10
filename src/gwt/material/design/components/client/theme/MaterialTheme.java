@@ -136,7 +136,23 @@ public class MaterialTheme implements Serializable {
 			//final String[] colors = ColorHelper.generatePalette(chartStartColor, chartEndColor,
 			//		ChartHelper.maxSeries());
 			
-			final String[] colors = ColorHelper.generateColloredPalette(ChartHelper.maxSeries() / 4, chartStartColor, chartEndColor);
+			//final String[] colorss = ColorHelper.generateColloredPalette(ChartHelper.maxSeries(), 
+			//		loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary), 
+			//		"#fff");
+		
+			final String[] colors = new String[ChartHelper.maxSeries()];
+			
+			final String color = loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary);
+			for(int i = 0, x = 1; i < colors.length; x++) {
+				if(x > 5) {
+					x = -2;
+				}
+				final String[] auxColors = ColorHelper.generateColloredPalette(4, ColorHelper.saturate(color, x), "#fff");
+				for(int c = 0; c < auxColors.length; c++) {
+					colors[i++] = auxColors[c];
+				}
+			}
+			
 
 			for (int i = 0; i < colors.length; i++) {
 				text.append(identation).append(
