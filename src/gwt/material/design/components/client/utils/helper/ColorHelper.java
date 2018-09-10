@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
@@ -71,18 +74,78 @@ public class ColorHelper {
 	/**
 	 * https://gka.github.io/chroma.js/
 	 * 
+	 * Generate a color palette from a color list
+	 * 
 	 * @param colorStart
 	 * @param colorEnd
 	 * @param count
+	 *            number of colors to return
 	 * @return
 	 */
-	public static native String[] generatePalette(final String colorStart, final String colorEnd,
-			final int count)/*-{
-		return $wnd.chroma.scale([ colorStart, colorEnd ]).mode('lch').colors(count);
+	public static native String[] generatePalette(final int count, final String... colors)/*-{
+		return $wnd.chroma.scale(Array.from(colors)).colors(count);
 	}-*/;
-	
-	public static native String[] generateColloredPalette(final int count, final String... colors)/*-{
-		return $wnd.chroma.scale(Array.from(colors)).padding([0, 0.2]).correctLightness().colors(count);
+
+	/**
+	 * Generate a color palette from a single color
+	 * 
+	 * @param count
+	 *            number of colors to return
+	 * @param color
+	 *            color to generate the palette
+	 * @param limit
+	 *            number of different colors
+	 * @return
+	 */
+	public static String[] generatePalette(final int count, final String color, final int limit) {
+
+		final String[] palette = generatePalette(limit + 1, color, "#eee");
+		final List<String> cleanedColors = Arrays.asList(palette).subList(0, palette.length - 1);
+
+		final String[] colors = new String[count];
+		for (int i = 0; i < colors.length;) {
+			for (String c : cleanedColors) {
+				if (i >= colors.length)
+					break;
+				colors[i++] = c;
+			}
+		}
+
+		return colors;
+	}
+
+	/**
+	 * Generate a colored color palette
+	 * 
+	 * @param count
+	 *            number of colors to return
+	 * @param color
+	 *            color to start the palette
+	 * @return
+	 */
+	public static String[] generateColloredPalette(final int count, final String color) {
+
+		final String[] colors = new String[count];
+
+		String auxColor = color;
+		for (int i = 0; i < colors.length;) {
+
+			double hue = getHue(auxColor) + 10;
+
+			if (hue > 360)
+				hue = hue - 360;
+
+			auxColor = getColor(hue, 1, 0.4);
+
+			for (String c : Arrays.asList(generatePalette(6, auxColor, "#eee")).subList(2, 3))
+				colors[i++] = c;
+		}
+
+		return colors;
+	}
+
+	public static native String getColor(final double hue, final double saturation, final double lightness)/*-{
+		return $wnd.chroma(hue, saturation, lightness, 'hsl');
 	}-*/;
 
 	/**
@@ -156,7 +219,18 @@ public class ColorHelper {
 	public static native String saturate(final String color, final int saturation)/*-{
 		return $wnd.chroma(color).saturate(saturation);
 	}-*/;
-	
+
+	public static native double getHue(final String color)/*-{
+		var hsl = $wnd.chroma(color).hsl();
+
+		if (hsl[0] == null) {
+			return 0;
+		}
+
+		return hsl[0];
+
+	}-*/;
+
 	/**
 	 * https://gka.github.io/chroma.js/
 	 * 

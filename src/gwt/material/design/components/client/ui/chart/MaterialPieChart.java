@@ -174,7 +174,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		GWT.log("color brighten: " + endColor);
 		//sGWT.log("color light" + ColorHelper.blend(color, "FFF", BlendMode.MULTIPLY));
 		
-		final String[] colors = ColorHelper.generatePalette(startColor, endColor, seriesCount);
+		final String[] colors = ColorHelper.generatePalette(seriesCount, startColor, endColor);
 		for (int i = 0; i < colors.length; i++) {
 			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i]);
 			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), ColorHelper.getColorIn(colors[i]));
