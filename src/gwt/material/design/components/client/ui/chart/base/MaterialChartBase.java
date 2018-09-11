@@ -36,6 +36,7 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
+import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
 
 /**
@@ -62,10 +63,10 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
 
-	public MaterialChartBase(O options) {
+	public MaterialChartBase(O options, final ChartAspectRatio defaultAspect) {
 		super();
 		setElement(HtmlElements.DIV.createElement());
-		
+		setChartAspectRatio(defaultAspect);		
 		this.options = options;
 	}
 
@@ -93,6 +94,10 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	protected JavaScriptObject jsInit(final Element element, final V value, final O options) {
 		return element;
 	}
+	
+	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
+			final O options)/*-{
+	}-*/;
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());

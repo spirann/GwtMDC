@@ -48,6 +48,9 @@ public class JsPieChartOptions extends JsChartOptions {
     
     @JsProperty
     public String labelDirection;
+    
+    @JsProperty
+    public String labelPosition;
 
     @JsProperty
     public boolean ignoreEmptyValues;

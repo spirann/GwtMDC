@@ -39,8 +39,7 @@ import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
 public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][], JsLineChartOptions> {
 
 	public MaterialLineChart() {
-		super(new JsLineChartOptions());
-		setChartAspectRatio(ChartAspectRatio.ASPECT_3x4);
+		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_3x4);
 
 		final JsLineChartClassNames classNames = new JsLineChartClassNames();
 		classNames.chart = "ct-chart-line";
@@ -90,6 +89,7 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 
+	@Override
 	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
 			final JsLineChartOptions options)/*-{
 		return new $wnd.Chartist.Line(element, data, options);

@@ -21,25 +21,22 @@ package gwt.material.design.components.client.ui.chart;
 
 import java.util.Arrays;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasType;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
+import gwt.material.design.components.client.constants.ChartLabelDirection;
+import gwt.material.design.components.client.constants.ChartLabelPosition;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.PieChartType;
-import gwt.material.design.components.client.constants.ThemeAttribute;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
-import gwt.material.design.components.client.utils.helper.ColorHelper;
-import gwt.material.design.components.client.utils.helper.ColorHelper.MixMode;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
@@ -50,10 +47,11 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		implements HasType<PieChartType> {
 
 	private PieChartType type = PieChartType.PIE;
+	private ChartLabelPosition labelPosition = ChartLabelPosition.INSIDE;
+	private ChartLabelDirection labelDirection = ChartLabelDirection.NEUTRAL;
 
 	public MaterialPieChart() {
-		super(new JsPieChartOptions());
-		setChartAspectRatio(ChartAspectRatio.ASPECT_1x1);
+		super(new JsPieChartOptions(), ChartAspectRatio.ASPECT_1x1);
 
 		final JsPieChartClassNames classNames = new JsPieChartClassNames();
 		classNames.chartPie = "ct-chart-pie";
@@ -62,7 +60,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		classNames.slicePie = "ct-slice-pie";
 		classNames.sliceDonut = "ct-slice-donut";
 		classNames.sliceDonutSolid = "ct-slice-donut-solid";
-		classNames.label = "ct-label";		
+		classNames.label = "ct-label";
 		options.classNames = classNames;
 
 		options.showLabel = true;
@@ -70,6 +68,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		options.donutSolid = true;
 		options.donutWidth = "36px";
 		options.startAngle = 270;
+		options.labelPosition = labelPosition.getCssName();
 		options.labelOffset = 0;
 		options.labelDirection = "neutral";
 		options.ignoreEmptyValues = false;
@@ -104,11 +103,12 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 
+	@Override
 	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
 			final JsPieChartOptions options)/*-{
 		return new $wnd.Chartist.Pie(element, data, options);
 	}-*/;
-	
+
 	@Override
 	public void setType(PieChartType type) {
 		this.type = type;
@@ -156,45 +156,38 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		redraw();
 	}
 
-	@Override
-	protected void redraw() {
-		super.redraw();
-		//paint();
+	public ChartLabelPosition getLabelPosition() {
+		return labelPosition;
 	}
-	
-	protected void paint() {
-		
-		final int seriesCount = getValue() == null ? 0 : getValue().length;
-		final String color = StyleHelper.getComputedProperty(ThemeAttribute.MDC_THEME_SECONDARY).replace(" ", "");
-		final String startColor = ColorHelper.mix(color, "#000", 0.25, MixMode.RGB);
-		final String endColor = ColorHelper.mix(color, "#fff", 0.85, MixMode.HSL);
-		
-		GWT.log("color" + color);
-		GWT.log("color dark: " + startColor);
-		GWT.log("color brighten: " + endColor);
-		//sGWT.log("color light" + ColorHelper.blend(color, "FFF", BlendMode.MULTIPLY));
-		
-		final String[] colors = ColorHelper.generatePalette(seriesCount, startColor, endColor);
-		for (int i = 0; i < colors.length; i++) {
-			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i]);
-			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), ColorHelper.getColorIn(colors[i]));
-		}
+
+	public void setLabelPosition(ChartLabelPosition labelPosition) {
+		this.labelPosition = labelPosition;
+		redraw();
 	}
-	
+
+	public ChartLabelDirection getLabelDirection() {
+		return labelDirection;
+	}
+
+	public void setLabelDirection(ChartLabelDirection labelDirection) {
+		this.labelDirection = labelDirection;
+	}
+
 	/**
 	 * 
-	 * @param colors Ex. "RED BLUE GREEN"
+	 * @param colors
+	 *            Ex. "RED BLUE GREEN"
 	 */
-	public void setLabelColors(String colors) {		
-		final String[] colorsArray = colors.split(" ");		
-		for(int i = 0; i < colorsArray.length;i++) {			
-			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), Color.valueOf(colorsArray[i]).getCssName());			
-		}
+	public void setLabelColors(String colors) {
+		final String[] colorsArray = colors.split(" ");
+		for (int i = 0; i < colorsArray.length; i++)
+			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i),
+					Color.valueOf(colorsArray[i]).getCssName());
+
 	}
-	
-	public void setLabelColors(Color... colors) {		
-		for(int i = 0; i < colors.length;i++) {			
-			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());			
-		}
+
+	public void setLabelColors(Color... colors) {
+		for (int i = 0; i < colors.length; i++)
+			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());
 	}
 }
