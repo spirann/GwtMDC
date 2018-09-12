@@ -31,6 +31,9 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class JsLineChartOptions extends JsChartOptions {
 
+    @JsProperty
+    public JsChartPadding chartPadding;
+    
 	@JsProperty
     public boolean fullWidth;
 	

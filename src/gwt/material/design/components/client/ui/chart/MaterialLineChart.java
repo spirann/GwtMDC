@@ -28,6 +28,7 @@ import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.JsChartPadding;
 import gwt.material.design.components.client.ui.chart.js.JsLineChartClassNames;
 import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
 
@@ -58,6 +59,8 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		classNames.end = "ct-end";
 		options.classNames = classNames;
 
+		this.options.chartPadding = new JsChartPadding();
+		
 		//options.high = 100;
 		//options.low = 0;
 		/*
@@ -76,6 +79,34 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		options.axisY.showLabel = true;
 		// options.axisY.offset = 40;
 
+	}
+	
+	public void setChartPadding(final int padding) {
+		options.chartPadding.top = padding;
+		options.chartPadding.right = padding;
+		options.chartPadding.bottom = padding;
+		options.chartPadding.left = padding;
+		redraw();
+	}
+	
+	public void setChartTopPadding(final int padding) {
+		options.chartPadding.top = padding;
+		redraw();
+	}
+	
+	public void setChartRightPadding(final int padding) {
+		options.chartPadding.right = padding;
+		redraw();
+	}
+	
+	public void setChartBottomPadding(final int padding) {
+		options.chartPadding.bottom = padding;
+		redraw();
+	}
+	
+	public void setChartLeftPadding(final int padding) {
+		options.chartPadding.left = padding;
+		redraw();
 	}
 
 	@Override

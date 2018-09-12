@@ -66,6 +66,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		classNames.label = "ct-label";
 		options.classNames = classNames;
 
+		options.chartPadding = 0;
 		options.showLabel = true;
 		options.donut = false;
 		options.donutSolid = true;
@@ -123,15 +124,6 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		return type;
 	}
 
-	public boolean isShowLabel() {
-		return options.showLabel;
-	}
-
-	public void setShowLabel(boolean showLabel) {
-		options.showLabel = showLabel;
-		redraw();
-	}
-
 	public boolean isIgnoreEmptyValues() {
 		return options.ignoreEmptyValues;
 	}
@@ -179,6 +171,15 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		options.labelDirection = this.labelDirection.getCssName();
 		redraw();
 	}
+	
+	public int getLabelOffset() {
+		return options.labelOffset;
+	}
+
+	public void setLabelOffset(int labelOffset) {
+		this.options.labelOffset = labelOffset;
+		redraw();
+	}
 
 	public int getStartAngle() {
 		return options.startAngle;
@@ -189,6 +190,24 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		redraw();
 	}
 
+	public boolean isDonutSolid() {
+		return this.options.donutSolid;
+	}
+	
+	public void setDonutSolid(final boolean donutSolid) {
+		this.options.donutSolid = donutSolid;
+		redraw();
+	}
+	
+	public int getChartPadding() {
+		return options.startAngle;
+	}
+
+	public void setChartPadding(int chartPadding) {
+		this.options.chartPadding = chartPadding;
+		redraw();
+	}
+		
 	/**
 	 * 
 	 * @param colors

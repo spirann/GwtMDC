@@ -45,9 +45,6 @@ public class JsChartOptions {
     
     @JsProperty
     public double low;
-	
-    @JsProperty
-    public JsChartPadding chartPadding;
 
     @JsProperty
     public boolean showLabel;

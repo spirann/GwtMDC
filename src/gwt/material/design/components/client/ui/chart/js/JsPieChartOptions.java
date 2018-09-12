@@ -30,7 +30,10 @@ import jsinterop.annotations.JsType;
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class JsPieChartOptions extends JsChartOptions {
-
+	
+	@JsProperty
+    public int chartPadding;
+	
 	@JsProperty
     public boolean donut;
 
