@@ -165,8 +165,8 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// MENU
 	// //////////////////////////////////////////////////////
-	String MDC_MENU__ANCHOR = "mdc-menu-anchor";
-	String MDC_MENU = "mdc-menu";
+	String MDC_MENU__ANCHOR = "mdc-menu-surface--anchor";
+	String MDC_MENU = "mdc-menu-surface";
 	String MDC_MENU__ITEMS = "mdc-menu__items";
 	// //////////////////////////////////////////////////////
 	// DIALOG

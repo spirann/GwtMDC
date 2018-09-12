@@ -154,6 +154,7 @@ textarea,
 .mdc-list-item__secondary-text,
 .mdc-list-group__subheader,
 .mdc-menu .mdc-list-item,
+.mdc-menu-surface .mdc-list-item,
 .mdc-select__native-control,
 .mdc-slider__pin-value-marker,
 .mdc-snackbar__text,
@@ -647,6 +648,10 @@ i.mdc-list-item__graphic {
 	overflow-y: auto;
 	color: var(--mdc-drawer-ink-color);
 	background-color: var(--mdc-drawer-fill-color) !important;}	
+
+/* ==========================================================================
+   Menu
+   ========================================================================== */
 
 /* ==========================================================================
    Snackbar

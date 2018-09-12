@@ -58,7 +58,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.menu.MDCMenu(element);
+		return new $wnd.mdc.menuSurface.MDCMenuSurface(element);
 	}-*/;
 
 	@Override
