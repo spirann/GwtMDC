@@ -61,82 +61,82 @@
 	fill: var(--mdc-chartist--label);
 	color: var(--mdc-chartist--label);}
 
-:not(.ct-labels) .ct-label:nth-child(1) {
+[label_position="inside"] .ct-label:nth-child(1) {
 	fill: var(--mdc-chartist--label_a);
 	color: var(--mdc-chartist--label_a);}
-	:not(.ct-labels) .ct-label:nth-child(2) {
+	[label_position="inside"] .ct-label:nth-child(2) {
 	fill: var(--mdc-chartist--label_b);
 	color: var(--mdc-chartist--label_b);}
-	:not(.ct-labels) .ct-label:nth-child(3) {
+	[label_position="inside"] .ct-label:nth-child(3) {
 	fill: var(--mdc-chartist--label_c);
 	color: var(--mdc-chartist--label_c);}
-	:not(.ct-labels) .ct-label:nth-child(4) {
+	[label_position="inside"] .ct-label:nth-child(4) {
 	fill: var(--mdc-chartist--label_d);
 	color: var(--mdc-chartist--label_d);}
-	:not(.ct-labels) .ct-label:nth-child(5) {
+	[label_position="inside"] .ct-label:nth-child(5) {
 	fill: var(--mdc-chartist--label_e);
 	color: var(--mdc-chartist--label_e);}
-	:not(.ct-labels) .ct-label:nth-child(6) {
+	[label_position="inside"] .ct-label:nth-child(6) {
 	fill: var(--mdc-chartist--label_f);
 	color: var(--mdc-chartist--label_f);}
-	:not(.ct-labels) .ct-label:nth-child(7) {
+	[label_position="inside"] .ct-label:nth-child(7) {
 	fill: var(--mdc-chartist--label_g);
 	color: var(--mdc-chartist--label_g);}
-	:not(.ct-labels) .ct-label:nth-child(8) {
+	[label_position="inside"] .ct-label:nth-child(8) {
 	fill: var(--mdc-chartist--label_h);
 	color: var(--mdc-chartist--label_h);}
-	:not(.ct-labels) .ct-label:nth-child(9) {
+	[label_position="inside"] .ct-label:nth-child(9) {
 	fill: var(--mdc-chartist--label_i);
 	color: var(--mdc-chartist--label_i);}
-	:not(.ct-labels) .ct-label:nth-child(10) {
+	[label_position="inside"] .ct-label:nth-child(10) {
 	fill: var(--mdc-chartist--label_j);
 	color: var(--mdc-chartist--label_j);}
-	:not(.ct-labels) .ct-label:nth-child(11) {
+	[label_position="inside"] .ct-label:nth-child(11) {
 	fill: var(--mdc-chartist--label_k);
 	color: var(--mdc-chartist--label_k);}
-	:not(.ct-labels) .ct-label:nth-child(12) {
+	[label_position="inside"] .ct-label:nth-child(12) {
 	fill: var(--mdc-chartist--label_l);
 	color: var(--mdc-chartist--label_l);}
-	:not(.ct-labels) .ct-label:nth-child(13) {
+	[label_position="inside"] .ct-label:nth-child(13) {
 	fill: var(--mdc-chartist--label_m);
 	color: var(--mdc-chartist--label_m);}
-	:not(.ct-labels) .ct-label:nth-child(14) {
+	[label_position="inside"] .ct-label:nth-child(14) {
 	fill: var(--mdc-chartist--label_n);
 	color: var(--mdc-chartist--label_n);}
-	:not(.ct-labels) .ct-label:nth-child(15) {
+	[label_position="inside"] .ct-label:nth-child(15) {
 	fill: var(--mdc-chartist--label_o);
 	color: var(--mdc-chartist--label_o);}	
-	:not(.ct-labels) .ct-label:nth-child(16) {
+	[label_position="inside"] .ct-label:nth-child(16) {
 	fill: var(--mdc-chartist--label_p);
 	color: var(--mdc-chartist--label_p);}
-	:not(.ct-labels) .ct-label:nth-child(17) {
+	[label_position="inside"] .ct-label:nth-child(17) {
 	fill: var(--mdc-chartist--label_q);
 	color: var(--mdc-chartist--label_q);}
-	:not(.ct-labels) .ct-label:nth-child(18) {
+	[label_position="inside"] .ct-label:nth-child(18) {
 	fill: var(--mdc-chartist--label_r);
 	color: var(--mdc-chartist--label_r);}
-	:not(.ct-labels) .ct-label:nth-child(19) {
+	[label_position="inside"] .ct-label:nth-child(19) {
 	fill: var(--mdc-chartist--label_s);
 	color: var(--mdc-chartist--label_s);}
-	:not(.ct-labels) .ct-label:nth-child(20) {
+	[label_position="inside"] .ct-label:nth-child(20) {
 	fill: var(--mdc-chartist--label_t);
 	color: var(--mdc-chartist--label_t);}
-	:not(.ct-labels) .ct-label:nth-child(21) {
+	[label_position="inside"] .ct-label:nth-child(21) {
 	fill: var(--mdc-chartist--label_u);
 	color: var(--mdc-chartist--label_u);}
-	:not(.ct-labels) .ct-label:nth-child(22) {
+	[label_position="inside"] .ct-label:nth-child(22) {
 	fill: var(--mdc-chartist--label_v);
 	color: var(--mdc-chartist--label_v);}
-	:not(.ct-labels) .ct-label:nth-child(23) {
+	[label_position="inside"] .ct-label:nth-child(23) {
 	fill: var(--mdc-chartist--label_w);
 	color: var(--mdc-chartist--label_w);}
-	:not(.ct-labels) .ct-label:nth-child(24) {
+	[label_position="inside"] .ct-label:nth-child(24) {
 	fill: var(--mdc-chartist--label_x);
 	color: var(--mdc-chartist--label_x);}
-	:not(.ct-labels) .ct-label:nth-child(25) {
+	[label_position="inside"] .ct-label:nth-child(25) {
 	fill: var(--mdc-chartist--label_y);
 	color: var(--mdc-chartist--label_y);}
-	:not(.ct-labels) .ct-label:nth-child(26) {
+	[label_position="inside"] .ct-label:nth-child(26) {
 	fill: var(--mdc-chartist--label_z);
 	color: var(--mdc-chartist--label_z);}		
 

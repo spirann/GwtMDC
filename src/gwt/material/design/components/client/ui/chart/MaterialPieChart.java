@@ -25,6 +25,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.ChartLabelDirection;
 import gwt.material.design.components.client.constants.ChartLabelPosition;
@@ -49,7 +50,9 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	private PieChartType type = PieChartType.PIE;
 	private ChartLabelPosition labelPosition = ChartLabelPosition.INSIDE;
 	private ChartLabelDirection labelDirection = ChartLabelDirection.NEUTRAL;
-
+	
+	protected AttributeMixin<MaterialPieChart> labelPositionMixin = new AttributeMixin<>(this, "label_position", "inside");
+	
 	public MaterialPieChart() {
 		super(new JsPieChartOptions(), ChartAspectRatio.ASPECT_1x1);
 
@@ -66,11 +69,11 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		options.showLabel = true;
 		options.donut = false;
 		options.donutSolid = true;
-		options.donutWidth = "36px";
 		options.startAngle = 270;
+		options.donutWidth = "36px";		
+		options.labelDirection = labelDirection.getCssName();
 		options.labelPosition = labelPosition.getCssName();
-		options.labelOffset = 0;
-		options.labelDirection = "neutral";
+		options.labelOffset = 0;		
 		options.ignoreEmptyValues = false;
 		options.reverseData = false;
 	}
@@ -161,7 +164,9 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	}
 
 	public void setLabelPosition(ChartLabelPosition labelPosition) {
-		this.labelPosition = labelPosition;
+		this.labelPosition = labelPosition == null ? ChartLabelPosition.INSIDE : labelPosition;		
+		options.labelPosition = this.labelPosition.getCssName();	
+		labelPositionMixin.setAttribute(this.labelPosition.getCssName());
 		redraw();
 	}
 
@@ -170,7 +175,18 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	}
 
 	public void setLabelDirection(ChartLabelDirection labelDirection) {
-		this.labelDirection = labelDirection;
+		this.labelDirection = labelDirection == null ? ChartLabelDirection.NEUTRAL : labelDirection;
+		options.labelDirection = this.labelDirection.getCssName();
+		redraw();
+	}
+
+	public int getStartAngle() {
+		return options.startAngle;
+	}
+
+	public void setStartAngle(int startAngle) {
+		this.options.startAngle = startAngle;
+		redraw();
 	}
 
 	/**
