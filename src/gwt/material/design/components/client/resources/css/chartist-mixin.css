@@ -54,12 +54,16 @@
 	--mdc-chartist--label_z: white;
 	
 	--mdc-chartist--label: var(--mdc-theme-text-primary-on-background);
+	--mdc-chartist--grid_background: none;
 	 
 }
 
 .ct-label {
 	fill: var(--mdc-chartist--label);
 	color: var(--mdc-chartist--label);}
+	
+.ct-grid-background {
+	fill: var(--mdc-chartist--grid_background);}	
 
 [label_position="inside"] .ct-label:nth-child(1) {
 	fill: var(--mdc-chartist--label_a);

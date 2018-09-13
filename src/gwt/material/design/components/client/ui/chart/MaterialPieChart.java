@@ -44,7 +44,7 @@ import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], JsPieChartOptions>
+public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieChartOptions>
 		implements HasType<PieChartType> {
 
 	private PieChartType type = PieChartType.PIE;
@@ -79,32 +79,23 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 		options.reverseData = false;
 	}
 
-	protected void jsInit() {
-
+	
+	protected void calcTotal(final MaterialChartSerie<Double, String>[] value) {
 		options.donut = true;
-
-		if (getValue() == null || getValue().length == 0) {
+		if (value == null || value.length == 0) {
 			options.total = 0;
 		} else
 			switch (getType()) {
 			case GAUGE:
-				options.total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.getValue()).sum() * 2;
+				options.total = Arrays.asList(value).stream().mapToDouble(serie -> serie.getValue()).sum() * 2;
 				break;
 			case PIE:
 				options.donut = false;
 			case DONUT:
 			default:
-				options.total = Arrays.asList(getValue()).stream().mapToDouble(serie -> serie.getValue()).sum();
+				options.total = Arrays.asList(value).stream().mapToDouble(serie -> serie.getValue()).sum();
 				break;
 			}
-
-		super.jsInit();
-	}
-
-	@Override
-	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie[] values,
-			final JsPieChartOptions options) {
-		return jsInit(element, ChartHelper.toNativeData(values), options);
 	}
 
 	@Override
@@ -114,8 +105,15 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	}-*/;
 
 	@Override
+	public void setValue(MaterialChartSerie<Double, String>[] value, boolean fireEvents) {
+		calcTotal(value);
+		super.setValue(value, fireEvents);		
+	}
+	
+	@Override
 	public void setType(PieChartType type) {
 		this.type = type;
+		calcTotal(getValue());
 		redraw();
 	}
 
@@ -130,15 +128,6 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 
 	public void setIgnoreEmptyValues(boolean ignoreEmptyValues) {
 		options.ignoreEmptyValues = ignoreEmptyValues;
-		redraw();
-	}
-
-	public boolean isReverseData() {
-		return options.reverseData;
-	}
-
-	public void setReverseData(boolean reverseData) {
-		options.reverseData = reverseData;
 		redraw();
 	}
 
@@ -213,7 +202,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 	 * @param colors
 	 *            Ex. "RED BLUE GREEN"
 	 */
-	public void setLabelColors(String colors) {
+	public void setInsideLabelColors(String colors) {
 		final String[] colorsArray = colors.split(" ");
 		for (int i = 0; i < colorsArray.length; i++)
 			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i),
@@ -221,7 +210,7 @@ public class MaterialPieChart extends MaterialChartBase<MaterialChartSerie[], Js
 
 	}
 
-	public void setLabelColors(Color... colors) {
+	public void setInsideColors(Color... colors) {
 		for (int i = 0; i < colors.length; i++)
 			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());
 	}

@@ -26,9 +26,11 @@ import gwt.material.design.components.client.constants.Color;
  * @author Richeli Vargas
  *
  */
-public class MaterialChartSerie {
+public class MaterialChartSerie<V, L> {
 
-	private final double value;
+	private final V value;
+	
+	private final L label;
 
 	private final String name;
 
@@ -38,27 +40,32 @@ public class MaterialChartSerie {
 
 	private final Color color;
     
-	public MaterialChartSerie(double value, String name) {
-		this(value, name, null, null, null);
+	public MaterialChartSerie(V value, L label, String name) {
+		this(value, label, name, null, null, null);
 	}
 	
-	public MaterialChartSerie(double value, String name, Color color) {
-		this(value, name, null, null, color);
+	public MaterialChartSerie(V value, L label, String name, Color color) {
+		this(value, label, name, null, null, color);
 	}
 	
-	public MaterialChartSerie(double value, String name, String className, String meta, Color color) {
+	public MaterialChartSerie(V value, L label, String name, String className, String meta, Color color) {
 		super();
 		this.value = value;
+		this.label = label;
 		this.name = name;
 		this.className = className;
 		this.meta = meta;
 		this.color = color;
 	}
 
-	public double getValue() {
+	public V getValue() {
 		return value;
 	}
 	
+	public L getLabel() {
+		return label;
+	}
+
 	public String getName() {
 		return name;
 	}

@@ -41,12 +41,15 @@ public class JsChartOptions {
     public JsChartClassNames classNames;
 
     @JsProperty
-    public double high;
+    public Double high;
     
     @JsProperty
-    public double low;
+    public Double low;
 
     @JsProperty
     public boolean showLabel;
+    
+    @JsProperty
+    public boolean reverseData;
 
 }

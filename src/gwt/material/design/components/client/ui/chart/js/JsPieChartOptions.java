@@ -59,8 +59,5 @@ public class JsPieChartOptions extends JsChartOptions {
     public boolean ignoreEmptyValues;
     
     @JsProperty
-    public boolean reverseData;
-    
-    @JsProperty
     public double total;
 }

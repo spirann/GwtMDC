@@ -2,8 +2,6 @@ package gwt.material.design.components.client.ui.chart.helper;
 
 import java.util.Arrays;
 
-import com.google.gwt.core.client.JsArray;
-
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsChartSerie;
@@ -25,15 +23,6 @@ public class ChartHelper {
 		return $wnd.Chartist.alphaNumerate(seriesIndex);
 	}-*/;
 	
-	/**
-	 * Convert MaterialChartSerie to JsChartData
-	 * 
-	 * @param serie
-	 * @return
-	 */
-	public static JsChartData toNativeData(final MaterialChartSerie serie) {
-		return toNativeData(new MaterialChartSerie[] { serie });
-	}
 
 	/**
 	 * Convert MaterialChartSerie to JsChartData
@@ -41,7 +30,7 @@ public class ChartHelper {
 	 * @param series
 	 * @return
 	 */
-	public static JsChartData toNativeData(final MaterialChartSerie[] series) {
+	public static <V, L> JsChartData toNativeData(final MaterialChartSerie<V, L>[] series) {
 		final JsChartData data = new JsChartData();
 		data.series = JsHelper.toJsArray(toJsChartSerie(series));
 		data.labels = JsHelper.toJsArray(toLabel(series));
@@ -49,50 +38,47 @@ public class ChartHelper {
 	}
 
 	/**
-	 * Convert MaterialChartSerie to JsChartData
-	 * 
-	 * @param series
-	 * @return
-	 */
-	@SuppressWarnings("rawtypes")
-	public static JsChartData toNativeData(final MaterialChartSerie[][] series) {
-		final JsChartData data = new JsChartData();
-
-		final int countSeries = series.length;
-		final JsArray[] arrays = new JsArray[countSeries];
-		for (int i = 0; i < countSeries; i++) {
-			arrays[i] = JsHelper.toJsArray(toJsChartSerie(series[i]));
-		}
-
-		data.series = JsHelper.toJsArray(arrays);
-
-		if (series == null || series.length == 0) {
-		} else {
-			data.labels = JsHelper.toJsArray(toLabel(series[0]));
-		}
-		return data;
-	}
-
-	/**
 	 * Convert MaterialChartSerie to JsChartSerie
 	 * 
 	 * @param serie
 	 * @return
 	 */
-	public static JsChartSerie toJsChartSerie(final MaterialChartSerie serie) {
-
-		final JsChartSerie jsChartSerie = new JsChartSerie();
+	protected static <V, L> Object toJsChartSerie(final MaterialChartSerie<V, L> serie) {
 
 		if (serie == null) {
-			return jsChartSerie;
+			return new JsChartSerie();
 		}
 
-		jsChartSerie.value = serie.getValue();
-		jsChartSerie.name = serie.getName();
-		jsChartSerie.className = serie.getClassName();
-		jsChartSerie.meta = serie.getMeta();
+		
+		if(serie.getValue() instanceof Number) {
+			
+			final JsChartSerie jsChartSerie = new JsChartSerie();
 
-		return jsChartSerie;
+			jsChartSerie.value = serie.getValue() == null ? null : (Double) serie.getValue();
+			jsChartSerie.name = serie.getName();
+			jsChartSerie.className = serie.getClassName();
+			jsChartSerie.meta = serie.getMeta();
+
+			return jsChartSerie;
+			
+		} else if(serie.getValue() instanceof Number[]) {
+			
+			final Number[] values = (Number[]) serie.getValue();
+			final JsChartSerie[] jsChartSerie = new JsChartSerie[values.length];
+			
+			for(int i = 0; i < values.length; i++) {
+				jsChartSerie[i] = new JsChartSerie();
+				jsChartSerie[i].value = serie.getValue() == null ? null : (Double) values[i];
+				jsChartSerie[i].name = serie.getName();
+				jsChartSerie[i].className = serie.getClassName();
+				jsChartSerie[i].meta = serie.getMeta();				
+			}
+			
+			return jsChartSerie;
+			
+		} else {
+			throw new IllegalArgumentException("Value is not Number ou Number Array.");
+		}
 	}
 
 	/**
@@ -101,27 +87,16 @@ public class ChartHelper {
 	 * @param series
 	 * @return
 	 */
-	public static JsChartSerie[] toJsChartSerie(final MaterialChartSerie[] series) {
+	protected static <V, L> Object[] toJsChartSerie(final MaterialChartSerie<V, L>[] series) {
 		return series == null || series.length == 0 ? new JsChartSerie[0]
-				: Arrays.asList(series).stream().map(value -> toJsChartSerie(value)).toArray(JsChartSerie[]::new);
-	}
-
-	/**
-	 * Convert MaterialChartSerie to JsChartSerie
-	 * 
-	 * @param series
-	 * @return
-	 */
-	public static JsChartSerie[][] toJsChartSerie(final MaterialChartSerie[][] series) {
-		return series == null || series.length == 0 ? new JsChartSerie[0][0]
-				: Arrays.asList(series).stream().map(value -> toJsChartSerie(value)).toArray(JsChartSerie[][]::new);
+				: Arrays.asList(series).stream().map(value -> toJsChartSerie(value)).toArray(Object[]::new);
 	}
 
 	/*
 	 * Convert MaterialChartSerie to values
 	 */
 
-	public static Double toValue(final MaterialChartSerie serie) {
+	protected static <V, L> Object toValue(final MaterialChartSerie<V, L> serie) {
 
 		if (serie == null) {
 			return null;
@@ -130,21 +105,41 @@ public class ChartHelper {
 		return serie.getValue();
 	}
 
-	public static Double[] toValue(final MaterialChartSerie[] series) {
+	protected static <V, L> Object[] toValue(final MaterialChartSerie<V, L>[] series) {
 		return series == null || series.length == 0 ? new Double[0]
 				: Arrays.asList(series).stream().map(value -> toValue(value)).toArray(Double[]::new);
-	}
-
-	public static Double[][] toValue(final MaterialChartSerie[][] series) {
-		return series == null || series.length == 0 ? new Double[0][0]
-				: Arrays.asList(series).stream().map(value -> toValue(value)).toArray(Double[][]::new);
 	}
 
 	/*
 	 * Convert MaterialChartSerie to Labels
 	 */
 
-	public static String toLabel(final MaterialChartSerie serie) {
+	protected static <V, L> String toLabel(final MaterialChartSerie<V, L> serie) {
+
+		if (serie == null) {
+			return null;
+		}
+
+		return serie.getLabel().toString();
+	}
+
+	protected static <V, L> String[] toLabel(final MaterialChartSerie<V, L>[] series) {
+		
+		if(series == null || series.length == 0) {
+			return new String[0];
+		}
+		
+		if(series[0].getLabel() instanceof String) {
+			return series == null || series.length == 0 ? new String[0]
+					: Arrays.asList(series).stream().map(value -> toLabel(value)).toArray(String[]::new);	
+		} else if(series[0].getLabel() instanceof String[]) {			
+			return (String[]) series[0].getLabel();			
+		} else {
+			throw new IllegalArgumentException("Value is not String ou String Array.");
+		}
+	}
+	
+	protected static <V, L> String toSerieName(final MaterialChartSerie<V, L> serie) {
 
 		if (serie == null) {
 			return null;
@@ -153,13 +148,9 @@ public class ChartHelper {
 		return serie.getName();
 	}
 
-	public static String[] toLabel(final MaterialChartSerie[] series) {
+	protected static <V, L> String[] toSerieName(final MaterialChartSerie<V, L>[] series) {
 		return series == null || series.length == 0 ? new String[0]
-				: Arrays.asList(series).stream().map(value -> toLabel(value)).toArray(String[]::new);
+				: Arrays.asList(series).stream().map(value -> toSerieName(value)).toArray(String[]::new);
 	}
 
-	public static String[][] toLabel(final MaterialChartSerie[][] series) {
-		return series == null || series.length == 0 ? new String[0][0]
-				: Arrays.asList(series).stream().map(value -> toLabel(value)).toArray(String[][]::new);
-	}
 }

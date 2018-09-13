@@ -32,7 +32,7 @@ import jsinterop.annotations.JsType;
 public class JsChartSerie {
 
 	@JsProperty
-    public double value;
+    public Double value;
 
     @JsProperty
     public String name;

@@ -46,18 +46,20 @@ import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget implements HasValue<V>, HasChartAspectRatio {
+public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidget
+		implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
 
 	private boolean valueChangeHandlerInitialized;
-	
-	private V value;
-	
+
+	private MaterialChartSerie<V, L>[] value;
+
 	protected O options;
-	
+
 	private boolean initialized = false;
-	
-	protected final ChartAspectRatioMixin<MaterialChartBase<V, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(this);
-	
+
+	protected final ChartAspectRatioMixin<MaterialChartBase<V, L, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(
+			this);
+
 	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
@@ -66,7 +68,7 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	public MaterialChartBase(O options, final ChartAspectRatio defaultAspect) {
 		super();
 		setElement(HtmlElements.DIV.createElement());
-		setChartAspectRatio(defaultAspect);		
+		setChartAspectRatio(defaultAspect);
 		this.options = options;
 	}
 
@@ -76,27 +78,41 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		jsInit();
 		initialized = true;
 	}
-	
+
 	protected void redraw() {
-		if(initialized) {
-			jsInit();
+		if (initialized && jsElement != null) {
+			update(jsElement, ChartHelper.toNativeData(getValue()), options);
+			//jsInit();
 		}
 	}
 
+	protected native void update(final JavaScriptObject chart, final JsChartData data, final JsChartOptions options) /*-{
+		chart.update(data, options, true);
+	}-*/;
+	
 	protected void jsInit() {
 		jsElement = jsInit(getElement(), getValue(), options);
+
+		if (getValue() != null) {
+			for (int v = 0; v < getValue().length; v++) {
+				final Color color = getValue()[v].getColor();
+				if (color != null) {
+					setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v),
+							color.getCssName());
+				}
+			}
+		}
 	}
 
 	public JavaScriptObject asJavaScriptObject() {
 		return jsElement;
 	}
 
-	protected JavaScriptObject jsInit(final Element element, final V value, final O options) {
-		return element;
+	protected JavaScriptObject jsInit(final Element element, final MaterialChartSerie<V, L>[] value, final O options) {
+		return jsInit(element, value == null ? new JsChartData() : ChartHelper.toNativeData(value), options);
 	}
-	
-	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
-			final O options)/*-{
+
+	protected native JavaScriptObject jsInit(final Element element, final JsChartData data, final O options)/*-{
 	}-*/;
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
@@ -108,7 +124,7 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	}
 
 	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<V> handler) {
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<MaterialChartSerie<V, L>[]> handler) {
 		// Initialization code
 		if (!valueChangeHandlerInitialized) {
 			valueChangeHandlerInitialized = true;
@@ -122,17 +138,17 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	}
 
 	@Override
-	public void setValue(V value) {
+	public void setValue(MaterialChartSerie<V, L>[] value) {
 		setValue(value, true);
 	}
 
 	@Override
-	public V getValue() {
+	public MaterialChartSerie<V, L>[] getValue() {
 		return value;
 	}
 
 	@Override
-	public void setValue(V value, boolean fireEvents) {
+	public void setValue(MaterialChartSerie<V, L>[] value, boolean fireEvents) {
 		this.value = value;
 		redraw();
 		if (fireEvents) {
@@ -154,17 +170,19 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL, color.getCssName());
 	}
-	
-	public void setColors(String colors) {		
-		final String[] colorsArray = colors.split(" ");		
-		for(int i = 0; i < colorsArray.length;i++) {			
-			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), Color.valueOf(colorsArray[i]).getCssName());			
+
+	public void setColors(String colors) {
+		final String[] colorsArray = colors.split(" ");
+		for (int i = 0; i < colorsArray.length; i++) {
+			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
+					Color.valueOf(colorsArray[i]).getCssName());
 		}
 	}
-	
-	public void setColors(Color... colors) {		
-		for(int i = 0; i < colors.length;i++) {			
-			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());			
+
+	public void setColors(Color... colors) {
+		for (int i = 0; i < colors.length; i++) {
+			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
+					colors[i].getCssName());
 		}
 	}
 
@@ -176,11 +194,11 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 		options.showLabel = showLabel;
 		redraw();
 	}
-	
+
 	public Double getHigh() {
 		return options.high;
 	}
-	
+
 	public void setHigh(final Double high) {
 		options.high = high;
 		redraw();
@@ -189,9 +207,30 @@ public class MaterialChartBase<V, O extends JsChartOptions> extends BaseWidget i
 	public Double getLow() {
 		return options.low;
 	}
-	
+
 	public void setLow(final Double low) {
 		options.low = low;
+		redraw();
+	}
+
+	public boolean isReverseData() {
+		return options.reverseData;
+	}
+
+	public void setReverseData(boolean reverseData) {
+		options.reverseData = reverseData;
+		redraw();
+	}
+
+	@Override
+	public void setWidth(String width) {
+		options.width = width;
+		redraw();
+	}
+
+	@Override
+	public void setHeight(String height) {
+		options.height = height;
 		redraw();
 	}
 }

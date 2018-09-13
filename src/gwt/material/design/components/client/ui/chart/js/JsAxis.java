@@ -45,4 +45,10 @@ public class JsAxis {
     
     @JsProperty
     public String[] ticks;
+    
+    @JsProperty
+    public String position;
+
+    @JsProperty
+    public int scaleMinSpace;
 }

@@ -23,9 +23,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
+import gwt.material.design.components.client.constants.ChartAxisLabelPosition;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
-import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
-import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.JsChartPadding;
@@ -37,7 +38,7 @@ import gwt.material.design.components.client.ui.chart.js.JsLineChartOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][], JsLineChartOptions> {
+public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsLineChartOptions> {
 
 	public MaterialLineChart() {
 		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_3x4);
@@ -60,64 +61,32 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		options.classNames = classNames;
 
 		this.options.chartPadding = new JsChartPadding();
-		
-		//options.high = 100;
-		//options.low = 0;
-		/*
-		 * options.fullWidth = true; options.divisor = 4; options.fullWidth = true;
-		 * options.showArea = false; options.showPoint = false; options.lineSmooth =
-		 * false; options.high = 100; options.low = 0; // options.divisor = 4;
-		 * options.height = "100px"; // options.ticks = new int[] {1,10,20,30};
-		 */
+		this.options.chartPadding.top = 0;
+		this.options.chartPadding.right = 0;
+		this.options.chartPadding.bottom = 0;
+		this.options.chartPadding.left = 0;
+
+		this.options.fullWidth = true;
+		this.options.lineSmooth = true;
+		this.options.showArea = false;
+		this.options.showPoint = true;
+		this.options.showLine = true;
+		this.options.areaBase = 0;
+		this.options.showGridBackground = false;
+
 		options.axisX = new JsAxis();
 		options.axisX.showGrid = true;
 		options.axisX.showLabel = true;
-		// options.axisX.offset = 30;
+		options.axisX.offset = 30;
+		options.axisX.position = ChartAxisLabelPosition.END.getCssName();
 
 		options.axisY = new JsAxis();
 		options.axisY.showGrid = true;
 		options.axisY.showLabel = true;
-		// options.axisY.offset = 40;
-
-	}
-	
-	public void setChartPadding(final int padding) {
-		options.chartPadding.top = padding;
-		options.chartPadding.right = padding;
-		options.chartPadding.bottom = padding;
-		options.chartPadding.left = padding;
-		redraw();
-	}
-	
-	public void setChartTopPadding(final int padding) {
-		options.chartPadding.top = padding;
-		redraw();
-	}
-	
-	public void setChartRightPadding(final int padding) {
-		options.chartPadding.right = padding;
-		redraw();
-	}
-	
-	public void setChartBottomPadding(final int padding) {
-		options.chartPadding.bottom = padding;
-		redraw();
-	}
-	
-	public void setChartLeftPadding(final int padding) {
-		options.chartPadding.left = padding;
-		redraw();
-	}
-
-	@Override
-	protected JavaScriptObject jsInit(final Element element, MaterialChartSerie[][] values,
-			final JsLineChartOptions options) {
-
-		if (values == null) {
-			values = new MaterialChartSerie[0][0];
-		}
-
-		return jsInit(element, ChartHelper.toNativeData(values), options);
+		options.axisY.offset = 40;
+		options.axisY.position = ChartAxisLabelPosition.START.getCssName();
+		options.axisY.scaleMinSpace = 20;
+		options.axisY.onlyInteger = false;
 	}
 
 	@Override
@@ -126,4 +95,331 @@ public class MaterialLineChart extends MaterialChartBase<MaterialChartSerie[][],
 		return new $wnd.Chartist.Line(element, data, options);
 	}-*/;
 
+	public boolean isFullWidth() {
+		return this.options.fullWidth;
+	}
+
+	public void setFullWidth(final boolean fullWidth) {
+		this.options.fullWidth = fullWidth;
+		redraw();
+	}
+
+	public boolean isLineSmooth() {
+		return this.options.lineSmooth;
+	}
+
+	public void setLineSmooth(final boolean lineSmooth) {
+		this.options.lineSmooth = lineSmooth;
+		redraw();
+	}
+
+	public boolean isShowArea() {
+		return this.options.showArea;
+	}
+
+	public void setShowArea(final boolean showArea) {
+		this.options.showArea = showArea;
+		redraw();
+	}
+
+	public boolean isShowPoint() {
+		return this.options.showPoint;
+	}
+
+	public void setShowPoint(final boolean showPoint) {
+		this.options.showPoint = showPoint;
+		redraw();
+	}
+
+	public boolean isShowLine() {
+		return this.options.showLine;
+	}
+
+	public void setShowLine(final boolean showLine) {
+		this.options.showLine = showLine;
+		redraw();
+	}
+
+	/**
+	 * If the bar chart should add a background fill.
+	 * 
+	 * @return
+	 */
+	public boolean isShowGridBackground() {
+		return this.options.showGridBackground;
+	}
+
+
+	/**
+	 * If the bar chart should add a background fill.
+	 * 
+	 * @param color
+	 */
+	public void setShowGridBackground(final boolean showGridBackground) {
+		this.options.showGridBackground = showGridBackground;
+		redraw();
+	}
+
+	/**
+	 * Padding of the chart drawing area to the container element and labels
+	 * 
+	 * @param padding
+	 */
+	public void setChartPadding(final int padding) {
+		options.chartPadding.top = padding;
+		options.chartPadding.right = padding;
+		options.chartPadding.bottom = padding;
+		options.chartPadding.left = padding;
+		redraw();
+	}
+
+	/**
+	 * Padding of the chart drawing area to the container element and labels
+	 * 
+	 * @param padding
+	 */
+	public void setChartPaddingTop(final int padding) {
+		options.chartPadding.top = padding;
+		redraw();
+	}
+
+	/**
+	 * Padding of the chart drawing area to the container element and labels
+	 * 
+	 * @param padding
+	 */
+	public void setChartPaddingRight(final int padding) {
+		options.chartPadding.right = padding;
+		redraw();
+	}
+
+	/**
+	 * Padding of the chart drawing area to the container element and labels
+	 * 
+	 * @param padding
+	 */
+	public void setChartPaddingBottom(final int padding) {
+		options.chartPadding.bottom = padding;
+		redraw();
+	}
+
+	/**
+	 * Padding of the chart drawing area to the container element and labels
+	 * 
+	 * @param padding
+	 */
+	public void setChartPaddingLeft(final int padding) {
+		options.chartPadding.left = padding;
+		redraw();
+	}
+
+	public void setGridBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CHARTIST__GRID_BACKGROUND, color.getCssName());
+	}
+
+	// ////////////////////////////////////////////////////////////////////
+	// Axix X settings
+	// ////////////////////////////////////////////////////////////////////
+
+	/**
+	 * If labels should be shown or not
+	 * 
+	 * @return
+	 */
+	public boolean isAxisXShowLabel() {
+		return options.axisX.showLabel;
+	}
+
+	/**
+	 * If labels should be shown or not
+	 * 
+	 * @param showLabel
+	 */
+	public void setAxisXShowLabel(boolean showLabel) {
+		options.axisX.showLabel = showLabel;
+		redraw();
+	}
+
+	/**
+	 * If the axis grid should be drawn or not
+	 * 
+	 * @return
+	 */
+	public boolean isAxisXShowGrid() {
+		return options.axisX.showGrid;
+	}
+
+	/**
+	 * If the axis grid should be drawn or not
+	 * 
+	 * @param showGrid
+	 */
+	public void setAxisXShowGrid(boolean showGrid) {
+		options.axisX.showGrid = showGrid;
+		redraw();
+	}
+
+	/**
+	 * The offset of the chart drawing area to the border of the container
+	 * 
+	 * @return
+	 */
+	public int getAxisXOffset() {
+		return options.axisX.offset;
+	}
+
+	/**
+	 * The offset of the chart drawing area to the border of the container
+	 * 
+	 * @param offset
+	 */
+	public void setAxisXOffset(int offset) {
+		options.axisX.offset = offset;
+		redraw();
+	}
+
+	/**
+	 * Position where labels are placed. Can be set to `start` or `end` where
+	 * `start` is equivalent to left or top on vertical axis and `end` is equivalent
+	 * to right or bottom on horizontal axis.
+	 * 
+	 * @return
+	 */
+	public ChartAxisLabelPosition getAxisXPosition() {
+		return ChartAxisLabelPosition.fromStyleName(options.axisX.position);
+	}
+
+	/**
+	 * Position where labels are placed. Can be set to `start` or `end` where
+	 * `start` is equivalent to left or top on vertical axis and `end` is equivalent
+	 * to right or bottom on horizontal axis.
+	 * 
+	 * @param position
+	 */
+	public void setAxisXPosition(ChartAxisLabelPosition position) {
+		options.axisX.position = position.getCssName();
+		redraw();
+	}
+
+	// ////////////////////////////////////////////////////////////////////
+	// Axix Y settings
+	// ////////////////////////////////////////////////////////////////////
+
+	/**
+	 * If labels should be shown or not
+	 * 
+	 * @return
+	 */
+	public boolean isAxisYShowLabel() {
+		return options.axisY.showLabel;
+	}
+
+	/**
+	 * If labels should be shown or not
+	 * 
+	 * @param showLabel
+	 */
+	public void setAxisYShowLabel(boolean showLabel) {
+		options.axisY.showLabel = showLabel;
+		redraw();
+	}
+
+	/**
+	 * If the axis grid should be drawn or not
+	 * 
+	 * @return
+	 */
+	public boolean isAxisYShowGrid() {
+		return options.axisY.showGrid;
+	}
+
+	/**
+	 * If the axis grid should be drawn or not
+	 * 
+	 * @param showGrid
+	 */
+	public void setAxisYShowGrid(boolean showGrid) {
+		options.axisY.showGrid = showGrid;
+		redraw();
+	}
+
+	/**
+	 * Use only integer values (whole numbers) for the scale steps
+	 * 
+	 * @return
+	 */
+	public boolean isAxisYOnlyInteger() {
+		return options.axisY.onlyInteger;
+	}
+
+	/**
+	 * Use only integer values (whole numbers) for the scale steps
+	 * 
+	 * @param onlyInteger
+	 */
+	public void setAxisYOnlyInteger(boolean onlyInteger) {
+		options.axisY.onlyInteger = onlyInteger;
+		redraw();
+	}
+
+	/**
+	 * The offset of the chart drawing area to the border of the container
+	 * 
+	 * @return
+	 */
+	public int getAxisYOffset() {
+		return options.axisY.offset;
+	}
+
+	/**
+	 * The offset of the chart drawing area to the border of the container
+	 * 
+	 * @param offset
+	 */
+	public void setAxisYOffset(int offset) {
+		options.axisY.offset = offset;
+		redraw();
+	}
+
+	/**
+	 * Position where labels are placed. Can be set to `start` or `end` where
+	 * `start` is equivalent to left or top on vertical axis and `end` is equivalent
+	 * to right or bottom on horizontal axis.
+	 * 
+	 * @return
+	 */
+	public ChartAxisLabelPosition getAxisYPosition() {
+		return ChartAxisLabelPosition.fromStyleName(options.axisY.position);
+	}
+
+	/**
+	 * Position where labels are placed. Can be set to `start` or `end` where
+	 * `start` is equivalent to left or top on vertical axis and `end` is equivalent
+	 * to right or bottom on horizontal axis.
+	 * 
+	 * @param position
+	 */
+	public void setAxisYPosition(ChartAxisLabelPosition position) {
+		options.axisY.position = position.getCssName();
+		redraw();
+	}
+
+	/**
+	 * This value specifies the minimum height in pixel of the scale steps
+	 * 
+	 * @return
+	 */
+	public int getAxisYScaleMinSpace() {
+		return options.axisY.scaleMinSpace;
+	}
+
+	/**
+	 * This value specifies the minimum height in pixel of the scale steps
+	 * 
+	 * @param scaleMinSpace
+	 */
+	public void setAxisYScaleMinSpace(int scaleMinSpace) {
+		options.axisY.scaleMinSpace = scaleMinSpace;
+		redraw();
+	}
 }

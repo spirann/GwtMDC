@@ -38,16 +38,22 @@ public class JsLineChartOptions extends JsChartOptions {
     public boolean fullWidth;
 	
 	@JsProperty
+    public int areaBase;
+	
+	@JsProperty
     public boolean showArea;
 	
 	@JsProperty
 	public boolean showPoint;
 	
 	@JsProperty
+	public boolean showLine;
+	
+	@JsProperty
 	public boolean lineSmooth;
 	
 	@JsProperty
-	public boolean stretch;
+	public boolean showGridBackground;
 	
 	@JsProperty
 	public JsAxis axisX;
@@ -57,8 +63,5 @@ public class JsLineChartOptions extends JsChartOptions {
 	
 	@JsProperty
 	public int divisor;
-	
-	@JsProperty
-	public int[] ticks;
 		
 }

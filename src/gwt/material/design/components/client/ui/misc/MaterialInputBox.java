@@ -19,8 +19,10 @@
  */
 package gwt.material.design.components.client.ui.misc;
 
+import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.HasDense;
 import gwt.material.design.components.client.base.HasHelperText;
@@ -44,7 +46,7 @@ import gwt.material.design.components.client.validation.ui.TextFieldValidation;
  *
  */
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasPlaceholder,
-		HasState, HasTextFieldValidation, HasValidationHandlers<Result> {
+		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String> {
 
 	protected final MaterialInput field = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -231,5 +233,25 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		super.setMinHeight(minHeight);
 		field.setMinHeight(minHeight);
 		helper.setMinHeight(minHeight);
+	}
+
+	@Override
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+		return field.addValueChangeHandler(handler);
+	}
+
+	@Override
+	public String getValue() {
+		return field.getValue();
+	}
+
+	@Override
+	public void setValue(String value) {
+		field.setValue(value);
+	}
+
+	@Override
+	public void setValue(String value, boolean fireEvents) {
+		field.setValue(value, fireEvents);
 	}
 }
