@@ -3772,6 +3772,16 @@ var Chartist = {
    *
    */
   function createChart(options) {
+  
+  	if (this.data.labels)
+		this.data.labels = Array.from(this.data.labels);
+	if (this.data.series) {
+		this.data.series = Array.from(this.data.series);
+		var count = this.data.series.length;
+		for(var i=0; i<count; i++)
+			this.data.series[i] = Array.from(this.data.series[i]);
+	}	
+  
     var data;
     var highLow;
 

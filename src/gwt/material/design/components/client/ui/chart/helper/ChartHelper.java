@@ -125,7 +125,7 @@ public class ChartHelper {
 
 	protected static <V, L> String[] toLabel(final MaterialChartSerie<V, L>[] series) {
 		
-		if(series == null || series.length == 0) {
+		if(series == null || series.length == 0 || series[0].getLabel() == null) {
 			return new String[0];
 		}
 		
