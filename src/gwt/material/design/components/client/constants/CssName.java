@@ -401,7 +401,43 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// //////////////////////////////////////////////////////
 	// CHART
-	// //////////////////////////////////////////////////////
+	// //////////////////////////////////////////////////////	
+	String MDC_CHART__PIE_CHART = "ct-chart-pie";
+	String MDC_CHART__PIE_CHART__CHART_DONUT = "ct-chart-donut";
+	String MDC_CHART__PIE_CHART__SLICE_PIE = "ct-slice-pie";
+	String MDC_CHART__PIE_CHART__SLICE_DONUT = "ct-slice-donut";
+	String MDC_CHART__PIE_CHART__SLICE_DONUT_SOLID = "ct-slice-donut-solid";
+	String MDC_CHART__PIE_CHART__LABEL = "ct-label";
+	String MDC_CHART__PIE_CHART__SERIES = "ct-series";
+	
+	String MDC_CHART__BAR_CHART = "ct-chart-bar";
+	String MDC_CHART__BAR_CHART__HORIZONTAL_BARS = "ct-horizontal-bars";
+	String MDC_CHART__BAR_CHART__BAR = "ct-bar";
+	String MDC_CHART__BAR_CHART__LABEL = "ct-label";
+	String MDC_CHART__BAR_CHART__LABEL_GROUP = "ct-labels";
+	String MDC_CHART__BAR_CHART__SERIES = "ct-series";
+	String MDC_CHART__BAR_CHART__GRID = "ct-grid";
+	String MDC_CHART__BAR_CHART__GRID_GROUP = "ct-grids";
+	String MDC_CHART__BAR_CHART__GRID_BACKGROUND = "ct-grid-background";
+	String MDC_CHART__BAR_CHART__VERTICAL = "ct-vertical";
+	String MDC_CHART__BAR_CHART__HORIZONTAL = "ct-horizontal";
+	String MDC_CHART__BAR_CHART__START = "ct-start";
+	String MDC_CHART__BAR_CHART__END = "ct-end";
+	
+	String MDC_CHART__LINE_CHART = "ct-chart-line";	
+	String MDC_CHART__LINE_CHART__POINT = "ct-point";
+	String MDC_CHART__LINE_CHART__LINE = "ct-line";
+	String MDC_CHART__LINE_CHART__AREA = "ct-area";	
+	String MDC_CHART__LINE_CHART__LABEL = "ct-label";
+	String MDC_CHART__LINE_CHART__LABEL_GROUP = "ct-labels";
+	String MDC_CHART__LINE_CHART__SERIES = "ct-series";
+	String MDC_CHART__LINE_CHART__GRID = "ct-grid";
+	String MDC_CHART__LINE_CHART__GRID_GROUP = "ct-grids";
+	String MDC_CHART__LINE_CHART__GRID_BACKGROUND = "ct-grid-background";
+	String MDC_CHART__LINE_CHART__VERTICAL = "ct-vertical";
+	String MDC_CHART__LINE_CHART__HORIZONTAL = "ct-horizontal";
+	String MDC_CHART__LINE_CHART__START = "ct-start";
+	String MDC_CHART__LINE_CHART__END = "ct-end";
 	
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE

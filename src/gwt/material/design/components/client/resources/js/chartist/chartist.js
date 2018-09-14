@@ -1892,6 +1892,7 @@ var Chartist = {
   }
 
   function initialize() {
+  
     // Add window resize listener that re-creates the chart
     window.addEventListener('resize', this.resizeListener);
 
@@ -1905,14 +1906,16 @@ var Chartist = {
 
     // Before the first chart creation we need to register us with all plugins that are configured
     // Initialize all relevant plugins with our chart object and the plugin options specified in the config
+    
     if(this.options.plugins) {
-      this.options.plugins.forEach(function(plugin) {
+      this.options.plugins = Object.values(this.options.plugins);          
+      this.options.plugins.forEach(function(plugin) {      
         if(plugin instanceof Array) {
           plugin[0](this, plugin[1]);
-        } else {
+        } else {        
           plugin(this);
         }
-      }.bind(this));
+      }.bind(this));    
     }
 
     // Event for data transformation that allows to manipulate the data before it gets rendered in the charts

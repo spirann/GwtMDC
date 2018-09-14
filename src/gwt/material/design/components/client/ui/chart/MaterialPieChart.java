@@ -31,6 +31,7 @@ import gwt.material.design.components.client.constants.ChartLabelDirection;
 import gwt.material.design.components.client.constants.ChartLabelPosition;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.PieChartType;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
@@ -48,22 +49,25 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 		implements HasType<PieChartType> {
 
 	private PieChartType type = PieChartType.PIE;
-	private ChartLabelPosition labelPosition = ChartLabelPosition.INSIDE;
-	private ChartLabelDirection labelDirection = ChartLabelDirection.NEUTRAL;
-	
-	protected AttributeMixin<MaterialPieChart> labelPositionMixin = new AttributeMixin<>(this, "label_position", "inside");
-	
+
+	protected AttributeMixin<MaterialPieChart> labelPositionMixin = new AttributeMixin<>(this, "label_position",
+			"inside");
+
 	public MaterialPieChart() {
 		super(new JsPieChartOptions(), ChartAspectRatio.ASPECT_1x1);
+	}
 
+	@Override
+	protected void initializedDefaultOptions() {
+		super.initializedDefaultOptions();
 		final JsPieChartClassNames classNames = new JsPieChartClassNames();
-		classNames.chartPie = "ct-chart-pie";
-		classNames.chartDonut = "ct-chart-donut";
-		classNames.series = "ct-series";
-		classNames.slicePie = "ct-slice-pie";
-		classNames.sliceDonut = "ct-slice-donut";
-		classNames.sliceDonutSolid = "ct-slice-donut-solid";
-		classNames.label = "ct-label";
+		classNames.chartPie = CssName.MDC_CHART__PIE_CHART;
+		classNames.chartDonut = CssName.MDC_CHART__PIE_CHART__CHART_DONUT;
+		classNames.slicePie = CssName.MDC_CHART__PIE_CHART__SLICE_PIE;
+		classNames.sliceDonut = CssName.MDC_CHART__PIE_CHART__SLICE_DONUT;
+		classNames.sliceDonutSolid = CssName.MDC_CHART__PIE_CHART__SLICE_DONUT_SOLID;
+		classNames.label = CssName.MDC_CHART__PIE_CHART__LABEL;
+		classNames.series = CssName.MDC_CHART__PIE_CHART__SERIES;
 		options.classNames = classNames;
 
 		options.chartPadding = 0;
@@ -71,15 +75,14 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 		options.donut = false;
 		options.donutSolid = true;
 		options.startAngle = 270;
-		options.donutWidth = "36px";		
-		options.labelDirection = labelDirection.getCssName();
-		options.labelPosition = labelPosition.getCssName();
-		options.labelOffset = 0;		
+		options.donutWidth = "36px";
+		options.labelDirection = ChartLabelDirection.NEUTRAL.getCssName();
+		options.labelPosition = ChartLabelPosition.INSIDE.getCssName();
+		options.labelOffset = 0;
 		options.ignoreEmptyValues = false;
 		options.reverseData = false;
 	}
 
-	
 	protected void calcTotal(final MaterialChartSerie<Double, String>[] value) {
 		options.donut = true;
 		if (value == null || value.length == 0) {
@@ -107,9 +110,9 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	@Override
 	public void setValue(MaterialChartSerie<Double, String>[] value, boolean fireEvents) {
 		calcTotal(value);
-		super.setValue(value, fireEvents);		
+		super.setValue(value, fireEvents);
 	}
-	
+
 	@Override
 	public void setType(PieChartType type) {
 		this.type = type;
@@ -141,26 +144,25 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	}
 
 	public ChartLabelPosition getLabelPosition() {
-		return labelPosition;
+		return ChartLabelPosition.fromStyleName(options.labelPosition);
 	}
 
 	public void setLabelPosition(ChartLabelPosition labelPosition) {
-		this.labelPosition = labelPosition == null ? ChartLabelPosition.INSIDE : labelPosition;		
-		options.labelPosition = this.labelPosition.getCssName();	
-		labelPositionMixin.setAttribute(this.labelPosition.getCssName());
+		options.labelPosition = labelPosition == null ? ChartLabelPosition.INSIDE.getCssName() : labelPosition.getCssName();
+		labelPositionMixin.setAttribute(options.labelPosition);
 		redraw();
 	}
 
 	public ChartLabelDirection getLabelDirection() {
-		return labelDirection;
+		return ChartLabelDirection.fromStyleName(options.labelDirection);
 	}
 
 	public void setLabelDirection(ChartLabelDirection labelDirection) {
-		this.labelDirection = labelDirection == null ? ChartLabelDirection.NEUTRAL : labelDirection;
-		options.labelDirection = this.labelDirection.getCssName();
+		options.labelDirection = labelDirection == null ? ChartLabelDirection.NEUTRAL.getCssName()
+				: labelDirection.getCssName();
 		redraw();
 	}
-	
+
 	public int getLabelOffset() {
 		return options.labelOffset;
 	}
@@ -182,21 +184,21 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	public boolean isDonutSolid() {
 		return this.options.donutSolid;
 	}
-	
+
 	public void setDonutSolid(final boolean donutSolid) {
 		this.options.donutSolid = donutSolid;
 		redraw();
 	}
-	
+
 	public int getChartPadding() {
 		return options.startAngle;
 	}
 
-	public void setChartPadding(int chartPadding) {
-		this.options.chartPadding = chartPadding;
+	public void setChartPadding(int padding) {
+		options.chartPadding = padding;
 		redraw();
 	}
-		
+
 	/**
 	 * 
 	 * @param colors

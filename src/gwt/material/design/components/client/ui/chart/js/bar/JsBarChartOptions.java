@@ -44,7 +44,7 @@ public class JsBarChartOptions extends JsChartOptions {
 	public JsAxis axisY;
     
 	@JsProperty
-    public int referenceValue;
+    public double referenceValue;
 	
 	@JsProperty
 	public boolean showGridBackground;

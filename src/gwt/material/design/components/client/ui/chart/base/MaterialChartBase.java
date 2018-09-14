@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui.chart.base;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -67,9 +68,19 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	public MaterialChartBase(O options, final ChartAspectRatio defaultAspect) {
 		super();
+		this.options = options;
 		setElement(HtmlElements.DIV.createElement());
 		setChartAspectRatio(defaultAspect);
-		this.options = options;
+		initializedDefaultOptions();
+	}
+
+	protected void initializedDefaultOptions() {
+		this.options.plugins = getPlugins();
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected JsArray getPlugins() {
+		return null;
 	}
 
 	@Override
@@ -81,15 +92,22 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	protected void redraw() {
 		if (initialized && jsElement != null) {
-			update(jsElement, ChartHelper.toNativeData(getValue()), options);
-			//jsInit();
+			this.options.plugins = getPlugins();
+			if (this.options.plugins == null || this.options.plugins.length() == 0) {
+				// Not load plugins
+				update(jsElement, ChartHelper.toNativeData(getValue()), options);
+			} else {
+				// Reconstruct the chart
+				jsInit();
+			}
 		}
 	}
 
-	protected native void update(final JavaScriptObject chart, final JsChartData data, final JsChartOptions options) /*-{
+	protected native void update(final JavaScriptObject chart, final JsChartData data,
+			final JsChartOptions options) /*-{
 		chart.update(data, options, true);
 	}-*/;
-	
+
 	protected void jsInit() {
 		jsElement = jsInit(getElement(), getValue(), options);
 

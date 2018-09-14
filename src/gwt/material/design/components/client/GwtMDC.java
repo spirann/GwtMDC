@@ -62,6 +62,7 @@ public class GwtMDC implements EntryPoint {
 	public static void loadJsResources() {
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectJs(MaterialResources.INSTANCE.chartistJs());
+		injectJs(MaterialResources.INSTANCE.chartistTooltipPluginJs());
 		injectJs(MaterialResources.INSTANCE.prismJs());
 		injectJs(MaterialResources.INSTANCE.chromaJs());
 		injectJs(MaterialResources.INSTANCE.jqueryMaskJs());
@@ -78,6 +79,7 @@ public class GwtMDC implements EntryPoint {
 		styles = new StyleElement[] { 
 				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()), 
 				injectCss(MaterialResources.INSTANCE.chartistCss()),
+				injectCss(MaterialResources.INSTANCE.chartistTooltipPluginCss()),
 				injectCss(MaterialResources.INSTANCE.prismCss()), 
 				injectCss(MaterialResources.INSTANCE.addinsCss()), 
 				injectCss(MaterialResources.INSTANCE.mixinCss()), 

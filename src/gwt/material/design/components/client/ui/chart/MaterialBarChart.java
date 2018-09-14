@@ -27,6 +27,7 @@ import gwt.material.design.components.client.constants.ChartAxisLabelPosition;
 import gwt.material.design.components.client.constants.ChartStackMode;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.js.base.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
@@ -42,37 +43,40 @@ import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartOptions;
 public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBarChartOptions> {
 
 	public MaterialBarChart() {
-		super(new JsBarChartOptions(), ChartAspectRatio.ASPECT_3x4);
-
+		super(new JsBarChartOptions(), ChartAspectRatio.ASPECT_1x3);
+	}
+	
+	@Override
+	protected void initializedDefaultOptions() {
+		super.initializedDefaultOptions();
 		final JsBarChartClassNames classNames = new JsBarChartClassNames();
-		classNames.chart = "ct-chart-bar";
-		classNames.label = "ct-label";
-		classNames.horizontalBars = "ct-horizontal-bars";
-		classNames.series = "ct-series";
-		classNames.labelGroup = "ct-labels";
-		classNames.bar = "ct-bar";
-		classNames.grid = "ct-grid";
-		classNames.gridGroup = "ct-grids";
-		classNames.gridBackground = "ct-grid-background";
-		classNames.vertical = "ct-vertical";
-		classNames.horizontal = "ct-horizontal";
-		classNames.start = "ct-start";
-		classNames.end = "ct-end";
+		classNames.chart = CssName.MDC_CHART__BAR_CHART;
+		classNames.label = CssName.MDC_CHART__BAR_CHART__LABEL;
+		classNames.horizontalBars = CssName.MDC_CHART__BAR_CHART__HORIZONTAL_BARS;
+		classNames.series = CssName.MDC_CHART__BAR_CHART__SERIES;
+		classNames.labelGroup = CssName.MDC_CHART__BAR_CHART__LABEL_GROUP;
+		classNames.bar = CssName.MDC_CHART__BAR_CHART__BAR;
+		classNames.grid = CssName.MDC_CHART__BAR_CHART__GRID;
+		classNames.gridGroup = CssName.MDC_CHART__BAR_CHART__GRID_GROUP;
+		classNames.gridBackground = CssName.MDC_CHART__BAR_CHART__GRID_BACKGROUND;
+		classNames.vertical = CssName.MDC_CHART__BAR_CHART__VERTICAL;
+		classNames.horizontal = CssName.MDC_CHART__BAR_CHART__HORIZONTAL;
+		classNames.start = CssName.MDC_CHART__BAR_CHART__START;
+		classNames.end = CssName.MDC_CHART__BAR_CHART__END;
 		options.classNames = classNames;
 
 		this.options.chartPadding = new JsChartPadding();
-		this.options.chartPadding.top = 0;
-		this.options.chartPadding.right = 0;
-		this.options.chartPadding.bottom = 0;
-		this.options.chartPadding.left = 0;
-		
-		this.options.referenceValue = 0;		
+		this.options.chartPadding.top = 15;
+		this.options.chartPadding.right = 15;
+		this.options.chartPadding.bottom = 5;
+		this.options.chartPadding.left = 10;
+
 		this.options.showGridBackground = false;
-		this.options.referenceValue = 0;
 		this.options.distributeSeries = false;
 		this.options.horizontalBars = false;
-		this.options.seriesBarDistance = 15;
 		this.options.stackBars = false;
+		this.options.referenceValue = 0;
+		this.options.seriesBarDistance = 15;
 		this.options.stackMode = ChartStackMode.ACCUMULATE.getCssName();
 
 		options.axisX = new JsAxis();
@@ -89,7 +93,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		options.axisY.offset = 40;
 		options.axisY.position = ChartAxisLabelPosition.START.getCssName();
 		options.axisY.scaleMinSpace = 20;
-		options.axisY.onlyInteger = false;
+		options.axisY.onlyInteger = false;		
 	}
 
 	@Override
@@ -98,61 +102,146 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		return new $wnd.Chartist.Bar(element, data, options);
 	}-*/;
 
-
-	public int getReferenceValue() {
+	/**
+	 * Unless low/high are explicitly set, bar chart will be centered at zero by
+	 * default. Set referenceValue to null to auto scale.
+	 * 
+	 * @return
+	 */
+	public double getReferenceValue() {
 		return this.options.referenceValue;
 	}
 
-	public void setReferenceValue(int referenceValue) {
+	/**
+	 * Unless low/high are explicitly set, bar chart will be centered at zero by
+	 * default. Set referenceValue to null to auto scale.
+	 * 
+	 * @param referenceValue
+	 */
+	public void setReferenceValue(double referenceValue) {
 		this.options.referenceValue = referenceValue;
 		redraw();
 	}
 
+	/**
+	 * If set to true then each bar will represent a series and the data array is
+	 * expected to be a one dimensional array of data values rather than a series
+	 * array of series. This is useful if the bar chart should represent a profile
+	 * rather than some data over time.
+	 * 
+	 * @return
+	 */
 	public boolean isDistributeSeries() {
 		return this.options.distributeSeries;
 	}
 
+	/**
+	 * If set to true then each bar will represent a series and the data array is
+	 * expected to be a one dimensional array of data values rather than a series
+	 * array of series. This is useful if the bar chart should represent a profile
+	 * rather than some data over time.
+	 * 
+	 * @param distributeSeries
+	 */
 	public void setDistributeSeries(boolean distributeSeries) {
 		this.options.distributeSeries = distributeSeries;
 		redraw();
 	}
 
+	/**
+	 * Inverts the axes of the bar chart in order to draw a horizontal bar chart. Be
+	 * aware that you also need to invert your axis settings as the Y Axis will now
+	 * display the labels and the X Axis the values.
+	 * 
+	 * @return
+	 */
 	public boolean isHorizontalBars() {
 		return this.options.horizontalBars;
 	}
 
+	/**
+	 * Inverts the axes of the bar chart in order to draw a horizontal bar chart. Be
+	 * aware that you also need to invert your axis settings as the Y Axis will now
+	 * display the labels and the X Axis the values.
+	 * 
+	 * @param horizontalBars
+	 */
 	public void setHorizontalBars(boolean horizontalBars) {
 		this.options.horizontalBars = horizontalBars;
 		redraw();
 	}
 
+	/**
+	 * Specify the distance in pixel of bars in a group
+	 * 
+	 * @return
+	 */
 	public int getSeriesBarDistance() {
 		return this.options.seriesBarDistance;
 	}
 
+	/**
+	 * Specify the distance in pixel of bars in a group
+	 * 
+	 * @param seriesBarDistance
+	 */
 	public void setSeriesBarDistance(int seriesBarDistance) {
 		this.options.seriesBarDistance = seriesBarDistance;
 		redraw();
 	}
 
+	/**
+	 * If set to true this property will cause the series bars to be stacked. Check
+	 * the `stackMode` option for further stacking options.
+	 * 
+	 * @return
+	 */
 	public boolean isStackBars() {
 		return this.options.stackBars;
 	}
 
+	/**
+	 * If set to true this property will cause the series bars to be stacked. Check
+	 * the `stackMode` option for further stacking options.
+	 * 
+	 * @param stackBars
+	 */
 	public void setStackBars(boolean stackBars) {
 		this.options.stackBars = stackBars;
 		redraw();
 	}
 
+	/**
+	 * If set to 'overlap' this property will force the stacked bars to draw from
+	 * the zero line. 
+	 * 
+	 * If set to 'accumulate' this property will form a total for
+	 * each series point. This will also influence the y-axis and the overall bounds
+	 * of the chart. In stacked mode the seriesBarDistance property will have no
+	 * effect.
+	 * 
+	 * @return
+	 */
 	public ChartStackMode getStackMode() {
 		return ChartStackMode.fromStyleName(this.options.stackMode);
 	}
 
+	/**
+	 *  If set to 'overlap' this property will force the stacked bars to draw from
+	 * the zero line. 
+	 * 
+	 * If set to 'accumulate' this property will form a total for
+	 * each series point. This will also influence the y-axis and the overall bounds
+	 * of the chart. In stacked mode the seriesBarDistance property will have no
+	 * effect.
+	 * 
+	 * @param stackMode
+	 */
 	public void setStackMode(ChartStackMode stackMode) {
 		this.options.stackMode = stackMode.getCssName();
 		redraw();
 	}
-	
+
 	/**
 	 * If the bar chart should add a background fill.
 	 * 
@@ -161,7 +250,6 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	public boolean isShowGridBackground() {
 		return this.options.showGridBackground;
 	}
-
 
 	/**
 	 * If the bar chart should add a background fill.
@@ -271,7 +359,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		options.axisX.showGrid = showGrid;
 		redraw();
 	}
-	
+
 	/**
 	 * Use only integer values (whole numbers) for the scale steps
 	 * 
@@ -332,7 +420,6 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		options.axisX.position = position.getCssName();
 		redraw();
 	}
-	
 
 	/**
 	 * This value specifies the minimum height in pixel of the scale steps

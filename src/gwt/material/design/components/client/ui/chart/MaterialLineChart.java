@@ -20,12 +20,14 @@
 package gwt.material.design.components.client.ui.chart;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.ChartAxisLabelPosition;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.js.base.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
@@ -40,31 +42,38 @@ import gwt.material.design.components.client.ui.chart.js.line.JsLineChartOptions
  */
 public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsLineChartOptions> {
 
-	public MaterialLineChart() {
-		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_3x4);
+	private TooltipValueFormatter formatter;
+	private boolean showTooltip = false;
 
+	public MaterialLineChart() {
+		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_1x3);
+	}
+
+	@Override
+	protected void initializedDefaultOptions() {
+		super.initializedDefaultOptions();
 		final JsLineChartClassNames classNames = new JsLineChartClassNames();
-		classNames.chart = "ct-chart-line";
-		classNames.label = "ct-label";
-		classNames.labelGroup = "ct-labels";
-		classNames.series = "ct-series";
-		classNames.line = "ct-line";
-		classNames.point = "ct-point";
-		classNames.area = "ct-area";
-		classNames.grid = "ct-grid";
-		classNames.gridGroup = "ct-grids";
-		classNames.gridBackground = "ct-grid-background";
-		classNames.vertical = "ct-vertical";
-		classNames.horizontal = "ct-horizontal";
-		classNames.start = "ct-start";
-		classNames.end = "ct-end";
-		options.classNames = classNames;
+		classNames.chart = CssName.MDC_CHART__LINE_CHART;
+		classNames.label = CssName.MDC_CHART__LINE_CHART__LABEL;
+		classNames.labelGroup = CssName.MDC_CHART__LINE_CHART__LABEL_GROUP;
+		classNames.series = CssName.MDC_CHART__LINE_CHART__SERIES;
+		classNames.line = CssName.MDC_CHART__LINE_CHART__LINE;
+		classNames.point = CssName.MDC_CHART__LINE_CHART__POINT;
+		classNames.area = CssName.MDC_CHART__LINE_CHART__AREA;
+		classNames.grid = CssName.MDC_CHART__LINE_CHART__GRID;
+		classNames.gridGroup = CssName.MDC_CHART__LINE_CHART__GRID_GROUP;
+		classNames.gridBackground = CssName.MDC_CHART__LINE_CHART__GRID_BACKGROUND;
+		classNames.vertical = CssName.MDC_CHART__LINE_CHART__VERTICAL;
+		classNames.horizontal = CssName.MDC_CHART__LINE_CHART__HORIZONTAL;
+		classNames.start = CssName.MDC_CHART__LINE_CHART__START;
+		classNames.end = CssName.MDC_CHART__LINE_CHART__END;
+		this.options.classNames = classNames;
 
 		this.options.chartPadding = new JsChartPadding();
-		this.options.chartPadding.top = 0;
-		this.options.chartPadding.right = 0;
-		this.options.chartPadding.bottom = 0;
-		this.options.chartPadding.left = 0;
+		this.options.chartPadding.top = 15;
+		this.options.chartPadding.right = 15;
+		this.options.chartPadding.bottom = 5;
+		this.options.chartPadding.left = 10;
 
 		this.options.fullWidth = true;
 		this.options.lineSmooth = true;
@@ -74,19 +83,19 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 		this.options.areaBase = 0;
 		this.options.showGridBackground = false;
 
-		options.axisX = new JsAxis();
-		options.axisX.showGrid = true;
-		options.axisX.showLabel = true;
-		options.axisX.offset = 30;
-		options.axisX.position = ChartAxisLabelPosition.END.getCssName();
+		this.options.axisX = new JsAxis();
+		this.options.axisX.showGrid = true;
+		this.options.axisX.showLabel = true;
+		this.options.axisX.offset = 30;
+		this.options.axisX.position = ChartAxisLabelPosition.END.getCssName();
 
-		options.axisY = new JsAxis();
-		options.axisY.showGrid = true;
-		options.axisY.showLabel = true;
-		options.axisY.offset = 40;
-		options.axisY.position = ChartAxisLabelPosition.START.getCssName();
-		options.axisY.scaleMinSpace = 20;
-		options.axisY.onlyInteger = false;
+		this.options.axisY = new JsAxis();
+		this.options.axisY.showGrid = true;
+		this.options.axisY.showLabel = true;
+		this.options.axisY.offset = 40;
+		this.options.axisY.position = ChartAxisLabelPosition.START.getCssName();
+		this.options.axisY.scaleMinSpace = 20;
+		this.options.axisY.onlyInteger = false;
 	}
 
 	@Override
@@ -94,6 +103,48 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 			final JsLineChartOptions options)/*-{
 		return new $wnd.Chartist.Line(element, data, options);
 	}-*/;
+
+	@SuppressWarnings("rawtypes")
+	@Override
+	protected JsArray getPlugins() {
+		return loadPlugins(getElement(), showTooltip);
+	}
+
+	@SuppressWarnings("rawtypes")
+	protected native JsArray loadPlugins(final Element element, final boolean addTooltipPlugin)/*-{
+
+		var _this = this;
+		var plugins = [];
+
+		// ////////////////////////////////////////////////////////////////////
+		// Add tooltipplugin
+		// ////////////////////////////////////////////////////////////////////
+		
+		// Remove old tooltips
+		while (element.getElementsByClassName('chartist-tooltip')[0])
+			element.getElementsByClassName('chartist-tooltip')[0].remove();
+
+		// Instantiete the plugin
+		if (addTooltipPlugin) {
+			var func = function(value) {
+				return _this.@gwt.material.design.components.client.ui.chart.MaterialLineChart::format(Ljava/lang/Double;)(value);
+			};
+			var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
+				transformTooltipTextFnc : func
+			});
+			plugins.push(tooltipPlugin);
+		}
+		
+		// ////////////////////////////////////////////////////////////////////
+		// Return the plugin list
+		// ////////////////////////////////////////////////////////////////////		
+		return plugins;
+
+	}-*/;
+
+	protected String format(final Double value) {
+		return formatter == null ? String.valueOf(value) : formatter.format(value);
+	}
 
 	public boolean isFullWidth() {
 		return this.options.fullWidth;
@@ -148,7 +199,6 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	public boolean isShowGridBackground() {
 		return this.options.showGridBackground;
 	}
-
 
 	/**
 	 * If the bar chart should add a background fill.
@@ -421,5 +471,50 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	public void setAxisYScaleMinSpace(int scaleMinSpace) {
 		options.axisY.scaleMinSpace = scaleMinSpace;
 		redraw();
+	}
+
+	// ////////////////////////////////////////////////////////////////////
+	// Plugin settings
+	// ////////////////////////////////////////////////////////////////////
+
+	// Tooltip
+
+	public boolean isShowTooltip() {
+		return showTooltip;
+	}
+
+	/**
+	 * Show or not tooltips in points
+	 * 
+	 * @param showTooltip
+	 */
+	public void setShowTooltip(boolean showTooltip) {
+		this.showTooltip = showTooltip;
+		redraw();
+	}
+
+	/**
+	 * Format tooltip value
+	 * 
+	 * @return
+	 */
+	public TooltipValueFormatter getTooltipValueFormatter() {
+		return formatter;
+	}
+
+	/**
+	 * Format tooltip value
+	 * 
+	 * @param formatter
+	 */
+	public void setTooltipValueFormatter(TooltipValueFormatter formatter) {
+		this.formatter = formatter;
+		if (isShowTooltip()) {
+			redraw();
+		}
+	}
+
+	public interface TooltipValueFormatter {
+		public String format(final double value);
 	}
 }

@@ -40,14 +40,47 @@ public class MaterialChartSerie<V, L> {
 
 	private final Color color;
     
+	/**
+	 * 
+	 * @param value
+	 * @param label
+	 * @param name
+	 */
 	public MaterialChartSerie(V value, L label, String name) {
 		this(value, label, name, null, null, null);
 	}
 	
+	/**
+	 * 
+	 * @param value
+	 * @param label
+	 * @param name
+	 * @param meta It's used in tooltip and others views
+	 */
+	public MaterialChartSerie(V value, L label, String name, String meta) {
+		this(value, label, name, null, meta, null);
+	}
+	
+	/**
+	 * 
+	 * @param value
+	 * @param label
+	 * @param name
+	 * @param color
+	 */
 	public MaterialChartSerie(V value, L label, String name, Color color) {
 		this(value, label, name, null, null, color);
 	}
 	
+	/**
+	 * 
+	 * @param value
+	 * @param label
+	 * @param name
+	 * @param className
+	 * @param meta It's used in tooltip and others views
+	 * @param color
+	 */
 	public MaterialChartSerie(V value, L label, String name, String className, String meta, Color color) {
 		super();
 		this.value = value;

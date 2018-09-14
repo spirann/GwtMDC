@@ -38,8 +38,11 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/material-components-web.min.js")
 	TextResource materialComponentsWebJs();
 
-	@Source("js/chartist.js")
+	@Source("js/chartist/chartist.js")
 	TextResource chartistJs();
+	
+	@Source("js/chartist/chartist-plugin-tooltip.min.js")
+	TextResource chartistTooltipPluginJs();
 	
 	@Source("js/prism.js")
 	TextResource prismJs();
@@ -55,15 +58,18 @@ public interface MaterialResources extends ClientBundle {
 	
 	@Source("css/mixin.css")
 	TextResource mixinCss();
-	
-	@Source("css/chartist-mixin.css")
-	TextResource chartMixinCss();
 
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();
 	
-	@Source("css/chartist.min.css")
+	@Source("css/chartist/chartist.min.css")
 	TextResource chartistCss();
+	
+	@Source("css/chartist/chartist-plugin-tooltip.css")
+	TextResource chartistTooltipPluginCss();
+	
+	@Source("css/chartist/chartist-mixin.css")
+	TextResource chartMixinCss();
 
 	// ////////////////////////////////////////
 	// Images

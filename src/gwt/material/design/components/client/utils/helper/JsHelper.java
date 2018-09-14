@@ -9,6 +9,10 @@ public class JsHelper {
 		$doc.activeElement.blur();
 	}-*/;
 
+	public static native void throwsWindowResize()/*-{
+		$wnd.dispatchEvent(new Event('resize'));
+	}-*/;
+
 	public static native void doClick(Element element)/*-{
 
 		var evt = new MouseEvent("click", {

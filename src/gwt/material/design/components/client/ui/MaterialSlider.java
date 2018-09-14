@@ -38,6 +38,7 @@ import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -99,7 +100,9 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		initializeInputEventListener();
 
 		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
-		//super.onInitialize();
+		
+		// It is necessary in panels with horizontal scroll  
+		addMouseOverHandler(event -> JsHelper.throwsWindowResize());
 
 	}
 
