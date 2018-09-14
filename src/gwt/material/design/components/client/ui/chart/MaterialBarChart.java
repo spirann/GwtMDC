@@ -24,33 +24,33 @@ import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.ChartAxisLabelPosition;
+import gwt.material.design.components.client.constants.ChartStackMode;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.js.base.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartPadding;
-import gwt.material.design.components.client.ui.chart.js.line.JsLineChartClassNames;
-import gwt.material.design.components.client.ui.chart.js.line.JsLineChartOptions;
+import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartClassNames;
+import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartOptions;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsLineChartOptions> {
+public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBarChartOptions> {
 
-	public MaterialLineChart() {
-		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_3x4);
+	public MaterialBarChart() {
+		super(new JsBarChartOptions(), ChartAspectRatio.ASPECT_3x4);
 
-		final JsLineChartClassNames classNames = new JsLineChartClassNames();
-		classNames.chart = "ct-chart-line";
+		final JsBarChartClassNames classNames = new JsBarChartClassNames();
+		classNames.chart = "ct-chart-bar";
 		classNames.label = "ct-label";
-		classNames.labelGroup = "ct-labels";
+		classNames.horizontalBars = "ct-horizontal-bars";
 		classNames.series = "ct-series";
-		classNames.line = "ct-line";
-		classNames.point = "ct-point";
-		classNames.area = "ct-area";
+		classNames.labelGroup = "ct-labels";
+		classNames.bar = "ct-bar";
 		classNames.grid = "ct-grid";
 		classNames.gridGroup = "ct-grids";
 		classNames.gridBackground = "ct-grid-background";
@@ -65,20 +65,23 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 		this.options.chartPadding.right = 0;
 		this.options.chartPadding.bottom = 0;
 		this.options.chartPadding.left = 0;
-
-		this.options.fullWidth = true;
-		this.options.lineSmooth = true;
-		this.options.showArea = false;
-		this.options.showPoint = true;
-		this.options.showLine = true;
-		this.options.areaBase = 0;
+		
+		this.options.referenceValue = 0;		
 		this.options.showGridBackground = false;
+		this.options.referenceValue = 0;
+		this.options.distributeSeries = false;
+		this.options.horizontalBars = false;
+		this.options.seriesBarDistance = 15;
+		this.options.stackBars = false;
+		this.options.stackMode = ChartStackMode.ACCUMULATE.getCssName();
 
 		options.axisX = new JsAxis();
 		options.axisX.showGrid = true;
 		options.axisX.showLabel = true;
 		options.axisX.offset = 30;
 		options.axisX.position = ChartAxisLabelPosition.END.getCssName();
+		options.axisX.scaleMinSpace = 30;
+		options.axisX.onlyInteger = false;
 
 		options.axisY = new JsAxis();
 		options.axisY.showGrid = true;
@@ -91,55 +94,65 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
-			final JsLineChartOptions options)/*-{
-		return new $wnd.Chartist.Line(element, data, options);
+			final JsBarChartOptions options)/*-{
+		return new $wnd.Chartist.Bar(element, data, options);
 	}-*/;
 
-	public boolean isFullWidth() {
-		return this.options.fullWidth;
+
+	public int getReferenceValue() {
+		return this.options.referenceValue;
 	}
 
-	public void setFullWidth(final boolean fullWidth) {
-		this.options.fullWidth = fullWidth;
+	public void setReferenceValue(int referenceValue) {
+		this.options.referenceValue = referenceValue;
 		redraw();
 	}
 
-	public boolean isLineSmooth() {
-		return this.options.lineSmooth;
+	public boolean isDistributeSeries() {
+		return this.options.distributeSeries;
 	}
 
-	public void setLineSmooth(final boolean lineSmooth) {
-		this.options.lineSmooth = lineSmooth;
+	public void setDistributeSeries(boolean distributeSeries) {
+		this.options.distributeSeries = distributeSeries;
 		redraw();
 	}
 
-	public boolean isShowArea() {
-		return this.options.showArea;
+	public boolean isHorizontalBars() {
+		return this.options.horizontalBars;
 	}
 
-	public void setShowArea(final boolean showArea) {
-		this.options.showArea = showArea;
+	public void setHorizontalBars(boolean horizontalBars) {
+		this.options.horizontalBars = horizontalBars;
 		redraw();
 	}
 
-	public boolean isShowPoint() {
-		return this.options.showPoint;
+	public int getSeriesBarDistance() {
+		return this.options.seriesBarDistance;
 	}
 
-	public void setShowPoint(final boolean showPoint) {
-		this.options.showPoint = showPoint;
+	public void setSeriesBarDistance(int seriesBarDistance) {
+		this.options.seriesBarDistance = seriesBarDistance;
 		redraw();
 	}
 
-	public boolean isShowLine() {
-		return this.options.showLine;
+	public boolean isStackBars() {
+		return this.options.stackBars;
 	}
 
-	public void setShowLine(final boolean showLine) {
-		this.options.showLine = showLine;
+	public void setStackBars(boolean stackBars) {
+		this.options.stackBars = stackBars;
 		redraw();
 	}
 
+	public ChartStackMode getStackMode() {
+		return ChartStackMode.fromStyleName(this.options.stackMode);
+	}
+
+	public void setStackMode(ChartStackMode stackMode) {
+		this.options.stackMode = stackMode.getCssName();
+		redraw();
+	}
+	
 	/**
 	 * If the bar chart should add a background fill.
 	 * 
@@ -258,6 +271,25 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 		options.axisX.showGrid = showGrid;
 		redraw();
 	}
+	
+	/**
+	 * Use only integer values (whole numbers) for the scale steps
+	 * 
+	 * @return
+	 */
+	public boolean isAxisXOnlyInteger() {
+		return options.axisX.onlyInteger;
+	}
+
+	/**
+	 * Use only integer values (whole numbers) for the scale steps
+	 * 
+	 * @param onlyInteger
+	 */
+	public void setAxisXOnlyInteger(boolean onlyInteger) {
+		options.axisX.onlyInteger = onlyInteger;
+		redraw();
+	}
 
 	/**
 	 * The offset of the chart drawing area to the border of the container
@@ -298,6 +330,26 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisXPosition(ChartAxisLabelPosition position) {
 		options.axisX.position = position.getCssName();
+		redraw();
+	}
+	
+
+	/**
+	 * This value specifies the minimum height in pixel of the scale steps
+	 * 
+	 * @return
+	 */
+	public int getAxisXScaleMinSpace() {
+		return options.axisX.scaleMinSpace;
+	}
+
+	/**
+	 * This value specifies the minimum height in pixel of the scale steps
+	 * 
+	 * @param scaleMinSpace
+	 */
+	public void setAxisXScaleMinSpace(int scaleMinSpace) {
+		options.axisX.scaleMinSpace = scaleMinSpace;
 		redraw();
 	}
 

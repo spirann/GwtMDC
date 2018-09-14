@@ -36,8 +36,8 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
-import gwt.material.design.components.client.ui.chart.js.JsChartData;
-import gwt.material.design.components.client.ui.chart.js.JsChartOptions;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartOptions;
 
 /**
  * 

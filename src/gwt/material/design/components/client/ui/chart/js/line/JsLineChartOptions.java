@@ -17,8 +17,11 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.line;
 
+import gwt.material.design.components.client.ui.chart.js.base.JsAxis;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartOptions;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartPadding;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -29,18 +32,39 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartSerie {
-
-	@JsProperty
-    public Double value;
+public class JsLineChartOptions extends JsChartOptions {
 
     @JsProperty
-    public String name;
-
-    @JsProperty
-    public String className;
+    public JsChartPadding chartPadding;
     
-    @JsProperty
-    public String meta;
-
+	@JsProperty
+    public boolean fullWidth;
+	
+	@JsProperty
+    public int areaBase;
+	
+	@JsProperty
+    public boolean showArea;
+	
+	@JsProperty
+	public boolean showPoint;
+	
+	@JsProperty
+	public boolean showLine;
+	
+	@JsProperty
+	public boolean lineSmooth;
+	
+	@JsProperty
+	public boolean showGridBackground;
+	
+	@JsProperty
+	public JsAxis axisX;
+	
+	@JsProperty
+	public JsAxis axisY;
+	
+	@JsProperty
+	public int divisor;
+		
 }

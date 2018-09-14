@@ -3,8 +3,8 @@ package gwt.material.design.components.client.ui.chart.helper;
 import java.util.Arrays;
 
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
-import gwt.material.design.components.client.ui.chart.js.JsChartData;
-import gwt.material.design.components.client.ui.chart.js.JsChartSerie;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartSerie;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 
 public class ChartHelper {

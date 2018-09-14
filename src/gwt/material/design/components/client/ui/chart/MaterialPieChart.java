@@ -35,9 +35,9 @@ import gwt.material.design.components.client.constants.PieChartType;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartSerie;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
-import gwt.material.design.components.client.ui.chart.js.JsChartData;
-import gwt.material.design.components.client.ui.chart.js.JsPieChartClassNames;
-import gwt.material.design.components.client.ui.chart.js.JsPieChartOptions;
+import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
+import gwt.material.design.components.client.ui.chart.js.pie.JsPieChartClassNames;
+import gwt.material.design.components.client.ui.chart.js.pie.JsPieChartOptions;
 
 /**
  * 

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.base;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -29,26 +29,27 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsAxis {
+public class JsChartOptions {
+
+	@JsProperty
+    public String width;
+	
+	@JsProperty
+    public String height;
+	
+	@JsProperty
+    public JsChartClassNames classNames;
+
+    @JsProperty
+    public Double high;
+    
+    @JsProperty
+    public Double low;
 
     @JsProperty
     public boolean showLabel;
-
-    @JsProperty
-    public boolean showGrid;
     
     @JsProperty
-    public boolean onlyInteger;
+    public boolean reverseData;
 
-    @JsProperty
-    public int offset;
-    
-    @JsProperty
-    public String[] ticks;
-    
-    @JsProperty
-    public String position;
-
-    @JsProperty
-    public int scaleMinSpace;
 }

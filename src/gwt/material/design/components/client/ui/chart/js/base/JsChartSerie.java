@@ -17,9 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
-
-import com.google.gwt.core.client.JsArray;
+package gwt.material.design.components.client.ui.chart.js.base;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -30,14 +28,19 @@ import jsinterop.annotations.JsType;
  * @author Richeli Vargas
  *
  */
-@SuppressWarnings("rawtypes")
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartData {
+public class JsChartSerie {
 
 	@JsProperty
-    public JsArray labels;
-	
-	@JsProperty
-    public JsArray series;
+    public Double value;
+
+    @JsProperty
+    public String name;
+
+    @JsProperty
+    public String className;
+    
+    @JsProperty
+    public String meta;
 
 }

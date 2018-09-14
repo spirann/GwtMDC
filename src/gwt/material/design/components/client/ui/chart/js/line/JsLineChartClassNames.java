@@ -17,8 +17,9 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.line;
 
+import gwt.material.design.components.client.ui.chart.js.base.JsChartClassNames;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -29,18 +30,43 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartPadding {
+public class JsLineChartClassNames extends JsChartClassNames {
+
+	
+    @JsProperty
+    public String chart;
 
     @JsProperty
-    public int top;
-
-    @JsProperty
-    public int right;
+    public String labelGroup;
     
     @JsProperty
-    public int bottom;
+    public String line;
     
     @JsProperty
-    public int left;
+    public String point;
+    
+    @JsProperty
+    public String area;
+    
+    @JsProperty
+    public String grid;
+    
+    @JsProperty
+    public String gridGroup;
+    
+    @JsProperty
+    public String gridBackground;
+    
+    @JsProperty
+    public String vertical;
+    
+    @JsProperty
+    public String horizontal;
+    
+    @JsProperty
+    public String start;
+    
+    @JsProperty
+    public String end;
 
 }

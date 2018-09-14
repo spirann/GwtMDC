@@ -17,8 +17,9 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.pie;
 
+import gwt.material.design.components.client.ui.chart.js.base.JsChartOptions;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -29,39 +30,35 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsLineChartOptions extends JsChartOptions {
+public class JsPieChartOptions extends JsChartOptions {
+	
+	@JsProperty
+    public int chartPadding;
+	
+	@JsProperty
+    public boolean donut;
 
     @JsProperty
-    public JsChartPadding chartPadding;
+    public boolean donutSolid;
     
-	@JsProperty
-    public boolean fullWidth;
+    @JsProperty
+    public String donutWidth;
 	
-	@JsProperty
-    public int areaBase;
-	
-	@JsProperty
-    public boolean showArea;
-	
-	@JsProperty
-	public boolean showPoint;
-	
-	@JsProperty
-	public boolean showLine;
-	
-	@JsProperty
-	public boolean lineSmooth;
-	
-	@JsProperty
-	public boolean showGridBackground;
-	
-	@JsProperty
-	public JsAxis axisX;
-	
-	@JsProperty
-	public JsAxis axisY;
-	
-	@JsProperty
-	public int divisor;
-		
+    @JsProperty
+    public int startAngle;
+
+    @JsProperty
+    public int labelOffset;
+    
+    @JsProperty
+    public String labelDirection;
+    
+    @JsProperty
+    public String labelPosition;
+
+    @JsProperty
+    public boolean ignoreEmptyValues;
+    
+    @JsProperty
+    public double total;
 }

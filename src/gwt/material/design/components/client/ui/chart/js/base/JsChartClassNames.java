@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.base;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -29,35 +29,12 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsPieChartOptions extends JsChartOptions {
-	
-	@JsProperty
-    public int chartPadding;
-	
-	@JsProperty
-    public boolean donut;
+public class JsChartClassNames {
+    
+    @JsProperty
+    public String label;
+    
+    @JsProperty
+    public String series;
 
-    @JsProperty
-    public boolean donutSolid;
-    
-    @JsProperty
-    public String donutWidth;
-	
-    @JsProperty
-    public int startAngle;
-
-    @JsProperty
-    public int labelOffset;
-    
-    @JsProperty
-    public String labelDirection;
-    
-    @JsProperty
-    public String labelPosition;
-
-    @JsProperty
-    public boolean ignoreEmptyValues;
-    
-    @JsProperty
-    public double total;
 }

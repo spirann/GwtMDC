@@ -17,8 +17,9 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.chart.js;
+package gwt.material.design.components.client.ui.chart.js.bar;
 
+import gwt.material.design.components.client.ui.chart.js.base.JsChartClassNames;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -29,23 +30,40 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsPieChartClassNames extends JsChartClassNames {
+public class JsBarChartClassNames extends JsChartClassNames {
 
 	
     @JsProperty
-    public String chartPie;
+    public String chart;
 
     @JsProperty
-    public String chartDonut;
+    public String horizontalBars;
     
     @JsProperty
-    public String slicePie;
+    public String labelGroup;
     
     @JsProperty
-    public String sliceDonut;
+    public String bar;
     
     @JsProperty
-    public String sliceDonutSolid;
+    public String grid;
     
+    @JsProperty
+    public String gridGroup;
+    
+    @JsProperty
+    public String gridBackground;
+    
+    @JsProperty
+    public String vertical;
+    
+    @JsProperty
+    public String horizontal;
+    
+    @JsProperty
+    public String start;
+    
+    @JsProperty
+    public String end;
 
 }
