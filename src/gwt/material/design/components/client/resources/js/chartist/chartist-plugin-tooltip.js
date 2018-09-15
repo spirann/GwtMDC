@@ -84,6 +84,8 @@
           var meta = $point.getAttribute('ct:meta') || seriesName || '';
           var hasMeta = !!meta;
           var value = $point.getAttribute('ct:value');
+          
+          $point.setAttribute('tooltip', 'visible');
 
           if (options.transformTooltipTextFnc && typeof options.transformTooltipTextFnc === 'function') {
             value = options.transformTooltipTextFnc(value);
@@ -138,6 +140,8 @@
         });
 
         on('mouseout', tooltipSelector, function () {
+          var $point = event.target;	
+          $point.setAttribute('tooltip', 'hidden');
           hide($toolTip);
         });
 

@@ -1,13 +1,23 @@
+:root {
+  --mdc-arrow-size: 8px;}
+
 .chartist-tooltip {
   position: absolute;
+  margin-top: calc(var(--mdc-arrow-size) - 2px);
   display: inline-block;
   opacity: 0;
   min-width: 5em;
-  padding: .5em;
-  background: #F4C63D;
-  color: #453D3F;
-  font-family: Oxygen,Helvetica,Arial,sans-serif;
-  font-weight: 700;
+  padding: 4px;
+  background: var(--mdc-theme-on-surface);
+  color: var(--mdc-theme-surface);  
+  border-radius: var(--mdc-popup-border-radius);  
+  font-family: var(--mdc-font-family);  
+  font-size: 0.8rem;
+  line-height: 0.85rem;
+  font-weight: 400;
+  letter-spacing: 0.03125em;
+  text-decoration: inherit;
+  text-transform: inherit;    
   text-align: center;
   pointer-events: none;
   z-index: 1;
@@ -22,13 +32,21 @@
     left: 50%;
     width: 0;
     height: 0;
-    margin-left: -15px;
-    border: 15px solid transparent;
-    border-top-color: #F4C63D; }
+    margin-left: calc(-1 * var(--mdc-arrow-size));
+    border: var(--mdc-arrow-size) solid transparent;
+    border-top-color: var(--mdc-theme-on-surface); }
   .chartist-tooltip.tooltip-show {
     opacity: 1; }
 
 .ct-area, .ct-line {
   pointer-events: none; }
 
-/*# sourceMappingURL=chartist-plugin-tooltip.css.map */
+.chartist-tooltip-meta {
+	opacity: .85;}  
+
+.chartist-tooltip-value {
+	font-size: 0.9rem;
+	font-weight: bold;}
+	
+.ct-point[tooltip]:hover {
+	stroke-width: 14px;}		

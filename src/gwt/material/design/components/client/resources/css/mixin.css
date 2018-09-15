@@ -4,6 +4,8 @@
 	/* --mdc-font-family: "Roboto", monospace; */
 	--mdc-font-family: "Google Sans", monospace;
 	
+	--mdc-popup-border-radius: 4px;
+	
 	/* Placeholder */
 	--mdc-placeholder-ink-color: var(--mdc-theme-text-hint-on-background);
 	
@@ -652,7 +654,9 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Menu
    ========================================================================== */
-
+.mdc-menu-surface {
+	border-radius: var(--mdc-popup-border-radius);}
+	
 /* ==========================================================================
    Snackbar
    ========================================================================== */
@@ -662,7 +666,8 @@ i.mdc-list-item__graphic {
 	bottom: calc(var(--mdc-snackbar-bottom) + var(--mdc-snackbar-position-adjust));}  
 @media (min-width: 600px) {
 	.mdc-snackbar {
-		bottom: calc(var(--mdc-snackbar-bottom) + var(--mdc-snackbar-position-adjust));} 
+		bottom: calc(var(--mdc-snackbar-bottom) + var(--mdc-snackbar-position-adjust));
+		border-radius: var(--mdc-popup-border-radius);} 
   	.mdc-snackbar--align-start {
 		bottom: calc(24px + var(--mdc-snackbar-position-adjust));}
 }
@@ -675,7 +680,7 @@ i.mdc-list-item__graphic {
   	.mdc-snackbar--active:not(.mdc-snackbar--align-start) {
   		max-width: calc(100% - calc(var(--mdc-snackbar-bottom) * 2));
   		left: var(--mdc-snackbar-bottom);
-  		border-radius: 2px;}
+  		border-radius: var(--mdc-popup-border-radius);}
 }
 .mdc-snackbar__action-button {
 	color: var(--mdc-theme-secondary);}
@@ -709,7 +714,7 @@ i.mdc-list-item__graphic {
 .mdc-dialog__surface {
 	color: var(--mdc-dialog-body-ink-color);
 	background-color:  var(--mdc-dialog-body-fill-color);
-	border-radius: 4px;}
+	border-radius: var(--mdc-popup-border-radius);}
 .mdc-dialog__footer__button {
 	padding: 0 16px 0 16px;}
 .mdc-dialog__header {
