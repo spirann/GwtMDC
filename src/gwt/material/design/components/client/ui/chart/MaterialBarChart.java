@@ -29,11 +29,11 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.chart.base.MaterialChartBase;
+import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartClassNames;
+import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartOptions;
 import gwt.material.design.components.client.ui.chart.js.base.JsAxis;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartPadding;
-import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartClassNames;
-import gwt.material.design.components.client.ui.chart.js.bar.JsBarChartOptions;
 
 /**
  * 
@@ -47,8 +47,8 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	}
 	
 	@Override
-	protected void initializedDefaultOptions() {
-		super.initializedDefaultOptions();
+	protected void initializeDefaultOptions() {
+		super.initializeDefaultOptions();
 		final JsBarChartClassNames classNames = new JsBarChartClassNames();
 		classNames.chart = CssName.MDC_CHART__BAR_CHART;
 		classNames.label = CssName.MDC_CHART__BAR_CHART__LABEL;
@@ -101,7 +101,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 			final JsBarChartOptions options)/*-{
 		return new $wnd.Chartist.Bar(element, data, options);
 	}-*/;
-
+	
 	/**
 	 * Unless low/high are explicitly set, bar chart will be centered at zero by
 	 * default. Set referenceValue to null to auto scale.

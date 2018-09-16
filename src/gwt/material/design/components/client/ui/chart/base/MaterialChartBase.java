@@ -19,8 +19,10 @@
  */
 package gwt.material.design.components.client.ui.chart.base;
 
+import java.util.LinkedList;
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -39,6 +41,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartData;
 import gwt.material.design.components.client.ui.chart.js.base.JsChartOptions;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 
 /**
  * 
@@ -62,6 +65,12 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			this);
 
 	// /////////////////////////////////////////////////////////////
+	// Plugings
+	// /////////////////////////////////////////////////////////////
+	private ChartValueFormatter formatter;
+	private boolean showTooltip = false;
+
+	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
@@ -71,16 +80,70 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 		this.options = options;
 		setElement(HtmlElements.DIV.createElement());
 		setChartAspectRatio(defaultAspect);
-		initializedDefaultOptions();
+		initializeDefaultOptions();
 	}
 
-	protected void initializedDefaultOptions() {
-		this.options.plugins = getPlugins();
+	protected void initializeDefaultOptions() {
+		this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
 	}
 
-	@SuppressWarnings("rawtypes")
-	protected JsArray getPlugins() {
-		return null;
+	protected List<JavaScriptObject> getPlugins() {
+
+		final List<JavaScriptObject> plugins = new LinkedList<>();
+
+		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(getElement(), options, showTooltip);
+		if (tooltipPlugin != null) {
+			plugins.add(tooltipPlugin);
+		}
+
+		return plugins;
+	}
+
+	protected final native JavaScriptObject loadTooltipPlugin(final Element element, final O options,
+			final boolean addTooltipPlugin)/*-{
+
+		var _this = this;
+
+		// Remove old tooltips
+		while (element.getElementsByClassName('chartist-tooltip')[0])
+			element.getElementsByClassName('chartist-tooltip')[0].remove();
+
+		// Instantiete the plugin
+		if (addTooltipPlugin) {
+
+			// Find correct point class
+			var pointClass;
+			if (options.classNames.point)
+				pointClass = options.classNames.point;
+			else if (options.classNames.bar)
+				pointClass = options.classNames.bar;
+			else if (options.classNames.slicePie)
+				pointClass = options.classNames.slicePie;
+			else if (options.donut && !options.donutSolid && options.classNames.sliceDonut)
+				pointClass = options.classNames.sliceDonut;
+			else if (options.donut && options.donutSolid && options.classNames.sliceDonutSolid)
+				pointClass = options.classNames.sliceDonutSolid;			
+			else if (options.classNames.slicePie)
+				pointClass = options.classNames.slicePie;
+
+			// Create a function to format the value
+			var func = function(value) {
+				return _this.@gwt.material.design.components.client.ui.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
+			};
+			
+			// Create the tooltip plugin
+			var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
+				transformTooltipTextFnc : func,
+				pointClass : pointClass
+			});
+			
+			return tooltipPlugin;
+		}
+
+	}-*/;
+
+	protected String format(final Double value) {
+		return formatter == null ? String.valueOf(value) : formatter.format(value);
 	}
 
 	@Override
@@ -92,7 +155,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	protected void redraw() {
 		if (initialized && jsElement != null) {
-			this.options.plugins = getPlugins();
+			this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
 			if (this.options.plugins == null || this.options.plugins.length() == 0) {
 				// Not load plugins
 				update(jsElement, ChartHelper.toNativeData(getValue()), options);
@@ -250,5 +313,46 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 	public void setHeight(String height) {
 		options.height = height;
 		redraw();
+	}
+
+	// ////////////////////////////////////////////////////////////////////
+	// Plugin settings
+	// ////////////////////////////////////////////////////////////////////
+
+	// Tooltip
+
+	public boolean isShowTooltip() {
+		return showTooltip;
+	}
+
+	/**
+	 * Show or not tooltips in points
+	 * 
+	 * @param showTooltip
+	 */
+	public void setShowTooltip(boolean showTooltip) {
+		this.showTooltip = showTooltip;
+		redraw();
+	}
+
+	/**
+	 * Format tooltip value
+	 * 
+	 * @return
+	 */
+	public ChartValueFormatter getValueFormatter() {
+		return formatter;
+	}
+
+	/**
+	 * Format tooltip value
+	 * 
+	 * @param formatter
+	 */
+	public void setValueFormatter(ChartValueFormatter formatter) {
+		this.formatter = formatter;
+		if (isShowTooltip()) {
+			redraw();
+		}
 	}
 }

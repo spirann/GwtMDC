@@ -20,7 +20,6 @@
 package gwt.material.design.components.client.ui.chart;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.constants.ChartAspectRatio;
@@ -42,16 +41,13 @@ import gwt.material.design.components.client.ui.chart.js.line.JsLineChartOptions
  */
 public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsLineChartOptions> {
 
-	private TooltipValueFormatter formatter;
-	private boolean showTooltip = false;
-
 	public MaterialLineChart() {
 		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_1x3);
 	}
 
 	@Override
-	protected void initializedDefaultOptions() {
-		super.initializedDefaultOptions();
+	protected void initializeDefaultOptions() {
+		super.initializeDefaultOptions();
 		final JsLineChartClassNames classNames = new JsLineChartClassNames();
 		classNames.chart = CssName.MDC_CHART__LINE_CHART;
 		classNames.label = CssName.MDC_CHART__LINE_CHART__LABEL;
@@ -103,48 +99,6 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 			final JsLineChartOptions options)/*-{
 		return new $wnd.Chartist.Line(element, data, options);
 	}-*/;
-
-	@SuppressWarnings("rawtypes")
-	@Override
-	protected JsArray getPlugins() {
-		return loadPlugins(getElement(), showTooltip);
-	}
-
-	@SuppressWarnings("rawtypes")
-	protected native JsArray loadPlugins(final Element element, final boolean addTooltipPlugin)/*-{
-
-		var _this = this;
-		var plugins = [];
-
-		// ////////////////////////////////////////////////////////////////////
-		// Add tooltipplugin
-		// ////////////////////////////////////////////////////////////////////
-		
-		// Remove old tooltips
-		while (element.getElementsByClassName('chartist-tooltip')[0])
-			element.getElementsByClassName('chartist-tooltip')[0].remove();
-
-		// Instantiete the plugin
-		if (addTooltipPlugin) {
-			var func = function(value) {
-				return _this.@gwt.material.design.components.client.ui.chart.MaterialLineChart::format(Ljava/lang/Double;)(value);
-			};
-			var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
-				transformTooltipTextFnc : func
-			});
-			plugins.push(tooltipPlugin);
-		}
-		
-		// ////////////////////////////////////////////////////////////////////
-		// Return the plugin list
-		// ////////////////////////////////////////////////////////////////////		
-		return plugins;
-
-	}-*/;
-
-	protected String format(final Double value) {
-		return formatter == null ? String.valueOf(value) : formatter.format(value);
-	}
 
 	public boolean isFullWidth() {
 		return this.options.fullWidth;
@@ -473,48 +427,4 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 		redraw();
 	}
 
-	// ////////////////////////////////////////////////////////////////////
-	// Plugin settings
-	// ////////////////////////////////////////////////////////////////////
-
-	// Tooltip
-
-	public boolean isShowTooltip() {
-		return showTooltip;
-	}
-
-	/**
-	 * Show or not tooltips in points
-	 * 
-	 * @param showTooltip
-	 */
-	public void setShowTooltip(boolean showTooltip) {
-		this.showTooltip = showTooltip;
-		redraw();
-	}
-
-	/**
-	 * Format tooltip value
-	 * 
-	 * @return
-	 */
-	public TooltipValueFormatter getTooltipValueFormatter() {
-		return formatter;
-	}
-
-	/**
-	 * Format tooltip value
-	 * 
-	 * @param formatter
-	 */
-	public void setTooltipValueFormatter(TooltipValueFormatter formatter) {
-		this.formatter = formatter;
-		if (isShowTooltip()) {
-			redraw();
-		}
-	}
-
-	public interface TooltipValueFormatter {
-		public String format(final double value);
-	}
 }

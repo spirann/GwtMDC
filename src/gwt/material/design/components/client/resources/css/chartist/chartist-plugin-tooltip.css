@@ -7,7 +7,7 @@
   display: inline-block;
   opacity: 0;
   min-width: 5em;
-  padding: 4px;
+  padding: 8px;
   background: var(--mdc-theme-on-surface);
   color: var(--mdc-theme-surface);  
   border-radius: var(--mdc-popup-border-radius);  

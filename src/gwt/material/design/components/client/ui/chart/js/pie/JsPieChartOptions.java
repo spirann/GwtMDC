@@ -37,9 +37,6 @@ public class JsPieChartOptions extends JsChartOptions {
 	
 	@JsProperty
     public boolean donut;
-
-    @JsProperty
-    public boolean donutSolid;
     
     @JsProperty
     public String donutWidth;

@@ -58,8 +58,8 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	}
 
 	@Override
-	protected void initializedDefaultOptions() {
-		super.initializedDefaultOptions();
+	protected void initializeDefaultOptions() {
+		super.initializeDefaultOptions();
 		final JsPieChartClassNames classNames = new JsPieChartClassNames();
 		classNames.chartPie = CssName.MDC_CHART__PIE_CHART;
 		classNames.chartDonut = CssName.MDC_CHART__PIE_CHART__CHART_DONUT;
@@ -73,7 +73,6 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 		options.chartPadding = 0;
 		options.showLabel = true;
 		options.donut = false;
-		options.donutSolid = true;
 		options.startAngle = 270;
 		options.donutWidth = "36px";
 		options.labelDirection = ChartLabelDirection.NEUTRAL.getCssName();
@@ -106,7 +105,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 			final JsPieChartOptions options)/*-{
 		return new $wnd.Chartist.Pie(element, data, options);
 	}-*/;
-
+	
 	@Override
 	public void setValue(MaterialChartSerie<Double, String>[] value, boolean fireEvents) {
 		calcTotal(value);
@@ -178,15 +177,6 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	public void setStartAngle(int startAngle) {
 		this.options.startAngle = startAngle;
-		redraw();
-	}
-
-	public boolean isDonutSolid() {
-		return this.options.donutSolid;
-	}
-
-	public void setDonutSolid(final boolean donutSolid) {
-		this.options.donutSolid = donutSolid;
 		redraw();
 	}
 
