@@ -58,6 +58,11 @@
 	 
 }
 
+.ct-zoom-rect {
+  fill: rgba(200, 100, 100, 0.3);
+  stroke: red;
+}
+
 .ct-label {
 	fill: var(--mdc-chartist--label);
 	color: var(--mdc-chartist--label);}

@@ -119,10 +119,12 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 				pointClass = options.classNames.bar;
 			else if (options.classNames.slicePie)
 				pointClass = options.classNames.slicePie;
-			else if (options.donut && !options.donutSolid && options.classNames.sliceDonut)
+			else if (options.donut && !options.donutSolid
+					&& options.classNames.sliceDonut)
 				pointClass = options.classNames.sliceDonut;
-			else if (options.donut && options.donutSolid && options.classNames.sliceDonutSolid)
-				pointClass = options.classNames.sliceDonutSolid;			
+			else if (options.donut && options.donutSolid
+					&& options.classNames.sliceDonutSolid)
+				pointClass = options.classNames.sliceDonutSolid;
 			else if (options.classNames.slicePie)
 				pointClass = options.classNames.slicePie;
 
@@ -130,13 +132,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			var func = function(value) {
 				return _this.@gwt.material.design.components.client.ui.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
 			};
-			
+
 			// Create the tooltip plugin
 			var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
 				transformTooltipTextFnc : func,
 				pointClass : pointClass
 			});
-			
+
 			return tooltipPlugin;
 		}
 
@@ -155,20 +157,35 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	protected void redraw() {
 		if (initialized && jsElement != null) {
+			
+			//clearEvents(jsElement);
+			//detach(jsElement);
+			
 			this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
-			if (this.options.plugins == null || this.options.plugins.length() == 0) {
-				// Not load plugins
-				update(jsElement, ChartHelper.toNativeData(getValue()), options);
-			} else {
-				// Reconstruct the chart
-				jsInit();
-			}
+			
+			// if (this.options.plugins == null || this.options.plugins.length() == 0) {
+			// Not load plugins
+			// update(jsElement, ChartHelper.toNativeData(getValue()), options);
+			// } else {
+			// Reconstruct the chart
+			// jsInit();
+			// }
+			
+			jsInit();
 		}
 	}
+	
+	protected native void clearEvents(final JavaScriptObject chart) /*-{
+		chart.off();
+	}-*/;
 
 	protected native void update(final JavaScriptObject chart, final JsChartData data,
 			final JsChartOptions options) /*-{
 		chart.update(data, options, true);
+	}-*/;
+	
+	protected native void detach(final JavaScriptObject chart) /*-{
+		chart.detach();
 	}-*/;
 
 	protected void jsInit() {

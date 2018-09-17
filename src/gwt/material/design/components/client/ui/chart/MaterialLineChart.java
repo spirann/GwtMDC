@@ -43,6 +43,10 @@ import gwt.material.design.components.client.ui.chart.js.line.JsLineChartOptions
  */
 public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsLineChartOptions> {
 
+	private boolean enableZoom = false;
+	private boolean showPointLabel = false;
+	private String pointLabelClass = CssName.MDC_CHART__LINE_CHART__LABEL;
+
 	public MaterialLineChart() {
 		super(new JsLineChartOptions(), ChartAspectRatio.ASPECT_1x3);
 	}
@@ -105,15 +109,70 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	@Override
 	protected List<JavaScriptObject> getPlugins() {
 		final List<JavaScriptObject> plugins = super.getPlugins();
-		plugins.add(loadPointLabelPlugin());
+
+		if (enableZoom)
+			plugins.add(loadZoomPlugin(jsElement));
+
+		if (showPointLabel)
+			plugins.add(loadPointLabelPlugin(pointLabelClass));
+
 		return plugins;
 	}
-	
-	protected native JavaScriptObject loadPointLabelPlugin()/*-{
-		return new $wnd.Chartist.plugins.ctPointLabels({
-			textAnchor : 'middle'
+
+	protected native JavaScriptObject loadPointLabelPlugin(final String labelClass)/*-{
+
+		var _this = this;
+		var func = function(value) {
+			return _this.@gwt.material.design.components.client.ui.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
+		};
+
+		return $wnd.Chartist.plugins.ctPointLabels({
+			textAnchor : 'middle',
+			labelClass : labelClass,
+			labelInterpolationFnc : func
 		});
+
 	}-*/;
+
+	protected native JavaScriptObject loadZoomPlugin(final JavaScriptObject chart)/*-{
+
+		var resetFnc;
+		function onZoom(chart, reset) {
+			resetFnc = reset;
+		}
+
+		return $wnd.Chartist.plugins.zoom({
+			onZoom : onZoom
+		});
+
+	}-*/;
+
+	public boolean isEnableZoom() {
+		return enableZoom;
+	}
+
+	public void setEnableZoom(boolean enableZoom) {
+		this.enableZoom = enableZoom;
+		redraw();
+	}
+
+	public String getPointLabelClass() {
+		return pointLabelClass;
+	}
+
+	public void setPointLabelClass(String pointLabelClass) {
+		this.pointLabelClass = pointLabelClass;
+		redraw();
+	}
+
+	public boolean isShowPointLabel() {
+		return showPointLabel;
+	}
+
+	public void setShowPointLabel(boolean showPointLabel) {
+		this.showPointLabel = showPointLabel;
+		redraw();
+	}
 
 	public boolean isFullWidth() {
 		return this.options.fullWidth;

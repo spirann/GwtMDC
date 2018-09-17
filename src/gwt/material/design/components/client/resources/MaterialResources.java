@@ -47,6 +47,9 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/chartist/chartist-plugin-pointlabels.min.js")
 	TextResource chartistPointLabelPluginJs();
 	
+	@Source("js/chartist/chartist-plugin-zoom.min.js")
+	TextResource chartistZoomPluginJs();
+	
 	@Source("js/prism.min.js")
 	TextResource prismJs();
 	
@@ -71,7 +74,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/chartist/chartist-plugin-tooltip.min.css")
 	TextResource chartistTooltipPluginCss();
 	
-	@Source("css/chartist/chartist-mixin.min.css")
+	@Source("css/chartist/chartist-mixin.css")
 	TextResource chartMixinCss();
 
 	// ////////////////////////////////////////

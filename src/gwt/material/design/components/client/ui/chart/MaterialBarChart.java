@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.chart;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
@@ -42,6 +44,9 @@ import gwt.material.design.components.client.ui.chart.js.base.JsChartPadding;
  */
 public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBarChartOptions> {
 
+	private boolean showBarLabel = false;
+	private String barLabelClass = CssName.MDC_CHART__LINE_CHART__LABEL;
+	
 	public MaterialBarChart() {
 		super(new JsBarChartOptions(), ChartAspectRatio.ASPECT_1x3);
 	}
@@ -101,6 +106,49 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 			final JsBarChartOptions options)/*-{
 		return new $wnd.Chartist.Bar(element, data, options);
 	}-*/;
+	
+	@Override
+	protected List<JavaScriptObject> getPlugins() {
+		final List<JavaScriptObject> plugins = super.getPlugins();
+		
+		if (showBarLabel)
+			plugins.add(loadBarLabelPlugin(barLabelClass));
+
+		return plugins;
+	}
+
+	protected native JavaScriptObject loadBarLabelPlugin(final String labelClass)/*-{
+
+		var _this = this;
+		var func = function(value) {
+			return _this.@gwt.material.design.components.client.ui.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
+		};
+
+		return new $wnd.Chartist.plugins.ctPointLabels({
+			textAnchor : 'middle',
+			labelClass: labelClass,
+			labelInterpolationFnc : func
+		});
+
+	}-*/;
+	
+	public String getBarLabelClass() {
+		return barLabelClass;
+	}
+
+	public void setBarLabelClass(String pointLabelClass) {
+		this.barLabelClass = pointLabelClass;
+		redraw();
+	}
+
+	public boolean isShowBarLabel() {
+		return showBarLabel;
+	}
+
+	public void setShowBarLabel(boolean showPointLabel) {
+		this.showBarLabel = showPointLabel;
+		redraw();
+	}
 	
 	/**
 	 * Unless low/high are explicitly set, bar chart will be centered at zero by
