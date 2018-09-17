@@ -55,7 +55,7 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 		return new $wnd.mdc.formField.MDCFormField(element);
 	}-*/;
 
-	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
+	protected HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());
 	}
 

@@ -59,8 +59,11 @@
 }
 
 .ct-zoom-rect {
-  fill: rgba(200, 100, 100, 0.3);
-  stroke: red;
+	fill-opacity: var(--mdc-track-opacity);
+  	fill: var(--mdc-theme-secondary);
+  	stroke: var(--mdc-theme-secondary);
+  	rx: var(--mdc-popup-border-radius);
+  	yx: var(--mdc-popup-border-radius);
 }
 
 .ct-label {

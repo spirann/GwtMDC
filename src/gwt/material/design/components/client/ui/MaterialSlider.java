@@ -51,15 +51,15 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
-	// /////////////////////////////////////////////////////////////	
+	// /////////////////////////////////////////////////////////////
 	protected Div trackContainer = new Div(CssName.MDC_SLIDER__TRACK_CONTAINER);
-	protected Div track = new Div(CssName.MDC_SLIDER__TRACK);	
-	protected Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);	
-	protected Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);	
+	protected Div track = new Div(CssName.MDC_SLIDER__TRACK);
+	protected Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);
+	protected Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);
 	protected Div focusRing = new Div(CssName.MDC_SLIDER__FOCUS_RING);
 	protected Div pin = new Div(CssName.MDC_SLIDER__PIN);
 	protected Span pinValueMarker = new Span(CssName.MDC_SLIDER__PIN_VALUE_MARKER);
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
@@ -68,14 +68,16 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax");
 	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step");
 	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled");
-	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE);
-	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_SLIDER__DISCRETE);
+	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
 		setRole(Role.SLIDER);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.slider.MDCSlider(element);
@@ -88,20 +90,20 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		trackContainer.add(markerContainer);
 
 		pin.add(pinValueMarker);
-	
+
 		thumbContainer.getElement().setInnerHTML(MaterialResources.INSTANCE.mdcSliderThumb().getText());
 		thumbContainer.add(pin);
-		thumbContainer.add(focusRing);	
-		
+		thumbContainer.add(focusRing);
+
 		add(trackContainer);
 		add(thumbContainer);
-		
+
 		initializeChageEventListener();
 		initializeInputEventListener();
 
 		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
-		
-		// It is necessary in panels with horizontal scroll  
+
+		// It is necessary in panels with horizontal scroll
 		addMouseOverHandler(event -> JsHelper.throwsWindowResize());
 
 	}
@@ -109,26 +111,44 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	protected native void initializeChageEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		element.addEventListener('MDCSlider:change', function() {
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
-		});
+		var milliseconds = 0;
+
+		function onChange() {
+			var now = new Date().getTime();
+			if ((now - milliseconds) > 100) {
+				milliseconds = now;
+				_this.@gwt.material.design.components.client.ui.MaterialSlider::fireChangeEvent()();
+			}
+		}
+
+		element.addEventListener('MDCSlider:change', onChange);
+		
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.MaterialSlider::getElement()();
-		element.addEventListener('MDCSlider:input', function() {											
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();
-			_this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
-		});
+		var milliseconds = 0;
+
+		function onInput() {
+			var now = new Date().getTime();
+			if ((now - milliseconds) > 100) {
+				milliseconds = now;
+				_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();
+				_this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
+			}
+		}
+
+		element.addEventListener('MDCSlider:input', onInput);
+		
 	}-*/;
-	
+
 	protected native void draw()/*-{
-	
+
 		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinValueMarker;
 		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
 		var value = this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()();
-		
+
 		var formattedValue = parseFloat(value).toFixed(0);
 		pinMarkerElement.innerText = formattedValue;
 
@@ -144,12 +164,12 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		}
 
 	}-*/;
-	
+
 	protected native void layout()/*-{
 		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		slider.layout();
 	}-*/;
-	
+
 	protected native void nativeSetValue(final Double value)/*-{
 		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		slider.value = value;
@@ -159,7 +179,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	public void setValue(Double value, boolean fireEvents) {
 		valuenowMixin.setAttribute(value);
 		super.setValue(value, fireEvents);
-		if(initialized) {
+		if (initialized) {
 			nativeSetValue(value);
 		}
 	}
@@ -184,11 +204,11 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	public double getMax() {
 		return valuemaxMixin.getAttributeAsDouble();
 	}
-	
+
 	protected void fireInputEvent() {
 		InputEvent.fire(this, getValue());
 	}
-	
+
 	@Override
 	public HandlerRegistration addInputHandler(InputHandler<Double> handler) {
 		return addHandler(handler, InputEvent.getType());
@@ -227,27 +247,27 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		super.setEnabled(enabled);
 		enabledMixin.setAttribute(!enabled);
 	}
-	
+
 	public void setTrackColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_COLOR, color.getCssName());
 	}
-	
+
 	public void setTrackFillColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_FILL_COLOR, color.getCssName());
 	}
-	
+
 	public void setTickMarkerColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__TICK_MARKER_COLOR, color.getCssName());
 	}
-	
+
 	public void setSliderThumbColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__SLIDER_THUMB_COLOR, color.getCssName());
 	}
-	
+
 	public void setPinColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__PIN_COLOR, color.getCssName());
 	}
-	
+
 	public void setValuePinColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SLIDER__VALUE_PIN_COLOR, color.getCssName());
 	}

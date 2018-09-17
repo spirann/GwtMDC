@@ -170,7 +170,6 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			// Reconstruct the chart
 			// jsInit();
 			// }
-			
 			jsInit();
 		}
 	}
@@ -189,6 +188,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 	}-*/;
 
 	protected void jsInit() {
+		
 		jsElement = jsInit(getElement(), getValue(), options);
 
 		if (getValue() != null) {
@@ -200,7 +200,14 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 				}
 			}
 		}
+		
+		applyAnimations(jsElement);
+		
 	}
+	
+	protected native void applyAnimations(final JavaScriptObject chart) /*-{
+		
+	}-*/;
 
 	public JavaScriptObject asJavaScriptObject() {
 		return jsElement;
@@ -257,6 +264,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 	@Override
 	public void setChartAspectRatio(ChartAspectRatio aspectRatio) {
 		aspectRatioMixin.setChartAspectRatio(aspectRatio);
+		redraw();
 	}
 
 	@Override
