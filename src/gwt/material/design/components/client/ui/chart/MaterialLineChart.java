@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.chart;
 
+import java.util.List;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
@@ -98,6 +100,19 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	protected native JavaScriptObject jsInit(final Element element, final JsChartData data,
 			final JsLineChartOptions options)/*-{
 		return new $wnd.Chartist.Line(element, data, options);
+	}-*/;
+
+	@Override
+	protected List<JavaScriptObject> getPlugins() {
+		final List<JavaScriptObject> plugins = super.getPlugins();
+		plugins.add(loadPointLabelPlugin());
+		return plugins;
+	}
+	
+	protected native JavaScriptObject loadPointLabelPlugin()/*-{
+		return new $wnd.Chartist.plugins.ctPointLabels({
+			textAnchor : 'middle'
+		});
 	}-*/;
 
 	public boolean isFullWidth() {

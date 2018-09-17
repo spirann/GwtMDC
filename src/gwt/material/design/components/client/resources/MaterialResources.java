@@ -44,6 +44,9 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/chartist/chartist-plugin-tooltip.min.js")
 	TextResource chartistTooltipPluginJs();
 	
+	@Source("js/chartist/chartist-plugin-pointlabels.min.js")
+	TextResource chartistPointLabelPluginJs();
+	
 	@Source("js/prism.min.js")
 	TextResource prismJs();
 	
