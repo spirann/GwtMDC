@@ -101,8 +101,8 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn,
-		HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt,
+		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
 
 	static {
 		autoInit();
@@ -141,7 +141,8 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	// /////////////////////////////////////////////////////////////
 	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
-	//protected final ActiveMixin<MaterialWidget> activeMixin = new ActiveMixin<>(this);
+	// protected final ActiveMixin<MaterialWidget> activeMixin = new
+	// ActiveMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final RoleMixin<MaterialWidget> roleMixin = new RoleMixin<>(this);
 	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
@@ -206,7 +207,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			// Check the onLoadAdd items.
 			for (Appender item : onLoadAdd) {
 				if (item.index == Appender.SEQUENTIAL) {
-					add(item.widget, (Element) getElement());
+					add(item.widget, getElement());
 				} else if (item.index == Appender.START) {
 					insert(item.widget, 0);
 				} else if (item.index == Appender.END) {
@@ -231,7 +232,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	@Override
 	public void add(Widget child) {
-		super.add(child, (Element) getElement());
+		add(child, getElement());
 	}
 
 	@Override
@@ -242,9 +243,29 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			}
 			onLoadAdd.add(new Appender(child));
 		} else {
-			super.add(child, container);
+
+			// Detach new child.
+			child.removeFromParent();
+
+			// Logical attach.
+			getChildren().add(child);
+
+			// Physical attach.
+			// DOM.appendChild(container, child.getElement());
+
+			// getElement().appendChild(resolve(child.getElement()));
+			getElement().appendChild(child.getElement());
+
+			// Adopt.
+			adopt(child);
+
 		}
 	}
+
+	private static native Element resolve(Element maybePotential) /*-{
+		return maybePotential.__gwt_resolve ? maybePotential.__gwt_resolve()
+				: maybePotential;
+	}-*/;
 
 	@Override
 	protected void insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex,
@@ -306,8 +327,13 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	}
 
 	@Override
+	public int getWidgetCount() {
+		return getElement().getChildCount();
+	}
+
+	@Override
 	public WidgetCollection getChildren() {
-		return super.getChildren();		
+		return super.getChildren();
 	}
 
 	public List<Widget> getChildrenList() {

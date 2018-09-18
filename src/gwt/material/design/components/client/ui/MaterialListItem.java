@@ -117,14 +117,24 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 		if (prevent) {
 			prevent(widget.getElement());
 		}
-				
+		
 		if(widget instanceof MaterialCheckbox) {
 			final MaterialCheckbox checkbox = (MaterialCheckbox) widget;
+			checkbox.addAttachHandler(event -> {
+				if(event.isAttached()) {
+					checkbox.setSelected(isSelected(), false);
+				}
+			});
 			checkbox.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
 		
 		if(widget instanceof MaterialRadioButton) {
 			final MaterialRadioButton radioButton = (MaterialRadioButton) widget;
+			radioButton.addAttachHandler(event -> {
+				if(event.isAttached()) {
+					radioButton.setSelected(isSelected(), false);
+				}
+			});
 			radioButton.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
 	}
