@@ -147,13 +147,24 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 						easing : 'easeOutQuart'
 					}
 				});
-			} else if (data.type === 'bar') {
+			} else if (data.type === 'bar' && data.x1 == data.x2) {
+				// Vertical bars
 				data.element.animate({
 					y2 : {
 						begin : seq * delays,
 						dur : durations,
 						from : data.y1,
 						to : data.y2
+					}
+				});
+			} else if (data.type === 'bar' && data.y1 == data.y2) {
+				// Horizontal bars
+				data.element.animate({
+					x2 : {
+						begin : seq * delays,
+						dur : durations,
+						from : data.x1,
+						to : data.x2
 					}
 				});
 			} else if (data.type === 'grid') {

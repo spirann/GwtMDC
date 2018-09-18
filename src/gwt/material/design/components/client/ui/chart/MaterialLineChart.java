@@ -140,6 +140,20 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 						to : 1
 					}
 				});
+			} else if (data.type === 'area') {
+				// If the drawn element is a line we do a simple opacity fade in. This could also be achieved using CSS3 animations.
+				data.element.animate({
+					opacity : {
+						// The delay when we like to start the animation
+						begin : seq * delays + 600,
+						// Duration of the animation
+						dur : durations,
+						// The value where the animation should start
+						from : 0,
+						// The value where it should end
+						to : 1
+					}
+				});
 			} else if (data.type === 'label' && data.axis === 'x') {
 				data.element.animate({
 					y : {
