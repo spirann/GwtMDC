@@ -17,20 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui;
+package gwt.material.design.components.client.ui.html;
 
-import gwt.material.design.components.client.base.MaterialDrawerBase;
-import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawerPermanent extends MaterialDrawerBase {
+public class H5 extends Text {
 
-	public MaterialDrawerPermanent() {
-		super(CssName.MDC_DRAWER__PERMANENT);
+	public H5() {
+		super(HtmlElements.H5.createElement());
 	}
-
+	
+	public H5(final String ... initialClasses) {
+		super(HtmlElements.H5.createElement(), initialClasses);
+	}
 }

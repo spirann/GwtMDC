@@ -17,19 +17,34 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui;
+package gwt.material.design.components.client.constants;
 
-import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
  * 
- * @author Richeli Vargas
+ * @author Richeli Vargas 
  *
  */
-public class MaterialDrawerHeader extends Div {
+public enum DrawerType implements CssType {
 
-	public MaterialDrawerHeader() {
-		super(CssName.MDC_DRAWER__HEADER);
-	}
+	PERMANENT(""),
+	DISMISSIBLE(CssName.MDC_DRAWER__DISMISSIBLE),
+	MODAL(CssName.MDC_DRAWER__MODAL);
+
+    private final String cssClass;
+
+    DrawerType(final String cssClass) {
+        this.cssClass = cssClass;
+    }
+
+    @Override
+    public String getCssName() {
+        return cssClass;
+    }
+
+    public static DrawerType fromStyleName(final String styleName) {
+        return EnumHelper.fromStyleName(styleName, DrawerType.class, PERMANENT);
+    }
 }
+

@@ -17,19 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui;
+package gwt.material.design.components.client.ui.html;
 
-import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawerHeader extends Div {
+public class H6 extends Text {
 
-	public MaterialDrawerHeader() {
-		super(CssName.MDC_DRAWER__HEADER);
+	public H6() {
+		super(HtmlElements.H6.createElement());
+	}
+	
+	public H6(final String ... initialClasses) {
+		super(HtmlElements.H6.createElement(), initialClasses);
 	}
 }

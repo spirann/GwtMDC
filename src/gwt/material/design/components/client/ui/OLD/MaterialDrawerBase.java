@@ -17,12 +17,13 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base;
+package gwt.material.design.components.client.ui.OLD;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.HasOpen;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
