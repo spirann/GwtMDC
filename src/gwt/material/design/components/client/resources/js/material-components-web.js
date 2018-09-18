@@ -2486,11 +2486,14 @@ var MDCListFoundation = function (_MDCFoundation) {
         }
       );
     }
+
+    /**
+     * @param {!MDCListAdapter=} adapter
+     */
+
   }]);
 
-  function MDCListFoundation() {
-    var adapter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : /** @type {!MDCListFoundation} */{};
-
+  function MDCListFoundation(adapter) {
     _classCallCheck(this, MDCListFoundation);
 
     /** {boolean} */
@@ -7791,7 +7794,6 @@ var MDCSelectAdapter = function () {
 
 /** @enum {string} */
 var cssClasses = {
-  BOX: 'mdc-select--box',
   DISABLED: 'mdc-select--disabled',
   ROOT: 'mdc-select',
   OUTLINED: 'mdc-select--outlined'
@@ -10351,9 +10353,13 @@ var MDCRippleFoundation = function (_MDCFoundation) {
         if (this.activationTimer_) {
           clearTimeout(this.activationTimer_);
           this.activationTimer_ = 0;
-          var FG_ACTIVATION = MDCRippleFoundation.cssClasses.FG_ACTIVATION;
+          this.adapter_.removeClass(MDCRippleFoundation.cssClasses.FG_ACTIVATION);
+        }
 
-          this.adapter_.removeClass(FG_ACTIVATION);
+        if (this.fgDeactivationRemovalTimer_) {
+          clearTimeout(this.fgDeactivationRemovalTimer_);
+          this.fgDeactivationRemovalTimer_ = 0;
+          this.adapter_.removeClass(MDCRippleFoundation.cssClasses.FG_DEACTIVATION);
         }
 
         var _MDCRippleFoundation$2 = MDCRippleFoundation.cssClasses,
@@ -16021,9 +16027,7 @@ var MDCLineRippleFoundation = function (_MDCFoundation) {
 
   }]);
 
-  function MDCLineRippleFoundation() {
-    var adapter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : /** @type {!MDCLineRippleAdapter} */{};
-
+  function MDCLineRippleFoundation(adapter) {
     _classCallCheck(this, MDCLineRippleFoundation);
 
     /** @private {function(!Event): undefined} */
@@ -17853,7 +17857,7 @@ var MDCSelect = function (_MDCComponent) {
         this.outline_ = outlineFactory(outlineElement);
       }
 
-      if (this.root_.classList.contains(__WEBPACK_IMPORTED_MODULE_7__constants__["a" /* cssClasses */].BOX)) {
+      if (!this.root_.classList.contains(__WEBPACK_IMPORTED_MODULE_7__constants__["a" /* cssClasses */].OUTLINED)) {
         this.ripple = this.initRipple_();
       }
     }
