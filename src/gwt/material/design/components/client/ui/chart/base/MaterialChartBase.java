@@ -71,6 +71,12 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 	private boolean showTooltip = false;
 
 	// /////////////////////////////////////////////////////////////
+	// Animation
+	// /////////////////////////////////////////////////////////////
+	private boolean animated = false;
+	private int animationDuration = 250;
+
+	// /////////////////////////////////////////////////////////////
 	// Initialize java script component
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
@@ -157,12 +163,12 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	protected void redraw() {
 		if (initialized && jsElement != null) {
-			
-			//clearEvents(jsElement);
-			//detach(jsElement);
-			
+
+			// clearEvents(jsElement);
+			// detach(jsElement);
+
 			this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
-			
+
 			// if (this.options.plugins == null || this.options.plugins.length() == 0) {
 			// Not load plugins
 			// update(jsElement, ChartHelper.toNativeData(getValue()), options);
@@ -173,7 +179,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			jsInit();
 		}
 	}
-	
+
 	protected native void clearEvents(final JavaScriptObject chart) /*-{
 		chart.off();
 	}-*/;
@@ -182,13 +188,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			final JsChartOptions options) /*-{
 		chart.update(data, options, true);
 	}-*/;
-	
+
 	protected native void detach(final JavaScriptObject chart) /*-{
 		chart.detach();
 	}-*/;
 
 	protected void jsInit() {
-		
+
 		jsElement = jsInit(getElement(), getValue(), options);
 
 		if (getValue() != null) {
@@ -200,13 +206,14 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 				}
 			}
 		}
-		
-		applyAnimations(jsElement);
-		
+
+		if (animated) {
+			applyAnimations(jsElement, animationDuration);
+		}
+
 	}
-	
-	protected native void applyAnimations(final JavaScriptObject chart) /*-{
-		
+
+	protected native void applyAnimations(final JavaScriptObject chart, final int duration) /*-{		
 	}-*/;
 
 	public JavaScriptObject asJavaScriptObject() {
@@ -290,6 +297,34 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
 					colors[i].getCssName());
 		}
+	}
+
+	public boolean isAnimated() {
+		return animated;
+	}
+
+	public void setAnimated(boolean animated) {
+		this.animated = animated;
+		redraw();
+	}
+
+	/**
+	 * Duration of the animation in milliseconds
+	 * 
+	 * @return
+	 */
+	public int getAnimationDuration() {
+		return animationDuration;
+	}
+
+	/**
+	 * Duration of the animation in milliseconds
+	 * 
+	 * @param animationDuration
+	 */
+	public void setAnimationDuration(int animationDuration) {
+		this.animationDuration = animationDuration;
+		redraw();
 	}
 
 	public boolean isShowLabel() {

@@ -46,11 +46,11 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 
 	private boolean showBarLabel = false;
 	private String barLabelClass = CssName.MDC_CHART__LINE_CHART__LABEL;
-	
+
 	public MaterialBarChart() {
 		super(new JsBarChartOptions(), ChartAspectRatio.ASPECT_1x3);
 	}
-	
+
 	@Override
 	protected void initializeDefaultOptions() {
 		super.initializeDefaultOptions();
@@ -98,7 +98,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		options.axisY.offset = 40;
 		options.axisY.position = ChartAxisLabelPosition.START.getCssName();
 		options.axisY.scaleMinSpace = 20;
-		options.axisY.onlyInteger = false;		
+		options.axisY.onlyInteger = false;
 	}
 
 	@Override
@@ -106,11 +106,95 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 			final JsBarChartOptions options)/*-{
 		return new $wnd.Chartist.Bar(element, data, options);
 	}-*/;
-	
+
+	@Override
+	protected native void applyAnimations(final JavaScriptObject chart, final int durations) /*-{
+
+		// Let's put a sequence number aside so we can use it in the event callbacks
+		var seq = 0, delays = 40, count = 0;
+
+		// Once the chart is fully created we reset the sequence
+		chart.on('created', function() {
+			seq = 0;
+			count++;
+		});
+
+		chart.on('draw', function(data) {
+			
+			if (count > 0)
+				return;
+
+			seq++;
+
+			if (data.type === 'label' && data.axis === 'x') {
+				data.element.animate({
+					y : {
+						begin : seq * delays,
+						dur : durations,
+						from : data.y + 100,
+						to : data.y,
+						// We can specify an easing function from Chartist.Svg.Easing
+						easing : 'easeOutQuart'
+					}
+				});
+			} else if (data.type === 'label' && data.axis === 'y') {
+				data.element.animate({
+					x : {
+						begin : seq * delays,
+						dur : durations,
+						from : data.x - 100,
+						to : data.x,
+						easing : 'easeOutQuart'
+					}
+				});
+			} else if (data.type === 'bar') {
+				data.element.animate({
+					y2 : {
+						begin : seq * delays,
+						dur : durations,
+						from : data.y1,
+						to : data.y2
+					}
+				});
+			} else if (data.type === 'grid') {
+				// Using data.axis we get x or y which we can use to construct our animation definition objects
+				var pos1Animation = {
+					begin : seq * delays,
+					dur : durations,
+					from : data[data.axis.units.pos + '1'] - 30,
+					to : data[data.axis.units.pos + '1'],
+					easing : 'easeOutQuart'
+				};
+
+				var pos2Animation = {
+					begin : seq * delays,
+					dur : durations,
+					from : data[data.axis.units.pos + '2'] - 100,
+					to : data[data.axis.units.pos + '2'],
+					easing : 'easeOutQuart'
+				};
+
+				var animations = {};
+				animations[data.axis.units.pos + '1'] = pos1Animation;
+				animations[data.axis.units.pos + '2'] = pos2Animation;
+				animations['opacity'] = {
+					begin : seq * delays,
+					dur : durations,
+					from : 0,
+					to : 1,
+					easing : 'easeOutQuart'
+				};
+
+				data.element.animate(animations);
+			}
+		});
+
+	}-*/;
+
 	@Override
 	protected List<JavaScriptObject> getPlugins() {
 		final List<JavaScriptObject> plugins = super.getPlugins();
-		
+
 		if (showBarLabel)
 			plugins.add(loadBarLabelPlugin(barLabelClass));
 
@@ -126,12 +210,12 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 
 		return new $wnd.Chartist.plugins.ctPointLabels({
 			textAnchor : 'middle',
-			labelClass: labelClass,
+			labelClass : labelClass,
 			labelInterpolationFnc : func
 		});
 
 	}-*/;
-	
+
 	public String getBarLabelClass() {
 		return barLabelClass;
 	}
@@ -149,7 +233,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		this.showBarLabel = showPointLabel;
 		redraw();
 	}
-	
+
 	/**
 	 * Unless low/high are explicitly set, bar chart will be centered at zero by
 	 * default. Set referenceValue to null to auto scale.
@@ -261,12 +345,11 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 
 	/**
 	 * If set to 'overlap' this property will force the stacked bars to draw from
-	 * the zero line. 
+	 * the zero line.
 	 * 
-	 * If set to 'accumulate' this property will form a total for
-	 * each series point. This will also influence the y-axis and the overall bounds
-	 * of the chart. In stacked mode the seriesBarDistance property will have no
-	 * effect.
+	 * If set to 'accumulate' this property will form a total for each series point.
+	 * This will also influence the y-axis and the overall bounds of the chart. In
+	 * stacked mode the seriesBarDistance property will have no effect.
 	 * 
 	 * @return
 	 */
@@ -275,13 +358,12 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	}
 
 	/**
-	 *  If set to 'overlap' this property will force the stacked bars to draw from
-	 * the zero line. 
+	 * If set to 'overlap' this property will force the stacked bars to draw from
+	 * the zero line.
 	 * 
-	 * If set to 'accumulate' this property will form a total for
-	 * each series point. This will also influence the y-axis and the overall bounds
-	 * of the chart. In stacked mode the seriesBarDistance property will have no
-	 * effect.
+	 * If set to 'accumulate' this property will form a total for each series point.
+	 * This will also influence the y-axis and the overall bounds of the chart. In
+	 * stacked mode the seriesBarDistance property will have no effect.
 	 * 
 	 * @param stackMode
 	 */

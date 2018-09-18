@@ -107,32 +107,22 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	}-*/;
 
 	@Override
-	protected native void applyAnimations(JavaScriptObject chart) /*-{
-
-		var elements = [];
+	protected native void applyAnimations(final JavaScriptObject chart, final int durations) /*-{
 
 		// Let's put a sequence number aside so we can use it in the event callbacks
-		var seq = 0, delays = 40, durations = 250;
-
+		var seq = 0, delays = 40, count = 0;
+		
 		// Once the chart is fully created we reset the sequence
 		chart.on('created', function() {
 			seq = 0;
+			count++;
 		});
 
 		// On each drawn element by Chartist we use the Chartist.Svg API to trigger SMIL animations
-		var drawEvent = chart.on('draw', function(data) {
-
-			// ///////////////////////////////////////////////////////////////
-			// Control to not animete on update
-			// ///////////////////////////////////////////////////////////////
-			console.log($wnd.Reflect.ownKeys(data));
-			console.log('seriesIndex: ' + data.seriesIndex);
-				
-			var ctrl = data.type + ':' + data.axis + ':' + data.index + ':' + data.element;
-			if (elements.indexOf(ctrl) > -1)
+		chart.on('draw', function(data) {		
+			
+			if(count > 0)
 				return;
-			elements.push(ctrl);
-			// ///////////////////////////////////////////////////////////////
 
 			seq++;
 

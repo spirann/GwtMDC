@@ -107,17 +107,18 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	}-*/;
 
 	@Override
-	protected native void applyAnimations(JavaScriptObject chart) /*-{
+	protected native void applyAnimations(final JavaScriptObject chart, final int durations) /*-{
 
-		var series = [];
+		// Let's put a sequence number aside so we can use it in the event callbacks
+		var count = 0;
+		
+		// Once the chart is fully created we reset the sequence
+		chart.on('created', function() {
+			count++;
+		});
+		
 		chart.on('draw', function(data) {
-
-			if (data.type === 'slice' && series.indexOf(data.index) == -1) {
-				// ///////////////////////////////////////////////////////////////
-				// Control to not animete on update
-				// ///////////////////////////////////////////////////////////////			
-				series.push(data.index);
-				// ///////////////////////////////////////////////////////////////
+			if (data.type === 'slice' && count == 0) {
 
 				// Get the total path length in order to use for dash array animation
 				var pathLength = data.element._node.getTotalLength();
@@ -131,7 +132,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 				var animationDefinition = {
 					'stroke-dashoffset' : {
 						id : 'anim' + data.index,
-						dur : 150,
+						dur : durations,
 						from : -pathLength + 'px',
 						to : '0px',
 						easing : $wnd.Chartist.Svg.Easing.easeOutQuint,
