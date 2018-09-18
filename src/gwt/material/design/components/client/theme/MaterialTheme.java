@@ -129,14 +129,9 @@ public class MaterialTheme implements Serializable {
 				.append(loadProperty(ThemeAttribute.MDC_THEME_TEXT_ICON_ON_BACKGROUND, textIconOnBackground))
 				.append(separator);
 
-		final String color = loadProperty(ThemeAttribute.MDC_THEME_SECONDARY, secondary);
-
+		final String color = loadPropertyValue(ThemeAttribute.MDC_THEME_SECONDARY, secondary);		
 		final String[] colors = ColorHelper.generatePalette(ChartHelper.maxSeries(), color, 8);
-		//final String[] colors = ColorHelper.generateColloredPalette(ChartHelper.maxSeries(), color);
-
-		// final String[] colors =
-		// ColorHelper.generateColloredPalette(ChartHelper.maxSeries(), color, "#eee");
-
+		
 		for (int i = 0; i < colors.length; i++) {
 			text.append(identation)
 					.append(loadProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i]))
@@ -308,6 +303,19 @@ public class MaterialTheme implements Serializable {
 		}
 
 		return property + ": " + color + ";";
+	}
+	
+	private String loadPropertyValue(final String property, String value) {
+
+		if (property == null) {
+			return "";
+		}
+
+		if (value == null) {
+			return StyleHelper.getComputedProperty(property).replace(" ", "");
+		} else {
+			return value.replace(" ", "");
+		}
 	}
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////

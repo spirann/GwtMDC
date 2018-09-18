@@ -108,7 +108,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	@Override
 	protected native void applyAnimations(final JavaScriptObject chart, final int durations) /*-{
-
+	
 		// Let's put a sequence number aside so we can use it in the event callbacks
 		var count = 0;
 		
