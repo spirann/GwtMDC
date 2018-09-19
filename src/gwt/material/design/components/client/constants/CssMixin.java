@@ -28,6 +28,10 @@ public interface CssMixin {
 	// EXTRAS
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_PLACEHOLDER__INK_COLOR = "--mdc-placeholder-ink-color";
+	String MDC_SCROLLBAR_WIDTH = "--mdc-scrollbar-width";
+	String MDC_SCROLLBAR_TRACK_FILL = "--mdc-scrollbar-track-fill";
+	String MDC_SCROLLBAR_THUMB_CORNER = "--mdc-scrollbar-thumb-corner";
+	String MDC_SCROLLBAR_THUMB_FILL = "--mdc-scrollbar-thumb-fill";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Top app bar

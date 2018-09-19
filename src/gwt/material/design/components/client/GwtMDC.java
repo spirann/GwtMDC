@@ -83,7 +83,8 @@ public class GwtMDC implements EntryPoint {
 				injectCss(MaterialResources.INSTANCE.chartistCss()),
 				injectCss(MaterialResources.INSTANCE.chartistTooltipPluginCss()),
 				injectCss(MaterialResources.INSTANCE.prismCss()), 
-				injectCss(MaterialResources.INSTANCE.addinsCss()), 
+				injectCss(MaterialResources.INSTANCE.materialComponentsRootCss()),
+				injectCss(MaterialResources.INSTANCE.materialComponentsWebAddinsCss()),				
 				injectCss(MaterialResources.INSTANCE.mixinCss()), 
 				injectCss(MaterialResources.INSTANCE.chartMixinCss()) };
 

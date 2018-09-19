@@ -31,6 +31,7 @@ import com.google.gwt.user.client.ui.ComplexPanel;
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.constants.BorderCollapse;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Flex;
 import gwt.material.design.components.client.constants.FlexAlignContent;
@@ -317,5 +318,21 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	@Override
 	public void setFlexJustifyContent(FlexJustifyContent flexJustifyContent) {
 		flexboxMixin.setFlexJustifyContent(flexJustifyContent);
+	}
+
+	public void setScrollBarWidth(final String width) {
+		setStyleProperty(CssMixin.MDC_SCROLLBAR_WIDTH, width);
+	}
+	
+	public void setScrollBarTrackColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SCROLLBAR_TRACK_FILL, color.getCssName());
+	}
+	
+	public void setScrollBarThumbCorner(final String width) {
+		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_CORNER, width);
+	}
+	
+	public void setScrollBarThumbColor(final Color color) {
+		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_FILL, color.getCssName());
 	}
 }

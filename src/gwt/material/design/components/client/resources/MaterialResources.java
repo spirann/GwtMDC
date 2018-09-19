@@ -59,11 +59,14 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/prism.min.css")
 	TextResource prismCss();
 
-	@Source("css/addins.min.css")
-	TextResource addinsCss();
+	@Source("css/material-components-root.min.css")
+	TextResource materialComponentsRootCss();
 	
-	@Source("css/mixin.min.css")
+	@Source("css/mixin.css")
 	TextResource mixinCss();
+	
+	@Source("css/material-components-web-addins.min.css")
+	TextResource materialComponentsWebAddinsCss();
 
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();

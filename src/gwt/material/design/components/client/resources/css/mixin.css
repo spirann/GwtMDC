@@ -1,13 +1,7 @@
 :root {	
 	
-	/* Font */
-	/* --mdc-font-family: "Roboto", monospace; */
-	--mdc-font-family: "Google Sans", monospace;
-	
+	/* Popup */
 	--mdc-popup-border-radius: 4px;
-	
-	/* Placeholder */
-	--mdc-placeholder-ink-color: var(--mdc-theme-text-hint-on-background);
 	
 	/* misc */
 	--mdc-track-opacity: .38;
@@ -130,65 +124,6 @@
 }
 
 /* ==========================================================================
-   Set default font family
-   ========================================================================== */
-html, 
-body,
-label,
-h1, 
-h2, 
-h3, 
-h4,
-h5,
-h6,
-text,
-textarea,
-.mdc-button,
-.mdc-chip,
-.mdc-dialog__header__title,
-.mdc-dialog__body,
-.mdc-drawer .mdc-list-item,
-.mdc-drawer__title,
-.mdc-drawer__subtitle,
-.mdc-fab--extended,
-.mdc-floating-label,
-.mdc-form-field,
-.mdc-grid-tile__support-text,
-.mdc-image-list__label,
-.mdc-list,
-.mdc-list-item__secondary-text,
-.mdc-list-group__subheader,
-.mdc-list-item,
-.mdc-menu .mdc-list-item,
-.mdc-menu-surface .mdc-list-item,
-.mdc-select__native-control,
-.mdc-slider__pin-value-marker,
-.mdc-snackbar__text,
-.mdc-snackbar__action-button,
-.mdc-tab,
-.mdc-text-field-helper-text,
-.mdc-text-field__input,
-.mdc-toolbar__title,
-.mdc-toolbar--flexible-default-behavior .mdc-toolbar__title,
-.mdc-top-app-bar__title,
-.mdc-typography,
-.mdc-typography--headline1,
-.mdc-typography--headline2,
-.mdc-typography--headline3,
-.mdc-typography--headline4,
-.mdc-typography--headline5,
-.mdc-typography--headline6,
-.mdc-typography--subtitle1,
-.mdc-typography--subtitle2,
-.mdc-typography--body1,
-.mdc-typography--body2,
-.mdc-typography--caption,
-.mdc-typography--button,
-.mdc-typography--overline {
-	font-family: var(--mdc-font-family);
-}
-
-/* ==========================================================================
    Material disabled adjust
    ========================================================================== */
 [disabled] {
@@ -201,10 +136,15 @@ textarea,
 	opacity: 0.26;}
 
 /* ==========================================================================
-   Default color for material icons
+   Material Icons
    ========================================================================== */
 .material-icons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	align-content: center;
 	color: var(--mdc-theme-text-primary-on-background);}
+	
 
 /* ==========================================================================
    Button
@@ -639,27 +579,28 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Adjust drawer
    ========================================================================== */
-.mdc-drawer__header-content {
-	background-color: var(--mdc-drawer-fill-color);}
-.mdc-drawer__header-content .mdc-typography {
-	color: var(--mdc-drawer-ink-color);}
-.mdc-drawer__header-content .mdc-typography[class*="subtitle"],
-.mdc-drawer__header-content .mdc-typography[class*="caption"] {
-	opacity: .87;}
-.mdc-drawer__content {
-	color: var(--mdc-drawer-ink-color);
-	background-color: var(--mdc-drawer-fill-color);}
-.mdc-drawer__content .mdc-list-item:not(.mdc-list-item--selected) .mdc-list-item__graphic {
-	color: var(--mdc-drawer-ink-color);}			
 .mdc-drawer {	
 	--mdc-list-item-graphic-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-primary-text-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-secondary-text-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-meta-ink-color: var(--mdc-drawer-ink-color);		
-	height: 100%;
-	overflow-y: auto;
-	color: var(--mdc-drawer-ink-color);
-	background-color: var(--mdc-drawer-fill-color) !important;}	
+	background-color: var(--mdc-drawer-fill-color);}	
+
+  .mdc-drawer .mdc-drawer__title {
+    color: var(--mdc-drawer-ink-color);}
+  .mdc-drawer .mdc-list-group__subheader {
+    color: var(--mdc-drawer-ink-color);}
+  .mdc-drawer .mdc-drawer__subtitle {
+    color: var(--mdc-drawer-ink-color);}
+  .mdc-drawer .mdc-list-item__graphic {
+    color: var(--mdc-drawer-ink-color); }
+  .mdc-drawer .mdc-list-item {
+    color: var(--mdc-drawer-ink-color); }
+  .mdc-drawer .mdc-list-item--selected .mdc-list-item__graphic,
+  .mdc-drawer .mdc-list-item--activated .mdc-list-item__graphic {
+    color: var(--mdc-list-item-selected-graphic-ink-color); }
+  .mdc-drawer .mdc-list-item--activated {
+    color: var(--mdc-list-item-selected-graphic-ink-color); }	
 
 /* ==========================================================================
    Menu

@@ -52,9 +52,6 @@ public class MaterialTheme implements Serializable {
 	private String textDisabledOnBackground;
 	private String textIconOnBackground;
 	//
-	private String chartStartColor;
-	private String chartEndColor;
-	//
 	private String codeBackground;
 	private String codeString;
 	private String codeTokenComment;
@@ -214,7 +211,6 @@ public class MaterialTheme implements Serializable {
 	// AUTOMATE
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
-
 	private final double mainAlpha = 1.0;
 	private final double textPrimaryAlpha = 1.0;
 	private final double textSecondaryAlpha = 0.7;
@@ -232,25 +228,6 @@ public class MaterialTheme implements Serializable {
 
 	public void setSecondaryColor(final Color color) {
 		setSecondary(color.getCssName(mainAlpha));
-		setChartColors(color);
-
-	}
-
-	public void setChartColors(final Color color) {
-
-		final Color s;
-		final Color e;
-
-		if (color.equals(Color.BLACK) || color.equals(Color.WHITE) || color.equals(Color.TRANSPARENT)) {
-			s = Color.BLACK;
-			e = Color.WHITE;
-		} else {
-			s = Color.valueOf(cleanedName(color) + "_900");
-			e = Color.valueOf(cleanedName(color) + "_50");
-		}
-
-		setChartStartColor(s.asHex());
-		setChartEndColor(e.asHex());
 	}
 
 	protected String cleanedName(final Color color) {
@@ -418,27 +395,6 @@ public class MaterialTheme implements Serializable {
 
 	public void setThemeOnSurface(String themeOnSurface) {
 		this.themeOnSurface = themeOnSurface;
-	}
-
-	/*
-	 * 
-	 * 
-	 */
-
-	public String getChartStartColor() {
-		return chartStartColor;
-	}
-
-	public void setChartStartColor(String chartStartColor) {
-		this.chartStartColor = chartStartColor;
-	}
-
-	public String getChartEndColor() {
-		return chartEndColor;
-	}
-
-	public void setChartEndColor(String chartEndColor) {
-		this.chartEndColor = chartEndColor;
 	}
 
 	/*

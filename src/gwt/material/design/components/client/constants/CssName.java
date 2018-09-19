@@ -152,12 +152,7 @@ public interface CssName {
 	
 	// //////////////////////////////////////////////////////
 	// DRAWER
-	// //////////////////////////////////////////////////////
-	
-	String MDC_DRAWER__DRAWER = "mdc-drawer__drawer";
-	String MDC_DRAWER__TOOLBAR_SPACER = "mdc-drawer__toolbar-spacer";	
-	String MDC_DRAWER__HEADER_CONTENT = "mdc-drawer__header-content";	
-		
+	// //////////////////////////////////////////////////////		
 	String MDC_DRAWER = "mdc-drawer";
 	String MDC_DRAWER__DISMISSIBLE = "mdc-drawer--dismissible";	
 	String MDC_DRAWER__MODAL = "mdc-drawer--modal";	
