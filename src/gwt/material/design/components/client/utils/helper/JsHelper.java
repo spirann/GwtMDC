@@ -13,14 +13,22 @@ public class JsHelper {
 		$wnd.dispatchEvent(new Event('resize'));
 	}-*/;
 
-	public static native void removeAllElements(final String className)/*-{
+	public static native void removeAllElementsByClassName(final String className)/*-{
 		while ($doc.getElementsByClassName(className)[0])
 			$doc.getElementsByClassName(className)[0].remove();
 	}-*/;
 
-	public static native void removeAllElements(final String className, final Element parent)/*-{
+	public static native void removeAllElementsByClassName(final String className, final Element parent)/*-{
 		while (parent.getElementsByClassName(className)[0])
 			parent.getElementsByClassName(className)[0].remove();
+	}-*/;
+
+	public static native boolean containsElementByClassName(final String className)/*-{
+		return $doc.getElementsByClassName(className).length > 0;
+	}-*/;
+
+	public static native boolean containsElementByClassName(final String className, final Element parent)/*-{
+		return parent.getElementsByClassName(className).length > 0;
 	}-*/;
 
 	public static native void doClick(Element element)/*-{

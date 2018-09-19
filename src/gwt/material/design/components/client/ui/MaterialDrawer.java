@@ -55,26 +55,25 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 		var dismissibleClass = @gwt.material.design.components.client.constants.CssName::MDC_DRAWER__DISMISSIBLE;
 		var scrimClass = @gwt.material.design.components.client.constants.CssName::MDC_DRAWER_SCRIM;
 		var parent = element.parentElement;
-
-		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElements(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(scrimClass, parent);
-
 		var className = element.className;
 		var isModal = className.indexOf(modalClass) != -1;
 		var isDismissible = className.indexOf(dismissibleClass) != -1;
+		var containsModal = @gwt.material.design.components.client.utils.helper.JsHelper::containsElementByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(modalClass, parent);		
 
-		if (!isModal && !isDismissible)
-			return element;
-
-		if (isModal) {
+		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElementsByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(scrimClass, parent);
+		if (containsModal) {
 			var div = $doc.createElement("div");
 			div.className = scrimClass;
-			parent.insertBefore(div, element.nextSibling);
+			parent.appendChild(div);
 		}
+		
+		if (!isModal && !isDismissible)
+			return element;
 
 		var jsElement = new $wnd.mdc.drawer.MDCDrawer(element);
 		jsElement.open = element.getAttribute("open");
 		element.removeAttribute("open");
-		
+
 		return jsElement;
 
 	}-*/;
@@ -88,7 +87,7 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	@Override
 	public native void setOpen(boolean open)/*-{
 		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		if (drawer){
+		if (drawer) {
 			drawer.open = open;
 		} else {
 			var element = this.@gwt.material.design.components.client.ui.MaterialDrawer::getElement()();

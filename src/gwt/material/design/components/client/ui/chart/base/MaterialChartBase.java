@@ -111,7 +111,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 		var _this = this;
 
 		var tooltipClass = @gwt.material.design.components.client.constants.CssName::MDC_CHART__TOOLTIP;
-		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElements(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
+		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElementsByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
 
 		// Instantiete the plugin
 		if (addTooltipPlugin) {
