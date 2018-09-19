@@ -40,37 +40,60 @@ import gwt.material.design.components.client.ui.html.Nav;
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpen{
+public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpen {
 
 	protected final TypeMixin<MaterialDrawer, DrawerType> typeMixin = new TypeMixin<>(this);
-	
+
 	public MaterialDrawer() {
 		super(CssName.MDC_DRAWER);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		
+
+		var modalClass = @gwt.material.design.components.client.constants.CssName::MDC_DRAWER__MODAL;
+		var dismissibleClass = @gwt.material.design.components.client.constants.CssName::MDC_DRAWER__DISMISSIBLE;
+		var scrimClass = @gwt.material.design.components.client.constants.CssName::MDC_DRAWER_SCRIM;
+		var parent = element.parentElement;
+
+		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElements(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(scrimClass, parent);
+
 		var className = element.className;
-		
-		if(className.indexOf('mdc-drawer--modal') == -1 && className.indexOf('mdc-drawer--dismissible') == -1){
+		var isModal = className.indexOf(modalClass) != -1;
+		var isDismissible = className.indexOf(dismissibleClass) != -1;
+
+		if (!isModal && !isDismissible)
 			return element;
-		}	
-				
-		return new $wnd.mdc.drawer.MDCDrawer(element);
+
+		if (isModal) {
+			var div = $doc.createElement("div");
+			div.className = scrimClass;
+			parent.insertBefore(div, element.nextSibling);
+		}
+
+		var jsElement = new $wnd.mdc.drawer.MDCDrawer(element);
+		jsElement.open = element.getAttribute("open");
+		element.removeAttribute("open");
 		
+		return jsElement;
+
 	}-*/;
-	
+
 	@Override
 	public native boolean isOpen()/*-{
 		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
 		return drawer && drawer.open;
 	}-*/;
-	
+
 	@Override
 	public native void setOpen(boolean open)/*-{
 		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
-		drawer.open = open;
+		if (drawer){
+			drawer.open = open;
+		} else {
+			var element = this.@gwt.material.design.components.client.ui.MaterialDrawer::getElement()();
+			element.setAttribute("open", open);
+		}
 	}-*/;
 
 	@Override
@@ -82,17 +105,17 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	public void close() {
 		setOpen(false);
 	}
-	
+
 	@Override
 	public void setType(DrawerType type) {
 		typeMixin.setType(type);
 	}
-	
+
 	@Override
 	public DrawerType getType() {
 		return typeMixin.getType();
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DRAWER__FILL_COLOR, color.getCssName());
@@ -102,35 +125,34 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DRAWER__INK_COLOR, color.getCssName());
 	}
-	
-	
+
 	// ///////////////////////////////////////////
 	// Sub classes
 	// ///////////////////////////////////////////
-	
+
 	public static class Header extends Div {
 		public Header() {
 			super(CssName.MDC_DRAWER__HEADER);
 		}
 	}
-	
+
 	public static class Title extends H3 {
 		public Title() {
 			super(CssName.MDC_DRAWER__TITLE);
 		}
 	}
-	
+
 	public static class Subtitle extends H6 {
 		public Subtitle() {
 			super(CssName.MDC_DRAWER__SUBTITLE);
 		}
 	}
-	
+
 	public static class Content extends Nav {
 
 		public Content() {
 			super(CssName.MDC_DRAWER__CONTENT);
 		}
-		
+
 	}
 }

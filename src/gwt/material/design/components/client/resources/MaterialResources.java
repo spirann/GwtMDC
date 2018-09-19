@@ -35,7 +35,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/vanilla-masker.min.js")
 	TextResource jqueryMaskJs();
 	
-	@Source("js/material-components-web.min.js")
+	@Source("js/material-components-web.js")
 	TextResource materialComponentsWebJs();
 
 	@Source("js/chartist/chartist.min.js")

@@ -63,21 +63,14 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 
 	@Override
 	protected void onInitialize() {
-
-		fireChangeOnClick = true;
-		
+		fireChangeOnClick = true;		
 		content.add(icon);
 		content.add(label);
-
 		add(content);
 		add(indicator);
 		add(ripple);
-
-		
 		addKeyUpHandler(event -> setSelected(true));
-
 		super.onInitialize();
-
 	}
 
 	@Override

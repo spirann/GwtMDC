@@ -62,21 +62,16 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	public MaterialCheckbox() {
 		super(CssName.MDC_FORM_FIELD);
 		super.initializeSelectedMixin(checkbox, CssName.MDC_CHECKBOX__SELECTED, input);
+		getElement();
 	}
-
-	@Override
-	protected void jsInit() {
-		super.jsInit();
-		final JavaScriptObject inputElement = getInputElemente(checkbox.getElement());
-		setInputElemente(jsElement, inputElement);
-	}
-
-	protected native JavaScriptObject getInputElemente(final Element element)/*-{
-		return new $wnd.mdc.checkbox.MDCCheckbox(element);
-	}-*/;
 	
-	protected native void setInputElemente(final JavaScriptObject element, final JavaScriptObject input)/*-{
-		element.input = input;		
+	@Override
+	protected native JavaScriptObject jsInit(final Element element)/*-{		
+		var _this = this;			
+		var checkbox = this.@gwt.material.design.components.client.ui.MaterialCheckbox::checkbox;
+		var checkbox_element = checkbox.@gwt.material.design.components.client.ui.html.Div::getElement()();		
+		element.input = new $wnd.mdc.checkbox.MDCCheckbox(checkbox_element);		
+		return element;
 	}-*/;
 
 	@Override

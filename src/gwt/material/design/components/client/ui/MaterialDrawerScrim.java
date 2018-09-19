@@ -27,9 +27,10 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawerHeader extends Div {
-
-	public MaterialDrawerHeader() {
-		super(CssName.MDC_DRAWER__HEADER);
+public class MaterialDrawerScrim extends Div {
+	
+	public MaterialDrawerScrim() {
+		super(CssName.MDC_DRAWER_SCRIM);
 	}
+	
 }

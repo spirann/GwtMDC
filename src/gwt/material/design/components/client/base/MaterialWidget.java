@@ -66,6 +66,7 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
@@ -178,7 +179,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		setInitialClasses(initialClass);
 	}
 
-	protected void jsInit() {
+	protected final void jsInit() {
 		jsElement = jsInit(getElement());
 	}
 
@@ -251,10 +252,10 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			getChildren().add(child);
 
 			// Physical attach.
-			// DOM.appendChild(container, child.getElement());
+			DOM.appendChild(container, child.getElement());
 
 			// getElement().appendChild(resolve(child.getElement()));
-			getElement().appendChild(child.getElement());
+			// getElement().appendChild(child.getElement());
 
 			// Adopt.
 			adopt(child);
@@ -324,11 +325,6 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	 */
 	public void setClass(String cssClasses) {
 		getElement().setAttribute("class", cssClasses);
-	}
-
-	@Override
-	public int getWidgetCount() {
-		return getElement().getChildCount();
 	}
 
 	@Override

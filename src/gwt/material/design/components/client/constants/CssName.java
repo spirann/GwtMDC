@@ -165,6 +165,9 @@ public interface CssName {
 	String MDC_DRAWER__TITLE = "mdc-drawer__title";
 	String MDC_DRAWER__SUBTITLE = "mdc-drawer__subtitle";
 	String MDC_DRAWER__CONTENT = "mdc-drawer__content";
+	
+	String MDC_DRAWER_SCRIM = "mdc-drawer-scrim";
+	String MDC_DRAWER_APP_CONTENT = "mdc-drawer-app-content";
 	// //////////////////////////////////////////////////////
 	// MENU
 	// //////////////////////////////////////////////////////
@@ -405,6 +408,8 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// CHART
 	// //////////////////////////////////////////////////////	
+	String MDC_CHART__TOOLTIP = "chartist-tooltip";
+	
 	String MDC_CHART__PIE_CHART = "ct-chart-pie";
 	String MDC_CHART__PIE_CHART__CHART_DONUT = "ct-chart-donut";
 	String MDC_CHART__PIE_CHART__SLICE_PIE = "ct-slice-pie";

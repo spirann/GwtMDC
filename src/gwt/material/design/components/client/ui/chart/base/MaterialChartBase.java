@@ -110,9 +110,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 		var _this = this;
 
-		// Remove old tooltips
-		while (element.getElementsByClassName('chartist-tooltip')[0])
-			element.getElementsByClassName('chartist-tooltip')[0].remove();
+		var tooltipClass = @gwt.material.design.components.client.constants.CssName::MDC_CHART__TOOLTIP;
+		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElements(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
 
 		// Instantiete the plugin
 		if (addTooltipPlugin) {

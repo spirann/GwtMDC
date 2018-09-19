@@ -73,15 +73,13 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 				
 		super.onInitialize();
 	}
-	
+
 	@Override
-	protected void jsInit() {
-		jsElement = jsInit(switch_.getElement());
-	}
-	
-	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.switchControl.MDCSwitch(element);
+	protected native JavaScriptObject jsInit(final Element element)/*-{		
+		var _this = this;			
+		var switch_ = this.@gwt.material.design.components.client.ui.MaterialSwitch::switch_;
+		var switch_element = switch_.@gwt.material.design.components.client.ui.html.Div::getElement()();		
+		return new $wnd.mdc.switchControl.MDCSwitch(switch_element);
 	}-*/;
 
 	@Override

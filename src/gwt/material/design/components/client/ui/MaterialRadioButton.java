@@ -90,13 +90,11 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	}
 	
 	@Override
-	protected void jsInit() {
-		jsElement = jsInit(radio.getElement());
-	}
-	
-	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.radio.MDCRadio(element);
+	protected native JavaScriptObject jsInit(final Element element)/*-{		
+		var _this = this;			
+		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;		
+		var radio_element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();	
+		return new $wnd.mdc.radio.MDCRadio(radio_element);
 	}-*/;
 
 	@Override
