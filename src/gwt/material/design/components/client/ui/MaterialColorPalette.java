@@ -1,5 +1,6 @@
 package gwt.material.design.components.client.ui;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -15,7 +16,7 @@ import gwt.material.design.components.client.ui.html.Label;
 public class MaterialColorPalette extends MaterialValuedField<Color> {
 
 	protected static final String[] COLORS_NAMES = { "", "50", "100", "200", "300", "400", "500", "600", "700", "800",
-			"900", "A100", "A200", "A400", "A700" };
+			"900", "A<br/>100", "A<br/>200", "A<br/>400", "A<br/>700" };
 	protected static final Color[][] COLORS = {
 
 			// RED
@@ -109,31 +110,32 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 
 	public MaterialColorPalette() {
 		super(CssName.MDC_COLOR_PALETTE);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+
+		final Div labesContent = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
 		
-		final Div contentLabels = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
-		for (String name : COLORS_NAMES) {
+		Arrays.asList(COLORS_NAMES).parallelStream().forEach(name -> {
 			final Label colorName = new Label(CssName.MDC_COLOR_PALETTE__LABEL);
-			colorName.setText(name);
-			contentLabels.add(colorName);
-		}
-		add(contentLabels);
+			colorName.setInnerHTML(name);
+			labesContent.add(colorName);
+		});
+		add(labesContent);
 
-		for (Color[] colorsGroup : COLORS) {
-
+		Arrays.asList(COLORS).forEach(colorsGroup -> {
 			final Div content = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
-
-			for (Color color : colorsGroup) {
-
+			Arrays.asList(colorsGroup).forEach(color -> {
 				final Div colorItem = new Div(CssName.MDC_COLOR_PALETTE__BUTTON);
 				colorItem.setBackgroundColor(color);
 				colorItem.addClickHandler(event -> setValue(color));
 				content.add(colorItem);
-
 				items.put(color, colorItem);
-			}
-
+			});
 			add(content);
-		}
+		});
 
 	}
 

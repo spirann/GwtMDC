@@ -577,29 +577,30 @@ i.mdc-list-item__graphic {
 	--mdc-button-raised-fill-color: var(--mdc-top-app-bar-ink-color);}	
 	
 /* ==========================================================================
-   Adjust drawer
+   Drawer
    ========================================================================== */
 .mdc-drawer {	
 	--mdc-list-item-graphic-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-primary-text-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-secondary-text-ink-color: var(--mdc-drawer-ink-color);
 	--mdc-list-item-meta-ink-color: var(--mdc-drawer-ink-color);		
-	background-color: var(--mdc-drawer-fill-color);}	
-
-  .mdc-drawer .mdc-drawer__title {
+	background-color: var(--mdc-drawer-fill-color);}
+.mdc-drawer .mdc-drawer__title {
     color: var(--mdc-drawer-ink-color);}
-  .mdc-drawer .mdc-list-group__subheader {
+.mdc-drawer .mdc-list-group__subheader {
     color: var(--mdc-drawer-ink-color);}
-  .mdc-drawer .mdc-drawer__subtitle {
-    color: var(--mdc-drawer-ink-color);}
-  .mdc-drawer .mdc-list-item__graphic {
+.mdc-drawer .mdc-drawer__subtitle {
+    color: var(--mdc-drawer-ink-color);
+    opacity: .6;}
+.mdc-drawer .mdc-list-item__graphic {
     color: var(--mdc-drawer-ink-color); }
-  .mdc-drawer .mdc-list-item {
+.mdc-drawer .mdc-list-item {
     color: var(--mdc-drawer-ink-color); }
-  .mdc-drawer .mdc-list-item--selected .mdc-list-item__graphic,
-  .mdc-drawer .mdc-list-item--activated .mdc-list-item__graphic {
+.mdc-drawer .mdc-list-item--selected .mdc-list-item__graphic,
+.mdc-drawer .mdc-list-item--activated .mdc-list-item__graphic {
     color: var(--mdc-list-item-selected-graphic-ink-color); }
-  .mdc-drawer .mdc-list-item--activated {
+.mdc-drawer .mdc-list-item--selected,
+.mdc-drawer .mdc-list-item--activated {
     color: var(--mdc-list-item-selected-graphic-ink-color); }	
 
 /* ==========================================================================
@@ -662,6 +663,8 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Adjust dialog color
    ========================================================================== */
+.mdc-dialog {
+	z-index: 7;}
 .mdc-dialog__surface {
 	color: var(--mdc-dialog-body-ink-color);
 	background-color:  var(--mdc-dialog-body-fill-color);

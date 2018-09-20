@@ -58,8 +58,8 @@ import gwt.material.design.components.client.events.ValidationEvent.ValidationHa
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Input;
+import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
-import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 /**
  * 
@@ -67,8 +67,8 @@ import gwt.material.design.components.client.validation.ui.TextFieldValidation;
  *
  */
 public class MaterialInput extends MaterialValuedField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>,
-		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
+		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask,
+		HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -83,12 +83,13 @@ public class MaterialInput extends MaterialValuedField<String>
 	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
 	protected final RequiredMixin<MaterialWidget> requeridMixin = new RequiredMixin<>(input);
-	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);	
+	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final AttributeMixin<MaterialWidget> minLengthMixin = new AttributeMixin<>(input, "minlength");
 	protected final AttributeMixin<MaterialWidget> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
-	
-	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
+
+	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
 	protected final AttributeMixin<MaterialInput> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
@@ -98,7 +99,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	// Validation
 	// /////////////////////////////////////////////////////////////
 	protected TextFieldValidation validation;
-	
+
 	public MaterialInput() {
 		super(CssName.MDC_TEXT_FIELD);
 	}
@@ -136,18 +137,16 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	protected void fireValidation() {
 
-		if (validation == null) {
+		if (validation == null)
 			return;
-		}
 
-		final Result result = validation.validate(getValue(), isRequired(), getMinLength(), getMaxLength());
-		
-		if(result == null) {
+		final Result result = validation.validate(getValue(), getInputMask(), isRequired(), getMinLength(),
+				getMaxLength());
+
+		if (result == null)
 			return;
-		}
-		
-		applyResultValidation(result);		
-		
+
+		applyResultValidation(result);
 		fireValidationEvent(result);
 	}
 
@@ -166,7 +165,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	protected void fireValidationEvent(final Result result) {
 		ValidationEvent.fire(this, result);
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
@@ -209,7 +208,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	public void setTextColor(Color color) {
 		input.setTextColor(color);
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
@@ -219,7 +218,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
 	}
-	
+
 	public void setFocusedColor(Color color) {
 		setStyleProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}
@@ -253,22 +252,20 @@ public class MaterialInput extends MaterialValuedField<String>
 	public String getPlaceholder() {
 		return placeholderMixin.getPlaceholder();
 	}
-	
+
 	@Override
 	public void setPlaceholderColor(Color color) {
-		placeholderMixin.setPlaceholderColor(color);	
+		placeholderMixin.setPlaceholderColor(color);
 	}
 
 	public void setInputType(InputType type) {
-		if(input instanceof Input) {
-			((Input) input).setType(type);	
-		}		
+		if (input instanceof Input)
+			((Input) input).setType(type);
 	}
 
-	public InputType getInputType() {		
-		if(input instanceof Input) {
-			return ((Input) input).getType();	
-		}		
+	public InputType getInputType() {
+		if (input instanceof Input)
+			return ((Input) input).getType();
 		return null;
 	}
 
@@ -311,6 +308,10 @@ public class MaterialInput extends MaterialValuedField<String>
 	@Override
 	public void setInputMask(String inputMask) {
 		inputMaskMixin.setInputMask(inputMask);
+		if (inputMask != null) {
+			setMinLength(inputMask.length());
+			setMaxLength(inputMask.length());
+		}
 	}
 
 	@Override
@@ -336,17 +337,13 @@ public class MaterialInput extends MaterialValuedField<String>
 	@Override
 	public void setIcon(IconType iconType) {
 		icon.setType(iconType);
-
 		if (iconPositionMixin.getType() != null) {
-
 			removeStyleName(iconPositionMixin.getType().getCssName());
-
-			if (iconType != null) {
+			if (iconType != null)
 				addStyleName(iconPositionMixin.getType().getCssName());
-			}
 		}
 	}
-	
+
 	@Override
 	public void setIconColor(Color color) {
 		icon.setColor(color);
@@ -355,9 +352,8 @@ public class MaterialInput extends MaterialValuedField<String>
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
 		icon.setTabindex(0);
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onClick(event);
-			}
 		}, IconClickEvent.getType());
 	}
 
@@ -367,10 +363,9 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
 		iconPositionMixin.setType(iconPosition);
-
-		if (icon.getType() == null && iconPosition != null) {
+		if (icon.getType() == null && iconPosition != null)
 			removeStyleName(iconPositionMixin.getType().getCssName());
-		}
+
 	}
 
 	@Override
@@ -378,13 +373,13 @@ public class MaterialInput extends MaterialValuedField<String>
 		super.setWidth(width);
 		input.setWidth(width);
 	}
-	
+
 	@Override
 	public void setMaxWidth(String maxWidth) {
 		super.setMaxWidth(maxWidth);
 		input.setMaxWidth(maxWidth);
 	}
-	
+
 	@Override
 	public void setMinHeight(String minHeight) {
 		super.setMinHeight(minHeight);

@@ -24,7 +24,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.HasInputMask;
-import gwt.material.design.components.client.vanillaMasker.VMasker;
+import gwt.material.design.components.client.masker.Masker;
 
 /**
  * 
@@ -56,10 +56,10 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 			handlerRegistration = null;
 		}
 
-		VMasker.unMask(uiObject.getElement());
+		Masker.unMask(uiObject.getElement());
 
 		if (inputMask != null) {
-			VMasker.maskPattern(uiObject.getElement(), inputMask);
+			Masker.maskPattern(uiObject.getElement(), inputMask);
 			uiObject.getElement().setAttribute(INPUT_MASK, inputMask);
 		}
 	}
@@ -71,7 +71,7 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 	}
 	
 	public String getValue() {
-		return VMasker.fromPattern(getValue(uiObject.getElement()), getInputMask());
+		return Masker.fromPattern(getValue(uiObject.getElement()), getInputMask());
 	}
 	
 	protected native String getValue(final Element element) /*-{

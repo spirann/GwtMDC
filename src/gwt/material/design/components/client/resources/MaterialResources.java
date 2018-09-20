@@ -62,7 +62,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/material-components-root.min.css")
 	TextResource materialComponentsRootCss();
 	
-	@Source("css/mixin.css")
+	@Source("css/mixin.min.css")
 	TextResource mixinCss();
 	
 	@Source("css/material-components-web-addins.min.css")

@@ -26,6 +26,7 @@ import com.google.gwt.dom.client.Style.OutlineStyle;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.TextAlign;
 import com.google.gwt.resources.client.ImageResource;
+import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
@@ -53,6 +54,14 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	
 	protected void setStyleProperty(final String attribute, final String value) {
 		StyleHelper.setStyleProperty(getElement(), attribute, value == null ? "none" : value);
+	}
+	
+	public void setInnerHTML(final String html) {
+		getElement().setInnerHTML(html);
+	}
+	
+	public void setInnerSafeHTML(final SafeHtml html) {
+		getElement().setInnerSafeHtml(html);
 	}
 
 	@Override
@@ -241,8 +250,8 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 		setStyleProperty("border-collapse", borderCollapse.getCssName());
 	}
 	
-	public void setBorderRadius(final int borderRadius) {
-		setStyleProperty("border-radius", borderRadius + "px");
+	public void setBorderRadius(final String borderRadius) {
+		setStyleProperty("border-radius", borderRadius);
 	}
 	
 	public void setOpacity(final double opacity) {

@@ -27,4 +27,7 @@ public interface IMessages extends Messages {
 	
 	@DefaultMessage("This field cannot be empty")
 	String mdc_validation__required();
+	
+	@DefaultMessage("The value is invalid")
+	String mdc_validation__value_invalid();
 }

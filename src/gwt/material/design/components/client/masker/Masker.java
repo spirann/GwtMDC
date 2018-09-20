@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.vanillaMasker;
+package gwt.material.design.components.client.masker;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
@@ -28,7 +28,7 @@ import com.google.gwt.i18n.client.Messages;
  * @author Richeli Vargas
  *
  */
-public class VMasker {
+public class Masker {
 
 	/**
 	 * 9 - Numbers <br/>
@@ -38,7 +38,7 @@ public class VMasker {
 	public static native void maskPattern(Element element, String mask)/*-{
 		$wnd.VMasker(element).maskPattern(mask);
 	}-*/;
-	
+
 	public static native void unMask(Element element)/*-{
 		$wnd.VMasker(element).unMask();
 	}-*/;
@@ -75,11 +75,7 @@ public class VMasker {
 			return text;
 		}
 
-		final String chars[] = mask
-				.replaceAll("9", "")
-				.replaceAll("A", "")
-				.replaceAll("S", "")
-				.split("");
+		final String chars[] = mask.replaceAll("9", "").replaceAll("A", "").replaceAll("S", "").split("");
 
 		for (String character : chars) {
 			text = text.replace(character, "");
@@ -87,33 +83,39 @@ public class VMasker {
 
 		return text;
 	}
-	
+
 	public interface Defaults extends Messages {
-		
+
 		public static final Defaults INSTANCE = GWT.create(Defaults.class);
-		
+
 		@DefaultMessage("(99) 9999-9999")
 		String phone_number_10__mask();
-		
+
 		@DefaultMessage("(99) 99999-9999")
 		String phone_number_11__mask();
-		
+
 		@DefaultMessage("9999 9999 9999 9999")
 		String credit_card__mask();
-		
+
 		@DefaultMessage("99999-999")
 		String postal_code__mask();
+
+		// //////////////////////////////////////////////////////////////////////////
+		// Date mask
+		// //////////////////////////////////////////////////////////////////////////
+		@DefaultMessage("99/99/9999")
+		String date__mask();
 		
 		// //////////////////////////////////////////////////////////////////////////
 		// Brazilian documents
 		// //////////////////////////////////////////////////////////////////////////
-		
+
 		@DefaultMessage("999.999.999-99")
 		String cpf__mask();
 
 		@DefaultMessage("99.999.999/9999-99")
 		String cnpj__mask();
-		
+
 		@DefaultMessage("99.999.999-9")
 		String rg__mask();
 	}

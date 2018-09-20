@@ -37,8 +37,8 @@ import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
-import gwt.material.design.components.client.validation.ui.TextFieldValidation;
 
 /**
  * 
