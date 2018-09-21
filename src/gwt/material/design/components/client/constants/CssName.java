@@ -448,6 +448,7 @@ public interface CssName {
 	String MDC_CALENDAR = "mdc-calendar";
 	String MDC_CALENDAR__HEADER__CONTENT = "mdc-calendar__header--content";
 	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
+	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
 	String MDC_CALENDAR__BODY__CONTENT = "mdc-calendar__body--content";
 	
 	// //////////////////////////////////////////////////////

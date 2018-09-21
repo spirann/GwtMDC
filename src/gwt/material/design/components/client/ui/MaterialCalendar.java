@@ -35,6 +35,7 @@ public class MaterialCalendar extends Div {
 	protected Div header = new Div(CssName.MDC_CALENDAR__HEADER__CONTENT);
 	protected Div body = new Div(CssName.MDC_CALENDAR__BODY__CONTENT);
 	protected Label yearLabel = new Label(CssName.MDC_CALENDAR__HEADER__YEAR);
+	protected Label dateLabel = new Label(CssName.MDC_CALENDAR__HEADER__DATE);
 	
 	public MaterialCalendar() {
 		super(CssName.MDC_CALENDAR);
@@ -46,6 +47,10 @@ public class MaterialCalendar extends Div {
 		
 		if(yearLabel.getText().isEmpty()) {
 			yearLabel.setText(String.valueOf((new Date()).getYear() + 1900));
+		}
+		
+		if(dateLabel.getText().isEmpty()) {
+			dateLabel.setText(String.valueOf((new Date()).getYear() + 1900));
 		}
 		
 		header.add(yearLabel);

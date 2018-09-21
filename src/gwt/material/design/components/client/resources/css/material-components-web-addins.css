@@ -128,6 +128,11 @@
 	border: 1px solid rgba(127,127,127,0.5); 
 	display: flex;
 	flex-direction: column;
+	
+	-webkit-user-select: none;
+    -moz-user-select: -moz-none;
+    -ms-user-select: none;
+    user-select: none;
 }	
 
 .mdc-calendar__header--content {
@@ -138,6 +143,11 @@
 }
 
 .mdc-calendar__header--year {
+	color: var(--mdc-theme-on-primary);
+	cursor: pointer;
+}
+
+.mdc-calendar__header--month {
 	color: var(--mdc-theme-on-primary);
 	cursor: pointer;
 }
