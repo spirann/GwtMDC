@@ -19,8 +19,11 @@
  */
 package gwt.material.design.components.client.ui;
 
+import java.util.Date;
+
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Label;
 
 /**
  * 
@@ -29,7 +32,25 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialCalendar extends Div {
 
+	protected Div header = new Div(CssName.MDC_CALENDAR__HEADER__CONTENT);
+	protected Div body = new Div(CssName.MDC_CALENDAR__BODY__CONTENT);
+	protected Label yearLabel = new Label(CssName.MDC_CALENDAR__HEADER__YEAR);
+	
 	public MaterialCalendar() {
 		super(CssName.MDC_CALENDAR);
+	}
+	
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		
+		if(yearLabel.getText().isEmpty()) {
+			yearLabel.setText(String.valueOf((new Date()).getYear() + 1900));
+		}
+		
+		header.add(yearLabel);
+		
+		add(header);
+		add(body);
 	}
 }
