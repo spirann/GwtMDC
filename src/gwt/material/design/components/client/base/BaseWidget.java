@@ -25,6 +25,7 @@ import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.dom.client.Style.OutlineStyle;
 import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.dom.client.Style.TextAlign;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.ui.ComplexPanel;
@@ -51,15 +52,15 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
 	protected final FlexboxMixin<BaseWidget> flexboxMixin = new FlexboxMixin<>(this);
-	
+
 	protected void setStyleProperty(final String attribute, final String value) {
 		StyleHelper.setStyleProperty(getElement(), attribute, value == null ? "none" : value);
 	}
-	
+
 	public void setInnerHTML(final String html) {
 		getElement().setInnerHTML(html);
 	}
-	
+
 	public void setInnerSafeHTML(final SafeHtml html) {
 		getElement().setInnerSafeHtml(html);
 	}
@@ -101,7 +102,7 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setFontSize(final String fontSize) {
 		setStyleProperty("font-size", fontSize);
 	}
-	
+
 	public void setFontFamily(final String fontFamily) {
 		setStyleProperty("font-family", fontFamily);
 	}
@@ -109,7 +110,7 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setTextAlign(final TextAlign textAlign) {
 		setStyleProperty("text-align", textAlign.getCssName());
 	}
-	
+
 	public void setCursor(Cursor cursor) {
 		setStyleProperty("cursor", cursor.getCssName());
 	}
@@ -159,13 +160,14 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	}
 
 	public void setBackgroundImageResource(final ImageResource imageResource) {
-		setStyleProperty("background", "url('" + imageResource.getSafeUri().asString() + "') no-repeat center center fixed");
+		setStyleProperty("background",
+				"url('" + imageResource.getSafeUri().asString() + "') no-repeat center center fixed");
 		setStyleProperty("-webkit-background-size", "cover");
 		setStyleProperty("-moz-background-size", "cover");
 		setStyleProperty("-o-background-size", "cover");
 		setStyleProperty("background-size", "cover");
 	}
-	
+
 	public void setBackgroundImage(final String url) {
 		setStyleProperty("background-image", url);
 	}
@@ -177,7 +179,7 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setColor(final Color color) {
 		setStyleProperty("color", color.getCssName());
 	}
-	
+
 	public void setTextColor(final Color color) {
 		setColor(color);
 	}
@@ -217,15 +219,15 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setZIndex(final int zIndex) {
 		setStyleProperty("z-index", String.valueOf(zIndex));
 	}
-	
+
 	public void setOutlineWidth(final int borderWidth) {
 		setStyleProperty("outline-width", borderWidth + "px");
 	}
-	
+
 	public void setOutilineColor(final Color color) {
 		setStyleProperty("outline-color", color.getCssName());
 	}
-	
+
 	public void setOutlineStyle(final OutlineStyle outlineStyle) {
 		setStyleProperty("outline-style", outlineStyle.getCssName());
 	}
@@ -233,37 +235,42 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setBorderWidth(final int borderWidth) {
 		setStyleProperty("border-width", borderWidth + "px");
 	}
-	
+
 	public void setBorderColor(final Color color) {
 		setStyleProperty("border-color", color.getCssName());
 	}
-	
+
 	public void setBorderStyle(final BorderStyle borderStyle) {
 		setStyleProperty("border-style", borderStyle.getCssName());
 	}
-	
+
 	public void setBorderSpacing(final int borderSpacing) {
 		setStyleProperty("border-spacing", borderSpacing + "px");
 	}
-	
+
 	public void setBorderCollapse(final BorderCollapse borderCollapse) {
 		setStyleProperty("border-collapse", borderCollapse.getCssName());
 	}
-	
+
 	public void setBorderRadius(final String borderRadius) {
 		setStyleProperty("border-radius", borderRadius);
 	}
-	
+
 	public void setOpacity(final double opacity) {
 		setStyleProperty("opacity", String.valueOf(opacity));
 	}
 
-	/* *****************************************************************************
+	public final void setVisibility(Visibility value) {
+		setStyleProperty("visibility", value.getCssName());
+	}
+
+	/*
+	 * *****************************************************************************
 	 *
 	 * FLEX BOX SETTER'S
 	 * 
-	 ******************************************************************************* */
-	
+	 */
+
 	@Override
 	public void setGwtDisplay(Style.Display display) {
 		flexboxMixin.setGwtDisplay(display);
@@ -332,15 +339,15 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	public void setScrollBarWidth(final String width) {
 		setStyleProperty(CssMixin.MDC_SCROLLBAR_WIDTH, width);
 	}
-	
+
 	public void setScrollBarTrackColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SCROLLBAR_TRACK_FILL, color.getCssName());
 	}
-	
+
 	public void setScrollBarThumbCorner(final String width) {
 		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_CORNER, width);
 	}
-	
+
 	public void setScrollBarThumbColor(final Color color) {
 		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_FILL, color.getCssName());
 	}

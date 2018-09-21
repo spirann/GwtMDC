@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.utils;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 /**
  * 
  * @author Richeli Vargas
@@ -26,24 +29,15 @@ package gwt.material.design.components.client.utils;
  */
 public class StringUtils {
 
-	public static String capitalize(final String text){
-		
-		
-		final String[] words = text.split(" ");
-		final StringBuilder builder = new StringBuilder();
-		
-		for(String word : words){
-			builder.append(" ");
-			builder.append(firstLetterToUpper(word));
-		}
-		
-		return builder.toString().substring(1);
+	public static String capitalize(final String text) {
+		return Arrays.asList(text.split(" ")).stream().map(word -> firstLetterToUpper(word))
+				.collect(Collectors.joining(" "));
 	}
-	
-	public static String firstLetterToUpper(final String text){		
-		return text.substring(0,1).toUpperCase() + text.substring(1).toLowerCase();
+
+	public static String firstLetterToUpper(final String text) {
+		return text.substring(0, 1).toUpperCase() + text.substring(1).toLowerCase();
 	}
-	
+
 	public static String toString(final double value) {
 		return String.valueOf(value);
 	}

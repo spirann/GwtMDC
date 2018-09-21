@@ -450,6 +450,15 @@ public interface CssName {
 	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
 	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
 	String MDC_CALENDAR__BODY__CONTENT = "mdc-calendar__body--content";
+	String MDC_CALENDAR__BODY__MONTH__CONTENT = "mdc-calendar__body--month--content";
+	String MDC_CALENDAR__BODY__MONTH__LABEL = "mdc-calendar__body--month--label";
+	String MDC_CALENDAR__BODY__MONTH__ACTION = "mdc-calendar__body--month--action";
+	String MDC_CALENDAR__BODY__WEEK__CONTENT = "mdc-calendar__body--week--content";
+	String MDC_CALENDAR__BODY__WEEK__LABEL = "mdc-calendar__body--week--label";
+	String MDC_CALENDAR__BODY__DAYS__CONTENT = "mdc-calendar__body--days--content";
+	String MDC_CALENDAR__BODY__DAYS__LABEL = "mdc-calendar__body--days--label";
+	String MDC_CALENDAR__BODY__DAYS__LABEL_ACTIVE = "mdc-calendar__body--days--label-active";
+	String MDC_CALENDAR__BODY__MONTHS__CONTENT = "mdc-calendar__body--months--content";
 	
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE

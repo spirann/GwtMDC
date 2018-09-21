@@ -54,55 +54,54 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		super(element, initialClasses);
 		initializeSelectedMixin();
 	}
-	
+
 	public MaterialSelectedField(final String... initialClasses) {
 		this(HtmlElements.DIV.createElement(), initialClasses);
 	}
-	
-	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass, Input checkedInput) {		
+
+	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass, Input checkedInput) {
 		selectedMixin = new ApplyStyleMixin<>(widget, cssClass);
-		if(checkedInput == null) {
+		if (checkedInput == null)
 			checkedMixin = null;
-		} else {
+		else
 			checkedMixin = new CheckedMixin<>(checkedInput);
-		}
 	}
-	
+
 	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass) {
 		initializeSelectedMixin(widget, cssClass, null);
 	}
-	
+
 	protected void initializeSelectedMixin(String cssClass) {
 		initializeSelectedMixin(this, cssClass, null);
 	}
-	
+
 	protected void initializeSelectedMixin(Input checkedInput) {
 		initializeSelectedMixin(this, "selected", checkedInput);
 	}
-	
+
 	private void defaultSelectedMixin() {
 		selectedMixin = new ApplyStyleMixin<>(this, "selected");
 	}
-	
+
 	protected void initializeSelectedMixin() {
 		initializeSelectedMixin(this, "selected", null);
 	}
-		
+
 	@Override
 	protected void onInitialize() {
 		addClickHandler(event -> fireAutoSelect(event));
 		super.onInitialize();
 	}
-	
+
 	protected void fireAutoSelect(ClickEvent event) {
 
-		if(fireChangeOnClick && (event.getSource() == null || event.getSource() == this || !(event.getSource() instanceof HasSelectionHandlers))) {			
+		if (fireChangeOnClick && (event.getSource() == null || event.getSource() == this
+				|| !(event.getSource() instanceof HasSelectionHandlers)))
 			TimerHelper.schedule(1, () -> fireChangeEvent());
-		}		
 
 		JsHelper.clearFocus();
-	}	
-	
+	}
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.formField.MDCFormField(element);
@@ -132,30 +131,27 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		return addHandler(handler, SelectionEvent.getType());
 	}
 
-	protected ApplyStyleMixin<MaterialWidget> getSelectedMixin(){		
-		if(selectedMixin == null) {
+	protected ApplyStyleMixin<MaterialWidget> getSelectedMixin() {
+		if (selectedMixin == null)
 			defaultSelectedMixin();
-		}		
 		return selectedMixin;
 	}
-	
+
 	@Override
 	public void setSelected(boolean selected) {
 		setSelected(selected, true);
 	}
-	
+
 	@Override
 	public void setSelected(boolean selected, boolean fireEvents) {
-		
-		if(checkedMixin != null) {
+
+		if (checkedMixin != null)
 			checkedMixin.setChecked(selected);
-		}
-		
+
 		getSelectedMixin().setApply(selected);
-		
-		if (fireEvents) {
+
+		if (fireEvents)
 			fireChangeEvent();
-		}
 	}
 
 	@Override
