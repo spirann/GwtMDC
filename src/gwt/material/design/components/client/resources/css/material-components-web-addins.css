@@ -147,11 +147,11 @@
 	color: var(--mdc-theme-on-primary);}
 	.mdc-calendar__header--month {
 	color: var(--mdc-theme-on-primary);}
-	.mdc-calendar__body--week--label {
+	.mdc-calendar__day-selector--week--label {
 	color: var(--mdc-theme-on-surface);}
-	.mdc-calendar__body--days--label {
+	.mdc-calendar__day-selector--days--label {
 	color: var(--mdc-theme-on-surface);}
-	.mdc-calendar__body--months--label {
+	.mdc-calendar__day-selector--months--label {
 	color: var(--mdc-theme-on-surface);}
 	
 
@@ -175,7 +175,6 @@
 	flex-direction: column;
 	background-color: var(--mdc-theme-surface);
 	height: auto;
-	max-height: calc(7 * 36px); 
 	overflow: hidden;	
 	-webkit-transition: max-height 2s ease-out; /* Safari */
     transition: max-height 2s ease-out;}
@@ -215,11 +214,21 @@
 	.mdc-calendar__day-selector--days--label {
 	width: 36px;
 	height: 36px;
-	--mdc-icon-button-ink-color: var(--mdc-theme-on-surface);}
+	color: var(--mdc-theme-on-surface);
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;	
+	border-radius: var(--mdc-popup-border-radius);}
 	.mdc-calendar__day-selector--days--label-active {
-	--mdc-icon-button-ink-color: var(--mdc-theme-on-primary);
+	border-radius: 50%;
+	color: var(--mdc-theme-on-primary);
 	background-color: var(--mdc-theme-primary);
 	}	
+	
+	
+	
+	
 	
 .mdc-calendar__body--months--content {
 	display: flex;	

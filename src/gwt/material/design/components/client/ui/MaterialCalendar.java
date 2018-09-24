@@ -21,11 +21,9 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.i18n.client.LocaleInfo;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.calendar.MaterialDaySelector;
 import gwt.material.design.components.client.ui.html.Div;
@@ -63,6 +61,9 @@ public class MaterialCalendar extends Div {
 
 		header.add(headerYear);
 		header.add(headerDate);
+		
+		daySelector.addValueChangeHandler(event -> setValues());
+		daySelector.setValue(new Date());
 
 		for (int i = 1; i < 13; i++) {
 			final int month = i - 1;
@@ -78,16 +79,10 @@ public class MaterialCalendar extends Div {
 			bodyMonths.add(chip);
 		}
 		
-		daySelector.setValue(new Date());
-		daySelector.addValueChangeHandler(event -> setValues());
 
 		add(header);
 		add(daySelector);
 		add(bodyMonths);
-		
-
-
-		setValues();
 	}
 
 	protected Date adjustDate(final Date date) {
@@ -95,15 +90,8 @@ public class MaterialCalendar extends Div {
 	}
 
 	protected void setValues() {
-
-		tempDate = daySelector.getValue();
-		
+		tempDate = daySelector.getValue();		
 		drawHeader();
-
-		final int year = tempDate.getYear() + 1900;
-		final int month = tempDate.getMonth() + 1;
-		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
-
 	}
 
 	protected void drawHeader() {

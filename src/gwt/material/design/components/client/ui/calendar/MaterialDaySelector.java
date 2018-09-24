@@ -39,132 +39,146 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
  * @author Richeli Vargas
  *
  */
+@SuppressWarnings("deprecation")
 public class MaterialDaySelector extends MaterialValuedField<Date> {
 
 	protected Div bodyMonth = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__CONTENT);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 	protected Label bodyMonthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
-	
+
 	protected Div bodyWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
 	protected Div bodyDays = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT);
-	
 
 	private Date tempDate = adjustDate(new Date());
-	
+
 	public MaterialDaySelector() {
 		super(CssName.MDC_CALENDAR__DAY_SELECTOR);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return element;
 	}-*/;
-	
+
 	@Override
-	protected void onInitialize() {	
+	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		previousMonth.addClickHandler(event -> decreaseMonth());
 		nextMonth.addClickHandler(event -> increaseMonth());
-		
+
 		bodyMonth.add(previousMonth);
 		bodyMonth.add(bodyMonthLabel);
 		bodyMonth.add(nextMonth);
-		
+
 		bodyMonthLabel.addClickHandler(event -> {
-			
+
 		});
-		
-		for(int i = 1; i < 8; i++) {
-			final Label label = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
+
+		for (int i = 1; i < 8; i++) {
+			final Label label = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL,
+					CssName.MDC_TYPOGRAPHY__CAPTION);
 			label.setText(IMessages.INSTANCE.mdc_calendar_letter_week(i));
 			bodyWeek.add(label);
 		}
-		
+
 		add(bodyMonth);
 		add(bodyWeek);
 		add(bodyDays);
+
+		drawDays();
+		drawMonth();
 	}
-	
+
 	protected void increaseMonth() {
- 		setMonth(tempDate.getMonth() + 1);
- 		drawDays();
+		setMonth(tempDate.getMonth() + 1);
 	}
-	
+
 	protected void decreaseMonth() {
 		setMonth(tempDate.getMonth() - 1);
-		drawDays();
 	}
-	
+
 	protected void setMonth(final int month) {
-		
+
 		final int newMonth;
 		final int newYear;
-		
-		if(month < 0) {
+
+		if (month < 0) {
 			newMonth = 11;
 			newYear = tempDate.getYear() - 1;
-		} else if(month > 11) {
+		} else if (month > 11) {
 			newMonth = 0;
 			newYear = tempDate.getYear() + 1;
 		} else {
 			newMonth = month;
 			newYear = tempDate.getYear();
 		}
-		
+
 		tempDate.setDate(1);
 		tempDate.setMonth(newMonth);
 		tempDate.setYear(newYear);
-		
+
 		drawDays();
+		drawMonth();
 	}
-	
+
+	protected void drawMonth() {
+		final int year = tempDate.getYear() + 1900;
+		final int month = tempDate.getMonth() + 1;
+		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
+		bodyMonthLabel.setText(IMessages.INSTANCE.mdc_calendar_body_month(fullMonth, year));
+	}
+
 	protected void drawDays() {
-		
+
 		bodyDays.clear();
-		
+
 		final int firstDay = 1;
 		final int lastDay = DateTimeHelper.lastDayOfMonth(this.tempDate);
-		
-		final Date date = adjustDate(this.tempDate);		
+
+		final Date date = adjustDate(this.tempDate);
 		final String name = getId();
-		
-		for(int i = firstDay, w = 0; i <= lastDay; i++, w++) {
+
+		for (int i = firstDay, w = 0; i <= lastDay; i++, w++) {
 			date.setDate(i);
 
-			if(w == 7)
-				w = 0; 
-			
-			final Date d = adjustDate(date);
+			if (w == 7)
+				w = 0;
+
+			final Date adjustedDate = adjustDate(date);
 			final MaterialCalendarItem dayButton = new MaterialCalendarItem();
 			dayButton.setText(String.valueOf(i));
 			dayButton.setName(name);
 			dayButton.addSelectionHandler(event -> {
-				tempDate = date;
-				setValue(date);
-				drawDays();
+				if (event.getValue())
+					super.setValue(adjustedDate, true);
 			});
-			
-			if(getValue() != null && d.getTime() == getValue().getTime()) 
+
+			if (getValue() != null && adjustedDate.getTime() == getValue().getTime())
 				dayButton.setSelected(true, true);
-			
-			if(w != date.getDay()) {
+
+			if (w != date.getDay()) {
 				i--;
 				dayButton.setText("");
 				dayButton.setVisibility(Visibility.HIDDEN);
 			}
-			
+
 			bodyDays.add(dayButton);
 		}
-		
+
 	}
-	
+
 	@Override
-	public void setValue(Date value) {
-		super.setValue(value);
+	public void setValue(Date value, boolean fireEvents) {
+		super.setValue(adjustDate(value), fireEvents);
+		this.tempDate = getValue();
+		if (initialized) {
+			drawDays();
+			drawMonth();
+		}
 	}
-	
+
 	protected Date adjustDate(final Date date) {
 		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
 	}
