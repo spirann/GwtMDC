@@ -153,6 +153,8 @@
 	color: var(--mdc-theme-on-surface);}
 	.mdc-calendar__body--days--label {
 	color: var(--mdc-theme-on-surface);}
+	.mdc-calendar__body--months--label {
+	color: var(--mdc-theme-on-surface);}
 	
 
 .mdc-calendar__header--content {
@@ -250,4 +252,8 @@
 	overflow: hidden;	
 	-webkit-transition: height 2s; /* Safari */
     transition: height 2s;
+}
+
+.mdc-calendar__body--months--label {
+	
 }

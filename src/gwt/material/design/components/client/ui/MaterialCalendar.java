@@ -21,20 +21,15 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.i18n.client.LocaleInfo;
 
-import gwt.material.design.components.client.constants.ChipSetType;
-import gwt.material.design.components.client.constants.ChipType;
-import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.utils.helper.DateTimeHelper;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
@@ -56,7 +51,7 @@ public class MaterialCalendar extends Div {
 	
 	protected Div bodyWeek = new Div(CssName.MDC_CALENDAR__BODY__WEEK__CONTENT);
 	protected Div bodyDays = new Div(CssName.MDC_CALENDAR__BODY__DAYS__CONTENT);
-	protected MaterialChipSet bodyMonths = new MaterialChipSet();
+	protected Div bodyMonths = new Div(CssName.MDC_CALENDAR__BODY__MONTHS__CONTENT);
 
 	private String locale = LocaleInfo.getCurrentLocale().getLocaleName();
 
@@ -95,25 +90,19 @@ public class MaterialCalendar extends Div {
 			bodyWeek.add(label);
 		}
 		
-		bodyMonths.addStyleName(CssName.MDC_CALENDAR__BODY__MONTHS__CONTENT);
-		bodyMonths.setType(ChipSetType.CHOICE);
-		
 		for(int i = 1; i < 13; i++) {
 			final int month = i - 1;
-			final MaterialChip chip = new MaterialChip();
+			final Label chip = new Label(CssName.MDC_CALENDAR__BODY__MONTHS__LABEL);
 			chip.setText(IMessages.INSTANCE.mdc_calendar_short_month(i));
-			chip.setSelected(i == (selectedDate.getMonth() + 1));
-			chip.setType(ChipType.OUTLINE);
-			chip.setShowCheckmark(false);
-			chip.setSelectColor(Color.MDC_THEME_PRIMARY);
-			chip.addSelectionHandler(event -> {
+			//chip.setSelected(i == (selectedDate.getMonth() + 1));
+			//chip.setType(ChipType.OUTLINE);
+			//chip.setShowCheckmark(false);
+			//chip.setSelectColor(Color.MDC_THEME_PRIMARY);
+			chip.addClickHandler(event -> {
 				
-				
-				if(event.getValue()) {
 					setMonth(month);
 					bodyMonths.setHeight("0");
 					body.setHeight("auto");
-				}
 				
 				
 			});

@@ -459,6 +459,7 @@ public interface CssName {
 	String MDC_CALENDAR__BODY__DAYS__LABEL = "mdc-calendar__body--days--label";
 	String MDC_CALENDAR__BODY__DAYS__LABEL_ACTIVE = "mdc-calendar__body--days--label-active";
 	String MDC_CALENDAR__BODY__MONTHS__CONTENT = "mdc-calendar__body--months--content";
+	String MDC_CALENDAR__BODY__MONTHS__LABEL = "mdc-calendar__body--months--label";
 	
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE
