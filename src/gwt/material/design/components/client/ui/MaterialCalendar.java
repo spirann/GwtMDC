@@ -27,6 +27,7 @@ import com.google.gwt.i18n.client.LocaleInfo;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.ui.calendar.MaterialDaySelector;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.utils.helper.DateTimeHelper;
@@ -42,200 +43,130 @@ public class MaterialCalendar extends Div {
 	protected Div header = new Div(CssName.MDC_CALENDAR__HEADER__CONTENT);
 	protected Label headerYear = new Label(CssName.MDC_CALENDAR__HEADER__YEAR);
 	protected Label headerDate = new Label(CssName.MDC_CALENDAR__HEADER__DATE, CssName.MDC_TYPOGRAPHY__HEADLINE_5);
-	
-	protected Div body = new Div(CssName.MDC_CALENDAR__BODY__CONTENT);
-	protected Div bodyMonth = new Div(CssName.MDC_CALENDAR__BODY__MONTH__CONTENT);
-	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
-	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected Label bodyMonthLabel = new Label(CssName.MDC_CALENDAR__BODY__MONTH__LABEL);
-	
-	protected Div bodyWeek = new Div(CssName.MDC_CALENDAR__BODY__WEEK__CONTENT);
-	protected Div bodyDays = new Div(CssName.MDC_CALENDAR__BODY__DAYS__CONTENT);
+
+	protected MaterialDaySelector daySelector = new MaterialDaySelector();
+
 	protected Div bodyMonths = new Div(CssName.MDC_CALENDAR__BODY__MONTHS__CONTENT);
 
 	private String locale = LocaleInfo.getCurrentLocale().getLocaleName();
 
 	private MaterialIconButton selectedElement;
-	private Date selectedDate = adjustDate(new Date());
 	private Date tempDate = adjustDate(new Date());
-	
+
 	public MaterialCalendar() {
 		super(CssName.MDC_CALENDAR);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
-		setValues();
-				
+
 		header.add(headerYear);
 		header.add(headerDate);
-		
-		previousMonth.addClickHandler(event -> decreaseMonth());
-		nextMonth.addClickHandler(event -> increaseMonth());
-		
-		bodyMonth.add(previousMonth);
-		bodyMonth.add(bodyMonthLabel);
-		bodyMonth.add(nextMonth);
-		
-		bodyMonthLabel.addClickHandler(event -> {
-			body.setHeight("0");
-			bodyMonths.setHeight("auto");
-		});
-		
-		for(int i = 1; i < 8; i++) {
-			final Label label = new Label(CssName.MDC_CALENDAR__BODY__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
-			label.setText(IMessages.INSTANCE.mdc_calendar_letter_week(i));
-			bodyWeek.add(label);
-		}
-		
-		for(int i = 1; i < 13; i++) {
+
+		for (int i = 1; i < 13; i++) {
 			final int month = i - 1;
 			final Label chip = new Label(CssName.MDC_CALENDAR__BODY__MONTHS__LABEL);
 			chip.setText(IMessages.INSTANCE.mdc_calendar_short_month(i));
-			//chip.setSelected(i == (selectedDate.getMonth() + 1));
-			//chip.setType(ChipType.OUTLINE);
-			//chip.setShowCheckmark(false);
-			//chip.setSelectColor(Color.MDC_THEME_PRIMARY);
 			chip.addClickHandler(event -> {
-				
-					setMonth(month);
-					bodyMonths.setHeight("0");
-					body.setHeight("auto");
-				
-				
+
+				setMonth(month);
+				bodyMonths.setHeight("0");
+				daySelector.setHeight("auto");
+
 			});
 			bodyMonths.add(chip);
 		}
 		
-		body.add(bodyMonth);
-		body.add(bodyWeek);
-		body.add(bodyDays);
-		
-		
+		daySelector.setValue(new Date());
+		daySelector.addValueChangeHandler(event -> setValues());
+
 		add(header);
-		add(body);
+		add(daySelector);
 		add(bodyMonths);
+		
+
+
+		setValues();
 	}
-	
+
 	protected Date adjustDate(final Date date) {
 		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
 	}
 
 	protected void setValues() {
+
+		tempDate = daySelector.getValue();
 		
 		drawHeader();
-		
+
 		final int year = tempDate.getYear() + 1900;
 		final int month = tempDate.getMonth() + 1;
 		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
-		bodyMonthLabel.setText(IMessages.INSTANCE.mdc_calendar_body_month(fullMonth, year));
-		
-		drawDays();
+
 	}
-	
+
 	protected void drawHeader() {
-		final int year = selectedDate.getYear() + 1900;
-		final int month = selectedDate.getMonth() + 1;
-		final String week = IMessages.INSTANCE.mdc_calendar_short_week(selectedDate.getDay() + 1);
+		final int year = daySelector.getValue().getYear() + 1900;
+		final int month = daySelector.getValue().getMonth() + 1;
+		final String week = IMessages.INSTANCE.mdc_calendar_short_week(daySelector.getValue().getDay() + 1);
 		final String shortMonth = IMessages.INSTANCE.mdc_calendar_short_month(month);
-		final int day = selectedDate.getDate();
+		final int day = daySelector.getValue().getDate();
 		headerYear.setText(String.valueOf(year));
 		headerDate.setText(IMessages.INSTANCE.mdc_calendar_header_day(week, shortMonth, day));
 	}
-	
-	protected void drawDays() {
-		
-		bodyDays.clear();
-		
-		final int firstDay = 1;
-		final int lastDay = DateTimeHelper.lastDayOfMonth(this.tempDate);
-		
-		final Date date = adjustDate(this.tempDate);		
-		
-		for(int i = firstDay, w = 0; i <= lastDay; i++, w++) {
-			date.setDate(i);
 
-			if(w == 7)
-				w = 0; 
-			
-			final Date d = adjustDate(date);
-			final MaterialIconButton dayButton = new MaterialIconButton();
-			dayButton.addStyleName(CssName.MDC_CALENDAR__BODY__DAYS__LABEL);
-			dayButton.addStyleName(CssName.MDC_TYPOGRAPHY__CAPTION);
-			dayButton.addClickHandler(event -> select(d, dayButton));
-			
-			if(selectedDate != null && d.getTime() == selectedDate.getTime()) 
-				select(d, dayButton);
-			
-			if(w == date.getDay()) {
-				dayButton.getElement().setInnerText(String.valueOf(i));				
-			} else {
-				i--;
-				dayButton.getElement().setInnerText("");
-				dayButton.setVisibility(Visibility.HIDDEN);
-			}
-			
-			bodyDays.add(dayButton);
-		}
-		
-	}
-	
 	protected void select(final Date date, final MaterialIconButton element) {
-		
-		if(selectedElement != null) {
-			selectedElement.removeStyleName(CssName.MDC_CALENDAR__BODY__DAYS__LABEL_ACTIVE);
+
+		if (selectedElement != null) {
+			selectedElement.removeStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL_ACTIVE);
 		}
-		
+
 		selectedElement = element;
-		selectedElement.addStyleName(CssName.MDC_CALENDAR__BODY__DAYS__LABEL_ACTIVE);
-		
-		selectedDate = date;
-		
+		selectedElement.addStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL_ACTIVE);
+
 		drawHeader();
 	}
 
- 	protected void increaseMonth() {
- 		setMonth(tempDate.getMonth() + 1);
+	protected void increaseMonth() {
+		setMonth(tempDate.getMonth() + 1);
 		setValues();
 	}
-	
+
 	protected void decreaseMonth() {
 		setMonth(tempDate.getMonth() - 1);
 		setValues();
 	}
-	
+
 	protected void setMonth(final int month) {
-		
+
 		final int newMonth;
 		final int newYear;
-		
-		if(month < 0) {
+
+		if (month < 0) {
 			newMonth = 11;
 			newYear = tempDate.getYear() - 1;
-		} else if(month > 11) {
+		} else if (month > 11) {
 			newMonth = 0;
 			newYear = tempDate.getYear() + 1;
 		} else {
 			newMonth = month;
 			newYear = tempDate.getYear();
 		}
-		
+
 		tempDate.setDate(1);
 		tempDate.setMonth(newMonth);
 		tempDate.setYear(newYear);
-		
+
 		setValues();
 	}
-	
+
 	public Date getDate() {
-		return selectedDate;
+		return daySelector.getValue();
 	}
 
 	public void setDate(Date date) {
-		this.selectedDate = date;
-		setValues();
+		daySelector.setValue(date);
 	}
 
 	public String getLocale() {
