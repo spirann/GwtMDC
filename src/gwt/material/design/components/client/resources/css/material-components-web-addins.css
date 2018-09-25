@@ -121,6 +121,15 @@
 /* ==========================================================================
    Calendar
    ========================================================================== */
+:root{
+	--mdc-calendar-ink: var(--mdc-theme-on-surface);
+	--mdc-calendar-fill: var(--mdc-theme-surface);
+	--mdc-calendar-active-ink: var(--mdc-theme-on-primary);
+	--mdc-calendar-active-fill: var(--mdc-theme-primary);
+	--mdc-calendar--header-ink: var(--mdc-theme-on-primary);
+	--mdc-calendar--header-fill: var(--mdc-theme-primary);
+	--mdc-calendar--body-width: calc(7 * 36px);
+}  
 .mdc-calendar {
 	width: 100%;
 	border-radius: var(--mdc-popup-border-radius);
@@ -130,46 +139,52 @@
 	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
-		
 	-webkit-user-select: none;
     -moz-user-select: -moz-none;
     -ms-user-select: none;
-    user-select: none;    
-}
-
-.mdc-calendar label {
-	cursor: pointer;
-}
+    user-select: none;}
+    .mdc-calendar label {
+	cursor: pointer;}
 
 .mdc-calendar__header--year {
-	color: var(--mdc-theme-on-primary);}
+	color: var(--mdc-calendar--header-ink);}
 	.mdc-calendar__header--date {
-	color: var(--mdc-theme-on-primary);}
+	color: var(--mdc-calendar--header-ink);}
 	.mdc-calendar__header--month {
-	color: var(--mdc-theme-on-primary);}
+	color: var(--mdc-calendar--header-ink);}
 	.mdc-calendar__day-selector--week--label {
-	color: var(--mdc-theme-on-surface);}
+	color: var(--mdc-calendar-ink);}
 	.mdc-calendar__day-selector--days--label {
-	color: var(--mdc-theme-on-surface);}
-	.mdc-calendar__day-selector--months--label {
-	color: var(--mdc-theme-on-surface);}
-	
+	color: var(--mdc-calendar-ink);}
+	.mdc-calendar__day-selector--month--label {
+	color: var(--mdc-calendar-ink);}
+	.mdc-calendar__day-selector--month--action {
+	--mdc-icon-button-ink-color: var(--mdc-calendar-ink); }
+	.mdc-calendar__day-selector--days--label-active {
+	color: var(--mdc-calendar-active-ink);
+	background-color: var(--mdc-calendar-active-fill);}
+.mdc-calendar {
+	background-color: var(--mdc-calendar-fill);}
+	.mdc-calendar__header {
+	background-color: var(--mdc-calendar--header-fill);}
 
-.mdc-calendar__header--content {
-	width: 100%;
+.mdc-calendar__header {
+	width: calc(100% - 40px);
 	display: flex;
 	flex-direction: column;
-	background-color: var(--mdc-theme-primary);
 	padding: 16px;
 	padding-left: 24px;}
-	.mdc-calendar__header--year {height: 16px;}
-	.mdc-calendar__header--date {height: 24px;}
-	.mdc-calendar__header--month {}
+	.mdc-calendar__header--year {}
+	.mdc-calendar__header--date {}
 
 .mdc-calendar__day-selector {
+	width: 100%;
+	max-width: var(--mdc-calendar--body-width);
+	height: auto;
+	padding: 8px;
 	flex: 1;
 	display: flex;
-	justify-content: center;
+	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
 	flex-direction: column;
@@ -203,48 +218,44 @@
 	align-content: center;
 	align-items: center;
 	justify-content: center;
-	opacity: .5}
+	opacity: .5;
+	cursor: auto;}
 	/* Days */
 	.mdc-calendar__day-selector--days--content {
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
-	max-width: calc(7 * 36px);
 	height: auto;}
 	.mdc-calendar__day-selector--days--label {
 	width: 36px;
 	height: 36px;
-	color: var(--mdc-theme-on-surface);
 	display: flex;
 	align-content: center;
 	align-items: center;
 	justify-content: center;	
 	border-radius: var(--mdc-popup-border-radius);}
 	.mdc-calendar__day-selector--days--label-active {
-	border-radius: 50%;
-	color: var(--mdc-theme-on-primary);
-	background-color: var(--mdc-theme-primary);
-	}	
+	border-radius: 50%;}	
 	
-	
-	
-	
-	
-.mdc-calendar__body--months--content {
-	display: flex;	
+.mdc-calendar__month-selector {
 	width: 100%;
+	max-width: var(--mdc-calendar--body-width);
+	height: auto;
+	max-height: 0;
+	padding: 8px;
+	display: flex;	
 	flex-wrap: wrap;
-	max-width: calc(7 * 36px);
 	align-content: center;
 	align-items: center;
 	justify-content: center;
-	height: 0;
-	overflow: hidden;	
-	-webkit-transition: height 2s; /* Safari */
-    transition: height 2s;
-}
+	overflow: hidden;
+	-webkit-transition: max-height 2s ease-out; /* Safari */
+    transition: max-height 2s ease-out;
+}	
+.mdc-calendar__month-selector label {
+	text-transform: uppercase;
+	width: 56px;
+	height: 56px;
+}	
+	
 
-.mdc-calendar__body--months--label {
-	width: 36px;
-	height: 36px;
-}

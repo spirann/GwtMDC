@@ -123,5 +123,4 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	public void setText(String text) {
 		textMixin.setText(text);
 	}
-
 }

@@ -24,6 +24,8 @@ import java.util.Date;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Visibility;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
@@ -40,19 +42,18 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialDaySelector extends MaterialValuedField<Date> {
+public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 
 	protected Div bodyMonth = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__CONTENT);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected Label bodyMonthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
+	protected Label monthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
+	protected Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
+	protected Div contentDays = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT);
 
-	protected Div bodyWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
-	protected Div bodyDays = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT);
+	private Date auxDate = adjustDate(new Date());
 
-	private Date tempDate = adjustDate(new Date());
-
-	public MaterialDaySelector() {
+	public MaterialCalendarDaySelector() {
 		super(CssName.MDC_CALENDAR__DAY_SELECTOR);
 	}
 
@@ -65,38 +66,35 @@ public class MaterialDaySelector extends MaterialValuedField<Date> {
 	protected void onInitialize() {
 		super.onInitialize();
 
+		previousMonth.addStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__ACTION);
 		previousMonth.addClickHandler(event -> decreaseMonth());
+
+		nextMonth.addStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__ACTION);
 		nextMonth.addClickHandler(event -> increaseMonth());
 
 		bodyMonth.add(previousMonth);
-		bodyMonth.add(bodyMonthLabel);
+		bodyMonth.add(monthLabel);
 		bodyMonth.add(nextMonth);
 
-		bodyMonthLabel.addClickHandler(event -> {
-
-		});
-
-		for (int i = 1; i < 8; i++) {
-			final Label label = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL,
-					CssName.MDC_TYPOGRAPHY__CAPTION);
-			label.setText(IMessages.INSTANCE.mdc_calendar_letter_week(i));
-			bodyWeek.add(label);
-		}
-
 		add(bodyMonth);
-		add(bodyWeek);
-		add(bodyDays);
+		add(contentWeek);
+		add(contentDays);
 
 		drawDays();
+		drawWeeks();
 		drawMonth();
+	}
+	
+	public HandlerRegistration addClickMonthHandler(ClickHandler handler) {
+		return monthLabel.addClickHandler(handler);
 	}
 
 	protected void increaseMonth() {
-		setMonth(tempDate.getMonth() + 1);
+		setMonth(auxDate.getMonth() + 1);
 	}
 
 	protected void decreaseMonth() {
-		setMonth(tempDate.getMonth() - 1);
+		setMonth(auxDate.getMonth() - 1);
 	}
 
 	protected void setMonth(final int month) {
@@ -106,49 +104,55 @@ public class MaterialDaySelector extends MaterialValuedField<Date> {
 
 		if (month < 0) {
 			newMonth = 11;
-			newYear = tempDate.getYear() - 1;
+			newYear = auxDate.getYear() - 1;
 		} else if (month > 11) {
 			newMonth = 0;
-			newYear = tempDate.getYear() + 1;
+			newYear = auxDate.getYear() + 1;
 		} else {
 			newMonth = month;
-			newYear = tempDate.getYear();
+			newYear = auxDate.getYear();
 		}
 
-		tempDate.setDate(1);
-		tempDate.setMonth(newMonth);
-		tempDate.setYear(newYear);
+		auxDate.setDate(1);
+		auxDate.setMonth(newMonth);
+		auxDate.setYear(newYear);
 
 		drawDays();
 		drawMonth();
 	}
 
 	protected void drawMonth() {
-		final int year = tempDate.getYear() + 1900;
-		final int month = tempDate.getMonth() + 1;
+		final int year = auxDate.getYear() + 1900;
+		final int month = auxDate.getMonth() + 1;
 		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
-		bodyMonthLabel.setText(IMessages.INSTANCE.mdc_calendar_body_month(fullMonth, year));
+		monthLabel.setText(IMessages.INSTANCE.mdc_calendar_body_month(fullMonth, year));
+	}
+
+	protected void drawWeeks() {
+		contentWeek.clear();
+		for (int i = 1; i < 8; i++)
+			contentWeek.add(new WeekLabel(i));
 	}
 
 	protected void drawDays() {
 
-		bodyDays.clear();
+		contentDays.clear();
 
 		final int firstDay = 1;
-		final int lastDay = DateTimeHelper.lastDayOfMonth(this.tempDate);
+		final int lastDay = DateTimeHelper.lastDayOfMonth(this.auxDate);
 
-		final Date date = adjustDate(this.tempDate);
+		final Date date = adjustDate(this.auxDate);
 		final String name = getId();
 
-		for (int i = firstDay, w = 0; i <= lastDay; i++, w++) {
-			date.setDate(i);
+		for (int d = firstDay, w = 0; d <= lastDay; d++, w++) {
+			date.setDate(d);
 
 			if (w == 7)
 				w = 0;
 
 			final Date adjustedDate = adjustDate(date);
 			final MaterialCalendarItem dayButton = new MaterialCalendarItem();
-			dayButton.setText(String.valueOf(i));
+			dayButton.setText(String.valueOf(d));
 			dayButton.setName(name);
 			dayButton.addSelectionHandler(event -> {
 				if (event.getValue())
@@ -159,12 +163,12 @@ public class MaterialDaySelector extends MaterialValuedField<Date> {
 				dayButton.setSelected(true, true);
 
 			if (w != date.getDay()) {
-				i--;
+				d--;
 				dayButton.setText("");
 				dayButton.setVisibility(Visibility.HIDDEN);
 			}
 
-			bodyDays.add(dayButton);
+			contentDays.add(dayButton);
 		}
 
 	}
@@ -172,7 +176,9 @@ public class MaterialDaySelector extends MaterialValuedField<Date> {
 	@Override
 	public void setValue(Date value, boolean fireEvents) {
 		super.setValue(adjustDate(value), fireEvents);
-		this.tempDate = getValue();
+
+		this.auxDate = getValue();
+
 		if (initialized) {
 			drawDays();
 			drawMonth();
@@ -181,5 +187,13 @@ public class MaterialDaySelector extends MaterialValuedField<Date> {
 
 	protected Date adjustDate(final Date date) {
 		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
+	}
+
+
+	protected class WeekLabel extends Label {
+		protected WeekLabel(final int date) {
+			super(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
+			setText(IMessages.INSTANCE.mdc_calendar_letter_week(date));
+		}
 	}
 }
