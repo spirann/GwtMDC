@@ -446,6 +446,9 @@ public interface CssName {
 	// CALENDAR
 	// //////////////////////////////////////////////////////
 	String MDC_CALENDAR = "mdc-calendar";
+	String MDC_CALENDAR__ITEM = "mdc-calendar__item";
+	String MDC_CALENDAR__ITEM_ACTIVE = "mdc-calendar__item-active";
+	
 	String MDC_CALENDAR__HEADER__CONTENT = "mdc-calendar__header";
 	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
 	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
@@ -456,9 +459,7 @@ public interface CssName {
 	String MDC_CALENDAR__DAY_SELECTOR__MONTH__ACTION = "mdc-calendar__day-selector--month--action";
 	String MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT = "mdc-calendar__day-selector--week--content";
 	String MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL = "mdc-calendar__day-selector--week--label";	
-	String MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT = "mdc-calendar__day-selector--days--content";
-	String MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL = "mdc-calendar__day-selector--days--label";
-	String MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL_ACTIVE = "mdc-calendar__day-selector--days--label-active";
+	String MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT = "mdc-calendar__day-selector--days--content";	
 	
 	String MDC_CALENDAR__MONTH_SELECTOR = "mdc-calendar__month-selector";
 	

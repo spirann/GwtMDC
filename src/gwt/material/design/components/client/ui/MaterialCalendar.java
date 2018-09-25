@@ -24,9 +24,9 @@ import java.util.Date;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style.Visibility;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarDaySelector;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarHeader;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarMonthSelector;
@@ -66,24 +66,48 @@ public class MaterialCalendar extends MaterialValuedField<Date> {
 		daySelector.setValue(getValue());
 		monthSelector.setValue(getValue().getMonth() + 1);
 		monthSelector.addValueChangeHandler(event -> showDaySelector());
-		
+
 		add(header);
 		add(daySelector);
 		add(monthSelector);
 	}
 
 	protected void showDaySelector() {
-		monthSelector.setVisibility(Visibility.HIDDEN);
+		/*
 		monthSelector.setMaxHeight("0");
-		daySelector.setVisibility(Visibility.VISIBLE);
-		daySelector.setMaxHeight("999px");
+		TimerHelper.schedule(250, () -> {
+			monthSelector.setVisibility(Visibility.HIDDEN);
+			daySelector.setVisibility(Visibility.VISIBLE);
+			daySelector.setMaxHeight("999px");
+		});*/
+		hideContent(monthSelector);
+		showContent(daySelector);
+	}
+
+	protected void showMonthSelector() {
+		
+		hideContent(daySelector);
+		showContent(monthSelector);
+		
+		/*
+		daySelector.setMaxHeight("0");
+		TimerHelper.schedule(250, () -> {
+			daySelector.setVisibility(Visibility.HIDDEN);
+			monthSelector.setVisibility(Visibility.VISIBLE);
+			monthSelector.setMaxHeight("999px");
+		});*/
+	}
+
+	private void showContent(Widget widget) {
+		widget.removeStyleName("mdc-calendar__show_content");
+		widget.removeStyleName("mdc-calendar__hidden_content");
+		widget.addStyleName("mdc-calendar__show_content");
 	}
 	
-	protected void showMonthSelector() {
-		daySelector.setVisibility(Visibility.HIDDEN);
-		daySelector.setMaxHeight("0");
-		monthSelector.setVisibility(Visibility.VISIBLE);
-		monthSelector.setMaxHeight("999px");
+	private void hideContent(Widget widget) {
+		widget.removeStyleName("mdc-calendar__show_content");
+		widget.removeStyleName("mdc-calendar__hidden_content");
+		widget.addStyleName("mdc-calendar__hidden_content");
 	}
 	
 	@Override

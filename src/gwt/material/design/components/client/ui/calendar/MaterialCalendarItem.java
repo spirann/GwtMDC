@@ -74,8 +74,8 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	protected final NameMixin<MaterialCalendarItem> nameMixin = new NameMixin<>(this);
 	
 	public MaterialCalendarItem() {
-		super(HtmlElements.LABEL.createElement(), CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
-		super.initializeSelectedMixin(this, CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__LABEL_ACTIVE);
+		super(HtmlElements.LABEL.createElement(), CssName.MDC_CALENDAR__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);
+		super.initializeSelectedMixin(this, CssName.MDC_CALENDAR__ITEM_ACTIVE);
 	}
 	
 	@Override
@@ -87,6 +87,7 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	protected void onInitialize() {
 
 		ripleMixin.initialize();
+		
 		fireChangeOnClick = true;
 		
 		addClickHandler(event -> setSelected(true, false));
