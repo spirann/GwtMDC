@@ -22,6 +22,8 @@ package gwt.material.design.components.client.ui.calendar;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.form.MaterialValuedField;
@@ -73,10 +75,33 @@ public class MaterialCalendarMonthSelector extends MaterialValuedField<Integer> 
 
 	@Override
 	public void setValue(Integer value, boolean fireEvents) {
+		final Integer oldValue = getValue();
 		super.setValue(value, fireEvents);
 		if (initialized && getWidgetCount() > 0) {
-			((MaterialCalendarItem) getWidget(value - 1)).setSelected(true, false);
+			if (value == null && oldValue != null)
+				((MaterialCalendarItem) getWidget(oldValue - 1)).setSelected(false, false);
+			else if (value != null)
+				((MaterialCalendarItem) getWidget(value - 1)).setSelected(true, false);
+
 		}
+	}
+
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__FILL, color.getCssName());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__INK, color.getCssName());
+	}
+
+	public void setActiveColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_INK, color.getCssName());
+	}
+
+	public void setActiveBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_FILL, color.getCssName());
 	}
 
 }

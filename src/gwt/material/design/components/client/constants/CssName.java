@@ -450,11 +450,12 @@ public interface CssName {
 	String MDC_CALENDAR__ITEM = "mdc-calendar__item";
 	String MDC_CALENDAR__ITEM_ACTIVE = "mdc-calendar__item-active";
 	String MDC_CALENDAR__ACTIONS = "mdc-calendar__actions";
-	String MDC_CALENDAR__ACTION = "mdc-calendar__day-selector--month--action";
+	String MDC_CALENDAR__ACTION = "mdc-calendar__action";
 	
-	String MDC_CALENDAR__HEADER__CONTENT = "mdc-calendar__header";
+	String MDC_CALENDAR__HEADER = "mdc-calendar__header";
 	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
 	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
+	String MDC_CALENDAR__HEADER__PERIOD = "mdc-calendar__header_period";
 	
 	String MDC_CALENDAR__DAY_SELECTOR = "mdc-calendar__day-selector";		
 	String MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL = "mdc-calendar__day-selector--month--label";	
@@ -463,6 +464,10 @@ public interface CssName {
 	
 	String MDC_CALENDAR__MONTH_SELECTOR = "mdc-calendar__month-selector";
 	String MDC_CALENDAR__YEAR_SELECTOR = "mdc-calendar__year-selector";
+	
+	String MDC_CALENDAR__MULT_DAYS__MIN = "mdc_calendar__mult_days--min";
+	String MDC_CALENDAR__MULT_DAYS__MAX = "mdc_calendar__mult_days--max";
+	String MDC_CALENDAR__MULT_DAYS__BETWEEN = "mdc_calendar__mult_days--between";
 	
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE

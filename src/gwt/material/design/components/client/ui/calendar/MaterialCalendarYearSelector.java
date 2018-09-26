@@ -26,6 +26,8 @@ import java.util.Map;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.MaterialIconButton;
@@ -117,13 +119,36 @@ public class MaterialCalendarYearSelector extends MaterialValuedField<Integer> {
 
 	@Override
 	public void setValue(Integer value, boolean fireEvents) {
+		final Integer oldValue = getValue();
 		super.setValue(value, fireEvents);
 		if (initialized) {
-			if (years.containsKey(value))
+			
+			if(value == null && oldValue != null) {
+				years.get(oldValue).setSelected(false, false);
+			} else if (value != null && years.containsKey(value)) {
 				years.get(value).setSelected(true, false);
-			else
+			} else {
 				drawYears();
+			}
 		}
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__FILL, color.getCssName());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__INK, color.getCssName());
+	}
+
+	public void setActiveColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_INK, color.getCssName());
+	}
+	
+	public void setActiveBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_FILL, color.getCssName());
 	}
 
 }

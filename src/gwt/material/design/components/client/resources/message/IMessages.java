@@ -74,6 +74,9 @@ public interface IMessages extends Messages {
 	@DefaultMessage("{0}, {1} {2}")
 	String mdc_calendar_header_day(String weekDay, String month, int day);
 	
+	@DefaultMessage("{0}, {1} {2} {3}")
+	String mdc_calendar_header_full_day(String weekDay, int day, String month, int year);
+	
 	@DefaultMessage("{1} {0}")
 	String mdc_calendar_body_month(String month, int year);
 	

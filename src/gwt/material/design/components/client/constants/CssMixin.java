@@ -164,6 +164,16 @@ public interface CssMixin {
 	String MDC_CHARTIST__SERIES = "--mdc-chartist--series";
 	String MDC_CHARTIST__LABEL = "--mdc-chartist--label";
 	String MDC_CHARTIST__GRID_BACKGROUND = "--mdc-chartist--grid_background";
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// Calendar
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_CALENDAR__INK = "--mdc-calendar-ink";
+	String MDC_CALENDAR__FILL = "--mdc-calendar-fill";
+	String MDC_CALENDAR__ACTIVE_INK = "--mdc-calendar-active-ink";
+	String MDC_CALENDAR__ACTIVE_FILL = "--mdc-calendar-active-fill";
+	String MDC_CALENDAR__HEADER_INK = "--mdc-calendar--header-ink";
+	String MDC_CALENDAR__HEADER_FILL = "--mdc-calendar--header-fill";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// OLD
