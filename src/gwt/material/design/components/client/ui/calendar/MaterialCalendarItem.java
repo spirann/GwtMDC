@@ -86,8 +86,7 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	@Override
 	protected void onInitialize() {
 
-		ripleMixin.initialize();
-		
+		ripleMixin.initialize();		
 		fireChangeOnClick = true;
 		
 		addClickHandler(event -> setSelected(true, false));
@@ -100,9 +99,9 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	}
 	
 	@Override
-	protected void fireChangeEvent() {
+	public void setSelected(boolean selected, boolean fireEvents) {
+		super.setSelected(selected, fireEvents);
 		updateHistory();
-		super.fireChangeEvent();
 	}
 
 	@Override

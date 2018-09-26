@@ -44,12 +44,12 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 @SuppressWarnings("deprecation")
 public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 
-	protected Div bodyMonth = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__CONTENT);
+	protected Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 	protected Label monthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
 	protected Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
-	protected Div contentDays = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__DAYS__CONTENT);
+	protected Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
 
 	private Date auxDate = adjustDate(new Date());
 
@@ -66,25 +66,25 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 	protected void onInitialize() {
 		super.onInitialize();
 
-		previousMonth.addStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__ACTION);
+		previousMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
 		previousMonth.addClickHandler(event -> decreaseMonth());
 
-		nextMonth.addStyleName(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__ACTION);
+		nextMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
 		nextMonth.addClickHandler(event -> increaseMonth());
 
-		bodyMonth.add(previousMonth);
-		bodyMonth.add(monthLabel);
-		bodyMonth.add(nextMonth);
+		actions.add(previousMonth);
+		actions.add(monthLabel);
+		actions.add(nextMonth);
 
-		add(bodyMonth);
+		add(actions);
 		add(contentWeek);
-		add(contentDays);
+		add(items);
 
 		drawDays();
 		drawWeeks();
 		drawMonth();
 	}
-	
+
 	public HandlerRegistration addClickMonthHandler(ClickHandler handler) {
 		return monthLabel.addClickHandler(handler);
 	}
@@ -97,7 +97,13 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 		setMonth(auxDate.getMonth() - 1);
 	}
 
-	protected void setMonth(final int month) {
+	public void setYear(final int year) {
+		auxDate.setYear(year);
+		drawDays();
+		drawMonth();
+	}
+
+	public void setMonth(final int month) {
 
 		final int newMonth;
 		final int newYear;
@@ -116,7 +122,6 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 		auxDate.setDate(1);
 		auxDate.setMonth(newMonth);
 		auxDate.setYear(newYear);
-
 		drawDays();
 		drawMonth();
 	}
@@ -136,13 +141,15 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 
 	protected void drawDays() {
 
-		contentDays.clear();
+		items.clear();
 
 		final int firstDay = 1;
 		final int lastDay = DateTimeHelper.lastDayOfMonth(this.auxDate);
 
 		final Date date = adjustDate(this.auxDate);
 		final String name = getId();
+		final Date value = getValue();
+		final Long valueAsTime = value == null ? null : value.getTime();
 
 		for (int d = firstDay, w = 0; d <= lastDay; d++, w++) {
 			date.setDate(d);
@@ -159,7 +166,7 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 					super.setValue(adjustedDate, true);
 			});
 
-			if (getValue() != null && adjustedDate.getTime() == getValue().getTime())
+			if (value != null && adjustedDate.getTime() == valueAsTime)
 				dayButton.setSelected(true, true);
 
 			if (w != date.getDay()) {
@@ -168,7 +175,7 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 				dayButton.setVisibility(Visibility.HIDDEN);
 			}
 
-			contentDays.add(dayButton);
+			items.add(dayButton);
 		}
 
 	}
@@ -188,7 +195,6 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 	protected Date adjustDate(final Date date) {
 		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
 	}
-
 
 	protected class WeekLabel extends Label {
 		protected WeekLabel(final int date) {

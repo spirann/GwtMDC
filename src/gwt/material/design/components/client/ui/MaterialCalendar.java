@@ -23,27 +23,30 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarDaySelector;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarHeader;
 import gwt.material.design.components.client.ui.calendar.MaterialCalendarMonthSelector;
+import gwt.material.design.components.client.ui.calendar.MaterialCalendarYearSelector;
 import gwt.material.design.components.client.ui.form.MaterialValuedField;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
+@SuppressWarnings("deprecation")
 public class MaterialCalendar extends MaterialValuedField<Date> {
 
 	protected MaterialCalendarHeader header = new MaterialCalendarHeader();
 	protected MaterialCalendarDaySelector daySelector = new MaterialCalendarDaySelector();
 	protected MaterialCalendarMonthSelector monthSelector = new MaterialCalendarMonthSelector();
-
+	protected MaterialCalendarYearSelector yearSelector = new MaterialCalendarYearSelector();
+	
+	private Widget visibleSelector = daySelector;
+	
 	public MaterialCalendar() {
 		super(CssName.MDC_CALENDAR);
 		setValue(new Date(), false);
@@ -54,71 +57,63 @@ public class MaterialCalendar extends MaterialValuedField<Date> {
 		return element;
 	}-*/;
 
-	@SuppressWarnings("deprecation")
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
 		header.setValue(getValue());
+		header.addClickHandler(event -> toggleSelector(yearSelector));
 
 		daySelector.addValueChangeHandler(event -> setValue(event.getValue(), true));
-		daySelector.addClickMonthHandler(event -> showMonthSelector());
+		daySelector.addClickMonthHandler(event -> toggleSelector(monthSelector));
 		daySelector.setValue(getValue());
+		
 		monthSelector.setValue(getValue().getMonth() + 1);
-		monthSelector.addValueChangeHandler(event -> showDaySelector());
+		monthSelector.addValueChangeHandler(event -> {
+			daySelector.setMonth(event.getValue() - 1);
+			toggleSelector(daySelector);
+		});
 
+		yearSelector.setValue(getValue().getYear() + 1900);
+		yearSelector.addValueChangeHandler(event -> {
+			daySelector.setYear(event.getValue() - 1900);
+			toggleSelector(daySelector);
+		});
+
+		toggle(monthSelector.getElement());
+		toggle(yearSelector.getElement());
+		
 		add(header);
 		add(daySelector);
 		add(monthSelector);
+		add(yearSelector);
 	}
 
-	protected void showDaySelector() {
-		/*
-		monthSelector.setMaxHeight("0");
-		TimerHelper.schedule(250, () -> {
-			monthSelector.setVisibility(Visibility.HIDDEN);
-			daySelector.setVisibility(Visibility.VISIBLE);
-			daySelector.setMaxHeight("999px");
-		});*/
-		hideContent(monthSelector);
-		showContent(daySelector);
-	}
+	protected native void toggle(final Element element)/*-{
+		$wnd.jQuery(element).slideToggle(250, function(event) {
+			if ($wnd.jQuery(element).css('display') != 'none') {
+				$wnd.jQuery(element).css('display', 'flex');
+			}
+		});
+	}-*/;
 
-	protected void showMonthSelector() {
+	protected void toggleSelector(final Widget selector) {
+		toggle(visibleSelector.getElement());
+		toggle(selector.getElement());
 		
-		hideContent(daySelector);
-		showContent(monthSelector);
-		
-		/*
-		daySelector.setMaxHeight("0");
-		TimerHelper.schedule(250, () -> {
-			daySelector.setVisibility(Visibility.HIDDEN);
-			monthSelector.setVisibility(Visibility.VISIBLE);
-			monthSelector.setMaxHeight("999px");
-		});*/
+		visibleSelector = selector;
 	}
 
-	private void showContent(Widget widget) {
-		widget.removeStyleName("mdc-calendar__show_content");
-		widget.removeStyleName("mdc-calendar__hidden_content");
-		widget.addStyleName("mdc-calendar__show_content");
-	}
-	
-	private void hideContent(Widget widget) {
-		widget.removeStyleName("mdc-calendar__show_content");
-		widget.removeStyleName("mdc-calendar__hidden_content");
-		widget.addStyleName("mdc-calendar__hidden_content");
-	}
-	
 	@Override
 	public void setValue(Date value, boolean fireEvents) {
 		super.setValue(value, fireEvents);
 		if (initialized) {
-
 			header.setValue(value, false);
-
-			if (value.getTime() != daySelector.getValue().getTime())
-				daySelector.setValue(value, false);
+			if (value.getTime() != daySelector.getValue().getTime()) {
+				daySelector.setValue(value, false);				
+			}
+			monthSelector.setValue(value.getMonth() + 1, false);
+			yearSelector.setValue(value.getYear() + 1900, false);
 		}
 	}
 }

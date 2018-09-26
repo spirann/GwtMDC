@@ -32,6 +32,9 @@ import com.google.gwt.resources.client.TextResource;
 public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
 
+	@Source("js/jquery-3.3.1.min.js")
+	TextResource jquery();
+	
 	@Source("js/vanilla-masker.min.js")
 	TextResource jqueryMaskJs();
 	
