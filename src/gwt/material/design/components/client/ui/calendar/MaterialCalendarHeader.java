@@ -23,6 +23,8 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;
@@ -78,4 +80,11 @@ public class MaterialCalendarHeader extends MaterialValuedField<Date> {
 			drawHeader();
 	}
 
+	public HandlerRegistration addYearClickHandler(ClickHandler handler) {
+		return headerYear.addClickHandler(handler);
+	}
+	
+	public HandlerRegistration addDateClickHandler(ClickHandler handler) {
+		return headerDate.addClickHandler(handler);
+	}
 }

@@ -152,7 +152,7 @@
 	align-content: center;
 	align-items: center;
 	justify-content: center;	
-	border-radius: var(--mdc-popup-border-radius);}
+	border-radius: 50%;}
 	.mdc-calendar__item-active {
 	border-radius: 50%;}
 	/* Arrows */

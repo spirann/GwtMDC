@@ -62,10 +62,10 @@ public class MaterialCalendar extends MaterialValuedField<Date> {
 		super.onInitialize();
 
 		header.setValue(getValue());
-		header.addClickHandler(event -> toggleSelector(yearSelector));
+		header.addYearClickHandler(event -> toggleSelector(yearSelector));
 
 		daySelector.addValueChangeHandler(event -> setValue(event.getValue(), true));
-		daySelector.addClickMonthHandler(event -> toggleSelector(monthSelector));
+		daySelector.addMonthClickHandler(event -> toggleSelector(monthSelector));
 		daySelector.setValue(getValue());
 		
 		monthSelector.setValue(getValue().getMonth() + 1);
@@ -98,6 +98,10 @@ public class MaterialCalendar extends MaterialValuedField<Date> {
 	}-*/;
 
 	protected void toggleSelector(final Widget selector) {
+		
+		if(selector == visibleSelector)
+			return;
+		
 		toggle(visibleSelector.getElement());
 		toggle(selector.getElement());
 		

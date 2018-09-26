@@ -85,7 +85,7 @@ public class MaterialCalendarDaySelector extends MaterialValuedField<Date> {
 		drawMonth();
 	}
 
-	public HandlerRegistration addClickMonthHandler(ClickHandler handler) {
+	public HandlerRegistration addMonthClickHandler(ClickHandler handler) {
 		return monthLabel.addClickHandler(handler);
 	}
 
