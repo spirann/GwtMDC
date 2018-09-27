@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasAlign;
+import gwt.material.design.components.client.base.interfaces.HasAlign;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -43,7 +43,7 @@ public class MaterialTopAppBarSection extends Section implements HasAlign<TopApp
 	}
 
 	/**
-	 * Toolbar sections are aligned to the toolbar’s center. You can change this
+	 * Toolbar sections are aligned to the toolbarï¿½s center. You can change this
 	 * behavior by applying mdc-toolbar__section--align-start or
 	 * mdc-toolbar__section--align-end to align the sections to the start or the end
 	 * of the toolbar (respectively).

@@ -94,7 +94,7 @@ public class MaterialSnackbar extends Div implements HasText {
 			final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
-		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
 		var _action = null;
 
@@ -118,12 +118,12 @@ public class MaterialSnackbar extends Div implements HasText {
 	}-*/;
 
 	public native void setDismissesOnAction(final boolean dismissesOnAction) /*-{
-		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 
 	public native boolean isDismissesOnAction() /*-{
-		var snackbar = _this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
 	}-*/;
 

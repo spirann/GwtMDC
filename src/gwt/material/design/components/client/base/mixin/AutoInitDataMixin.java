@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasAutoInitData;
+import gwt.material.design.components.client.base.interfaces.HasAutoInitData;
 import gwt.material.design.components.client.constants.AutoInitData;
 
 /**

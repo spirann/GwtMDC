@@ -217,13 +217,16 @@
 	display: flex;
 	justify-content: flex-start;
 	align-content: center;
-	align-items: center;}
+	align-items: center;
+	cursor: pointer;}
 	.mdc-calendar__header .mdc-list-divider {
 	--mdc-divider-color: var(--mdc-calendar--header-ink);
 	opacity: 1;}
 
 .mdc-calendar__header_period {
 	flex-direction: row;}
+	.mdc-calendar__header_period--placeholder {
+	opacity: .58;}
 	.mdc-calendar__header_period .mdc-calendar__header--date {
 	height: 36px;}
 	.mdc-calendar__header_period--circle {

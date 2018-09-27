@@ -80,6 +80,12 @@ public interface IMessages extends Messages {
 	@DefaultMessage("{1} {0}")
 	String mdc_calendar_body_month(String month, int year);
 	
+	@DefaultMessage("Initial date")
+	String mdc_calendar_initial_date();
+	
+	@DefaultMessage("Final date")
+	String mdc_calendar_final_date();
+	
 	@DefaultMessage("Password is very weak")
 	String mdc_validation__password__very_weak();
 		

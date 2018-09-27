@@ -22,9 +22,9 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.CodeType;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;

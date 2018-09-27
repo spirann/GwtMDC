@@ -21,7 +21,7 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasRole;
+import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.constants.Role;
 
 /**

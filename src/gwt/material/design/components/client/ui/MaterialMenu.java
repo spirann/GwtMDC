@@ -26,10 +26,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasCloseHandlers;
-import gwt.material.design.components.client.base.HasOpen;
-import gwt.material.design.components.client.base.HasOpenHandlers;
-import gwt.material.design.components.client.base.HasRole;
+import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
+import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
+import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
@@ -171,7 +171,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected native void setNativeOpen(boolean open)/*-{
 
 		var _this = this;
-		var menu = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var menu = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		var quickOpen = this.@gwt.material.design.components.client.ui.MaterialMenu::quickOpen;
 		var oldOpen = menu.open;
 
@@ -190,7 +190,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 	@Override
 	public native boolean isOpen()/*-{
-		var menu = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var menu = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		return menu && menu.open;
 	}-*/;
 

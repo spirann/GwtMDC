@@ -26,8 +26,8 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasAlign;
-import gwt.material.design.components.client.base.HasSelectionHandlers;
+import gwt.material.design.components.client.base.interfaces.HasAlign;
+import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;

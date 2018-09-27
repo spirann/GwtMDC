@@ -21,7 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.resources.client.TextResource;
 
-import gwt.material.design.components.client.base.HasSvg;
+import gwt.material.design.components.client.base.interfaces.HasSvg;
 import gwt.material.design.components.client.base.mixin.SvgMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.ui.html.Div;

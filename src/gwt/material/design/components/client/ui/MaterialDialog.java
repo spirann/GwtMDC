@@ -25,10 +25,10 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasAcceptHandlers;
-import gwt.material.design.components.client.base.HasCancelHandlers;
-import gwt.material.design.components.client.base.HasOpen;
-import gwt.material.design.components.client.base.HasScrollable;
+import gwt.material.design.components.client.base.interfaces.HasAcceptHandlers;
+import gwt.material.design.components.client.base.interfaces.HasCancelHandlers;
+import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasScrollable;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
@@ -213,18 +213,18 @@ public class MaterialDialog extends Aside implements HasAcceptHandlers, HasCance
 
 	@Override
 	public native boolean isOpen()/*-{
-		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		return dialog && dialog.open;
 	}-*/;
 
 	@Override
 	public native void open()/*-{
-		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		dialog.show();
 	}-*/;
 
 	public native void open(final Element target)/*-{
-		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		dialog.lastFocusedTarget = target;
 		dialog.show();
 	}-*/;
@@ -235,7 +235,7 @@ public class MaterialDialog extends Aside implements HasAcceptHandlers, HasCance
 
 	@Override
 	public native void close()/*-{
-		var dialog = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var dialog = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		dialog.close();
 	}-*/;
 

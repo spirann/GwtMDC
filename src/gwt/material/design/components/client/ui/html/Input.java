@@ -19,11 +19,11 @@
  */
 package gwt.material.design.components.client.ui.html;
 
-import gwt.material.design.components.client.base.HasName;
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.interfaces.HasName;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.InputTypeMixin;
 import gwt.material.design.components.client.base.mixin.NameMixin;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.InputType;
 

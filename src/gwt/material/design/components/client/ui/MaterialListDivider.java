@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasInset;
+import gwt.material.design.components.client.base.interfaces.HasInset;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Hr;

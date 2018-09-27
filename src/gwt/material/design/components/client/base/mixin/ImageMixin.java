@@ -22,7 +22,7 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasImage;
+import gwt.material.design.components.client.base.interfaces.HasImage;
 
 /**
  * @author Richeli Vargas

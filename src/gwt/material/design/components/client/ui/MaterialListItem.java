@@ -26,16 +26,16 @@ import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.interfaces.HasHref;
+import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.ui.html.Span;
 

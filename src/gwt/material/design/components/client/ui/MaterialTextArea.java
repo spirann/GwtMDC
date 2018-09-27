@@ -19,11 +19,11 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasResize;
+import gwt.material.design.components.client.base.interfaces.HasResize;
 import gwt.material.design.components.client.constants.Resize;
-import gwt.material.design.components.client.ui.misc.MaterialInput;
-import gwt.material.design.components.client.ui.misc.MaterialInputArea;
-import gwt.material.design.components.client.ui.misc.MaterialInputBox;
+import gwt.material.design.components.client.ui.misc.input.MaterialInput;
+import gwt.material.design.components.client.ui.misc.input.MaterialInputArea;
+import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
 
 /**
  * 

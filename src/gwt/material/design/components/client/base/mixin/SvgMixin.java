@@ -24,7 +24,7 @@ import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.resources.client.TextResource;
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasSvg;
+import gwt.material.design.components.client.base.interfaces.HasSvg;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.utils.helper.StyleHelper;

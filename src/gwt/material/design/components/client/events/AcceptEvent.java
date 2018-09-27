@@ -22,7 +22,7 @@ package gwt.material.design.components.client.events;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-import gwt.material.design.components.client.base.HasAcceptHandlers;
+import gwt.material.design.components.client.base.interfaces.HasAcceptHandlers;
 import gwt.material.design.components.client.events.AcceptEvent.AcceptHandler;
 
 /**

@@ -19,8 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasAlign;
-import gwt.material.design.components.client.base.HasCellColumns;
+import gwt.material.design.components.client.base.interfaces.HasAlign;
+import gwt.material.design.components.client.base.interfaces.HasCellColumns;
 import gwt.material.design.components.client.base.mixin.ColumnsMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -64,7 +64,7 @@ public class MaterialLayoutCell extends Div implements HasAlign<LayoutCellAlign>
 	}
 
 	/**
-	 * Material design’s responsive UI is based on a column-variate grid layout. It
+	 * Material designï¿½s responsive UI is based on a column-variate grid layout. It
 	 * has 12 columns on desktop, 8 columns on tablet and 4 columns on phone.
 	 */
 	@Override

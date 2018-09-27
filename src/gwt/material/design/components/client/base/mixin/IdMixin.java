@@ -22,7 +22,7 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasId;
+import gwt.material.design.components.client.base.interfaces.HasId;
 
 /**
  * @author Richeli Vargas

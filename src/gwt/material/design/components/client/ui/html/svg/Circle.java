@@ -19,8 +19,8 @@
  */
 package gwt.material.design.components.client.ui.html.svg;
 
-import gwt.material.design.components.client.base.MaterialWidget;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.HtmlElements;
 
 /**

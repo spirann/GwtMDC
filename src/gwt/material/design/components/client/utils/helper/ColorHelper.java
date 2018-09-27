@@ -27,7 +27,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.RootPanel;
 
-import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssType;
 

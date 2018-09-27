@@ -22,7 +22,7 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasFlexbox;
+import gwt.material.design.components.client.base.interfaces.HasFlexbox;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Flex;
 import gwt.material.design.components.client.constants.FlexAlignContent;

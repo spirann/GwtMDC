@@ -30,7 +30,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasCaption;
 
-import gwt.material.design.components.client.base.HasImage;
+import gwt.material.design.components.client.base.interfaces.HasImage;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
 import gwt.material.design.components.client.ui.html.Img;
 

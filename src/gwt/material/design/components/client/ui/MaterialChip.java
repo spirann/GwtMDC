@@ -27,12 +27,13 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.HasImage;
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.interfaces.HasIcon;
+import gwt.material.design.components.client.base.interfaces.HasImage;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.ChipSetType;
 import gwt.material.design.components.client.constants.ChipType;
 import gwt.material.design.components.client.constants.Color;
@@ -41,7 +42,6 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.resources.MaterialResources;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**

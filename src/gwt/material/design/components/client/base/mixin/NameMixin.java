@@ -21,7 +21,7 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasName;
+import gwt.material.design.components.client.base.interfaces.HasName;
 
 /**
  * @author Richeli Vargas

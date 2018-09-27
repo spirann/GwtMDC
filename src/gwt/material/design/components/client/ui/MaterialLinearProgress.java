@@ -22,10 +22,10 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.HasBuffer;
-import gwt.material.design.components.client.base.HasIndeterminate;
-import gwt.material.design.components.client.base.HasProgress;
-import gwt.material.design.components.client.base.HasReverse;
+import gwt.material.design.components.client.base.interfaces.HasBuffer;
+import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
+import gwt.material.design.components.client.base.interfaces.HasProgress;
+import gwt.material.design.components.client.base.interfaces.HasReverse;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -119,7 +119,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 
 		var bufferingDots = this.@gwt.material.design.components.client.ui.MaterialLinearProgress::bufferingDots;
 		var bufferingDotsElement = bufferingDots.@gwt.material.design.components.client.ui.html.Div::getElement()();
-		var linearProgress = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var linearProgress = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
 		if (linearProgress) {
 			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100) + "% - 6px)";
@@ -140,7 +140,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	public native void setProgress(double progress)/*-{
 
 		this.@gwt.material.design.components.client.ui.MaterialLinearProgress::progress = progress;
-		var linearProgress = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var linearProgress = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
 		if (linearProgress) {
 			linearProgress.progress = progress;

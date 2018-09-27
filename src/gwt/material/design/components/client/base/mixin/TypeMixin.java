@@ -21,7 +21,7 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.constants.CssType;
 
 /**

@@ -21,10 +21,10 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasDense;
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.interfaces.HasDense;
+import gwt.material.design.components.client.base.interfaces.HasHref;
+import gwt.material.design.components.client.base.interfaces.HasIcon;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;

@@ -4,9 +4,9 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasAspectRatio;
-import gwt.material.design.components.client.base.HasImage;
-import gwt.material.design.components.client.base.HasLabel;
+import gwt.material.design.components.client.base.interfaces.HasAspectRatio;
+import gwt.material.design.components.client.base.interfaces.HasImage;
+import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
 import gwt.material.design.components.client.constants.AspectRatio;
 import gwt.material.design.components.client.constants.CssName;

@@ -23,7 +23,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasInputMask;
+import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.masker.Masker;
 
 /**

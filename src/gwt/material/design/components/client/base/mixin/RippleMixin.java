@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.HasRipple;
+import gwt.material.design.components.client.base.interfaces.HasRipple;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;

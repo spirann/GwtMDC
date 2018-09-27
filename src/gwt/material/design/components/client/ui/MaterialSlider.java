@@ -23,11 +23,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
-import gwt.material.design.components.client.base.HasDiscrete;
-import gwt.material.design.components.client.base.HasInputHandlers;
-import gwt.material.design.components.client.base.HasMarkers;
+import gwt.material.design.components.client.base.interfaces.HasDiscrete;
+import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
+import gwt.material.design.components.client.base.interfaces.HasMarkers;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -35,7 +36,6 @@ import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
-import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 import gwt.material.design.components.client.utils.helper.JsHelper;
@@ -166,12 +166,12 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	}-*/;
 
 	protected native void layout()/*-{
-		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var slider = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		slider.layout();
 	}-*/;
 
 	protected native void nativeSetValue(final Double value)/*-{
-		var slider = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var slider = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		slider.value = value;
 	}-*/;
 

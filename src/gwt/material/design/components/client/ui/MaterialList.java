@@ -22,7 +22,7 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.HasDense;
+import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Ul;

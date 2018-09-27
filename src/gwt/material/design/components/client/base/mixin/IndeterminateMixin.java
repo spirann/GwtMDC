@@ -22,7 +22,7 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.UIObject;
 
-import gwt.material.design.components.client.base.HasIndeterminate;
+import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 
 /**
  * @author Richeli Vargas

@@ -22,9 +22,9 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Span;
 
 /**

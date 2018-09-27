@@ -455,7 +455,10 @@ public interface CssName {
 	String MDC_CALENDAR__HEADER = "mdc-calendar__header";
 	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
 	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
-	String MDC_CALENDAR__HEADER__PERIOD = "mdc-calendar__header_period";
+	String MDC_CALENDAR__HEADER_PERIOD = "mdc-calendar__header_period";
+	String MDC_CALENDAR__HEADER_PERIOD__CIRCLE = "mdc-calendar__header_period--circle";
+	String MDC_CALENDAR__HEADER_PERIOD__LINE = "mdc-calendar__header_period--line";
+	String MDC_CALENDAR__HEADER_PERIOD__PLACEHOLDER = "mdc-calendar__header_period--placeholder";
 	
 	String MDC_CALENDAR__DAY_SELECTOR = "mdc-calendar__day-selector";		
 	String MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL = "mdc-calendar__day-selector--month--label";	

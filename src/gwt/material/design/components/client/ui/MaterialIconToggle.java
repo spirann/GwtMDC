@@ -26,13 +26,13 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 
 /**
  * 

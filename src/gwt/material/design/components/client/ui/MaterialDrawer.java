@@ -22,8 +22,8 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.HasOpen;
-import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -80,13 +80,13 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 
 	@Override
 	public native boolean isOpen()/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		return drawer && drawer.open;
 	}-*/;
 
 	@Override
 	public native void setOpen(boolean open)/*-{
-		var drawer = this.@gwt.material.design.components.client.base.MaterialWidget::jsElement;
+		var drawer = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		if (drawer) {
 			drawer.open = open;
 		} else {

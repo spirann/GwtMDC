@@ -24,7 +24,7 @@ import java.io.Serializable;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.ThemeAttribute;
-import gwt.material.design.components.client.ui.chart.helper.ChartHelper;
+import gwt.material.design.components.client.ui.misc.chart.helper.ChartHelper;
 import gwt.material.design.components.client.utils.helper.ColorHelper;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 

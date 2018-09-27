@@ -25,7 +25,7 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
-import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ChipSetType;
 import gwt.material.design.components.client.constants.CssName;

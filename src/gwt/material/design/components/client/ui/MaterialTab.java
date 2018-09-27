@@ -23,15 +23,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasIcon;
+import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.Role;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
 

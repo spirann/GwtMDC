@@ -19,8 +19,8 @@
  */
 package gwt.material.design.components.client.ui;
 
-import gwt.material.design.components.client.base.HasHref;
-import gwt.material.design.components.client.base.HasType;
+import gwt.material.design.components.client.base.interfaces.HasHref;
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.constants.CssName;

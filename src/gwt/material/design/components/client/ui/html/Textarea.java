@@ -19,9 +19,9 @@
  */
 package gwt.material.design.components.client.ui.html;
 
-import gwt.material.design.components.client.base.HasResize;
-import gwt.material.design.components.client.base.MaterialWidget;
+import gwt.material.design.components.client.base.interfaces.HasResize;
 import gwt.material.design.components.client.base.mixin.ResizeMixin;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.Resize;
 

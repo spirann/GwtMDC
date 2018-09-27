@@ -7,9 +7,9 @@ import java.util.Map;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.form.MaterialValuedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 

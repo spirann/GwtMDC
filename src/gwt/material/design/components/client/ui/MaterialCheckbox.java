@@ -25,14 +25,14 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasIndeterminate;
+import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
+import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.resources.MaterialResources;
-import gwt.material.design.components.client.ui.form.MaterialSelectedField;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.html.Label;

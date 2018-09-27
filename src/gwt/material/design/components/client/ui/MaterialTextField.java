@@ -22,24 +22,24 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.HasDense;
-import gwt.material.design.components.client.base.HasHelperText;
-import gwt.material.design.components.client.base.HasIcon;
-import gwt.material.design.components.client.base.HasIconClickHandlers;
-import gwt.material.design.components.client.base.HasInputMask;
-import gwt.material.design.components.client.base.HasLabel;
-import gwt.material.design.components.client.base.HasPlaceholder;
-import gwt.material.design.components.client.base.HasRequired;
-import gwt.material.design.components.client.base.HasState;
-import gwt.material.design.components.client.base.HasTextFieldValidation;
-import gwt.material.design.components.client.base.HasType;
-import gwt.material.design.components.client.base.HasValidationHandlers;
+import gwt.material.design.components.client.base.interfaces.HasDense;
+import gwt.material.design.components.client.base.interfaces.HasHelperText;
+import gwt.material.design.components.client.base.interfaces.HasIcon;
+import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
+import gwt.material.design.components.client.base.interfaces.HasInputMask;
+import gwt.material.design.components.client.base.interfaces.HasLabel;
+import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.base.interfaces.HasRequired;
+import gwt.material.design.components.client.base.interfaces.HasState;
+import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
+import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
-import gwt.material.design.components.client.ui.misc.MaterialInputBox;
+import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
 import gwt.material.design.components.client.validation.Validation.Result;
 
 /**
