@@ -72,8 +72,10 @@ import com.google.gwt.user.client.ui.WidgetCollection;
 
 import gwt.material.design.components.client.base.interfaces.HasAlt;
 import gwt.material.design.components.client.base.interfaces.HasAriaControls;
-import gwt.material.design.components.client.base.interfaces.HasAriaDescribedby;
+import gwt.material.design.components.client.base.interfaces.HasAriaDescribedBy;
 import gwt.material.design.components.client.base.interfaces.HasAriaLabel;
+import gwt.material.design.components.client.base.interfaces.HasAriaLabelledBy;
+import gwt.material.design.components.client.base.interfaces.HasAriaModal;
 import gwt.material.design.components.client.base.interfaces.HasAriaSelected;
 import gwt.material.design.components.client.base.interfaces.HasAutoInitData;
 import gwt.material.design.components.client.base.interfaces.HasCircle;
@@ -118,7 +120,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
 		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt,
-		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedby, HasAriaSelected {
+		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy {
 
 	static {
 		autoInit();
@@ -168,6 +170,8 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this,
 			"aria-describedby");
 	protected final AttributeMixin<MaterialWidget> ariaSelectedMixin = new AttributeMixin<>(this, "aria-selected");
+	protected final AttributeMixin<MaterialWidget> ariaModalMixin = new AttributeMixin<>(this, "aria-modal");
+	protected final AttributeMixin<MaterialWidget> ariaLabelledByMixin = new AttributeMixin<>(this, "aria-labelledby");
 	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
@@ -767,5 +771,25 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public boolean isAreaSelected() {
 		return ariaSelectedMixin.getAttributeAsBoolean();
+	}
+	
+	@Override
+	public void setAriaModal(boolean modal) {
+		ariaModalMixin.setAttribute(modal);
+	}
+
+	@Override
+	public boolean isAreaModal() {
+		return ariaModalMixin.getAttributeAsBoolean();
+	}
+
+	@Override
+	public void setAriaLabelledBy(String labelledby) {
+		ariaLabelledByMixin.setAttribute(labelledby);
+	}
+
+	@Override
+	public String getAriaLabelledBy() {
+		return ariaLabelledByMixin.getAttribute();
 	}
 }

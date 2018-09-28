@@ -25,10 +25,10 @@ package gwt.material.design.components.client.base.interfaces;
  * @author Richeli Vargas
  *
  */
-public interface HasAriaDescribedby {
+public interface HasAriaModal {
 	
-	public void setAriaDescribedBy(String target);
+	public void setAriaModal(boolean modal);
 	
-	public String getAriaDescribedBy();
+	public boolean isAreaModal();
 
 }

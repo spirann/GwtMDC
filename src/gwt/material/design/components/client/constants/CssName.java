@@ -173,17 +173,14 @@ public interface CssName {
 	// DIALOG
 	// //////////////////////////////////////////////////////
 	String MDC_DIALOG = "mdc-dialog";
+	String MDC_DIALOG__CONTAINER = "mdc-dialog__container";
 	String MDC_DIALOG__SURFACE = "mdc-dialog__surface";
-	String MDC_DIALOG__HEADER = "mdc-dialog__header";
-	String MDC_DIALOG__HEADER_TITLE = "mdc-dialog__header__title";
-	String MDC_DIALOG__BODY = "mdc-dialog__body";
-	String MDC_DIALOG__BODY_SCROLLABLE = "mdc-dialog__body--scrollable";
-	String MDC_DIALOG__FOOTER = "mdc-dialog__footer";
-	String MDC_DIALOG__FOOTER_BUTTON = "mdc-dialog__footer__button";
-	String MDC_DIALOG__FOOTER_BUTTON_CANCEL = "mdc-dialog__footer__button--cancel";
-	String MDC_DIALOG__FOOTER_BUTTON_ACCEPT = "mdc-dialog__footer__button--accept";
-	String MDC_DIALOG__BACKDROP = "mdc-dialog__backdrop";
-	String MDC_DIALOG__ACTION = "mdc-dialog__action";
+	String MDC_DIALOG__TITLE = "mdc-dialog__title";
+	String MDC_DIALOG__CONTENT = "mdc-dialog__content";
+	String MDC_DIALOG__SCRIM = "mdc-dialog__scrim";	
+	String MDC_DIALOG__ACTIONS = "mdc-dialog__actions";
+	String MDC_DIALOG__BUTTON = "mdc-dialog__button";
+	String MDC_DIALOG__BUTTON__DEFAULT = "mdc-dialog__button--default";
 	// //////////////////////////////////////////////////////
 	// SNACKBAR
 	// //////////////////////////////////////////////////////
