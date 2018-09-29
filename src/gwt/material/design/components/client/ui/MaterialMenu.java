@@ -30,6 +30,7 @@ import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRole;
+import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
@@ -195,7 +196,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	}-*/;
 
 	protected void fireCloseEvent() {
-		CloseEvent.fire(MaterialMenu.this);
+		CloseEvent.fire(MaterialMenu.this, CloseAction.NONE);
 	}
 
 	@Override

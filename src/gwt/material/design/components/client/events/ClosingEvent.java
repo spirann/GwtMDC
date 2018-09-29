@@ -22,25 +22,25 @@ package gwt.material.design.components.client.events;
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
 
-import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
+import gwt.material.design.components.client.base.interfaces.HasClosingHandlers;
 import gwt.material.design.components.client.constants.CloseAction;
-import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
+import gwt.material.design.components.client.events.ClosingEvent.ClosingHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class CloseEvent extends GwtEvent<CloseHandler> {
-	
-	public static interface CloseHandler extends EventHandler {
-		void onClose(CloseEvent event);
+public class ClosingEvent extends GwtEvent<ClosingHandler> {
+		
+	public static interface ClosingHandler extends EventHandler {
+		void onClosing(ClosingEvent event);
 	}
 
 	/**
 	 * Handler type.
 	 */
-	public static final Type<CloseHandler> TYPE = new Type<CloseHandler>();
+	public static final Type<ClosingHandler> TYPE = new Type<ClosingHandler>();
 
 	/**
 	 * Fires a value change event on all registered handlers in the handler manager.
@@ -53,8 +53,8 @@ public class CloseEvent extends GwtEvent<CloseHandler> {
 	 * @param value
 	 *            the value
 	 */
-	public static void fire(final HasCloseHandlers source, final CloseAction action) {
-		source.fireEvent(new CloseEvent(action));
+	public static void fire(final HasClosingHandlers source, final CloseAction action) {
+		source.fireEvent(new ClosingEvent(action));
 	}
 
 	/**
@@ -62,19 +62,19 @@ public class CloseEvent extends GwtEvent<CloseHandler> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<CloseHandler> getType() {
+	public static Type<ClosingHandler> getType() {
 		return TYPE;
 	}
 
+	private final CloseAction action;
+	
 	/**
 	 * Creates a value change event.
 	 * 
 	 * @param value
 	 *            the value
 	 */
-	private final CloseAction action;
-	
-	protected CloseEvent(final CloseAction action) {
+	protected ClosingEvent(final CloseAction action) {
 		this.action = action;
 	}
 
@@ -82,16 +82,17 @@ public class CloseEvent extends GwtEvent<CloseHandler> {
 		return action;
 	}
 
+
 	// The instance knows its BeforeSelectionHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
 	@Override
-	public final Type<CloseHandler> getAssociatedType() {
+	public final Type<ClosingHandler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(CloseHandler handler) {
-		handler.onClose(this);
+	protected void dispatch(ClosingHandler handler) {
+		handler.onClosing(this);
 	}
 
 }

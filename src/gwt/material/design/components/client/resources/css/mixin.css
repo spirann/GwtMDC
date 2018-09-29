@@ -680,7 +680,8 @@ i.mdc-list-item__graphic {
 	background-color: var(--mdc-dialog-body-fill-color);
 	border-radius: var(--mdc-popup-border-radius);}
 .mdc-dialog .mdc-dialog__title {
-	color: var(--mdc-dialog-header-ink-color); }
+	color: var(--mdc-dialog-header-ink-color);
+	background-color: var(--mdc-dialog-header-fill-color); }
 .mdc-dialog .mdc-dialog__title:empty {
 	display: none;}	
 .mdc-dialog .mdc-dialog__title:empty  + .mdc-dialog__content {
@@ -699,7 +700,8 @@ i.mdc-list-item__graphic {
 .mdc-dialog__button.mdc-button--unelevated:not(:disabled) {
 	--mdc-button-raised-ink-color: var(--mdc-dialog-action-raised-ink-color);
 	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}	
-
+.mdc-dialog__actions[empty]{
+	display: none;}
 /* ==========================================================================
    Card
    ========================================================================== */

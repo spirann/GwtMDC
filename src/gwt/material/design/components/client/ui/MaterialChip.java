@@ -58,52 +58,48 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	protected final static Map<String, MaterialChip> history = new HashMap<>();
 
 	protected void updateHistory() {
-		if (isSelected()) {
+		if (isSelected())
 			putInHistory(true);
-		} else {
+		else
 			removeFromHistory();
-		}
 	}
 
 	protected void putInHistory(final boolean fireEvent) {
 
-		if (getParent() == null || !(getParent() instanceof MaterialChipSet)) {
+		if (getParent() == null || !(getParent() instanceof MaterialChipSet))
 			return;
-		}
 
 		final MaterialChipSet chipSet = (MaterialChipSet) getParent();
 
-		if (!chipSet.getType().equals(ChipSetType.CHOICE)) {
+		if (!chipSet.getType().equals(ChipSetType.CHOICE))
 			return;
-		}
 
 		final String parent = chipSet.getId();
 
 		final MaterialChip old = history.get(parent);
-		if (fireEvent && old != null && old != this) {
+		if (fireEvent && old != null && old != this)
 			old.fireChangeEvent();
-		}
 
 		history.put(parent, this);
 	}
 
 	protected void removeFromHistory() {
 
-		if (getParent() == null) {
+		if (getParent() == null)
 			return;
-		}
 
 		final String parent = ((MaterialWidget) getParent()).getId();
 
 		final MaterialChip old = history.get(parent);
-		if (old == this) {
+		if (old == this)
 			history.remove(parent);
-		}
+
 	}
 
 	protected MaterialImage imageLeading = new MaterialImage();
 	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);
-	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__TRAILING);
+	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON,
+			CssName.MDC_CHIP__ICON__TRAILING);
 	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
 	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
 	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
@@ -137,26 +133,21 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 
 		add(checkmark);
 
-		if (iconLeading.getType() != null) {
+		if (iconLeading.getType() != null)
 			add(iconLeading);
-		}
 
-		if (imageLeading.getUrl() != null && !imageLeading.getUrl().isEmpty()) {
+		if (imageLeading.getUrl() != null && !imageLeading.getUrl().isEmpty())
 			add(imageLeading);
-		}
 
 		add(text);
 
-		if (closeable) {
+		if (closeable)
 			add(iconTrailing);
-		}
 
 		super.onInitialize();
 
-		if (isSelected()) {
+		if (isSelected())
 			updateHistory();
-		}
-
 	}
 
 	@Override
@@ -184,35 +175,32 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	public ChipType getType() {
 		return typeMixin.getType();
 	}
-	
+
 	public void setCloseable(final boolean closeable) {
 
 		this.closeable = closeable;
 
 		if (initialized) {
-			if (closeable) {
+			if (closeable)
 				insert(iconTrailing, getWidgetCount());
-			} else if (iconTrailing.getParent() != null) {
+			else if (iconTrailing.getParent() != null)
 				iconTrailing.removeFromParent();
-			}
 		}
-
 	}
 
 	public boolean isCloseable() {
 		return closeable;
 	}
-	
+
 	public void setCloseableColor(final Color color) {
 		iconTrailing.setColor(color);
 	}
-	
+
 	public void setShowCheckmark(final boolean show) {
-		if(show) {
+		if (show)
 			checkmark.setDisplay(Display.INITIAL);
-		} else {
+		else
 			checkmark.setDisplay(Display.NONE);
-		}
 	}
 
 	@Override
@@ -224,26 +212,22 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	public void setIcon(IconType iconType) {
 		iconLeading.setType(iconType);
 
-		if (iconType == null && iconLeading.getParent() != null) {
+		if (iconType == null && iconLeading.getParent() != null)
 			iconLeading.removeFromParent();
-		}
 
-		if (iconType != null && initialized) {
+		if (iconType != null && initialized)
 			insert(iconLeading, 0);
-		}
 	}
 
 	@Override
 	public void setUrl(String url) {
 		imageLeading.setUrl(url);
 
-		if (url == null && imageLeading.getParent() != null) {
+		if (url == null && imageLeading.getParent() != null)
 			imageLeading.removeFromParent();
-		}
 
-		if (url != null && initialized) {
+		if (url != null && initialized)
 			insert(imageLeading, iconLeading.getParent() == null ? 0 : 1);
-		}
 	}
 
 	@Override
@@ -256,13 +240,11 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 
 		imageLeading.setResource(resource);
 
-		if (resource == null && imageLeading.getParent() != null) {
+		if (resource == null && imageLeading.getParent() != null)
 			imageLeading.removeFromParent();
-		}
 
-		if (resource != null && initialized) {
+		if (resource != null && initialized)
 			insert(imageLeading, iconLeading.getParent() == null ? 0 : 1);
-		}
 	}
 
 	@Override

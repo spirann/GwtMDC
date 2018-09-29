@@ -21,15 +21,34 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.interfaces.HasAcceptHandlers;
+import gwt.material.design.components.client.base.interfaces.HasCancelHandlers;
+import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
+import gwt.material.design.components.client.base.interfaces.HasClosingHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpen;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
+import gwt.material.design.components.client.base.interfaces.HasOpeningHandlers;
+import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.events.AcceptEvent;
+import gwt.material.design.components.client.events.AcceptEvent.AcceptHandler;
+import gwt.material.design.components.client.events.CancelEvent;
+import gwt.material.design.components.client.events.CancelEvent.CancelHandler;
+import gwt.material.design.components.client.events.CloseEvent;
+import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
+import gwt.material.design.components.client.events.ClosingEvent;
+import gwt.material.design.components.client.events.ClosingEvent.ClosingHandler;
+import gwt.material.design.components.client.events.OpenEvent;
+import gwt.material.design.components.client.events.OpenEvent.OpenHandler;
+import gwt.material.design.components.client.events.OpeningEvent;
+import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Footer;
 import gwt.material.design.components.client.ui.html.H2;
@@ -39,8 +58,11 @@ import gwt.material.design.components.client.ui.html.H2;
  * @author Richeli Vargas
  *
  */
-public class MaterialDialog extends Div implements HasOpen {
+public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancelHandlers, HasOpenHandlers, HasOpeningHandlers, HasCloseHandlers, HasClosingHandlers,HasOpen {
 
+	protected static final String NATIVE_ACTION_ACCEPT = "accept";
+	protected static final String NATIVE_ACTION_CANCEL = "close";
+	
 	// /////////////////////////////////////////////////////////////
 	// Dialog
 	// /////////////////////////////////////////////////////////////
@@ -49,6 +71,8 @@ public class MaterialDialog extends Div implements HasOpen {
 	protected final H2 title = new H2(CssName.MDC_DIALOG__TITLE);
 	protected final Div content = new Div(CssName.MDC_DIALOG__CONTENT);
 	protected final Footer footer = new Footer(CssName.MDC_DIALOG__ACTIONS);
+	protected final MaterialButton accept = new MaterialButton();
+	protected final MaterialButton cancel = new MaterialButton();
 	protected final Div scrim = new Div(CssName.MDC_DIALOG__SCRIM);
 
 	private boolean autoStackButtons = false;
@@ -67,6 +91,14 @@ public class MaterialDialog extends Div implements HasOpen {
 	@Override
 	protected void onInitialize() {
 
+		cancel.addStyleName(CssName.MDC_DIALOG__BUTTON);
+		cancel.getElement().setAttribute("data-mdc-dialog-action", NATIVE_ACTION_CANCEL);
+		footer.add(cancel);
+		
+		accept.addStyleName(CssName.MDC_DIALOG__BUTTON);
+		accept.getElement().setAttribute("data-mdc-dialog-action", NATIVE_ACTION_ACCEPT);
+		footer.add(accept);
+		
 		surface.add(title);
 		surface.add(content);
 		surface.add(footer);
@@ -79,43 +111,111 @@ public class MaterialDialog extends Div implements HasOpen {
 		super.onInitialize();
 
 		setAutoStackButtons(autoStackButtons);
+		preventFooter();
 		initEvents();
+	}
+	
+	protected final void preventFooter() {
+		final Element element = footer.getElement();
+		element.removeAttribute("empty");
+		if(element.getInnerText().trim().isEmpty())
+			element.setAttribute("empty", null);
 	}
 
 	protected native void initEvents()/*-{
+		var _this = this; 
 		var dialog = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
-		dialog.listen('MDCDialog:opening', function() {
-			// fire opening event
-			console.log('fire opening event');
-		});
-		dialog.listen('MDCDialog:opened', function() {
-			// fire opened event
-			console.log('fire opened event');
-		});
+		function getCloseAction(action){
+			if(action == @gwt.material.design.components.client.ui.MaterialDialog::NATIVE_ACTION_ACCEPT)
+				return @gwt.material.design.components.client.constants.CloseAction::ACCEPT;
+			 else if(action == @gwt.material.design.components.client.ui.MaterialDialog::NATIVE_ACTION_CANCEL)
+				return @gwt.material.design.components.client.constants.CloseAction::CANCEL;			
+			 else 
+				return @gwt.material.design.components.client.constants.CloseAction::NONE;			
+		}
+
+		dialog.listen('MDCDialog:opening', _this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpeningEvent()());
+		dialog.listen('MDCDialog:opened', _this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpenEvent()());
 		dialog.listen('MDCDialog:closing', function(event) {
 			var action = event.detail.action;
-			// fire closing event
-			console.log('fire closing event: ' + action);
+			var closeAction = getCloseAction(action);
+			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireClosingEvent(Lgwt/material/design/components/client/constants/CloseAction;)(closeAction);
 		});
 		dialog.listen('MDCDialog:closed', function(event) {
 			var action = event.detail.action;
-			// fire closed event
-			console.log('fire closed event: ' + action);
-		});
+			var closeAction = getCloseAction(action);
+			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireCloseEvent(Lgwt/material/design/components/client/constants/CloseAction;)(closeAction);	
+		});		
 	}-*/;
 
+	protected void fireAcceptEvent() {
+		AcceptEvent.fire(MaterialDialog.this);
+	}
+
+	@Override
+	public HandlerRegistration addAcceptHandler(final AcceptHandler handler) {
+		return addHandler(handler, AcceptEvent.getType());
+	}
+
+	protected void fireCancelEvent() {
+		CancelEvent.fire(MaterialDialog.this);
+	}
+
+	@Override
+	public HandlerRegistration addCancelHandler(final CancelHandler handler) {
+		return addHandler(handler, CancelEvent.getType());
+	}
+	
+	protected void fireOpenEvent() {
+		OpenEvent.fire(MaterialDialog.this);
+	}
+
+	@Override
+	public HandlerRegistration addOpenHandler(final OpenHandler handler) {
+		return addHandler(handler, OpenEvent.getType());
+	}
+	
+	protected void fireOpeningEvent() {
+		OpeningEvent.fire(MaterialDialog.this);
+	}
+
+	@Override
+	public HandlerRegistration addOpeningHandler(final OpeningHandler handler) {
+		return addHandler(handler, OpeningEvent.getType());
+	}
+	
+	protected void fireCloseEvent(final CloseAction action) {
+		CloseEvent.fire(MaterialDialog.this, action);
+		switch (action) {
+		case ACCEPT:
+			fireAcceptEvent();
+			break;
+		case CANCEL:
+			fireCancelEvent();
+			break;
+		default:
+			break;
+		}
+	}
+
+	@Override
+	public HandlerRegistration addCloseHandler(final CloseHandler handler) {
+		return addHandler(handler, CloseEvent.getType());
+	}
+	
+	protected void fireClosingEvent(final CloseAction action) {
+		ClosingEvent.fire(MaterialDialog.this, action);
+	}
+
+	@Override
+	public HandlerRegistration addClosingHandler(final ClosingHandler handler) {
+		return addHandler(handler, ClosingEvent.getType());
+	}
+	
 	@UiChild(tagname = "content")
 	public void addContent(final Widget child) {
 		content.add(child);
-	}
-
-	@UiChild(tagname = "action")
-	public void addFooter(final Widget child, final boolean closeOnClick) {
-		child.addStyleName(CssName.MDC_DIALOG__BUTTON);
-		if (closeOnClick)
-			child.getElement().setAttribute("data-mdc-dialog-action", ((MaterialWidget) child).getId());
-		footer.add(child);
 	}
 
 	public boolean isAutoStackButtons() {
@@ -161,7 +261,29 @@ public class MaterialDialog extends Div implements HasOpen {
 		if (dialog)
 			dialog.close();
 	}-*/;
+	
+	public void setAcceptText(final String text) {
+		accept.setText(text);
+		preventFooter();
+	}
 
+	public String getAcceptText() {
+		return accept.getText();
+	}
+	
+	public void setAcceptEnabled(final boolean enabled) {
+		accept.setEnabled(enabled);
+	}
+
+	public void setCancelText(final String text) {
+		cancel.setText(text);
+		preventFooter();
+	}
+
+	public String getCancelText() {
+		return cancel.getText();
+	}
+	
 	public void setHeaderBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DIALOG__HEADER_FILL_COLOR, color.getCssName());
 	}
