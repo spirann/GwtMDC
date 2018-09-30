@@ -445,6 +445,7 @@ public interface CssName {
 	String MDC_CALENDAR = "mdc-calendar";
 	String MDC_CALENDAR__ITEMS = "mdc-calendar__items";	
 	String MDC_CALENDAR__ITEM = "mdc-calendar__item";
+	String MDC_CALENDAR__ITEM_TODAY = "mdc-calendar__item_today";
 	String MDC_CALENDAR__ITEM_ACTIVE = "mdc-calendar__item-active";
 	String MDC_CALENDAR__ACTIONS = "mdc-calendar__actions";
 	String MDC_CALENDAR__ACTION = "mdc-calendar__action";

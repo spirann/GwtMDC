@@ -21,57 +21,25 @@ package gwt.material.design.components.client.ui.misc.calendar;
 
 import java.util.Date;
 
-import com.google.gwt.dom.client.Style.Visibility;
-
-import gwt.material.design.components.client.utils.helper.DateTimeHelper;
-
 /**
  * 
  * @author Richeli Vargas
  *
  */
-@SuppressWarnings("deprecation")
 public class MaterialCalendarDaySelector extends MaterialCalendarBaseDaySelector<Date> {
 
 	@Override
-	protected void drawDays() {
-
-		items.clear();
-
-		final int firstDay = 1;
-		final int lastDay = DateTimeHelper.lastDayOfMonth(this.auxDate == null ? new Date() : this.auxDate);
-
-		final Date date = adjustDate(this.auxDate);
-		final String name = getId();
+	protected MaterialCalendarItem drawItem(Date date, String name, boolean visible) {
+		final MaterialCalendarItem item = super.drawItem(date, name, visible);
+		item.addSelectionHandler(event -> {
+			if (event.getValue())
+				super.setValue(date, true);
+		});
 		final Date value = getValue();
 		final Long valueAsTime = value == null ? null : value.getTime();
-
-		for (int d = firstDay, w = 0; d <= lastDay; d++, w++) {
-			date.setDate(d);
-
-			if (w == 7)
-				w = 0;
-
-			final Date adjustedDate = adjustDate(date);
-			final MaterialCalendarItem dayButton = new MaterialCalendarItem();
-			dayButton.setText(String.valueOf(d));
-			dayButton.setName(name);
-			dayButton.addSelectionHandler(event -> {
-				if (event.getValue())
-					super.setValue(adjustedDate, true);
-			});
-
-			if (value != null && adjustedDate.getTime() == valueAsTime)
-				dayButton.setSelected(true, true);
-
-			if (w != date.getDay()) {
-				d--;
-				dayButton.setText("");
-				dayButton.setVisibility(Visibility.HIDDEN);
-			}
-
-			items.add(dayButton);
-		}
+		if (value != null && date.getTime() == valueAsTime)
+			item.setSelected(true, true);
+		return item;
 	}
 
 	@Override

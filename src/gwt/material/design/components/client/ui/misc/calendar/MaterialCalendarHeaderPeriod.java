@@ -87,9 +87,9 @@ public class MaterialCalendarHeaderPeriod extends MaterialValuedField<Date[]> {
 			label.setText(emptyText);
 			label.addStyleName(CssName.MDC_CALENDAR__HEADER_PERIOD__PLACEHOLDER);
 		} else {
-			final String week = IMessages.INSTANCE.mdc_calendar_full_week(date.getDay() + 1);
+			final String week = IMessages.INSTANCE.mdc_calendar_short_week(date.getDay() + 1);
 			final int day = date.getDate();
-			final String month = IMessages.INSTANCE.mdc_calendar_full_month(date.getMonth() + 1);
+			final String month = IMessages.INSTANCE.mdc_calendar_short_month(date.getMonth() + 1);
 			final int year = date.getYear() + 1900;
 			label.setText(IMessages.INSTANCE.mdc_calendar_header_full_day(week, day, month, year));
 		}

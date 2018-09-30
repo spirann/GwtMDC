@@ -39,15 +39,19 @@ import gwt.material.design.components.client.constants.CssName;
 public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, S extends MaterialCalendarBaseDaySelector<T>>
 		extends MaterialValuedField<T> {
 
-	protected H header;
-	protected S daySelector;
-	protected MaterialCalendarMonthSelector monthSelector = new MaterialCalendarMonthSelector();
-	protected MaterialCalendarYearSelector yearSelector = new MaterialCalendarYearSelector();
+	protected final H header;
+	protected final S daySelector;
+	protected final MaterialCalendarMonthSelector monthSelector = new MaterialCalendarMonthSelector();
+	protected final MaterialCalendarYearSelector yearSelector = new MaterialCalendarYearSelector();
 
-	protected Widget visibleSelector = daySelector;
+	protected Widget visibleSelector;
+	private boolean changeYear = true;
 
-	public MaterialCalendarBase() {
+	public MaterialCalendarBase(final H header, final S daySelector) {
 		super(CssName.MDC_CALENDAR);
+		this.header = header;
+		this.daySelector = daySelector;
+		this.visibleSelector = daySelector;
 	}
 
 	@Override
@@ -73,9 +77,12 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 		}
 
 		header.setValue(getValue());
-		
+
 		daySelector.addValueChangeHandler(event -> setValue(event.getValue(), true));
-		daySelector.addMonthClickHandler(event -> toggleSelector(monthSelector));
+		daySelector.addMonthClickHandler(event -> {
+			if (daySelector.isChangeMonth())
+				toggleSelector(monthSelector);
+		});
 		daySelector.setValue(getValue());
 
 		monthSelector.setValue(date == null ? null : date.getMonth() + 1);
@@ -117,6 +124,22 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 		toggle(selector.getElement());
 
 		visibleSelector = selector;
+	}
+
+	public boolean isChangeMonth() {
+		return daySelector.isChangeMonth();
+	}
+
+	public void setChangeMonth(final boolean change) {
+		daySelector.setChangeMonth(change);
+	}
+
+	public boolean isChangeYear() {
+		return daySelector.isChangeYear();
+	}
+
+	public void setChangeYear(final boolean change) {
+		daySelector.setChangeYear(change);
 	}
 
 	@Override

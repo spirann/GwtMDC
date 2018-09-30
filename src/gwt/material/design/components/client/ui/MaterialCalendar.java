@@ -33,16 +33,19 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHe
 @SuppressWarnings("deprecation")
 public class MaterialCalendar extends MaterialCalendarBase<Date, MaterialCalendarHeader, MaterialCalendarDaySelector> {
 
+	public MaterialCalendar() {
+		super(new MaterialCalendarHeader(), new MaterialCalendarDaySelector());
+	}
+
 	@Override
 	protected void onInitialize() {
-
-		header = new MaterialCalendarHeader();
-		daySelector = new MaterialCalendarDaySelector();
-
 		super.onInitialize();
 
 		header.setValue(getValue());
-		header.addYearClickHandler(event -> toggleSelector(yearSelector));
+		header.addYearClickHandler(event -> {
+			if (daySelector.isChangeYear())
+				toggleSelector(yearSelector);
+		});
 		header.addDateClickHandler(event -> {
 			yearSelector.setValue(getValue().getYear() + 1900);
 			monthSelector.setValue(getValue().getMonth() + 1);

@@ -23,6 +23,7 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -50,7 +51,11 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 	protected Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
 	protected Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
 
-	protected Date auxDate = adjustDate(new Date());
+	protected final Date today = adjustDate(new Date());
+	protected Date auxDate = new Date(today.getTime());
+
+	private boolean changeMonth = true;
+	private boolean changeYear = true;
 
 	public MaterialCalendarBaseDaySelector() {
 		super(CssName.MDC_CALENDAR__DAY_SELECTOR);
@@ -125,13 +130,90 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 		drawMonth();
 	}
 
-	protected abstract void drawDays();
+	public boolean isChangeMonth() {
+		return changeMonth;
+	}
+
+	public void setChangeMonth(final boolean change) {
+		this.changeMonth = change;
+		drawMonth();
+	}
+
+	public boolean isChangeYear() {
+		return changeYear;
+	}
+
+	public void setChangeYear(final boolean change) {
+		this.changeYear = change;
+		drawMonth();
+	}
+
+	protected void drawDays() {
+		items.clear();
+
+		final String name = getId();
+
+		final Date date = adjustDate(this.auxDate);
+		final int month = date.getMonth();
+		final int year = date.getYear();
+		final int firstDay = 1;
+		final int lastDay = DateTimeHelper.lastDayOfMonth(date);
+
+		date.setDate(firstDay);
+		final long minus = DateTimeHelper.daysInMillis(date.getDay());
+		final long firtsDayToDraw = date.getTime() - minus;
+
+		date.setDate(lastDay);
+		final long plus = DateTimeHelper.daysInMillis(6 - date.getDay());
+		final long lastDayToDraw = date.getTime() + plus
+		// Add 12 hours because of summer hour
+				+ DateTimeHelper.hoursInMillis(12);
+
+		for (long d = firtsDayToDraw; d <= lastDayToDraw; d += DateTimeHelper.daysInMillis(1)) {
+			final Date adjustedDate = new Date(d);
+			final boolean visible = adjustedDate.getMonth() == month && adjustedDate.getYear() == year;
+			final MaterialCalendarItem dayButton = drawItem(adjustedDate, name, visible);
+			items.add(dayButton);
+		}
+	}
+
+	protected MaterialCalendarItem drawItem(final Date date, final String name, final boolean visible) {
+		final MaterialCalendarItem item = new MaterialCalendarItem();
+		if (visible) {
+			if (today.getTime() == date.getTime())
+				item.addStyleName(CssName.MDC_CALENDAR__ITEM_TODAY);
+			item.setText(String.valueOf(date.getDate()));
+			item.setName(name);
+		} else {
+			item.setVisibility(Visibility.HIDDEN);
+		}
+		return item;
+	}
 
 	protected void drawMonth() {
 		final int year = auxDate.getYear() + 1900;
 		final int month = auxDate.getMonth() + 1;
 		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
 		monthLabel.setText(IMessages.INSTANCE.mdc_calendar_body_month(fullMonth, year));
+
+		if (changeYear && changeMonth) {
+			previousMonth.setVisibility(Visibility.VISIBLE);
+			nextMonth.setVisibility(Visibility.VISIBLE);
+		} else if (!changeYear && changeMonth) {
+			if (month > 1)
+				previousMonth.setVisibility(Visibility.VISIBLE);
+			else
+				previousMonth.setVisibility(Visibility.HIDDEN);
+
+			if (month < 12)
+				nextMonth.setVisibility(Visibility.VISIBLE);
+			else
+				nextMonth.setVisibility(Visibility.HIDDEN);
+
+		} else {
+			previousMonth.setVisibility(Visibility.HIDDEN);
+			nextMonth.setVisibility(Visibility.HIDDEN);
+		}
 	}
 
 	protected void drawWeeks() {
@@ -141,7 +223,8 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 	}
 
 	protected Date adjustDate(final Date date) {
-		return date == null ? new Date(DateTimeHelper.fromTheDate((new Date()).getTime())) : new Date(DateTimeHelper.fromTheDate(date.getTime()));
+		return date == null ? new Date(DateTimeHelper.fromTheDate((new Date()).getTime()))
+				: new Date(DateTimeHelper.fromTheDate(date.getTime()));
 	}
 
 	protected class WeekLabel extends Label {

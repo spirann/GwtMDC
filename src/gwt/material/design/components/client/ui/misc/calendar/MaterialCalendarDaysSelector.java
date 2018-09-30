@@ -23,69 +23,46 @@ import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-@SuppressWarnings("deprecation")
 public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelector<Date[]> {
 
 	protected Map<Long, MaterialCalendarItem> mapedItems = new LinkedHashMap<>();
 
 	@Override
 	protected void drawDays() {
-
-		items.clear();
 		mapedItems.clear();
-
-		final int firstDay = 1;
-		final int lastDay = DateTimeHelper.lastDayOfMonth(this.auxDate);
-
-		final Date date = adjustDate(this.auxDate);
+		super.drawDays();
+		updateStyles();
+	}
+	
+	@Override
+	protected MaterialCalendarItem drawItem(Date date, String name, boolean visible) {
+		
+		final MaterialCalendarItem item = super.drawItem(date, name, visible);
+		item.setName(String.valueOf(date.getTime()));
+		item.addSelectionHandler(event -> {
+			if (event.getValue())
+				updateValue(date);
+		});
 
 		final Date minValue = getValue()[0];
 		final Date maxValue = getValue()[1];
-
 		final Long minValueAsTime = minValue == null ? null : minValue.getTime();
 		final Long maxValueAsTime = maxValue == null ? null : maxValue.getTime();
+		if ((minValueAsTime != null && date.getTime() == minValueAsTime)
+				|| (maxValueAsTime != null && date.getTime() == maxValueAsTime))
+			item.setSelected(true, false);
 
-		for (int d = firstDay, w = 0; d <= lastDay; d++, w++) {
-			date.setDate(d);
-
-			if (w == 7)
-				w = 0;
-
-			final Date adjustedDate = adjustDate(date);
-			final MaterialCalendarItem dayButton = new MaterialCalendarItem();
-			dayButton.setText(String.valueOf(d));
-			dayButton.setName(String.valueOf(d));
-			dayButton.addSelectionHandler(event -> {
-				if (event.getValue())
-					updateValue(adjustedDate);
-
-			});
-
-			if ((minValueAsTime != null && adjustedDate.getTime() == minValueAsTime)
-					|| (maxValueAsTime != null && adjustedDate.getTime() == maxValueAsTime))
-				dayButton.setSelected(true, false);
-
-			if (w != date.getDay()) {
-				d--;
-				dayButton.setText("");
-				dayButton.setVisibility(Visibility.HIDDEN);
-			}
-
-			items.add(dayButton);
-			mapedItems.put(adjustedDate.getTime(), dayButton);
-		}
-		updateStyles();
+		mapedItems.put(date.getTime(), item);
+		return item;
 	}
 
 	protected void updateValue(final Date date) {
@@ -235,10 +212,10 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 
 	@Override
 	public Date[] getValue() {
-		final Date[] value = super.getValue();		
+		final Date[] value = super.getValue();
 		return value == null ? new Date[2] : value;
 	}
-	
+
 	/**
 	 * The value must has two dates, the first is the smaller and the last is the
 	 * bigger.

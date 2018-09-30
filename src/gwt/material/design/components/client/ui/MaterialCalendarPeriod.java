@@ -34,12 +34,12 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHe
 public class MaterialCalendarPeriod
 		extends MaterialCalendarBase<Date[], MaterialCalendarHeaderPeriod, MaterialCalendarDaysSelector> {
 
+	public MaterialCalendarPeriod() {
+		super(new MaterialCalendarHeaderPeriod(), new MaterialCalendarDaysSelector());
+	}
+	
 	@Override
 	protected void onInitialize() {
-
-		header = new MaterialCalendarHeaderPeriod();
-		daySelector = new MaterialCalendarDaysSelector();
-
 		super.onInitialize();
 
 		header.setValue(getValue());
