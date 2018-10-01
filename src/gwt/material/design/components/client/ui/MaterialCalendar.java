@@ -43,8 +43,8 @@ public class MaterialCalendar extends MaterialCalendarBase<Date, MaterialCalenda
 	}
 
 	public void setShowTodayAction(final boolean show) {
-		if (show && todayAction == null)
-			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));
+		if (show && (todayAction == null || todayAction.getParent() == null))
+			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));		
 		else if (!show && todayAction != null && todayAction.getParent() != null)
 			todayAction.removeFromParent();
 	}

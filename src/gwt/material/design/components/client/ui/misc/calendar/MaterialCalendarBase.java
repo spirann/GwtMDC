@@ -168,7 +168,7 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 	}
 
 	public void setShowClearAction(final boolean show) {
-		if (show && clearAction == null)
+		if (show && (clearAction == null || clearAction.getParent() == null))
 			clearAction = addAction(IMessages.INSTANCE.mdc_calendar_clear(), event -> setValue(null));
 		else if (!show && clearAction != null && clearAction.getParent() != null)
 			clearAction.removeFromParent();
