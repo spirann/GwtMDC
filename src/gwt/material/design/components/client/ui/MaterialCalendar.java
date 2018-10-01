@@ -21,6 +21,9 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
+import com.google.gwt.user.client.ui.Widget;
+
+import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarBase;
 import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarDaySelector;
 import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHeader;
@@ -33,10 +36,19 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHe
 @SuppressWarnings("deprecation")
 public class MaterialCalendar extends MaterialCalendarBase<Date, MaterialCalendarHeader, MaterialCalendarDaySelector> {
 
+	protected Widget todayAction;
+	
 	public MaterialCalendar() {
 		super(new MaterialCalendarHeader(), new MaterialCalendarDaySelector());
 	}
 
+	public void setShowTodayAction(final boolean show) {
+		if (show && todayAction == null)
+			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));
+		else if (!show && todayAction != null && todayAction.getParent() != null)
+			todayAction.removeFromParent();
+	}
+	
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -57,9 +69,8 @@ public class MaterialCalendar extends MaterialCalendarBase<Date, MaterialCalenda
 		super.setValue(value, fireEvents);
 		if (initialized) {
 			header.setValue(value, false);
-			if (value.getTime() != daySelector.getValue().getTime()) {
+			if (value == null || daySelector.getValue() == null || value.getTime() != daySelector.getValue().getTime())
 				daySelector.setValue(value, false);
-			}
 			monthSelector.setValue(value == null ? null : value.getMonth() + 1, false);
 			yearSelector.setValue(value == null ? null : value.getYear() + 1900, false);
 		}

@@ -23,12 +23,19 @@ import java.util.Date;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
+import gwt.material.design.components.client.constants.ChipType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.Flex;
+import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.ui.MaterialChip;
+import gwt.material.design.components.client.ui.html.Div;
 
 /**
  * 
@@ -41,9 +48,11 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 
 	protected final H header;
 	protected final S daySelector;
+	protected final Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
 	protected final MaterialCalendarMonthSelector monthSelector = new MaterialCalendarMonthSelector();
 	protected final MaterialCalendarYearSelector yearSelector = new MaterialCalendarYearSelector();
 
+	protected Widget clearAction;
 	protected Widget visibleSelector;
 	private boolean changeYear = true;
 
@@ -102,28 +111,44 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 		toggle(yearSelector.getElement());
 
 		add(header);
+		add(actions);
 		add(daySelector);
 		add(monthSelector);
 		add(yearSelector);
 	}
 
+	protected Date today() {
+		return daySelector.today;
+	}
+
 	protected native void toggle(final Element element)/*-{
 		$wnd.jQuery(element).slideToggle(250, function(event) {
-			if ($wnd.jQuery(element).css('display') != 'none') {
+			if ($wnd.jQuery(element).css('display') != 'none')
 				$wnd.jQuery(element).css('display', 'flex');
-			}
 		});
 	}-*/;
 
 	protected void toggleSelector(final Widget selector) {
-
 		if (selector == visibleSelector)
 			return;
-
 		toggle(visibleSelector.getElement());
 		toggle(selector.getElement());
-
 		visibleSelector = selector;
+	}
+
+	public Widget addAction(final String text, final ClickHandler handler) {
+		final MaterialChip chip = new MaterialChip();
+		chip.setFlex(Flex.NONE);
+		chip.setType(ChipType.OUTLINE);
+		chip.setText(text);
+		chip.addClickHandler(handler);
+		addAction(chip);
+		return chip;
+	}
+
+	@UiChild(tagname = "action")
+	public void addAction(final Widget action) {
+		actions.add(action);
 	}
 
 	public boolean isChangeMonth() {
@@ -140,6 +165,13 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 
 	public void setChangeYear(final boolean change) {
 		daySelector.setChangeYear(change);
+	}
+
+	public void setShowClearAction(final boolean show) {
+		if (show && clearAction == null)
+			clearAction = addAction(IMessages.INSTANCE.mdc_calendar_clear(), event -> setValue(null));
+		else if (!show && clearAction != null && clearAction.getParent() != null)
+			clearAction.removeFromParent();
 	}
 
 	@Override

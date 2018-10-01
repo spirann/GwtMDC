@@ -44,12 +44,12 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 @SuppressWarnings("deprecation")
 public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedField<T> {
 
-	protected Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
-	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
-	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected Label monthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
-	protected Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
-	protected Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
+	protected final Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
+	protected final MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
+	protected final MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
+	protected final Label monthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
+	protected final Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
+	protected final Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
 
 	protected final Date today = adjustDate(new Date());
 	protected Date auxDate = new Date(today.getTime());
@@ -222,9 +222,11 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 			contentWeek.add(new WeekLabel(i));
 	}
 
-	protected Date adjustDate(final Date date) {
-		return date == null ? new Date(DateTimeHelper.fromTheDate((new Date()).getTime()))
-				: new Date(DateTimeHelper.fromTheDate(date.getTime()));
+	protected Date adjustDate(Date date) {
+		if(date == null)
+			date = new Date();
+		date.setHours(12);
+		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
 	}
 
 	protected class WeekLabel extends Label {

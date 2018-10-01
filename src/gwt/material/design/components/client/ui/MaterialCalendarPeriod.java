@@ -56,12 +56,20 @@ public class MaterialCalendarPeriod
 
 	}
 
+	public Date getInitialDate() {
+		return getValue()[0];
+	}
+
 	public void setInitialDate(final Date date) {
 		final Date[] values = getValue();
 		values[0] = date;
 		setValue(values);
 	}
-
+	
+	public Date getFinalDate() {
+		return getValue()[1];
+	}
+	
 	public void setFinalDate(final Date date) {
 		final Date[] values = getValue();
 		values[1] = date;
@@ -78,7 +86,8 @@ public class MaterialCalendarPeriod
 	public void setValue(Date[] value, boolean fireEvents) {
 		super.setValue(value, fireEvents);
 		if (initialized) {
-			final Date maxDate = getValue()[1];
+			value = getValue();
+			final Date maxDate = value[1];
 			header.setValue(value, false);
 			daySelector.setValue(value, false);
 			monthSelector.setValue(maxDate == null ? null : maxDate.getMonth() + 1, false);

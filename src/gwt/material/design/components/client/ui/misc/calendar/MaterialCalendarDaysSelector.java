@@ -223,7 +223,7 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 	@Override
 	public void setValue(Date[] value, boolean fireEvents) {
 
-		if (value.length > 2)
+		if (value != null && value.length > 2)
 			throw new IllegalArgumentException(
 					"The value must has two dates, the first is the smaller and the last is the bigger.");
 

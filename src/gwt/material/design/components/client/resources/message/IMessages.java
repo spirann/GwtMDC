@@ -86,6 +86,12 @@ public interface IMessages extends Messages {
 	@DefaultMessage("Final date")
 	String mdc_calendar_final_date();
 	
+	@DefaultMessage("Hoje")
+	String mdc_calendar_today();
+	
+	@DefaultMessage("Clear")
+	String mdc_calendar_clear();
+	
 	@DefaultMessage("Password is very weak")
 	String mdc_validation__password__very_weak();
 		
