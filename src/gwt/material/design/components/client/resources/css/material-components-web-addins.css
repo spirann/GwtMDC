@@ -119,25 +119,25 @@
 	border-radius: 50%;}
 	
 /* ==========================================================================
-   Calendar
+   DatePiker
    ========================================================================== */
 :root{
-	--mdc-calendar-ink: var(--mdc-theme-on-surface);
-	--mdc-calendar-fill: var(--mdc-theme-surface);
-	--mdc-calendar-active-ink: var(--mdc-theme-on-primary);
-	--mdc-calendar-active-fill: var(--mdc-theme-primary);
-	--mdc-calendar--header-ink: var(--mdc-theme-on-primary);
-	--mdc-calendar--header-fill: var(--mdc-theme-primary);
+	--mdc-datepicker-ink: var(--mdc-theme-on-surface);
+	--mdc-datepicker-fill: var(--mdc-theme-surface);
+	--mdc-datepicker-active-ink: var(--mdc-theme-on-primary);
+	--mdc-datepicker-active-fill: var(--mdc-theme-primary);
+	--mdc-datepicker--header-ink: var(--mdc-theme-on-primary);
+	--mdc-datepicker--header-fill: var(--mdc-theme-primary);
 	
-	--mdc-calendar--item-width: 30px;
-	--mdc-calendar--item-margin: 2px;
-	--mdc-calendar-width: calc(8px + calc(7 * calc( var(--mdc-calendar--item-width) + calc(2 * var(--mdc-calendar--item-margin)))));
+	--mdc-datepicker--item-width: 30px;
+	--mdc-datepicker--item-margin: 2px;
+	--mdc-datepicker-width: calc(8px + calc(7 * calc( var(--mdc-datepicker--item-width) + calc(2 * var(--mdc-datepicker--item-margin)))));
 }  
-.mdc-calendar {
+.mdc-datepicker {
 	width: 100%;
-	max-width: var(--mdc-calendar-width);
+	max-width: var(--mdc-datepicker-width);
 	border-radius: var(--mdc-popup-border-radius);
-	border: 1px solid var(--mdc-calendar-active-fill); 
+	border: 1px solid var(--mdc-datepicker-active-fill); 
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
@@ -147,76 +147,78 @@
     -moz-user-select: -moz-none;
     -ms-user-select: none;
     user-select: none;}
-	.mdc-calendar__item {
+	.mdc-datepicker__item {
 	cursor: pointer;
-	margin: var(--mdc-calendar--item-margin);
-	width: var(--mdc-calendar--item-width);
-	height: var(--mdc-calendar--item-width);
+	margin: var(--mdc-datepicker--item-margin);
+	width: var(--mdc-datepicker--item-width);
+	height: var(--mdc-datepicker--item-width);
 	display: flex;
 	align-content: center;
 	align-items: center;
 	justify-content: center;	
 	border-radius: 50%;}
-	.mdc-calendar__item-active {
+	.mdc-datepicker__item-active {
 	border-radius: 50%;}
 	/* Arrows */
-    .mdc-calendar__actions {
+    .mdc-datepicker__actions {
 	width: calc(100% - 8px);
 	display: flex;
 	padding: 4px;
 	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
-	overflow-x: auto;}
-	.mdc-calendar__actions:empty{
+	overflow-x: auto;		
+	overflow-y: hidden;}
+	.mdc-datepicker__actions:empty{
 	display: none;}
-	.mdc-calendar__actions > * {
+	.mdc-datepicker__actions > * {
 	margin: 4px;}
-	.mdc-calendar .mdc-calendar__day-selector {
+	.mdc-datepicker .mdc-datepicker__day-selector {
 	padding-bottom: 0;} 
-	.mdc-calendar__action {
+	.mdc-datepicker__action {
 	width: 30px;
 	height: 30px;}
 	/* Years */
-	.mdc-calendar__items {
+	.mdc-datepicker__items {
 	width: 100%;
 	display: flex;
 	justify-content: center;	
 	flex-wrap: wrap;
-	height: auto;}	
+	height: auto;
+	overflow: hidden;}	
 
-.mdc-calendar {
-	background-color: var(--mdc-calendar-fill);}
-	.mdc-calendar__header {
-	background-color: var(--mdc-calendar--header-fill);}
-	.mdc-calendar__header--year {
-	color: var(--mdc-calendar--header-ink);}
-	.mdc-calendar__header--date {
-	color: var(--mdc-calendar--header-ink);}
-	.mdc-calendar__header--month {
-	color: var(--mdc-calendar--header-ink);}
-	.mdc-calendar__day-selector--week--label {
-	color: var(--mdc-calendar-ink);}
-	.mdc-calendar__day-selector--month--label {
-	color: var(--mdc-calendar-ink);}
-	.mdc-calendar__action {
-	--mdc-icon-button-ink-color: var(--mdc-calendar-ink); }
-	.mdc-calendar__item {
-	color: var(--mdc-calendar-ink);}
-	.mdc-calendar__item_today:not(.mdc-calendar__item-active) {
-	color: var(--mdc-calendar-active-fill);}
-	.mdc-calendar__item-active {
-	color: var(--mdc-calendar-active-ink);
-	background-color: var(--mdc-calendar-active-fill);}
+.mdc-datepicker {
+	background-color: var(--mdc-datepicker-fill);}
+	.mdc-datepicker__header {
+	background-color: var(--mdc-datepicker--header-fill);}
+	.mdc-datepicker__header--year {
+	color: var(--mdc-datepicker--header-ink);}
+	.mdc-datepicker__header--date {
+	color: var(--mdc-datepicker--header-ink);}
+	.mdc-datepicker__header--month {
+	color: var(--mdc-datepicker--header-ink);}
+	.mdc-datepicker__day-selector--week--label {
+	color: var(--mdc-datepicker-ink);}
+	.mdc-datepicker__day-selector--month--label {
+	color: var(--mdc-datepicker-ink);}
+	.mdc-datepicker__action {
+	--mdc-icon-button-ink-color: var(--mdc-datepicker-ink); }
+	.mdc-datepicker__item {
+	color: var(--mdc-datepicker-ink);}
+	.mdc-datepicker__item_today:not(.mdc-datepicker__item-active) {
+	color: var(--mdc-datepicker-active-fill);}
+	.mdc-datepicker__item-active {
+	color: var(--mdc-datepicker-active-ink);
+	background-color: var(--mdc-datepicker-active-fill);}
 	
 
-.mdc-calendar__header {
+.mdc-datepicker__header {
 	width: calc(100% - 40px);
 	display: flex;
 	flex-direction: column;
 	padding: 16px;
 	padding-left: 24px;}
-	.mdc-calendar__header--year {
+	.mdc-datepicker__header--year {
 	width: 56px;
 	height: 24px;
 	display: flex;
@@ -224,42 +226,42 @@
 	align-content: center;
 	align-items: center;
 	padding: 4;
-	border-color: var(--mdc-calendar--header-ink);
+	border-color: var(--mdc-datepicker--header-ink);
 	border-width: 1px;
 	border-style: solid;
 	border-radius: 12px;
 	cursor: pointer;}
-	.mdc-calendar__header--year.mdc-ripple-surface--color::before, 
-	.mdc-calendar__header--year.mdc-ripple-surface--color::after{
-	background-color: var(--mdc-calendar--header-ink);}
-	.mdc-calendar__header--date {
+	.mdc-datepicker__header--year.mdc-ripple-surface--color::before, 
+	.mdc-datepicker__header--year.mdc-ripple-surface--color::after{
+	background-color: var(--mdc-datepicker--header-ink);}
+	.mdc-datepicker__header--date {
 	display: flex;
 	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
 	cursor: pointer;}
-	.mdc-calendar__header .mdc-list-divider {
-	--mdc-divider-color: var(--mdc-calendar--header-ink);
+	.mdc-datepicker__header .mdc-list-divider {
+	--mdc-divider-color: var(--mdc-datepicker--header-ink);
 	opacity: 1;}
 
-.mdc-calendar__header_period {
+.mdc-datepicker__header_period {
 	flex-direction: row;}
-	.mdc-calendar__header_period--placeholder {
+	.mdc-datepicker__header_period--placeholder {
 	opacity: .58;}
-	.mdc-calendar__header_period .mdc-calendar__header--date {
+	.mdc-datepicker__header_period .mdc-datepicker__header--date {
 	height: 36px;}
-	.mdc-calendar__header_period--circle {
+	.mdc-datepicker__header_period--circle {
 	width: 6px;
 	height: 6px;
-	border: 2px solid var(--mdc-calendar--header-ink);
+	border: 2px solid var(--mdc-datepicker--header-ink);
 	border-radius: 50%;}
-	.mdc-calendar__header_period--line {
+	.mdc-datepicker__header_period--line {
 	flex: 1;
 	width: 0;
-	border-right: 4px dotted var(--mdc-calendar--header-ink);
+	border-right: 4px dotted var(--mdc-datepicker--header-ink);
 	margin-top: 4px;
 	margin-bottom: 4px;}
-	.mdc-calendar__header_period > div:first-child {
+	.mdc-datepicker__header_period > div:first-child {
 	width: 10px;
 	padding-top: 14px;
 	padding-bottom: 14px;
@@ -268,28 +270,28 @@
 	flex-direction: column;
 	align-content: center;
 	align-items: center;}
-	.mdc-calendar__header_period > div:last-child {
+	.mdc-datepicker__header_period > div:last-child {
 	flex: 1;
 	display: flex;
 	flex-direction: column;
 	align-content: flex-start;
 	align-items: flex-start;}
 
-.mdc-calendar__day-selector {
+.mdc-datepicker__day-selector {
 	width: 100%;
-	max-width: var(--mdc-calendar-width);
-	padding: 8px;
+	max-width: var(--mdc-datepicker-width);
 	height: auto;
+	padding: 8px;
 	flex: 1;
 	display: flex;
 	justify-content: flex-start;
 	align-content: center;
 	align-items: center;
-	flex-direction: column;
-	overflow: hidden;}
-	.mdc-calendar .mdc-calendar__day-selector {
+	flex-direction: column;	
+    overflow: hidden;}
+	.mdc-datepicker .mdc-datepicker__day-selector {
 	padding-top: 0;}
-	.mdc-calendar__day-selector--month--label {
+	.mdc-datepicker__day-selector--month--label {
 	flex: 1;
 	display: flex;
 	align-content: center;
@@ -297,27 +299,26 @@
 	justify-content: center;
 	cursor: pointer;}
 	/* week */
-	.mdc-calendar__day-selector--week--content {
+	.mdc-datepicker__day-selector--week--content {
 	width: 100%;
 	display: flex;
 	align-content: center;
 	align-items: center;
 	justify-content: center;}
-	.mdc-calendar__day-selector--week--label {
-	width: var(--mdc-calendar--item-width);
-	height: var(--mdc-calendar--item-width);
-	margin-right: var(--mdc-calendar--item-margin);
-	margin-left: var(--mdc-calendar--item-margin);
+	.mdc-datepicker__day-selector--week--label {
+	width: var(--mdc-datepicker--item-width);
+	height: var(--mdc-datepicker--item-width);
+	margin-right: var(--mdc-datepicker--item-margin);
+	margin-left: var(--mdc-datepicker--item-margin);
 	display: flex;
 	align-content: center;
 	align-items: center;
 	justify-content: center;
 	opacity: .5;}
 	
-.mdc-calendar__month-selector {
+.mdc-datepicker__month-selector {
 	width: 100%;
-	max-width: var(--mdc-calendar-width);
-	height: auto;
+	max-width: var(--mdc-datepicker-width);
 	padding: 8px;
 	display: flex;
 	flex-wrap: wrap;
@@ -325,15 +326,14 @@
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;}	
-	.mdc-calendar__month-selector .mdc-calendar__item {
+	.mdc-datepicker__month-selector .mdc-datepicker__item {
 	text-transform: uppercase;
 	width: 48px;
 	height: 48px;}
 
-.mdc-calendar__year-selector {
+.mdc-datepicker__year-selector {
 	width: 100%;
-	max-width: var(--mdc-calendar-width);
-	height: auto;
+	max-width: var(--mdc-datepicker-width);
 	padding: 8px;
 	display: flex;
 	flex-direction: column;
@@ -341,32 +341,45 @@
 	align-items: center;
 	justify-content: flex-start;
 	overflow: hidden;}
-	.mdc-calendar__year-selector .mdc-calendar__actions {
+	.mdc-datepicker__year-selector .mdc-datepicker__actions {
 	justify-content: space-between;}
-	.mdc-calendar__year-selector .mdc-calendar__item {
+	.mdc-datepicker__year-selector .mdc-datepicker__item {
 	width: 42px;
 	height: 42px;}
 	
-.mdc_calendar__mult_days--min {
+.mdc_datepicker__mult_days--min {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 	margin-right: 0;
-	padding-right: var(--mdc-calendar--item-margin); 
-}
-.mdc_calendar__mult_days--max {
+	padding-right: var(--mdc-datepicker--item-margin);}
+.mdc_datepicker__mult_days--max {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	margin-left: 0;
-	padding-left: var(--mdc-calendar--item-margin); 
-}
-.mdc_calendar__mult_days--between {
+	padding-left: var(--mdc-datepicker--item-margin);}
+.mdc_datepicker__mult_days--between {
 	border-radius: 0;
-	color: var(--mdc-calendar-active-ink);
-	background-color: var(--mdc-calendar-active-fill);
+	color: var(--mdc-datepicker-active-ink);
+	background-color: var(--mdc-datepicker-active-fill);
 	margin-right: 0;
 	margin-left: 0;
-	padding-right: var(--mdc-calendar--item-margin);
-	padding-left: var(--mdc-calendar--item-margin);
-	opacity: .58;
-}	
-	
+	padding-right: var(--mdc-datepicker--item-margin);
+	padding-left: var(--mdc-datepicker--item-margin);
+	opacity: .58;}
+
+/* ==========================================================================
+   DatePiker Dialog
+   ========================================================================== */
+.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__surface {
+	padding: 0;
+	min-width: var(--mdc-datepicker-width);
+	overflow: hidden;}
+	.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__title:empty  + .mdc-dialog__content {
+  	padding-top: 0; }
+  	.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__content {
+	padding: 0;
+	overflow-x: hidden;}
+	.mdc-datepicker-dialog.mdc-dialog .mdc-datepicker {
+	border: none;
+	border-radius: 0;
+	min-height: 380px;}

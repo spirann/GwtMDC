@@ -440,35 +440,37 @@ public interface CssName {
 	String MDC_CHART__LINE_CHART__END = "ct-end";
 
 	// //////////////////////////////////////////////////////
-	// CALENDAR
+	// DATE PICKER
 	// //////////////////////////////////////////////////////
-	String MDC_CALENDAR = "mdc-calendar";
-	String MDC_CALENDAR__ITEMS = "mdc-calendar__items";	
-	String MDC_CALENDAR__ITEM = "mdc-calendar__item";
-	String MDC_CALENDAR__ITEM_TODAY = "mdc-calendar__item_today";
-	String MDC_CALENDAR__ITEM_ACTIVE = "mdc-calendar__item-active";
-	String MDC_CALENDAR__ACTIONS = "mdc-calendar__actions";
-	String MDC_CALENDAR__ACTION = "mdc-calendar__action";
+	String MDC_DATEPICKER = "mdc-datepicker";
+	String MDC_DATEPICKER__ITEMS = "mdc-datepicker__items";	
+	String MDC_DATEPICKER__ITEM = "mdc-datepicker__item";
+	String MDC_DATEPICKER__ITEM_TODAY = "mdc-datepicker__item_today";
+	String MDC_DATEPICKER__ITEM_ACTIVE = "mdc-datepicker__item-active";
+	String MDC_DATEPICKER__ACTIONS = "mdc-datepicker__actions";
+	String MDC_DATEPICKER__ACTION = "mdc-datepicker__action";
 	
-	String MDC_CALENDAR__HEADER = "mdc-calendar__header";
-	String MDC_CALENDAR__HEADER__YEAR = "mdc-calendar__header--year";
-	String MDC_CALENDAR__HEADER__DATE = "mdc-calendar__header--date";
-	String MDC_CALENDAR__HEADER_PERIOD = "mdc-calendar__header_period";
-	String MDC_CALENDAR__HEADER_PERIOD__CIRCLE = "mdc-calendar__header_period--circle";
-	String MDC_CALENDAR__HEADER_PERIOD__LINE = "mdc-calendar__header_period--line";
-	String MDC_CALENDAR__HEADER_PERIOD__PLACEHOLDER = "mdc-calendar__header_period--placeholder";
+	String MDC_DATEPICKER__HEADER = "mdc-datepicker__header";
+	String MDC_DATEPICKER__HEADER__YEAR = "mdc-datepicker__header--year";
+	String MDC_DATEPICKER__HEADER__DATE = "mdc-datepicker__header--date";
+	String MDC_DATEPICKER__HEADER_PERIOD = "mdc-datepicker__header_period";
+	String MDC_DATEPICKER__HEADER_PERIOD__CIRCLE = "mdc-datepicker__header_period--circle";
+	String MDC_DATEPICKER__HEADER_PERIOD__LINE = "mdc-datepicker__header_period--line";
+	String MDC_DATEPICKER__HEADER_PERIOD__PLACEHOLDER = "mdc-datepicker__header_period--placeholder";
 	
-	String MDC_CALENDAR__DAY_SELECTOR = "mdc-calendar__day-selector";		
-	String MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL = "mdc-calendar__day-selector--month--label";	
-	String MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT = "mdc-calendar__day-selector--week--content";
-	String MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL = "mdc-calendar__day-selector--week--label";	
+	String MDC_DATEPICKER__DAY_SELECTOR = "mdc-datepicker__day-selector";		
+	String MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL = "mdc-datepicker__day-selector--month--label";	
+	String MDC_DATEPICKER__DAY_SELECTOR__WEEK__CONTENT = "mdc-datepicker__day-selector--week--content";
+	String MDC_DATEPICKER__DAY_SELECTOR__WEEK__LABEL = "mdc-datepicker__day-selector--week--label";	
 	
-	String MDC_CALENDAR__MONTH_SELECTOR = "mdc-calendar__month-selector";
-	String MDC_CALENDAR__YEAR_SELECTOR = "mdc-calendar__year-selector";
+	String MDC_DATEPICKER__MONTH_SELECTOR = "mdc-datepicker__month-selector";
+	String MDC_DATEPICKER__YEAR_SELECTOR = "mdc-datepicker__year-selector";
 	
-	String MDC_CALENDAR__MULT_DAYS__MIN = "mdc_calendar__mult_days--min";
-	String MDC_CALENDAR__MULT_DAYS__MAX = "mdc_calendar__mult_days--max";
-	String MDC_CALENDAR__MULT_DAYS__BETWEEN = "mdc_calendar__mult_days--between";
+	String MDC_DATEPICKER__MULT_DAYS__MIN = "mdc_datepicker__mult_days--min";
+	String MDC_DATEPICKER__MULT_DAYS__MAX = "mdc_datepicker__mult_days--max";
+	String MDC_DATEPICKER__MULT_DAYS__BETWEEN = "mdc_datepicker__mult_days--between";
+	// Dialog
+	String MDC_DATEPICKER_DIALOG = "mdc-datepicker-dialog";
 	
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE

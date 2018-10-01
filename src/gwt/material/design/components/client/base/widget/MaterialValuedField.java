@@ -45,11 +45,11 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 	protected MaterialValuedField() {
 		this(CssName.MDC_FORM_FIELD);
 	}
-	
-	public MaterialValuedField(final String ... initialClasses) {
+
+	public MaterialValuedField(final String... initialClasses) {
 		super(initialClasses);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.formField.MDCFormField(element);
@@ -66,14 +66,9 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
 		// Initialization code
-		if (!valueChangeHandlerInitialized) {
-			valueChangeHandlerInitialized = true;
-			addChangeHandler(new ChangeHandler() {
-				public void onChange(ChangeEvent event) {
-					fireChangeEvent();
-				}
-			});
-		}
+		if (!valueChangeHandlerInitialized)
+			valueChangeHandlerInitialized = addChangeHandler(event -> fireChangeEvent()) != null;
+
 		return addHandler(handler, ValueChangeEvent.getType());
 	}
 
@@ -90,9 +85,8 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 	@Override
 	public void setValue(T value, boolean fireEvents) {
 		this.value = value;
-		if (fireEvents) {
+		if (fireEvents)
 			fireChangeEvent();
-		}
 	}
 
 }

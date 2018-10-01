@@ -21,9 +21,9 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarBase;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarDaysSelector;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHeaderPeriod;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerBase;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDateRangePickerDaySelector;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDateRangePickerHeader;
 
 /**
  * 
@@ -31,11 +31,11 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHe
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialCalendarPeriod
-		extends MaterialCalendarBase<Date[], MaterialCalendarHeaderPeriod, MaterialCalendarDaysSelector> {
+public class MaterialDateRangePicker
+		extends MaterialDatePickerBase<Date[], MaterialDateRangePickerHeader, MaterialDateRangePickerDaySelector> {
 
-	public MaterialCalendarPeriod() {
-		super(new MaterialCalendarHeaderPeriod(), new MaterialCalendarDaysSelector());
+	public MaterialDateRangePicker() {
+		super(new MaterialDateRangePickerHeader(), new MaterialDateRangePickerDaySelector());
 	}
 	
 	@Override

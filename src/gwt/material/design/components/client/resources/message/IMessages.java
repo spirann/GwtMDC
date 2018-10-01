@@ -92,6 +92,12 @@ public interface IMessages extends Messages {
 	@DefaultMessage("Clear")
 	String mdc_calendar_clear();
 	
+	@DefaultMessage("Ok")
+	String mdc_calendar_ok();
+	
+	@DefaultMessage("Cancel")
+	String mdc_calendar_cancel();
+	
 	@DefaultMessage("Password is very weak")
 	String mdc_validation__password__very_weak();
 		

@@ -665,17 +665,6 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Dialog
    ========================================================================== */
-/*
-
-	--mdc-dialog-header-fill-color: transparent;
-	--mdc-dialog-header-ink-color: var(--mdc-theme-on-surface);
-	--mdc-dialog-body-fill-color: var(--mdc-theme-surface);
-	--mdc-dialog-body-ink-color: var(--mdc-theme-on-surface);
-	--mdc-dialog-action-fill-color: transparent;
-	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
-	--mdc-dialog-action-raised-ink-color: var(--mdc-dialog-body-fill-color);
-
-*/   
 .mdc-dialog .mdc-dialog__surface {	
 	background-color: var(--mdc-dialog-body-fill-color);
 	border-radius: var(--mdc-popup-border-radius);}
@@ -699,9 +688,7 @@ i.mdc-list-item__graphic {
 .mdc-dialog__button.mdc-button--raised:not(:disabled),
 .mdc-dialog__button.mdc-button--unelevated:not(:disabled) {
 	--mdc-button-raised-ink-color: var(--mdc-dialog-action-raised-ink-color);
-	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}	
-.mdc-dialog__actions[empty]{
-	display: none;}
+	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}
 /* ==========================================================================
    Card
    ========================================================================== */
@@ -799,8 +786,7 @@ i.mdc-list-item__graphic {
 
 /* Disabled Text Field */
 .mdc-text-field--fullwidth.mdc-text-field--disabled:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input,
-.mdc-text-field--fullwidth[disabled]:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input {
-	height: 36px;
+.mdc-text-field--fullwidth[disabled]:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input {	
 	border-bottom: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;}
 
 /* Disabled Text Area */
@@ -891,10 +877,6 @@ i.mdc-list-item__graphic {
     background-color: rgb(127,127,127, 0.3);}
 .mdc-text-field--box::before, .mdc-text-field--box::after {
     background-color: rgba(0, 0, 0, 0.87);}
-.mdc-text-field--fullwidth:not(.mdc-text-field--focused):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea) {
- 	/* border-bottom-color: var(--mdc-text-field--ink-color, rgba(0, 0, 0, 0.87)) !important; */}
-.mdc-text-field--fullwidth:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
-	height: 36px;}
 
 /* Text Field */
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input,

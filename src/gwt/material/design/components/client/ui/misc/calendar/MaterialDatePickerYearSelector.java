@@ -39,21 +39,21 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialCalendarYearSelector extends MaterialValuedField<Integer> {
+public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer> {
 
 	protected final static int NUMBER_OF_YERAS = 25;
 	
-	protected Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
+	protected Div actions = new Div(CssName.MDC_DATEPICKER__ACTIONS);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
+	protected Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
 	
-	protected Map<Integer, MaterialCalendarItem> years = new LinkedHashMap<>();
+	protected Map<Integer, MaterialDatePickerItem> years = new LinkedHashMap<>();
 	private int minValue;
 	private int maxValue;
 
-	public MaterialCalendarYearSelector() {
-		super(CssName.MDC_CALENDAR__YEAR_SELECTOR);
+	public MaterialDatePickerYearSelector() {
+		super(CssName.MDC_DATEPICKER__YEAR_SELECTOR);
 	}
 
 	@Override
@@ -65,10 +65,10 @@ public class MaterialCalendarYearSelector extends MaterialValuedField<Integer> {
 	protected void onInitialize() {
 		super.onInitialize();
 		
-		previousMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
+		previousMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
 		previousMonth.addClickHandler(event -> drawYears(minValue - NUMBER_OF_YERAS, maxValue - NUMBER_OF_YERAS));
 
-		nextMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
+		nextMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
 		nextMonth.addClickHandler(event -> drawYears(minValue + NUMBER_OF_YERAS, maxValue + NUMBER_OF_YERAS));
 		
 		actions.add(previousMonth);
@@ -102,7 +102,7 @@ public class MaterialCalendarYearSelector extends MaterialValuedField<Integer> {
 		for (int y = minValue; y <= maxValue; y++) {
 
 			final Integer year = y;
-			final MaterialCalendarItem yearLabel = new MaterialCalendarItem();
+			final MaterialDatePickerItem yearLabel = new MaterialDatePickerItem();
 			yearLabel.setText(String.valueOf(year));
 			yearLabel.setName(name);
 			yearLabel.addClickHandler(event -> super.setValue(year, true));
@@ -135,20 +135,20 @@ public class MaterialCalendarYearSelector extends MaterialValuedField<Integer> {
 	
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__INK, color.getCssName());
 	}
 
 	public void setActiveColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_INK, color.getCssName());
 	}
 	
 	public void setActiveBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_FILL, color.getCssName());
 	}
 
 }

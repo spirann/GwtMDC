@@ -43,21 +43,21 @@ import gwt.material.design.components.client.ui.html.Div;
  *
  */
 @SuppressWarnings("deprecation")
-public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, S extends MaterialCalendarBaseDaySelector<T>>
+public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>, S extends MaterialDatePickerBaseDaySelector<T>>
 		extends MaterialValuedField<T> {
 
 	protected final H header;
 	protected final S daySelector;
-	protected final Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
-	protected final MaterialCalendarMonthSelector monthSelector = new MaterialCalendarMonthSelector();
-	protected final MaterialCalendarYearSelector yearSelector = new MaterialCalendarYearSelector();
+	protected final Div actions = new Div(CssName.MDC_DATEPICKER__ACTIONS);
+	protected final MaterialDatePickerMonthSelector monthSelector = new MaterialDatePickerMonthSelector();
+	protected final MaterialDatePickerYearSelector yearSelector = new MaterialDatePickerYearSelector();
 
 	protected Widget clearAction;
 	protected Widget visibleSelector;
 	private boolean changeYear = true;
 
-	public MaterialCalendarBase(final H header, final S daySelector) {
-		super(CssName.MDC_CALENDAR);
+	public MaterialDatePickerBase(final H header, final S daySelector) {
+		super(CssName.MDC_DATEPICKER);
 		this.header = header;
 		this.daySelector = daySelector;
 		this.visibleSelector = daySelector;
@@ -176,27 +176,27 @@ public abstract class MaterialCalendarBase<T, H extends MaterialValuedField<T>, 
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__INK, color.getCssName());
 	}
 
 	public void setActiveColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_INK, color.getCssName());
 	}
 
 	public void setActiveBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__ACTIVE_FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_FILL, color.getCssName());
 	}
 
 	public void setHeaderColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
 
 	public void setHeaderBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
 }

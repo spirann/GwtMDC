@@ -41,13 +41,13 @@ import gwt.material.design.components.client.ui.html.Label;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialCalendarHeaderPeriod extends MaterialValuedField<Date[]> {
+public class MaterialDateRangePickerHeader extends MaterialValuedField<Date[]> {
 
-	protected Label minDate = new Label(CssName.MDC_CALENDAR__HEADER__DATE, CssName.MDC_TYPOGRAPHY__CAPTION);
-	protected Label maxDate = new Label(CssName.MDC_CALENDAR__HEADER__DATE, CssName.MDC_TYPOGRAPHY__CAPTION);
+	protected Label minDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE, CssName.MDC_TYPOGRAPHY__CAPTION);
+	protected Label maxDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE, CssName.MDC_TYPOGRAPHY__CAPTION);
 
-	public MaterialCalendarHeaderPeriod() {
-		super(CssName.MDC_CALENDAR__HEADER, CssName.MDC_CALENDAR__HEADER_PERIOD);
+	public MaterialDateRangePickerHeader() {
+		super(CssName.MDC_DATEPICKER__HEADER, CssName.MDC_DATEPICKER__HEADER_PERIOD);
 	}
 
 	@Override
@@ -60,9 +60,9 @@ public class MaterialCalendarHeaderPeriod extends MaterialValuedField<Date[]> {
 		super.onInitialize();
 		
 		final Div firstColumn = new Div();
-		firstColumn.add(new Div(CssName.MDC_CALENDAR__HEADER_PERIOD__CIRCLE));
-		firstColumn.add(new Div(CssName.MDC_CALENDAR__HEADER_PERIOD__LINE));
-		firstColumn.add(new Div(CssName.MDC_CALENDAR__HEADER_PERIOD__CIRCLE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__CIRCLE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__LINE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__CIRCLE));
 		
 		final Div lastColumn = new Div();		
 		lastColumn.add(minDate);
@@ -82,10 +82,10 @@ public class MaterialCalendarHeaderPeriod extends MaterialValuedField<Date[]> {
 	}
 
 	protected void setText(final Label label, final Date date, final String emptyText) {
-		label.removeStyleName(CssName.MDC_CALENDAR__HEADER_PERIOD__PLACEHOLDER);
+		label.removeStyleName(CssName.MDC_DATEPICKER__HEADER_PERIOD__PLACEHOLDER);
 		if (date == null) {
 			label.setText(emptyText);
-			label.addStyleName(CssName.MDC_CALENDAR__HEADER_PERIOD__PLACEHOLDER);
+			label.addStyleName(CssName.MDC_DATEPICKER__HEADER_PERIOD__PLACEHOLDER);
 		} else {
 			final String week = IMessages.INSTANCE.mdc_calendar_short_week(date.getDay() + 1);
 			final int day = date.getDate();
@@ -130,11 +130,11 @@ public class MaterialCalendarHeaderPeriod extends MaterialValuedField<Date[]> {
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
 }

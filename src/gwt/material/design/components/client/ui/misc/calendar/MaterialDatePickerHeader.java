@@ -39,9 +39,9 @@ import gwt.material.design.components.client.ui.html.Label;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialCalendarHeader extends MaterialValuedField<Date> {
+public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 
-	protected Label headerYear = new Label(CssName.MDC_CALENDAR__HEADER__YEAR) {
+	protected Label headerYear = new Label(CssName.MDC_DATEPICKER__HEADER__YEAR) {
 		@Override
 		protected void onInitialize() {
 			ripleMixin.initialize();
@@ -49,10 +49,10 @@ public class MaterialCalendarHeader extends MaterialValuedField<Date> {
 		}
 	};
 	
-	protected Label headerDate = new Label(CssName.MDC_CALENDAR__HEADER__DATE, CssName.MDC_TYPOGRAPHY__HEADLINE_5);
+	protected Label headerDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE, CssName.MDC_TYPOGRAPHY__HEADLINE_5);
 
-	public MaterialCalendarHeader() {
-		super(CssName.MDC_CALENDAR__HEADER);
+	public MaterialDatePickerHeader() {
+		super(CssName.MDC_DATEPICKER__HEADER);
 	}
 
 	@Override
@@ -103,11 +103,11 @@ public class MaterialCalendarHeader extends MaterialValuedField<Date> {
 	
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_INK, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
 	
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CALENDAR__HEADER_FILL, color.getCssName());
+		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
 }

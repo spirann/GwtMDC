@@ -52,6 +52,7 @@ import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Footer;
 import gwt.material.design.components.client.ui.html.H2;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 
 /**
  * 
@@ -116,10 +117,9 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	}
 	
 	protected final void preventFooter() {
-		final Element element = footer.getElement();
-		element.removeAttribute("empty");
-		if(element.getInnerText().trim().isEmpty())
-			element.setAttribute("empty", null);
+		JsHelper.hideEmpty(accept);
+		JsHelper.hideEmpty(cancel);
+		JsHelper.hideEmpty(footer);
 	}
 
 	protected native void initEvents()/*-{
@@ -298,7 +298,7 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	}
 
 	@Override
-	public void setTextColor(Color color) {
+	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DIALOG__BODY_INK_COLOR, color.getCssName());
 	}
 

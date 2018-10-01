@@ -32,9 +32,9 @@ import gwt.material.design.components.client.constants.CssName;
  * @author Richeli Vargas
  *
  */
-public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelector<Date[]> {
+public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDaySelector<Date[]> {
 
-	protected Map<Long, MaterialCalendarItem> mapedItems = new LinkedHashMap<>();
+	protected Map<Long, MaterialDatePickerItem> mapedItems = new LinkedHashMap<>();
 
 	@Override
 	protected void drawDays() {
@@ -44,9 +44,9 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 	}
 	
 	@Override
-	protected MaterialCalendarItem drawItem(Date date, String name, boolean visible) {
+	protected MaterialDatePickerItem drawItem(Date date, String name, boolean visible) {
 		
-		final MaterialCalendarItem item = super.drawItem(date, name, visible);
+		final MaterialDatePickerItem item = super.drawItem(date, name, visible);
 		item.setName(String.valueOf(date.getTime()));
 		item.addSelectionHandler(event -> {
 			if (event.getValue())
@@ -77,13 +77,13 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 		final Long maxDateAsTime = maxDate == null ? null : maxDate.getTime();
 
 		if (minDateAsTime != null) {
-			final MaterialCalendarItem item = mapedItems.get(minDateAsTime);
+			final MaterialDatePickerItem item = mapedItems.get(minDateAsTime);
 			if (item != null)
 				item.setSelected(false, false);
 		}
 
 		if (maxDateAsTime != null) {
-			final MaterialCalendarItem item = mapedItems.get(maxDateAsTime);
+			final MaterialDatePickerItem item = mapedItems.get(maxDateAsTime);
 			if (item != null)
 				item.setSelected(false, false);
 		}
@@ -148,13 +148,13 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 		}
 
 		if (values[0] != null) {
-			final MaterialCalendarItem item = mapedItems.get(values[0].getTime());
+			final MaterialDatePickerItem item = mapedItems.get(values[0].getTime());
 			if (item != null)
 				item.setSelected(true, false);
 		}
 
 		if (values[1] != null) {
-			final MaterialCalendarItem item = mapedItems.get(values[1].getTime());
+			final MaterialDatePickerItem item = mapedItems.get(values[1].getTime());
 			if (item != null)
 				item.setSelected(true, false);
 		}
@@ -181,21 +181,21 @@ public class MaterialCalendarDaysSelector extends MaterialCalendarBaseDaySelecto
 
 		mapedItems.entrySet().parallelStream().forEach(entry -> {
 			final Long time = entry.getKey();
-			final MaterialCalendarItem item = entry.getValue();
+			final MaterialDatePickerItem item = entry.getValue();
 			clearStyles(item);
 			if (time.equals(minDateAsTime))
-				item.addStyleName(CssName.MDC_CALENDAR__MULT_DAYS__MIN);
+				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MIN);
 			else if (time.equals(maxDateAsTime))
-				item.addStyleName(CssName.MDC_CALENDAR__MULT_DAYS__MAX);
+				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MAX);
 			else if (time > minDateAsTime && time < maxDateAsTime)
-				item.addStyleName(CssName.MDC_CALENDAR__MULT_DAYS__BETWEEN);
+				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__BETWEEN);
 		});
 	}
 
 	protected void clearStyles(final Widget widget) {
-		widget.removeStyleName(CssName.MDC_CALENDAR__MULT_DAYS__MIN);
-		widget.removeStyleName(CssName.MDC_CALENDAR__MULT_DAYS__MAX);
-		widget.removeStyleName(CssName.MDC_CALENDAR__MULT_DAYS__BETWEEN);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MIN);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MAX);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__BETWEEN);
 	}
 
 	public void setInitialDate(final Date date) {

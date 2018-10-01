@@ -24,9 +24,9 @@ import java.util.Date;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.resources.message.IMessages;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarBase;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarDaySelector;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHeader;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerBase;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerDaySelector;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerHeader;
 
 /**
  * 
@@ -34,12 +34,12 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialCalendarHe
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialCalendar extends MaterialCalendarBase<Date, MaterialCalendarHeader, MaterialCalendarDaySelector> {
+public class MaterialDatePicker extends MaterialDatePickerBase<Date, MaterialDatePickerHeader, MaterialDatePickerDaySelector> {
 
 	protected Widget todayAction;
 	
-	public MaterialCalendar() {
-		super(new MaterialCalendarHeader(), new MaterialCalendarDaySelector());
+	public MaterialDatePicker() {
+		super(new MaterialDatePickerHeader(), new MaterialDatePickerDaySelector());
 	}
 
 	public void setShowTodayAction(final boolean show) {

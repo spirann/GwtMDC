@@ -38,13 +38,13 @@ import gwt.material.design.components.client.constants.HtmlElements;
  * @author Richeli Vargas
  *
  */
-public class MaterialCalendarItem extends MaterialSelectedField implements HasName, HasText {
+public class MaterialDatePickerItem extends MaterialSelectedField implements HasName, HasText {
 
 	// ////////////////////////////////////////////////////////////////
 	// Control for change value in RadioButton group
 	// Because the event is not trigger when another radio is selected
 	// ////////////////////////////////////////////////////////////////
-	protected final static Map<String, MaterialCalendarItem> history = new HashMap<>();
+	protected final static Map<String, MaterialDatePickerItem> history = new HashMap<>();
 
 	protected void updateHistory() {
 		if (isSelected()) {
@@ -55,7 +55,7 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	}
 	
 	protected void putInHistory(final boolean fireEvent) {
-		final MaterialCalendarItem old = history.get(getName());
+		final MaterialDatePickerItem old = history.get(getName());
 		if (fireEvent && old != null && old != this) {
 			old.setSelected(false, false);
 			old.fireChangeEvent();
@@ -64,18 +64,18 @@ public class MaterialCalendarItem extends MaterialSelectedField implements HasNa
 	}
 
 	protected void removeFromHistory() {
-		final MaterialCalendarItem old = history.get(getName());
+		final MaterialDatePickerItem old = history.get(getName());
 		if (old == this) {
 			history.remove(getName());
 		}
 	}
 	
-	protected final TextMixin<MaterialCalendarItem> textMixin = new TextMixin<>(this);
-	protected final NameMixin<MaterialCalendarItem> nameMixin = new NameMixin<>(this);
+	protected final TextMixin<MaterialDatePickerItem> textMixin = new TextMixin<>(this);
+	protected final NameMixin<MaterialDatePickerItem> nameMixin = new NameMixin<>(this);
 	
-	public MaterialCalendarItem() {
-		super(HtmlElements.LABEL.createElement(), CssName.MDC_CALENDAR__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);
-		super.initializeSelectedMixin(this, CssName.MDC_CALENDAR__ITEM_ACTIVE);
+	public MaterialDatePickerItem() {
+		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);
+		super.initializeSelectedMixin(this, CssName.MDC_DATEPICKER__ITEM_ACTIVE);
 	}
 	
 	@Override

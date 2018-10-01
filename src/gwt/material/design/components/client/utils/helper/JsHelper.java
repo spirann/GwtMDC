@@ -2,8 +2,16 @@ package gwt.material.design.components.client.utils.helper;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.Widget;
 
 public class JsHelper {
+
+	public static void hideEmpty(final Widget widget) {
+		final Element element = widget.getElement();
+		element.removeAttribute("empty");
+		if (element.getInnerText().trim().isEmpty())
+			element.setAttribute("empty", null);
+	}
 
 	public static native void clearFocus()/*-{
 		$doc.activeElement.blur();

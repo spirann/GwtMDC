@@ -42,14 +42,14 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedField<T> {
+public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValuedField<T> {
 
-	protected final Div actions = new Div(CssName.MDC_CALENDAR__ACTIONS);
+	protected final Div actions = new Div(CssName.MDC_DATEPICKER__ACTIONS);
 	protected final MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected final MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected final Label monthLabel = new Label(CssName.MDC_CALENDAR__DAY_SELECTOR__MONTH__LABEL);
-	protected final Div contentWeek = new Div(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__CONTENT);
-	protected final Div items = new Div(CssName.MDC_CALENDAR__ITEMS);
+	protected final Label monthLabel = new Label(CssName.MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL);
+	protected final Div contentWeek = new Div(CssName.MDC_DATEPICKER__DAY_SELECTOR__WEEK__CONTENT);
+	protected final Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
 
 	protected final Date today = adjustDate(new Date());
 	protected Date auxDate = new Date(today.getTime());
@@ -57,8 +57,8 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 	private boolean changeMonth = true;
 	private boolean changeYear = true;
 
-	public MaterialCalendarBaseDaySelector() {
-		super(CssName.MDC_CALENDAR__DAY_SELECTOR);
+	public MaterialDatePickerBaseDaySelector() {
+		super(CssName.MDC_DATEPICKER__DAY_SELECTOR);
 	}
 
 	@Override
@@ -70,10 +70,10 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 	protected void onInitialize() {
 		super.onInitialize();
 
-		previousMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
+		previousMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
 		previousMonth.addClickHandler(event -> decreaseMonth());
 
-		nextMonth.addStyleName(CssName.MDC_CALENDAR__ACTION);
+		nextMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
 		nextMonth.addClickHandler(event -> increaseMonth());
 
 		actions.add(previousMonth);
@@ -172,16 +172,16 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 		for (long d = firtsDayToDraw; d <= lastDayToDraw; d += DateTimeHelper.daysInMillis(1)) {
 			final Date adjustedDate = new Date(d);
 			final boolean visible = adjustedDate.getMonth() == month && adjustedDate.getYear() == year;
-			final MaterialCalendarItem dayButton = drawItem(adjustedDate, name, visible);
+			final MaterialDatePickerItem dayButton = drawItem(adjustedDate, name, visible);
 			items.add(dayButton);
 		}
 	}
 
-	protected MaterialCalendarItem drawItem(final Date date, final String name, final boolean visible) {
-		final MaterialCalendarItem item = new MaterialCalendarItem();
+	protected MaterialDatePickerItem drawItem(final Date date, final String name, final boolean visible) {
+		final MaterialDatePickerItem item = new MaterialDatePickerItem();
 		if (visible) {
 			if (today.getTime() == date.getTime())
-				item.addStyleName(CssName.MDC_CALENDAR__ITEM_TODAY);
+				item.addStyleName(CssName.MDC_DATEPICKER__ITEM_TODAY);
 			item.setText(String.valueOf(date.getDate()));
 			item.setName(name);
 		} else {
@@ -231,7 +231,7 @@ public abstract class MaterialCalendarBaseDaySelector<T> extends MaterialValuedF
 
 	protected class WeekLabel extends Label {
 		protected WeekLabel(final int date) {
-			super(CssName.MDC_CALENDAR__DAY_SELECTOR__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
+			super(CssName.MDC_DATEPICKER__DAY_SELECTOR__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
 			setText(IMessages.INSTANCE.mdc_calendar_letter_week(date));
 		}
 	}

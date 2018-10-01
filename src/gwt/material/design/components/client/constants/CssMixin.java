@@ -168,12 +168,12 @@ public interface CssMixin {
 	// ////////////////////////////////////////////////////////////////////////////
 	// Calendar
 	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_CALENDAR__INK = "--mdc-calendar-ink";
-	String MDC_CALENDAR__FILL = "--mdc-calendar-fill";
-	String MDC_CALENDAR__ACTIVE_INK = "--mdc-calendar-active-ink";
-	String MDC_CALENDAR__ACTIVE_FILL = "--mdc-calendar-active-fill";
-	String MDC_CALENDAR__HEADER_INK = "--mdc-calendar--header-ink";
-	String MDC_CALENDAR__HEADER_FILL = "--mdc-calendar--header-fill";
+	String MDC_DATEPICKER__INK = "--mdc-datepicker-ink";
+	String MDC_DATEPICKER__FILL = "--mdc-datepicker-fill";
+	String MDC_DATEPICKER__ACTIVE_INK = "--mdc-datepicker-active-ink";
+	String MDC_DATEPICKER__ACTIVE_FILL = "--mdc-datepicker-active-fill";
+	String MDC_DATEPICKER__HEADER_INK = "--mdc-datepicker--header-ink";
+	String MDC_DATEPICKER__HEADER_FILL = "--mdc-datepicker--header-fill";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// OLD
