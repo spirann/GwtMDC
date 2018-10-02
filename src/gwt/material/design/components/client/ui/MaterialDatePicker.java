@@ -34,21 +34,22 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePicker
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialDatePicker extends MaterialDatePickerBase<Date, MaterialDatePickerHeader, MaterialDatePickerDaySelector> {
+public class MaterialDatePicker
+		extends MaterialDatePickerBase<Date, MaterialDatePickerHeader, MaterialDatePickerDaySelector> {
 
 	protected Widget todayAction;
-	
+
 	public MaterialDatePicker() {
 		super(new MaterialDatePickerHeader(), new MaterialDatePickerDaySelector());
 	}
 
 	public void setShowTodayAction(final boolean show) {
 		if (show && (todayAction == null || todayAction.getParent() == null))
-			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));		
+			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));
 		else if (!show && todayAction != null && todayAction.getParent() != null)
 			todayAction.removeFromParent();
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -64,9 +65,21 @@ public class MaterialDatePicker extends MaterialDatePickerBase<Date, MaterialDat
 		});
 	}
 
+	/**
+	 * The clone prevents changes in the original object
+	 * 
+	 * @param value
+	 * @return
+	 */
+	private Date clone(Date value) {
+		if (value == null)
+			return null;
+		return new Date(value.getTime());
+	}
+
 	@Override
 	public void setValue(Date value, boolean fireEvents) {
-		super.setValue(value, fireEvents);
+		super.setValue(clone(value), fireEvents);
 		if (initialized) {
 			header.setValue(value, false);
 			if (value == null || daySelector.getValue() == null || value.getTime() != daySelector.getValue().getTime())

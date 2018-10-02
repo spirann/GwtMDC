@@ -56,8 +56,7 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 		setAcceptText(IMessages.INSTANCE.mdc_calendar_ok());
 		setCancelText(IMessages.INSTANCE.mdc_calendar_cancel());
 		addAcceptHandler(event -> setValue(datePicker.getValue()));
-		addCancelHandler(event -> datePicker.setValue(getValue(), false));
-		datePicker.setValue(getValue(), false);
+		addOpeningHandler(event -> datePicker.setValue(getValue(), false));
 	}
 
 	protected abstract void initializeDatePicker();
@@ -92,10 +91,10 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 	@Override
 	public void setValue(T value, boolean fireEvents) {
 		this.value = value;
-		
+
 		if (datePicker != null)
 			datePicker.setValue(value, false);
-		
+
 		if (fireEvents)
 			fireChangeEvent();
 	}

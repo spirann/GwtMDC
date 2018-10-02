@@ -184,18 +184,18 @@ public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDa
 			final MaterialDatePickerItem item = entry.getValue();
 			clearStyles(item);
 			if (time.equals(minDateAsTime))
-				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MIN);
+				item.addStyleName(CssName.MDC_DATEPICKER__RANGE__MIN);
 			else if (time.equals(maxDateAsTime))
-				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MAX);
+				item.addStyleName(CssName.MDC_DATEPICKER__RANGE__MAX);
 			else if (time > minDateAsTime && time < maxDateAsTime)
-				item.addStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__BETWEEN);
+				item.addStyleName(CssName.MDC_DATEPICKER__RANGE__BETWEEN);
 		});
 	}
 
 	protected void clearStyles(final Widget widget) {
-		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MIN);
-		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__MAX);
-		widget.removeStyleName(CssName.MDC_DATEPICKER__MULT_DAYS__BETWEEN);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__RANGE__MIN);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__RANGE__MAX);
+		widget.removeStyleName(CssName.MDC_DATEPICKER__RANGE__BETWEEN);
 	}
 
 	public void setInitialDate(final Date date) {

@@ -82,9 +82,28 @@ public class MaterialDateRangePicker
 		return value == null ? new Date[2] : value;
 	}
 
+	/**
+	 * The clone prevents changes in the original object
+	 * 
+	 * @param value
+	 * @return
+	 */
+	private Date[] clone(Date[] value) {
+		
+		final Date[] newValue = new Date[2];
+		
+		if(value.length > 0 && value[0] != null)
+			newValue[0] = new Date(value[0].getTime());
+		
+		if(value.length == 2 && value[1] != null)
+			newValue[1] = new Date(value[1].getTime());
+		
+		return newValue;
+	}
+	
 	@Override
 	public void setValue(Date[] value, boolean fireEvents) {
-		super.setValue(value, fireEvents);
+		super.setValue(clone(value), fireEvents);
 		if (initialized) {
 			value = getValue();
 			final Date maxDate = value[1];

@@ -205,9 +205,12 @@
 	--mdc-icon-button-ink-color: var(--mdc-datepicker-ink); }
 	.mdc-datepicker__item {
 	color: var(--mdc-datepicker-ink);}
-	.mdc-datepicker__item_today:not(.mdc-datepicker__item-active) {
+	.mdc-datepicker__item_today:not(.mdc-datepicker__item-active):not(.mdc_datepicker__range--between) {
 	color: var(--mdc-datepicker-active-fill);}
 	.mdc-datepicker__item-active {
+	color: var(--mdc-datepicker-active-ink);
+	background-color: var(--mdc-datepicker-active-fill);}
+	.mdc_datepicker__range--between {
 	color: var(--mdc-datepicker-active-ink);
 	background-color: var(--mdc-datepicker-active-fill);}
 	
@@ -347,20 +350,18 @@
 	width: 42px;
 	height: 42px;}
 	
-.mdc_datepicker__mult_days--min {
+.mdc_datepicker__range--min {
 	border-top-right-radius: 0;
 	border-bottom-right-radius: 0;
 	margin-right: 0;
 	padding-right: var(--mdc-datepicker--item-margin);}
-.mdc_datepicker__mult_days--max {
+.mdc_datepicker__range--max {
 	border-top-left-radius: 0;
 	border-bottom-left-radius: 0;
 	margin-left: 0;
 	padding-left: var(--mdc-datepicker--item-margin);}
-.mdc_datepicker__mult_days--between {
+.mdc_datepicker__range--between {
 	border-radius: 0;
-	color: var(--mdc-datepicker-active-ink);
-	background-color: var(--mdc-datepicker-active-fill);
 	margin-right: 0;
 	margin-left: 0;
 	padding-right: var(--mdc-datepicker--item-margin);

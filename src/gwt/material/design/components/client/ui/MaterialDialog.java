@@ -135,8 +135,12 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 				return @gwt.material.design.components.client.constants.CloseAction::NONE;			
 		}
 
-		dialog.listen('MDCDialog:opening', _this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpeningEvent()());
-		dialog.listen('MDCDialog:opened', _this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpenEvent()());
+		dialog.listen('MDCDialog:opening', function(event) {
+			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpeningEvent()();
+		});
+		dialog.listen('MDCDialog:opened', function(event) { 
+			_this.@gwt.material.design.components.client.ui.MaterialDialog::fireOpenEvent()();
+		});
 		dialog.listen('MDCDialog:closing', function(event) {
 			var action = event.detail.action;
 			var closeAction = getCloseAction(action);
