@@ -136,7 +136,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	public String getPlaceholder() {
 		return field.getPlaceholder();
 	}
-	
+
 	@Override
 	public void setPlaceholderColor(Color color) {
 		field.setPlaceholderColor(color);
@@ -213,21 +213,21 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	public void setValidation(TextFieldValidation validation) {
 		field.setValidation(validation);
 	}
-	
+
 	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
 		field.setWidth(width);
 		helper.setWidth(width);
 	}
-	
+
 	@Override
 	public void setMaxWidth(String maxWidth) {
 		super.setMaxWidth(maxWidth);
 		field.setMaxWidth(maxWidth);
 		helper.setMaxWidth(maxWidth);
 	}
-	
+
 	@Override
 	public void setMinHeight(String minHeight) {
 		super.setMinHeight(minHeight);
@@ -253,5 +253,9 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	@Override
 	public void setValue(String value, boolean fireEvents) {
 		field.setValue(value, fireEvents);
+	}
+
+	protected MaterialInput getInput() {
+		return field;
 	}
 }

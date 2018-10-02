@@ -6,6 +6,21 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class JsHelper {
 
+	public static long paserDate(final String value) {
+		return Long.valueOf(paser(value));
+	}
+	
+	public static native String paser(final String value)/*-{
+		console.log(value + ': time: ' + new Date(value).getTime());
+		return new Date(value + ' 12:00:00').getTime();
+	}-*/;
+	
+	public static native void allowNumbersOnly(final Element element)/*-{
+		$wnd.jQuery(element).keypress(function(event) {
+			return /\d/.test(String.fromCharCode(event.keyCode));
+		});
+	}-*/;
+
 	public static void hideEmpty(final Widget widget) {
 		final Element element = widget.getElement();
 		element.removeAttribute("empty");
