@@ -75,5 +75,12 @@ public enum HtmlElements {
 	
 	public Element createElement(){
 		return Document.get().createElement(tag);
-	}	
+	}
+	
+	public Element createElement(final String... styles) {
+		final Element element = createElement();
+		for (String style : styles)
+			element.addClassName(style);
+		return element;
+	}
 }

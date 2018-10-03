@@ -9,12 +9,12 @@ public class JsHelper {
 	public static long paserDate(final String value) {
 		return Long.valueOf(paser(value));
 	}
-	
+
 	public static native String paser(final String value)/*-{
 		console.log(value + ': time: ' + new Date(value).getTime());
 		return new Date(value + ' 12:00:00').getTime();
 	}-*/;
-	
+
 	public static native void allowNumbersOnly(final Element element)/*-{
 		$wnd.jQuery(element).keypress(function(event) {
 			return /\d/.test(String.fromCharCode(event.keyCode));
@@ -27,6 +27,13 @@ public class JsHelper {
 		if (element.getInnerText().trim().isEmpty())
 			element.setAttribute("empty", null);
 	}
+
+	public static native void setTooltip(final Element element, final String text, final String... tooltipClasses)/*-{
+		
+		var classes = Array.from(tooltipClasses);
+		
+		$wnd.jQuery(element).tooltip();
+	}-*/;
 
 	public static native void clearFocus()/*-{
 		$doc.activeElement.blur();

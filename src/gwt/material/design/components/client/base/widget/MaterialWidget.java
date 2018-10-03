@@ -88,6 +88,7 @@ import gwt.material.design.components.client.base.interfaces.HasRipple;
 import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasRtl;
 import gwt.material.design.components.client.base.interfaces.HasTabindex;
+import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
@@ -95,6 +96,7 @@ import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.RoleMixin;
+import gwt.material.design.components.client.base.mixin.TooltipMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Color;
@@ -110,6 +112,7 @@ import gwt.material.design.components.client.events.DragStartEvent;
 import gwt.material.design.components.client.events.DropActivateEvent;
 import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
+import gwt.material.design.components.client.ui.MaterialTooltip;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 
 /**
@@ -118,9 +121,10 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt,
-		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy {
+public class MaterialWidget extends BaseWidget
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData,
+		HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex,
+		HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip {
 
 	static {
 		autoInit();
@@ -177,6 +181,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
+	protected final TooltipMixin<MaterialWidget> tooltipMixin = new TooltipMixin<>(this);
 
 	private String[] initialClasses;
 
@@ -271,7 +276,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 			getChildren().add(child);
 
 			// Physical attach.
-			//DOM.appendChild(container, child.getElement());
+			// DOM.appendChild(container, child.getElement());
 
 			getElement().appendChild(resolve(child.getElement()));
 			// getElement().appendChild(child.getElement());
@@ -772,7 +777,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public boolean isAreaSelected() {
 		return ariaSelectedMixin.getAttributeAsBoolean();
 	}
-	
+
 	@Override
 	public void setAriaModal(boolean modal) {
 		ariaModalMixin.setAttribute(modal);
@@ -791,5 +796,15 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public String getAriaLabelledBy() {
 		return ariaLabelledByMixin.getAttribute();
+	}
+
+	@Override
+	public void setTooltip(String tooltip) {
+		tooltipMixin.setTooltip(tooltip);
+	}
+
+	@Override
+	public String getTooltip() {
+		return tooltipMixin.getTooltip();
 	}
 }
