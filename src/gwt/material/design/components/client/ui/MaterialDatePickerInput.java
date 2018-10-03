@@ -24,6 +24,7 @@ import java.util.Date;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.masker.Masker;
+import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
@@ -37,20 +38,40 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 	public static interface StringToDate {
 		public Date convert(final String value);
+
+		public String convert(final Date value);
 	}
 
 	protected final MaterialDatePickerDialog dialog = new MaterialDatePickerDialog();
 
-	private StringToDate stringToDate = value -> valueToDate(Masker.toPattern(getValue(), getInputMask()));
+	private StringToDate stringToDate = new StringToDate() {
+
+		@Override
+		public String convert(Date value) {
+			return dateToString(value);
+		}
+
+		@Override
+		public Date convert(String value) {
+			return valueToDate(value);
+		}
+	};
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
+		dialog.addAcceptHandler(event -> setValue(stringToDate.convert(dialog.getValue())));
+
 		add(dialog);
 
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());
-		setValidation(TextFieldValidation.Defaults.input_mask());
+		setValidation(TextFieldValidation.Defaults.date());
+		if (getPlaceholder() == null || getPlaceholder().isEmpty())
+			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/")
+					.replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
+					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy())
+					.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
 		setIcon(IconType.EVENT);
 		setIconPosition(TextFieldIconPosition.TRAILING);
 		setMaxLength(10);
@@ -69,10 +90,36 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	}
 
 	@SuppressWarnings("deprecation")
+	protected String dateToString(final Date date) {
+
+		if (date == null)
+			return "";
+
+		final String mask = getInputMask();
+
+		final String day = date.getDate() < 9 ? "0" + date.getDate() : String.valueOf(date.getDate());
+		final String month = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : String.valueOf((date.getMonth() + 1));
+		final String year = String.valueOf(date.getYear() + 1900);
+
+		switch (mask) {
+		case "99/99/9999":
+		case "99-99-9999":
+			return Masker.toPattern(day + month + year, mask);
+		case "9999/99/99":
+		case "9999-99-99":
+			return year + month + day;
+		default:
+			return "";
+		}
+	}
+
+	@SuppressWarnings("deprecation")
 	protected Date valueToDate(final String maskedValue) {
 
-		final Result result = getValidation().validate(getValue(), getInputMask(), isRequired(), getMinLength(),
-				getMaxLength());
+		if(maskedValue.isEmpty())
+			return null;
+		
+		final Result result = getValidation().validate(getValue(), getInputMask(), isRequired(), getMinLength(), getMaxLength());
 		switch (result.getState()) {
 		case SUCCESS:
 		case NONE:
@@ -82,7 +129,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 		}
 
 		final String mask = getInputMask();
-		
+
 		final int day;
 		final int month;
 		final int year;
@@ -106,10 +153,28 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 		return new Date(year - 1900, month - 1, day);
 	}
-	
+
 	public void openDatePicker() {
-		dialog.setValue(stringToDate.convert(Masker.toPattern(getValue(), getInputMask())));
+		if (getValue().isEmpty())
+			dialog.setValue(stringToDate.convert(getValue()));
+		else
+			dialog.setValue(stringToDate.convert(Masker.toPattern(getValue(), getInputMask())));
 		dialog.open();
 	}
 
+	public Date getMinDate() {
+		return dialog.getMinDate();
+	}
+
+	public void setMinDate(Date minDate) {
+		dialog.setMinDate(minDate);
+	}
+
+	public Date getMaxDate() {
+		return dialog.getMaxDate();
+	}
+
+	public void setMaxDate(Date maxDate) {
+		dialog.setMaxDate(maxDate);
+	}
 }

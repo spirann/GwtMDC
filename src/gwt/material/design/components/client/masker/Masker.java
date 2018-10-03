@@ -106,11 +106,17 @@ public class Masker {
 		@DefaultMessage("99/99/9999")
 		String date__mask();
 		
+		@DefaultMessage("9999-99-99")
+		String date_en__mask();
+		
 		@DefaultMessage("99:99")
 		String time__mask();
 		
 		@DefaultMessage("99/99/9999 99:99")
 		String date_time__mask();
+		
+		@DefaultMessage("9999-99-99 99:99")
+		String date_time_en__mask();
 		
 		// //////////////////////////////////////////////////////////////////////////
 		// Brazilian documents

@@ -57,6 +57,9 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	private boolean changeMonth = true;
 	private boolean changeYear = true;
 
+	private Date minDate;
+	private Date maxDate;
+
 	public MaterialDatePickerBaseDaySelector() {
 		super(CssName.MDC_DATEPICKER__DAY_SELECTOR);
 	}
@@ -153,6 +156,11 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 
 		final String name = getId();
 
+		final Long minDateAsTime = getMinDate() == null ? null
+				: adjustDate(getMinDate()).getTime() - DateTimeHelper.hoursInMillis(6);
+		final Long maxDateAsTime = getMaxDate() == null ? null
+				: adjustDate(getMaxDate()).getTime() + DateTimeHelper.hoursInMillis(6);
+
 		final Date date = adjustDate(this.auxDate);
 		final int month = date.getMonth();
 		final int year = date.getYear();
@@ -172,8 +180,12 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		for (long d = firtsDayToDraw; d <= lastDayToDraw; d += DateTimeHelper.daysInMillis(1)) {
 			final Date adjustedDate = new Date(d);
 			final boolean visible = adjustedDate.getMonth() == month && adjustedDate.getYear() == year;
-			final MaterialDatePickerItem dayButton = drawItem(adjustedDate, name, visible);
-			items.add(dayButton);
+			final MaterialDatePickerItem item = drawItem(adjustedDate, name, visible);
+			
+			item.setEnabled((minDateAsTime == null || minDateAsTime < adjustedDate.getTime())
+					&& (maxDateAsTime == null || maxDateAsTime > adjustedDate.getTime()));
+			
+			items.add(item);
 		}
 	}
 
@@ -223,7 +235,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	}
 
 	protected Date adjustDate(Date date) {
-		if(date == null)
+		if (date == null)
 			date = new Date();
 		date.setHours(12);
 		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
@@ -234,5 +246,21 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			super(CssName.MDC_DATEPICKER__DAY_SELECTOR__WEEK__LABEL, CssName.MDC_TYPOGRAPHY__CAPTION);
 			setText(IMessages.INSTANCE.mdc_calendar_letter_week(date));
 		}
+	}
+
+	public Date getMinDate() {
+		return minDate;
+	}
+
+	public void setMinDate(Date minDate) {
+		this.minDate = minDate;
+	}
+
+	public Date getMaxDate() {
+		return maxDate;
+	}
+
+	public void setMaxDate(Date maxDate) {
+		this.maxDate = maxDate;
 	}
 }

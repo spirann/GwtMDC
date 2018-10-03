@@ -174,6 +174,22 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 			clearAction.removeFromParent();
 	}
 
+	public Date getMinDate() {
+		return daySelector.getMinDate();
+	}
+
+	public void setMinDate(Date minDate) {
+		daySelector.setMinDate(minDate);
+	}
+
+	public Date getMaxDate() {
+		return daySelector.getMaxDate();
+	}
+
+	public void setMaxDate(Date maxDate) {
+		daySelector.setMaxDate(maxDate);
+	}
+	
 	@Override
 	public void setBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());

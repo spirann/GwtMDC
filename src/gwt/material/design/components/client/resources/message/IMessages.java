@@ -71,6 +71,15 @@ public interface IMessages extends Messages {
 		"7", "S"})
 	String mdc_calendar_letter_week(@Select int day);
 	
+	@DefaultMessage("dd")
+	String mdc_calendar_dd();
+	
+	@DefaultMessage("mm")
+	String mdc_calendar_mm();
+	
+	@DefaultMessage("yyyy")
+	String mdc_calendar_yyyy();
+	
 	@DefaultMessage("{0}, {1} {2}")
 	String mdc_calendar_header_day(String weekDay, String month, int day);
 	

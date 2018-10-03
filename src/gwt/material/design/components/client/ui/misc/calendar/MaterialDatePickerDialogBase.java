@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.misc.calendar;
 
+import java.util.Date;
+
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -28,6 +30,7 @@ import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;
@@ -54,8 +57,11 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 		initializeDatePicker();
 		addContent(datePicker);
 		setAcceptText(IMessages.INSTANCE.mdc_calendar_ok());
-		setCancelText(IMessages.INSTANCE.mdc_calendar_cancel());
-		addAcceptHandler(event -> setValue(datePicker.getValue()));
+		setCancelText(IMessages.INSTANCE.mdc_calendar_cancel());		
+		addClosingHandler(event -> {
+			if(event.getAction().equals(CloseAction.ACCEPT))
+				setValue(datePicker.getValue());
+		});
 		addOpeningHandler(event -> datePicker.setValue(getValue(), false));
 	}
 
@@ -155,4 +161,21 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 	public void setShowClearAction(final boolean show) {
 		datePicker.setShowClearAction(show);
 	}
+	
+	public Date getMinDate() {
+		return datePicker.getMinDate();
+	}
+
+	public void setMinDate(Date minDate) {
+		datePicker.setMinDate(minDate);
+	}
+
+	public Date getMaxDate() {
+		return datePicker.getMaxDate();
+	}
+
+	public void setMaxDate(Date maxDate) {
+		datePicker.setMaxDate(maxDate);
+	}
+
 }
