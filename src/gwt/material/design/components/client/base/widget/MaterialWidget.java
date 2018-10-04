@@ -112,7 +112,6 @@ import gwt.material.design.components.client.events.DragStartEvent;
 import gwt.material.design.components.client.events.DropActivateEvent;
 import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
-import gwt.material.design.components.client.ui.MaterialTooltip;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 
 /**

@@ -69,14 +69,23 @@
    Tooltip
    ========================================================================== */
 .mdc-tooltip {
+	z-index: 99;
+	position: fixed;
+	min-width: 5em;
 	margin: 8px;
 	padding: 8px;
-	border: 1px solid blue;
-	background-color: yellow;
-	position: absolute;
-	z-index: 8;
-	top: 0;
-	left: 0;
+	background: var(--mdc-theme-on-surface);
+	color: var(--mdc-theme-surface);
+	border-radius: var(--mdc-popup-border-radius);
+	text-align: center;
+	pointer-events: none;
+	-webkit-transition: opacity .2s linear;
+	-moz-transition: opacity .2s linear;
+	-o-transition: opacity .2s linear;
+	transition: opacity .2s linear; 
+}
+.mdc-tooltip:empty {
+	display: none;
 }
 
 /* ==========================================================================

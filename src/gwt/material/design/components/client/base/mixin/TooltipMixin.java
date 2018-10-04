@@ -19,8 +19,15 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.event.dom.client.MouseEvent;
+import com.google.gwt.event.dom.client.MouseMoveEvent;
+import com.google.gwt.event.dom.client.MouseOutEvent;
+import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.constants.CssName;
@@ -29,9 +36,12 @@ import gwt.material.design.components.client.constants.HtmlElements;
 /**
  * @author Richeli Vargas
  */
-public class TooltipMixin<T extends UIObject> extends AbstractMixin<T> implements HasTooltip {
+public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements HasTooltip {
 
 	private Element tooltip;
+	private HandlerRegistration mouseMove;
+	private HandlerRegistration mouseOut;
+	private HandlerRegistration mouseOver;
 
 	public TooltipMixin(final T uiObject) {
 		super(uiObject);
@@ -39,10 +49,12 @@ public class TooltipMixin<T extends UIObject> extends AbstractMixin<T> implement
 
 	@Override
 	public void setTooltip(String tooltip) {
-		if (this.tooltip == null) {
-			this.tooltip = HtmlElements.LABEL.createElement(CssName.MDC_TOOLTIP);
-			initialize(this.tooltip, uiObject.getElement());
-		}		
+
+		if (tooltip == null || tooltip.isEmpty())
+			unbind();
+		else
+			bind();
+
 		this.tooltip.setInnerHTML(tooltip);
 	}
 
@@ -51,32 +63,51 @@ public class TooltipMixin<T extends UIObject> extends AbstractMixin<T> implement
 		return tooltip.getInnerText();
 	}
 
-	protected native void initialize(final Element element, final Element target)/*-{
+	protected void bind() {
+		unbind();
 
-		var changeTooltipPosition = function(event) {
-			var tooltipX = event.pageX - 8;
-			var tooltipY = event.pageY + 8;
-			$wnd.jQuery(element).css({
-				top : tooltipY,
-				left : tooltipX
-			});
-		};
+		if (tooltip == null)
+			this.tooltip = HtmlElements.LABEL.createElement(CssName.MDC_TOOLTIP, CssName.MDC_TYPOGRAPHY__CAPTION);
 
-		var showTooltip = function(event) {
-			$wnd.jQuery(element).remove();
-			$doc.body.appendChild(element);
-			changeTooltipPosition(event);
-		};
+		mouseMove = uiObject.addDomHandler(event -> changePosition(event), MouseMoveEvent.getType());
+		mouseOver = uiObject.addDomHandler(event -> attach(event), MouseOverEvent.getType());
+		mouseOut = uiObject.addDomHandler(event -> unAttach(), MouseOutEvent.getType());
 
-		var hideTooltip = function() {
-			$wnd.jQuery(element).remove();
-		};
+	}
 
-		$wnd.jQuery(target).bind({
-			mousemove : changeTooltipPosition,
-			mouseenter : showTooltip,
-			mouseleave : hideTooltip
-		});
+	protected void unbind() {
+		if (mouseMove != null)
+			mouseMove.removeHandler();
+		if (mouseOut != null)
+			mouseOut.removeHandler();
+		if (mouseOver != null)
+			mouseOver.removeHandler();
+	}
 
+	protected void changePosition(final MouseEvent<?> event) {		
+		int tooltipX = event.getClientX();
+		int tooltipY = event.getClientY();
+		tooltip.getStyle().setProperty("left", tooltipX + "px");
+		tooltip.getStyle().setProperty("top", tooltipY + "px");
+	}
+
+	protected void attach(final MouseEvent<?> event) {
+		unAttach();
+		attach(tooltip);
+		changePosition(event);
+	}
+
+	protected void unAttach() {
+		if (tooltip != null)
+			unAttach(tooltip);
+	}
+
+	protected native void attach(final Element element)/*-{
+		$doc.body.appendChild(element);
 	}-*/;
+
+	protected native void unAttach(final Element element)/*-{
+		$wnd.jQuery(element).remove();
+	}-*/;
+
 }
