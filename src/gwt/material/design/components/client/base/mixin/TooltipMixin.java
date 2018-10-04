@@ -19,14 +19,13 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.RootPanel;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
@@ -85,8 +84,27 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	}
 
 	protected void changePosition(final MouseEvent<?> event) {		
+		
+		final int cursorSize = 16;
+		final int margin = 8;
+		final int tooltipWidth = tooltip.getClientWidth();
+		final int tooltipHeight = tooltip.getClientHeight();		
+		final int screenWidth = Window.getClientWidth();
+		final int screenHeight = Window.getClientHeight();
+		
 		int tooltipX = event.getClientX();
 		int tooltipY = event.getClientY();
+				
+		if(tooltipX > screenWidth / 2)
+			tooltipX -= (tooltipWidth + cursorSize);
+		else
+			tooltipX -= (cursorSize - margin);
+		
+		if(tooltipY > screenHeight / 2)
+			tooltipY -= (tooltipHeight + margin + cursorSize);
+		else 
+			tooltipY += margin;
+		
 		tooltip.getStyle().setProperty("left", tooltipX + "px");
 		tooltip.getStyle().setProperty("top", tooltipY + "px");
 	}

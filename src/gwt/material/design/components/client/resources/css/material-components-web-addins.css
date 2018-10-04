@@ -69,10 +69,10 @@
    Tooltip
    ========================================================================== */
 .mdc-tooltip {
-	z-index: 99;
+	z-index: 8;
 	position: fixed;
 	min-width: 5em;
-	margin: 8px;
+	margin: 16px;
 	padding: 8px;
 	background: var(--mdc-theme-on-surface);
 	color: var(--mdc-theme-surface);
