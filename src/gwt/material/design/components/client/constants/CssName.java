@@ -452,6 +452,7 @@ public interface CssName {
 	String MDC_DATEPICKER__ITEM = "mdc-datepicker__item";
 	String MDC_DATEPICKER__ITEM_TODAY = "mdc-datepicker__item_today";
 	String MDC_DATEPICKER__ITEM_ACTIVE = "mdc-datepicker__item-active";
+	String MDC_DATEPICKER__ITEM__TOOLTIP_INDICATOR = "mdc-datepicker__item--tooltip-indicator";
 	String MDC_DATEPICKER__ACTIONS = "mdc-datepicker__actions";
 	String MDC_DATEPICKER__ACTION = "mdc-datepicker__action";
 	

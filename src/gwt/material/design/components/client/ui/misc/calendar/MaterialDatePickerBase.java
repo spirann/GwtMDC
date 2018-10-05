@@ -215,4 +215,16 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 	public void setHeaderBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
+	
+	public void setDateTooltip(final Date date, final String tooltip) {
+		daySelector.setDateTooltip(date, tooltip);
+	}
+	
+	public String getDateTooltip(final Date date) {
+		return daySelector.getDateTooltip(date);
+	}
+	
+	public String removeDateTooltip(final Date date) {
+		return daySelector.removeDateTooltip(date); 
+	}
 }

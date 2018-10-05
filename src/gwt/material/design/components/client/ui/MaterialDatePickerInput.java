@@ -177,4 +177,16 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	public void setMaxDate(Date maxDate) {
 		dialog.setMaxDate(maxDate);
 	}
+	
+	public void setDateTooltip(final Date date, final String tooltip) {
+		dialog.setDateTooltip(date, tooltip);
+	}
+	
+	public String getDateTooltip(final Date date) {
+		return dialog.getDateTooltip(date);
+	}
+	
+	public String removeDateTooltip(final Date date) {
+		return dialog.removeDateTooltip(date); 
+	}
 }

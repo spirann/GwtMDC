@@ -178,4 +178,15 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 		datePicker.setMaxDate(maxDate);
 	}
 
+	public void setDateTooltip(final Date date, final String tooltip) {
+		datePicker.setDateTooltip(date, tooltip);
+	}
+	
+	public String getDateTooltip(final Date date) {
+		return datePicker.getDateTooltip(date);
+	}
+	
+	public String removeDateTooltip(final Date date) {
+		return datePicker.removeDateTooltip(date); 
+	}
 }

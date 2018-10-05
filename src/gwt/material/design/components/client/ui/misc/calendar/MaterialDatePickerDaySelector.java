@@ -29,8 +29,8 @@ import java.util.Date;
 public class MaterialDatePickerDaySelector extends MaterialDatePickerBaseDaySelector<Date> {
 
 	@Override
-	protected MaterialDatePickerItem drawItem(Date date, String name, boolean visible) {
-		final MaterialDatePickerItem item = super.drawItem(date, name, visible);
+	protected MaterialDatePickerItem drawItem(Date date, String name, boolean visible, final boolean enabled) {
+		final MaterialDatePickerItem item = super.drawItem(date, name, visible, enabled);
 		item.addSelectionHandler(event -> {
 			if (event.getValue())
 				super.setValue(date, true);

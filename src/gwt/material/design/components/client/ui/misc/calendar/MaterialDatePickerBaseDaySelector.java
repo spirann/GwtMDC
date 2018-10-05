@@ -20,6 +20,8 @@
 package gwt.material.design.components.client.ui.misc.calendar;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
@@ -50,6 +52,8 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	protected final Label monthLabel = new Label(CssName.MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL);
 	protected final Div contentWeek = new Div(CssName.MDC_DATEPICKER__DAY_SELECTOR__WEEK__CONTENT);
 	protected final Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
+
+	protected final Map<Long, MaterialDatePickerItem> mapedItems = new LinkedHashMap<>();
 
 	protected final Date today = adjustDate(new Date());
 	protected Date auxDate = new Date(today.getTime());
@@ -152,6 +156,8 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	}
 
 	protected void drawDays() {
+
+		mapedItems.clear();
 		items.clear();
 
 		final String name = getId();
@@ -180,29 +186,42 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		for (long d = firtsDayToDraw; d <= lastDayToDraw; d += DateTimeHelper.daysInMillis(1)) {
 			final Date adjustedDate = new Date(d);
 			final boolean visible = adjustedDate.getMonth() == month && adjustedDate.getYear() == year;
-			final MaterialDatePickerItem item = drawItem(adjustedDate, name, visible);
-			
-			item.setEnabled((minDateAsTime == null || minDateAsTime < adjustedDate.getTime())
-					&& (maxDateAsTime == null || maxDateAsTime > adjustedDate.getTime()));
-			
+			final boolean enabled = (minDateAsTime == null || minDateAsTime < adjustedDate.getTime())
+					&& (maxDateAsTime == null || maxDateAsTime > adjustedDate.getTime());
+			final MaterialDatePickerItem item = drawItem(adjustedDate, name, visible, enabled);
+			mapedItems.put(adjustedDate.getTime(), item);
 			items.add(item);
 		}
 	}
 
-	protected MaterialDatePickerItem drawItem(final Date date, final String name, final boolean visible) {
+	protected MaterialDatePickerItem drawItem(final Date date, final String name, final boolean visible,
+			final boolean enabled) {
+		
 		final MaterialDatePickerItem item = new MaterialDatePickerItem();
-		if (visible) {
-			if (today.getTime() == date.getTime())
-				item.addStyleName(CssName.MDC_DATEPICKER__ITEM_TODAY);
-			item.setText(String.valueOf(date.getDate()));
-			item.setName(name);
-		} else {
+		item.setEnabled(enabled);
+		
+		if (today.getTime() == date.getTime())
+			item.addStyleName(CssName.MDC_DATEPICKER__ITEM_TODAY);
+		item.setText(String.valueOf(date.getDate()));
+		item.setName(name);
+		
+		if (!visible)
 			item.setVisibility(Visibility.HIDDEN);
-		}
+
+		drawTooltip(date, item);
+
 		return item;
 	}
 
+	protected void drawTooltip(final Date date, final MaterialDatePickerItem item) {
+		item.setTooltip(getDateTooltip(date));
+		item.clear();
+		if (item.getTooltip() != null)
+			item.add(new Div(CssName.MDC_DATEPICKER__ITEM__TOOLTIP_INDICATOR));
+	}
+
 	protected void drawMonth() {
+
 		final int year = auxDate.getYear() + 1900;
 		final int month = auxDate.getMonth() + 1;
 		final String fullMonth = IMessages.INSTANCE.mdc_calendar_full_month(month);
@@ -238,7 +257,15 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		if (date == null)
 			date = new Date();
 		date.setHours(12);
-		return new Date(DateTimeHelper.fromTheDate(date.getTime()));
+		date.setMinutes(0);
+		date.setSeconds(0);
+		
+		date = new Date(DateTimeHelper.fromTheDate(date.getTime()));
+		date.setHours(12);
+		date.setMinutes(0);
+		date.setSeconds(0);
+		
+		return date;
 	}
 
 	protected class WeekLabel extends Label {
@@ -262,5 +289,33 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 
 	public void setMaxDate(Date maxDate) {
 		this.maxDate = maxDate;
+	}
+
+	private Map<Long, String> tooltips = new LinkedHashMap<>();
+
+	public void setDateTooltip(final Date date, final String tooltip) {
+		final Date adjustDate = adjustDate(date);
+		final long key = adjustDate.getTime();
+		tooltips.put(key, tooltip);
+
+		final MaterialDatePickerItem item = mapedItems.get(key);		
+		if (item != null)
+			drawTooltip(adjustDate, item);
+	}
+
+	public String getDateTooltip(final Date date) {
+		return tooltips.get(adjustDate(date).getTime());
+	}
+
+	public String removeDateTooltip(final Date date) {
+		final Date adjustDate = adjustDate(date);
+		final long key = adjustDate.getTime();
+		final String tooltip = tooltips.remove(key);
+
+		final MaterialDatePickerItem item = mapedItems.get(key);
+		if (item != null)
+			drawTooltip(adjustDate, item);
+
+		return tooltip;
 	}
 }

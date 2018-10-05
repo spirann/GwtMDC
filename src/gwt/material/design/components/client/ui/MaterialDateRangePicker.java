@@ -46,11 +46,13 @@ public class MaterialDateRangePicker
 		header.addInitialDateClickHandler(event -> {
 			if (getValue()[0] != null) {
 				monthSelector.setValue(getValue()[0].getMonth() + 1);
+				yearSelector.setValue(getValue()[0].getYear() + 1900);
 			}
 		});
 		header.addFinalDateClickHandler(event -> {
 			if (getValue()[1] != null) {
 				monthSelector.setValue(getValue()[1].getMonth() + 1);
+				yearSelector.setValue(getValue()[1].getYear() + 1900);
 			}
 		});
 

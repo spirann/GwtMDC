@@ -20,8 +20,6 @@
 package gwt.material.design.components.client.ui.misc.calendar;
 
 import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import com.google.gwt.user.client.ui.Widget;
 
@@ -34,19 +32,16 @@ import gwt.material.design.components.client.constants.CssName;
  */
 public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDaySelector<Date[]> {
 
-	protected Map<Long, MaterialDatePickerItem> mapedItems = new LinkedHashMap<>();
-
 	@Override
-	protected void drawDays() {
-		mapedItems.clear();
+	protected void drawDays() {		
 		super.drawDays();
 		updateStyles();
 	}
 	
 	@Override
-	protected MaterialDatePickerItem drawItem(Date date, String name, boolean visible) {
+	protected MaterialDatePickerItem drawItem(Date date, String name, boolean visible, final boolean enabled) {
 		
-		final MaterialDatePickerItem item = super.drawItem(date, name, visible);
+		final MaterialDatePickerItem item = super.drawItem(date, name, visible, enabled);
 		item.setName(String.valueOf(date.getTime()));
 		item.addSelectionHandler(event -> {
 			if (event.getValue())
@@ -61,7 +56,7 @@ public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDa
 				|| (maxValueAsTime != null && date.getTime() == maxValueAsTime))
 			item.setSelected(true, false);
 
-		mapedItems.put(date.getTime(), item);
+		
 		return item;
 	}
 

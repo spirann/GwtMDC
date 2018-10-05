@@ -48,18 +48,19 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 
 	@Override
 	public void setTooltip(String tooltip) {
-
-		if (tooltip == null || tooltip.isEmpty())
+		if (tooltip == null || tooltip.isEmpty()) {
+			uiObject.getElement().removeAttribute("tooltip");
 			unbind();
-		else
+		} else {
+			uiObject.getElement().setAttribute("tooltip", tooltip);
 			bind();
-
-		this.tooltip.setInnerHTML(tooltip);
+			this.tooltip.setInnerHTML(tooltip);
+		}
 	}
 
 	@Override
 	public String getTooltip() {
-		return tooltip.getInnerText();
+		return tooltip == null ? null : tooltip.getInnerText();
 	}
 
 	protected void bind() {
@@ -83,28 +84,28 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 			mouseOver.removeHandler();
 	}
 
-	protected void changePosition(final MouseEvent<?> event) {		
-		
+	protected void changePosition(final MouseEvent<?> event) {
+
 		final int cursorSize = 16;
 		final int margin = 8;
 		final int tooltipWidth = tooltip.getClientWidth();
-		final int tooltipHeight = tooltip.getClientHeight();		
+		final int tooltipHeight = tooltip.getClientHeight();
 		final int screenWidth = Window.getClientWidth();
 		final int screenHeight = Window.getClientHeight();
-		
+
 		int tooltipX = event.getClientX();
 		int tooltipY = event.getClientY();
-				
-		if(tooltipX > screenWidth / 2)
+
+		if (tooltipX > screenWidth / 2)
 			tooltipX -= (tooltipWidth + cursorSize);
 		else
 			tooltipX -= (cursorSize - margin);
-		
-		if(tooltipY > screenHeight / 2)
+
+		if (tooltipY > screenHeight / 2)
 			tooltipY -= (tooltipHeight + margin + cursorSize);
-		else 
+		else
 			tooltipY += margin;
-		
+
 		tooltip.getStyle().setProperty("left", tooltipX + "px");
 		tooltip.getStyle().setProperty("top", tooltipY + "px");
 	}
