@@ -84,6 +84,11 @@ public class MaterialDatePicker
 			header.setValue(value, false);
 			if (value == null || daySelector.getValue() == null || value.getTime() != daySelector.getValue().getTime())
 				daySelector.setValue(value, false);
+			else if (daySelector.getVisibleMonth() - 1 != value.getMonth()
+					|| daySelector.getVisibleYear() - 1900 != value.getYear()) {
+				daySelector.setYear(value.getYear());
+				daySelector.setMonth(value.getMonth());
+			}
 			monthSelector.setValue(value == null ? null : value.getMonth() + 1, false);
 			yearSelector.setValue(value == null ? null : value.getYear() + 1900, false);
 		}

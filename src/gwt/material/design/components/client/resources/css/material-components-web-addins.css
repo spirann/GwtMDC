@@ -66,6 +66,20 @@
 	text-align: left;}
 
 /* ==========================================================================
+   Animation on show
+   ========================================================================== */
+:root{
+	--mdc-animation--on-show: mdc-animation--on-show .25s ease-in-out;
+}
+
+@keyframes mdc-animation--on-show {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
    Tooltip
    ========================================================================== */
 .mdc-tooltip {
@@ -78,17 +92,15 @@
 	color: var(--mdc-theme-surface);
 	border-radius: var(--mdc-popup-border-radius);
 	text-align: center;
-	pointer-events: none;
-	animation: mdc-tooltip--on-open .25s ease-in-out;}
+	pointer-events: none;	
+	-webkit-animation: var(--mdc-animation--on-show);
+	   -moz-animation: var(--mdc-animation--on-show);
+	     -o-animation: var(--mdc-animation--on-show);
+	        animation: var(--mdc-animation--on-show);}
 	.mdc-tooltip:empty {
 	display: none; }
 
-@keyframes mdc-tooltip--on-open {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-}
+
 
 /* ==========================================================================
    Config default component content
@@ -182,7 +194,11 @@
 	align-items: center;
 	justify-content: center;	
 	border-radius: 50%;
-	position: relative;}
+	position: relative;
+	-webkit-animation: var(--mdc-animation--on-show);
+	   -moz-animation: var(--mdc-animation--on-show);
+	     -o-animation: var(--mdc-animation--on-show);
+	        animation: var(--mdc-animation--on-show);}
 	.mdc-datepicker__item-active {
 	border-radius: 50%;}
 	.mdc-datepicker__item_today:not(.mdc-datepicker__item-active):not(.mdc_datepicker__range--between) {

@@ -108,6 +108,14 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		setMonth(auxDate.getMonth() - 1);
 	}
 
+	public int getVisibleYear() {
+		return auxDate.getYear() + 1900;
+	}
+	
+	public int getVisibleMonth() {
+		return auxDate.getMonth() + 1;
+	}
+	
 	public void setYear(final int year) {
 		auxDate.setYear(year);
 		drawDays();
