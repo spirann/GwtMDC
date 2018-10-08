@@ -403,6 +403,23 @@ public interface CssName {
 	String MDC_TOOLTIP = "mdc-tooltip";
 	
 	// //////////////////////////////////////////////////////
+	// LINEAR PROGRESS
+	// //////////////////////////////////////////////////////
+	String MDC_CIRCULAR_PROGRESS = "mdc-circular-progress";
+	String MDC_CIRCULAR_PROGRESS__LOADER = "mdc-circular-progress__loader";
+	String MDC_CIRCULAR_PROGRESS__PATH = "mdc-circular-progress__path";
+	String MDC_CIRCULAR_PROGRESS__REVERSED = "mdc-circular-progress--reversed";	
+	String MDC_CIRCULAR_PROGRESS__INDETERMINATE = "mdc-circular-progress--indeterminate";
+	
+	String MDC_CIRCULAR_PROGRESS__BUFFERING_DOTS = "mdc-circular-progress__buffering-dots";
+	String MDC_CIRCULAR_PROGRESS__BUFFER = "mdc-circular-progress__buffer";
+	
+	String MDC_CIRCULAR_PROGRESS__PRIMARY_BAR = "mdc-circular-progress__primary-bar";
+	String MDC_CIRCULAR_PROGRESS__SECONDARY_BAR = "mdc-circular-progress__secondary-bar";
+	String MDC_CIRCULAR_PROGRESS__BAR_INNER = "mdc-circular-progress__bar-inner";
+
+	
+	// //////////////////////////////////////////////////////
 	// CHART
 	// //////////////////////////////////////////////////////	
 	String MDC_CHART__TOOLTIP = "chartist-tooltip";

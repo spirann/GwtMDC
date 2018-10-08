@@ -79,6 +79,7 @@ import gwt.material.design.components.client.base.interfaces.HasAriaModal;
 import gwt.material.design.components.client.base.interfaces.HasAriaSelected;
 import gwt.material.design.components.client.base.interfaces.HasAutoInitData;
 import gwt.material.design.components.client.base.interfaces.HasCircle;
+import gwt.material.design.components.client.base.interfaces.HasDataObject;
 import gwt.material.design.components.client.base.interfaces.HasElevation;
 import gwt.material.design.components.client.base.interfaces.HasHideOn;
 import gwt.material.design.components.client.base.interfaces.HasId;
@@ -123,7 +124,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
 public class MaterialWidget extends BaseWidget
 		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData,
 		HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex,
-		HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip {
+		HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -157,6 +158,12 @@ public class MaterialWidget extends BaseWidget
 	// /////////////////////////////////////////////////////////////
 	protected JavaScriptObject jsElement;
 
+	// /////////////////////////////////////////////////////////////
+	// Data object helps the developer to save same entity 
+	// or any object who is necessary
+	// /////////////////////////////////////////////////////////////
+	private Object object;
+	
 	// /////////////////////////////////////////////////////////////
 	// Mixin list
 	// /////////////////////////////////////////////////////////////
@@ -805,5 +812,16 @@ public class MaterialWidget extends BaseWidget
 	@Override
 	public String getTooltip() {
 		return tooltipMixin.getTooltip();
+	}
+	
+	@Override
+	public <O> void setDataObject(O object) {
+		this.object = object;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public <O> O getDataObject() {
+		return object == null ? null : (O) object;
 	}
 }

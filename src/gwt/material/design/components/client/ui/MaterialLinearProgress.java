@@ -95,8 +95,8 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	}
 
 	@Override
-	public void setReverse(boolean dense) {
-		reverseMixin.setApply(dense);
+	public void setReverse(boolean reverse) {
+		reverseMixin.setApply(reverse);
 	}
 
 	@Override

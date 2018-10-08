@@ -77,6 +77,13 @@ public interface CssMixin {
 	String MDC_LINEAR_PROGRESS__TRACK_COLOR = "--mdc-linear-progress-track-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
+	// Circular progress
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_CIRCULAR_PROGRESS__WIDTH = "--mdc-circular-progress-width";
+	String MDC_CIRCULAR_PROGRESS__INDICATOR_COLOR = "--mdc-circular-progress-indicator-color";
+	String MDC_CIRCULAR_PROGRESS__TRACK_COLOR = "--mdc-circular-progress-track-color";
+
+	// ////////////////////////////////////////////////////////////////////////////
 	// Icon toggle
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_ICON_TOGGLE__INK_COLOR = "--mdc-icon-toggle-ink-color";
@@ -164,7 +171,7 @@ public interface CssMixin {
 	String MDC_CHARTIST__SERIES = "--mdc-chartist--series";
 	String MDC_CHARTIST__LABEL = "--mdc-chartist--label";
 	String MDC_CHARTIST__GRID_BACKGROUND = "--mdc-chartist--grid_background";
-	
+
 	// ////////////////////////////////////////////////////////////////////////////
 	// Calendar
 	// ////////////////////////////////////////////////////////////////////////////

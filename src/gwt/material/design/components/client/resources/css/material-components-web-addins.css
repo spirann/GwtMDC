@@ -118,6 +118,87 @@
 	overflow: visible;
 	overflow-x: hidden;
 	position: relative;}
+/* ==========================================================================
+   Circular progress
+   ========================================================================== */
+:root{
+	--mdc-circular-progress-width: 48px;
+	--mdc-circular-progress-stroke-width: 3;
+	--mdc-circular-progress-start-angle: -90deg;
+	--mdc-circular-progress-indicator-color: var(--mdc-theme-secondary);
+	--mdc-circular-progress-track-color: var(--mdc-theme-secondary);}
+	
+.mdc-circular-progress {
+	width: var(--mdc-circular-progress-width);
+ 	height: var(--mdc-circular-progress-width);
+ 	position: relative;
+ 	margin: 0;
+ 	border-radius: 50%;}
+.mdc-circular-progress__loader { 	
+	height: 100%;
+	transform-origin: center center;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	margin: auto;}
+.mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader {	
+	-webkit-transform: rotate(var(--mdc-circular-progress-start-angle));
+	   -moz-transform: rotate(var(--mdc-circular-progress-start-angle));
+	     -o-transform: rotate(var(--mdc-circular-progress-start-angle));
+	        transform: rotate(var(--mdc-circular-progress-start-angle));}
+.mdc-circular-progress__track {
+	stroke-width: var(--mdc-circular-progress-stroke-width);
+	stroke: var(--mdc-circular-progress-track-color);
+	opacity: var(--mdc-track-opacity);}
+.mdc-circular-progress__path {
+	stroke-width: var(--mdc-circular-progress-stroke-width);
+	stroke-dashoffset: 0;
+	stroke-linecap: round;
+	stroke: var(--mdc-circular-progress-indicator-color);}
+.mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path {
+	-webkit-transition: stroke-dashoffset 1s linear;
+	   -moz-transition: stroke-dashoffset 1s linear;
+	     -o-transition: stroke-dashoffset 1s linear;
+	        transition: stroke-dashoffset 1s linear;}
+.mdc-circular-progress--indeterminate .mdc-circular-progress__loader {
+	-webkit-animation: rotate 2s linear infinite;
+	   -moz-animation: rotate 2s linear infinite;
+	     -o-animation: rotate 2s linear infinite;
+	        animation: rotate 2s linear infinite;}
+.mdc-circular-progress--indeterminate .mdc-circular-progress__path {
+	stroke-dasharray: 1, 200;	
+	-webkit-animation: dash 1.5s ease-in-out infinite;
+	   -moz-animation: dash 1.5s ease-in-out infinite;
+	     -o-animation: dash 1.5s ease-in-out infinite;
+	        animation: dash 1.5s ease-in-out infinite;}
+.mdc-circular-progress--reversed .mdc-circular-progress__loader,
+.mdc-circular-progress--reversed .mdc-circular-progress__path {
+	-webkit-animation-direction: reverse;
+	   -moz-animation-direction: reverse;
+	     -o-animation-direction: reverse;
+	        animation-direction: reverse;}
+@keyframes rotate {
+  100% {
+    -webkit-transform: rotate(360deg);
+       -moz-transform: rotate(360deg);
+         -o-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+@keyframes dash {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;}
+  50% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -35px;}
+  100% {
+    stroke-dasharray: 89, 200;
+    stroke-dashoffset: -124px;}
+}
 
 /* ==========================================================================
    Color palette

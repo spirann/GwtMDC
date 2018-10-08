@@ -102,4 +102,8 @@ public interface MaterialResources extends ClientBundle {
 	@MimeType("image/svg+xml")
 	TextResource mdcNotchedOutline();
 	
+	@Source("image/mdc-circular-progress__path.svg")
+	@MimeType("image/svg+xml")
+	TextResource mdcCircularProgressPath();
+	
 }

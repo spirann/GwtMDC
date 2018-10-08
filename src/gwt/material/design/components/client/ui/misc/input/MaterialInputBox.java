@@ -28,6 +28,7 @@ import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.interfaces.HasHelperText;
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.base.interfaces.HasReadOnly;
 import gwt.material.design.components.client.base.interfaces.HasState;
 import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
 import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
@@ -46,7 +47,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  *
  */
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasPlaceholder,
-		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String> {
+		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
 
 	protected final MaterialInput field = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -257,5 +258,15 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 
 	protected MaterialInput getInput() {
 		return field;
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		field.setReadOnly(readOnly);
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return field.isReadOnly();
 	}
 }

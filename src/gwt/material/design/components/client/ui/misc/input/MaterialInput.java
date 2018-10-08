@@ -30,6 +30,7 @@ import gwt.material.design.components.client.base.interfaces.HasIconClickHandler
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.base.interfaces.HasReadOnly;
 import gwt.material.design.components.client.base.interfaces.HasRequired;
 import gwt.material.design.components.client.base.interfaces.HasState;
 import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
@@ -68,7 +69,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  */
 public class MaterialInput extends MaterialValuedField<String>
 		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask,
-		HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result> {
+		HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -86,6 +87,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final AttributeMixin<MaterialWidget> minLengthMixin = new AttributeMixin<>(input, "minlength");
 	protected final AttributeMixin<MaterialWidget> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
+	protected final AttributeMixin<MaterialWidget> readOnlyMixin = new AttributeMixin<>(input, "readonly");
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
 
 	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this,
@@ -384,5 +386,18 @@ public class MaterialInput extends MaterialValuedField<String>
 	public void setMinHeight(String minHeight) {
 		super.setMinHeight(minHeight);
 		input.setMinHeight(minHeight);
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		if(readOnly)
+			readOnlyMixin.setAttribute(readOnly);
+		else
+			readOnlyMixin.setAttribute(null);
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return readOnlyMixin.getAttributeAsBoolean();
 	}
 }

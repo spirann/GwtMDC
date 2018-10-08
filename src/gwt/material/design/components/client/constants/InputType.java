@@ -28,26 +28,28 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  */
 public enum InputType implements CssType {
 
+//	Not applicable to text field
 	BUTTON("button"),
 	CHECKBOX("checkbox"),
-	COLOR("color"),
+	COLOR("color"),	
 	DATE("date"),
 	DATETIME_LOCAL("datetime-local"),
-	EMAIL("email"),
-	FILE("file"),
 	HIDDEN("hidden"),
-	NUMBER("number"),
-	PASSWORD("password"),
+	FILE("file"),
 	RADIO("radio"),
 	RANGE("range"),
 	RESET("reset"),
-	SEARCH("search"),
 	SUBMIT("submit"),
+	TIME("time"),
+	WEEK("week"),
+//	Applicable to text field
+	EMAIL("email"),
+	NUMBER("number"),
+	PASSWORD("password"),
+	SEARCH("search"),
 	TEL("tel"),
 	TEXT("text"),
-	TIME("time"),
-	URL("url"),
-	WEEK("week");
+	URL("url");
 
     private final String cssClass;
 
