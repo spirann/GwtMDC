@@ -24,7 +24,11 @@
   -webkit-transition: opacity .2s linear;
   -moz-transition: opacity .2s linear;
   -o-transition: opacity .2s linear;
-  transition: opacity .2s linear; }
+  transition: opacity .2s linear;
+  -webkit-animation: var(--mdc-animation--on-show);
+	 -moz-animation: var(--mdc-animation--on-show);
+	   -o-animation: var(--mdc-animation--on-show);
+	      animation: var(--mdc-animation--on-show); }
   .chartist-tooltip:before {
     content: "";
     position: absolute;
