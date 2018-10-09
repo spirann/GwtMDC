@@ -42,7 +42,7 @@ public class JsPieChartOptions extends JsChartOptions {
     public String donutWidth;
 	
     @JsProperty
-    public int startAngle;
+    public double startAngle;
 
     @JsProperty
     public int labelOffset;

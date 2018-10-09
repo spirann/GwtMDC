@@ -226,17 +226,17 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 		redraw();
 	}
 
-	public int getStartAngle() {
+	public double getStartAngle() {
 		return options.startAngle;
 	}
 
-	public void setStartAngle(int startAngle) {
+	public void setStartAngle(double startAngle) {
 		this.options.startAngle = startAngle;
 		redraw();
 	}
 
 	public int getChartPadding() {
-		return options.startAngle;
+		return options.chartPadding;
 	}
 
 	public void setChartPadding(int padding) {

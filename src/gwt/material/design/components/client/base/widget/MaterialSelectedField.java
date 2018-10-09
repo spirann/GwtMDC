@@ -29,6 +29,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import gwt.material.design.components.client.base.interfaces.HasSelected;
 import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.CheckedMixin;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.events.SelectionEvent;
@@ -44,6 +45,7 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
  */
 public class MaterialSelectedField extends MaterialWidget implements HasSelected, HasSelectionHandlers<Boolean> {
 
+	protected final AttributeMixin<MaterialWidget> selectMixin = new AttributeMixin<>(this, "selected");
 	protected ApplyStyleMixin<MaterialWidget> selectedMixin;
 	protected CheckedMixin<Input> checkedMixin;
 	protected boolean fireChangeOnClick = false;
@@ -149,6 +151,11 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 
 		getSelectedMixin().setApply(selected);
 
+		if(selected)
+			selectMixin.setAttribute(selected);
+		else
+			selectMixin.setAttribute(null);
+		
 		if (fireEvents)
 			fireChangeEvent();
 	}

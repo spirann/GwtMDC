@@ -82,6 +82,7 @@ public interface CssMixin {
 	String MDC_CIRCULAR_PROGRESS__WIDTH = "--mdc-circular-progress-width";
 	String MDC_CIRCULAR_PROGRESS__INDICATOR_COLOR = "--mdc-circular-progress-indicator-color";
 	String MDC_CIRCULAR_PROGRESS__TRACK_COLOR = "--mdc-circular-progress-track-color";
+	String MDC_CIRCULAR_PROGRESS__START_ANGLE = "--mdc-circular-progress-start-angle";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Icon toggle
@@ -159,11 +160,6 @@ public interface CssMixin {
 	String MDC_DIALOG__ACTION_FILL_COLOR = "--mdc-dialog-action-fill-color";
 	String MDC_DIALOG__ACTION_INK_COLOR = "--mdc-dialog-action-ink-color";
 	String MDC_DIALOG__ACTION_RAISED_INK_COLOR = "--mdc-dialog-action-raised-ink-color";
-
-	// ////////////////////////////////////////////////////////////////////////////
-	// Shape
-	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_SHAPE__PARENT_FILL_COLOR = "--mdc-shape-parent-fill-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Chart

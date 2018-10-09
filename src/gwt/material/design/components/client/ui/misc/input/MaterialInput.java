@@ -74,11 +74,11 @@ public class MaterialInput extends MaterialValuedField<String>
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
-	protected MaterialWidget input = constructInput();
-	protected MaterialFloatLabel label = new MaterialFloatLabel();
-	protected MaterialLineRipple lineRipple = new MaterialLineRipple();
-	protected MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
-	protected MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
+	protected final MaterialWidget input = constructInput();
+	protected final MaterialFloatLabel label = new MaterialFloatLabel();
+	protected final MaterialLineRipple lineRipple = new MaterialLineRipple();
+	protected final MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
+	protected final MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin TextFieldIconPosition
@@ -90,8 +90,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	protected final AttributeMixin<MaterialWidget> readOnlyMixin = new AttributeMixin<>(input, "readonly");
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
 
-	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__DENSE);
+	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
 	protected final AttributeMixin<MaterialInput> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);

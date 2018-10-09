@@ -79,27 +79,27 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected native void addNativeCloseEvent(Element element)/*-{
 
 		var _this = this;
-		element.addEventListener('MDCMenu:cancel', function(event) {
-			_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
-		});
+		element
+				.addEventListener(
+						'MDCMenu:cancel',
+						function(event) {
+							_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
+						});
 
 	}-*/;
 
 	@Override
 	protected void onUnload() {
 		super.onUnload();
-
-		if (handler != null) {
+		if (handler != null)
 			handler.removeHandler();
-		}
 	}
 
 	@Override
 	public void add(Widget child) {
 
-		if (child instanceof HasRole && !(child instanceof MaterialListDivider)) {
+		if (child instanceof HasRole && !(child instanceof MaterialListDivider))
 			((HasRole) child).setRole(Role.MENU_ITEM);
-		}
 
 		if (!(child instanceof MaterialListDivider)) {
 
@@ -108,18 +108,16 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 				final String innerHtml = child.getElement().getInnerHTML();
 				final boolean prevent = innerHtml.contains("prevent=\"true\"");
 
-				if (((child instanceof HasEnabled) && !((HasEnabled) child).isEnabled()) || prevent) {
+				if (((child instanceof HasEnabled) && !((HasEnabled) child).isEnabled()) || prevent)
 					return;
-				}
 
-				if (closeOnClick) {
+				if (closeOnClick)
 					close();
-				}
 
 			}, ClickEvent.getType());
-			
+
 		}
-		
+
 		items.add(child);
 	}
 
@@ -145,18 +143,17 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 			handler = addAttachHandler(event -> {
 
-				if (event.isAttached()) {
+				if (event.isAttached())
 					setNativeOpen(open);
-				} else if (handler != null) {
+				else if (handler != null) {
 					handler.removeHandler();
 					handler = null;
 				}
 
 			});
 
-		} else {
+		} else
 			setNativeOpen(open);
-		}
 	}
 
 	@Override
@@ -180,11 +177,10 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 		menu.open = open;
 
 		if (oldOpen != open) {
-			if (open) {
+			if (open)
 				_this.@gwt.material.design.components.client.ui.MaterialMenu::fireOpenEvent()();
-			} else {
+			else
 				_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
-			}
 		}
 
 	}-*/;
@@ -202,9 +198,8 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	@Override
 	public HandlerRegistration addCloseHandler(CloseHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onClose(event);
-			}
 		}, CloseEvent.getType());
 	}
 
@@ -215,9 +210,8 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	@Override
 	public HandlerRegistration addOpenHandler(OpenHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onOpen(event);
-			}
 		}, OpenEvent.getType());
 	}
 

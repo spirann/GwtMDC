@@ -30,18 +30,19 @@ import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.constants.Color;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.helper.JsHelper;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
+ * Because MDCSlider updates its UI based on the values it reads in when it is
+ * instantiated, there is potential for an incorrect first render before the
+ * script containing the MDCSlider initialization logic executes.
  * 
  * @author Richeli Vargas
  *
@@ -101,11 +102,11 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		initializeChageEventListener();
 		initializeInputEventListener();
 
-		TimerHelper.schedule(1, () -> MaterialSlider.super.onInitialize());
-
 		// It is necessary in panels with horizontal scroll
-		addMouseOverHandler(event -> JsHelper.throwsWindowResize());
+		// Or if the parent starts invisible
+		addMouseOverHandler(event -> layout());
 
+		super.onInitialize();
 	}
 
 	protected native void initializeChageEventListener()/*-{
@@ -122,7 +123,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		}
 
 		element.addEventListener('MDCSlider:change', onChange);
-		
+
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
@@ -140,7 +141,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		}
 
 		element.addEventListener('MDCSlider:input', onInput);
-		
+
 	}-*/;
 
 	protected native void draw()/*-{

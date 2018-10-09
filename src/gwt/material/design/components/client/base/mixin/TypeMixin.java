@@ -38,7 +38,7 @@ public class TypeMixin<W extends Widget, T extends CssType> extends StyleMixin<W
 	@Override
 	public void setType(T type) {
 		this.type = type;
-		setStyle(type.getCssName());
+		setStyle(type == null ? null : type.getCssName());
 	}
 
 	@Override

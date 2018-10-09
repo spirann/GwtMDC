@@ -90,7 +90,7 @@
 	padding: 8px;
 	background: var(--mdc-theme-on-surface);
 	color: var(--mdc-theme-surface);
-	border-radius: var(--mdc-popup-border-radius);
+	border-radius: var(--mdc-rounded-border-radius);
 	text-align: center;
 	pointer-events: none;	
 	-webkit-animation: var(--mdc-animation--on-show);
@@ -156,7 +156,7 @@
 .mdc-circular-progress__path {
 	stroke-width: var(--mdc-circular-progress-stroke-width);
 	stroke-dashoffset: 0;
-	stroke-linecap: round;
+	stroke-linecap: square;
 	stroke: var(--mdc-circular-progress-indicator-color);}
 .mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path {
 	-webkit-transition: stroke-dashoffset 1s linear;
@@ -204,7 +204,7 @@
    Color palette
    ========================================================================== */
 .mdc-color-palette {
-	border-radius: var(--mdc-popup-border-radius);
+	border-radius: var(--mdc-rounded-border-radius);
 	display: flex;
 	flex-direction: column;}
 .mdc-color-palette__title:first-child {
@@ -254,7 +254,7 @@
 .mdc-datepicker {
 	width: 100%;
 	max-width: var(--mdc-datepicker-width);
-	border-radius: var(--mdc-popup-border-radius);
+	border-radius: var(--mdc-rounded-border-radius);
 	border: 1px solid var(--mdc-datepicker-active-fill); 
 	display: flex;
 	flex-direction: column;

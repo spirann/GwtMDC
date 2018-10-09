@@ -102,6 +102,11 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	}
 
 	@Override
+	public void setSize(String width, String height) {
+		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__WIDTH, width);
+	}
+	
+	@Override
 	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__INDICATOR_COLOR, color.getCssName());
 	}
@@ -144,5 +149,9 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	@Override
 	public boolean isReverse() {
 		return reverseMixin.isApplied();
+	}
+
+	public void setStartAngle(double startAngle) {
+		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__START_ANGLE, startAngle + "deg");
 	}
 }

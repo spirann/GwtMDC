@@ -95,15 +95,6 @@ public interface CssName {
 	String MDC_TYPOGRAPHY__CAPTION = "mdc-typography--caption";
 	String MDC_TYPOGRAPHY__BUTTON = "mdc-typography--button";
 	String MDC_TYPOGRAPHY__OVERLINE = "mdc-typography--overline";
-	// //////////////////////////////////////////////////////
-	// SHAPE
-	// //////////////////////////////////////////////////////
-	String MDC_SHAPE_CONTAINER = "mdc-shape-container";
-	String MDC_SHAPE_CONTAINER__CORNER = "mdc-shape-container__corner";
-	String MDC_SHAPE_CONTAINER__CORNER__TOP_LEFT = "mdc-shape-container__corner--top-left";
-	String MDC_SHAPE_CONTAINER__CORNER__TOP_RIGHT = "mdc-shape-container__corner--top-right";
-	String MDC_SHAPE_CONTAINER__CORNER__BOTTOM_LEFT = "mdc-shape-container__corner--bottom-left";
-	String MDC_SHAPE_CONTAINER__CORNER__BOTTOM_RIGHT = "mdc-shape-container__corner--bottom-right";
 
 	// //////////////////////////////////////////////////////
 	// TOOLBAR
@@ -127,9 +118,9 @@ public interface CssName {
 	String MDC_TOP_APP_BAR__SHORT_COLLAPSED = "mdc-top-app-bar--short-collapsed";
 	// //////////////////////////////////////////////////////
 	// TAB BAR
-	// //////////////////////////////////////////////////////	
+	// //////////////////////////////////////////////////////
 	String MDC_TAB_BAR = "mdc-tab-bar";
-	
+
 	String MDC_TAB_SCROLLER = "mdc-tab-scroller";
 	String MDC_TAB_SCROLLER__SCROLL_AREA = "mdc-tab-scroller__scroll-area";
 	String MDC_TAB_SCROLLER__SCROLL_CONTENT = "mdc-tab-scroller__scroll-content";
@@ -144,23 +135,23 @@ public interface CssName {
 	String MDC_TAB__ICON = "mdc-tab__icon";
 	String MDC_TAB__RIPPLE = "mdc-tab__ripple";
 	String MDC_TAB__STACKED = "mdc-tab--stacked";
-	
+
 	String MDC_TAB_INDICATOR = "mdc-tab-indicator";
 	String MDC_TAB_INDICATOR__ACTIVE = "mdc-tab-indicator--active";
 	String MDC_TAB_INDICATOR__CONTENT = "mdc-tab-indicator__content";
 	String MDC_TAB_INDICATOR__CONTENT__UNDERLINE = "mdc-tab-indicator__content--underline";
-	
+
 	// //////////////////////////////////////////////////////
 	// DRAWER
-	// //////////////////////////////////////////////////////		
+	// //////////////////////////////////////////////////////
 	String MDC_DRAWER = "mdc-drawer";
-	String MDC_DRAWER__DISMISSIBLE = "mdc-drawer--dismissible";	
-	String MDC_DRAWER__MODAL = "mdc-drawer--modal";	
+	String MDC_DRAWER__DISMISSIBLE = "mdc-drawer--dismissible";
+	String MDC_DRAWER__MODAL = "mdc-drawer--modal";
 	String MDC_DRAWER__HEADER = "mdc-drawer__header";
 	String MDC_DRAWER__TITLE = "mdc-drawer__title";
 	String MDC_DRAWER__SUBTITLE = "mdc-drawer__subtitle";
 	String MDC_DRAWER__CONTENT = "mdc-drawer__content";
-	
+
 	String MDC_DRAWER_SCRIM = "mdc-drawer-scrim";
 	String MDC_DRAWER_APP_CONTENT = "mdc-drawer-app-content";
 	// //////////////////////////////////////////////////////
@@ -170,6 +161,12 @@ public interface CssName {
 	String MDC_MENU = "mdc-menu-surface";
 	String MDC_MENU__ITEMS = "mdc-menu__items";
 	// //////////////////////////////////////////////////////
+	// SELECT MENU
+	// //////////////////////////////////////////////////////
+	String MDC_SELECT = "mdc-select";
+	String MDC_SELECT__OUTLINE = "mdc-select--outlined";
+	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";	
+	// //////////////////////////////////////////////////////
 	// DIALOG
 	// //////////////////////////////////////////////////////
 	String MDC_DIALOG = "mdc-dialog";
@@ -177,7 +174,7 @@ public interface CssName {
 	String MDC_DIALOG__SURFACE = "mdc-dialog__surface";
 	String MDC_DIALOG__TITLE = "mdc-dialog__title";
 	String MDC_DIALOG__CONTENT = "mdc-dialog__content";
-	String MDC_DIALOG__SCRIM = "mdc-dialog__scrim";	
+	String MDC_DIALOG__SCRIM = "mdc-dialog__scrim";
 	String MDC_DIALOG__ACTIONS = "mdc-dialog__actions";
 	String MDC_DIALOG__BUTTON = "mdc-dialog__button";
 	String MDC_DIALOG__BUTTON__DEFAULT = "mdc-dialog__button--default";
@@ -263,12 +260,12 @@ public interface CssName {
 	String MDC_LIST_GROUP__SUBHEADER = "mdc-list-group__subheader";
 	String MDC_LIST_DIVIDER = "mdc-list-divider";
 	String MDC_LIST_DIVIDER__INSET = "mdc-list-divider--inset";
-	
+
 	String MDC_LIST = "mdc-list";
 	String MDC_LIST__TWO_LINE = "mdc-list--two-line";
-	String MDC_LIST__AVATAR_LIST = "mdc-list--avatar-list";	
+	String MDC_LIST__AVATAR_LIST = "mdc-list--avatar-list";
 	String MDC_LIST__DENSE = "mdc-list--dense";
-	
+
 	String MDC_LIST_ITEM = "mdc-list-item";
 	String MDC_LIST_ITEM__SELECTED = "mdc-list-item--selected";
 	String MDC_LIST_ITEM__GRAPHIC = "mdc-list-item__graphic";
@@ -352,13 +349,14 @@ public interface CssName {
 	String MDC_SWITCH__THUMB_UNDERLAY = "mdc-switch__thumb-underlay";
 	String MDC_SWITCH__THUMB = "mdc-switch__thumb";
 	String MDC_SWITCH__NATIVE_CONTROL = "mdc-switch__native-control";
-	String MDC_SWITCH__LABEL = "mdc-switch-label";	
+	String MDC_SWITCH__LABEL = "mdc-switch-label";
 	// //////////////////////////////////////////////////////
 	// Textfield
 	// //////////////////////////////////////////////////////
 	String MDC_FLOATING_LABEL = "mdc-floating-label";
+	String MDC_FLOATING_LABEL__FLOAT_ABOVE = "mdc-floating-label--float-above";
 	String MDC_LINE_RIPPLE = "mdc-line-ripple";
-	
+
 	String MDC_TEXT_FIELD_CONTAINER = "mdc-text-field-container";
 	String MDC_TEXT_FIELD = "mdc-text-field";
 	String MDC_TEXT_FIELD__TEXTAREA = "mdc-text-field--textarea";
@@ -376,8 +374,8 @@ public interface CssName {
 	String MDC_TEXT_FIELD__ICON = "mdc-text-field__icon";
 	String MDC_TEXT_FIELD__WITH_LEADING_ICON = "mdc-text-field--with-leading-icon";
 	String MDC_TEXT_FIELD__WITH_TRAILING_ICON = "mdc-text-field--with-trailing-icon";
-	
-	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";	
+
+	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";
 	String MDC_TEXT_FIELD_MULTILINE = "mdc-text-field--multiline";
 	// //////////////////////////////////////////////////////
 	// LINEAR PROGRESS
@@ -391,7 +389,7 @@ public interface CssName {
 	String MDC_LINEAR_PROGRESS__PRIMARY_BAR = "mdc-linear-progress__primary-bar";
 	String MDC_LINEAR_PROGRESS__SECONDARY_BAR = "mdc-linear-progress__secondary-bar";
 	String MDC_LINEAR_PROGRESS__BAR_INNER = "mdc-linear-progress__bar-inner";
-	
+
 	// //////////////////////////////////////////////////////
 	//
 	// ADD-INS
@@ -401,29 +399,28 @@ public interface CssName {
 	// TOOLTIP
 	// //////////////////////////////////////////////////////
 	String MDC_TOOLTIP = "mdc-tooltip";
-	
+
 	// //////////////////////////////////////////////////////
 	// LINEAR PROGRESS
 	// //////////////////////////////////////////////////////
 	String MDC_CIRCULAR_PROGRESS = "mdc-circular-progress";
 	String MDC_CIRCULAR_PROGRESS__LOADER = "mdc-circular-progress__loader";
 	String MDC_CIRCULAR_PROGRESS__PATH = "mdc-circular-progress__path";
-	String MDC_CIRCULAR_PROGRESS__REVERSED = "mdc-circular-progress--reversed";	
+	String MDC_CIRCULAR_PROGRESS__REVERSED = "mdc-circular-progress--reversed";
 	String MDC_CIRCULAR_PROGRESS__INDETERMINATE = "mdc-circular-progress--indeterminate";
-	
+
 	String MDC_CIRCULAR_PROGRESS__BUFFERING_DOTS = "mdc-circular-progress__buffering-dots";
 	String MDC_CIRCULAR_PROGRESS__BUFFER = "mdc-circular-progress__buffer";
-	
+
 	String MDC_CIRCULAR_PROGRESS__PRIMARY_BAR = "mdc-circular-progress__primary-bar";
 	String MDC_CIRCULAR_PROGRESS__SECONDARY_BAR = "mdc-circular-progress__secondary-bar";
 	String MDC_CIRCULAR_PROGRESS__BAR_INNER = "mdc-circular-progress__bar-inner";
 
-	
 	// //////////////////////////////////////////////////////
 	// CHART
-	// //////////////////////////////////////////////////////	
+	// //////////////////////////////////////////////////////
 	String MDC_CHART__TOOLTIP = "chartist-tooltip";
-	
+
 	String MDC_CHART__PIE_CHART = "ct-chart-pie";
 	String MDC_CHART__PIE_CHART__CHART_DONUT = "ct-chart-donut";
 	String MDC_CHART__PIE_CHART__SLICE_PIE = "ct-slice-pie";
@@ -431,7 +428,7 @@ public interface CssName {
 	String MDC_CHART__PIE_CHART__SLICE_DONUT_SOLID = "ct-slice-donut-solid";
 	String MDC_CHART__PIE_CHART__LABEL = "ct-label";
 	String MDC_CHART__PIE_CHART__SERIES = "ct-series";
-	
+
 	String MDC_CHART__BAR_CHART = "ct-chart-bar";
 	String MDC_CHART__BAR_CHART__HORIZONTAL_BARS = "ct-horizontal-bars";
 	String MDC_CHART__BAR_CHART__BAR = "ct-bar";
@@ -445,11 +442,11 @@ public interface CssName {
 	String MDC_CHART__BAR_CHART__HORIZONTAL = "ct-horizontal";
 	String MDC_CHART__BAR_CHART__START = "ct-start";
 	String MDC_CHART__BAR_CHART__END = "ct-end";
-	
-	String MDC_CHART__LINE_CHART = "ct-chart-line";	
+
+	String MDC_CHART__LINE_CHART = "ct-chart-line";
 	String MDC_CHART__LINE_CHART__POINT = "ct-point";
 	String MDC_CHART__LINE_CHART__LINE = "ct-line";
-	String MDC_CHART__LINE_CHART__AREA = "ct-area";	
+	String MDC_CHART__LINE_CHART__AREA = "ct-area";
 	String MDC_CHART__LINE_CHART__LABEL = "ct-label";
 	String MDC_CHART__LINE_CHART__LABEL_GROUP = "ct-labels";
 	String MDC_CHART__LINE_CHART__SERIES = "ct-series";
@@ -465,14 +462,14 @@ public interface CssName {
 	// DATE PICKER
 	// //////////////////////////////////////////////////////
 	String MDC_DATEPICKER = "mdc-datepicker";
-	String MDC_DATEPICKER__ITEMS = "mdc-datepicker__items";	
+	String MDC_DATEPICKER__ITEMS = "mdc-datepicker__items";
 	String MDC_DATEPICKER__ITEM = "mdc-datepicker__item";
 	String MDC_DATEPICKER__ITEM_TODAY = "mdc-datepicker__item_today";
 	String MDC_DATEPICKER__ITEM_ACTIVE = "mdc-datepicker__item-active";
 	String MDC_DATEPICKER__ITEM__TOOLTIP_INDICATOR = "mdc-datepicker__item--tooltip-indicator";
 	String MDC_DATEPICKER__ACTIONS = "mdc-datepicker__actions";
 	String MDC_DATEPICKER__ACTION = "mdc-datepicker__action";
-	
+
 	String MDC_DATEPICKER__HEADER = "mdc-datepicker__header";
 	String MDC_DATEPICKER__HEADER__YEAR = "mdc-datepicker__header--year";
 	String MDC_DATEPICKER__HEADER__DATE = "mdc-datepicker__header--date";
@@ -480,21 +477,21 @@ public interface CssName {
 	String MDC_DATEPICKER__HEADER_PERIOD__CIRCLE = "mdc-datepicker__header_period--circle";
 	String MDC_DATEPICKER__HEADER_PERIOD__LINE = "mdc-datepicker__header_period--line";
 	String MDC_DATEPICKER__HEADER_PERIOD__PLACEHOLDER = "mdc-datepicker__header_period--placeholder";
-	
-	String MDC_DATEPICKER__DAY_SELECTOR = "mdc-datepicker__day-selector";		
-	String MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL = "mdc-datepicker__day-selector--month--label";	
+
+	String MDC_DATEPICKER__DAY_SELECTOR = "mdc-datepicker__day-selector";
+	String MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL = "mdc-datepicker__day-selector--month--label";
 	String MDC_DATEPICKER__DAY_SELECTOR__WEEK__CONTENT = "mdc-datepicker__day-selector--week--content";
-	String MDC_DATEPICKER__DAY_SELECTOR__WEEK__LABEL = "mdc-datepicker__day-selector--week--label";	
-	
+	String MDC_DATEPICKER__DAY_SELECTOR__WEEK__LABEL = "mdc-datepicker__day-selector--week--label";
+
 	String MDC_DATEPICKER__MONTH_SELECTOR = "mdc-datepicker__month-selector";
 	String MDC_DATEPICKER__YEAR_SELECTOR = "mdc-datepicker__year-selector";
-	
+
 	String MDC_DATEPICKER__RANGE__MIN = "mdc_datepicker__range--min";
 	String MDC_DATEPICKER__RANGE__MAX = "mdc_datepicker__range--max";
 	String MDC_DATEPICKER__RANGE__BETWEEN = "mdc_datepicker__range--between";
 	// Dialog
 	String MDC_DATEPICKER_DIALOG = "mdc-datepicker-dialog";
-	
+
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE
 	// //////////////////////////////////////////////////////
