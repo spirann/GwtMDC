@@ -763,7 +763,7 @@ i.mdc-list-item__graphic {
     border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined__native-control {
     border-radius: var(--mdc-rounded-border-radius);} 
- 
+
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline,
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline__idle {
 	display: none;}
@@ -838,7 +838,7 @@ i.mdc-list-item__graphic {
 	background-color: rgb(127,127,127, 0.2);}	
 	   
 /* General */
-.mdc-text-field__input {
+.mdc-text-field {	
 	border-radius: var(--mdc-rounded-border-radius);}
 .mdc-text-field--outlined .mdc-notched-outline {
     border-radius: var(--mdc-rounded-border-radius); }
@@ -911,7 +911,9 @@ i.mdc-list-item__graphic {
 /* -------------------------------------------------------------------- */
 /* Add property to change color											*/
 /* --------------------------------------------------------------------	*/
-.mdc-text-field__input,
+.mdc-text-field__input {
+	background-color: transparent;}
+.mdc-text-field,
 .mdc-text-field--textarea .mdc-floating-label {
 	background-color: var(--mdc-text-field--fill-color) !important;} 
 .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
