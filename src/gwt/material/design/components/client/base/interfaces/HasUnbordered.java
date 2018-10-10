@@ -17,33 +17,17 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.constants;
-
-import gwt.material.design.components.client.utils.helper.EnumHelper;
+package gwt.material.design.components.client.base.interfaces;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public enum SelectMenuType implements CssType {
+public interface HasUnbordered {
 
-	DEFAULT(""),
-	OUTLINED(CssName.MDC_SELECT__OUTLINE),
-	SHAPED(CssName.MDC_SELECT__OUTLINE + " " + CssName.MDC_SELECT__SHAPED);
-
-    private final String cssClass;
-
-    SelectMenuType(final String cssClass) {
-        this.cssClass = cssClass;
-    }
-
-    @Override
-    public String getCssName() {
-        return cssClass;
-    }
-
-    public static SelectMenuType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, SelectMenuType.class, DEFAULT);
-    }
+	public void setUnbordered(boolean unbordered);
+	
+	public boolean isUnbordered();
+	
 }

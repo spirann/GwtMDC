@@ -31,6 +31,7 @@ public enum TextFieldType implements CssType {
 	DEFAULT(""),
 	BOX(CssName.MDC_TEXT_FIELD__BOX),
 	OUTLINED(CssName.MDC_TEXT_FIELD__OUTLINED),
+	SHAPED(CssName.MDC_TEXT_FIELD__OUTLINED + " " + CssName.MDC_TEXT_FIELD__SHAPED),
 	FULLWIDTH(CssName.MDC_TEXT_FIELD__FULLWIDTH);
 
     private final String cssClass;

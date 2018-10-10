@@ -26,6 +26,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.interfaces.HasUnbordered;
+import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
@@ -43,13 +45,14 @@ import gwt.material.design.components.client.ui.misc.input.MaterialNotchedOutlin
  * @author Richeli Vargas
  *
  */
-public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabel, HasType<SelectMenuType> {
+public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabel, HasType<SelectMenuType>, HasUnbordered {
 
 	protected final Select select = new Select(CssName.MDC_SELECT__NATIVE_CONTROL);
 	protected final MaterialFloatLabel label = new MaterialFloatLabel();
 	protected final MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected final MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
 
+	protected final ApplyStyleMixin<MaterialSelect<V>> unborderedMixin = new ApplyStyleMixin<>(this, CssName.MDC_SELECT__UNBORDERED);
 	protected final TypeMixin<MaterialSelect<V>, SelectMenuType> typeMixin = new TypeMixin<>(this);
 
 	public MaterialSelect() {
@@ -116,6 +119,7 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 		if (initialized) {
 			final Widget item = select.getChildrenList().stream()
 					.filter(widget -> ((Option<V>) widget).getValue().equals(value)).findAny().orElse(null);
+			
 			if (item == null)
 				selectedIndex(-1);
 			else
@@ -175,6 +179,16 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	@Override
 	public SelectMenuType getType() {
 		return typeMixin.getType();
+	}
+	
+	@Override
+	public void setUnbordered(boolean unbordered) {
+		unborderedMixin.setApply(unbordered);
+	}
+
+	@Override
+	public boolean isUnbordered() {
+		return unborderedMixin.isApplied();
 	}
 
 	public static class Option<T> extends MaterialSelectedField implements HasText {

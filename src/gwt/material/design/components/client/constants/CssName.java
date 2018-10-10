@@ -165,6 +165,8 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_SELECT = "mdc-select";
 	String MDC_SELECT__OUTLINE = "mdc-select--outlined";
+	String MDC_SELECT__SHAPED = "mdc-select--shaped";
+	String MDC_SELECT__UNBORDERED = "mdc-select--unbordered";
 	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";	
 	// //////////////////////////////////////////////////////
 	// DIALOG
@@ -366,6 +368,8 @@ public interface CssName {
 	String MDC_TEXT_FIELD__HELPER_TEXT_PERSISTENT = "mdc-text-field-helper-text--persistent";
 	String MDC_TEXT_FIELD__HELPER_TEXT_VALIDATION_MSG = "mdc-text-field-helper-text--validation-msg";
 	String MDC_TEXT_FIELD__DENSE = "mdc-text-field--dense";
+	String MDC_TEXT_FIELD__SHAPED = "mdc-text-field--shaped";
+	String MDC_TEXT_FIELD__UNBORDERED = "mdc-text-field--unbordered";
 	String MDC_TEXT_FIELD__BOX = "mdc-text-field--box";
 	String MDC_TEXT_FIELD__OUTLINED = "mdc-text-field--outlined";
 	String MDC_TEXT_FIELD__FULLWIDTH = "mdc-text-field--fullwidth";

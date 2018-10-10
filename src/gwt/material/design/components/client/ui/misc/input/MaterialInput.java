@@ -35,6 +35,7 @@ import gwt.material.design.components.client.base.interfaces.HasRequired;
 import gwt.material.design.components.client.base.interfaces.HasState;
 import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.interfaces.HasUnbordered;
 import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
 import gwt.material.design.components.client.base.mixin.AttributeMixin;
@@ -46,8 +47,8 @@ import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
-import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
@@ -68,7 +69,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  *
  */
 public class MaterialInput extends MaterialValuedField<String>
-		implements HasText, HasLabel, HasDense, HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask,
+		implements HasText, HasLabel, HasDense, HasUnbordered, HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask,
 		HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
 
 	// /////////////////////////////////////////////////////////////
@@ -91,6 +92,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
 
 	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
+	protected final ApplyStyleMixin<MaterialInput> unborderedMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);
 	protected final AttributeMixin<MaterialInput> statusMixin = new AttributeMixin<>(this, "status");
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
@@ -398,5 +400,15 @@ public class MaterialInput extends MaterialValuedField<String>
 	@Override
 	public boolean isReadOnly() {
 		return readOnlyMixin.getAttributeAsBoolean();
+	}
+	
+	@Override
+	public void setUnbordered(boolean unbordered) {
+		unborderedMixin.setApply(unbordered);
+	}
+
+	@Override
+	public boolean isUnbordered() {
+		return unborderedMixin.isApplied();
 	}
 }

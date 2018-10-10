@@ -754,27 +754,30 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Material select menu
    ========================================================================== */
+.mdc-select__native-control {
+	overflow: hidden;
+    border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined .mdc-notched-outline {
-    border-radius: var(--mdc-rounded-border-radius); }
+    border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined .mdc-notched-outline__idle {
-    border-radius: var(--mdc-rounded-border-radius); }
+    border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined__native-control {
-    border-radius: var(--mdc-rounded-border-radius); } 
-
+    border-radius: var(--mdc-rounded-border-radius);} 
+ 
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline,
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline__idle {
 	display: none;}
 .mdc-select--outlined .mdc-line-ripple {
 	display: none;}	
-		
+
 .mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control ~ .mdc-floating-label {
     color: var(--mdc-text-field--ink-color);}
 .mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control:focus ~ .mdc-floating-label,    
-.mdc-select--focused:not(.mdc-select--disabled):not([disabled]):not([state]) .mdc-floating-label {
+.mdc-select--focused:not(.mdc-select--disabled):not([disabled]) .mdc-floating-label {
 	color: var(--mdc-text-field--focused-color) !important;}
 .mdc-select--outlined:not(.mdc-select--disabled):not([disabled]) .mdc-notched-outline__idle {
     border-color: var(--mdc-text-field--ink-color);}
-.mdc-select--outlined:not(.mdc-select--disabled) .mdc-notched-outline__path {
+.mdc-select--outlined:not(.mdc-select--disabled):not([disabled]) .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--ink-color); }    
 .mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select__native-control:focus) .mdc-select__native-control:hover ~ .mdc-notched-outline__idle {
     border-color: var(--mdc-text-field--focused-color);}
@@ -783,8 +786,22 @@ i.mdc-list-item__graphic {
 .mdc-select--outlined:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-notched-outline .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--focused-color);}  
 .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-line-ripple {
-    background-color: var(--mdc-text-field--focused-color);}      	
-    
+    background-color: var(--mdc-text-field--focused-color);}    
+      	
+/* Shaped */
+.mdc-select--outlined.mdc-select--shaped {
+	--mdc-rounded-border-radius: 28px;}
+.mdc-select--outlined.mdc-select--shaped .mdc-floating-label--float-above {
+	margin-left: 34px;}  
+
+/* Unborded */
+.mdc-select--unbordered .mdc-line-ripple,
+.mdc-select--unbordered .mdc-notched-outline,
+.mdc-select--unbordered .mdc-notched-outline__idle {
+	visibility: hidden;}
+.mdc-select--unbordered .mdc-select__native-control {
+	border-bottom: none;}
+	    
 /* ==========================================================================
    Textfield color adjust
    ========================================================================== */
@@ -821,6 +838,8 @@ i.mdc-list-item__graphic {
 	background-color: rgb(127,127,127, 0.2);}	
 	   
 /* General */
+.mdc-text-field__input {
+	border-radius: var(--mdc-rounded-border-radius);}
 .mdc-text-field--outlined .mdc-notched-outline {
     border-radius: var(--mdc-rounded-border-radius); }
 .mdc-text-field--outlined .mdc-notched-outline__idle {
@@ -865,13 +884,36 @@ i.mdc-list-item__graphic {
     -webkit-transform: translateY(-66%) scale(0.923);
             transform: translateY(-66%) scale(0.923);}
 
+/* Shaped */
+.mdc-text-field--outlined.mdc-text-field--shaped {
+	--mdc-rounded-border-radius: 28px;}
+.mdc-text-field--outlined.mdc-text-field--shaped .mdc-floating-label--float-above {
+	margin-left: 34px;}
+
+.mdc-text-field--dense.mdc-text-field--outlined.mdc-text-field--shaped {
+    --mdc-rounded-border-radius:  24px;}
+.mdc-text-field--dense.mdc-text-field--outlined.mdc-text-field--shaped .mdc-floating-label--float-above {
+	margin-left: 26px;}
+.mdc-text-field--dense.mdc-text-field--outlined.mdc-text-field--shaped .mdc-text-field__input {
+	padding-top: 6px;
+	padding-left: 16px;}	
+.mdc-text-field--dense.mdc-text-field--outlined.mdc-text-field--shaped .mdc-text-field__input {
+	padding-right: 16px;}
+
+/* Unborded */
+.mdc-text-field--unbordered .mdc-line-ripple,
+.mdc-text-field--unbordered .mdc-notched-outline,
+.mdc-text-field--unbordered .mdc-notched-outline__idle {
+	visibility: hidden;}
+.mdc-text-field--unbordered .mdc-text-field__input {
+	border-bottom: none;}
+	
 /* -------------------------------------------------------------------- */
 /* Add property to change color											*/
 /* --------------------------------------------------------------------	*/
-.mdc-text-field,
 .mdc-text-field__input,
 .mdc-text-field--textarea .mdc-floating-label {
-	background-color: var(--mdc-text-field--fill-color);} 
+	background-color: var(--mdc-text-field--fill-color) !important;} 
 .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
 .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,  
 .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) + .mdc-text-field-helper-text {

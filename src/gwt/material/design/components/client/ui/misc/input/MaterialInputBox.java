@@ -31,6 +31,7 @@ import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
 import gwt.material.design.components.client.base.interfaces.HasReadOnly;
 import gwt.material.design.components.client.base.interfaces.HasState;
 import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
+import gwt.material.design.components.client.base.interfaces.HasUnbordered;
 import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
@@ -46,7 +47,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasPlaceholder,
+public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
 		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
 
 	protected final MaterialInput field = contructInput();
@@ -268,5 +269,15 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	@Override
 	public boolean isReadOnly() {
 		return field.isReadOnly();
+	}
+	
+	@Override
+	public void setUnbordered(boolean unbordered) {
+		field.setUnbordered(unbordered);
+	}
+
+	@Override
+	public boolean isUnbordered() {
+		return field.isUnbordered();
 	}
 }
