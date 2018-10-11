@@ -77,7 +77,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/chartist/chartist.min.css")
 	TextResource chartistCss();
 	
-	@Source("css/chartist/chartist-plugin-tooltip.min.css")
+	@Source("css/chartist/chartist-plugin-tooltip.css")
 	TextResource chartistTooltipPluginCss();
 	
 	@Source("css/chartist/chartist-mixin.min.css")

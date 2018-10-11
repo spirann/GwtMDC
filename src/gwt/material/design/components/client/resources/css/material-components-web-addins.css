@@ -69,14 +69,12 @@
    Animation on show
    ========================================================================== */
 :root{
-	--mdc-animation--on-show: mdc-animation--on-show .25s ease-in-out;
-}
+	--mdc-animation--on-show: mdc-animation--on-show .25s ease-in-out;}
 
 @keyframes mdc-animation--on-show {
   from {
     transform: scale(0);
-    opacity: 0;
-  }
+    opacity: 0;}
 }
 
 /* ==========================================================================
