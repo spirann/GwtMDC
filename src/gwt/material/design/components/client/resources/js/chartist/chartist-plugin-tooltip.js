@@ -55,13 +55,9 @@
         var $chart = chart.container;
         var $toolTip = $chart.querySelector('.chartist-tooltip');
         if (!$toolTip) {
-          $toolTip = document.createElement('div');
-          $toolTip.className = (!options.class) ? 'chartist-tooltip' : 'chartist-tooltip ' + options.class;
-          if (!options.appendToBody) {
-            $chart.appendChild($toolTip);
-          } else {
-            document.body.appendChild($toolTip);
-          }
+          var styles = 'mdc-tooltip mdc-typography mdc-typography--caption chartist-tooltip ';
+          $toolTip = document.createElement('div');          
+          $toolTip.className = (!options.class) ? styles : styles + options.class;  
         }
         var height = $toolTip.offsetHeight;
         var width = $toolTip.offsetWidth;
@@ -130,8 +126,9 @@
 
           if(tooltipText) {
             $toolTip.innerHTML = tooltipText;
+            show($toolTip, chart, options.appendToBody);
             setPosition(event);
-            show($toolTip);
+            //show($toolTip);
 
             // Remember height and width to avoid wrong position in IE
             height = $toolTip.offsetHeight;
@@ -176,17 +173,20 @@
         }
       }
     };
-
-    function show(element) {
-      if(!hasClass(element, 'tooltip-show')) {
-        element.className = element.className + ' tooltip-show';
+    
+	function show(toolTip, chart, appendToBody) {
+      if (appendToBody) {
+      	document.body.appendChild(toolTip);
+      } else {
+      	var $chart = chart.container;
+      	$chart.appendChild(toolTip);
       }
     }
 
-    function hide(element) {
-      var regex = new RegExp('tooltip-show' + '\\s*', 'gi');
-      element.className = element.className.replace(regex, '').trim();
-    }
+	function hide(element) {
+	if(element.parentNode)
+		element.parentNode.removeChild(element);
+	}
 
     function hasClass(element, className) {
       return (' ' + element.getAttribute('class') + ' ').indexOf(' ' + className + ' ') > -1;

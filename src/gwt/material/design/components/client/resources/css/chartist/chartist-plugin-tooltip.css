@@ -3,33 +3,13 @@
 
 .chartist-tooltip {
   position: absolute;
+  margin: 0;
   margin-top: calc(var(--mdc-arrow-size) - 2px);
   display: inline-block;
-  opacity: 0;
-  transform: scale(0);
-  min-width: 5em;
-  padding: 8px;
-  background: var(--mdc-theme-on-surface);
-  color: var(--mdc-theme-surface);  
-  border-radius: var(--mdc-popup-border-radius);  
-  font-family: var(--mdc-font-family);  
-  font-size: 0.8rem;
-  line-height: 0.85rem;
-  font-weight: 400;
-  letter-spacing: 0.03125em;
-  text-decoration: inherit;
-  text-transform: inherit;    
-  text-align: center;
-  pointer-events: none;
-  z-index: 1;
-  -webkit-transition: var(--mdc-animation--on-show);
-     -moz-transition: var(--mdc-animation--on-show);
-       -o-transition: var(--mdc-animation--on-show);
-          transition: var(--mdc-animation--on-show);
   -webkit-animation: var(--mdc-animation--on-show);
 	 -moz-animation: var(--mdc-animation--on-show);
 	   -o-animation: var(--mdc-animation--on-show);
-	      animation: var(--mdc-animation--on-show); }
+	      animation: var(--mdc-animation--on-show);}
   .chartist-tooltip:before {
     content: "";
     position: absolute;
@@ -39,18 +19,7 @@
     height: 0;
     margin-left: calc(-1 * var(--mdc-arrow-size));
     border: var(--mdc-arrow-size) solid transparent;
-    border-top-color: var(--mdc-theme-on-surface); }
-  .chartist-tooltip.tooltip-show {
-    opacity: 1;  
-    transform: scale(1);
-      -webkit-transition: var(--mdc-animation--on-show);
-     -moz-transition: var(--mdc-animation--on-show);
-       -o-transition: var(--mdc-animation--on-show);
-          transition: var(--mdc-animation--on-show);
-  -webkit-animation: var(--mdc-animation--on-show);
-	 -moz-animation: var(--mdc-animation--on-show);
-	   -o-animation: var(--mdc-animation--on-show);
-	      animation: var(--mdc-animation--on-show);}
+    border-top-color: var(--mdc-theme-on-surface);}
 
 .ct-area, .ct-line {
   pointer-events: none; }
