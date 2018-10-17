@@ -167,7 +167,28 @@ public interface CssName {
 	String MDC_SELECT__OUTLINE = "mdc-select--outlined";
 	String MDC_SELECT__SHAPED = "mdc-select--shaped";
 	String MDC_SELECT__UNBORDERED = "mdc-select--unbordered";
-	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";	
+	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";
+	// //////////////////////////////////////////////////////
+	// SNACKBAR
+	// //////////////////////////////////////////////////////
+	String MDC_SNACKBAR = "mdc-snackbar";
+	String MDC_SNACKBAR__ALIGN_START = "mdc-snackbar--align-start";
+	String MDC_SNACKBAR__MULTILINE = "mdc-snackbar--multiline";
+	String MDC_SNACKBAR__ACTION_ON_BUTTON = "mdc-snackbar--action-on-bottom";
+	String MDC_SNACKBAR__TEXT = "mdc-snackbar__text";
+	String MDC_SNACKBAR__ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
+	String MDC_SNACKBAR__ACTION_BUTTON = "mdc-snackbar__action-button";
+	// //////////////////////////////////////////////////////
+	// SNACKBAR
+	// //////////////////////////////////////////////////////
+	String MDC_BANNER = "mdc-banner";
+	String MDC_BANNER__VERTICAL = "mdc-banner-vertical";
+	String MDC_BANNER__CONTENT = "mdc-banner--content";
+	String MDC_BANNER__AVATAR = "mdc-banner--avatar";
+	String MDC_BANNER__LABEL = "mdc-banner--label";
+	String MDC_BANNER__ACTIONS = "mdc-banner--actions";
+	String MDC_BANNER__ACTION = "mdc-banner--action";
+	String MDC_BANNER__BORDER = "mdc-banner--border";
 	// //////////////////////////////////////////////////////
 	// DIALOG
 	// //////////////////////////////////////////////////////
@@ -180,16 +201,6 @@ public interface CssName {
 	String MDC_DIALOG__ACTIONS = "mdc-dialog__actions";
 	String MDC_DIALOG__BUTTON = "mdc-dialog__button";
 	String MDC_DIALOG__BUTTON__DEFAULT = "mdc-dialog__button--default";
-	// //////////////////////////////////////////////////////
-	// SNACKBAR
-	// //////////////////////////////////////////////////////
-	String MDC_SNACKBAR = "mdc-snackbar";
-	String MDC_SNACKBAR__ALIGN_START = "mdc-snackbar--align-start";
-	String MDC_SNACKBAR__MULTILINE = "mdc-snackbar--multiline";
-	String MDC_SNACKBAR__ACTION_ON_BUTTON = "mdc-snackbar--action-on-bottom";
-	String MDC_SNACKBAR__TEXT = "mdc-snackbar__text";
-	String MDC_SNACKBAR__ACTION_WRAPPER = "mdc-snackbar__action-wrapper";
-	String MDC_SNACKBAR__ACTION_BUTTON = "mdc-snackbar__action-button";
 	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////
