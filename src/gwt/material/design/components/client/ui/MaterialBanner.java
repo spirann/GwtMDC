@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasType;
@@ -26,6 +27,7 @@ import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.BannerType;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 
@@ -40,7 +42,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType> 
 	protected final Div avatar = new Div(CssName.MDC_BANNER__AVATAR);
 	protected final Label label = new Label(CssName.MDC_BANNER__LABEL);	
 	protected final Div actions = new Div(CssName.MDC_BANNER__ACTIONS);
-	protected final Div border = new Div(CssName.MDC_BANNER__BORDER);
+	protected final MaterialListDivider border = new MaterialListDivider();
 	
 	protected final TypeMixin<MaterialBanner, BannerType> typeMixin = new TypeMixin<>(this);
 	
@@ -59,10 +61,14 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType> 
 		button.setType(ButtonType.OUTLINE);
 		
 		actions.add(button);
-		
+
+		add(new MaterialListDivider());
 		add(actions);
 		add(content);
-		add(border);
+		add(new MaterialListDivider());
+		
+		setType(BannerType.VERTICAL);
+		setAvatar(IconType.WIFI);
 		
 		super.onInitialize();
 	}
@@ -87,5 +93,24 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType> 
 		return typeMixin.getType();
 	}
 	
+	public void setAvatar(final IconType iconType) {
+		final MaterialIcon icon = new MaterialIcon(iconType);
+		setAvatar(icon);
+	}
+	
+	public void setAvatar(final MaterialIcon icon) {
+		avatar.clear();
+		avatar.add(icon);
+	}
+	
+	public void setAvatar(final ImageResource resource) {
+		avatar.clear();
+		avatar.add(new MaterialImage(resource));
+	}
+	
+	public void setAvatar(final String url) {
+		avatar.clear();
+		avatar.add(new MaterialImage(url));
+	}
 	
 }

@@ -187,8 +187,6 @@ public interface CssName {
 	String MDC_BANNER__AVATAR = "mdc-banner--avatar";
 	String MDC_BANNER__LABEL = "mdc-banner--label";
 	String MDC_BANNER__ACTIONS = "mdc-banner--actions";
-	String MDC_BANNER__ACTION = "mdc-banner--action";
-	String MDC_BANNER__BORDER = "mdc-banner--border";
 	// //////////////////////////////////////////////////////
 	// DIALOG
 	// //////////////////////////////////////////////////////

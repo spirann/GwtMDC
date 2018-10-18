@@ -121,10 +121,10 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData,
-		HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex,
-		HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
+public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
+		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt,
+		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal,
+		HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -159,11 +159,11 @@ public class MaterialWidget extends BaseWidget
 	protected JavaScriptObject jsElement;
 
 	// /////////////////////////////////////////////////////////////
-	// Data object helps the developer to save same entity 
+	// Data object helps the developer to save same entity
 	// or any object who is necessary
 	// /////////////////////////////////////////////////////////////
 	private Object object;
-	
+
 	// /////////////////////////////////////////////////////////////
 	// Mixin list
 	// /////////////////////////////////////////////////////////////
@@ -259,6 +259,13 @@ public class MaterialWidget extends BaseWidget
 
 	protected void onInitialize() {
 		jsInit();
+	}
+
+	@Override
+	public void clear() {
+		super.clear();
+		if (onLoadAdd != null)
+			onLoadAdd.clear();
 	}
 
 	@Override
@@ -813,7 +820,7 @@ public class MaterialWidget extends BaseWidget
 	public String getTooltip() {
 		return tooltipMixin.getTooltip();
 	}
-	
+
 	@Override
 	public <O> void setDataObject(O object) {
 		this.object = object;
