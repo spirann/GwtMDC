@@ -183,6 +183,7 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_BANNER = "mdc-banner";
 	String MDC_BANNER__VERTICAL = "mdc-banner-vertical";
+	String MDC_BANNER__OPENED = "mdc-banner-opened";
 	String MDC_BANNER__CONTENT = "mdc-banner--content";
 	String MDC_BANNER__AVATAR = "mdc-banner--avatar";
 	String MDC_BANNER__LABEL = "mdc-banner--label";

@@ -266,10 +266,35 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	}
 
 	/*
-	 * *****************************************************************************
-	 *
-	 * FLEX BOX SETTER'S
-	 * 
+	 * -------------------------------------------------------------------------------
+	 * Transform and animations
+	 * -------------------------------------------------------------------------------
+	 */
+	public final void setTransform(final String transform) {
+		setStyleProperty("-webkit-transform", transform);
+		setStyleProperty("-moz-transform", transform);
+		setStyleProperty("-o-transform", transform);
+		setStyleProperty("transform", transform);
+	}
+	
+	public final void setTransformOrigin(final String transformOrigin) {
+		setStyleProperty("-webkit-transform-origin", transformOrigin);
+		setStyleProperty("-moz-transform-origin", transformOrigin);
+		setStyleProperty("-o-transform-origin", transformOrigin);
+		setStyleProperty("transform-origin", transformOrigin);
+	}
+	
+	public final void setTransition(final String trasition) {
+		setStyleProperty("-webkit-transition", trasition);
+		setStyleProperty("-moz-transition", trasition);
+		setStyleProperty("-o-transition", trasition);
+		setStyleProperty("transition", trasition);
+	}
+	
+	/*
+	 * -------------------------------------------------------------------------------
+	 * FLEX BOX SETTER'S 
+	 * -------------------------------------------------------------------------------
 	 */
 
 	@Override

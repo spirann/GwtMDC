@@ -160,7 +160,15 @@ public interface CssMixin {
 	String MDC_DIALOG__ACTION_FILL_COLOR = "--mdc-dialog-action-fill-color";
 	String MDC_DIALOG__ACTION_INK_COLOR = "--mdc-dialog-action-ink-color";
 	String MDC_DIALOG__ACTION_RAISED_INK_COLOR = "--mdc-dialog-action-raised-ink-color";
-
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// Banner
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_BANNER__FILL_COLOR = "--mdc-banner--fill-color";
+	String MDC_BANNER__INK_COLOR = "--mdc-banner--ink-color";
+	String MDC_BANNER__AVATAR_FILL_COLOR = "--mdc-banner--avatar-fill-color";
+	String MDC_BANNER__AVATAR_INK_COLOR = "--mdc-banner--avatar-ink-color";
+	
 	// ////////////////////////////////////////////////////////////////////////////
 	// Chart
 	// ////////////////////////////////////////////////////////////////////////////

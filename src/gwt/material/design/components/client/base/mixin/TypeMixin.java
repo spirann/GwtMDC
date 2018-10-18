@@ -34,6 +34,11 @@ public class TypeMixin<W extends Widget, T extends CssType> extends StyleMixin<W
 	public TypeMixin(final W widget) {
 		super(widget);
 	}
+	
+	public TypeMixin(final W widget, final T type) {
+		super(widget);
+		setType(type);
+	}
 
 	@Override
 	public void setType(T type) {
