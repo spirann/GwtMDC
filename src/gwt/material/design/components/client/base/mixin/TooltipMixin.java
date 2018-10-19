@@ -24,13 +24,18 @@ import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
+import com.google.gwt.event.dom.client.MouseUpEvent;
+import com.google.gwt.event.dom.client.TouchEndEvent;
+import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * @author Richeli Vargas
@@ -41,6 +46,10 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	private HandlerRegistration mouseMove;
 	private HandlerRegistration mouseOut;
 	private HandlerRegistration mouseOver;
+	private HandlerRegistration mouseUp;
+	private HandlerRegistration touchStart;
+	private HandlerRegistration touchEnd;
+	private Timer longPressTimer;
 
 	public TooltipMixin(final T uiObject) {
 		super(uiObject);
@@ -72,7 +81,10 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		mouseMove = uiObject.addDomHandler(event -> changePosition(event), MouseMoveEvent.getType());
 		mouseOver = uiObject.addDomHandler(event -> attach(event), MouseOverEvent.getType());
 		mouseOut = uiObject.addDomHandler(event -> unAttach(), MouseOutEvent.getType());
-
+		mouseUp = uiObject.addDomHandler(event -> unAttach(), MouseUpEvent.getType());
+		touchStart = uiObject.addDomHandler(event -> cancelLongPressTimer(), TouchEndEvent.getType());
+		touchEnd = uiObject.addDomHandler(event -> startLongPressTimer(null), TouchStartEvent.getType());
+		
 	}
 
 	protected void unbind() {
@@ -82,6 +94,24 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 			mouseOut.removeHandler();
 		if (mouseOver != null)
 			mouseOver.removeHandler();
+		if (mouseUp != null)
+			mouseUp.removeHandler();
+		if (touchStart != null)
+			touchStart.removeHandler();
+		if (touchEnd != null)
+			touchEnd.removeHandler();
+		
+		cancelLongPressTimer();
+	}
+
+	protected void startLongPressTimer(final MouseEvent<?> event) {
+		cancelLongPressTimer();
+		longPressTimer = TimerHelper.schedule(1500, () -> attach(event));
+	}
+
+	protected void cancelLongPressTimer() {
+		if (longPressTimer != null)
+			longPressTimer.cancel();
 	}
 
 	protected void changePosition(final MouseEvent<?> event) {
@@ -93,8 +123,8 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		final int screenWidth = Window.getClientWidth();
 		final int screenHeight = Window.getClientHeight();
 
-		int tooltipX = event.getClientX();
-		int tooltipY = event.getClientY();
+		int tooltipX = event == null ? uiObject.getElement().getAbsoluteLeft() + (margin * 2) : event.getClientX();
+		int tooltipY = event == null ? uiObject.getElement().getAbsoluteTop() + (margin * 2) : event.getClientY();
 
 		if (tooltipX > screenWidth / 2)
 			tooltipX -= (tooltipWidth + cursorSize);

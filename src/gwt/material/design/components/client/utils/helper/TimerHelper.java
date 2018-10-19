@@ -4,7 +4,7 @@ import com.google.gwt.user.client.Timer;
 
 public class TimerHelper {
 
-	public static void schedule(final int schedule, final Runnable runnable) {
+	public static Timer schedule(final int schedule, final Runnable runnable) {
 		
 		final Timer timer = new Timer() {
 			@Override
@@ -13,7 +13,7 @@ public class TimerHelper {
 			}
 		};
 		timer.schedule(schedule);
-		
+		return timer;
 	}
 	
 	
