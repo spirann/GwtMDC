@@ -109,18 +109,27 @@
 }
 .mdc-banner {
 	width: 100%;
-	max-height: 0;
-	
-	transition-delay: .25s, .0s;
-	transition-duration: .0s, .25s;
-	transition-property: max-height, transform;
-	transition-timing-function: ease-in-out, cubic-bezier(0, 1, 0.5, 1);
-	
+	max-height: 0;	
+	-webkit-transition-delay: .25s, .0s;
+	   -moz-transition-delay: .25s, .0s;
+		 -o-transition-delay: .25s, .0s;
+			transition-delay: .25s, .0s;	
+	-webkit-transition-duration: .0s, .25s;
+	   -moz-transition-duration: .0s, .25s;
+		 -o-transition-duration: .0s, .25s;
+			transition-duration: .0s, .25s;	
+	-webkit-transition-property: max-height, transform;
+	   -moz-transition-property: max-height, transform;
+		 -o-transition-property: max-height, transform;
+			transition-property: max-height, transform;	
+	-webkit-transition-timing-function: ease-in-out, cubic-bezier(0, 1, 0.5, 1);
+	   -moz-transition-timing-function: ease-in-out, cubic-bezier(0, 1, 0.5, 1);
+		 -o-transition-timing-function: ease-in-out, cubic-bezier(0, 1, 0.5, 1);
+	        transition-timing-function: ease-in-out, cubic-bezier(0, 1, 0.5, 1);		
 	-webkit-transform: translateY(-100%);
 	   -moz-transform: translateY(-100%);
 	     -o-transform: translateY(-100%);
-	        transform: translateY(-100%);
-	        
+	        transform: translateY(-100%);	        
 	display: flex;
 	flex-direction: row-reverse;
 	align-content: center;
@@ -131,13 +140,16 @@
 	background-color: var(--mdc-banner--fill-color);}
 	.mdc-banner-opened{
 	max-height: 100vh;
+	-webkit-transition-delay: .0s, .0s;
+	   -moz-transition-delay: .0s, .0s;
+		 -o-transition-delay: .0s, .0s;
+			transition-delay: .0s, .0s;
 	-webkit-transform: translateY(0);
 	   -moz-transform: translateY(0);
 	     -o-transform: translateY(0);
 	        transform: translateY(0);}
 	.mdc-banner-vertical{
 	flex-direction: column-reverse;}
-	.mdc-banner-open{height: auto;}
 	.mdc-banner:not(.mdc-banner-vertical) .mdc-list-divider:first-child {
 	display: none;}
 	.mdc-banner-vertical .mdc-list-divider:last-child {
@@ -170,7 +182,7 @@
 	max-height: 40px;
 	overflow: hidden;
 	border-radius: 50%;
-	margin-right: 24px;
+	margin-right: 16px;
 	margin-top: 8px;
 	margin-bottom: 8px;
 	color: var(--mdc-banner--avatar-ink-color);

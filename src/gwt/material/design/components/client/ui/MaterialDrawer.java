@@ -148,10 +148,8 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	}
 
 	public static class Content extends Nav {
-
 		public Content() {
 			super(CssName.MDC_DRAWER__CONTENT);
 		}
-
 	}
 }

@@ -291,6 +291,34 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 		setStyleProperty("transition", trasition);
 	}
 	
+	public final void setTransitionDelay(final String trasitionDelay) {
+		setStyleProperty("-webkit-transition-delay", trasitionDelay);
+		setStyleProperty("-moz-transition-delay", trasitionDelay);
+		setStyleProperty("-o-transition-delay", trasitionDelay);
+		setStyleProperty("transition-delay", trasitionDelay);
+	}	
+	
+	public final void setTransitionDuration(final String trasitionDuration) {
+		setStyleProperty("-webkit-transition-duration", trasitionDuration);
+		setStyleProperty("-moz-transition-duration", trasitionDuration);
+		setStyleProperty("-o-transition-duration", trasitionDuration);
+		setStyleProperty("transition-duration", trasitionDuration);
+	}
+	
+	public final void setTransitionProperty(final String trasitionProperty) {
+		setStyleProperty("-webkit-transition-property", trasitionProperty);
+		setStyleProperty("-moz-transition-property", trasitionProperty);
+		setStyleProperty("-o-transition-property", trasitionProperty);
+		setStyleProperty("transition-property", trasitionProperty);
+	}
+	
+	public final void setTransitionTimingFunction(final String trasitionTimingFunction) {
+		setStyleProperty("-webkit-transition-timing-function", trasitionTimingFunction);
+		setStyleProperty("-moz-transition-timing-function", trasitionTimingFunction);
+		setStyleProperty("-o-transition-timing-function", trasitionTimingFunction);
+		setStyleProperty("transition-timing-function", trasitionTimingFunction);
+	}	
+	
 	/*
 	 * -------------------------------------------------------------------------------
 	 * FLEX BOX SETTER'S 
