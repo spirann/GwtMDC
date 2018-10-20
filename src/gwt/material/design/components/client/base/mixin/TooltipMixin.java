@@ -22,7 +22,6 @@ package gwt.material.design.components.client.base.mixin;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.MouseEvent;
-import com.google.gwt.event.dom.client.MouseMoveEvent;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOverEvent;
 import com.google.gwt.event.dom.client.MouseUpEvent;
@@ -141,23 +140,23 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		var top;
 		var left;
 
-		switch (position) {
-		case LEFT:
+		switch (position.toString()) {
+		case 'LEFT':
 			top = targetTop + ((targetHeight - tooltipHeight) / 2)
 					- tooltipMarginTop;
 			left = targetLeft - tooltipWidth - (tooltipMarginLeft * 2);
 			break;
-		case RIGHT:
+		case 'RIGHT':
 			top = targetTop + ((targetHeight - tooltipHeight) / 2)
 					- tooltipMarginTop;
 			left = targetLeft + targetWidth;
 			break;
-		case TOP:
+		case 'TOP':
 			top = targetTop - tooltipHeight - (tooltipMarginTop * 2);
 			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
 					- tooltipMarginLeft;
 			break;
-		case BOTTOM:
+		case 'BOTTOM':
 		default:
 			top = targetTop + targetHeight;
 			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
