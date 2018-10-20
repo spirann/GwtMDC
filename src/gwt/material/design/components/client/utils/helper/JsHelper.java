@@ -6,6 +6,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class JsHelper {
 
+	public static native int getWidth(Element element) /*-{
+		return $wnd.jQuery(element).outerWidth();
+	}-*/;
+
+	public static native int getHeight(Element element) /*-{
+		return $wnd.jQuery(element).outerHeight();
+	}-*/;
+
 	public static long paserDate(final String value) {
 		return Long.valueOf(paser(value));
 	}

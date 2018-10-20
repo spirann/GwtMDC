@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseMoveEvent;
@@ -35,6 +36,8 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
+import gwt.material.design.components.client.constants.TooltipPosition;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -50,6 +53,8 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	private HandlerRegistration touchStart;
 	private HandlerRegistration touchEnd;
 	private Timer longPressTimer;
+
+	private TooltipPosition position = TooltipPosition.BOTTOM;
 
 	public TooltipMixin(final T uiObject) {
 		super(uiObject);
@@ -78,13 +83,14 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		if (tooltip == null)
 			this.tooltip = HtmlElements.LABEL.createElement(CssName.MDC_TOOLTIP, CssName.MDC_TYPOGRAPHY__CAPTION);
 
-		mouseMove = uiObject.addDomHandler(event -> changePosition(event), MouseMoveEvent.getType());
+		// mouseMove = uiObject.addDomHandler(event -> changePosition(event),
+		// MouseMoveEvent.getType());
 		mouseOver = uiObject.addDomHandler(event -> attach(event), MouseOverEvent.getType());
 		mouseOut = uiObject.addDomHandler(event -> unAttach(), MouseOutEvent.getType());
 		mouseUp = uiObject.addDomHandler(event -> unAttach(), MouseUpEvent.getType());
 		touchStart = uiObject.addDomHandler(event -> cancelLongPressTimer(), TouchEndEvent.getType());
 		touchEnd = uiObject.addDomHandler(event -> startLongPressTimer(null), TouchStartEvent.getType());
-		
+
 	}
 
 	protected void unbind() {
@@ -100,7 +106,7 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 			touchStart.removeHandler();
 		if (touchEnd != null)
 			touchEnd.removeHandler();
-		
+
 		cancelLongPressTimer();
 	}
 
@@ -112,6 +118,85 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	protected void cancelLongPressTimer() {
 		if (longPressTimer != null)
 			longPressTimer.cancel();
+	}
+
+	protected native void setPosition(final Element tooltip, final Element target,
+			final TooltipPosition position)/*-{
+
+		var targetWidth = $wnd.jQuery(target).outerWidth();
+		var targetHeight = $wnd.jQuery(target).outerHeight();
+		var tooltipWidth = $wnd.jQuery(tooltip).outerWidth();
+		var tooltipHeight = $wnd.jQuery(tooltip).outerHeight();
+		var screenWidth = $wnd.jQuery($wnd).outerWidth();
+		var screenHeight = $wnd.jQuery($wnd).outerHeight();
+		var targetTop = $wnd.jQuery(target).offset().top
+				- $wnd.jQuery($wnd).scrollTop();
+		var targetLeft = $wnd.jQuery(target).offset().left
+				- $wnd.jQuery($wnd).scrollLeft();
+		var tooltipMarginTop = ($wnd.jQuery(tooltip).outerWidth(true) - $wnd
+				.jQuery(tooltip).outerWidth()) / 2;
+		var tooltipMarginLeft = ($wnd.jQuery(tooltip).outerHeight(true) - $wnd
+				.jQuery(tooltip).outerHeight()) / 2;
+
+		var top;
+		var left;
+
+		switch (position) {
+		case LEFT:
+			top = targetTop + ((targetHeight - tooltipHeight) / 2)
+					- tooltipMarginTop;
+			left = targetLeft - tooltipWidth - (tooltipMarginLeft * 2);
+			break;
+		case RIGHT:
+			top = targetTop + ((targetHeight - tooltipHeight) / 2)
+					- tooltipMarginTop;
+			left = targetLeft + targetWidth;
+			break;
+		case TOP:
+			top = targetTop - tooltipHeight - (tooltipMarginTop * 2);
+			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
+					- tooltipMarginLeft;
+			break;
+		case BOTTOM:
+		default:
+			top = targetTop + targetHeight;
+			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
+					- tooltipMarginLeft;
+			break;
+		}
+		
+		$wnd.jQuery(tooltip).css('top', top + 'px');
+		$wnd.jQuery(tooltip).css('left', left + 'px');
+
+	}-*/;
+
+	protected void staticPosition() {
+
+		final int margin = 8;
+		final int tooltipWidth = JsHelper.getWidth(tooltip);
+		final int tooltipHeight = JsHelper.getHeight(tooltip);
+		final int screenWidth = Window.getClientWidth();
+		final int screenHeight = Window.getClientHeight();
+
+		final int targetWidth = JsHelper.getWidth(uiObject.getElement());
+		final int targetHeight = JsHelper.getHeight(uiObject.getElement());
+		final int targetTop = uiObject.getElement().getAbsoluteTop();
+		final int targetLeft = uiObject.getElement().getAbsoluteLeft();
+		final double targetHorizontalCenter = (double) targetLeft + ((double) targetWidth / 2d);
+		final double targetVerticalCenter = (double) targetTop + ((double) targetHeight / 2d);
+
+		final double x;
+		final double y;
+
+		// Bottom
+		x = (double) targetLeft + (((double) targetWidth - (double) tooltipWidth) / 2d) - 16d;
+		y = targetTop + targetHeight + margin;
+
+		tooltip.getStyle().setProperty("left", x + "px");
+		tooltip.getStyle().setProperty("top", y + "px");
+
+		GWT.log("x: " + x + "px");
+		GWT.log("y: " + y + "px");
 	}
 
 	protected void changePosition(final MouseEvent<?> event) {
@@ -143,7 +228,9 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	protected void attach(final MouseEvent<?> event) {
 		unAttach();
 		attach(tooltip);
-		changePosition(event);
+		// changePosition(event);
+		// staticPosition();
+		setPosition(tooltip, uiObject.getElement(), position);
 	}
 
 	protected void unAttach() {
@@ -159,4 +246,11 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		$wnd.jQuery(element).remove();
 	}-*/;
 
+	public TooltipPosition getTooltipPosition() {
+		return position;
+	}
+
+	public void setTooltipPosition(TooltipPosition position) {
+		this.position = position;
+	}
 }

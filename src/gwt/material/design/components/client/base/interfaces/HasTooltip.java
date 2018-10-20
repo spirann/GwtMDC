@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.interfaces;
 
+import gwt.material.design.components.client.constants.TooltipPosition;
 
 /**
  * 
@@ -31,4 +32,7 @@ public interface HasTooltip {
 	
 	public String getTooltip();
 
+	public void setTooltipPosition(TooltipPosition position);
+	
+	public TooltipPosition getTooltipPosition();
 }

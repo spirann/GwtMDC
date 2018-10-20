@@ -104,6 +104,7 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.Elevation;
 import gwt.material.design.components.client.constants.HideOn;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.constants.TooltipPosition;
 import gwt.material.design.components.client.events.DragEndEvent;
 import gwt.material.design.components.client.events.DragEnterEvent;
 import gwt.material.design.components.client.events.DragLeaveEvent;
@@ -819,6 +820,14 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public String getTooltip() {
 		return tooltipMixin.getTooltip();
+	}
+	
+	public TooltipPosition getTooltipPosition() {
+		return tooltipMixin.getTooltipPosition();
+	}
+
+	public void setTooltipPosition(TooltipPosition position) {
+		tooltipMixin.setTooltipPosition(position);
 	}
 
 	@Override
