@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.MouseEvent;
 import com.google.gwt.event.dom.client.MouseOutEvent;
@@ -36,7 +35,6 @@ import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.TooltipPosition;
-import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -183,35 +181,6 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		$wnd.jQuery(tooltip).css('left', left + 'px');
 
 	}-*/;
-
-	protected void staticPosition() {
-
-		final int margin = 8;
-		final int tooltipWidth = JsHelper.getWidth(tooltip);
-		final int tooltipHeight = JsHelper.getHeight(tooltip);
-		final int screenWidth = Window.getClientWidth();
-		final int screenHeight = Window.getClientHeight();
-
-		final int targetWidth = JsHelper.getWidth(uiObject.getElement());
-		final int targetHeight = JsHelper.getHeight(uiObject.getElement());
-		final int targetTop = uiObject.getElement().getAbsoluteTop();
-		final int targetLeft = uiObject.getElement().getAbsoluteLeft();
-		final double targetHorizontalCenter = (double) targetLeft + ((double) targetWidth / 2d);
-		final double targetVerticalCenter = (double) targetTop + ((double) targetHeight / 2d);
-
-		final double x;
-		final double y;
-
-		// Bottom
-		x = (double) targetLeft + (((double) targetWidth - (double) tooltipWidth) / 2d) - 16d;
-		y = targetTop + targetHeight + margin;
-
-		tooltip.getStyle().setProperty("left", x + "px");
-		tooltip.getStyle().setProperty("top", y + "px");
-
-		GWT.log("x: " + x + "px");
-		GWT.log("y: " + y + "px");
-	}
 
 	protected void changePosition(final MouseEvent<?> event) {
 

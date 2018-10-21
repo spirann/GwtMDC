@@ -106,6 +106,8 @@
    Tooltip
    ========================================================================== */
 .mdc-tooltip {
+	font-size: 0.60rem;
+	line-height: 0.70rem;
 	z-index: 8;
 	position: fixed;
 	min-width: 5em;
