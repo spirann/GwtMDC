@@ -25,7 +25,7 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  * @author Richeli Vargas
  */
 public enum TooltipPosition implements CssType {
-	BOTTOM("bottom"), TOP("top"), LEFT("left"), RIGHT("right");
+	AUTO("auto"), BOTTOM("bottom"), TOP("top"), LEFT("left"), RIGHT("right");
 
 	private final String cssName;
 
@@ -39,6 +39,6 @@ public enum TooltipPosition implements CssType {
 	}
 
 	public static TooltipPosition fromStyleName(final String styleName) {
-		return EnumHelper.fromStyleName(styleName, TooltipPosition.class, BOTTOM);
+		return EnumHelper.fromStyleName(styleName, TooltipPosition.class, AUTO);
 	}
 }

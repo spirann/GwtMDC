@@ -53,7 +53,7 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	private HandlerRegistration touchEnd;
 	private Timer longPressTimer;
 
-	private TooltipPosition position = TooltipPosition.BOTTOM;
+	private TooltipPosition position = TooltipPosition.AUTO;
 
 	public TooltipMixin(final T uiObject) {
 		super(uiObject);
@@ -122,6 +122,13 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	protected native void setPosition(final Element tooltip, final Element target,
 			final TooltipPosition position)/*-{
 
+		var POSITION = position.toString();
+		var AUTO = 'AUTO';
+		var BOTTOM = 'BOTTOM';
+		var TOP = 'TOP';
+		var LEFT = 'LEFT';
+		var RIGHT = 'RIGHT';
+
 		var targetWidth = $wnd.jQuery(target).outerWidth();
 		var targetHeight = $wnd.jQuery(target).outerHeight();
 		var tooltipWidth = $wnd.jQuery(tooltip).outerWidth();
@@ -137,33 +144,41 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 		var tooltipMarginLeft = ($wnd.jQuery(tooltip).outerHeight(true) - $wnd
 				.jQuery(tooltip).outerHeight()) / 2;
 
+		if (POSITION === AUTO) {
+			var isTop = screenHeight / 2 > targetTop;
+			if (isTop)
+				POSITION = BOTTOM;
+			else
+				POSITION = TOP;
+		}
+
 		var top;
 		var left;
 
-		switch (position.toString()) {
-		case 'LEFT':
+		switch (POSITION) {
+		case LEFT:
 			top = targetTop + ((targetHeight - tooltipHeight) / 2)
 					- tooltipMarginTop;
 			left = targetLeft - tooltipWidth - (tooltipMarginLeft * 2);
 			break;
-		case 'RIGHT':
+		case RIGHT:
 			top = targetTop + ((targetHeight - tooltipHeight) / 2)
 					- tooltipMarginTop;
 			left = targetLeft + targetWidth;
 			break;
-		case 'TOP':
+		case TOP:
 			top = targetTop - tooltipHeight - (tooltipMarginTop * 2);
 			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
 					- tooltipMarginLeft;
 			break;
-		case 'BOTTOM':
+		case BOTTOM:
 		default:
 			top = targetTop + targetHeight;
 			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
 					- tooltipMarginLeft;
 			break;
 		}
-		
+
 		$wnd.jQuery(tooltip).css('top', top + 'px');
 		$wnd.jQuery(tooltip).css('left', left + 'px');
 
