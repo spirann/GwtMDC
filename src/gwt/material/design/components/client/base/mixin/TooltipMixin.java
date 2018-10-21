@@ -211,9 +211,8 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 	protected void attach(final MouseEvent<?> event) {
 		unAttach();
 		attach(tooltip);
-		// changePosition(event);
-		// staticPosition();
 		setPosition(tooltip, uiObject.getElement(), position);
+		// changePosition(event);
 	}
 
 	protected void unAttach() {
