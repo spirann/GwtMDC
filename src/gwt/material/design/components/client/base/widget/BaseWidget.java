@@ -54,7 +54,7 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
 	protected final FlexboxMixin<BaseWidget> flexboxMixin = new FlexboxMixin<>(this);
 
-	protected void setStyleProperty(final String attribute, final String value) {
+	public void setStyleProperty(final String attribute, final String value) {
 		StyleHelper.setStyleProperty(getElement(), attribute, value == null ? "none" : value);
 	}
 

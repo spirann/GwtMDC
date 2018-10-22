@@ -44,7 +44,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 
 	protected final Div content = new Div(CssName.MDC_BANNER__CONTENT);
 	protected final Div avatar = new Div(CssName.MDC_BANNER__AVATAR);
-	protected final Label label = new Label(CssName.MDC_BANNER__LABEL);
+	protected final Label label = new Label(CssName.MDC_BANNER__LABEL, CssName.MDC_TYPOGRAPHY__BODY_2);
 	protected final Div actions = new Div(CssName.MDC_BANNER__ACTIONS);
 	protected final MaterialDivider border = new MaterialDivider();
 

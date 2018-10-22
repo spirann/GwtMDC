@@ -23,6 +23,8 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -75,4 +77,10 @@ public class MaterialSideSheet extends Div implements HasOpen {
 	public void close() {
 		setOpen(false);
 	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		content.setStyleProperty(CssMixin.MDC_SIDE_SHEET__FILL_COLOR, color.getCssName());
+	}
+
 }
