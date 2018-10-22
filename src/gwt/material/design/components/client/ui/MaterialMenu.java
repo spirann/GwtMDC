@@ -98,10 +98,10 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	@Override
 	public void add(Widget child) {
 
-		if (child instanceof HasRole && !(child instanceof MaterialListDivider))
+		if (child instanceof HasRole && !(child instanceof MaterialDivider))
 			((HasRole) child).setRole(Role.MENU_ITEM);
 
-		if (!(child instanceof MaterialListDivider)) {
+		if (!(child instanceof MaterialDivider)) {
 
 			child.addDomHandler(event -> {
 

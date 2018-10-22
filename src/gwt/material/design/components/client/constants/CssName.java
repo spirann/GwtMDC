@@ -201,6 +201,13 @@ public interface CssName {
 	String MDC_DIALOG__BUTTON = "mdc-dialog__button";
 	String MDC_DIALOG__BUTTON__DEFAULT = "mdc-dialog__button--default";
 	// //////////////////////////////////////////////////////
+	// SIDE SHEET
+	// //////////////////////////////////////////////////////
+	String MDC_SIDE_SHEET = "mdc-side-sheet";
+	String MDC_SIDE_SHEET__OPENED = "mdc-side-sheet-opened";
+	String MDC_SIDE_SHEET__CONTENT = "mdc-side-sheet--content";
+	String MDC_SIDE_SHEET__SCRIM = "mdc-side-sheet--scrim";
+	// //////////////////////////////////////////////////////
 	// MATERIAL CONTENT
 	// //////////////////////////////////////////////////////
 	String MDC_CONTENT = "mdc-content";

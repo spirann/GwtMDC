@@ -29,17 +29,17 @@ import gwt.material.design.components.client.ui.html.Hr;
  * @author Richeli Vargas
  *
  */
-public class MaterialListDivider extends Hr implements HasInset {
+public class MaterialDivider extends Hr implements HasInset {
 
-	protected final ApplyStyleMixin<MaterialListDivider> insetMixin = new ApplyStyleMixin<>(this,
+	protected final ApplyStyleMixin<MaterialDivider> insetMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_LIST_DIVIDER__INSET);
 
-	public MaterialListDivider() {
+	public MaterialDivider() {
 		super(CssName.MDC_LIST_DIVIDER);
 		//setRole(Role.SEPARATOR);
 	}
 
-	public MaterialListDivider(final boolean inset) {
+	public MaterialDivider(final boolean inset) {
 		this();
 		setInset(inset);
 	}

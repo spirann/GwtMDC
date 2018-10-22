@@ -31,7 +31,7 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;
-import gwt.material.design.components.client.ui.MaterialListDivider;
+import gwt.material.design.components.client.ui.MaterialDivider;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Label;
 
@@ -66,7 +66,7 @@ public class MaterialDateRangePickerHeader extends MaterialValuedField<Date[]> {
 		
 		final Div lastColumn = new Div();		
 		lastColumn.add(minDate);
-		lastColumn.add(new MaterialListDivider());
+		lastColumn.add(new MaterialDivider());
 		lastColumn.add(maxDate);
 		
 		add(firstColumn);

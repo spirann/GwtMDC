@@ -46,7 +46,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 	protected final Div avatar = new Div(CssName.MDC_BANNER__AVATAR);
 	protected final Label label = new Label(CssName.MDC_BANNER__LABEL);
 	protected final Div actions = new Div(CssName.MDC_BANNER__ACTIONS);
-	protected final MaterialListDivider border = new MaterialListDivider();
+	protected final MaterialDivider border = new MaterialDivider();
 
 	protected final TypeMixin<MaterialBanner, BannerType> typeMixin = new TypeMixin<>(this, BannerType.VERTICAL);
 	protected final ApplyStyleMixin<MaterialBanner> openMixin = new ApplyStyleMixin<>(this, CssName.MDC_BANNER__OPENED);
@@ -61,10 +61,10 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 		content.add(avatar);
 		content.add(label);
 
-		add(new MaterialListDivider());
+		add(new MaterialDivider());
 		add(actions);
 		add(content);
-		add(new MaterialListDivider());
+		add(new MaterialDivider());
 
 		super.onInitialize();
 	}
