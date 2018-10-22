@@ -69,7 +69,7 @@
    Animation on show
    ========================================================================== */
 :root{
-	--mdc-animation--on-show: mdc-animation--on-show .25s ease-in-out;}
+	--mdc-animation--on-show: mdc-animation--on-show 250ms ease-in-out;}
 
 @keyframes mdc-animation--on-show {
   from {
@@ -115,10 +115,10 @@
 	height: 100%;
 	display: flex;
 	overflow: hidden;		
-	-webkit-transition-duration: .25s, .25s;
-	   -moz-transition-duration: .25s, .25s;
-		 -o-transition-duration: .25s, .25s;
-			transition-duration: .25s, .25s;	
+	-webkit-transition-duration: 250ms, 250ms;
+	   -moz-transition-duration: 250ms, 250ms;
+		 -o-transition-duration: 250ms, 250ms;
+			transition-duration: 250ms, 250ms;	
 	-webkit-transition-property: max-width, transform;
 	   -moz-transition-property: max-width, transform;
 		 -o-transition-property: max-width, transform;
@@ -196,48 +196,40 @@
    Banner
    ========================================================================== */
 :root {
+	--mdc-banner--animation-duration: 250ms;
 	--mdc-banner--fill-color: var(--mdc-theme-surface);
 	--mdc-banner--ink-color: var(--mdc-theme-on-surface);
 	--mdc-banner--avatar-fill-color: transparent;
 	--mdc-banner--avatar-ink-color: var(--mdc-theme-on-surface);
 	--mdc-banner--label_lines_number: 3;
 }
+
 .mdc-banner {
+	position: relative;
 	width: 100%;
-	height: auto;
-	max-height: 0;	
+	margin-top: -148px;	
 	display: flex;
 	flex-direction: row-reverse;
-	align-content: center;
-	align-items: center;
 	justify-content: flex-start;
-	flex-wrap: wrap;
+	flex-wrap: wrap-reverse;
 	overflow: hidden;
 	background-color: var(--mdc-banner--fill-color);
-	-webkit-transition-duration: .25s, .25s;
-	   -moz-transition-duration: .25s, .25s;
-		 -o-transition-duration: .25s, .25s;
-			transition-duration: .25s, .25s;	
-	-webkit-transition-property: max-height, transform;
-	   -moz-transition-property: max-height, transform;
-		 -o-transition-property: max-height, transform;
-			transition-property: max-height, transform;	
-	-webkit-transition-timing-function: ease-in-out, cubic-bezier(0, 0.4, 1, 0.2);
-	   -moz-transition-timing-function: ease-in-out, cubic-bezier(0, 0.4, 1, 0.2);
-		 -o-transition-timing-function: ease-in-out, cubic-bezier(0, 0.4, 1, 0.2);
-	        transition-timing-function: ease-in-out, cubic-bezier(0, 0.4, 1, 0.2);		
-	-webkit-transform: translateY(-100%);
-	   -moz-transform: translateY(-100%);
-	     -o-transform: translateY(-100%);
-	        transform: translateY(-100%);}
-	.mdc-banner-opened{
-	max-height: 148px;
-	-webkit-transform: translateY(0);
-	   -moz-transform: translateY(0);
-	     -o-transform: translateY(0);
-	        transform: translateY(0);}
+	-webkit-transition-duration: var(--mdc-banner--animation-duration);
+	   -moz-transition-duration: var(--mdc-banner--animation-duration);
+		 -o-transition-duration: var(--mdc-banner--animation-duration);
+			transition-duration: var(--mdc-banner--animation-duration);
+	-webkit-transition-property: margin-top;
+	   -moz-transition-property: margin-top;
+		 -o-transition-property: margin-top;
+			transition-property: margin-top;	
+	-webkit-transition-timing-function: ease-out;
+	   -moz-transition-timing-function: ease-out;
+		 -o-transition-timing-function: ease-out;
+	        transition-timing-function: ease-out;}
 	.mdc-banner-vertical{
 	flex-direction: column-reverse;}
+	.mdc-banner-opened{
+	margin-top: 0;}
 	.mdc-banner:not(.mdc-banner-vertical) .mdc-list-divider:first-child {
 	display: none;}
 	.mdc-banner-vertical .mdc-list-divider:last-child {
@@ -245,6 +237,7 @@
 
 .mdc-banner--content {
 	flex: 1;
+	flex-shrink: 0;
 	display: flex;
 	align-content: center;
 	align-items: center;
@@ -287,6 +280,7 @@
 	
 .mdc-banner--label {
 	flex: 1;
+	flex-shrink: 0;
 	color: var(--mdc-banner--ink-color);
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -297,6 +291,7 @@
 	
 .mdc-banner--actions {
 	display: flex;
+	flex-shrink: 0;
 	flex-direction: row-reverse;
 	align-content: center;
 	align-items: center;
