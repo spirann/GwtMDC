@@ -60,6 +60,11 @@ public class MaterialTextField extends MaterialInputBox implements HasHelperText
 	public void setIcon(IconType iconType) {
 		field.setIcon(iconType);
 	}
+	
+	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		field.setIcon(iconType, animate);
+	}
 
 	@Override
 	public void setIconColor(Color color) {

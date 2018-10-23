@@ -62,9 +62,9 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 
 	@Override
 	protected void onInitialize() {
-		
+
 		ripleMixin.initialize();
-		
+
 		add(icon);
 		add(label);
 		addClickHandler(event -> getElement().blur());
@@ -78,11 +78,11 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	}
 
 	@Override
-	public void setText(String text) {		
+	public void setText(String text) {
 		textMixin.setText(text);
 		extendedMixin.setApply(text != null && !text.trim().isEmpty());
 	}
-	
+
 	@Override
 	public void setHref(String href) {
 		hrefMixin.setHref(href);
@@ -124,18 +124,23 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	}
 	
 	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		iconMixin.setIcon(iconType, animate);
+	}
+	
+	@Override
 	public void setIconColor(Color color) {
 		iconMixin.setIconColor(color);
 	}
-	
+
 	public void setExited(final boolean isExited) {
 		exitedMixin.setApply(isExited);
 	}
-	
+
 	public boolean isExited() {
 		return exitedMixin.isApplied();
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_FAB__FILL_COLOR, color.getCssName());
@@ -144,6 +149,12 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	@Override
 	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
+		iconMixin.setIconColor(color);
 	}
 
 }

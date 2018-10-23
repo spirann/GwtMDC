@@ -114,6 +114,11 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 	}
 	
 	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		icon.setType(iconType, animate);
+	}
+	
+	@Override
 	public void setIconColor(Color color) {
 		icon.setColor(color);
 	}

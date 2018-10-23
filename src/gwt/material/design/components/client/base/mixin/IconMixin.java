@@ -24,7 +24,9 @@ import com.google.gwt.user.client.ui.UIObject;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
@@ -55,8 +57,22 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 	}
 
 	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		if (animate && getIcon() != null && uiObject.getElement().hasParentElement()) {
+			uiObject.addStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION);
+			uiObject.getElement().getStyle().setProperty("transform", "scale(0)");
+			TimerHelper.schedule(200, () -> {
+				setIcon(iconType);
+				uiObject.getElement().getStyle().setProperty("transform", "scale(1)");
+				TimerHelper.schedule(200, () -> uiObject.removeStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION));
+			});
+		} else
+			setIcon(iconType);
+	}
+
+	@Override
 	public void setIconColor(Color color) {
-		if(uiObject instanceof MaterialWidget) {
+		if (uiObject instanceof MaterialWidget) {
 			((MaterialWidget) uiObject).setColor(color);
 		} else {
 			uiObject.getElement().getStyle().setColor(color.getCssName());

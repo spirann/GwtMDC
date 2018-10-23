@@ -66,6 +66,23 @@
 	text-align: left;}
 
 /* ==========================================================================
+   Animation to change icon
+   ========================================================================== */
+.material-icons__change_animation {
+	-webkit-transition-duration: 200ms;
+	   -moz-transition-duration: 200ms;
+		 -o-transition-duration: 200ms;
+			transition-duration: 200ms;
+	-webkit-transition-property: transform;
+	   -moz-transition-property: transform;
+		 -o-transition-property: transform;
+			transition-property: transform;	
+	-webkit-transition-timing-function: ease-out;
+	   -moz-transition-timing-function: ease-out;
+		 -o-transition-timing-function: ease-out;
+	        transition-timing-function: ease-out;}	
+
+/* ==========================================================================
    Animation on show
    ========================================================================== */
 :root{
@@ -401,6 +418,22 @@
     stroke-dasharray: 89, 200;
     stroke-dashoffset: -124px;}
 }
+
+/* ==========================================================================
+   Fab Progress
+   ========================================================================== */
+.mdc-fab-progess {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	width: 76px;
+	height: 76px;}
+.mdc-fab-progess.mdc-fab--mini{
+	width: 56px;
+	height: 56px;}
+.mdc-fab-progess .mdc-fab {
+	z-index: 2;}
 
 /* ==========================================================================
    Color palette

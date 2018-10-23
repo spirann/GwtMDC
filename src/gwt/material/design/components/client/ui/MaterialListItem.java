@@ -54,7 +54,7 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
-	// /////////////////////////////////////////////////////////////	
+	// /////////////////////////////////////////////////////////////
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
 	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
 
@@ -64,39 +64,37 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM);
 		super.initializeSelectedMixin(CssName.MDC_LIST_ITEM__SELECTED);
 	}
-	
+
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return element;
 	}-*/;
-	
+
 	@Override
 	protected void onInitialize() {
 
 		ripleMixin.initialize();
-		
+
 		ariaHiddenMixin.setAttribute(true);
 
 		avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
 		avatar.setCircle(true);
 
-		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty()) {
+		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty())
 			insert(avatar, 0);
-		}
 
 		icon.setCircle(true);
 
-		if (icon.getType() != null) {
+		if (icon.getType() != null)
 			insert(icon, 0);
-		}
 
 		textContent.add(primaryText);
 		textContent.add(secondaryText);
-		
+
 		add(textContent);
 
 		super.onInitialize();
-	}	
-	
+	}
+
 	private native void removeDatail(final Element element, final String className)/*-{
 		var elements = element.getElementsByClassName(className);
 		var i;
@@ -114,26 +112,24 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	@UiChild(tagname = "start")
 	public void addStartDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM__GRAPHIC, Appender.START);
-		if (prevent) {
+		if (prevent)
 			prevent(widget.getElement());
-		}
-		
-		if(widget instanceof MaterialCheckbox) {
+
+		if (widget instanceof MaterialCheckbox) {
 			final MaterialCheckbox checkbox = (MaterialCheckbox) widget;
 			checkbox.addAttachHandler(event -> {
-				if(event.isAttached()) {
+				if (event.isAttached())
 					checkbox.setSelected(isSelected(), false);
-				}
+
 			});
 			checkbox.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
-		
-		if(widget instanceof MaterialRadioButton) {
+
+		if (widget instanceof MaterialRadioButton) {
 			final MaterialRadioButton radioButton = (MaterialRadioButton) widget;
 			radioButton.addAttachHandler(event -> {
-				if(event.isAttached()) {
+				if (event.isAttached())
 					radioButton.setSelected(isSelected(), false);
-				}
 			});
 			radioButton.addSelectionHandler(event -> setSelected(event.getValue(), true));
 		}
@@ -207,13 +203,16 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 
 	@Override
 	public void setIcon(IconType iconType) {
-		icon.setType(iconType);
+		setIcon(iconType, false);
+	}
 
-		if (icon.getType() != null && isAttached() && icon.getParent() == null) {
+	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		icon.setType(iconType, animate);
+		if (icon.getType() != null && isAttached() && icon.getParent() == null)
 			insert(icon, 0);
-		} else if (icon.getType() == null && icon.getParent() != null) {
+		else if (icon.getType() == null && icon.getParent() != null)
 			icon.removeFromParent();
-		}
 	}
 
 	public void setAvatar(final ImageResource resource) {
@@ -222,43 +221,41 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 
 	public void setAvatarUrl(final String url) {
 		avatar.setUrl(url);
-
-		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null) {
+		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null)
 			insert(avatar, getWidgetIndex(primaryText));
-		} else if ((avatar.getUrl() == null || avatar.getUrl().isEmpty()) && avatar.getParent() != null) {
+		else if ((avatar.getUrl() == null || avatar.getUrl().isEmpty()) && avatar.getParent() != null)
 			avatar.removeFromParent();
-		}
 	}
 
 	@Override
 	public void setTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__PRIMARY_TEXT_COLOR, color.getCssName());
 	}
-	
+
 	public void setSecondaryTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__SECONDARY_TEXT_COLOR, color.getCssName());
 	}
-	
+
 	public void setGraphicColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__GRAPHIC_COLOR, color.getCssName());
 	}
-	
+
 	public void setMetaColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__META_COLOR, color.getCssName());
 	}
-	
+
 	public void setSelectedTextColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_PRIMARY_TEXT_COLOR, color.getCssName());
 	}
-	
+
 	public void setSelectedGraphicColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_GRAPHIC_COLOR, color.getCssName());
 	}
-	
+
 	public void setSelectedMetaColor(Color color) {
 		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_META_COLOR, color.getCssName());
 	}
-	
+
 	public void setIconColor(Color color) {
 		icon.setTextColor(color);
 	}

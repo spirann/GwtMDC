@@ -62,6 +62,10 @@ public class MaterialIcon extends Icon implements HasType<IconType>, HasHref {
 	public void setType(IconType type) {
 		iconMixin.setIcon(type);
 	}
+	
+	public void setType(IconType type, boolean animate) {
+		iconMixin.setIcon(type, animate);
+	}
 
 	@Override
 	public IconType getType() {

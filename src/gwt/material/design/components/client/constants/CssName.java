@@ -253,6 +253,7 @@ public interface CssName {
 	// ICONS
 	// //////////////////////////////////////////////////////
 	String MATERIAL_ICONS = "material-icons";
+	String MATERIAL_ICONS__CHANGE_ANIMATION = "material-icons__change_animation";
 	// //////////////////////////////////////////////////////
 	// BUTTONS
 	// //////////////////////////////////////////////////////
@@ -422,7 +423,7 @@ public interface CssName {
 	String MDC_TOOLTIP = "mdc-tooltip";
 
 	// //////////////////////////////////////////////////////
-	// LINEAR PROGRESS
+	// CIRCULAR PROGRESS
 	// //////////////////////////////////////////////////////
 	String MDC_CIRCULAR_PROGRESS = "mdc-circular-progress";
 	String MDC_CIRCULAR_PROGRESS__LOADER = "mdc-circular-progress__loader";
@@ -437,6 +438,11 @@ public interface CssName {
 	String MDC_CIRCULAR_PROGRESS__SECONDARY_BAR = "mdc-circular-progress__secondary-bar";
 	String MDC_CIRCULAR_PROGRESS__BAR_INNER = "mdc-circular-progress__bar-inner";
 
+	// //////////////////////////////////////////////////////
+	// FAB PROGRESS
+	// //////////////////////////////////////////////////////
+	String MDC_FAB_PROGRESS = "mdc-fab-progess";
+	
 	// //////////////////////////////////////////////////////
 	// CHART
 	// //////////////////////////////////////////////////////

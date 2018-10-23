@@ -42,6 +42,12 @@ public interface HasIcon {
     
     /**
      * 
+     * @param iconType
+     */
+    void setIcon(IconType iconType, boolean animate);
+    
+    /**
+     * 
      * @param color
      */
     void setIconColor(Color color);

@@ -113,11 +113,14 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 
 	@Override
 	public void setIcon(IconType iconType) {
+		setIcon(iconType, false);
+	}
 
+	@Override
+	public void setIcon(IconType iconType, boolean animate) {
 		if (iconType == null) {
-			if (icon != null) {
+			if (icon != null)
 				icon.removeFromParent();
-			}
 			icon = null;
 			return;
 		}
@@ -126,8 +129,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 			icon = new MaterialIcon(CssName.MDC_BUTTON__ICON);
 			insert(icon, 0);
 		}
-
-		icon.setType(iconType);
+		icon.setType(iconType, animate);
 	}
 
 	@Override

@@ -207,10 +207,15 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	public IconType getIcon() {
 		return iconLeading.getType();
 	}
-
+	
 	@Override
 	public void setIcon(IconType iconType) {
-		iconLeading.setType(iconType);
+		setIcon(iconType, false);
+	}
+
+	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		iconLeading.setType(iconType, animate);
 
 		if (iconType == null && iconLeading.getParent() != null)
 			iconLeading.removeFromParent();

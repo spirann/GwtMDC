@@ -339,7 +339,12 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	@Override
 	public void setIcon(IconType iconType) {
-		icon.setType(iconType);
+		setIcon(iconType, false);
+	}
+	
+	@Override
+	public void setIcon(IconType iconType, boolean animate) {
+		icon.setType(iconType, animate);
 		if (iconPositionMixin.getType() != null) {
 			removeStyleName(iconPositionMixin.getType().getCssName());
 			if (iconType != null)
