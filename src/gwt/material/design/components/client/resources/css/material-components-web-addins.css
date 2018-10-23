@@ -69,18 +69,13 @@
    Animation to change icon
    ========================================================================== */
 .material-icons__change_animation {
-	-webkit-transition-duration: 200ms;
-	   -moz-transition-duration: 200ms;
-		 -o-transition-duration: 200ms;
-			transition-duration: 200ms;
-	-webkit-transition-property: transform;
-	   -moz-transition-property: transform;
-		 -o-transition-property: transform;
-			transition-property: transform;	
-	-webkit-transition-timing-function: ease-out;
-	   -moz-transition-timing-function: ease-out;
-		 -o-transition-timing-function: ease-out;
-	        transition-timing-function: ease-out;}	
+	animation: --mdc-change_icon_animation 400ms alternate ease-in;}	
+	        
+@keyframes --mdc-change_icon_animation {
+  0%   {transform: scale(1);}
+  50% {transform: scale(0);}
+  100%   {transform: scale(1);}
+}	        
 
 /* ==========================================================================
    Animation on show
@@ -362,7 +357,8 @@
 	bottom: 0;
 	left: 0;
 	right: 0;
-	margin: auto;}
+	margin: auto;
+	border-radius: 50%;}
 .mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader {	
 	-webkit-transform: rotate(var(--mdc-circular-progress-start-angle));
 	   -moz-transform: rotate(var(--mdc-circular-progress-start-angle));
@@ -377,11 +373,11 @@
 	stroke-dashoffset: 0;
 	stroke-linecap: square;
 	stroke: var(--mdc-circular-progress-indicator-color);}
-.mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path {
-	-webkit-transition: stroke-dashoffset 1s linear;
-	   -moz-transition: stroke-dashoffset 1s linear;
-	     -o-transition: stroke-dashoffset 1s linear;
-	        transition: stroke-dashoffset 1s linear;}
+.mdc-circular-progress:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path[animate] {
+	-webkit-transition: stroke-dashoffset 400ms linear;
+	   -moz-transition: stroke-dashoffset 400ms linear;
+	     -o-transition: stroke-dashoffset 400ms linear;
+	        transition: stroke-dashoffset 400ms linear;}
 .mdc-circular-progress--indeterminate .mdc-circular-progress__loader {
 	-webkit-animation: rotate 2s linear infinite;
 	   -moz-animation: rotate 2s linear infinite;
@@ -422,18 +418,42 @@
 /* ==========================================================================
    Fab Progress
    ========================================================================== */
+:root {
+	--mdc-fab-progess--animation-duration: 400ms;
+	--mdc-fab-progess--animation-property: background-color;
+}
 .mdc-fab-progess {
 	display: flex;
 	align-content: center;
 	align-items: center;
 	justify-content: center;
 	width: 76px;
-	height: 76px;}
+	height: 76px;
+	}
+
+.mdc-fab-progess .mdc-circular-progress__loader {
+	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);
+}
+	
 .mdc-fab-progess.mdc-fab--mini{
 	width: 56px;
 	height: 56px;}
 .mdc-fab-progess .mdc-fab {
-	z-index: 2;}
+	box-shadow: none;
+	margin: 0;
+	-webkit-transition-duration: var(--mdc-fab-progess--animation-duration);
+	   -moz-transition-duration: var(--mdc-fab-progess--animation-duration);
+		 -o-transition-duration: var(--mdc-fab-progess--animation-duration);
+			transition-duration: var(--mdc-fab-progess--animation-duration);
+	-webkit-transition-property: var(--mdc-fab-progess--animation-property);
+	   -moz-transition-property: var(--mdc-fab-progess--animation-property);
+		 -o-transition-property: var(--mdc-fab-progess--animation-property);
+			transition-property: var(--mdc-fab-progess--animation-property);
+	-webkit-transition-timing-function: ease-out;
+	   -moz-transition-timing-function: ease-out;
+		 -o-transition-timing-function: ease-out;
+	        transition-timing-function: ease-out;
+	}
 
 /* ==========================================================================
    Color palette

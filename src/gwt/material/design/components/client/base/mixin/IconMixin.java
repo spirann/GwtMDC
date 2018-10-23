@@ -26,6 +26,7 @@ import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -49,22 +50,27 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 	@Override
 	public void setIcon(IconType iconType) {
 		this.iconType = iconType;
-		if (iconType == null) {
+		if (iconType == null)
 			uiObject.getElement().setInnerHTML("");
-		} else {
+		else
 			uiObject.getElement().setInnerHTML(iconType.getCssName());
-		}
 	}
 
 	@Override
 	public void setIcon(IconType iconType, boolean animate) {
 		if (animate && getIcon() != null && uiObject.getElement().hasParentElement()) {
 			uiObject.addStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION);
-			uiObject.getElement().getStyle().setProperty("transform", "scale(0)");
-			TimerHelper.schedule(200, () -> {
+
+			final String animationDuration = StyleHelper.getComputedProperty(uiObject, "animation-duration")
+					.replaceAll("[a-zA-Z]", "");
+
+			final int duration = (int) (Double.valueOf(animationDuration) * 1000);
+			final int halfDuration = duration / 2;
+
+			TimerHelper.schedule(halfDuration, () -> {
 				setIcon(iconType);
-				uiObject.getElement().getStyle().setProperty("transform", "scale(1)");
-				TimerHelper.schedule(200, () -> uiObject.removeStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION));
+				TimerHelper.schedule(halfDuration,
+						() -> uiObject.removeStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION));
 			});
 		} else
 			setIcon(iconType);
@@ -72,11 +78,10 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 
 	@Override
 	public void setIconColor(Color color) {
-		if (uiObject instanceof MaterialWidget) {
+		if (uiObject instanceof MaterialWidget)
 			((MaterialWidget) uiObject).setColor(color);
-		} else {
-			uiObject.getElement().getStyle().setColor(color.getCssName());
-		}
+		else
+			StyleHelper.setStyleProperty(uiObject, "color", color.getCssName());
 	}
 
 }

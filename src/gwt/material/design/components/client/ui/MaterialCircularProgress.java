@@ -54,10 +54,10 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		super.onInitialize();
 		path.setResource(MaterialResources.INSTANCE.mdcCircularProgressPath());
 		add(path);
-		setNativeProgress(getProgress());
+		setNativeProgress(getProgress(), false);
 	}
 
-	public native void setNativeProgress(double val)/*-{
+	public native void setNativeProgress(double val, boolean animate)/*-{
 
 		var element = this.@gwt.material.design.components.client.ui.MaterialCircularProgress::getElement()();
 		var pathClass = @gwt.material.design.components.client.constants.CssName::MDC_CIRCULAR_PROGRESS__PATH;
@@ -70,7 +70,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		if (isNaN(val)) {
 			val = 0;
 		} else {
-			
+
 			var r = $wnd.jQuery(path).attr('r');
 			var c = Math.PI * (r * 2);
 
@@ -81,12 +81,18 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 				val = 1;
 
 			var pct = ((100 - (val * 100)) / 100) * c;
-			var dasharray = (c * 1.0) + ', ' + c
-		
+			var dasharray = (c * 1.0) + ', ' + c;
+
+			if (animate)
+				$wnd.jQuery(path).attr("animate", animate);
+			else
+				$wnd.jQuery(path).removeAttr("animate");
+
 			$wnd.jQuery(path).css({
 				strokeDashoffset : pct,
 				strokeDasharray : dasharray
 			});
+
 		}
 
 	}-*/;
@@ -105,7 +111,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	public void setSize(String width, String height) {
 		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__WIDTH, width);
 	}
-	
+
 	@Override
 	public void setColor(Color color) {
 		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__INDICATOR_COLOR, color.getCssName());
@@ -121,9 +127,13 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 
 	@Override
 	public void setProgress(double progress) {
+		setProgress(progress, true);
+	}
+
+	public void setProgress(double progress, boolean animate) {
 		this.progress = progress;
 		if (initialized)
-			setNativeProgress(progress);
+			setNativeProgress(progress, animate);
 	}
 
 	@Override
@@ -154,4 +164,5 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	public void setStartAngle(double startAngle) {
 		setStyleProperty(CssMixin.MDC_CIRCULAR_PROGRESS__START_ANGLE, startAngle + "deg");
 	}
+
 }

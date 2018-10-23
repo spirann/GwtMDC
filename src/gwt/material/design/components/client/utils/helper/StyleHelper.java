@@ -160,17 +160,16 @@ public final class StyleHelper {
 	 *            Style name
 	 */
 	public static void toggleStyleName(final UIObject uiObject, final boolean toggleStyle, final String styleName) {
-		if (toggleStyle) {
+		if (toggleStyle)
 			uiObject.addStyleName(styleName);
-		} else {
+		else
 			uiObject.removeStyleName(styleName);
-		}
 	}
 
 	public static Double getMeasurementValue(String value) {
-		if (value == null) {
+		if (value == null)
 			return null;
-		}
+
 		try {
 			return Double.parseDouble(value.replaceAll("[^0-9.]", ""));
 		} catch (NumberFormatException ex) {
@@ -179,9 +178,9 @@ public final class StyleHelper {
 	}
 
 	public static Style.Unit getMeasurementUnit(String value) {
-		if (value == null) {
+		if (value == null)
 			return null;
-		}
+
 		try {
 			return Style.Unit.valueOf(value.replaceAll("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?", "").toUpperCase());
 		} catch (IllegalArgumentException e) {
@@ -190,18 +189,26 @@ public final class StyleHelper {
 		}
 	}
 
+	public final static void setStyleProperty(final UIObject uiObject, final String attribute,
+			final String value) {
+		setStyleProperty(uiObject.getElement(), attribute, value);
+	}
+
 	public final static native void setStyleProperty(final Element element, final String attribute,
 			final String value)/*-{
-		element.style.setProperty(attribute, value);
+		$wnd.jQuery(element).css(attribute, value);
 	}-*/;
-	
+
 	public final static String getComputedProperty(final String property) {
 		return getComputedProperty(RootPanel.get().getElement(), property);
 	}
+	
+	public final static String getComputedProperty(final UIObject uiObject, final String property) {
+		return getComputedProperty(uiObject.getElement(), property);
+	}
 
-	public final static native String getComputedProperty(Element e, String property)/*-{
-		var cs = $wnd.document.defaultView.getComputedStyle(e, null);
-		return cs.getPropertyValue(property);
+	public final static native String getComputedProperty(final Element element, final String property)/*-{
+		return $wnd.jQuery(element).css(property);
 	}-*/;
 
 	private StyleHelper() {
