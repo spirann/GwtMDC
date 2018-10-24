@@ -36,27 +36,27 @@ import gwt.material.design.components.client.constants.IconType;
  * @author Richeli Vargas
  *
  */
-public class MaterialFabProgress extends MaterialCircularProgress implements HasType<FabType>, HasHref, HasIcon{
+public class MaterialFabProgress extends MaterialCircularProgress implements HasType<FabType>, HasHref, HasIcon {
 
 	protected final MaterialFab fab = new MaterialFab();
-	
+
 	protected final TypeMixin<MaterialFabProgress, FabType> typeMixin = new TypeMixin<>(this);
-	
+
 	public MaterialFabProgress() {
 		addStyleName(CssName.MDC_FAB_PROGRESS);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
-		super.onInitialize();
 		add(fab);
+		super.onInitialize();
 	}
-
+	
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return fab.addClickHandler(handler);
 	}
-	
+
 	@Override
 	public IconType getIcon() {
 		return fab.getIcon();
@@ -116,12 +116,12 @@ public class MaterialFabProgress extends MaterialCircularProgress implements Has
 	public FabType getType() {
 		return typeMixin.getType();
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		fab.setBackgroundColor(color);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		fab.setColor(color);

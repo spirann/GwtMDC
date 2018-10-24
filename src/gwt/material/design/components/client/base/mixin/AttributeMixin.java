@@ -33,6 +33,22 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
 		this.attribute = attribute;
 	}
 
+	public AttributeMixin(final T widget, String attribute, int value) {
+		this(widget, attribute, String.valueOf(value));
+	}
+	
+	public AttributeMixin(final T widget, String attribute, double value) {
+		this(widget, attribute, String.valueOf(value));
+	}
+	
+	public AttributeMixin(final T widget, String attribute, boolean value) {
+		this(widget, attribute, String.valueOf(value));
+	}
+	
+	public AttributeMixin(final T widget, String attribute, long value) {
+		this(widget, attribute, String.valueOf(value));
+	}
+	
 	public AttributeMixin(final T widget, String attribute, String value) {
 		this(widget, attribute);
 		this.uiObject.getElement().setAttribute(attribute, value);
@@ -56,6 +72,10 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
 	}
 
 	public void setAttribute(boolean value) {
+		setAttribute(String.valueOf(value));
+	}
+	
+	public void setAttribute(long value) {
 		setAttribute(String.valueOf(value));
 	}
 
@@ -84,6 +104,15 @@ public class AttributeMixin<T extends UIObject> extends AbstractMixin<T> {
 	public double getAttributeAsDouble(final double defaultValue) {
 		final String attribute = getAttribute();
 		return attribute == null || attribute.isEmpty() ? defaultValue : Double.parseDouble(attribute);
+	}
+	
+	public long getAttributeAsLong() {
+		return getAttributeAsLong(0L);
+	}
+
+	public long getAttributeAsLong(final long defaultValue) {
+		final String attribute = getAttribute();
+		return attribute == null || attribute.isEmpty() ? defaultValue : Long.parseLong(attribute);
 	}
 
 	public boolean getAttributeAsBoolean() {

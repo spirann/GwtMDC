@@ -2,14 +2,23 @@ package gwt.material.design.components.client.utils.helper;
 
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 public class JsHelper {
 
+	public static int getWidth(UIObject uiObject) {
+		return getWidth(uiObject.getElement());
+	}
+	
 	public static native int getWidth(Element element) /*-{
 		return $wnd.jQuery(element).outerWidth();
 	}-*/;
 
+	public static int getHeight(UIObject uiObject) {
+		return getHeight(uiObject.getElement());
+	}
+	
 	public static native int getHeight(Element element) /*-{
 		return $wnd.jQuery(element).outerHeight();
 	}-*/;

@@ -23,6 +23,7 @@ import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.interfaces.HasProgress;
 import gwt.material.design.components.client.base.interfaces.HasReverse;
 import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -43,8 +44,8 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	
 	protected final ApplyStyleMixin<MaterialCircularProgress> reverseMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_CIRCULAR_PROGRESS__REVERSED);
-
-	private double progress = 0d;
+	
+	protected final AttributeMixin<MaterialCircularProgress> progressMixin = new AttributeMixin<>(this, "progress", 0d);
 
 	public MaterialCircularProgress() {
 		super(CssName.MDC_CIRCULAR_PROGRESS);
@@ -129,14 +130,14 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	}
 
 	public void setProgress(double progress, boolean animate) {
-		this.progress = progress;
+		progressMixin.setAttribute(progress);
 		if (initialized)
 			setNativeProgress(progress, animate);
 	}
 
 	@Override
 	public double getProgress() {
-		return progress;
+		return progressMixin.getAttributeAsDouble();
 	}
 
 	@Override

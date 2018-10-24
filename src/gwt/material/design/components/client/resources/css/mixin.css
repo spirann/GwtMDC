@@ -222,6 +222,11 @@
 .mdc-fab--extended[dir="rtl"] .mdc-fab__icon {
 	margin-left: 12px;
 	margin-right: -8px;}
+.mdc-fab:not(.mdc-fab--extended).mdc-fab--mix_with_extended {
+  width: 48px;
+  height: 48px;}
+  .mdc-fab.mdc-fab--mix_with_extended:not(.mdc-fab--extended) {
+  border-radius: 24px; }  	
 .mdc-fab--fixed > label:empty {
 	display: none;}
 .mdc-fab--fixed {
