@@ -40,6 +40,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 
 	protected final ApplyStyleMixin<MaterialCircularProgress> indeterminateMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_CIRCULAR_PROGRESS__INDETERMINATE);
+	
 	protected final ApplyStyleMixin<MaterialCircularProgress> reverseMixin = new ApplyStyleMixin<>(this,
 			CssName.MDC_CIRCULAR_PROGRESS__REVERSED);
 
@@ -70,7 +71,6 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		if (isNaN(val)) {
 			val = 0;
 		} else {
-
 			var r = $wnd.jQuery(path).attr('r');
 			var c = Math.PI * (r * 2);
 
@@ -92,9 +92,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 				strokeDashoffset : pct,
 				strokeDasharray : dasharray
 			});
-
 		}
-
 	}-*/;
 
 	@Override
