@@ -64,6 +64,10 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	private Date minDate;
 	private Date maxDate;
 
+	// Helper to draw days if necessary
+	private int currentMonth;
+	private int currentYear;
+
 	public MaterialDatePickerBaseDaySelector() {
 		super(CssName.MDC_DATEPICKER__DAY_SELECTOR);
 	}
@@ -111,11 +115,11 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	public int getVisibleYear() {
 		return auxDate.getYear() + 1900;
 	}
-	
+
 	public int getVisibleMonth() {
 		return auxDate.getMonth() + 1;
 	}
-	
+
 	public void setYear(final int year) {
 		auxDate.setYear(year);
 		drawDays();
@@ -165,6 +169,10 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 
 	protected void drawDays() {
 
+		if (currentMonth == this.auxDate.getMonth() 
+				&& currentYear == this.auxDate.getYear())
+			return;
+
 		mapedItems.clear();
 		items.clear();
 
@@ -200,19 +208,22 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			mapedItems.put(adjustedDate.getTime(), item);
 			items.add(item);
 		}
+		
+		currentMonth = this.auxDate.getMonth();
+		currentYear = this.auxDate.getYear();
 	}
 
 	protected MaterialDatePickerItem drawItem(final Date date, final String name, final boolean visible,
 			final boolean enabled) {
-		
+
 		final MaterialDatePickerItem item = new MaterialDatePickerItem();
 		item.setEnabled(enabled);
-		
+
 		if (today.getTime() == date.getTime())
 			item.addStyleName(CssName.MDC_DATEPICKER__ITEM_TODAY);
 		item.setText(String.valueOf(date.getDate()));
 		item.setName(name);
-		
+
 		if (!visible)
 			item.setVisibility(Visibility.HIDDEN);
 
@@ -267,12 +278,12 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		date.setHours(12);
 		date.setMinutes(0);
 		date.setSeconds(0);
-		
+
 		date = new Date(DateTimeHelper.fromTheDate(date.getTime()));
 		date.setHours(12);
 		date.setMinutes(0);
 		date.setSeconds(0);
-		
+
 		return date;
 	}
 
@@ -306,7 +317,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		final long key = adjustDate.getTime();
 		tooltips.put(key, tooltip);
 
-		final MaterialDatePickerItem item = mapedItems.get(key);		
+		final MaterialDatePickerItem item = mapedItems.get(key);
 		if (item != null)
 			drawTooltip(adjustDate, item);
 	}

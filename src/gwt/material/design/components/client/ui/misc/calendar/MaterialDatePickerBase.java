@@ -74,16 +74,15 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 
 		final Date date;
 		final T value = getValue();
-		if (value == null) {
+		if (value == null)
 			date = null;
-		} else if (value instanceof Date) {
+		else if (value instanceof Date)
 			date = (Date) value;
-		} else if (value instanceof Date[]) {
+		else if (value instanceof Date[]) {
 			final Date[] values = (Date[]) value;
 			date = values.length == 0 ? null : values[values.length - 1];
-		} else {
+		} else
 			date = null;
-		}
 
 		header.setValue(getValue());
 
@@ -189,7 +188,7 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 	public void setMaxDate(Date maxDate) {
 		daySelector.setMaxDate(maxDate);
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
@@ -215,16 +214,16 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 	public void setHeaderBackgroundColor(Color color) {
 		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
-	
+
 	public void setDateTooltip(final Date date, final String tooltip) {
 		daySelector.setDateTooltip(date, tooltip);
 	}
-	
+
 	public String getDateTooltip(final Date date) {
 		return daySelector.getDateTooltip(date);
 	}
-	
+
 	public String removeDateTooltip(final Date date) {
-		return daySelector.removeDateTooltip(date); 
+		return daySelector.removeDateTooltip(date);
 	}
 }
