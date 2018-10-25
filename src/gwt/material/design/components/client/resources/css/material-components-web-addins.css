@@ -222,7 +222,7 @@
 	margin-top: -148px;	
 	display: flex;
 	flex-direction: row-reverse;
-	justify-content: flex-start;
+	justify-content: center;
 	flex-wrap: wrap-reverse;
 	overflow: hidden;
 	background-color: var(--mdc-banner--fill-color);
@@ -395,12 +395,21 @@
 	   -moz-animation: dash 1.5s ease-in-out infinite;
 	     -o-animation: dash 1.5s ease-in-out infinite;
 	        animation: dash 1.5s ease-in-out infinite;}
-.mdc-circular-progress--reversed .mdc-circular-progress__loader,
-.mdc-circular-progress--reversed .mdc-circular-progress__path {
+.mdc-circular-progress--indeterminate .mdc-circular-progress__loader,	 
+.mdc-circular-progress--indeterminate .mdc-circular-progress__path,       
+.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader,
+.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path {
 	-webkit-animation-direction: reverse;
 	   -moz-animation-direction: reverse;
 	     -o-animation-direction: reverse;
 	        animation-direction: reverse;}
+.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__loader,
+.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__path {
+	-webkit-animation-direction: normal;
+	   -moz-animation-direction: normal;
+	     -o-animation-direction: normal;
+	        animation-direction: normal;}	        
+	        
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -431,11 +440,7 @@
 .mdc-fab-progess {
 	padding: 4px;
 	--mdc-circular-progress-stroke-width: 8;
-	--mdc-circular-progress-width: auto;
-	-webkit-transition: all 4000ms;
-	   -moz-transition: all 4000ms;
-		 -o-transition: all 4000ms;
-			transition: all 4000ms;}
+	--mdc-circular-progress-width: auto;}
 	.mdc-fab-progess.mdc-fab--mini {
 	padding: 3px;}
 	
