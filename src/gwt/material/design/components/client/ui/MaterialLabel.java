@@ -34,6 +34,11 @@ public class MaterialLabel extends Label {
 	public MaterialLabel() {
 		super(CssName.MDC_TYPOGRAPHY);
 	}
+	
+	public MaterialLabel(final String text) {
+		this();
+		setText(text);
+	}
 
 	@Override
 	protected void onInitialize() {

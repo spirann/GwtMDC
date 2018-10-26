@@ -32,6 +32,8 @@ import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.SelectMenuType;
@@ -189,6 +191,20 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	@Override
 	public boolean isUnbordered() {
 		return unborderedMixin.isApplied();
+	}
+
+	@Override
+	public void setBackgroundColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
+	}
+
+	@Override
+	public void setColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
+	}
+
+	public void setFocusedColor(Color color) {
+		setStyleProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}
 
 	public static class Option<T> extends MaterialSelectedField implements HasText {

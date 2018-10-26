@@ -440,18 +440,22 @@
 .mdc-fab-progess {
 	padding: 4px;
 	--mdc-circular-progress-stroke-width: 8;
-	--mdc-circular-progress-width: auto;}
+	--mdc-circular-progress-width: auto;
+	-webkit-transition: box-shadow 400ms;
+	   -moz-transition: box-shadow 400ms;
+		 -o-transition: box-shadow 400ms;
+			transition: box-shadow 400ms;}
 	.mdc-fab-progess.mdc-fab--mini {
 	padding: 3px;}
 	
 .mdc-fab-progess .mdc-circular-progress__loader {
 	z-index: 1;	
-	-webkit-transition: all 400ms;
-	   -moz-transition: all 400ms;
-		 -o-transition: all 400ms;
-			transition: all 400ms;}	
+	-webkit-transition: opacity 400ms, box-shadow 400ms;
+	   -moz-transition: opacity 400ms, box-shadow 400ms;
+		 -o-transition: opacity 400ms, box-shadow 400ms;
+			transition: opacity 400ms, box-shadow 400ms;}	
 	.mdc-fab-progess[progress='0']:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader {
-	display: none;}
+	opacity: 0;}
 	
 .mdc-fab-progess .mdc-fab {
 	z-index: 2;
