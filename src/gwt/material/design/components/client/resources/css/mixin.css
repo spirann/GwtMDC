@@ -582,6 +582,17 @@ i.mdc-list-item__graphic {
 .mdc-top-app-bar .mdc-button--unelevated:not(:disabled) {
 	--mdc-button-raised-ink-color: var(--mdc-top-app-bar-fill-color);
 	--mdc-button-raised-fill-color: var(--mdc-top-app-bar-ink-color);}	
+/* Text field and select into top app bar */	
+.mdc-top-app-bar .mdc-text-field:not(.mdc-select--disabled):not([disabled]),
+.mdc-top-app-bar .mdc-select:not(.mdc-select--disabled):not([disabled]) {
+	--mdc-placeholder-ink-color: var(--mdc-top-app-bar-ink-color);
+	--mdc-text-field--ink-color: var(--mdc-top-app-bar-ink-color);
+	--mdc-text-field--fill-color: var(--mdc-top-app-bar-fill-color);
+	--mdc-text-field--focused-color: var(--mdc-top-app-bar-ink-color);
+	--mdc-text-field--focused-ink-color: var(--mdc-top-app-bar-ink-color);}
+.mdc-top-app-bar .mdc-floating-label,
+.mdc-top-app-bar .mdc-text-field-helper-text {
+	display: none;}	
 	
 /* ==========================================================================
    Drawer
