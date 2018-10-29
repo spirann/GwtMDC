@@ -244,6 +244,59 @@ public final class StyleHelper {
 	}-*/;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set property
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void setProperty(final UIObject uiObject, final String property,
+			final Style.HasCssName value) {
+		setProperty(uiObject.getElement(), property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setProperty(final Element element, final String property, final Style.HasCssName value) {
+		setProperty(element, property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setProperty(final UIObject uiObject, final String property, final String value) {
+		setProperty(uiObject.getElement(), property, value);
+	}
+
+	public final static native void setProperty(final Element element, final String property,
+			final String value)/*-{
+		if (value && value.length > 0)
+			$wnd.jQuery(element).prop(property, value);
+		else
+			$wnd.jQuery(element).removeProp(property);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Remove property
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void removeProperty(final UIObject uiObject, final String property) {
+		removeProperty(uiObject.getElement(), property);
+	}
+
+	public final static native void removeProperty(final Element element, final String property)/*-{
+		$wnd.jQuery(element).removeProp(property);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Get property
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static String getProperty(final UIObject uiObject, final String property) {
+		return getProperty(uiObject.getElement(), property);
+	}
+
+	public final static boolean getPropertyAsBoolean(final UIObject uiObject, final String property) {
+		return Boolean.valueOf(getProperty(uiObject.getElement(), property));
+	}
+
+	public final static native String getProperty(final Element element, final String property)/*-{
+		return new String($wnd.jQuery(element).prop(property));
+	}-*/;
+	
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// Set attribute
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -293,6 +346,6 @@ public final class StyleHelper {
 	}
 
 	public final static native String getAttribute(final Element element, final String attribute)/*-{
-		return $wnd.jQuery(element).attr(attribute);
+		return new String($wnd.jQuery(element).attr(attribute));
 	}-*/;
 }

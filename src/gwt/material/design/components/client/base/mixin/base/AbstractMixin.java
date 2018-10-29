@@ -35,4 +35,8 @@ public abstract class AbstractMixin<UIO extends MaterialUIObject> {
     public void setUiObject(UIO uiObject) {
         this.uiObject = uiObject;
     }
+    
+    public UIO getUIObject() {
+    	return uiObject;
+    }
 }

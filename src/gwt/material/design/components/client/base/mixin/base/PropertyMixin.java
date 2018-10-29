@@ -27,36 +27,36 @@ import gwt.material.design.components.client.base.widget.MaterialUIObject;
 /**
  * @author Richeli Vargas
  */
-public class AttributeMixin<UIO extends MaterialUIObject, V> extends AbstractMixin<UIO> {
+public class PropertyMixin<UIO extends MaterialUIObject, V> extends AbstractMixin<UIO> {
 
-	protected final String attribute;
+	protected final String property;
 	protected final FromString<V> fromString;
 
-	public AttributeMixin(final UIO uiObject, final String attribute, final FromString<V> fromString) {
+	public PropertyMixin(final UIO uiObject, final String property, final FromString<V> fromString) {
 		super(uiObject);
-		this.attribute = attribute;
+		this.property = property;
 		this.fromString = fromString;
 	}
 
-	public AttributeMixin(final UIO uiObject, final String attribute, V value, final FromString<V> converter) {
-		this(uiObject, attribute, converter);
+	public PropertyMixin(final UIO uiObject, final String property, V value, final FromString<V> converter) {
+		this(uiObject, property, converter);
 		setValue(value);
 	}
 
-	public String getAttribute() {
-		return attribute;
+	public String getProperty() {
+		return property;
 	}
 
 	public V getValue() {
-		return fromString == null ? null : fromString.from(uiObject.getAttribute(attribute));
+		return fromString == null ? null : fromString.from(uiObject.getProperty(property));
 	}
 
 	public void setValue(V value) {
-		setValue(attribute, value, uiObject);
+		setValue(property, value, uiObject);
 	}
 
-	public void setValue(String attribute, V value, MaterialUIObject uiObject) {
-		uiObject.setAttribute(attribute,
+	public void setValue(String property, V value, MaterialUIObject uiObject) {
+		uiObject.setProperty(property,
 				value == null || (value instanceof Boolean && !((Boolean) value)) ? null : (value instanceof HasCssName ? ((HasCssName) value).getCssName() : value.toString()));
 	}
 

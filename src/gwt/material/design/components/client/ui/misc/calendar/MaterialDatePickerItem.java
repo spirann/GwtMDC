@@ -27,6 +27,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
@@ -72,7 +73,7 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 	}
 	
 	protected final TextMixin<MaterialDatePickerItem> textMixin = new TextMixin<>(this);
-	protected final AttributeMixin<MaterialDatePickerItem, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME);
+	protected final AttributeMixin<MaterialDatePickerItem, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME, FromString.TO_STRING);
 	
 	public MaterialDatePickerItem() {
 		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);

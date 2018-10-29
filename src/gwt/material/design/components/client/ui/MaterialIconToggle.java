@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
@@ -42,12 +43,8 @@ import gwt.material.design.components.client.constants.Role;
  */
 public class MaterialIconToggle extends MaterialSelectedField {
 
-	protected final AttributeMixin<MaterialIconToggle, String> toggleOnMixin = new AttributeMixin<>(this,
-			CssAttribute.DATA_TOOGLE_ON);
-	protected final AttributeMixin<MaterialIconToggle, String> toggleOffMixin = new AttributeMixin<>(this,
-			CssAttribute.DATA_TOGGLE_OFF);
 	protected final AttributeMixin<MaterialIconToggle, Boolean> ariaPressedMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_PRESSED);
+			CssAttribute.ARIA_PRESSED, FromString.TO_BOOLEAN);
 
 	protected Color colorOn = Color.MDC_THEME_SECONDARY;
 	protected Color backgroundColorOn = Color.TRANSPARENT;
@@ -88,11 +85,11 @@ public class MaterialIconToggle extends MaterialSelectedField {
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {
-		toggleOnMixin.setValue("{\"content\": \"" + icon.getCssName() + "\"}");
+		setAttribute(CssAttribute.DATA_TOOGLE_ON, "{\"content\": \"" + icon.getCssName() + "\"}");
 	}
 
 	public void setToggleOff(final IconType icon) {
-		toggleOffMixin.setValue("{\"content\": \"" + icon.getCssName() + "\"}");
+		setAttribute(CssAttribute.DATA_TOGGLE_OFF, "{\"content\": \"" + icon.getCssName() + "\"}");
 	}
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {

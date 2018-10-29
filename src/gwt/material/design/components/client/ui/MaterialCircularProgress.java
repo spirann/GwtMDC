@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.interfaces.HasProgress;
 import gwt.material.design.components.client.base.interfaces.HasReverse;
@@ -47,7 +48,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 			CssName.MDC_CIRCULAR_PROGRESS__REVERSED);
 
 	protected final AttributeMixin<MaterialCircularProgress, Double> progressMixin = new AttributeMixin<>(this,
-			CssAttribute.PROGRESS, 0d);
+			CssAttribute.PROGRESS, 0d, FromString.TO_DOUBLE);
 
 	public MaterialCircularProgress() {
 		super(CssName.MDC_CIRCULAR_PROGRESS);

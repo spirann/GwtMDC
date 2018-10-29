@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
@@ -33,7 +34,7 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 public class PlaceholderMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String> implements HasPlaceholder {
 
 	public PlaceholderMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.PLACEHOLDER);
+		super(uiObject, CssAttribute.PLACEHOLDER, FromString.TO_STRING);
 	}
 
 	@Override

@@ -21,6 +21,7 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
@@ -36,7 +37,7 @@ public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin
 		implements HasInputMask {
 
 	public InputMaskMixin(UIO uiObject) {
-		super(uiObject, CssAttribute.INPUT_MASK);
+		super(uiObject, CssAttribute.INPUT_MASK, FromString.TO_STRING);
 	}
 
 	/**

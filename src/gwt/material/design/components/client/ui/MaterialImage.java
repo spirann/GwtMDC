@@ -30,6 +30,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.user.client.ui.HasCaption;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasImage;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
@@ -44,7 +45,7 @@ import gwt.material.design.components.client.ui.html.Img;
 public class MaterialImage extends Img implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
 
 	protected final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
-	protected final AttributeMixin<MaterialImage, String> captionMixin = new AttributeMixin<MaterialImage, String>(this, CssAttribute.DATA_CAPTION);
+	protected final AttributeMixin<MaterialImage, String> captionMixin = new AttributeMixin<MaterialImage, String>(this, CssAttribute.DATA_CAPTION, FromString.TO_STRING);
 
 	/**
 	 * Creates an empty image.

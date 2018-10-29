@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.html.svg;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.CssAttribute;
@@ -31,9 +32,9 @@ import gwt.material.design.components.client.constants.HtmlElements;
  */
 public class Circle extends MaterialWidget {
 
-	protected final AttributeMixin<Circle, Double> cxMixin = new AttributeMixin<>(this, CssAttribute.CX);
-	protected final AttributeMixin<Circle, Double> cyMixin = new AttributeMixin<>(this, CssAttribute.CY);
-	protected final AttributeMixin<Circle, Double> rMixin = new AttributeMixin<>(this, CssAttribute.R);
+	protected final AttributeMixin<Circle, Double> cxMixin = new AttributeMixin<>(this, CssAttribute.CX, FromString.TO_DOUBLE);
+	protected final AttributeMixin<Circle, Double> cyMixin = new AttributeMixin<>(this, CssAttribute.CY, FromString.TO_DOUBLE);
+	protected final AttributeMixin<Circle, Double> rMixin = new AttributeMixin<>(this, CssAttribute.R, FromString.TO_DOUBLE);
 
 	public Circle() {
 		super(HtmlElements.SVG__CIRCLE.createElement());

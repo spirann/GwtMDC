@@ -32,7 +32,7 @@ import gwt.material.design.components.client.constants.Resize;
 public class ResizeMixin<UIO extends MaterialUIObject & HasResize> extends AttributeMixin<UIO, Resize> implements HasResize {
 	
 	public ResizeMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.RESIZE);
+		super(uiObject, CssAttribute.RESIZE, (value) -> Resize.fromStyleName(value));
 	}
 
 	@Override

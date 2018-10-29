@@ -24,6 +24,7 @@ import java.util.Arrays;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
@@ -52,7 +53,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	private PieChartType type = PieChartType.PIE;
 
 	protected final AttributeMixin<MaterialPieChart, String> labelPositionMixin = new AttributeMixin<>(this,
-			CssAttribute.LABEL_POSITION, "inside");
+			CssAttribute.LABEL_POSITION, "inside", FromString.TO_STRING);
 
 	public MaterialPieChart() {
 		super(new JsPieChartOptions(), ChartAspectRatio.ASPECT_1x1);

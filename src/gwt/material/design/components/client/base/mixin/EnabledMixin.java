@@ -23,6 +23,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CssAttribute;
@@ -35,7 +36,7 @@ public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends Att
 	private HandlerRegistration handler;
 
 	public EnabledMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.DISABLED);
+		super(uiObject, CssAttribute.DISABLED, FromString.TO_BOOLEAN);
 	}
 
 	void clearHandler() {
@@ -48,8 +49,8 @@ public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends Att
 	@Override
 	public void setEnabled(boolean enabled) {
 		// Invert because of the attribute name in CSS
-		// setValue(enabled ? null : Boolean.TRUE);
-
+		setValue(enabled ? null : Boolean.TRUE);
+/*
 		// Test ideas to remove bellow
 		if (!uiObject.isAttached() && handler == null)
 			handler = uiObject.addAttachHandler(event -> {
@@ -58,6 +59,7 @@ public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends Att
 			});
 		else
 			setEnabled(enabled ? null : Boolean.TRUE, uiObject);
+*/			
 	}
 
 	protected final void setEnabled(final boolean enabled, final MaterialUIObject uiObject) {
@@ -75,6 +77,6 @@ public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends Att
 	@Override
 	public boolean isEnabled() {
 		// Invert because of the attribute name in CSS
-		return getValue() == null ? Boolean.TRUE : Boolean.FALSE;
+		return !getValue();
 	}
 }

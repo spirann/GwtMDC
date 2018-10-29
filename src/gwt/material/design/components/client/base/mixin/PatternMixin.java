@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasPattern;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
@@ -30,7 +31,7 @@ import gwt.material.design.components.client.constants.CssAttribute;
 public class PatternMixin<UIO extends MaterialUIObject & HasPattern> extends AttributeMixin<UIO, String> implements HasPattern {
 
 	public PatternMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.PATTERN);
+		super(uiObject, CssAttribute.PATTERN, FromString.TO_STRING);
 	}
 
 	@Override

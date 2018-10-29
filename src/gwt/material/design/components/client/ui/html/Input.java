@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.html;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasName;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.InputTypeMixin;
@@ -36,7 +37,7 @@ import gwt.material.design.components.client.constants.InputType;
 public class Input extends MaterialWidget implements HasType<InputType>, HasName {
 
 	protected final InputTypeMixin<Input> inputTypeMixin = new InputTypeMixin<Input>(this);
-	protected final AttributeMixin<Input, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME);
+	protected final AttributeMixin<Input, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME, FromString.TO_STRING);
 
 	public Input() {
 		super(HtmlElements.INPUT.createElement());

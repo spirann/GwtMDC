@@ -23,6 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasDiscrete;
 import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
 import gwt.material.design.components.client.base.interfaces.HasMarkers;
@@ -66,15 +67,15 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	// Mixins
 	// /////////////////////////////////////////////////////////////
 	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMIN, 0.0);
+			CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
 	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUENOW, 5.0);
+			CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
 	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMAX, 10.0);
+			CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
 	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this,
-			CssAttribute.DATA_STEP, 1.0);
+			CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
 	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_DISABLED);
+			CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
 	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_SLIDER__DISCRETE);
 	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this,

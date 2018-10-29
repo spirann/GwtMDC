@@ -32,7 +32,7 @@ public class StateMixin<UIO extends MaterialUIObject & HasState> extends Attribu
 		implements HasState {
 
 	public StateMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.STATE);
+		super(uiObject, CssAttribute.STATE, (value) -> State.fromStyleName(value));
 	}
 
 	@Override

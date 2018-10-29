@@ -26,10 +26,12 @@ import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasSelected;
 import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.events.SelectionEvent;
@@ -46,13 +48,11 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
 public class MaterialSelectedField extends MaterialWidget implements HasSelected, HasSelectionHandlers<Boolean> {
 
 	private static final String DEFAULT_CSS_CLASS = "selected";
-	protected final AttributeMixin<MaterialWidget, Boolean> selectMixin = new AttributeMixin<>(this,
-			CssAttribute.SELECTED, false);
-	protected AttributeMixin<Input, Boolean> checkedMixin;
+	protected final AttributeMixin<MaterialWidget, Boolean> selectMixin = new AttributeMixin<>(this, CssAttribute.SELECTED, false, FromString.TO_BOOLEAN);
+	protected PropertyMixin<Input, Boolean> checkedMixin;
 	protected ToggleStyleMixin<MaterialWidget> selectedMixin;
 	protected boolean fireChangeOnClick = false;
-
-	private boolean valueChangeHandlerInitialized = false;
+	protected boolean valueChangeHandlerInitialized = false;
 
 	public MaterialSelectedField(final Element element, final String... initialClasses) {
 		super(element, initialClasses);
@@ -60,35 +60,36 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 
 	public MaterialSelectedField(final String... initialClasses) {
-		this(HtmlElements.DIV.createElement(), initialClasses);
+		super(HtmlElements.DIV.createElement(), initialClasses);
 	}
 
-	protected void initializeSelectedMixin(final MaterialWidget widget, final String cssClass, final Input checkedInput) {
+	protected final void initializeSelectedMixin(final MaterialWidget widget, final String cssClass, final Input checkedInput) {
+
 		selectedMixin = new ToggleStyleMixin<>(widget, cssClass);
 		if (checkedInput == null)
 			checkedMixin = null;
 		else
-			checkedMixin = new AttributeMixin<>(checkedInput, CssAttribute.CHECKED, false);
+			checkedMixin = new PropertyMixin<>(checkedInput, CssAttribute.CHECKED, false, FromString.TO_BOOLEAN);
 	}
 
-	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass) {
+	protected final void initializeSelectedMixin(MaterialWidget widget, String cssClass) {
 		initializeSelectedMixin(widget, cssClass, null);
 	}
 
-	protected void initializeSelectedMixin(String cssClass) {
+	protected final void initializeSelectedMixin(String cssClass) {
 		initializeSelectedMixin(this, cssClass, null);
 	}
 
-	protected void initializeSelectedMixin(Input checkedInput) {
+	protected final void initializeSelectedMixin(Input checkedInput) {
 		initializeSelectedMixin(this, DEFAULT_CSS_CLASS, checkedInput);
 	}
 
-	private void defaultSelectedMixin() {
-		selectedMixin = new ToggleStyleMixin<>(this, DEFAULT_CSS_CLASS);
+	protected final void initializeSelectedMixin() {
+		initializeSelectedMixin(this, DEFAULT_CSS_CLASS, null);
 	}
 
-	protected void initializeSelectedMixin() {
-		initializeSelectedMixin(this, DEFAULT_CSS_CLASS, null);
+	private final void defaultSelectedMixin() {
+		selectedMixin = new ToggleStyleMixin<>(this, DEFAULT_CSS_CLASS);
 	}
 
 	@Override
@@ -99,8 +100,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 
 	protected void fireAutoSelect(ClickEvent event) {
 
-		if (fireChangeOnClick && (event.getSource() == null || event.getSource() == this
-				|| !(event.getSource() instanceof HasSelectionHandlers)))
+		if (fireChangeOnClick && (event.getSource() == null || event.getSource() == this || !(event.getSource() instanceof HasSelectionHandlers)))
 			TimerHelper.schedule(1, () -> fireChangeEvent());
 
 		JsHelper.clearFocus();
@@ -145,22 +145,18 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 
 	@Override
-	public void setSelected(boolean selected, boolean fireEvents) {
-
+	public void setSelected(boolean selected, boolean fireEvents) {		
 		if (checkedMixin != null)
 			checkedMixin.setValue(selected);
 
 		getSelectedMixin().toggle(selected);
 
-		if (selected)
-			selectMixin.setValue(selected);
-		else
-			selectMixin.setValue(null);
+		selectMixin.setValue(selected);
 
 		if (fireEvents)
 			fireChangeEvent();
 	}
-
+	
 	@Override
 	public boolean isSelected() {
 		return checkedMixin == null ? getSelectedMixin().isApplied() : checkedMixin.getValue();

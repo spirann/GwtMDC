@@ -24,6 +24,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
@@ -87,13 +88,13 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
 	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input,
-			CssAttribute.REQUIRED);
+			CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
 	protected final AttributeMixin<MaterialWidget, Integer> minLengthMixin = new AttributeMixin<>(input,
-			CssAttribute.MIN_LENGTH, 0);
+			CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
 	protected final AttributeMixin<MaterialWidget, Integer> maxLengthMixin = new AttributeMixin<>(input,
-			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE);
+			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
 	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input,
-			CssAttribute.READONLY, false);
+			CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
 	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_TEXT_FIELD__DENSE);
 	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this,

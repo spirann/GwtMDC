@@ -70,6 +70,7 @@ import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.user.client.ui.WidgetCollection;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasAlt;
 import gwt.material.design.components.client.base.interfaces.HasAriaControls;
 import gwt.material.design.components.client.base.interfaces.HasAriaDescribedBy;
@@ -93,7 +94,6 @@ import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
-import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.TooltipMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
@@ -122,10 +122,9 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends MaterialUIObject implements HasId, HasInitialClasses, HasEnabled,
-		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation,
-		HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected,
-		HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
+public class MaterialWidget extends MaterialUIObject
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl,
+		HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -168,7 +167,6 @@ public class MaterialWidget extends MaterialUIObject implements HasId, HasInitia
 	// /////////////////////////////////////////////////////////////
 	// Mixin list
 	// /////////////////////////////////////////////////////////////
-	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
@@ -176,23 +174,17 @@ public class MaterialWidget extends MaterialUIObject implements HasId, HasInitia
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 	protected final TooltipMixin<MaterialWidget> tooltipMixin = new TooltipMixin<>(this);
-	protected final AttributeMixin<MaterialWidget, Role> roleMixin = new AttributeMixin<>(this, CssAttribute.ROLE);
-	protected final AttributeMixin<MaterialWidget, String> rtlMixin = new AttributeMixin<>(this, CssAttribute.DIR);
-	protected final AttributeMixin<MaterialWidget, String> altMixin = new AttributeMixin<>(this, CssAttribute.ALT);
-	protected final AttributeMixin<MaterialWidget, String> ariaLabelMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_LABEL);
-	protected final AttributeMixin<MaterialWidget, String> ariaControlsMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_CONTROLS);
-	protected final AttributeMixin<MaterialWidget, String> ariaDescribedByMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_DESCRIBEDBY);
-	protected final AttributeMixin<MaterialWidget, Boolean> ariaSelectedMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_SELECTED, false);
-	protected final AttributeMixin<MaterialWidget, Boolean> ariaModalMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_MODAL, false);
-	protected final AttributeMixin<MaterialWidget, String> ariaLabelledByMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_LABELLEDBY);
-	protected final AttributeMixin<MaterialWidget, Integer> tabindexMixin = new AttributeMixin<>(this,
-			CssAttribute.TABINDEX);
+	protected final AttributeMixin<MaterialWidget, Role> roleMixin = new AttributeMixin<>(this, CssAttribute.ROLE, value -> Role.fromStyleName(value));
+	protected final AttributeMixin<MaterialWidget, String> idMixin = new AttributeMixin<>(this, CssAttribute.ID, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, String> rtlMixin = new AttributeMixin<>(this, CssAttribute.DIR, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, String> altMixin = new AttributeMixin<>(this, CssAttribute.ALT, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, String> ariaLabelMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LABEL, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, String> ariaControlsMixin = new AttributeMixin<>(this, CssAttribute.ARIA_CONTROLS, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, String> ariaDescribedByMixin = new AttributeMixin<>(this, CssAttribute.ARIA_DESCRIBEDBY, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, Boolean> ariaSelectedMixin = new AttributeMixin<>(this, CssAttribute.ARIA_SELECTED, false, FromString.TO_BOOLEAN);
+	protected final AttributeMixin<MaterialWidget, Boolean> ariaModalMixin = new AttributeMixin<>(this, CssAttribute.ARIA_MODAL, false, FromString.TO_BOOLEAN);
+	protected final AttributeMixin<MaterialWidget, String> ariaLabelledByMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LABELLEDBY, FromString.TO_STRING);
+	protected final AttributeMixin<MaterialWidget, Integer> tabindexMixin = new AttributeMixin<>(this, CssAttribute.TABINDEX, FromString.TO_INTEGER);
 
 	private String[] initialClasses;
 
@@ -290,8 +282,7 @@ public class MaterialWidget extends MaterialUIObject implements HasId, HasInitia
 	}-*/;
 
 	@Override
-	protected void insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex,
-			boolean domInsert) {
+	protected void insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex, boolean domInsert) {
 		if (!isAttached()) {
 			if (onLoadAdd == null)
 				onLoadAdd = new ArrayList<>();
@@ -598,12 +589,12 @@ public class MaterialWidget extends MaterialUIObject implements HasId, HasInitia
 
 	@Override
 	public void setId(String id) {
-		idMixin.setId(id);
+		idMixin.setValue(id);
 	}
 
 	@Override
 	public String getId() {
-		return idMixin.getId();
+		return idMixin.getValue();
 	}
 
 	@Override

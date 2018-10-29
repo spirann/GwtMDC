@@ -32,7 +32,7 @@ public class InputTypeMixin<UIO extends MaterialUIObject & HasType<InputType>> e
 		implements HasType<InputType> {
 
 	public InputTypeMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.TYPE);
+		super(uiObject, CssAttribute.TYPE, (value) -> InputType.fromStyleName(value));
 	}
 
 	@Override

@@ -37,7 +37,7 @@ public class AutoInitDataMixin<UIO extends MaterialUIObject & HasAutoInitData> e
 	private HandlerRegistration handler;
 
 	public AutoInitDataMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.DATA_MDC_AUTO_INIT);
+		super(uiObject, CssAttribute.DATA_MDC_AUTO_INIT, (value) -> AutoInitData.fromStyleName(value));
 	}
 
 	void init() {
