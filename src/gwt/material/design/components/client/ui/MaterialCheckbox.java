@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -28,6 +29,7 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -64,7 +66,6 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	public MaterialCheckbox() {
 		super(CssName.MDC_FORM_FIELD);
 		super.initializeSelectedMixin(checkbox, CssName.MDC_CHECKBOX__SELECTED, input);
-		getElement();
 	}
 
 	@Override
@@ -75,10 +76,15 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 		element.input = new $wnd.mdc.checkbox.MDCCheckbox(checkbox_element);
 		return element;
 	}-*/;
+	
+	@Override
+	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass, Input checkedInput) {
+		GWT.log(input + " -- checkedInput: " + checkedInput);
+		super.initializeSelectedMixin(widget, cssClass, input);
+	}
 
 	@Override
 	protected void onInitialize() {
-
 		label.setFor(input.getId());
 
 		setCircle(true);

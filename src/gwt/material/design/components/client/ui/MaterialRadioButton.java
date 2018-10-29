@@ -52,26 +52,23 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	protected final static Map<String, MaterialRadioButton> history = new HashMap<>();
 
 	protected void updateHistory() {
-		if (isSelected()) {
+		if (isSelected())
 			putInHistory(true);
-		} else {
+		else
 			removeFromHistory();
-		}
 	}
-	
+
 	protected void putInHistory(final boolean fireEvent) {
 		final MaterialRadioButton old = history.get(getName());
-		if (fireEvent && old != null && old != this) {
+		if (fireEvent && old != null && old != this)
 			old.fireChangeEvent();
-		}
 		history.put(getName(), this);
 	}
 
 	protected void removeFromHistory() {
 		final MaterialRadioButton old = history.get(getName());
-		if (old == this) {
+		if (old == this)
 			history.remove(getName());
-		}
 	}
 
 	// /////////////////////////////////////////////////////////////
@@ -88,19 +85,19 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 		super(CssName.MDC_FORM_FIELD);
 		super.initializeSelectedMixin(radio, CssName.MDC_RADIO__SELECTED, input);
 	}
-	
+
 	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{		
-		var _this = this;			
-		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;		
-		var radio_element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();	
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		var _this = this;
+		var radio = this.@gwt.material.design.components.client.ui.MaterialRadioButton::radio;
+		var radio_element = radio.@gwt.material.design.components.client.ui.html.Div::getElement()();
 		return new $wnd.mdc.radio.MDCRadio(radio_element);
 	}-*/;
 
 	@Override
 	protected void onInitialize() {
 		label.setFor(input.getId());
-		
+
 		divBackground.add(divOuterCircle);
 		divBackground.add(divInnerCircle);
 
@@ -110,15 +107,14 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 		add(radio);
 		add(label);
 
-		if (isSelected()) {
+		if (isSelected()) 
 			updateHistory();
-		}
-
+		
 		setCircle(true);
 
 		super.onInitialize();
 	}
-	
+
 	@Override
 	protected void fireChangeEvent() {
 		updateHistory();
@@ -169,11 +165,11 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return radio.addClickHandler(handler);
 	}
-	
+
 	public void setSelectedColor(final Color color) {
 		setCssProperty(CssMixin.MDC_RADIO_BUTTON__CHECKED_COLOR, color.getCssName());
 	}
-	
+
 	public void setUnselectedColor(final Color color) {
 		setCssProperty(CssMixin.MDC_RADIO_BUTTON__UNCHECKED_COLOR, color.getCssName());
 	}

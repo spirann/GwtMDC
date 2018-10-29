@@ -63,7 +63,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		this(HtmlElements.DIV.createElement(), initialClasses);
 	}
 
-	protected void initializeSelectedMixin(MaterialWidget widget, String cssClass, Input checkedInput) {
+	protected void initializeSelectedMixin(final MaterialWidget widget, final String cssClass, final Input checkedInput) {
 		selectedMixin = new ToggleStyleMixin<>(widget, cssClass);
 		if (checkedInput == null)
 			checkedMixin = null;
