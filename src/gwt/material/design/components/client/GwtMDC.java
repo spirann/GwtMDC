@@ -51,7 +51,7 @@ public class GwtMDC implements EntryPoint {
 		// ///////////////////////////////////////////////////////////////
 		// Configure background
 		// ///////////////////////////////////////////////////////////////
-		StyleHelper.setStyleProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");
+		StyleHelper.setCssProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");
 
 		// ///////////////////////////////////////////////////////////////
 		// Apply default theme

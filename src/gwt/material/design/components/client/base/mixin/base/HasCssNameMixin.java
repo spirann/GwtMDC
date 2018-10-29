@@ -17,40 +17,35 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.mixin;
+package gwt.material.design.components.client.base.mixin.base;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.dom.client.Style;
+
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * @author Richeli Vargas
  */
-public class StyleMixin<H extends Widget> extends AbstractMixin<H> {
+public abstract class HasCssNameMixin<UIO extends MaterialUIObject, S extends Style.HasCssName> extends AbstractMixin<UIO> {
 
-	private String style;
-	
-	public StyleMixin(final H widget) {
+	private S hasCssName;
+
+	protected HasCssNameMixin(final UIO widget) {
 		super(widget);
 	}
 
-	public void setStyle(String styles) {
+	protected void setHasCssName(S hasCssName) {
 
-		if (this.style != null && !this.style.isEmpty()) {
-			for (String style : this.style.split(" ")) {
-				uiObject.removeStyleName(style);
-			}
-		}
-		
-		this.style = styles;
+		if (this.hasCssName != null)
+			StyleHelper.removeStyle(uiObject, this.hasCssName);
 
-		if (styles != null && !styles.isEmpty()) {
-			for (String style : styles.split(" ")) {
-				uiObject.addStyleName(style);
-			}
-		}
-		
+		this.hasCssName = hasCssName;
+		StyleHelper.addStyle(uiObject, hasCssName);
+
 	}
 
-	public String getStyle() {
-		return style;
+	protected S getHasCssName() {
+		return hasCssName;
 	}
 }

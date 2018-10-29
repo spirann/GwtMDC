@@ -289,29 +289,29 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	}
 	
 	public void setHeaderBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__HEADER_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__HEADER_FILL_COLOR, color.getCssName());
 	}
 
 	public void setHeaderTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__HEADER_INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__HEADER_INK_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__BODY_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__BODY_FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__BODY_INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__BODY_INK_COLOR, color.getCssName());
 	}
 
 	public void setFooterBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_FILL_COLOR, color.getCssName());
-		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_RAISED_INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__ACTION_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__ACTION_RAISED_INK_COLOR, color.getCssName());
 	}
 
 	public void setFooterTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DIALOG__ACTION_INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DIALOG__ACTION_INK_COLOR, color.getCssName());
 	}
 }

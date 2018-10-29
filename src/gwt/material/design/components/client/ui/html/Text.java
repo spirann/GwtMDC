@@ -23,10 +23,11 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasTypography;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HasFor;
 import gwt.material.design.components.client.constants.Typography;
 
@@ -39,7 +40,7 @@ public class Text extends MaterialWidget implements HasText, HasTypography, HasF
 
 	protected final TextMixin<Text> textMixin = new TextMixin<>(this);
 	protected final TypeMixin<Text, Typography> typographiMixin = new TypeMixin<>(this);
-	protected final AttributeMixin<Text> forMixin = new AttributeMixin<>(this, "for");
+	protected final AttributeMixin<Text, String> forMixin = new AttributeMixin<>(this, CssAttribute.FOR);
 
 	protected Text(Element element) {
 		super(element);
@@ -71,6 +72,6 @@ public class Text extends MaterialWidget implements HasText, HasTypography, HasF
 
 	@Override
 	public void setFor(String elementId) {
-		forMixin.setAttribute(elementId);
+		forMixin.setValue(elementId);
 	}
 }

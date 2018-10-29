@@ -90,17 +90,17 @@ import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasRtl;
 import gwt.material.design.components.client.base.interfaces.HasTabindex;
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
 import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.IdMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
-import gwt.material.design.components.client.base.mixin.RoleMixin;
 import gwt.material.design.components.client.base.mixin.TooltipMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.constants.AutoInitData;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.Elevation;
 import gwt.material.design.components.client.constants.HideOn;
 import gwt.material.design.components.client.constants.Role;
@@ -122,10 +122,10 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  *
  */
 @SuppressWarnings("deprecation")
-public class MaterialWidget extends BaseWidget implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers,
-		HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl, HasHideOn, HasAlt,
-		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal,
-		HasAriaLabelledBy, HasTooltip, HasDataObject {
+public class MaterialWidget extends MaterialUIObject implements HasId, HasInitialClasses, HasEnabled,
+		HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation,
+		HasRtl, HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected,
+		HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -170,25 +170,29 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	// /////////////////////////////////////////////////////////////
 	protected final IdMixin<MaterialWidget> idMixin = new IdMixin<>(this);
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
-	// protected final ActiveMixin<MaterialWidget> activeMixin = new
-	// ActiveMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
-	protected final RoleMixin<MaterialWidget> roleMixin = new RoleMixin<>(this);
-	protected final AttributeMixin<MaterialWidget> rtlMixin = new AttributeMixin<>(this, "dir");
-	protected final AttributeMixin<MaterialWidget> altMixin = new AttributeMixin<>(this, "alt");
-	protected final AttributeMixin<MaterialWidget> ariaLabelMixin = new AttributeMixin<>(this, "aria-label");
-	protected final AttributeMixin<MaterialWidget> ariaControlsMixin = new AttributeMixin<>(this, "aria-controls");
-	protected final AttributeMixin<MaterialWidget> ariaDescribedByMixin = new AttributeMixin<>(this,
-			"aria-describedby");
-	protected final AttributeMixin<MaterialWidget> ariaSelectedMixin = new AttributeMixin<>(this, "aria-selected");
-	protected final AttributeMixin<MaterialWidget> ariaModalMixin = new AttributeMixin<>(this, "aria-modal");
-	protected final AttributeMixin<MaterialWidget> ariaLabelledByMixin = new AttributeMixin<>(this, "aria-labelledby");
-	protected final AttributeMixin<MaterialWidget> tabindexMixin = new AttributeMixin<>(this, "tabindex");
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
 	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 	protected final TooltipMixin<MaterialWidget> tooltipMixin = new TooltipMixin<>(this);
+	protected final AttributeMixin<MaterialWidget, Role> roleMixin = new AttributeMixin<>(this, CssAttribute.ROLE);
+	protected final AttributeMixin<MaterialWidget, String> rtlMixin = new AttributeMixin<>(this, CssAttribute.DIR);
+	protected final AttributeMixin<MaterialWidget, String> altMixin = new AttributeMixin<>(this, CssAttribute.ALT);
+	protected final AttributeMixin<MaterialWidget, String> ariaLabelMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_LABEL);
+	protected final AttributeMixin<MaterialWidget, String> ariaControlsMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_CONTROLS);
+	protected final AttributeMixin<MaterialWidget, String> ariaDescribedByMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_DESCRIBEDBY);
+	protected final AttributeMixin<MaterialWidget, Boolean> ariaSelectedMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_SELECTED, false);
+	protected final AttributeMixin<MaterialWidget, Boolean> ariaModalMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_MODAL, false);
+	protected final AttributeMixin<MaterialWidget, String> ariaLabelledByMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_LABELLEDBY);
+	protected final AttributeMixin<MaterialWidget, Integer> tabindexMixin = new AttributeMixin<>(this,
+			CssAttribute.TABINDEX);
 
 	private String[] initialClasses;
 
@@ -196,13 +200,9 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	protected boolean initialized = false;
 
-	public MaterialWidget() {
-		setId(IdHelper.createUniqueUiId());
-	}
-
 	public MaterialWidget(Element element) {
-		this();
-		setElement(element);
+		super(element);
+		setId(IdHelper.createUniqueUiId());
 	}
 
 	public MaterialWidget(Element element, String... initialClass) {
@@ -238,15 +238,14 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 		if (onLoadAdd != null) {
 			// Check the onLoadAdd items.
 			for (Appender item : onLoadAdd) {
-				if (item.index == Appender.SEQUENTIAL) {
+				if (item.index == Appender.SEQUENTIAL)
 					add(item.widget, getElement());
-				} else if (item.index == Appender.START) {
+				else if (item.index == Appender.START)
 					insert(item.widget, 0);
-				} else if (item.index == Appender.END) {
+				else if (item.index == Appender.END)
 					insert(item.widget, getWidgetCount());
-				} else {
+				else
 					insert(item.widget, item.index);
-				}
 			}
 			onLoadAdd.clear();
 		}
@@ -277,27 +276,11 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	protected void add(Widget child, com.google.gwt.user.client.Element container) {
 		if (!isAttached()) {
-			if (onLoadAdd == null) {
+			if (onLoadAdd == null)
 				onLoadAdd = new ArrayList<>();
-			}
 			onLoadAdd.add(new Appender(child));
 		} else {
-
-			// Detach new child.
-			child.removeFromParent();
-
-			// Logical attach.
-			getChildren().add(child);
-
-			// Physical attach.
-			// DOM.appendChild(container, child.getElement());
-
-			getElement().appendChild(resolve(child.getElement()));
-			// getElement().appendChild(child.getElement());
-
-			// Adopt.
-			adopt(child);
-
+			super.add(child, container);
 		}
 	}
 
@@ -310,19 +293,19 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	protected void insert(Widget child, com.google.gwt.user.client.Element container, int beforeIndex,
 			boolean domInsert) {
 		if (!isAttached()) {
-			if (onLoadAdd == null) {
+			if (onLoadAdd == null)
 				onLoadAdd = new ArrayList<>();
-			}
+
 			onLoadAdd.add(new Appender(child, beforeIndex));
 		} else {
 			// Regular child addition
-			if (beforeIndex == Appender.START) {
+			if (beforeIndex == Appender.START)
 				beforeIndex = 0;
-			} else if (beforeIndex == Appender.END) {
+			else if (beforeIndex == Appender.END)
 				beforeIndex = getWidgetCount();
-			} else if (beforeIndex == Appender.SEQUENTIAL) {
+			else if (beforeIndex == Appender.SEQUENTIAL)
 				beforeIndex = getWidgetCount();
-			}
+
 			super.insert(child, container, beforeIndex, domInsert);
 		}
 	}
@@ -372,9 +355,8 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	public List<Widget> getChildrenList() {
 		final List<Widget> children = new ArrayList<>();
-		for (int i = 0; i < getWidgetCount(); i++) {
+		for (int i = 0; i < getWidgetCount(); i++)
 			children.add(getWidget(i));
-		}
 		return children;
 	}
 
@@ -383,99 +365,88 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public HandlerRegistration addClickHandler(final ClickHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onClick(event);
-			}
 		}, ClickEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseDownHandler(final MouseDownHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseDown(event);
-			}
 		}, MouseDownEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseMoveHandler(final MouseMoveHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseMove(event);
-			}
 		}, MouseMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseOutHandler(final MouseOutHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseOut(event);
-			}
 		}, MouseOutEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseOverHandler(final MouseOverHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseOver(event);
-			}
 		}, MouseOverEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseUpHandler(final MouseUpHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseUp(event);
-			}
 		}, MouseUpEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addMouseWheelHandler(final MouseWheelHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onMouseWheel(event);
-			}
 		}, MouseWheelEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDoubleClickHandler(final DoubleClickHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDoubleClick(event);
-			}
 		}, DoubleClickEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragStartHandler(DragStartEvent.DragStartHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragStart(event);
-			}
 		}, DragStartEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragMoveHandler(DragMoveEvent.DragMoveHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragMove(event);
-			}
 		}, DragMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragEndHandler(DragEndEvent.DragEndHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragEnd(event);
-			}
 		}, DragEndEvent.getType());
 	}
 
@@ -491,153 +462,137 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public HandlerRegistration addDragEnterHandler(DragEnterEvent.DragEnterHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragEnter(event);
-			}
 		}, DragEnterEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragLeaveHandler(DragLeaveEvent.DragLeaveHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragLeave(event);
-			}
 		}, DragLeaveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDragOverHandler(final DragOverEvent.DragOverHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDragOver(event);
-			}
 		}, DragOverEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDropDeactivateHandler(DropDeactivateEvent.DropDeactivateHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDropDeactivate(event);
-			}
 		}, DropDeactivateEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addDropHandler(DropEvent.DropHandler handler) {
 		return addHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onDrop(event);
-			}
 		}, DropEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchCancelHandler(TouchCancelHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onTouchCancel(event);
-			}
 		}, TouchCancelEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchEndHandler(TouchEndHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onTouchEnd(event);
-			}
 		}, TouchEndEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchMoveHandler(TouchMoveHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onTouchMove(event);
-			}
 		}, TouchMoveEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addTouchStartHandler(TouchStartHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onTouchStart(event);
-			}
 		}, TouchStartEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureChangeHandler(GestureChangeHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onGestureChange(event);
-			}
 		}, GestureChangeEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureEndHandler(GestureEndHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onGestureEnd(event);
-			}
 		}, GestureEndEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addGestureStartHandler(GestureStartHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onGestureStart(event);
-			}
 		}, GestureStartEvent.getType());
+
 	}
 
 	@Override
 	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onKeyDown(event);
-			}
 		}, KeyDownEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onKeyPress(event);
-			}
 		}, KeyPressEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onKeyUp(event);
-			}
 		}, KeyUpEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addBlurHandler(BlurHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onBlur(event);
-			}
 		}, BlurEvent.getType());
 	}
 
 	@Override
 	public HandlerRegistration addFocusHandler(FocusHandler handler) {
 		return addDomHandler(event -> {
-			if (isEnabled()) {
+			if (isEnabled())
 				handler.onFocus(event);
-			}
 		}, FocusEvent.getType());
 	}
 
@@ -664,17 +619,17 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	@Override
 	public void setRtl(boolean rtl) {
 		if (rtl) {
-			rtlMixin.setAttribute("rtl");
-			setStyleProperty("direction", "rtl");
+			rtlMixin.setValue("rtl");
+			setCssProperty("direction", "rtl");
 		} else {
-			rtlMixin.setAttribute(null);
-			setStyleProperty("direction", "ltr");
+			rtlMixin.setValue(null);
+			setCssProperty("direction", "ltr");
 		}
 	}
 
 	@Override
 	public boolean isRtl() {
-		return rtlMixin.getAttribute() != null;
+		return rtlMixin.getValue() != null;
 	}
 
 	@Override
@@ -689,12 +644,12 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	@Override
 	public void setRole(Role role) {
-		roleMixin.setRole(role);
+		roleMixin.setValue(role);
 	}
 
 	@Override
 	public Role getRole() {
-		return roleMixin.getRole();
+		return roleMixin.getValue();
 	}
 
 	@Override
@@ -734,82 +689,82 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 
 	@Override
 	public void setAriaLabel(String ariaLabel) {
-		ariaLabelMixin.setAttribute(ariaLabel);
+		ariaLabelMixin.setValue(ariaLabel);
 	}
 
 	@Override
 	public String getAriaLabel() {
-		return ariaLabelMixin.getAttribute();
+		return ariaLabelMixin.getValue();
 	}
 
 	@Override
 	public void setAriaControls(String target) {
-		ariaControlsMixin.setAttribute(target);
+		ariaControlsMixin.setValue(target);
 	}
 
 	@Override
 	public String getAriaControls() {
-		return ariaControlsMixin.getAttribute();
+		return ariaControlsMixin.getValue();
 	}
 
 	@Override
 	public void setAriaDescribedBy(String target) {
-		ariaDescribedByMixin.setAttribute(target);
+		ariaDescribedByMixin.setValue(target);
 	}
 
 	@Override
 	public String getAriaDescribedBy() {
-		return ariaDescribedByMixin.getAttribute();
+		return ariaDescribedByMixin.getValue();
 	}
 
 	@Override
 	public void setAlt(String alt) {
-		altMixin.setAttribute(alt);
+		altMixin.setValue(alt);
 	}
 
 	@Override
 	public String getAlt() {
-		return altMixin.getAttribute();
+		return altMixin.getValue();
 	}
 
 	@Override
 	public void setTabindex(int tabindex) {
-		tabindexMixin.setAttribute(tabindex);
+		tabindexMixin.setValue(tabindex);
 	}
 
 	@Override
 	public int getTabindex() {
-		return tabindexMixin.getAttributeAsInteger();
+		return tabindexMixin.getValue();
 	}
 
 	@Override
 	public void setAriaSelected(boolean selected) {
-		ariaSelectedMixin.setAttribute(selected);
+		ariaSelectedMixin.setValue(selected);
 	}
 
 	@Override
 	public boolean isAreaSelected() {
-		return ariaSelectedMixin.getAttributeAsBoolean();
+		return ariaSelectedMixin.getValue();
 	}
 
 	@Override
 	public void setAriaModal(boolean modal) {
-		ariaModalMixin.setAttribute(modal);
+		ariaModalMixin.setValue(modal);
 	}
 
 	@Override
 	public boolean isAreaModal() {
-		return ariaModalMixin.getAttributeAsBoolean();
+		return ariaModalMixin.getValue();
 	}
 
 	@Override
 	public void setAriaLabelledBy(String labelledby) {
-		ariaLabelledByMixin.setAttribute(labelledby);
+		ariaLabelledByMixin.setValue(labelledby);
 	}
 
 	@Override
 	public String getAriaLabelledBy() {
-		return ariaLabelledByMixin.getAttribute();
+		return ariaLabelledByMixin.getValue();
 	}
 
 	@Override
@@ -821,7 +776,7 @@ public class MaterialWidget extends BaseWidget implements HasId, HasInitialClass
 	public String getTooltip() {
 		return tooltipMixin.getTooltip();
 	}
-	
+
 	public TooltipPosition getTooltipPosition() {
 		return tooltipMixin.getTooltipPosition();
 	}

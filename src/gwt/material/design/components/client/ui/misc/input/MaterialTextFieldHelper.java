@@ -23,8 +23,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.interfaces.HasHelperText;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.P;
 
@@ -35,14 +36,13 @@ import gwt.material.design.components.client.ui.html.P;
  */
 public class MaterialTextFieldHelper extends P implements HasHelperText {
 
-	protected final ApplyStyleMixin<MaterialTextFieldHelper> helpPersistentMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialTextFieldHelper> helpPersistentMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_TEXT_FIELD__HELPER_TEXT_PERSISTENT);
-	
-	protected final ApplyStyleMixin<MaterialTextFieldHelper> helpValidationMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialTextFieldHelper> helpValidationMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_TEXT_FIELD__HELPER_TEXT_VALIDATION_MSG);
-	
-	protected final AttributeMixin<MaterialTextFieldHelper> ariaHiddenMixin = new AttributeMixin<>(this, "aria-hidden", "true");
-	
+	protected final AttributeMixin<MaterialTextFieldHelper, Boolean> ariaHiddenMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_HIDDEN, true);
+
 	public MaterialTextFieldHelper() {
 		super(CssName.MDC_TEXT_FIELD__HELPER_TEXT);
 	}
@@ -64,7 +64,7 @@ public class MaterialTextFieldHelper extends P implements HasHelperText {
 
 	@Override
 	public void setHelperTextPersistent(boolean persistent) {
-		helpPersistentMixin.setApply(persistent);
+		helpPersistentMixin.toggle(persistent);
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class MaterialTextFieldHelper extends P implements HasHelperText {
 
 	@Override
 	public void setHelperTextValidation(boolean validation) {
-		helpValidationMixin.setApply(validation);
+		helpValidationMixin.toggle(validation);
 	}
 
 	@Override

@@ -19,36 +19,30 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasState;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.State;
 
 /**
  * @author Richeli Vargas
  */
-public class StateMixin<T extends Widget & HasState> extends AbstractMixin<T> implements HasState {
+public class StateMixin<UIO extends MaterialUIObject & HasState> extends AttributeMixin<UIO, State>
+		implements HasState {
 
-	private State state;
-	
-	public StateMixin(final T uiObject) {
-		super(uiObject);
+	public StateMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.STATE);
 	}
-	
+
 	@Override
 	public void setState(State state) {
-		this.state = state;
-
-		uiObject.getElement().removeAttribute("state");
-
-		if (state != null && !state.getCssName().isEmpty()) {
-			uiObject.getElement().setAttribute("state", state.getCssName());
-		}
+		setValue(state);
 	}
 
 	@Override
 	public State getState() {
-		return state;
+		return getValue();
 	}
 
 }

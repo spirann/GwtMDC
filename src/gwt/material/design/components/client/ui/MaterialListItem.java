@@ -28,16 +28,18 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasHref;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Label;
 import gwt.material.design.components.client.ui.html.Span;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
@@ -46,17 +48,18 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialListItem extends MaterialSelectedField implements HasHref, HasText, HasIcon {
 
-	private MaterialIcon icon = new MaterialIcon(CssName.MDC_LIST_ITEM__GRAPHIC);
-	private MaterialImage avatar = new MaterialImage();
-	private Span textContent = new Span(CssName.MDC_LIST_ITEM__TEXT);
-	private Label primaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_PRIMARY_TEXT);
-	private Label secondaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_SECONDARY_TEXT);
+	private final MaterialIcon icon = new MaterialIcon(CssName.MDC_LIST_ITEM__GRAPHIC);
+	private final MaterialImage avatar = new MaterialImage();
+	private final Span textContent = new Span(CssName.MDC_LIST_ITEM__TEXT);
+	private final Label primaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_PRIMARY_TEXT);
+	private final Label secondaryText = new Label(CssName.MDC_LIST_ITEM__TEXT_SECONDARY_TEXT);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
 	private final HrefMixin<MaterialListItem> hrefMixin = new HrefMixin<>(this);
-	private final AttributeMixin<MaterialIcon> ariaHiddenMixin = new AttributeMixin<>(icon, "aria-hidden");
+	private final AttributeMixin<MaterialIcon, Boolean> ariaHiddenMixin = new AttributeMixin<>(icon,
+			CssAttribute.ARIA_HIDDEN, true);
 
 	private boolean initialized = false;
 
@@ -73,8 +76,6 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	protected void onInitialize() {
 
 		ripleMixin.initialize();
-
-		ariaHiddenMixin.setAttribute(true);
 
 		avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
 		avatar.setCircle(true);
@@ -139,7 +140,7 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	public void addEndDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM__META, Appender.END);
 		if (prevent) {
-			widget.getElement().setAttribute("prevent", "true");
+			StyleHelper.setAttribute(widget, CssAttribute.PREVENT, "true");
 			prevent(widget.getElement());
 		}
 	}
@@ -229,31 +230,31 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__PRIMARY_TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__PRIMARY_TEXT_COLOR, color.getCssName());
 	}
 
 	public void setSecondaryTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__SECONDARY_TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__SECONDARY_TEXT_COLOR, color.getCssName());
 	}
 
 	public void setGraphicColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__GRAPHIC_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__GRAPHIC_COLOR, color.getCssName());
 	}
 
 	public void setMetaColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__META_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__META_COLOR, color.getCssName());
 	}
 
 	public void setSelectedTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_PRIMARY_TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__SELECTED_PRIMARY_TEXT_COLOR, color.getCssName());
 	}
 
 	public void setSelectedGraphicColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_GRAPHIC_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__SELECTED_GRAPHIC_COLOR, color.getCssName());
 	}
 
 	public void setSelectedMetaColor(Color color) {
-		setStyleProperty(CssMixin.MDC_LIST_ITEM__SELECTED_META_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LIST_ITEM__SELECTED_META_COLOR, color.getCssName());
 	}
 
 	public void setIconColor(Color color) {

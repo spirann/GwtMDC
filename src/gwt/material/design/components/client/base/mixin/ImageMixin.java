@@ -20,44 +20,44 @@
 package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.resources.client.ImageResource;
-import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.interfaces.HasImage;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 
 /**
  * @author Richeli Vargas
  */
-public class ImageMixin<T extends UIObject & HasImage> extends AbstractMixin<T> implements HasImage {
+public class ImageMixin<UIO extends MaterialUIObject & HasImage> extends AttributeMixin<UIO, String> implements HasImage {
 
-	private String url = "";
 	private ImageResource resource;
 
-	public ImageMixin(final T widget) {
-		super(widget);
+	public ImageMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.SRC);
 	}
 
 	@Override
 	public void setUrl(String url) {
-		this.url = url;
-		uiObject.getElement().setAttribute("src", url);
+		setValue(url);
 	}
 
 	@Override
 	public String getUrl() {
-		return url;
+		return getValue();
 	}
 
 	/**
-	 * @param resource ImageResource
+	 * @param resource
+	 *            ImageResource
 	 */
 	@Override
 	public void setResource(ImageResource resource) {
 		this.resource = resource;
-		if(resource == null ) {
+		if (resource == null)
 			setUrl(null);
-		} else {
+		else
 			setUrl(resource.getSafeUri().asString());
-		}
 	}
 
 	@Override

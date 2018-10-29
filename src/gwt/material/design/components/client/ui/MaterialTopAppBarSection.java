@@ -62,6 +62,6 @@ public class MaterialTopAppBarSection extends Section implements HasAlign<TopApp
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
 }

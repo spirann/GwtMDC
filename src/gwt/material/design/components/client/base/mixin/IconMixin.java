@@ -19,10 +19,9 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasIcon;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
@@ -34,11 +33,11 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
  * @author Richeli Vargas
  *
  */
-public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements HasIcon {
+public class IconMixin<UIO extends MaterialUIObject> extends AbstractMixin<UIO> implements HasIcon {
 
 	private IconType iconType;
 
-	public IconMixin(final T uiObject) {
+	public IconMixin(final UIO uiObject) {
 		super(uiObject);
 	}
 
@@ -51,9 +50,9 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 	public void setIcon(IconType iconType) {
 		this.iconType = iconType;
 		if (iconType == null)
-			uiObject.getElement().setInnerHTML("");
+			uiObject.setInnerHTML("");
 		else
-			uiObject.getElement().setInnerHTML(iconType.getCssName());
+			uiObject.setInnerHTML(iconType.getCssName());
 	}
 
 	@Override
@@ -61,7 +60,7 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 		if (animate && getIcon() != null && uiObject.getElement().hasParentElement()) {
 			uiObject.addStyleName(CssName.MATERIAL_ICONS__CHANGE_ANIMATION);
 
-			final String animationDuration = StyleHelper.getComputedProperty(uiObject, "animation-duration")
+			final String animationDuration = StyleHelper.getCssProperty(uiObject, "animation-duration")
 					.replaceAll("[a-zA-Z]", "");
 
 			final int duration = (int) (Double.valueOf(animationDuration) * 1000);
@@ -78,10 +77,7 @@ public class IconMixin<T extends UIObject> extends AbstractMixin<T> implements H
 
 	@Override
 	public void setIconColor(Color color) {
-		if (uiObject instanceof MaterialWidget)
-			((MaterialWidget) uiObject).setColor(color);
-		else
-			StyleHelper.setStyleProperty(uiObject, "color", color.getCssName());
+		uiObject.setColor(color);
 	}
 
 }

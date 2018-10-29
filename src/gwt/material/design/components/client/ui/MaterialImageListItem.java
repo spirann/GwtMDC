@@ -18,12 +18,12 @@ import gwt.material.design.components.client.utils.helper.JsHelper;
 
 public class MaterialImageListItem extends Li implements HasImage, HasLabel, HasAspectRatio {
 
-	private Div imageContent = new Div();
-	private MaterialImage image;
-	private Div supportingDiv = new Div(CssName.MDC_IMAGE_LIST__SUPPORTING);
-	private Span label = new Span(CssName.MDC_IMAGE_LIST__LABEL);
-		
-	private final AspectRatioMixin<Div> aspectRatioMixin = new AspectRatioMixin<Div>(imageContent);
+	protected final Div imageContent = new Div();
+	protected final MaterialImage image = new MaterialImage();
+	protected final Div supportingDiv = new Div(CssName.MDC_IMAGE_LIST__SUPPORTING);
+	protected final Span label = new Span(CssName.MDC_IMAGE_LIST__LABEL);
+
+	protected final AspectRatioMixin<Div> aspectRatioMixin = new AspectRatioMixin<Div>(imageContent);
 
 	public MaterialImageListItem() {
 		super(CssName.MDC_IMAGE_LIST__ITEM);
@@ -37,7 +37,7 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 		add(supportingDiv);
 		addClickHandler(event -> JsHelper.clearFocus());
 	}
-	
+
 	@UiChild(tagname = "supporting")
 	public void addSupporting(final Widget widget) {
 		supportingDiv.add(widget);
@@ -45,19 +45,18 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 
 	protected void drawImage() {
 
-		image = new MaterialImage();
 		image.addStyleName(CssName.MDC_IMAGE_LIST__IMAGE);
-		
+
 		imageContent.clear();
 		imageContent.removeStyleName(CssName.MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER);
 
-		if (getAspectRatio() != null && !getAspectRatio().equals(AspectRatio.DEFAULT)) {			
+		if (getAspectRatio() != null && !getAspectRatio().equals(AspectRatio.DEFAULT))
 			imageContent.addStyleName(CssName.MDC_IMAGE_LIST__IMAGE_ASPECT_CONTAINER);
-		}
-				
-		imageContent.add(image);		
-		insert(imageContent, 0);
 		
+
+		imageContent.add(image);
+		insert(imageContent, 0);
+
 	}
 
 	@Override
@@ -85,12 +84,11 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 	@Override
 	public void setLabel(String label) {
 		this.label.setText(label);
-
-		if ((label == null || label.isEmpty()) && supportingDiv.getChildrenList().size() < 2) {
+		if ((label == null || label.isEmpty()) && supportingDiv.getChildrenList().size() < 2)
 			supportingDiv.setDisplay(Display.NONE);
-		} else {
+		else
 			supportingDiv.setDisplay(Display.FLEX);
-		}
+
 	}
 
 	@Override
@@ -101,10 +99,8 @@ public class MaterialImageListItem extends Li implements HasImage, HasLabel, Has
 	@Override
 	public void setAspectRatio(AspectRatio aspectRatio) {
 		aspectRatioMixin.setAspectRatio(aspectRatio);
-		
-		if (image != null) {
+		if (image != null)
 			setUrl(image.getUrl());
-		}
 	}
 
 	@Override

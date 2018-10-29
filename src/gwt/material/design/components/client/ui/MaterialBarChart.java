@@ -456,7 +456,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	}
 
 	public void setGridBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHARTIST__GRID_BACKGROUND, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHARTIST__GRID_BACKGROUND, color.getCssName());
 	}
 
 	// ////////////////////////////////////////////////////////////////////

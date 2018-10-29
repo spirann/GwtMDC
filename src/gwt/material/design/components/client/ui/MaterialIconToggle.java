@@ -25,9 +25,10 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
@@ -41,9 +42,12 @@ import gwt.material.design.components.client.constants.Role;
  */
 public class MaterialIconToggle extends MaterialSelectedField {
 
-	protected final AttributeMixin<MaterialIconToggle> toggleOnMixin = new AttributeMixin<>(this, "data-toggle-on");
-	protected final AttributeMixin<MaterialIconToggle> toggleOffMixin = new AttributeMixin<>(this, "data-toggle-off");
-	protected final AttributeMixin<MaterialIconToggle> ariaPressedMixin = new AttributeMixin<>(this, "aria-pressed");
+	protected final AttributeMixin<MaterialIconToggle, String> toggleOnMixin = new AttributeMixin<>(this,
+			CssAttribute.DATA_TOOGLE_ON);
+	protected final AttributeMixin<MaterialIconToggle, String> toggleOffMixin = new AttributeMixin<>(this,
+			CssAttribute.DATA_TOGGLE_OFF);
+	protected final AttributeMixin<MaterialIconToggle, Boolean> ariaPressedMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_PRESSED);
 
 	protected Color colorOn = Color.MDC_THEME_SECONDARY;
 	protected Color backgroundColorOn = Color.TRANSPARENT;
@@ -64,59 +68,56 @@ public class MaterialIconToggle extends MaterialSelectedField {
 		return new $wnd.mdc.iconToggle.MDCIconToggle(element);
 	}-*/;
 
-	
 	@Override
 	protected void onInitialize() {
 		ripleMixin.initialize();
 		initializeChageEventListener();
-		updateColor();		
+		updateColor();
 		super.onInitialize();
 	}
 
 	public native void initializeChageEventListener()/*-{
-		
 		var _this = this;
-		
 		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
-		
-		element.addEventListener('MDCIconToggle:change', function() {
+		var onChange = function() {
 			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
 			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
-		});
-		
+		};
+		element.addEventListener('MDCIconToggle:change', onChange);
+
 	}-*/;
 
 	public void setToggleOn(final IconType icon) {
-		toggleOnMixin.setAttribute("{\"content\": \"" + icon.getCssName() + "\"}");
+		toggleOnMixin.setValue("{\"content\": \"" + icon.getCssName() + "\"}");
 	}
 
 	public void setToggleOff(final IconType icon) {
-		toggleOffMixin.setAttribute("{\"content\": \"" + icon.getCssName() + "\"}");
+		toggleOffMixin.setValue("{\"content\": \"" + icon.getCssName() + "\"}");
 	}
 
 	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
 		return addDomHandler(handler, ChangeEvent.getType());
 	}
 
-	protected void updateColor() {		
+	protected void updateColor() {
 		if (isSelected()) {
-			setStyleProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOn.getCssName());
+			setCssProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOn.getCssName());
 			setBackgroundColor(backgroundColorOn);
 		} else {
-			setStyleProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOff.getCssName());
+			setCssProperty(CssMixin.MDC_ICON_TOGGLE__INK_COLOR, colorOff.getCssName());
 			setBackgroundColor(backgroundColorOff);
-		} 
+		}
 	}
-	
+
 	@Override
 	public void setSelected(boolean selected, boolean fireEvents) {
-		this.ariaPressedMixin.setAttribute(selected);
+		this.ariaPressedMixin.setValue(selected);
 		super.setSelected(selected, fireEvents);
 	}
-	
+
 	@Override
 	public boolean isSelected() {
-		return ariaPressedMixin.getAttributeAsBoolean();
+		return ariaPressedMixin.getValue();
 	}
 
 	public Color getColorOn() {

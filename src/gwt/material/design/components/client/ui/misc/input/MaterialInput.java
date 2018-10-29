@@ -37,16 +37,16 @@ import gwt.material.design.components.client.base.interfaces.HasTextFieldValidat
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.interfaces.HasUnbordered;
 import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.InputMaskMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
-import gwt.material.design.components.client.base.mixin.RequiredMixin;
 import gwt.material.design.components.client.base.mixin.StateMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
@@ -68,9 +68,9 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialInput extends MaterialValuedField<String>
-		implements HasText, HasLabel, HasDense, HasUnbordered, HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask,
-		HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
+public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered,
+		HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
+		HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -84,16 +84,20 @@ public class MaterialInput extends MaterialValuedField<String>
 	// /////////////////////////////////////////////////////////////
 	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
-	protected final RequiredMixin<MaterialWidget> requeridMixin = new RequiredMixin<>(input);
 	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
-	protected final AttributeMixin<MaterialWidget> minLengthMixin = new AttributeMixin<>(input, "minlength");
-	protected final AttributeMixin<MaterialWidget> maxLengthMixin = new AttributeMixin<>(input, "maxlength");
-	protected final AttributeMixin<MaterialWidget> readOnlyMixin = new AttributeMixin<>(input, "readonly");
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
-
-	protected final ApplyStyleMixin<MaterialInput> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
-	protected final ApplyStyleMixin<MaterialInput> unborderedMixin = new ApplyStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);
-	protected final AttributeMixin<MaterialInput> statusMixin = new AttributeMixin<>(this, "status");
+	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input,
+			CssAttribute.REQUIRED);
+	protected final AttributeMixin<MaterialWidget, Integer> minLengthMixin = new AttributeMixin<>(input,
+			CssAttribute.MIN_LENGTH, 0);
+	protected final AttributeMixin<MaterialWidget, Integer> maxLengthMixin = new AttributeMixin<>(input,
+			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE);
+	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input,
+			CssAttribute.READONLY, false);
+	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
+	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__UNBORDERED);
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
 	protected final StateMixin<MaterialInput> stateMixin = new StateMixin<>(this);
@@ -214,16 +218,16 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
 	}
 
 	public void setFocusedColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
 	}
 
 	@Override
@@ -238,7 +242,7 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	@Override
 	public void setDense(boolean dense) {
-		denseMixin.setApply(dense);
+		denseMixin.toggle(dense);
 	}
 
 	@Override
@@ -283,29 +287,29 @@ public class MaterialInput extends MaterialValuedField<String>
 	}
 
 	public void setMinLength(final int length) {
-		minLengthMixin.setAttribute(length);
+		minLengthMixin.setValue(length);
 	}
 
 	public int getMinLength() {
-		return minLengthMixin.getAttributeAsInteger();
+		return minLengthMixin.getValue();
 	}
 
 	public void setMaxLength(final int length) {
-		maxLengthMixin.setAttribute(length);
+		maxLengthMixin.setValue(length);
 	}
 
 	public int getMaxLength() {
-		return maxLengthMixin.getAttributeAsInteger(Integer.MAX_VALUE);
+		return maxLengthMixin.getValue();
 	}
 
 	@Override
 	public boolean isRequired() {
-		return requeridMixin.isRequired();
+		return requeridMixin.getValue();
 	}
 
 	@Override
 	public void setRequired(boolean value) {
-		requeridMixin.setRequired(value);
+		requeridMixin.setValue(value);
 	};
 
 	@Override
@@ -341,7 +345,7 @@ public class MaterialInput extends MaterialValuedField<String>
 	public void setIcon(IconType iconType) {
 		setIcon(iconType, false);
 	}
-	
+
 	@Override
 	public void setIcon(IconType iconType, boolean animate) {
 		icon.setType(iconType, animate);
@@ -396,20 +400,17 @@ public class MaterialInput extends MaterialValuedField<String>
 
 	@Override
 	public void setReadOnly(boolean readOnly) {
-		if(readOnly)
-			readOnlyMixin.setAttribute(readOnly);
-		else
-			readOnlyMixin.setAttribute(null);
+		readOnlyMixin.setValue(readOnly);
 	}
 
 	@Override
 	public boolean isReadOnly() {
-		return readOnlyMixin.getAttributeAsBoolean();
+		return readOnlyMixin.getValue();
 	}
-	
+
 	@Override
 	public void setUnbordered(boolean unbordered) {
-		unborderedMixin.setApply(unbordered);
+		unborderedMixin.toggle(unbordered);
 	}
 
 	@Override

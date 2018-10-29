@@ -27,18 +27,21 @@ import com.google.gwt.event.dom.client.TouchEndEvent;
 import com.google.gwt.event.dom.client.TouchStartEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.TooltipPosition;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * @author Richeli Vargas
  */
-public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements HasTooltip {
+public class TooltipMixin<UIO extends MaterialUIObject & HasTooltip> extends AbstractMixin<UIO> implements HasTooltip {
 
 	private Element tooltip;
 	private HandlerRegistration mouseOut;
@@ -50,18 +53,17 @@ public class TooltipMixin<T extends Widget> extends AbstractMixin<T> implements 
 
 	private TooltipPosition position = TooltipPosition.AUTO;
 
-	public TooltipMixin(final T uiObject) {
+	public TooltipMixin(final UIO uiObject) {
 		super(uiObject);
 	}
 
 	@Override
 	public void setTooltip(String tooltip) {
 
-		uiObject.getElement().removeAttribute("tooltip");
+		StyleHelper.setAttribute(uiObject, CssAttribute.TOOLTIP, tooltip);
 		unbind();
 
 		if (tooltip != null && !tooltip.isEmpty()) {
-			uiObject.getElement().setAttribute("tooltip", tooltip);
 			bind();
 			this.tooltip.setInnerHTML(tooltip);
 		}

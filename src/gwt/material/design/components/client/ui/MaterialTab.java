@@ -24,7 +24,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasIcon;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -48,7 +48,7 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 	protected MaterialTabIndicator indicator = new MaterialTabIndicator();
 	protected Span ripple = new Span(CssName.MDC_TAB__RIPPLE);
 
-	protected final ApplyStyleMixin<MaterialTab> stackedMixin = new ApplyStyleMixin<>(this, CssName.MDC_TAB__STACKED);
+	protected final ToggleStyleMixin<MaterialTab> stackedMixin = new ToggleStyleMixin<>(this, CssName.MDC_TAB__STACKED);
 
 	public MaterialTab() {
 		super(HtmlElements.BUTTON.createElement(), CssName.MDC_TAB);
@@ -96,11 +96,11 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 	
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
 	}
 
 	public void setSelectedColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TAB__ACTIVED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TAB__ACTIVED_COLOR, color.getCssName());
 	}
 
 	@Override
@@ -124,7 +124,7 @@ public class MaterialTab extends MaterialSelectedField implements HasText, HasIc
 	}
 	
 	public void setStacked(final boolean stacked) {
-		stackedMixin.setApply(stacked);
+		stackedMixin.toggle(stacked);
 	}
 	
 	public boolean isStacked() {

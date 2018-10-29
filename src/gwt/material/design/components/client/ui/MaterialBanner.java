@@ -25,7 +25,7 @@ import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.interfaces.HasType;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.BannerType;
 import gwt.material.design.components.client.constants.Color;
@@ -49,7 +49,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 	protected final MaterialDivider border = new MaterialDivider();
 
 	protected final TypeMixin<MaterialBanner, BannerType> typeMixin = new TypeMixin<>(this, BannerType.VERTICAL);
-	protected final ApplyStyleMixin<MaterialBanner> openMixin = new ApplyStyleMixin<>(this, CssName.MDC_BANNER__OPENED);
+	protected final ToggleStyleMixin<MaterialBanner> openMixin = new ToggleStyleMixin<>(this, CssName.MDC_BANNER__OPENED);
 	
 	public MaterialBanner() {
 		super(CssName.MDC_BANNER);		
@@ -96,12 +96,12 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BANNER__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BANNER__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BANNER__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BANNER__INK_COLOR, color.getCssName());
 	}
 
 	public void setAvatar(final IconType iconType) {
@@ -131,16 +131,16 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 	}
 
 	public void setAvatarBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BANNER__AVATAR_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BANNER__AVATAR_FILL_COLOR, color.getCssName());
 	}
 
 	public void setAvatarColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BANNER__AVATAR_INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BANNER__AVATAR_INK_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setOpen(boolean open) {	
-		openMixin.setApply(open);
+		openMixin.toggle(open);
 	}
 
 	@Override

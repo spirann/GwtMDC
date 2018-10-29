@@ -103,11 +103,11 @@ public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 	
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
 	
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
 }

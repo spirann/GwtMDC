@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.base.widget;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.dom.client.Style.BorderStyle;
 import com.google.gwt.dom.client.Style.Cursor;
@@ -50,14 +51,57 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
  * @author Richeli Vargas
  *
  */
-public class BaseWidget extends ComplexPanel implements HasFlexbox {
+public class MaterialUIObject extends ComplexPanel implements HasFlexbox {
 
-	protected final FlexboxMixin<BaseWidget> flexboxMixin = new FlexboxMixin<>(this);
+	protected final FlexboxMixin<MaterialUIObject> flexboxMixin = new FlexboxMixin<>(this);
 
-	public void setStyleProperty(final String attribute, final String value) {
-		StyleHelper.setStyleProperty(getElement(), attribute, value == null ? "none" : value);
+	public MaterialUIObject(Element element) {
+		super();
+		setElement(element);
+	}
+	
+	public void setAttribute(final String attribute, final String value) {
+		StyleHelper.setAttribute(getElement(), attribute, value);
+	}
+	
+	public void removeAttribute(final String attribute) {
+		StyleHelper.removeAttribute(getElement(), attribute);
+	}
+	
+	public String getAttribute(final String attribute) {
+		return StyleHelper.getAttribute(getElement(), attribute);
+	}
+	
+	protected void setCssProperty(final String property, final String value) {
+		StyleHelper.setCssProperty(getElement(), property, value);
+	}
+	
+	protected void setCssProperty(final String property, final Style.HasCssName value) {
+		StyleHelper.setCssProperty(getElement(), property, value);
 	}
 
+	public boolean hasStyleName(String style) {
+		return StyleHelper.hasStyle(this, style);
+	}
+	
+	@Override
+	public void addStyleName(String style) {
+		StyleHelper.addStyle(this, style);
+	}
+
+	@Override
+	public void removeStyleName(String style) {
+		StyleHelper.removeStyle(this, style);
+	}
+	
+	public void toggleStyleName(final boolean toggleStyle, final String styleName) {
+		StyleHelper.toggleStyle(this, toggleStyle, styleName);
+	}
+
+	public void toggleStyleName(final String styleName) {
+		StyleHelper.toggleStyle(this, styleName);
+	}
+	
 	public void setInnerHTML(final String html) {
 		getElement().setInnerHTML(html);
 	}
@@ -68,117 +112,117 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 
 	@Override
 	public void setWidth(final String width) {
-		setStyleProperty("width", width);
+		setCssProperty("width", width);
 	}
 
 	@Override
 	public void setHeight(final String height) {
-		setStyleProperty("height", height);
+		setCssProperty("height", height);
 	}
 
 	public void setMaxWidth(final String maxWidth) {
-		setStyleProperty("max-width", maxWidth);
+		setCssProperty("max-width", maxWidth);
 	}
 
 	public void setMinWidth(final String minWidth) {
-		setStyleProperty("min-width", minWidth);
+		setCssProperty("min-width", minWidth);
 	}
 
 	public void setMaxHeight(final String maxHeight) {
-		setStyleProperty("max-height", maxHeight);
+		setCssProperty("max-height", maxHeight);
 	}
 
 	public void setMinHeight(final String minHeight) {
-		setStyleProperty("min-height", minHeight);
+		setCssProperty("min-height", minHeight);
 	}
 
 	public void setLineHeight(final String lineHeight) {
-		setStyleProperty("line-height", lineHeight);
+		setCssProperty("line-height", lineHeight);
 	}
 
 	public void setLetterSpacing(final String letterSpacing) {
-		setStyleProperty("letter-spacing", letterSpacing);
+		setCssProperty("letter-spacing", letterSpacing);
 	}
 
 	public void setFontSize(final String fontSize) {
-		setStyleProperty("font-size", fontSize);
+		setCssProperty("font-size", fontSize);
 	}
 
 	public void setFontFamily(final String fontFamily) {
-		setStyleProperty("font-family", fontFamily);
+		setCssProperty("font-family", fontFamily);
 	}
 
 	public void setTextAlign(final TextAlign textAlign) {
-		setStyleProperty("text-align", textAlign.getCssName());
+		setCssProperty("text-align", textAlign);
 	}
 
 	public void setCursor(Cursor cursor) {
-		setStyleProperty("cursor", cursor.getCssName());
+		setCssProperty("cursor", cursor);
 	}
 
 	public void setPadding(final int padding) {
-		setStyleProperty("padding", padding + "px");
+		setCssProperty("padding", padding + "px");
 	}
 
 	public void setPaddingTop(final int paddingTop) {
-		setStyleProperty("padding-top", paddingTop + "px");
+		setCssProperty("padding-top", paddingTop + "px");
 	}
 
 	public void setPaddingBottom(final int paddingBottom) {
-		setStyleProperty("padding-bottom", paddingBottom + "px");
+		setCssProperty("padding-bottom", paddingBottom + "px");
 	}
 
 	public void setPaddingLeft(final int paddingLeft) {
-		setStyleProperty("padding-left", paddingLeft + "px");
+		setCssProperty("padding-left", paddingLeft + "px");
 	}
 
 	public void setPaddingRight(final int paddingRight) {
-		setStyleProperty("padding-right", paddingRight + "px");
+		setCssProperty("padding-right", paddingRight + "px");
 	}
 
 	public void setMargin(final int margin) {
-		setStyleProperty("margin", margin + "px");
+		setCssProperty("margin", margin + "px");
 	}
 
 	public void setMarginTop(final int marginTop) {
-		setStyleProperty("margin-top", marginTop + "px");
+		setCssProperty("margin-top", marginTop + "px");
 	}
 
 	public void setMarginBottom(final int marginBottom) {
-		setStyleProperty("margin-bottom", marginBottom + "px");
+		setCssProperty("margin-bottom", marginBottom + "px");
 	}
 
 	public void setMarginLeft(final int marginLeft) {
-		setStyleProperty("margin-left", marginLeft + "px");
+		setCssProperty("margin-left", marginLeft + "px");
 	}
 
 	public void setMarginRight(final int marginRight) {
-		setStyleProperty("margin-right", marginRight + "px");
+		setCssProperty("margin-right", marginRight + "px");
 	}
 
 	public void setBackground(final String background) {
-		setStyleProperty("background", background);
+		setCssProperty("background", background);
 	}
 
 	public void setBackgroundImageResource(final ImageResource imageResource) {
-		setStyleProperty("background",
+		setCssProperty("background",
 				"url('" + imageResource.getSafeUri().asString() + "') no-repeat center center fixed");
-		setStyleProperty("-webkit-background-size", "cover");
-		setStyleProperty("-moz-background-size", "cover");
-		setStyleProperty("-o-background-size", "cover");
-		setStyleProperty("background-size", "cover");
+		setCssProperty("-webkit-background-size", "cover");
+		setCssProperty("-moz-background-size", "cover");
+		setCssProperty("-o-background-size", "cover");
+		setCssProperty("background-size", "cover");
 	}
 
 	public void setBackgroundImage(final String url) {
-		setStyleProperty("background-image", url);
+		setCssProperty("background-image", url);
 	}
 
 	public void setBackgroundColor(final Color color) {
-		setStyleProperty("background-color", color.getCssName());
+		setCssProperty("background-color", color);
 	}
 
 	public void setColor(final Color color) {
-		setStyleProperty("color", color.getCssName());
+		setCssProperty("color", color);
 	}
 
 	public void setTextColor(final Color color) {
@@ -186,83 +230,83 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	}
 
 	public void setOverflow(final Overflow overflow) {
-		setStyleProperty("overflow", overflow.getCssName());
+		setCssProperty("overflow", overflow);
 	}
 
 	public void setOverflowX(final Overflow overflow) {
-		setStyleProperty("overflow-x", overflow.getCssName());
+		setCssProperty("overflow-x", overflow);
 	}
 
 	public void setOverflowY(final Overflow overflow) {
-		setStyleProperty("overflow-y", overflow.getCssName());
+		setCssProperty("overflow-y", overflow);
 	}
 
 	public void setTop(final String top) {
-		setStyleProperty("top", top);
+		setCssProperty("top", top);
 	}
 
 	public void setBottom(final String bottom) {
-		setStyleProperty("bottom", bottom);
+		setCssProperty("bottom", bottom);
 	}
 
 	public void setLeft(final String left) {
-		setStyleProperty("left", left);
+		setCssProperty("left", left);
 	}
 
 	public void setRight(final String right) {
-		setStyleProperty("right", right);
+		setCssProperty("right", right);
 	}
 
 	public void setLayoutPosition(final Style.Position position) {
-		setStyleProperty("position", position.getCssName());
+		setCssProperty("position", position);
 	}
 
 	public void setZIndex(final int zIndex) {
-		setStyleProperty("z-index", String.valueOf(zIndex));
+		setCssProperty("z-index", String.valueOf(zIndex));
 	}
 
 	public void setOutlineWidth(final int borderWidth) {
-		setStyleProperty("outline-width", borderWidth + "px");
+		setCssProperty("outline-width", borderWidth + "px");
 	}
 
 	public void setOutilineColor(final Color color) {
-		setStyleProperty("outline-color", color.getCssName());
+		setCssProperty("outline-color", color);
 	}
 
 	public void setOutlineStyle(final OutlineStyle outlineStyle) {
-		setStyleProperty("outline-style", outlineStyle.getCssName());
+		setCssProperty("outline-style", outlineStyle);
 	}
 
 	public void setBorderWidth(final int borderWidth) {
-		setStyleProperty("border-width", borderWidth + "px");
+		setCssProperty("border-width", borderWidth + "px");
 	}
 
 	public void setBorderColor(final Color color) {
-		setStyleProperty("border-color", color.getCssName());
+		setCssProperty("border-color", color);
 	}
 
 	public void setBorderStyle(final BorderStyle borderStyle) {
-		setStyleProperty("border-style", borderStyle.getCssName());
+		setCssProperty("border-style", borderStyle);
 	}
 
 	public void setBorderSpacing(final int borderSpacing) {
-		setStyleProperty("border-spacing", borderSpacing + "px");
+		setCssProperty("border-spacing", borderSpacing + "px");
 	}
 
 	public void setBorderCollapse(final BorderCollapse borderCollapse) {
-		setStyleProperty("border-collapse", borderCollapse.getCssName());
+		setCssProperty("border-collapse", borderCollapse);
 	}
 
 	public void setBorderRadius(final String borderRadius) {
-		setStyleProperty("border-radius", borderRadius);
+		setCssProperty("border-radius", borderRadius);
 	}
 
 	public void setOpacity(final double opacity) {
-		setStyleProperty("opacity", String.valueOf(opacity));
+		setCssProperty("opacity", String.valueOf(opacity));
 	}
 
 	public final void setVisibility(Visibility value) {
-		setStyleProperty("visibility", value.getCssName());
+		setCssProperty("visibility", value);
 	}
 
 	/*
@@ -271,52 +315,52 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	 * -------------------------------------------------------------------------------
 	 */
 	public final void setTransform(final String transform) {
-		setStyleProperty("-webkit-transform", transform);
-		setStyleProperty("-moz-transform", transform);
-		setStyleProperty("-o-transform", transform);
-		setStyleProperty("transform", transform);
+		setCssProperty("-webkit-transform", transform);
+		setCssProperty("-moz-transform", transform);
+		setCssProperty("-o-transform", transform);
+		setCssProperty("transform", transform);
 	}
 	
 	public final void setTransformOrigin(final String transformOrigin) {
-		setStyleProperty("-webkit-transform-origin", transformOrigin);
-		setStyleProperty("-moz-transform-origin", transformOrigin);
-		setStyleProperty("-o-transform-origin", transformOrigin);
-		setStyleProperty("transform-origin", transformOrigin);
+		setCssProperty("-webkit-transform-origin", transformOrigin);
+		setCssProperty("-moz-transform-origin", transformOrigin);
+		setCssProperty("-o-transform-origin", transformOrigin);
+		setCssProperty("transform-origin", transformOrigin);
 	}
 	
 	public final void setTransition(final String trasition) {
-		setStyleProperty("-webkit-transition", trasition);
-		setStyleProperty("-moz-transition", trasition);
-		setStyleProperty("-o-transition", trasition);
-		setStyleProperty("transition", trasition);
+		setCssProperty("-webkit-transition", trasition);
+		setCssProperty("-moz-transition", trasition);
+		setCssProperty("-o-transition", trasition);
+		setCssProperty("transition", trasition);
 	}
 	
 	public final void setTransitionDelay(final String trasitionDelay) {
-		setStyleProperty("-webkit-transition-delay", trasitionDelay);
-		setStyleProperty("-moz-transition-delay", trasitionDelay);
-		setStyleProperty("-o-transition-delay", trasitionDelay);
-		setStyleProperty("transition-delay", trasitionDelay);
+		setCssProperty("-webkit-transition-delay", trasitionDelay);
+		setCssProperty("-moz-transition-delay", trasitionDelay);
+		setCssProperty("-o-transition-delay", trasitionDelay);
+		setCssProperty("transition-delay", trasitionDelay);
 	}	
 	
 	public final void setTransitionDuration(final String trasitionDuration) {
-		setStyleProperty("-webkit-transition-duration", trasitionDuration);
-		setStyleProperty("-moz-transition-duration", trasitionDuration);
-		setStyleProperty("-o-transition-duration", trasitionDuration);
-		setStyleProperty("transition-duration", trasitionDuration);
+		setCssProperty("-webkit-transition-duration", trasitionDuration);
+		setCssProperty("-moz-transition-duration", trasitionDuration);
+		setCssProperty("-o-transition-duration", trasitionDuration);
+		setCssProperty("transition-duration", trasitionDuration);
 	}
 	
 	public final void setTransitionProperty(final String trasitionProperty) {
-		setStyleProperty("-webkit-transition-property", trasitionProperty);
-		setStyleProperty("-moz-transition-property", trasitionProperty);
-		setStyleProperty("-o-transition-property", trasitionProperty);
-		setStyleProperty("transition-property", trasitionProperty);
+		setCssProperty("-webkit-transition-property", trasitionProperty);
+		setCssProperty("-moz-transition-property", trasitionProperty);
+		setCssProperty("-o-transition-property", trasitionProperty);
+		setCssProperty("transition-property", trasitionProperty);
 	}
 	
 	public final void setTransitionTimingFunction(final String trasitionTimingFunction) {
-		setStyleProperty("-webkit-transition-timing-function", trasitionTimingFunction);
-		setStyleProperty("-moz-transition-timing-function", trasitionTimingFunction);
-		setStyleProperty("-o-transition-timing-function", trasitionTimingFunction);
-		setStyleProperty("transition-timing-function", trasitionTimingFunction);
+		setCssProperty("-webkit-transition-timing-function", trasitionTimingFunction);
+		setCssProperty("-moz-transition-timing-function", trasitionTimingFunction);
+		setCssProperty("-o-transition-timing-function", trasitionTimingFunction);
+		setCssProperty("transition-timing-function", trasitionTimingFunction);
 	}	
 	
 	/*
@@ -391,18 +435,18 @@ public class BaseWidget extends ComplexPanel implements HasFlexbox {
 	}
 
 	public void setScrollBarWidth(final String width) {
-		setStyleProperty(CssMixin.MDC_SCROLLBAR_WIDTH, width);
+		setCssProperty(CssMixin.MDC_SCROLLBAR_WIDTH, width);
 	}
 
 	public void setScrollBarTrackColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SCROLLBAR_TRACK_FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_SCROLLBAR_TRACK_FILL, color);
 	}
 
 	public void setScrollBarThumbCorner(final String width) {
-		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_CORNER, width);
+		setCssProperty(CssMixin.MDC_SCROLLBAR_THUMB_CORNER, width);
 	}
 
 	public void setScrollBarThumbColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SCROLLBAR_THUMB_FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_SCROLLBAR_THUMB_FILL, color);
 	}
 }

@@ -19,41 +19,27 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasPattern;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 
 /**
  * @author Richeli Vargas
  */
-public class PatternMixin<T extends UIObject> extends AbstractMixin<T> implements HasPattern {
+public class PatternMixin<UIO extends MaterialUIObject & HasPattern> extends AttributeMixin<UIO, String> implements HasPattern {
 
-	public PatternMixin(final T widget) {
-		super(widget);
+	public PatternMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.PATTERN);
 	}
 
 	@Override
 	public void setPattern(String pattern) {
-		setPattern(uiObject.getElement(), pattern == null ? "" : pattern);
+		setValue(pattern);
 	}
 
 	@Override
 	public String getPattern() {
-		return getPattern(uiObject.getElement());
+		return getValue();
 	}
-
-	protected native String getPattern(Element element)/*-{
-		return element.pattern;
-	}-*/;
-
-	protected native void setPattern(Element element, String pattern)/*-{
-		
-		if(pattern){			
-			element.pattern = pattern;
-		} else {
-			element.removeAttribute("pattern");
-		}
-		
-	}-*/;
 }

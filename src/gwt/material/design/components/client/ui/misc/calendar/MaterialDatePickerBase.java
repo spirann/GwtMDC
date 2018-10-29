@@ -191,28 +191,28 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__INK, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__INK, color.getCssName());
 	}
 
 	public void setActiveColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_INK, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__ACTIVE_INK, color.getCssName());
 	}
 
 	public void setActiveBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__ACTIVE_FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__ACTIVE_FILL, color.getCssName());
 	}
 
 	public void setHeaderColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
 
 	public void setHeaderBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
+		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());
 	}
 
 	public void setDateTooltip(final Date date, final String tooltip) {

@@ -68,15 +68,15 @@ public class MaterialLayoutGrid extends Div implements HasAlign<LayoutGridAlign>
 	}
 	
 	public void setDesktopCellMargin(int margin) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, margin + "px");
 	}
 	
 	public void setTabletCellMargin(int margin) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, margin + "px");
 	}
 	
 	public void setPhoneCellMargin(int margin) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, margin + "px");
 	}
 
 	public void setCellGutter(int gutter) {
@@ -86,15 +86,15 @@ public class MaterialLayoutGrid extends Div implements HasAlign<LayoutGridAlign>
 	}
 	
 	public void setDesktopCellGutter(int gutter) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gutter + "px");
 	}
 	
 	public void setTabletCellGutter(int gutter) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gutter + "px");
 	}
 	
 	public void setPhoneCellGutter(int gutter) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gutter + "px");
 	}
 	
 	
@@ -107,20 +107,20 @@ public class MaterialLayoutGrid extends Div implements HasAlign<LayoutGridAlign>
 	
 	@Override
 	public void setDesktopGap(int gap) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gap + "px");
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_DESKTOP, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_DESKTOP, gap + "px");
 	}
 	
 	@Override
 	public void setTabletGap(int gap) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gap + "px");
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_TABLET, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_TABLET, gap + "px");
 	}
 	
 	@Override
 	public void setPhoneGap(int gap) {
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gap + "px");
-		setStyleProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_GUTTER_PHONE, gap + "px");
+		setCssProperty(CssMixin.MDC_LAYOUT_GRID_MARGIN_PHONE, gap + "px");
 	}
 	
 	/**

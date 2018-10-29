@@ -18,9 +18,9 @@
  * #L%
  */package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.base.HasCssNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CodeType;
 
 /**
@@ -29,24 +29,21 @@ import gwt.material.design.components.client.constants.CodeType;
  * @author Richeli Vargas
  * 
  */
-public class CodeTypeMixin<T extends Widget & HasType<CodeType>>  extends StyleMixin<T>
+public class CodeTypeMixin<UIO extends MaterialUIObject & HasType<CodeType>>  extends HasCssNameMixin<UIO, CodeType>
 		implements HasType<CodeType> {
 
-	private CodeType CodeType;
-
-	public CodeTypeMixin(final T widget) {
-		super(widget);
+	public CodeTypeMixin(final UIO uiObject) {
+		super(uiObject);
 	}
 
 	@Override
-	public void setType(CodeType CodeType) {
-		this.CodeType = CodeType;
-		setStyle(CodeType.getCssName());
+	public void setType(final CodeType codeType) {
+		setHasCssName(codeType);
 	}
 
 	@Override
 	public CodeType getType() {
-		return CodeType;
+		return getHasCssName();
 	}
 
 }

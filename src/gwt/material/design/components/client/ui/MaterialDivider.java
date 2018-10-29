@@ -20,7 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.interfaces.HasInset;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Hr;
 
@@ -31,7 +31,7 @@ import gwt.material.design.components.client.ui.html.Hr;
  */
 public class MaterialDivider extends Hr implements HasInset {
 
-	protected final ApplyStyleMixin<MaterialDivider> insetMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialDivider> insetMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LIST_DIVIDER__INSET);
 
 	public MaterialDivider() {
@@ -46,7 +46,7 @@ public class MaterialDivider extends Hr implements HasInset {
 
 	@Override
 	public void setInset(boolean inset) {
-		insetMixin.setApply(inset);
+		insetMixin.toggle(inset);
 	}
 
 	@Override

@@ -19,27 +19,26 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasCircle;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * 
  * @author Richeli Vargas
  */
-public class CircleMixin<T extends Widget & HasCircle> extends AbstractMixin<T> implements HasCircle {
-	
-	public CircleMixin(final T uiObject) {
+public class CircleMixin<UIO extends MaterialUIObject & HasCircle> extends AbstractMixin<UIO> implements HasCircle {
+
+	public CircleMixin(final UIO uiObject) {
 		super(uiObject);
 	}
 
 	@Override
 	public void setCircle(boolean circle) {
-		if(circle){
-			uiObject.getElement().getStyle().setProperty("borderRadius", "50%");
-		}else {
-			uiObject.getElement().getStyle().setProperty("borderRadius", "0");
-		}
+		if (circle)
+			uiObject.setBorderRadius("50%");
+		else
+			uiObject.setBorderRadius("0");
 	}
 
 }

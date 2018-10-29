@@ -19,22 +19,27 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
+import com.google.gwt.user.client.ui.HasText;
+
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * @author Richeli Vargas
  */
-public class TextMixin<T extends UIObject> extends AbstractMixin<T> {
-	
-    public TextMixin(final T uiObject) {
-        super(uiObject);
-    }
+public class TextMixin<UIO extends MaterialUIObject> extends AbstractMixin<UIO> implements HasText {
 
-    public String getText() {
-    	return uiObject.getElement().getInnerText();
-    }
+	public TextMixin(final UIO uiObject) {
+		super(uiObject);
+	}
 
-    public void setText(final String text) {
-    	uiObject.getElement().setInnerText(text);
-    }
+	@Override
+	public String getText() {
+		return uiObject.getElement().getInnerText();
+	}
+
+	@Override
+	public void setText(final String text) {
+		uiObject.getElement().setInnerText(text);
+	}
 }

@@ -24,7 +24,7 @@ import com.google.gwt.user.client.ui.HasText;
 import gwt.material.design.components.client.base.interfaces.HasHref;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasType;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
@@ -45,15 +45,15 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialFab extends Button implements HasType<FabType>, HasHref, HasText, HasIcon {
 
-	protected Span icon = new Span(CssName.MDC_FAB__ICON, CssName.MATERIAL_ICONS);
-	protected Span label = new Span(CssName.MDC_FAB__LABEL);
+	protected final Span icon = new Span(CssName.MDC_FAB__ICON, CssName.MATERIAL_ICONS);
+	protected final Span label = new Span(CssName.MDC_FAB__LABEL);
 
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialFab> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialFab, FabType> typeMixin = new TypeMixin<>(this);
 	protected final IconMixin<Span> iconMixin = new IconMixin<>(icon);
-	protected final ApplyStyleMixin<MaterialFab> extendedMixin = new ApplyStyleMixin<>(this, CssName.MDC_FAB__EXTENDED);
-	protected final ApplyStyleMixin<MaterialFab> exitedMixin = new ApplyStyleMixin<>(this, CssName.MDC_FAB__EXITED);
+	protected final ToggleStyleMixin<MaterialFab> extendedMixin = new ToggleStyleMixin<>(this, CssName.MDC_FAB__EXTENDED);
+	protected final ToggleStyleMixin<MaterialFab> exitedMixin = new ToggleStyleMixin<>(this, CssName.MDC_FAB__EXITED);
 
 	public MaterialFab() {
 		super(CssName.MDC_FAB);
@@ -80,7 +80,7 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	@Override
 	public void setText(String text) {
 		textMixin.setText(text);
-		extendedMixin.setApply(text != null && !text.trim().isEmpty());
+		extendedMixin.toggle(text != null && !text.trim().isEmpty());
 	}
 
 	@Override
@@ -134,7 +134,7 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 	}
 
 	public void setExited(final boolean isExited) {
-		exitedMixin.setApply(isExited);
+		exitedMixin.toggle(isExited);
 	}
 
 	public boolean isExited() {
@@ -143,17 +143,17 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_FAB__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_FAB__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
 	}
 	
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_FAB__INK_COLOR, color.getCssName());
 		iconMixin.setIconColor(color);
 	}
 

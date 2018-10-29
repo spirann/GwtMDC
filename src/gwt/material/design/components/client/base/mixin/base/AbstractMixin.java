@@ -17,22 +17,22 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.mixin;
+package gwt.material.design.components.client.base.mixin.base;
 
-import com.google.gwt.user.client.ui.UIObject;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * @author Richeli Vargas
  */
-abstract class AbstractMixin<T extends UIObject> {
+public abstract class AbstractMixin<UIO extends MaterialUIObject> {
 
-    T uiObject;
+	protected UIO uiObject;
 
-    AbstractMixin(final T uiObject) {
+    protected AbstractMixin(final UIO uiObject) {
         setUiObject(uiObject);
     }
 
-    public void setUiObject(T uiObject) {
+    public void setUiObject(UIO uiObject) {
         this.uiObject = uiObject;
     }
 }

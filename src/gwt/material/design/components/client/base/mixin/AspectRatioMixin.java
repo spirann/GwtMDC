@@ -19,9 +19,9 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasAspectRatio;
+import gwt.material.design.components.client.base.mixin.base.HasCssNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.AspectRatio;
 
 /**
@@ -29,27 +29,21 @@ import gwt.material.design.components.client.constants.AspectRatio;
  * @author Richeli Vargas
  *
  */
-public class AspectRatioMixin<W extends Widget> extends StyleMixin<W> implements HasAspectRatio {
+public class AspectRatioMixin<UIO extends MaterialUIObject> extends HasCssNameMixin<UIO, AspectRatio>
+		implements HasAspectRatio {
 
-	private AspectRatio aspectRatio = AspectRatio.DEFAULT;
-
-	public AspectRatioMixin(final W widget) {
-		super(widget);
+	public AspectRatioMixin(final UIO uiObject) {
+		super(uiObject);
 	}
-	
+
 	@Override
 	public void setAspectRatio(AspectRatio aspectRatio) {
-		this.aspectRatio = aspectRatio;
-		if (aspectRatio == null) {
-			setStyle(null);
-		} else {
-			setStyle(aspectRatio.getCssName());
-		}
+		super.setHasCssName(aspectRatio);
 	}
-	
+
 	@Override
 	public AspectRatio getAspectRatio() {
-		return aspectRatio;
+		return getHasCssName();
 	}
 
 }

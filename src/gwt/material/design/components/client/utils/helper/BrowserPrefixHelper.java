@@ -28,30 +28,28 @@ import gwt.material.design.components.client.constants.BrowserPrefixCssType;
  */
 public final class BrowserPrefixHelper {
 
-    public static void updateStyleProperties(Element element, String ieProperty, String[] properties, BrowserPrefixCssType cssType) {
-        updateStyleProperty(element, ieProperty, cssType.getIeValue());
-        updateStyleProperties(element, properties, cssType.getValue());
-    }
+	public static void updateStyleProperties(Element element, String ieProperty, String[] properties,
+			BrowserPrefixCssType cssType) {
+		updateStyleProperty(element, ieProperty, cssType.getIeValue());
+		updateStyleProperties(element, properties, cssType.getValue());
+	}
 
-    public static void updateStyleProperties(Element element, String[] properties, BrowserPrefixCssType cssType) {
-        updateStyleProperties(element, properties, cssType.getValue());
-    }
+	public static void updateStyleProperties(Element element, String[] properties, BrowserPrefixCssType cssType) {
+		updateStyleProperties(element, properties, cssType.getValue());
+	}
 
-    public static void updateStyleProperties(Element element, String[] properties, String value) {
-        for (String p : properties) {
-            updateStyleProperty(element, p, value);
-        }
-    }
+	public static void updateStyleProperties(Element element, String[] properties, String value) {
+		for (String p : properties)
+			updateStyleProperty(element, p, value);
+	}
 
-    public static void updateStyleProperty(Element element, String property, String value) {
-        if (element == null || property == null || property.isEmpty()) {
-            return;
-        }
+	public static void updateStyleProperty(Element element, String property, String value) {
+		if (element == null || property == null || property.isEmpty())
+			return;
 
-        if (value == null || value.isEmpty()) {
-            element.getStyle().clearProperty(property);
-        } else {
-            element.getStyle().setProperty(property, value);
-        }
-    }
+		if (value == null || value.isEmpty())
+			StyleHelper.removeCssProperty(element, property);
+		else
+			StyleHelper.setCssProperty(element, property, value);
+	}
 }

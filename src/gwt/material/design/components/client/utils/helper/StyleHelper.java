@@ -52,75 +52,7 @@ import com.google.gwt.user.client.ui.UIObject;
  */
 public final class StyleHelper {
 
-	public static <F extends Enum<? extends Style.HasCssName>> F fromStyleName(final Class<F> enumClass,
-			final Style.HasCssName styleName) {
-		return EnumHelper.fromStyleName(styleName.getCssName(), enumClass, null);
-	}
-
-	/**
-	 * Convenience method for first removing all enum style constants and then
-	 * adding the single one.
-	 *
-	 * @see #removeEnumStyleNames(UIObject, Class)
-	 * @see #addEnumStyleName(UIObject, Style.HasCssName)
-	 */
-	public static <E extends Style.HasCssName, F extends Enum<? extends Style.HasCssName>> void addUniqueEnumStyleName(
-			final UIObject uiObject, final Class<F> enumClass, final E style) {
-		removeEnumStyleNames(uiObject, enumClass);
-		addEnumStyleName(uiObject, style);
-	}
-
-	/**
-	 * Removes all CSS style names specified by an enum that implements
-	 * {@link Style.HasCssName} from an UIObject.
-	 *
-	 * @param uiObject
-	 *            Object to remove CSS class names from
-	 * @param enumClass
-	 *            Enum representing CSS class names
-	 * @param <E>
-	 *            Enum type implementing {@link Style.HasCssName}
-	 */
-	public static <E extends Enum<? extends Style.HasCssName>> void removeEnumStyleNames(final UIObject uiObject,
-			final Class<E> enumClass) {
-
-		for (final Enum<? extends Style.HasCssName> constant : enumClass.getEnumConstants()) {
-			final String cssClass = ((Style.HasCssName) constant).getCssName();
-
-			if (cssClass != null && !cssClass.isEmpty()) {
-				uiObject.removeStyleName(cssClass);
-			}
-		}
-	}
-
-	/**
-	 * Adds enum value style name to UIObject unless style is {@code null}.
-	 *
-	 * @param uiObject
-	 *            Object to add style to
-	 * @param style
-	 *            Style name
-	 */
-	public static <E extends Style.HasCssName> void addEnumStyleName(final UIObject uiObject, final E style) {
-
-		if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
-			uiObject.addStyleName(style.getCssName());
-		}
-	}
-
-	/**
-	 * Removes enum value style name from UIObject unless style is {@code null}.
-	 *
-	 * @param uiObject
-	 *            Object to remove style from
-	 * @param style
-	 *            Style name
-	 */
-	public static <E extends Style.HasCssName> void removeEnumStyleName(final UIObject uiObject, final E style) {
-
-		if (style != null && style.getCssName() != null && !style.getCssName().isEmpty()) {
-			uiObject.removeStyleName(style.getCssName());
-		}
+	private StyleHelper() {
 	}
 
 	/**
@@ -134,17 +66,14 @@ public final class StyleHelper {
 	 * @return True if contains style
 	 */
 	public static boolean containsStyle(final String styleNames, final String style) {
-		if (styleNames == null || style == null) {
+		if (styleNames == null || style == null)
 			return false;
-		}
 
 		final String[] styles = styleNames.split("\\s");
 
-		for (final String s : styles) {
-			if (style.equals(s)) {
+		for (final String s : styles)
+			if (style.equals(s))
 				return true;
-			}
-		}
 
 		return false;
 	}
@@ -159,58 +88,211 @@ public final class StyleHelper {
 	 * @param styleName
 	 *            Style name
 	 */
-	public static void toggleStyleName(final UIObject uiObject, final boolean toggleStyle, final String styleName) {
+	public static void toggleStyle(final UIObject uiObject, final boolean toggleStyle, final String styleName) {
 		if (toggleStyle)
-			uiObject.addStyleName(styleName);
+			addStyle(uiObject, styleName);
 		else
-			uiObject.removeStyleName(styleName);
+			removeStyle(uiObject, styleName);
 	}
 
-	public static Double getMeasurementValue(String value) {
-		if (value == null)
-			return null;
+	public static void toggleStyle(final UIObject uiObject, final String styleName) {
+		toggleStyle(uiObject, !hasStyle(uiObject, styleName), styleName);
+	}
 
-		try {
-			return Double.parseDouble(value.replaceAll("[^0-9.]", ""));
-		} catch (NumberFormatException ex) {
-			return null;
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Add style
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void addStyle(final UIObject uiObject, final Style.HasCssName style) {
+		addStyle(uiObject.getElement(), style == null ? null : style.getCssName());
+	}
+
+	public final static void addStyle(final Element element, final Style.HasCssName style) {
+		addStyle(element, style == null ? null : style.getCssName());
+	}
+
+	public final static void addStyle(final UIObject uiObject, final String style) {
+		addStyle(uiObject.getElement(), style);
+	}
+
+	public final static native void addStyle(final Element element, final String style)/*-{
+		if (style && style.length > 0) {
+			$wnd.jQuery(element).removeClass(style);
+			$wnd.jQuery(element).addClass(style);
 		}
-	}
-
-	public static Style.Unit getMeasurementUnit(String value) {
-		if (value == null)
-			return null;
-
-		try {
-			return Style.Unit.valueOf(value.replaceAll("[-+]?[0-9]*\\.?[0-9]+([eE][-+]?[0-9]+)?", "").toUpperCase());
-		} catch (IllegalArgumentException e) {
-			// Silently catch invalid units
-			return null;
-		}
-	}
-
-	public final static void setStyleProperty(final UIObject uiObject, final String attribute,
-			final String value) {
-		setStyleProperty(uiObject.getElement(), attribute, value);
-	}
-
-	public final static native void setStyleProperty(final Element element, final String attribute,
-			final String value)/*-{
-		$wnd.jQuery(element).css(attribute, value);
 	}-*/;
 
-	public final static String getComputedProperty(final String property) {
-		return getComputedProperty(RootPanel.get().getElement(), property);
-	}
-	
-	public final static String getComputedProperty(final UIObject uiObject, final String property) {
-		return getComputedProperty(uiObject.getElement(), property);
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Remove style
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void removeStyle(final UIObject uiObject, final Style.HasCssName style) {
+		removeStyle(uiObject.getElement(), style == null ? null : style.getCssName());
 	}
 
-	public final static native String getComputedProperty(final Element element, final String property)/*-{
+	public final static void removeStyle(final Element element, final Style.HasCssName style) {
+		removeStyle(element, style == null ? null : style.getCssName());
+	}
+
+	public final static void removeStyle(final UIObject uiObject, final String style) {
+		removeStyle(uiObject.getElement(), style);
+	}
+
+	public final static native void removeStyle(final Element element, final String style)/*-{
+		if (style && style.length > 0)
+			$wnd.jQuery(element).removeClass(style);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Has style
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static boolean hasStyle(final UIObject uiObject, final Style.HasCssName style) {
+		return hasStyle(uiObject.getElement(), style == null ? null : style.getCssName());
+	}
+
+	public final static boolean hasStyle(final Element element, final Style.HasCssName style) {
+		return hasStyle(element, style == null ? null : style.getCssName());
+	}
+
+	public final static boolean hasStyle(final UIObject uiObject, final String style) {
+		return hasStyle(uiObject.getElement(), style);
+	}
+
+	public final static native boolean hasStyle(final Element element, final String style)/*-{
+		if (style && style.length > 0)
+			return $wnd.jQuery(element).hasClass(style);
+		else
+			return false;
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set css property at an element
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void setCssProperty(final UIObject uiObject, final String property,
+			final Style.HasCssName value) {
+		setCssProperty(uiObject.getElement(), property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setCssProperty(final Element element, final String property,
+			final Style.HasCssName value) {
+		setCssProperty(element, property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setCssProperty(final UIObject uiObject, final String property, final String value) {
+		setCssProperty(uiObject.getElement(), property, value);
+	}
+
+	public final static native void setCssProperty(final Element element, final String property,
+			final String value)/*-{
+		$wnd.jQuery(element).css(property, value);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set css property at element's children
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void setCssProperty(final UIObject uiObject, String child, String property,
+			final Style.HasCssName value) {
+		setCssProperty(uiObject.getElement(), child, property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setCssProperty(final Element element, String child, String property,
+			final Style.HasCssName value) {
+		setCssProperty(element, child, property, value == null ? null : value.getCssName());
+	}
+
+	public final static void setCssProperty(final UIObject uiObject, String child, String property, String value) {
+		setCssProperty(uiObject.getElement(), child, property, value);
+	}
+
+	public final static native void setCssProperty(final Element parent, String child, String property,
+			String value) /*-{
+		if (value && value.length > 0)
+			$wnd.jQuery(parent).find(child).css(property, value);
+		else
+			$wnd.jQuery(parent).find(child).css(property, '');
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Remove css property
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void removeCssProperty(final UIObject uiObject, final String property) {
+		removeCssProperty(uiObject.getElement(), property);
+	}
+
+	public final static native void removeCssProperty(final Element element, final String property)/*-{
+		$wnd.jQuery(element).css(property, "");
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Get css property
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static String getCssProperty(final String property) {
+		return getCssProperty(RootPanel.get().getElement(), property);
+	}
+
+	public final static String getCssProperty(final UIObject uiObject, final String property) {
+		return getCssProperty(uiObject.getElement(), property);
+	}
+
+	public final static native String getCssProperty(final Element element, final String property)/*-{
 		return $wnd.jQuery(element).css(property);
 	}-*/;
 
-	private StyleHelper() {
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Set attribute
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void setAttribute(final UIObject uiObject, final String attribute,
+			final Style.HasCssName value) {
+		setAttribute(uiObject.getElement(), attribute, value == null ? null : value.getCssName());
 	}
+
+	public final static void setAttribute(final Element element, final String attribute, final Style.HasCssName value) {
+		setAttribute(element, attribute, value == null ? null : value.getCssName());
+	}
+
+	public final static void setAttribute(final UIObject uiObject, final String attribute, final String value) {
+		setAttribute(uiObject.getElement(), attribute, value);
+	}
+
+	public final static native void setAttribute(final Element element, final String attribute,
+			final String value)/*-{
+		if (value && value.length > 0)
+			$wnd.jQuery(element).attr(attribute, value);
+		else
+			$wnd.jQuery(element).removeAttr(attribute);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Remove attribute
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static void removeAttribute(final UIObject uiObject, final String attribute) {
+		removeAttribute(uiObject.getElement(), attribute);
+	}
+
+	public final static native void removeAttribute(final Element element, final String attribute)/*-{
+		$wnd.jQuery(element).removeAttr(attribute);
+	}-*/;
+
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+	// Get attribute
+	// ////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public final static String getAttribute(final UIObject uiObject, final String attribute) {
+		return getAttribute(uiObject.getElement(), attribute);
+	}
+
+	public final static boolean getAttributeAsBoolean(final UIObject uiObject, final String attribute) {
+		return Boolean.valueOf(getAttribute(uiObject.getElement(), attribute));
+	}
+
+	public final static native String getAttribute(final Element element, final String attribute)/*-{
+		return $wnd.jQuery(element).attr(attribute);
+	}-*/;
 }

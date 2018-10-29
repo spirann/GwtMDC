@@ -19,8 +19,9 @@
  */
 package gwt.material.design.components.client.ui.html.svg;
 
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
@@ -30,10 +31,10 @@ import gwt.material.design.components.client.constants.HtmlElements;
  */
 public class Circle extends MaterialWidget {
 
-	protected final AttributeMixin<Circle> cxMixin = new AttributeMixin<>(this, "cx");
-	protected final AttributeMixin<Circle> cyMixin = new AttributeMixin<>(this, "cy");
-	protected final AttributeMixin<Circle> rMixin = new AttributeMixin<>(this, "r");
-	
+	protected final AttributeMixin<Circle, Double> cxMixin = new AttributeMixin<>(this, CssAttribute.CX);
+	protected final AttributeMixin<Circle, Double> cyMixin = new AttributeMixin<>(this, CssAttribute.CY);
+	protected final AttributeMixin<Circle, Double> rMixin = new AttributeMixin<>(this, CssAttribute.R);
+
 	public Circle() {
 		super(HtmlElements.SVG__CIRCLE.createElement());
 	}
@@ -41,16 +42,16 @@ public class Circle extends MaterialWidget {
 	public Circle(final String... initialClasses) {
 		super(HtmlElements.SVG__CIRCLE.createElement(), initialClasses);
 	}
-	
+
 	public void setCx(final double cx) {
-		cxMixin.setAttribute(cx);
+		cxMixin.setValue(cx);
 	}
-	
+
 	public void setCy(final double cy) {
-		cyMixin.setAttribute(cy);
+		cyMixin.setValue(cy);
 	}
-	
+
 	public void setR(final double r) {
-		rMixin.setAttribute(r);
+		rMixin.setValue(r);
 	}
 }

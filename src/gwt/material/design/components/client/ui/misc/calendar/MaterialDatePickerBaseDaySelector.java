@@ -217,6 +217,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			final boolean enabled) {
 
 		final MaterialDatePickerItem item = new MaterialDatePickerItem();
+		/*
 		item.setEnabled(enabled);
 
 		if (today.getTime() == date.getTime())
@@ -228,7 +229,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			item.setVisibility(Visibility.HIDDEN);
 
 		drawTooltip(date, item);
-
+*/
 		return item;
 	}
 

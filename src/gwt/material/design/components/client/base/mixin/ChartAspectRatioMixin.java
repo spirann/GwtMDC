@@ -19,30 +19,28 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasChartAspectRatio;
+import gwt.material.design.components.client.base.mixin.base.HasCssNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 
 /**
  * @author Richeli Vargas
  */
-public class ChartAspectRatioMixin<W extends Widget> extends StyleMixin<W> implements HasChartAspectRatio {
+public class ChartAspectRatioMixin<UIO extends MaterialUIObject & HasChartAspectRatio> extends HasCssNameMixin<UIO, ChartAspectRatio>
+		implements HasChartAspectRatio {
 
-	private ChartAspectRatio aspectRatio;
-	
-	public ChartAspectRatioMixin(final W widget) {
+	public ChartAspectRatioMixin(final UIO widget) {
 		super(widget);
 	}
 
 	@Override
 	public void setChartAspectRatio(ChartAspectRatio aspectRatio) {
-		this.aspectRatio = aspectRatio;
-		setStyle(aspectRatio.getCssName());
+		setHasCssName(aspectRatio);
 	}
 
 	@Override
 	public ChartAspectRatio getChartAspectRatio() {
-		return aspectRatio;
+		return getHasCssName();
 	}
 }

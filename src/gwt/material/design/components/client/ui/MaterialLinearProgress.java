@@ -26,7 +26,7 @@ import gwt.material.design.components.client.base.interfaces.HasBuffer;
 import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.interfaces.HasProgress;
 import gwt.material.design.components.client.base.interfaces.HasReverse;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -41,10 +41,10 @@ import gwt.material.design.components.client.ui.html.Span;
  */
 public class MaterialLinearProgress extends Div implements HasReverse, HasIndeterminate, HasProgress, HasBuffer {
 
-	protected final ApplyStyleMixin<MaterialLinearProgress> indeterminateMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialLinearProgress> indeterminateMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LINEAR_PROGRESS__INDETERMINATE);
 
-	protected final ApplyStyleMixin<MaterialLinearProgress> reverseMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialLinearProgress> reverseMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LINEAR_PROGRESS__REVERSED);
 
 	protected Div bufferingDots = new Div(CssName.MDC_LINEAR_PROGRESS__BUFFERING_DOTS);
@@ -86,7 +86,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 
 	@Override
 	public void setIndeterminate(boolean indeterminate) {
-		indeterminateMixin.setApply(indeterminate);
+		indeterminateMixin.toggle(indeterminate);
 	}
 
 	@Override
@@ -96,7 +96,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 
 	@Override
 	public void setReverse(boolean reverse) {
-		reverseMixin.setApply(reverse);
+		reverseMixin.toggle(reverse);
 	}
 
 	@Override
@@ -149,11 +149,11 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 	}-*/;
 
 	public void setIndicatorColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_LINEAR_PROGRESS__INDICATOR_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LINEAR_PROGRESS__INDICATOR_COLOR, color.getCssName());
 	}
 
 	public void setTrackColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_LINEAR_PROGRESS__TRACK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_LINEAR_PROGRESS__TRACK_COLOR, color.getCssName());
 	}
 
 }

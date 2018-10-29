@@ -19,9 +19,9 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasCellColumns;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.ScreenSize;
 
@@ -30,7 +30,8 @@ import gwt.material.design.components.client.constants.ScreenSize;
  * @author Richeli Vargas
  *
  */
-public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractMixin<T> implements HasCellColumns {
+public class ColumnsMixin<UIO extends MaterialUIObject & HasCellColumns> extends AbstractMixin<UIO>
+		implements HasCellColumns {
 
 	private int cols = 0;
 	private int colsDesktop = 0;
@@ -38,8 +39,8 @@ public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractM
 	private int colsPhone = 0;
 
 	private int order = 0;
-	
-	public ColumnsMixin(final T uiObject) {
+
+	public ColumnsMixin(final UIO uiObject) {
 		super(uiObject);
 	}
 
@@ -72,31 +73,28 @@ public class ColumnsMixin<T extends UIObject & HasCellColumns> extends AbstractM
 		setOrder(this.order, order);
 		this.order = order;
 	}
-	
+
 	private void setColumns(final int oldCols, final int newCols, final ScreenSize screenSize) {
 
-		if (oldCols >= 1 && oldCols <= 12) {
+		if (oldCols >= 1 && oldCols <= 12)
 			uiObject.removeStyleName(CssName.MDC_LAYOUT_GRID__CELL__SPAN.replace("{columns}", String.valueOf(oldCols))
 					.replace("-{screen_size}", screenSize == null ? "" : "-" + screenSize.getCssName()));
-		}
 
-		if (newCols >= 1 && newCols <= 12) {
+		if (newCols >= 1 && newCols <= 12)
 			uiObject.addStyleName(CssName.MDC_LAYOUT_GRID__CELL__SPAN.replace("{columns}", String.valueOf(newCols))
 					.replace("-{screen_size}", screenSize == null ? "" : "-" + screenSize.getCssName()));
-		}
+
 	}
-	
+
 	private void setOrder(final int oldOrder, final int newOrder) {
 
-		if (oldOrder >= 1 && oldOrder <= 12) {
-			uiObject.removeStyleName(CssName.MDC_LAYOUT_GRID__CELL__ORDER
-					.replace("{number}", String.valueOf(oldOrder)));
-		}
+		if (oldOrder >= 1 && oldOrder <= 12)
+			uiObject.removeStyleName(
+					CssName.MDC_LAYOUT_GRID__CELL__ORDER.replace("{number}", String.valueOf(oldOrder)));
 
-		if (newOrder >= 1 && newOrder <= 12) {
-			uiObject.addStyleName(CssName.MDC_LAYOUT_GRID__CELL__ORDER
-					.replace("{number}", String.valueOf(newOrder)));
-		}
+		if (newOrder >= 1 && newOrder <= 12)
+			uiObject.addStyleName(CssName.MDC_LAYOUT_GRID__CELL__ORDER.replace("{number}", String.valueOf(newOrder)));
+
 	}
 
 }

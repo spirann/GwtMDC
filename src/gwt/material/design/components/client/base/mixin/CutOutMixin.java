@@ -21,15 +21,16 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.RootPanel;
-import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 
 /**
  * @author Richeli Vargas
  */
-public class CutOutMixin<T extends Widget> extends AbstractMixin<T> {
+public class CutOutMixin<T extends MaterialUIObject> extends AbstractMixin<T> {
 
 	private final Div cutOut = new Div("mdc-cutout");
 	private final Div scrim = new Div("mdc-cutout--scrim");

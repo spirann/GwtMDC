@@ -17,30 +17,28 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.mixin;
+package gwt.material.design.components.client.base.mixin.base;
 
-import com.google.gwt.user.client.ui.UIObject;
-
-import gwt.material.design.components.client.base.interfaces.HasName;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * @author Richeli Vargas
  */
-public class NameMixin<T extends UIObject> extends AbstractMixin<T> implements HasName {
+public abstract class ToggleStyleNameMixin<UIO extends MaterialUIObject> extends AbstractMixin<UIO> {
 
-	public NameMixin(final T uiObject) {
-		super(uiObject);
-	}
-	
-	@Override
-	public void setName(String name) {
-		uiObject.getElement().setAttribute("name", name);		
+	protected final String cssClass;
+
+	public ToggleStyleNameMixin(final UIO widget, final String cssClass) {
+		super(widget);
+		this.cssClass = cssClass;
 	}
 
-	@Override
-	public String getName() {
-		return uiObject.getElement().getAttribute("name");
+	protected void toggle(boolean apply) {		
+		uiObject.toggleStyleName(apply, cssClass);
 	}
 
-	
+	protected boolean isApplied() {
+		return uiObject.hasStyleName(cssClass);
+	}
 }

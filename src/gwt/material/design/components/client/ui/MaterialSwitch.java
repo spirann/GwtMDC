@@ -113,10 +113,10 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 	}
 	
 	public void setSelectedColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SWITCH__CHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SWITCH__CHECKED_COLOR, color.getCssName());
 	}
 	
 	public void setUnselectedColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SWITCH__UNCHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SWITCH__UNCHECKED_COLOR, color.getCssName());
 	}
 }

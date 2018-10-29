@@ -19,12 +19,11 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.interfaces.HasSvg;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
@@ -32,41 +31,38 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
 /**
  * @author Richeli Vargas
  */
-public class SvgMixin<T extends UIObject & HasSvg> extends AbstractMixin<T> implements HasSvg {
+public class SvgMixin<UIO extends MaterialUIObject & HasSvg> extends AbstractMixin<UIO> implements HasSvg {
 
-	
-	
-    private Color fillColor;
-    
-    public SvgMixin(final T widget) {
-        super(widget);
-    }
+	private Color fillColor;
 
-    @Override
-    public void setResource(TextResource resource) {
-        setSvg(resource.getText());
-    }
-    
-    @Override
-    public void setSvg(String text) {
+	public SvgMixin(final UIO widget) {
+		super(widget);
+	}
 
-        uiObject.getElement().setInnerHTML(text);
-        
-        if(this.fillColor != null){
-        	setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "fill", fillColor.getCssName());
-        }
-        
-        setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "width", "100%");
-        setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "height", "100%");
-        setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "viewBox", "0 0 100% 100%");
-    }
+	@Override
+	public void setResource(TextResource resource) {
+		setSvg(resource.getText());
+	}
+
+	@Override
+	public void setSvg(String svg) {
+
+		uiObject.getElement().setInnerHTML(svg);
+
+		if (this.fillColor != null)
+			StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "fill", fillColor.getCssName());
+
+		StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "width", "100%");
+		StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "height", "100%");
+		StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "viewBox", "0 0 100% 100%");
+	}
 
 	@Override
 	public void setFillColor(Color fillColor) {
-		this.fillColor = fillColor;		
-		if(this.fillColor != null){
-        	setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "fill", fillColor.getCssName());
-        }
+		this.fillColor = fillColor;
+		if (this.fillColor != null)
+			StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "fill", fillColor.getCssName());
+
 	}
 
 	@Override
@@ -76,25 +72,13 @@ public class SvgMixin<T extends UIObject & HasSvg> extends AbstractMixin<T> impl
 
 	@Override
 	public void setWidth(String width) {
-		if(width != null){
-			setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "width", width);
-		}
+		StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "width", width);
+
 	}
 
 	@Override
 	public void setHeight(String height) {
-		if(height != null){
-			setAttribute(uiObject.getElement(), HtmlElements.SVG.getTag(), "height", height);
-		}
+		StyleHelper.setCssProperty(uiObject, HtmlElements.SVG.getTag(), "height", height);
 	}
 
-    
-    private void setAttribute(Element parent, String tag, String attribute, String value){
-
-		final NodeList<Element> elements = parent.getElementsByTagName(tag);	
-		for(int i  = 0; i < elements.getLength(); i++){
-			StyleHelper.setStyleProperty(elements.getItem(i), attribute, value);
-		}
-	}
-	
 }

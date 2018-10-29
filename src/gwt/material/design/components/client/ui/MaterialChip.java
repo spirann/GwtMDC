@@ -96,13 +96,14 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 
 	}
 
-	protected MaterialImage imageLeading = new MaterialImage();
-	protected MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON, CssName.MDC_CHIP__ICON__LEADING);
-	protected MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON,
+	protected final MaterialImage imageLeading = new MaterialImage();
+	protected final MaterialIcon iconLeading = new MaterialIcon(CssName.MDC_CHIP__ICON,
+			CssName.MDC_CHIP__ICON__LEADING);
+	protected final MaterialIcon iconTrailing = new MaterialIcon(IconType.CANCEL, CssName.MDC_CHIP__ICON,
 			CssName.MDC_CHIP__ICON__TRAILING);
-	protected Div text = new Div(CssName.MDC_CHIP__TEXT);
-	protected Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
-	protected MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
+	protected final Div text = new Div(CssName.MDC_CHIP__TEXT);
+	protected final Div checkmark = new Div(CssName.MDC_CHIP__ICON__CHECKMARK);
+	protected final MaterialSvg checkmarkSvg = new MaterialSvg(CssName.MDC_CHIP__ICON__CHECKMARK__SVG);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
 	protected final TypeMixin<MaterialChip, ChipType> typeMixin = new TypeMixin<>(this);
@@ -207,7 +208,7 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	public IconType getIcon() {
 		return iconLeading.getType();
 	}
-	
+
 	@Override
 	public void setIcon(IconType iconType) {
 		setIcon(iconType, false);
@@ -261,24 +262,24 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	public void setBackgroundColor(Color color) {
 		setBackground(null);
 		super.setBackgroundColor(color);
-		setStyleProperty(CssMixin.MDC_CHIP_CONTAINER_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHIP_CONTAINER_FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHIP__TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHIP__TEXT_COLOR, color.getCssName());
 	}
 
 	public void setIconColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHIP_ICON_LEADING_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHIP_ICON_LEADING_COLOR, color.getCssName());
 	}
 
 	public void setCloseColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHIP_ICON_TREALING_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHIP_ICON_TREALING_COLOR, color.getCssName());
 	}
 
 	public void setSelectColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHIP_ICON_SELECTED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHIP_ICON_SELECTED_COLOR, color.getCssName());
 	}
 
 }

@@ -19,42 +19,41 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasHref;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class HrefMixin<T extends UIObject> extends AbstractMixin<T> implements HasHref {
+public class HrefMixin<UIO extends MaterialUIObject & HasHref> extends AbstractMixin<UIO> implements HasHref {
 
-	private static final String HREF = "href";
-	private static final String TARGET = "target";
-	
-	public HrefMixin(T uiObject) {
+	public HrefMixin(UIO uiObject) {
 		super(uiObject);
 	}
 
 	@Override
 	public void setHref(String href) {
-		uiObject.getElement().setAttribute(HREF, href);
+		StyleHelper.setAttribute(uiObject, CssAttribute.HREF, href);
 	}
 
 	@Override
 	public String getHref() {
-		return uiObject.getElement().getAttribute(HREF);
+		return StyleHelper.getAttribute(uiObject, CssAttribute.HREF);
 	}
 
 	@Override
 	public void setTarget(String target) {
-		uiObject.getElement().setAttribute(TARGET, target);
+		StyleHelper.setAttribute(uiObject, CssAttribute.TARGET, target);
 	}
 
 	@Override
 	public String getTarget() {
-		return uiObject.getElement().getAttribute(TARGET);
+		return StyleHelper.getAttribute(uiObject, CssAttribute.TARGET);
 	}
 
 }

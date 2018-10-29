@@ -274,7 +274,7 @@ public class MaterialTheme implements Serializable {
 		final String color;
 
 		if (value == null) {
-			color = StyleHelper.getComputedProperty(property);
+			color = StyleHelper.getCssProperty(property);
 		} else {
 			color = value;
 		}
@@ -289,7 +289,7 @@ public class MaterialTheme implements Serializable {
 		}
 
 		if (value == null) {
-			return StyleHelper.getComputedProperty(property).replace(" ", "");
+			return StyleHelper.getCssProperty(property).replace(" ", "");
 		} else {
 			return value.replace(" ", "");
 		}

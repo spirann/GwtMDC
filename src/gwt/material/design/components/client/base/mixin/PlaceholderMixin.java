@@ -19,43 +19,35 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * @author Richeli Vargas
  */
-public class PlaceholderMixin<T extends UIObject> extends AbstractMixin<T> implements HasPlaceholder {
+public class PlaceholderMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String> implements HasPlaceholder {
 
-	public PlaceholderMixin(final T widget) {
-		super(widget);
+	public PlaceholderMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.PLACEHOLDER);
 	}
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		setPlaceholder(uiObject.getElement(), placeholder == null ? "" : placeholder);
+		setValue(placeholder);
 	}
 
 	@Override
 	public String getPlaceholder() {
-		return getPlaceholder(uiObject.getElement());
+		return getValue();
 	}
-
-	protected native String getPlaceholder(Element element)/*-{
-		return element.placeholder;
-	}-*/;
-
-	protected native void setPlaceholder(Element element, String placeholder)/*-{
-		element.placeholder = placeholder;
-	}-*/;
 
 	@Override
 	public void setPlaceholderColor(Color color) {
-		StyleHelper.setStyleProperty(uiObject.getElement(), CssMixin.MDC_PLACEHOLDER__INK_COLOR, color.getCssName());
+		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_PLACEHOLDER__INK_COLOR, color);
 	}
 }

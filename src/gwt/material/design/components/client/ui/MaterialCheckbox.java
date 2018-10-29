@@ -26,9 +26,10 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
-import gwt.material.design.components.client.base.mixin.IndeterminateMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
@@ -47,64 +48,65 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	// /////////////////////////////////////////////////////////////
 	// Checkbox
 	// /////////////////////////////////////////////////////////////
-	protected Div checkbox = new Div(CssName.MDC_CHECKBOX);
-	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX__NATIVE_CONTROL);
-	protected Div background = new Div(CssName.MDC_CHECKBOX__BACKGROUND);
-	protected MaterialSvg checkmark = new MaterialSvg(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
-	protected Div mixedmark = new Div(CssName.MDC_CHECKBOX__MIXEDMARK);
-	protected Label label = new Label(CssName.MDC_CHECKBOX__LABEL);
+	protected final Div checkbox = new Div(CssName.MDC_CHECKBOX);
+	protected final Input input = new Input(InputType.CHECKBOX, CssName.MDC_CHECKBOX__NATIVE_CONTROL);
+	protected final Div background = new Div(CssName.MDC_CHECKBOX__BACKGROUND);
+	protected final MaterialSvg checkmark = new MaterialSvg(CssName.MDC_CHECKBOX__CHECKMARK_PATH);
+	protected final Div mixedmark = new Div(CssName.MDC_CHECKBOX__MIXEDMARK);
+	protected final Label label = new Label(CssName.MDC_CHECKBOX__LABEL);
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin
 	// /////////////////////////////////////////////////////////////
-	protected final IndeterminateMixin<Input> indeterminateMixin = new IndeterminateMixin<>(input);
+	protected final AttributeMixin<Input, Boolean> indeterminateMixin = new AttributeMixin<>(input,
+			CssAttribute.INDETERMINATE, false);
 
 	public MaterialCheckbox() {
 		super(CssName.MDC_FORM_FIELD);
 		super.initializeSelectedMixin(checkbox, CssName.MDC_CHECKBOX__SELECTED, input);
 		getElement();
 	}
-	
+
 	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{		
-		var _this = this;			
+	protected native JavaScriptObject jsInit(final Element element)/*-{
+		var _this = this;
 		var checkbox = this.@gwt.material.design.components.client.ui.MaterialCheckbox::checkbox;
-		var checkbox_element = checkbox.@gwt.material.design.components.client.ui.html.Div::getElement()();		
-		element.input = new $wnd.mdc.checkbox.MDCCheckbox(checkbox_element);		
+		var checkbox_element = checkbox.@gwt.material.design.components.client.ui.html.Div::getElement()();
+		element.input = new $wnd.mdc.checkbox.MDCCheckbox(checkbox_element);
 		return element;
 	}-*/;
 
 	@Override
 	protected void onInitialize() {
-		
+
 		label.setFor(input.getId());
-		
+
 		setCircle(true);
-		
+
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-				
+
 		background.add(checkmark);
 		background.add(mixedmark);
-				
+
 		checkbox.add(input);
 		checkbox.add(background);
-			
+
 		add(checkbox);
 		add(label);
-		
+
 		checkmark.setFillColor(Color.MDC_THEME_SECONDARY);
-				
+
 		super.onInitialize();
 	}
-	
+
 	@Override
 	public boolean isIndeterminate() {
-		return indeterminateMixin.isIndeterminate();
+		return indeterminateMixin.getValue();
 	}
 
 	@Override
 	public void setIndeterminate(boolean value) {
-		indeterminateMixin.setIndeterminate(value);
+		indeterminateMixin.setValue(value);
 	};
 
 	@Override
@@ -141,12 +143,12 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return checkbox.addClickHandler(handler);
 	}
-	
+
 	public void setSelectedColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
 	}
-	
+
 	public void setUnselectedColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
 	}
 }

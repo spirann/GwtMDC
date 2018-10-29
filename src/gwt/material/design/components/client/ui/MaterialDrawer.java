@@ -117,12 +117,12 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DRAWER__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DRAWER__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_DRAWER__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_DRAWER__INK_COLOR, color.getCssName());
 	}
 
 	// ///////////////////////////////////////////

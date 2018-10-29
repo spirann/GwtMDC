@@ -26,10 +26,11 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import gwt.material.design.components.client.base.interfaces.HasDiscrete;
 import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
 import gwt.material.design.components.client.base.interfaces.HasMarkers;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
@@ -53,25 +54,30 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	// /////////////////////////////////////////////////////////////
 	// Slider
 	// /////////////////////////////////////////////////////////////
-	protected Div trackContainer = new Div(CssName.MDC_SLIDER__TRACK_CONTAINER);
-	protected Div track = new Div(CssName.MDC_SLIDER__TRACK);
-	protected Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);
-	protected Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);
-	protected Div focusRing = new Div(CssName.MDC_SLIDER__FOCUS_RING);
-	protected Div pin = new Div(CssName.MDC_SLIDER__PIN);
-	protected Span pinValueMarker = new Span(CssName.MDC_SLIDER__PIN_VALUE_MARKER);
+	protected final Div trackContainer = new Div(CssName.MDC_SLIDER__TRACK_CONTAINER);
+	protected final Div track = new Div(CssName.MDC_SLIDER__TRACK);
+	protected final Div markerContainer = new Div(CssName.MDC_SLIDER__TRACK_MARKER_CONTAINER);
+	protected final Div thumbContainer = new Div(CssName.MDC_SLIDER__THUMB_CONTAINER);
+	protected final Div focusRing = new Div(CssName.MDC_SLIDER__FOCUS_RING);
+	protected final Div pin = new Div(CssName.MDC_SLIDER__PIN);
+	protected final Span pinValueMarker = new Span(CssName.MDC_SLIDER__PIN_VALUE_MARKER);
 
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
-	protected final AttributeMixin<MaterialSlider> valueminMixin = new AttributeMixin<>(this, "aria-valuemin");
-	protected final AttributeMixin<MaterialSlider> valuenowMixin = new AttributeMixin<>(this, "aria-valuenow");
-	protected final AttributeMixin<MaterialSlider> valuemaxMixin = new AttributeMixin<>(this, "aria-valuemax");
-	protected final AttributeMixin<MaterialSlider> dataStepMixin = new AttributeMixin<>(this, "data-step");
-	protected final AttributeMixin<MaterialSlider> enabledMixin = new AttributeMixin<>(this, "aria-disabled");
-	protected final ApplyStyleMixin<MaterialSlider> discreteMixin = new ApplyStyleMixin<>(this,
+	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUEMIN, 0.0);
+	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUENOW, 5.0);
+	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUEMAX, 10.0);
+	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this,
+			CssAttribute.DATA_STEP, 1.0);
+	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_DISABLED);
+	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_SLIDER__DISCRETE);
-	protected final ApplyStyleMixin<MaterialSlider> markersMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
@@ -178,7 +184,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 	@Override
 	public void setValue(Double value, boolean fireEvents) {
-		valuenowMixin.setAttribute(value);
+		valuenowMixin.setValue(value);
 		super.setValue(value, fireEvents);
 		if (initialized) {
 			nativeSetValue(value);
@@ -187,23 +193,23 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 	@Override
 	public Double getValue() {
-		return valuenowMixin.getAttributeAsDouble();
+		return valuenowMixin.getValue();
 	}
 
 	public void setMin(final double min) {
-		valueminMixin.setAttribute(min);
+		valueminMixin.setValue(min);
 	}
 
 	public double getMin() {
-		return valueminMixin.getAttributeAsDouble();
+		return valueminMixin.getValue();
 	}
 
 	public void setMax(final double max) {
-		valuemaxMixin.setAttribute(max);
+		valuemaxMixin.setValue(max);
 	}
 
 	public double getMax() {
-		return valuemaxMixin.getAttributeAsDouble();
+		return valuemaxMixin.getValue();
 	}
 
 	protected void fireInputEvent() {
@@ -217,7 +223,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 	@Override
 	public void setDiscrete(final boolean discrete) {
-		discreteMixin.setApply(discrete);
+		discreteMixin.toggle(discrete);
 	}
 
 	@Override
@@ -226,16 +232,16 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	}
 
 	public void setStep(final Double step) {
-		dataStepMixin.setAttribute(step);
+		dataStepMixin.setValue(step);
 	}
 
 	public Double getStep() {
-		return dataStepMixin.getAttributeAsDouble();
+		return dataStepMixin.getValue();
 	}
 
 	@Override
 	public void setMarkers(boolean markers) {
-		markersMixin.setApply(markers);
+		markersMixin.toggle(markers);
 	}
 
 	@Override
@@ -246,30 +252,30 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);
-		enabledMixin.setAttribute(!enabled);
+		enabledMixin.setValue(!enabled);
 	}
 
 	public void setTrackColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__TRACK_COLOR, color.getCssName());
 	}
 
 	public void setTrackFillColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__TRACK_FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__TRACK_FILL_COLOR, color.getCssName());
 	}
 
 	public void setTickMarkerColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__TICK_MARKER_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__TICK_MARKER_COLOR, color.getCssName());
 	}
 
 	public void setSliderThumbColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__SLIDER_THUMB_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__SLIDER_THUMB_COLOR, color.getCssName());
 	}
 
 	public void setPinColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__PIN_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__PIN_COLOR, color.getCssName());
 	}
 
 	public void setValuePinColor(final Color color) {
-		setStyleProperty(CssMixin.MDC_SLIDER__VALUE_PIN_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_SLIDER__VALUE_PIN_COLOR, color.getCssName());
 	}
 }

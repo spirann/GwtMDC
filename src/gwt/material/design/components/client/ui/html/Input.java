@@ -22,8 +22,9 @@ package gwt.material.design.components.client.ui.html;
 import gwt.material.design.components.client.base.interfaces.HasName;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.InputTypeMixin;
-import gwt.material.design.components.client.base.mixin.NameMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.InputType;
 
@@ -34,9 +35,8 @@ import gwt.material.design.components.client.constants.InputType;
  */
 public class Input extends MaterialWidget implements HasType<InputType>, HasName {
 
-	private final InputTypeMixin<Input> inputTypeMixin = new InputTypeMixin<Input>(this);
-
-	private final NameMixin<Input> nameMixin = new NameMixin<Input>(this);
+	protected final InputTypeMixin<Input> inputTypeMixin = new InputTypeMixin<Input>(this);
+	protected final AttributeMixin<Input, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME);
 
 	public Input() {
 		super(HtmlElements.INPUT.createElement());
@@ -46,13 +46,13 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 		this();
 		setType(type);
 	}
-	
-	public Input(final InputType type, final String ... initialClasses) {
+
+	public Input(final InputType type, final String... initialClasses) {
 		super(HtmlElements.INPUT.createElement(), initialClasses);
 		setType(type);
 	}
-	
-	public Input(final String ... initialClasses) {
+
+	public Input(final String... initialClasses) {
 		super(HtmlElements.INPUT.createElement(), initialClasses);
 	}
 
@@ -68,12 +68,12 @@ public class Input extends MaterialWidget implements HasType<InputType>, HasName
 
 	@Override
 	public void setName(String name) {
-		nameMixin.setName(name);
+		nameMixin.setValue(name);
 	}
 
 	@Override
 	public String getName() {
-		return nameMixin.getName();
+		return nameMixin.getValue();
 	}
 
 }

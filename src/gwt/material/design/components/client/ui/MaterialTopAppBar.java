@@ -63,11 +63,11 @@ public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> 
 	
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TOP_APP_BAR__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TOP_APP_BAR__INK_COLOR, color.getCssName());
 	}
 }

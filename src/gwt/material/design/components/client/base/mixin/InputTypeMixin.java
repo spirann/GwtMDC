@@ -19,35 +19,30 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.UIObject;
-
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.InputType;
 
 /**
  * @author Richeli Vargas
  */
-public class InputTypeMixin<T extends UIObject> extends AbstractMixin<T> implements HasType<InputType> {
+public class InputTypeMixin<UIO extends MaterialUIObject & HasType<InputType>> extends AttributeMixin<UIO, InputType>
+		implements HasType<InputType> {
 
-	private InputType type;
-	
-    public InputTypeMixin(final T uiObject) {
-        super(uiObject);
-    }
+	public InputTypeMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.TYPE);
+	}
 
 	@Override
 	public void setType(InputType type) {
-		this.type = type;
-		if (type != null) {
-            uiObject.getElement().setAttribute("type", type.getCssName());
-        } else {
-            uiObject.getElement().removeAttribute("type");
-        }		
+		setValue(type);
 	}
 
 	@Override
 	public InputType getType() {
-		return type;
+		return getValue();
 	}
 
 }

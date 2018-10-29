@@ -25,11 +25,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.interfaces.HasType;
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.ChartLabelDirection;
 import gwt.material.design.components.client.constants.ChartLabelPosition;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.PieChartType;
@@ -50,8 +51,8 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	private PieChartType type = PieChartType.PIE;
 
-	protected AttributeMixin<MaterialPieChart> labelPositionMixin = new AttributeMixin<>(this, "label_position",
-			"inside");
+	protected final AttributeMixin<MaterialPieChart, String> labelPositionMixin = new AttributeMixin<>(this,
+			CssAttribute.LABEL_POSITION, "inside");
 
 	public MaterialPieChart() {
 		super(new JsPieChartOptions(), ChartAspectRatio.ASPECT_1x1);
@@ -108,15 +109,15 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	@Override
 	protected native void applyAnimations(final JavaScriptObject chart, final int durations) /*-{
-	
+
 		// Let's put a sequence number aside so we can use it in the event callbacks
 		var count = 0;
-		
+
 		// Once the chart is fully created we reset the sequence
 		chart.on('created', function() {
 			count++;
 		});
-		
+
 		chart.on('draw', function(data) {
 			if (data.type === 'slice' && count == 0) {
 
@@ -203,7 +204,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	public void setLabelPosition(ChartLabelPosition labelPosition) {
 		options.labelPosition = labelPosition == null ? ChartLabelPosition.INSIDE.getCssName()
 				: labelPosition.getCssName();
-		labelPositionMixin.setAttribute(options.labelPosition);
+		labelPositionMixin.setValue(options.labelPosition);
 		redraw();
 	}
 
@@ -252,13 +253,13 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	public void setInsideLabelColors(String colors) {
 		final String[] colorsArray = colors.split(" ");
 		for (int i = 0; i < colorsArray.length; i++)
-			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i),
+			setCssProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i),
 					Color.valueOf(colorsArray[i]).getCssName());
 
 	}
 
 	public void setInsideColors(Color... colors) {
 		for (int i = 0; i < colors.length; i++)
-			setStyleProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());
+			setCssProperty(CssMixin.MDC_CHARTIST__LABEL + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());
 	}
 }

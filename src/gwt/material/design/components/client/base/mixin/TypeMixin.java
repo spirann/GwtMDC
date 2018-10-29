@@ -19,35 +19,32 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.base.HasCssNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CssType;
 
 /**
  * @author Richeli Vargas
  */
-public class TypeMixin<W extends Widget, T extends CssType> extends StyleMixin<W> implements HasType<T> {
-
-	private T type;
+public class TypeMixin<UIO extends MaterialUIObject, T extends CssType> extends HasCssNameMixin<UIO, T> implements HasType<T> {
 	
-	public TypeMixin(final W widget) {
-		super(widget);
+	public TypeMixin(final UIO uiObject) {
+		super(uiObject);
 	}
 	
-	public TypeMixin(final W widget, final T type) {
-		super(widget);
+	public TypeMixin(final UIO uiObject, final T type) {
+		super(uiObject);
 		setType(type);
 	}
 
 	@Override
 	public void setType(T type) {
-		this.type = type;
-		setStyle(type == null ? null : type.getCssName());
+		setHasCssName(type);
 	}
 
 	@Override
 	public T getType() {
-		return type;
+		return getHasCssName();
 	}
 }

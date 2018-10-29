@@ -27,9 +27,10 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
-import gwt.material.design.components.client.base.mixin.NameMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 
@@ -71,7 +72,7 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 	}
 	
 	protected final TextMixin<MaterialDatePickerItem> textMixin = new TextMixin<>(this);
-	protected final NameMixin<MaterialDatePickerItem> nameMixin = new NameMixin<>(this);
+	protected final AttributeMixin<MaterialDatePickerItem, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME);
 	
 	public MaterialDatePickerItem() {
 		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);
@@ -91,9 +92,8 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 		
 		addClickHandler(event -> setSelected(true, false));
 		
-		if (isSelected()) {
+		if (isSelected()) 
 			updateHistory();
-		}
 		
 		super.onInitialize();
 	}
@@ -106,12 +106,12 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 
 	@Override
 	public void setName(String name) {
-		nameMixin.setName(name);
+		nameMixin.setValue(name);
 	}
 
 	@Override
 	public String getName() {
-		return nameMixin.getName();
+		return nameMixin.getValue();
 	}
 
 	@Override

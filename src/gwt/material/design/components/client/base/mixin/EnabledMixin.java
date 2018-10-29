@@ -21,74 +21,60 @@ package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
-import com.google.gwt.user.client.ui.IndexedPanel;
 import com.google.gwt.user.client.ui.Widget;
 
-/**
- * 
- * @author Richeli Vargas
- *
- */
-public class EnabledMixin<T extends Widget & IndexedPanel.ForIsWidget & HasEnabled>
-		extends AbstractMixin<T> implements HasEnabled {
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 
-	private static final String DISABLED = "disabled";
+/**
+ * @author Richeli Vargas
+ */
+public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends AttributeMixin<UIO, Boolean> implements HasEnabled {
 
 	private HandlerRegistration handler;
 
-	public EnabledMixin(final T widget) {
-		super(widget);
+	public EnabledMixin(final UIO uiObject) {
+		super(uiObject, CssAttribute.DISABLED);
 	}
 
-	@Override
-	public void setUiObject(T uiObject) {
-		super.setUiObject(uiObject);
-
-		// Clean up previous handler
+	void clearHandler() {
 		if (handler != null) {
 			handler.removeHandler();
 			handler = null;
 		}
 	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		// Invert because of the attribute name in CSS
+		// setValue(enabled ? null : Boolean.TRUE);
+
+		// Test ideas to remove bellow
+		if (!uiObject.isAttached() && handler == null)
+			handler = uiObject.addAttachHandler(event -> {
+				if (event.isAttached())
+					setEnabled(enabled ? null : Boolean.TRUE, uiObject);
+			});
+		else
+			setEnabled(enabled ? null : Boolean.TRUE, uiObject);
+	}
+
+	protected final void setEnabled(final boolean enabled, final MaterialUIObject uiObject) {
+
+		clearHandler();
+		setValue(getAttribute(), enabled ? null : Boolean.TRUE, uiObject);
+
+		for (int index = 0; index < uiObject.getWidgetCount(); index++) {
+			final Widget widget = uiObject.getWidget(index);
+			if (widget instanceof MaterialUIObject)
+				setEnabled(enabled, (MaterialUIObject) widget);
+		}
+	}
 
 	@Override
 	public boolean isEnabled() {
-		return !uiObject.getElement().hasAttribute(DISABLED);
-	}
-
-	@Override
-	public void setEnabled(boolean enabled) {
-		if (!uiObject.isAttached() && handler == null) {
-			handler = uiObject.addAttachHandler(event -> {
-				if (event.isAttached()) {
-					applyEnabled(enabled, uiObject);
-				} else if (handler != null) {
-					handler.removeHandler();
-					handler = null;
-				}
-			});
-		} else {
-			applyEnabled(enabled, uiObject);
-		}
-	}
-
-	@SuppressWarnings("unchecked")
-	private void applyEnabled(boolean enabled, T element) {
-
-		if (enabled) {
-			element.getElement().removeAttribute(DISABLED);
-		} else {
-			element.getElement().setAttribute(DISABLED, "");
-		}
-
-		for (int index = 0; index < element.getWidgetCount(); index++) {
-
-			final Widget widget = element.getWidget(index);
-
-			if (widget instanceof Widget && widget instanceof IndexedPanel.ForIsWidget && widget instanceof HasEnabled) {
-				applyEnabled(enabled, (T) widget);
-			}
-		}
-
+		// Invert because of the attribute name in CSS
+		return getValue() == null ? Boolean.TRUE : Boolean.FALSE;
 	}
 }

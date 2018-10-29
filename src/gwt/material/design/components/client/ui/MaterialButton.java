@@ -25,7 +25,7 @@ import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.interfaces.HasHref;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasType;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
@@ -50,7 +50,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected final TextMixin<Span> textMixin = new TextMixin<>(label);
 	protected final HrefMixin<MaterialButton> hrefMixin = new HrefMixin<>(this);
 	protected final TypeMixin<MaterialButton, ButtonType> typeMixin = new TypeMixin<>(this);
-	protected final ApplyStyleMixin<MaterialButton> denseMixin = new ApplyStyleMixin<>(this, CssName.MDC_BUTTON__DENSE);
+	protected final ToggleStyleMixin<MaterialButton> denseMixin = new ToggleStyleMixin<>(this, CssName.MDC_BUTTON__DENSE);
 
 	protected MaterialIcon icon;
 
@@ -134,7 +134,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 
 	@Override
 	public void setDense(boolean dense) {
-		denseMixin.setApply(dense);
+		denseMixin.toggle(dense);
 	}
 
 	@Override
@@ -144,15 +144,15 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BUTTON__FILL_COLOR, color.getCssName());
-		setStyleProperty(CssMixin.MDC_BUTTON_RAISED__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BUTTON__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BUTTON_RAISED__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setStyleProperty(CssMixin.MDC_BUTTON__INK_COLOR, color.getCssName());
-		setStyleProperty(CssMixin.MDC_BUTTON__OUTLINE_COLOR, color.getCssName());
-		setStyleProperty(CssMixin.MDC_BUTTON_RAISED__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BUTTON__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BUTTON__OUTLINE_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_BUTTON_RAISED__INK_COLOR, color.getCssName());
 	}
 
 	@Override

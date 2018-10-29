@@ -33,7 +33,7 @@ import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.interfaces.HasChartAspectRatio;
 import gwt.material.design.components.client.base.mixin.ChartAspectRatioMixin;
-import gwt.material.design.components.client.base.widget.BaseWidget;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.ChartAspectRatio;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -50,7 +50,7 @@ import gwt.material.design.components.client.utils.helper.JsHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidget
+public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialUIObject
 		implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
 
 	private boolean valueChangeHandlerInitialized;
@@ -82,9 +82,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 	protected JavaScriptObject jsElement;
 
 	public MaterialChartBase(O options, final ChartAspectRatio defaultAspect) {
-		super();
+		super(HtmlElements.DIV.createElement());
 		this.options = options;
-		setElement(HtmlElements.DIV.createElement());
 		setChartAspectRatio(defaultAspect);
 		initializeDefaultOptions();
 	}
@@ -188,7 +187,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 			for (int v = 0; v < getValue().length; v++) {
 				final Color color = getValue()[v].getColor();
 				if (color != null) {
-					setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v),
+					setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v),
 							color.getCssName());
 				}
 			}
@@ -268,20 +267,20 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends BaseWidge
 
 	@Override
 	public void setTextColor(Color color) {
-		setStyleProperty(CssMixin.MDC_CHARTIST__LABEL, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHARTIST__LABEL, color.getCssName());
 	}
 
 	public void setColors(String colors) {
 		final String[] colorsArray = colors.split(" ");
 		for (int i = 0; i < colorsArray.length; i++) {
-			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
+			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
 					Color.valueOf(colorsArray[i]).getCssName());
 		}
 	}
 
 	public void setColors(Color... colors) {
 		for (int i = 0; i < colors.length; i++) {
-			setStyleProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
+			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
 					colors[i].getCssName());
 		}
 	}

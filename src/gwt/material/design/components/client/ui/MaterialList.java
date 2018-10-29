@@ -23,7 +23,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.interfaces.HasDense;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Ul;
 
@@ -34,13 +34,13 @@ import gwt.material.design.components.client.ui.html.Ul;
  */
 public class MaterialList extends Ul implements HasDense {
 
-	protected final ApplyStyleMixin<MaterialList> avatarMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialList> avatarMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LIST__AVATAR_LIST);
 	
-	protected final ApplyStyleMixin<MaterialList> denseMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialList> denseMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LIST__DENSE);
 	
-	protected final ApplyStyleMixin<MaterialList> twoLinesMixin = new ApplyStyleMixin<>(this,
+	protected final ToggleStyleMixin<MaterialList> twoLinesMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_LIST__TWO_LINE);
 	
 	public MaterialList(){
@@ -53,7 +53,7 @@ public class MaterialList extends Ul implements HasDense {
 	}-*/;
 	
 	public void setHasAvatar(final boolean hasAvatar) {
-		avatarMixin.setApply(hasAvatar);
+		avatarMixin.toggle(hasAvatar);
 	}
 	
 	public boolean hasAvatar() {
@@ -62,7 +62,7 @@ public class MaterialList extends Ul implements HasDense {
 
 	@Override
 	public void setDense(boolean dense) {
-		denseMixin.setApply(dense);
+		denseMixin.toggle(dense);
 	}
 
 	@Override
@@ -71,7 +71,7 @@ public class MaterialList extends Ul implements HasDense {
 	}
 	
 	public void setTwoLines(boolean twoLines) {
-		twoLinesMixin.setApply(twoLines);
+		twoLinesMixin.toggle(twoLines);
 	}
 
 	public boolean isTwoLines() {

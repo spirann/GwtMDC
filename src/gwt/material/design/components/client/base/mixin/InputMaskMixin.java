@@ -20,10 +20,11 @@
 package gwt.material.design.components.client.base.mixin;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.ui.UIObject;
 
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.masker.Masker;
 
 /**
@@ -31,14 +32,11 @@ import gwt.material.design.components.client.masker.Masker;
  * @author Richeli Vargas
  *
  */
-public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> implements HasInputMask {
+public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String>
+		implements HasInputMask {
 
-	private static final String INPUT_MASK = "inputmask";
-
-	private HandlerRegistration handlerRegistration;
-
-	public InputMaskMixin(T uiObject) {
-		super(uiObject);
+	public InputMaskMixin(UIO uiObject) {
+		super(uiObject, CssAttribute.INPUT_MASK);
 	}
 
 	/**
@@ -48,32 +46,24 @@ public class InputMaskMixin<T extends UIObject> extends AbstractMixin<T> impleme
 	 */
 	@Override
 	public void setInputMask(String inputMask) {
-
-		uiObject.getElement().removeAttribute(inputMask);
-
-		if (handlerRegistration != null) {
-			handlerRegistration.removeHandler();
-			handlerRegistration = null;
-		}
+		setValue(inputMask);
 
 		Masker.unMask(uiObject.getElement());
 
-		if (inputMask != null) {
+		if (inputMask != null)
 			Masker.maskPattern(uiObject.getElement(), inputMask);
-			uiObject.getElement().setAttribute(INPUT_MASK, inputMask);
-		}
+
 	}
 
 	@Override
 	public String getInputMask() {
-		final String mask = uiObject.getElement().getAttribute(INPUT_MASK);
-		return mask == null || mask.isEmpty() ? null : mask;
+		return super.getValue();
 	}
-	
+
 	public String getValue() {
 		return Masker.fromPattern(getValue(uiObject.getElement()), getInputMask());
 	}
-	
+
 	protected native String getValue(final Element element) /*-{
 		return element.value;
 	}-*/;

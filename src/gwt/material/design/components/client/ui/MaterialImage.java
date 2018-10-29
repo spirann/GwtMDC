@@ -32,6 +32,8 @@ import com.google.gwt.user.client.ui.HasCaption;
 
 import gwt.material.design.components.client.base.interfaces.HasImage;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.ui.html.Img;
 
 /**
@@ -42,6 +44,7 @@ import gwt.material.design.components.client.ui.html.Img;
 public class MaterialImage extends Img implements HasCaption, HasImage, HasLoadHandlers, HasErrorHandlers {
 
 	protected final ImageMixin<MaterialImage> imageMixin = new ImageMixin<>(this);
+	protected final AttributeMixin<MaterialImage, String> captionMixin = new AttributeMixin<MaterialImage, String>(this, CssAttribute.DATA_CAPTION);
 
 	/**
 	 * Creates an empty image.
@@ -68,12 +71,12 @@ public class MaterialImage extends Img implements HasCaption, HasImage, HasLoadH
 
 	@Override
 	public String getCaption() {
-		return getElement().getAttribute("data-caption");
+		return captionMixin.getValue();
 	}
 
 	@Override
 	public void setCaption(String caption) {
-		getElement().setAttribute("data-caption", caption);
+		captionMixin.setValue(caption);
 	}
 
 	@Override

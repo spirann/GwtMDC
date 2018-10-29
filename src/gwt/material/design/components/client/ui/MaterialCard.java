@@ -26,7 +26,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasAspectRatio;
 import gwt.material.design.components.client.base.interfaces.HasImage;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
 import gwt.material.design.components.client.constants.AspectRatio;
@@ -49,7 +49,7 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 	private Div buttons = new Div(CssName.MDC_CARD__ACTIONS_BUTTONS);
 	private Div icons = new Div(CssName.MDC_CARD__ACTIONS_ICONS);
 
-	protected final ApplyStyleMixin<MaterialCard> outlineMixin = new ApplyStyleMixin<>(this, CssName.MDC_CARD__OUTLINE);
+	protected final ToggleStyleMixin<MaterialCard> outlineMixin = new ToggleStyleMixin<>(this, CssName.MDC_CARD__OUTLINE);
 	
 	public MaterialCard() {
 		super(CssName.MDC_CARD);
@@ -135,7 +135,7 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 	}
 
 	public void setOutline(final boolean outline) {
-		outlineMixin.setApply(outline);
+		outlineMixin.toggle(outline);
 	}
 	
 	public boolean isOutline() {

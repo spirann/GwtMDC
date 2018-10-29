@@ -19,8 +19,9 @@
  */
 package gwt.material.design.components.client.ui.html.svg;
 
-import gwt.material.design.components.client.base.mixin.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HtmlElements;
 
 /**
@@ -30,9 +31,9 @@ import gwt.material.design.components.client.constants.HtmlElements;
  */
 public class Svg extends MaterialWidget {
 
-	protected final AttributeMixin<Svg> widthMixin = new AttributeMixin<>(this, "width");
-	protected final AttributeMixin<Svg> heightMixin = new AttributeMixin<>(this, "height");
-	
+	protected final AttributeMixin<Svg, String> widthMixin = new AttributeMixin<>(this, CssAttribute.WIDTH);
+	protected final AttributeMixin<Svg, String> heightMixin = new AttributeMixin<>(this, CssAttribute.HEIGHT);
+
 	public Svg() {
 		super(HtmlElements.SVG.createElement());
 	}
@@ -40,14 +41,14 @@ public class Svg extends MaterialWidget {
 	public Svg(final String... initialClasses) {
 		super(HtmlElements.SVG.createElement(), initialClasses);
 	}
-	
+
 	@Override
 	public void setWidth(String width) {
-		widthMixin.setAttribute(width);
+		widthMixin.setValue(width);
 	}
-	
+
 	@Override
 	public void setHeight(String height) {
-		heightMixin.setAttribute(height);
+		heightMixin.setValue(height);
 	}
 }

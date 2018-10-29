@@ -21,7 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.interfaces.HasColumns;
 import gwt.material.design.components.client.base.interfaces.HasGap;
-import gwt.material.design.components.client.base.mixin.ApplyStyleMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.ui.html.Ul;
@@ -33,9 +33,9 @@ import gwt.material.design.components.client.ui.html.Ul;
  */
 public class MaterialImageList extends Ul implements HasColumns, HasGap {
 
-	private final ApplyStyleMixin<MaterialImageList> masontyMixin = new ApplyStyleMixin<>(this,
+	private final ToggleStyleMixin<MaterialImageList> masontyMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_IMAGE_LIST__MASONRY);
-	private final ApplyStyleMixin<MaterialImageList> withTextProtectionMixin = new ApplyStyleMixin<>(this,
+	private final ToggleStyleMixin<MaterialImageList> withTextProtectionMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_IMAGE_LIST__WITH_TEXT_PROTECTION);
 
 	public MaterialImageList() {
@@ -47,7 +47,7 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 	}
 
 	public void setMasonry(boolean masonry) {
-		masontyMixin.setApply(masonry);
+		masontyMixin.toggle(masonry);
 	}
 
 	public boolean isWithTextProtection() {
@@ -55,7 +55,7 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 	}
 
 	public void setWithTextProtection(boolean withTextProtection) {
-		withTextProtectionMixin.setApply(withTextProtection);
+		withTextProtectionMixin.toggle(withTextProtection);
 	}
 
 	@Override
@@ -67,17 +67,17 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 	
 	@Override
 	public void setDesktopCols(int columns) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_DESKTOP, String.valueOf(columns));
 	}
 
 	@Override
 	public void setTabletCols(int columns) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_TABLET, String.valueOf(columns));
 	}
 
 	@Override
 	public void setPhoneCols(int columns) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_COUNT_PHONE, String.valueOf(columns));
 	}
 
 	@Override
@@ -89,16 +89,16 @@ public class MaterialImageList extends Ul implements HasColumns, HasGap {
 
 	@Override
 	public void setDesktopGap(int gap) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_DESKTOP, gap + "px");
 	}
 
 	@Override
 	public void setTabletGap(int gap) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_TABLET, gap + "px");
 	}
 
 	@Override
 	public void setPhoneGap(int gap) {
-		setStyleProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
+		setCssProperty(CssMixin.MDC_IMAGE_LIST_COLUMN_GAP_PHONE, gap + "px");
 	}
 }

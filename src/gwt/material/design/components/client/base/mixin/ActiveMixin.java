@@ -19,51 +19,43 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
-
 import gwt.material.design.components.client.base.interfaces.HasActive;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
+import gwt.material.design.components.client.base.mixin.base.ToggleStyleNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * @author Richeli Vargas
  */
-public class ActiveMixin<T extends Widget & HasActive> extends AbstractMixin<T> implements HasActive {
-	private String styleName = "active";
+public class ActiveMixin<UIO extends MaterialUIObject & HasActive> extends ToggleStyleNameMixin<UIO> implements HasActive {
 
 	private boolean active = false;
-	private MaterialWidget target;
+	private UIO target;
 
-	public ActiveMixin(final T widget) {
-		super(widget);
+	public ActiveMixin(final UIO uiobject, final String styleName) {
+		super(uiobject, styleName);
+	}
+
+	public ActiveMixin(final UIO uiobject) {
+		this(uiobject, "active");
+	}
+
+	public ActiveMixin(final UIO uiobject, final UIO target) {
+		this(target);
+		this.target = target;
 	}
 	
-	public ActiveMixin(final T widget, final String styleName) {
-		this(widget);
-		this.styleName = styleName;
-	}
-
-	public ActiveMixin(final T widget, final MaterialWidget target) {
-		super(widget);
+	public ActiveMixin(final UIO uiobject, final UIO target, final String styleName) {
+		this(uiobject, styleName);
 		this.target = target;
 	}
 
 	@Override
 	public void setActive(boolean active) {
 		this.active = active;
-		if (target != null) {
-			applyActiveStyle(target, active);
-		} else {
-			applyActiveStyle((Widget) uiObject, active);
-		}
-	}
-
-	protected void applyActiveStyle(Widget widget, boolean active) {
-		
-		widget.removeStyleName(styleName);
-		
-		if (active) {			
-			widget.addStyleName(styleName);
-		}
+		if (target != null)
+			target.toggleStyleName(active, cssClass);			
+		else
+			uiObject.toggleStyleName(active, cssClass);
 	}
 
 	@Override

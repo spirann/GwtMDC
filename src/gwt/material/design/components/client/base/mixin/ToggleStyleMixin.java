@@ -19,33 +19,25 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.user.client.ui.Widget;
+import gwt.material.design.components.client.base.mixin.base.ToggleStyleNameMixin;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * @author Richeli Vargas
  */
-public class StyleEnabledMixin<W extends Widget> extends StyleMixin<W> {
+public class ToggleStyleMixin<UIO extends MaterialUIObject> extends ToggleStyleNameMixin<UIO> {
 
-	private final String cssClass;
-	private boolean enabled = false;
-	
-	public StyleEnabledMixin(final W widget, final String cssClass) {
-		super(widget);
-		this.cssClass = cssClass;
+	public ToggleStyleMixin(final UIO uiObject, final String cssClass) {
+		super(uiObject, cssClass);
 	}
 
-	public boolean isEnabled() {
-		return enabled;
+	@Override
+	public void toggle(boolean apply) {
+		super.toggle(apply);
 	}
 
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-		if(enabled){
-			setStyle(cssClass);
-		} else {
-			setStyle(null);
-		}
+	@Override
+	public boolean isApplied() {
+		return super.isApplied();
 	}
-
-	
 }
