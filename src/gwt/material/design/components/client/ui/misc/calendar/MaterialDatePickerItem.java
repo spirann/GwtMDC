@@ -60,7 +60,7 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 		final MaterialDatePickerItem old = history.get(getName());
 		if (fireEvent && old != null && old != this) {
 			old.setSelected(false, false);
-			old.fireChangeEvent();
+			old.fireSelectEvent();
 		}
 		history.put(getName(), this);
 	}

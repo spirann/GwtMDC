@@ -44,6 +44,7 @@ import gwt.material.design.components.client.base.mixin.StateMixin;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
@@ -89,9 +90,9 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
 	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input,
 			CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
-	protected final AttributeMixin<MaterialWidget, Integer> minLengthMixin = new AttributeMixin<>(input,
+	protected final PropertyMixin<MaterialWidget, Integer> minLengthMixin = new PropertyMixin<>(input,
 			CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
-	protected final AttributeMixin<MaterialWidget, Integer> maxLengthMixin = new AttributeMixin<>(input,
+	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input,
 			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
 	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input,
 			CssAttribute.READONLY, false, FromString.TO_BOOLEAN);

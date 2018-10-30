@@ -78,7 +78,7 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 
 		final MaterialChip old = history.get(parent);
 		if (fireEvent && old != null && old != this)
-			old.fireChangeEvent();
+			old.fireSelectEvent();
 
 		history.put(parent, this);
 	}
@@ -152,9 +152,9 @@ public class MaterialChip extends MaterialSelectedField implements HasType<ChipT
 	}
 
 	@Override
-	protected void fireChangeEvent() {
+	protected void fireSelectEvent() {
 		updateHistory();
-		super.fireChangeEvent();
+		super.fireSelectEvent();
 	}
 
 	@Override

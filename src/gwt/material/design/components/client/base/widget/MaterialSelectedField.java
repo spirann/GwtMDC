@@ -101,7 +101,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	protected void fireAutoSelect(ClickEvent event) {
 
 		if (fireChangeOnClick && (event.getSource() == null || event.getSource() == this || !(event.getSource() instanceof HasSelectionHandlers)))
-			TimerHelper.schedule(1, () -> fireChangeEvent());
+			TimerHelper.schedule(1, () -> fireSelectEvent());
 
 		JsHelper.clearFocus();
 	}
@@ -115,7 +115,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		return addDomHandler(handler, ChangeEvent.getType());
 	}
 
-	protected void fireChangeEvent() {
+	protected void fireSelectEvent() {
 		setSelected(isSelected(), false);
 		SelectionEvent.fire(MaterialSelectedField.this, isSelected());
 	}
@@ -127,7 +127,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 			addChangeHandler(event -> {
 				event.preventDefault();
 				event.stopPropagation();
-				fireChangeEvent();
+				fireSelectEvent();
 			});
 		}
 		return addHandler(handler, SelectionEvent.getType());
@@ -154,7 +154,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		selectMixin.setValue(selected);
 
 		if (fireEvents)
-			fireChangeEvent();
+			fireSelectEvent();
 	}
 	
 	@Override
