@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
@@ -79,8 +80,51 @@ public class MaterialSideSheet extends Div implements HasOpen {
 	}
 	
 	@Override
+	public void setWidth(String width) {
+		setCssProperty(CssMixin.MDC_SIDE_SHEET__CONTENT_WIDTH, width);
+	}
+	
+	@Override
 	public void setBackgroundColor(Color color) {
 		setCssProperty(CssMixin.MDC_SIDE_SHEET__FILL_COLOR, color.getCssName());
 	}
 
+	@Override
+	public void setPadding(int padding) {
+		content.setPadding(padding);
+	}
+	
+	@Override
+	public void setPaddingBottom(int paddingBottom) {
+		content.setPaddingBottom(paddingBottom);
+	}
+	
+	@Override
+	public void setPaddingLeft(int paddingLeft) {
+		content.setPaddingLeft(paddingLeft);
+	}
+	@Override
+	public void setPaddingRight(int paddingRight) {
+		content.setPaddingRight(paddingRight);
+	}
+	
+	@Override
+	public void setPaddingTop(int paddingTop) {
+		content.setPaddingTop(paddingTop);
+	}
+	
+	@Override
+	public void setOverflow(Overflow overflow) {
+		content.setOverflow(overflow);
+	}
+	
+	@Override
+	public void setOverflowX(Overflow overflow) {
+		content.setOverflowX(overflow);
+	}
+	
+	@Override
+	public void setOverflowY(Overflow overflow) {
+		content.setOverflowY(overflow);
+	}
 }

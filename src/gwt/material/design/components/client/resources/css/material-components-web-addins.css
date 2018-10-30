@@ -119,10 +119,11 @@
    ========================================================================== */	
  :root {
 	--mdc-side-sheet--fill-color: var(--mdc-theme-surface);
+	--mdc-side-sheet--content-width: 256px;
 }
 .mdc-side-sheet {
 	position: relative;
-	width: 256px;
+	width: var(--mdc-side-sheet--content-width);
 	max-width: 0;
 	height: 100%;
 	display: flex;
@@ -145,7 +146,7 @@
 	        transform: translateX(100%);}
 	        	        
 .mdc-side-sheet-opened {
-	max-width: 256px;
+	max-width: var(--mdc-side-sheet--content-width);
 	-webkit-transform: translateX(0);
 	   -moz-transform: translateX(0);
 	     -o-transform: translateX(0);
@@ -153,8 +154,10 @@
 
 .mdc-side-sheet--content {
 	display: flex;
-	width: 256px;
+	width: var(--mdc-side-sheet--content-width);
 	height: 100%;
+	overflow-x: hidden;
+	overflow-y: auto;
 	background-color: var(--mdc-side-sheet--fill-color);
 	flex-direction: column;	
 	flex-shrink: 0;

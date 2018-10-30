@@ -17,7 +17,7 @@ html, body {
 i, button, a {
 	cursor: pointer;
 	border: none;
-    outline:none;
+    outline: none;
 }
 
 i {

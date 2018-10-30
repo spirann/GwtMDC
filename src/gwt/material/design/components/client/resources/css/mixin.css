@@ -622,6 +622,10 @@ i.mdc-list-item__graphic {
     color: var(--mdc-list-item-selected-graphic-ink-color); }	
 .mdc-drawer .mdc-list-item {
     border-radius: var(--mdc-rounded-border-radius); }
+.mdc-drawer-app-content {
+	width: 100%;
+	flex: 1;
+	display: flex;}    
 /* ==========================================================================
    Menu
    ========================================================================== */
