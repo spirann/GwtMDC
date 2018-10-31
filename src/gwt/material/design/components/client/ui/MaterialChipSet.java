@@ -38,7 +38,7 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialChipSet extends Div implements HasType<ChipSetType> {
 
-	protected final TypeMixin<MaterialChipSet, ChipSetType> typeMixin = new TypeMixin<>(this);
+	protected final TypeMixin<MaterialChipSet, ChipSetType> typeMixin = new TypeMixin<>(this, ChipSetType.DEFAULT);
 
 	protected List<MaterialChip> selectedChips = new LinkedList<>();
 

@@ -21,9 +21,6 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
@@ -78,7 +75,7 @@ public class MaterialIconToggle extends MaterialSelectedField {
 		var element = this.@gwt.material.design.components.client.ui.MaterialIconToggle::getElement()();
 		var onChange = function() {
 			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::updateColor()();
-			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireChangeEvent()();
+			_this.@gwt.material.design.components.client.ui.MaterialIconToggle::fireSelectEvent()();
 		};
 		element.addEventListener('MDCIconToggle:change', onChange);
 
@@ -90,10 +87,6 @@ public class MaterialIconToggle extends MaterialSelectedField {
 
 	public void setToggleOff(final IconType icon) {
 		setAttribute(CssAttribute.DATA_TOGGLE_OFF, "{\"content\": \"" + icon.getCssName() + "\"}");
-	}
-
-	public HandlerRegistration addChangeHandler(ChangeHandler handler) {
-		return addDomHandler(handler, ChangeEvent.getType());
 	}
 
 	protected void updateColor() {
