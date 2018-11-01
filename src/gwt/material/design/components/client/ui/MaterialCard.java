@@ -26,10 +26,11 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasAspectRatio;
 import gwt.material.design.components.client.base.interfaces.HasImage;
-import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.AspectRatioMixin;
 import gwt.material.design.components.client.base.mixin.ImageMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.constants.AspectRatio;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -40,17 +41,18 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 
-	private CardMedia media = new CardMedia();
+	protected final CardMedia media = new CardMedia();
 
-	private Div header = new Div(CssName.MDC_CARD__CONTENT);
-	private Div content = new Div(CssName.MDC_CARD__CONTENT);
+	protected final Div header = new Div(CssName.MDC_CARD__CONTENT);
+	protected final Div content = new Div(CssName.MDC_CARD__CONTENT);
 
-	private Div actions = new Div(CssName.MDC_CARD__ACTIONS);
-	private Div buttons = new Div(CssName.MDC_CARD__ACTIONS_BUTTONS);
-	private Div icons = new Div(CssName.MDC_CARD__ACTIONS_ICONS);
+	protected final Div actions = new Div(CssName.MDC_CARD__ACTIONS);
+	protected final Div buttons = new Div(CssName.MDC_CARD__ACTIONS_BUTTONS);
+	protected final Div icons = new Div(CssName.MDC_CARD__ACTIONS_ICONS);
 
-	protected final ToggleStyleMixin<MaterialCard> outlineMixin = new ToggleStyleMixin<>(this, CssName.MDC_CARD__OUTLINE);
-	
+	protected final ToggleStyleMixin<MaterialCard> outlineMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_CARD__OUTLINE);
+
 	public MaterialCard() {
 		super(CssName.MDC_CARD);
 	}
@@ -58,19 +60,13 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
 		add(header);
-
 		add(media);
-
 		add(content);
-
 		actions.add(buttons);
 		actions.add(icons);
-		
-		if (buttons.getWidgetCount() > 0 || icons.getWidgetCount() > 0) {
+		if (buttons.getWidgetCount() > 0 || icons.getWidgetCount() > 0)
 			add(actions);
-		}
 	}
 
 	@UiChild(limit = 1, tagname = "header")
@@ -137,11 +133,11 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 	public void setOutline(final boolean outline) {
 		outlineMixin.toggle(outline);
 	}
-	
+
 	public boolean isOutline() {
-		return outlineMixin.isApplied(); 
+		return outlineMixin.isApplied();
 	}
-	
+
 	protected class CardMedia extends Div implements HasImage, HasAspectRatio {
 
 		private Div mediaContent = new Div(CssName.MDC_CARD__MEDIA_CONTENT);
@@ -149,9 +145,9 @@ public class MaterialCard extends Div implements HasImage, HasAspectRatio {
 		protected final ImageMixin<CardMedia> imageMixin = new ImageMixin<CardMedia>(CardMedia.this) {
 			@Override
 			public void setUrl(String url) {
-				super.setUrl(url);
-				CardMedia.this.getElement().removeAttribute("src");
-				CardMedia.this.getElement().getStyle().setProperty("backgroundImage", "url(" + url + ")");
+				super.setUrl(url);				
+				CardMedia.this.removeAttribute(CssAttribute.SRC);
+				CardMedia.this.setCssProperty("backgroundImage", "url(" + url + ")");
 			}
 		};
 
