@@ -62,13 +62,10 @@ public class MaterialFab extends Button implements HasType<FabType>, HasHref, Ha
 
 	@Override
 	protected void onInitialize() {
-
 		ripleMixin.initialize();
-
 		add(icon);
 		add(label);
 		addClickHandler(event -> getElement().blur());
-
 		super.onInitialize();
 	}
 
