@@ -21,6 +21,7 @@ public class CssAttribute {
 	public static final String CX = "cx";
 	public static final String CY = "cy";
 	public static final String DATA_CAPTION = "data-caption";
+	public static final String DATA_MDC_DIALOG_ACTION = "data-mdc-dialog-action";
 	public static final String DATA_MDC_AUTO_INIT = "data-mdc-auto-init";
 	public static final String DATA_STEP = "data-step";
 	public static final String DATA_TOGGLE_OFF = "data-toggle-off";

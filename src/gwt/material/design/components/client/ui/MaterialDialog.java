@@ -32,8 +32,11 @@ import gwt.material.design.components.client.base.interfaces.HasClosingHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpeningHandlers;
+import gwt.material.design.components.client.base.interfaces.HasToggler;
+import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
@@ -59,7 +62,7 @@ import gwt.material.design.components.client.utils.helper.JsHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancelHandlers, HasOpenHandlers, HasOpeningHandlers, HasCloseHandlers, HasClosingHandlers,HasOpen {
+public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancelHandlers, HasOpenHandlers, HasOpeningHandlers, HasCloseHandlers, HasClosingHandlers,HasOpen, HasToggler {
 
 	protected static final String NATIVE_ACTION_ACCEPT = "accept";
 	protected static final String NATIVE_ACTION_CANCEL = "close";
@@ -76,8 +79,10 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	protected final MaterialButton cancel = new MaterialButton();
 	protected final Div scrim = new Div(CssName.MDC_DIALOG__SCRIM);
 
+	protected final TogglerMixin<MaterialDialog> togglerMixin = new TogglerMixin<>(this);
+	
 	private boolean autoStackButtons = false;
-
+	
 	public MaterialDialog() {
 		super(CssName.MDC_DIALOG);
 		setRole(Role.ALERT_DIALOG);
@@ -90,14 +95,16 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	}-*/;
 
 	@Override
-	protected void onInitialize() {
+	protected void onInitialize() {	
+		
+		scrim.setAttribute(CssAttribute.DATA_MDC_DIALOG_ACTION, NATIVE_ACTION_CANCEL);	
 
 		cancel.addStyleName(CssName.MDC_DIALOG__BUTTON);
-		cancel.getElement().setAttribute("data-mdc-dialog-action", NATIVE_ACTION_CANCEL);
+		cancel.setAttribute(CssAttribute.DATA_MDC_DIALOG_ACTION, NATIVE_ACTION_CANCEL);
 		footer.add(cancel);
 		
 		accept.addStyleName(CssName.MDC_DIALOG__BUTTON);
-		accept.getElement().setAttribute("data-mdc-dialog-action", NATIVE_ACTION_ACCEPT);
+		accept.setAttribute(CssAttribute.DATA_MDC_DIALOG_ACTION, NATIVE_ACTION_ACCEPT);
 		footer.add(accept);
 		
 		surface.add(title);
@@ -265,6 +272,17 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 		if (dialog)
 			dialog.close();
 	}-*/;
+	
+
+	@Override
+	public void setToggler(String togglerId) {
+		togglerMixin.setToggler(togglerId);		
+	}
+
+	@Override
+	public String getToggler() {
+		return togglerMixin.getToggler();
+	}
 	
 	public void setAcceptText(final String text) {
 		accept.setText(text);

@@ -486,6 +486,8 @@
 .mdc-color-palette__button_group {
 	display: flex;}
 .mdc-color-palette__label {
+	background-color: var(--mdc-theme-surface);
+	color: var(--mdc-theme-on-surface);
 	font-size: .6rem;
 	line-height: .6rem;
 	text-align: center;
@@ -501,14 +503,18 @@
 	height: 28px;
 	min-height: 28px;
 	max-height: 28px;
-	border: 1px solid rgba(127,127,127,0.5);
+	margin: 1px;
 	cursor: pointer;
 	transition: border-radius 0.3s;}
+.mdc-color-palette__button[color='white']:not(.mdc-color-palette__button_selected),
+.mdc-color-palette__button[color='transparent']:not(.mdc-color-palette__button_selected) {
+	border: 1px solid rgba(127,127,127,0.5);}	
 .mdc-color-palette__button:hover:not(.mdc-color-palette__button_selected) {
 	border-radius: 8px;}
 .mdc-color-palette__button_selected {
 	transition: border-radius 0.3s;
-	border-radius: 50%;}
+	border-radius: 50%;
+	border: 2px solid rgba(127,127,127,0.5);}
 	
 /* ==========================================================================
    DatePiker

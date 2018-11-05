@@ -8,10 +8,11 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
+import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.ui.html.Label;
 
 public class MaterialColorPalette extends MaterialValuedField<Color> {
 
@@ -106,7 +107,7 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 
 	};
 
-	protected Map<Color, Div> items = new LinkedHashMap<>();
+	protected Map<Color, MaterialWidget> items = new LinkedHashMap<>();
 
 	public MaterialColorPalette() {
 		super(CssName.MDC_COLOR_PALETTE);
@@ -119,7 +120,7 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 		final Div labesContent = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
 		
 		Arrays.asList(COLORS_NAMES).parallelStream().forEach(name -> {
-			final Label colorName = new Label(CssName.MDC_COLOR_PALETTE__LABEL);
+			final Button colorName = new Button(CssName.MDC_COLOR_PALETTE__LABEL);
 			colorName.setInnerHTML(name);
 			labesContent.add(colorName);
 		});
@@ -128,8 +129,9 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 		Arrays.asList(COLORS).forEach(colorsGroup -> {
 			final Div content = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
 			Arrays.asList(colorsGroup).forEach(color -> {
-				final Div colorItem = new Div(CssName.MDC_COLOR_PALETTE__BUTTON);
+				final Button colorItem = new Button(CssName.MDC_COLOR_PALETTE__BUTTON);
 				colorItem.setBackgroundColor(color);
+				colorItem.setAttribute("color", color.toString().toLowerCase());
 				colorItem.addClickHandler(event -> setValue(color));
 				content.add(colorItem);
 				items.put(color, colorItem);
@@ -147,18 +149,16 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 	@Override
 	public void setValue(Color value) {
 
-		final Div old = items.get(getValue());
-		if (old != null) {
+		final MaterialWidget old = items.get(getValue());
+		if (old != null) 
 			old.removeStyleName(CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
-		}
-
+		
 		super.setValue(value);
 
-		final Div selected = items.get(value);
-		if (selected != null) {
+		final MaterialWidget selected = items.get(value);
+		if (selected != null) 
 			selected.addStyleName(CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
-		}
-		
+				
 	}
 
 }
