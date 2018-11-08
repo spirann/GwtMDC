@@ -48,12 +48,9 @@ public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin
 	@Override
 	public void setInputMask(String inputMask) {
 		setValue(inputMask);
-
 		Masker.unMask(uiObject.getElement());
-
 		if (inputMask != null)
 			Masker.maskPattern(uiObject.getElement(), inputMask);
-
 	}
 
 	@Override

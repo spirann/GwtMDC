@@ -70,16 +70,13 @@ public class Masker {
 	 * S - Alphanumeric
 	 */
 	public static String fromPattern(String text, String mask) {
-
-		if (mask == null || mask.isEmpty() || text == null || text.isEmpty()) {
+		if (mask == null || mask.isEmpty() || text == null || text.isEmpty())
 			return text;
-		}
 
 		final String chars[] = mask.replaceAll("9", "").replaceAll("A", "").replaceAll("S", "").split("");
 
-		for (String character : chars) {
+		for (String character : chars)
 			text = text.replace(character, "");
-		}
 
 		return text;
 	}
@@ -105,19 +102,19 @@ public class Masker {
 		// //////////////////////////////////////////////////////////////////////////
 		@DefaultMessage("99/99/9999")
 		String date__mask();
-		
+
 		@DefaultMessage("9999-99-99")
 		String date_en__mask();
-		
+
 		@DefaultMessage("99:99")
 		String time__mask();
-		
+
 		@DefaultMessage("99/99/9999 99:99")
 		String date_time__mask();
-		
+
 		@DefaultMessage("9999-99-99 99:99")
 		String date_time_en__mask();
-		
+
 		// //////////////////////////////////////////////////////////////////////////
 		// Brazilian documents
 		// //////////////////////////////////////////////////////////////////////////

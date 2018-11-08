@@ -170,13 +170,11 @@ public final class StyleHelper {
 	// Set css property at an element
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static void setCssProperty(final UIObject uiObject, final String property,
-			final Style.HasCssName value) {
+	public final static void setCssProperty(final UIObject uiObject, final String property, final Style.HasCssName value) {
 		setCssProperty(uiObject.getElement(), property, value == null ? null : value.getCssName());
 	}
 
-	public final static void setCssProperty(final Element element, final String property,
-			final Style.HasCssName value) {
+	public final static void setCssProperty(final Element element, final String property, final Style.HasCssName value) {
 		setCssProperty(element, property, value == null ? null : value.getCssName());
 	}
 
@@ -184,8 +182,7 @@ public final class StyleHelper {
 		setCssProperty(uiObject.getElement(), property, value);
 	}
 
-	public final static native void setCssProperty(final Element element, final String property,
-			final String value)/*-{
+	public final static native void setCssProperty(final Element element, final String property, final String value)/*-{
 		$wnd.jQuery(element).css(property, value);
 	}-*/;
 
@@ -193,13 +190,11 @@ public final class StyleHelper {
 	// Set css property at element's children
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static void setCssProperty(final UIObject uiObject, String child, String property,
-			final Style.HasCssName value) {
+	public final static void setCssProperty(final UIObject uiObject, String child, String property, final Style.HasCssName value) {
 		setCssProperty(uiObject.getElement(), child, property, value == null ? null : value.getCssName());
 	}
 
-	public final static void setCssProperty(final Element element, String child, String property,
-			final Style.HasCssName value) {
+	public final static void setCssProperty(final Element element, String child, String property, final Style.HasCssName value) {
 		setCssProperty(element, child, property, value == null ? null : value.getCssName());
 	}
 
@@ -207,8 +202,7 @@ public final class StyleHelper {
 		setCssProperty(uiObject.getElement(), child, property, value);
 	}
 
-	public final static native void setCssProperty(final Element parent, String child, String property,
-			String value) /*-{
+	public final static native void setCssProperty(final Element parent, String child, String property, String value) /*-{
 		if (value && value.length > 0)
 			$wnd.jQuery(parent).find(child).css(property, value);
 		else
@@ -247,8 +241,7 @@ public final class StyleHelper {
 	// Set property
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static void setProperty(final UIObject uiObject, final String property,
-			final Style.HasCssName value) {
+	public final static void setProperty(final UIObject uiObject, final String property, final Style.HasCssName value) {
 		setProperty(uiObject.getElement(), property, value == null ? null : value.getCssName());
 	}
 
@@ -260,8 +253,7 @@ public final class StyleHelper {
 		setProperty(uiObject.getElement(), property, value);
 	}
 
-	public final static native void setProperty(final Element element, final String property,
-			final String value)/*-{
+	public final static native void setProperty(final Element element, final String property, final String value)/*-{
 		if (value && value.length > 0)
 			$wnd.jQuery(element).prop(property, value);
 		else
@@ -293,15 +285,18 @@ public final class StyleHelper {
 	}
 
 	public final static native String getProperty(final Element element, final String property)/*-{
-		return new String($wnd.jQuery(element).prop(property));
+		var prop = $wnd.jQuery(element).prop(property);
+		if (!prop)
+			return null;
+		else
+			return new String(prop);
 	}-*/;
-	
+
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// Set attribute
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static void setAttribute(final UIObject uiObject, final String attribute,
-			final Style.HasCssName value) {
+	public final static void setAttribute(final UIObject uiObject, final String attribute, final Style.HasCssName value) {
 		setAttribute(uiObject.getElement(), attribute, value == null ? null : value.getCssName());
 	}
 
@@ -313,8 +308,7 @@ public final class StyleHelper {
 		setAttribute(uiObject.getElement(), attribute, value);
 	}
 
-	public final static native void setAttribute(final Element element, final String attribute,
-			final String value)/*-{
+	public final static native void setAttribute(final Element element, final String attribute, final String value)/*-{
 		if (value && value.length > 0)
 			$wnd.jQuery(element).attr(attribute, value);
 		else
@@ -346,6 +340,10 @@ public final class StyleHelper {
 	}
 
 	public final static native String getAttribute(final Element element, final String attribute)/*-{
-		return new String($wnd.jQuery(element).attr(attribute));
+		var attr = $wnd.jQuery(element).attr(attribute);
+		if (!attr)
+			return null;
+		else
+			return new String(attr);
 	}-*/;
 }

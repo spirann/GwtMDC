@@ -42,24 +42,24 @@ public class MaterialTextArea extends MaterialInputBox implements HasResize {
 	}
 	
 	public void setRows(int rows) {
-		if (field instanceof MaterialInputArea) {
-			((MaterialInputArea) field).setRows(rows);
+		if (input instanceof MaterialInputArea) {
+			((MaterialInputArea) input).setRows(rows);
 		}
 	}
 
 	public void setCols(int cols) {
-		if (field instanceof MaterialInputArea) {
-			((MaterialInputArea) field).setCols(cols);
+		if (input instanceof MaterialInputArea) {
+			((MaterialInputArea) input).setCols(cols);
 		}
 	}
 	
 	@Override
 	public void setResize(Resize resize) {
-		((MaterialInputArea) field).setResize(resize);
+		((MaterialInputArea) input).setResize(resize);
 	}
 
 	@Override
 	public Resize getResize() {
-		return ((MaterialInputArea) field).getResize();
+		return ((MaterialInputArea) input).getResize();
 	}
 }

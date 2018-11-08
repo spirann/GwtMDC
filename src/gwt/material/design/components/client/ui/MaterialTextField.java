@@ -54,73 +54,73 @@ public class MaterialTextField extends MaterialInputBox implements HasHelperText
 
 	@Override
 	public IconType getIcon() {
-		return field.getIcon();
+		return input.getIcon();
 	}
 
 	@Override
 	public void setIcon(IconType iconType) {
-		field.setIcon(iconType);
+		input.setIcon(iconType);
 	}
 	
 	@Override
 	public void setIcon(IconType iconType, boolean animate) {
-		field.setIcon(iconType, animate);
+		input.setIcon(iconType, animate);
 	}
 
 	@Override
 	public void setIconColor(Color color) {
-		field.setIconColor(color);
+		input.setIconColor(color);
 	}
 	
 	public TextFieldIconPosition getIconPosition() {
-		return field.getIconPosition();
+		return input.getIconPosition();
 	}
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		field.setIconPosition(iconPosition);
+		input.setIconPosition(iconPosition);
 	}
 	
 	@Override
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
-		return field.addIconClickHandler(handler);
+		return input.addIconClickHandler(handler);
 	}
 
 	@Override
 	public void setType(TextFieldType type) {
-		field.setType(type);
+		input.setType(type);
 	}
 
 	@Override
 	public TextFieldType getType() {
-		return field.getType();
+		return input.getType();
 	}
 
 	public void setInputType(InputType type) {
-		field.setInputType(type);
+		input.setInputType(type);
 	}
 
 	public InputType getInputType() {
-		return field.getInputType();
+		return input.getInputType();
 	}
 	
 	@Override
 	public void setRequired(boolean required) {
-		field.setRequired(required);
+		input.setRequired(required);
 	}
 
 	@Override
 	public boolean isRequired() {
-		return field.isRequired();
+		return input.isRequired();
 	}
 
 	@Override
 	public void setInputMask(String inputMask) {
-		field.setInputMask(inputMask);
+		input.setInputMask(inputMask);
 	}
 
 	@Override
 	public String getInputMask() {
-		return field.getInputMask();
+		return input.getInputMask();
 	}
 
 }

@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui.misc.input;
 
+import com.google.gwt.event.dom.client.KeyDownHandler;
+import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.event.dom.client.KeyUpHandler;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
@@ -50,7 +53,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
 		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
 
-	protected final MaterialInput field = contructInput();
+	protected final MaterialInput input = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
 
 	public MaterialInputBox() {
@@ -64,12 +67,12 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	@Override
 	protected void onInitialize() {
 
-		field.setAriaControls(helper.getId());
-		field.setAriaDescribedBy(helper.getId());
+		input.setAriaControls(helper.getId());
+		input.setAriaDescribedBy(helper.getId());
 
 		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));
 
-		add(field);
+		add(input);
 		add(helper);
 
 		super.onInitialize();
@@ -77,12 +80,12 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 
 	@Override
 	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
-		return field.addValidationHandler(handler);
+		return input.addValidationHandler(handler);
 	}
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		field.setBackgroundColor(color);
+		input.setBackgroundColor(color);
 	}
 
 	@Override
@@ -97,16 +100,16 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 
 	@Override
 	public void setTextColor(Color color) {
-		field.setTextColor(color);
+		input.setTextColor(color);
 	}
 
 	@Override
 	public void setColor(Color color) {
-		field.setColor(color);
+		input.setColor(color);
 	}
 
 	public void setFocusedColor(Color color) {
-		field.setFocusedColor(color);
+		input.setFocusedColor(color);
 	}
 
 	@Override
@@ -131,153 +134,168 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 
 	@Override
 	public void setPlaceholder(String placeholder) {
-		field.setPlaceholder(placeholder);
+		input.setPlaceholder(placeholder);
 	}
 
 	@Override
 	public String getPlaceholder() {
-		return field.getPlaceholder();
+		return input.getPlaceholder();
 	}
 
 	@Override
 	public void setPlaceholderColor(Color color) {
-		field.setPlaceholderColor(color);
+		input.setPlaceholderColor(color);
 	}
 
 	@Override
 	public void setDense(boolean dense) {
-		field.setDense(dense);
+		input.setDense(dense);
 	}
 
 	@Override
 	public boolean isDense() {
-		return field.isDense();
+		return input.isDense();
 	}
 
 	@Override
 	public void setLabel(String label) {
-		field.setLabel(label);
+		input.setLabel(label);
 	}
 
 	@Override
 	public String getLabel() {
-		return field.getLabel();
+		return input.getLabel();
 	}
 
 	@Override
 	public String getText() {
-		return field.getText();
+		return input.getText();
 	}
 
 	@Override
 	public void setText(String text) {
-		field.setText(text);
+		input.setText(text);
 	}
 
 	public void setMinLength(final int length) {
-		field.setMinLength(length);
+		input.setMinLength(length);
 	}
 
 	public int getMinLength() {
-		return field.getMinLength();
+		return input.getMinLength();
 	}
 
 	public void setMaxLength(final int length) {
-		field.setMaxLength(length);
+		input.setMaxLength(length);
 	}
 
 	public int getMaxLength() {
-		return field.getMaxLength();
+		return input.getMaxLength();
 	}
 
 	@Override
 	public void setState(State state) {
-		field.setState(state);
+		input.setState(state);
 	}
 
 	@Override
 	public State getState() {
-		return field.getState();
+		return input.getState();
 	}
 
 	public TextFieldIconPosition getIconPosition() {
-		return field.getIconPosition();
+		return input.getIconPosition();
 	}
 
 	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		field.setIconPosition(iconPosition);
+		input.setIconPosition(iconPosition);
 	}
 
 	public TextFieldValidation getValidation() {
-		return field.getValidation();
+		return input.getValidation();
 	}
 
 	public void setValidation(TextFieldValidation validation) {
-		field.setValidation(validation);
+		input.setValidation(validation);
 	}
 
 	@Override
 	public void setWidth(String width) {
 		super.setWidth(width);
-		field.setWidth(width);
+		input.setWidth(width);
 		helper.setWidth(width);
 	}
 
 	@Override
 	public void setMaxWidth(String maxWidth) {
 		super.setMaxWidth(maxWidth);
-		field.setMaxWidth(maxWidth);
+		input.setMaxWidth(maxWidth);
 		helper.setMaxWidth(maxWidth);
 	}
 
 	@Override
 	public void setMinHeight(String minHeight) {
 		super.setMinHeight(minHeight);
-		field.setMinHeight(minHeight);
+		input.setMinHeight(minHeight);
 		helper.setMinHeight(minHeight);
 	}
 
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-		return field.addValueChangeHandler(handler);
+		return input.addValueChangeHandler(handler);
 	}
 
 	@Override
+	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
+		return input.addKeyDownHandler(handler);
+	}
+	
+	@Override
+	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
+		return input.addKeyUpHandler(handler);
+	}
+	
+	@Override
+	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
+		return input.addKeyPressHandler(handler);
+	}
+	
+	@Override
 	public String getValue() {
-		return field.getValue();
+		return input.getValue();
 	}
 
 	@Override
 	public void setValue(String value) {
-		field.setValue(value);
+		input.setValue(value);
 	}
 
 	@Override
 	public void setValue(String value, boolean fireEvents) {
-		field.setValue(value, fireEvents);
+		input.setValue(value, fireEvents);
 	}
 
 	protected MaterialInput getInput() {
-		return field;
+		return input;
 	}
 
 	@Override
 	public void setReadOnly(boolean readOnly) {
-		field.setReadOnly(readOnly);
+		input.setReadOnly(readOnly);
 	}
 
 	@Override
 	public boolean isReadOnly() {
-		return field.isReadOnly();
+		return input.isReadOnly();
 	}
 	
 	@Override
 	public void setUnbordered(boolean unbordered) {
-		field.setUnbordered(unbordered);
+		input.setUnbordered(unbordered);
 	}
 
 	@Override
 	public boolean isUnbordered() {
-		return field.isUnbordered();
+		return input.isUnbordered();
 	}
 }
