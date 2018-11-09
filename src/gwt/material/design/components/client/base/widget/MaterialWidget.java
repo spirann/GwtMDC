@@ -79,7 +79,6 @@ import gwt.material.design.components.client.base.interfaces.HasAriaLabelledBy;
 import gwt.material.design.components.client.base.interfaces.HasAriaModal;
 import gwt.material.design.components.client.base.interfaces.HasAriaSelected;
 import gwt.material.design.components.client.base.interfaces.HasAutoInitData;
-import gwt.material.design.components.client.base.interfaces.HasCircle;
 import gwt.material.design.components.client.base.interfaces.HasDataObject;
 import gwt.material.design.components.client.base.interfaces.HasElevation;
 import gwt.material.design.components.client.base.interfaces.HasHideOn;
@@ -92,7 +91,6 @@ import gwt.material.design.components.client.base.interfaces.HasRtl;
 import gwt.material.design.components.client.base.interfaces.HasTabindex;
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.base.mixin.AutoInitDataMixin;
-import gwt.material.design.components.client.base.mixin.CircleMixin;
 import gwt.material.design.components.client.base.mixin.EnabledMixin;
 import gwt.material.design.components.client.base.mixin.RippleMixin;
 import gwt.material.design.components.client.base.mixin.TooltipMixin;
@@ -123,7 +121,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends MaterialUIObject
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasCircle, HasElevation, HasRtl,
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl,
 		HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
@@ -170,7 +168,6 @@ public class MaterialWidget extends MaterialUIObject
 	protected final EnabledMixin<MaterialWidget> enabledMixin = new EnabledMixin<>(this);
 	protected final AutoInitDataMixin<MaterialWidget> autoInitMixin = new AutoInitDataMixin<MaterialWidget>(this);
 	protected final RippleMixin<MaterialWidget> ripleMixin = new RippleMixin<>(this);
-	protected final CircleMixin<MaterialWidget> circleMixin = new CircleMixin<MaterialWidget>(this);
 	protected final TypeMixin<MaterialWidget, Elevation> elevationMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 	protected final TooltipMixin<MaterialWidget> tooltipMixin = new TooltipMixin<>(this);
@@ -651,11 +648,6 @@ public class MaterialWidget extends MaterialUIObject
 	@Override
 	public Color getRipple() {
 		return ripleMixin.getRipple();
-	}
-
-	@Override
-	public void setCircle(boolean circle) {
-		circleMixin.setCircle(circle);
 	}
 
 	@Override

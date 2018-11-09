@@ -154,7 +154,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 
 		selectMixin.setValue(selected);
 
-		if (fireEvents)
+		if (fireEvents && isAttached())
 			fireSelectEvent();
 	}
 	

@@ -25,6 +25,7 @@ import com.google.gwt.dom.client.Element;
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -54,7 +55,7 @@ public class MaterialIconToggle extends MaterialSelectedField {
 	public MaterialIconToggle() {
 		super(HtmlElements.I.createElement(), CssName.MDC_ICON_TOGGLE, CssName.MATERIAL_ICONS);
 		setRole(Role.BUTTON);
-		setCircle(true);
+		setBorderRadius(BorderRadius.CIRCLE);
 	}
 
 	@Override

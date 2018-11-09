@@ -85,7 +85,7 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 	@Override
 	public void setValue(T value, boolean fireEvents) {
 		this.value = value;
-		if (fireEvents)
+		if (fireEvents && isAttached())
 			fireChangeEvent();
 	}
 

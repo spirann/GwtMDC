@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.ComplexPanel;
 import gwt.material.design.components.client.base.interfaces.HasFlexbox;
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
 import gwt.material.design.components.client.constants.BorderCollapse;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.Display;
@@ -310,6 +311,10 @@ public class MaterialUIObject extends ComplexPanel implements HasFlexbox {
 	}
 
 	public void setBorderRadius(final String borderRadius) {
+		setCssProperty("border-radius", BorderRadius.fromName(borderRadius));
+	}
+	
+	public void setBorderRadius(final BorderRadius borderRadius) {
 		setCssProperty("border-radius", borderRadius);
 	}
 

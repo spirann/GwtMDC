@@ -19,8 +19,6 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
-
-
 import com.google.gwt.dom.client.Style;
 
 /**
@@ -28,56 +26,56 @@ import com.google.gwt.dom.client.Style;
  */
 public final class EnumHelper {
 
-    /**
-     * Returns first enum constant found in at space-separated list of style names.
-     *
-     * @param styleName    Space-separated list of styles
-     * @param enumClass    Type of enum
-     * @param defaultValue Default value of no match was found
-     * @return First enum constant found or default value
-     */
-    public static <E extends Enum<? extends Style.HasCssName>> E fromStyleName(final String styleName,
-                                                                               final Class<E> enumClass,
-                                                                               final E defaultValue) {
-        return EnumHelper.fromStyleName(styleName, enumClass, defaultValue, false);
-    }
+	/**
+	 * Returns first enum constant found in at space-separated list of style names.
+	 *
+	 * @param styleName
+	 *            Space-separated list of styles
+	 * @param enumClass
+	 *            Type of enum
+	 * @param defaultValue
+	 *            Default value of no match was found
+	 * @return First enum constant found or default value
+	 */
+	public static <E extends Enum<? extends Style.HasCssName>> E fromStyleName(final String styleName, final Class<E> enumClass, final E defaultValue) {
+		return EnumHelper.fromStyleName(styleName, enumClass, defaultValue, false);
+	}
 
-    /**
-     * Returns first enum constant found in at space-separated list of style names.
-     *
-     * @param styleName    Space-separated list of styles
-     * @param enumClass    Type of enum
-     * @param defaultValue Default value of no match was found
-     * @return First enum constant found or default value
-     */
-    @SuppressWarnings("unchecked")
-    public static <E extends Enum<? extends Style.HasCssName>> E fromStyleName(final String styleName,
-                                                                               final Class<E> enumClass,
-                                                                               final E defaultValue,
-                                                                               final boolean ignoreSpaces) {
-        if (styleName == null || enumClass == null) {
-            return defaultValue;
-        }
+	/**
+	 * Returns first enum constant found in at space-separated list of style names.
+	 *
+	 * @param styleName
+	 *            Space-separated list of styles
+	 * @param enumClass
+	 *            Type of enum
+	 * @param defaultValue
+	 *            Default value of no match was found
+	 * @return First enum constant found or default value
+	 */
+	@SuppressWarnings("unchecked")
+	public static <E extends Enum<? extends Style.HasCssName>> E fromStyleName(final String styleName, final Class<E> enumClass, final E defaultValue, final boolean ignoreSpaces) {
+		if (styleName == null || enumClass == null)
+			return defaultValue;
 
-        for (final Enum<? extends Style.HasCssName> constant : enumClass.getEnumConstants()) {
-            final Style.HasCssName anEnum = (Style.HasCssName) constant;
-            final String cssClass = anEnum.getCssName();
+		for (final Enum<? extends Style.HasCssName> constant : enumClass.getEnumConstants()) {
+			final Style.HasCssName anEnum = (Style.HasCssName) constant;
+			final String cssClass = anEnum.getCssName();
 
-            if(cssClass != null) {
-                boolean contains;
-                if (ignoreSpaces) {
-                    contains = styleName.equals(cssClass);
-                } else {
-                    contains = StyleHelper.containsStyle(styleName, cssClass);
-                }
-                if (contains) {
-                    return (E) anEnum;
-                }
-            }
-        }
-        return defaultValue;
-    }
+			if (cssClass != null) {
+				boolean contains;
+				if (ignoreSpaces)
+					contains = styleName.equals(cssClass);
+				else
+					contains = StyleHelper.containsStyle(styleName, cssClass);
 
-    private EnumHelper() {
-    }
+				if (contains)
+					return (E) anEnum;
+
+			}
+		}
+		return defaultValue;
+	}
+
+	private EnumHelper() {
+	}
 }

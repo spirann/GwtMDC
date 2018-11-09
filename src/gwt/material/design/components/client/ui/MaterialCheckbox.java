@@ -29,6 +29,7 @@ import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasIndeterminate;
 import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -80,7 +81,7 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	protected void onInitialize() {
 		label.setFor(input.getId());
 
-		setCircle(true);
+		checkbox.setBorderRadius(BorderRadius.CIRCLE);
 
 		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
 
@@ -126,11 +127,6 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 	@Override
 	public Color getRipple() {
 		return checkbox.getRipple();
-	}
-
-	@Override
-	public void setCircle(boolean circle) {
-		checkbox.setCircle(circle);
 	}
 
 	@Override

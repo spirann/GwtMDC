@@ -103,11 +103,6 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 	}
 
 	@Override
-	public void setCircle(boolean circle) {
-		switch_.setCircle(circle);
-	}
-
-	@Override
 	public void setTextColor(Color color) {
 		label.setTextColor(color);
 	}

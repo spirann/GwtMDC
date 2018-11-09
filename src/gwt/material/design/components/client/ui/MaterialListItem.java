@@ -32,6 +32,7 @@ import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -79,12 +80,12 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 		ripleMixin.initialize();
 
 		avatar.addStyleName(CssName.MDC_LIST_ITEM__GRAPHIC);
-		avatar.setCircle(true);
+		avatar.setBorderRadius(BorderRadius.CIRCLE);
 
 		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty())
 			insert(avatar, 0);
 
-		icon.setCircle(true);
+		icon.setBorderRadius(BorderRadius.CIRCLE);
 
 		if (icon.getType() != null)
 			insert(icon, 0);

@@ -30,6 +30,8 @@ import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRole;
+import gwt.material.design.components.client.base.interfaces.HasToggler;
+import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
@@ -44,10 +46,12 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCloseHandlers {
+public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCloseHandlers, HasToggler {
 
-	protected MaterialList items = new MaterialList();
+	protected final MaterialList items = new MaterialList();
 
+	protected final TogglerMixin<MaterialMenu> togglerMixin = new TogglerMixin<>(this);
+	
 	private boolean quickOpen = false;
 	private boolean closeOnClick = false;
 
@@ -213,6 +217,16 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 			if (isEnabled())
 				handler.onOpen(event);
 		}, OpenEvent.getType());
+	}
+	
+	@Override
+	public void setToggler(String togglerId) {
+		togglerMixin.setToggler(togglerId);		
+	}
+
+	@Override
+	public String getToggler() {
+		return togglerMixin.getToggler();
 	}
 
 	public boolean isQuickOpen() {

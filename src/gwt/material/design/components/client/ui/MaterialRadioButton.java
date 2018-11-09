@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.HasName;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -110,7 +111,7 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 		if (isSelected()) 
 			updateHistory();
 		
-		setCircle(true);
+		radio.setBorderRadius(BorderRadius.CIRCLE);
 
 		super.onInitialize();
 	}
@@ -149,11 +150,6 @@ public class MaterialRadioButton extends MaterialSelectedField implements HasNam
 	@Override
 	public Color getRipple() {
 		return radio.getRipple();
-	}
-
-	@Override
-	public void setCircle(boolean circle) {
-		radio.setCircle(circle);
 	}
 
 	@Override

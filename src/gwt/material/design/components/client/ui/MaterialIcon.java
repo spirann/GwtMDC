@@ -23,6 +23,7 @@ import gwt.material.design.components.client.base.interfaces.HasHref;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.IconMixin;
+import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Icon;
@@ -39,13 +40,13 @@ public class MaterialIcon extends Icon implements HasType<IconType>, HasHref {
 
 	public MaterialIcon() {
 		super(CssName.MATERIAL_ICONS);
-		setCircle(true);
+		setBorderRadius(BorderRadius.CIRCLE);
 	}
 	
 	public MaterialIcon(String... initialClasses) {
 		super(initialClasses);
 		addStyleName(CssName.MATERIAL_ICONS);
-		setCircle(true);
+		setBorderRadius(BorderRadius.CIRCLE);
 	}
 	
 	public MaterialIcon(final IconType type, String... initialClasses) {

@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -27,8 +28,8 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.interfaces.HasUnbordered;
-import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
@@ -78,11 +79,18 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	@Override
 	protected void onLoad() {
 		super.onLoad();
-		final int index = getSelectedIndex();
-		if (index == -1)
-			setValue(getValue(), false);
-		else
-			onSelect(index, false);
+
+		V value = getValue();
+		GWT.log("value: " + value);
+		if (value != null)
+			setValue(value, false);
+		else {
+			final int index = getSelectedIndex();
+			if (index == -1)
+				setValue(value, false);
+			else
+				onSelect(index, false);
+		}
 	}
 
 	@Override
@@ -116,23 +124,21 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	}-*/;
 
 	@Override
+	public void setValue(V value) {
+		setValue(value, true);
+	}
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public void setValue(V value, boolean fireEvents) {
 		if (initialized) {
-			final Widget item = select.getChildrenList().stream()
-					.filter(widget -> ((Option<V>) widget).getValue().equals(value)).findAny().orElse(null);
-			
+			final Widget item = select.getChildrenList().stream().filter(widget -> ((Option<V>) widget).getValue().equals(value)).findAny().orElse(null);
 			if (item == null)
 				selectedIndex(-1);
 			else
 				selectedIndex(select.getWidgetIndex(item));
-
-			if (fireEvents)
-				fireChangeEvent();
-
-		} else
-			super.setValue(value, fireEvents);
-
+		}
+		super.setValue(value, fireEvents);
 	}
 
 	protected void onSelect(final int index) {
@@ -182,7 +188,7 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	public SelectMenuType getType() {
 		return typeMixin.getType();
 	}
-	
+
 	@Override
 	public void setUnbordered(boolean unbordered) {
 		unborderedMixin.toggle(unbordered);
