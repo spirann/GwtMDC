@@ -295,19 +295,19 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		return typeMixin.getType();
 	}
 
-	public void setMinLength(final int length) {
+	public void setMinLength(final Integer length) {
 		minLengthMixin.setValue(length);
 	}
 
-	public int getMinLength() {
+	public Integer getMinLength() {
 		return minLengthMixin.getValue();
 	}
 
-	public void setMaxLength(final int length) {
+	public void setMaxLength(final Integer length) {
 		maxLengthMixin.setValue(length);
 	}
 
-	public int getMaxLength() {
+	public Integer getMaxLength() {
 		return maxLengthMixin.getValue();
 	}
 

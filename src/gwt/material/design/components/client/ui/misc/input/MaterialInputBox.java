@@ -177,7 +177,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		input.setText(text);
 	}
 
-	public void setMinLength(final int length) {
+	public void setMinLength(final Integer length) {
 		input.setMinLength(length);
 	}
 
@@ -185,7 +185,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		return input.getMinLength();
 	}
 
-	public void setMaxLength(final int length) {
+	public void setMaxLength(final Integer length) {
 		input.setMaxLength(length);
 	}
 

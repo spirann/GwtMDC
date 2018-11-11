@@ -42,13 +42,13 @@ public class MaterialInputArea extends MaterialInput implements HasResize {
 		return new Textarea(CssName.MDC_TEXT_FIELD__INPUT);
 	}
 
-	public void setRows(int rows) {
+	public void setRows(Integer rows) {
 		if (input instanceof Textarea) {
 			((Textarea) input).setRows(rows);
 		}
 	}
 
-	public void setCols(int cols) {
+	public void setCols(Integer cols) {
 		if (input instanceof Textarea) {
 			((Textarea) input).setCols(cols);
 		}

@@ -42,12 +42,12 @@ public class Textarea extends MaterialWidget implements HasResize {
 		super(HtmlElements.TEXTAREA.createElement(), initialClasses);
 	}
 
-	public native void setRows(int rows)/*-{
+	public native void setRows(Integer rows)/*-{
 		var element = this.@gwt.material.design.components.client.ui.html.Textarea::getElement()();
 		element.rows = rows;
 	}-*/;
 
-	public native void setCols(int cols)/*-{
+	public native void setCols(Integer cols)/*-{
 		var element = this.@gwt.material.design.components.client.ui.html.Textarea::getElement()();
 		element.cols = cols;
 	}-*/;

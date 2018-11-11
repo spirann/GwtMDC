@@ -41,13 +41,13 @@ public class MaterialTextArea extends MaterialInputBox implements HasResize {
 		return new MaterialInputArea();
 	}
 	
-	public void setRows(int rows) {
+	public void setRows(Integer rows) {
 		if (input instanceof MaterialInputArea) {
 			((MaterialInputArea) input).setRows(rows);
 		}
 	}
 
-	public void setCols(int cols) {
+	public void setCols(Integer cols) {
 		if (input instanceof MaterialInputArea) {
 			((MaterialInputArea) input).setCols(cols);
 		}

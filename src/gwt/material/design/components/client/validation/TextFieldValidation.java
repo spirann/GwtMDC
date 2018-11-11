@@ -15,7 +15,7 @@ public interface TextFieldValidation extends Validation {
 	 * @param maxLength
 	 * @return
 	 */
-	public Result validate(String value, String inputMask, boolean isRequired, int minLength, int maxLength);
+	public Result validate(String value, String inputMask, Boolean isRequired, Integer minLength, Integer maxLength);
 
 	public class Defaults {
 
@@ -61,9 +61,9 @@ public interface TextFieldValidation extends Validation {
 
 				final int length = value.length();
 
-				if (length < minLength)
+				if (minLength != null && length < minLength)
 					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__less_than_min_length(minLength));
-				else if (length > maxLength)
+				else if (maxLength != null && length > maxLength)
 					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
 
 				return new Result(stateOnSuccess, "");
@@ -86,7 +86,7 @@ public interface TextFieldValidation extends Validation {
 		private static final TextFieldValidation required(final State stateOnSuccess) {
 			return (value, inputMask, isRequired, minLength, maxLength) -> {
 
-				if (isRequired && value.isEmpty()) {
+				if (isRequired != null && isRequired && value.isEmpty()) {
 					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__required());
 				}
 
@@ -104,9 +104,9 @@ public interface TextFieldValidation extends Validation {
 
 				if (inputMask == null)
 					return new Result(State.NONE, "");
-				else if (!isRequired && value.isEmpty())
+				else if ((isRequired == null || !isRequired) && value.isEmpty())
 					return new Result(State.NONE, "");
-				else if (isRequired && value.isEmpty())
+				else if (isRequired != null && isRequired && value.isEmpty())
 					return new Result(State.ERROR, "");
 
 				final int length = Masker.toPattern(value, inputMask).length();
@@ -115,7 +115,7 @@ public interface TextFieldValidation extends Validation {
 
 				if (length != inputMaskLength)
 					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__value_invalid());
-				else if (isRequired)
+				else if (isRequired != null && isRequired)
 					return new Result(State.SUCCESS, "");
 				else
 					return new Result(State.NONE, "");
@@ -132,9 +132,9 @@ public interface TextFieldValidation extends Validation {
 
 				if (inputMask == null)
 					return new Result(State.NONE, "");				
-				else if (!isRequired && value.isEmpty())
+				else if ((isRequired == null || !isRequired) && value.isEmpty())
 					return new Result(State.NONE, "");
-				else if (isRequired && value.isEmpty())
+				else if (isRequired != null && isRequired && value.isEmpty())
 					return new Result(State.ERROR, "");
 				
 				final String maskedValue = Masker.toPattern(value, inputMask);
