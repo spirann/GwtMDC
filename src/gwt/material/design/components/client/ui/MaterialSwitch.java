@@ -59,7 +59,6 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 	protected void onInitialize() {
 		
 		input.setRole(Role.SWITCH);
-		
 		label.setFor(input.getId());
 
 		thumb.add(input);

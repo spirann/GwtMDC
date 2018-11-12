@@ -20,6 +20,7 @@
 package gwt.material.design.components.client.base.widget;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -121,8 +122,8 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends MaterialUIObject
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl,
-		HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl, HasHideOn, HasAlt,
+		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -225,6 +226,9 @@ public class MaterialWidget extends MaterialUIObject
 		}
 
 		if (onLoadAdd != null) {
+
+			final List<Appender> end = new LinkedList<>();
+			
 			// Check the onLoadAdd items.
 			for (Appender item : onLoadAdd) {
 				if (item.index == Appender.SEQUENTIAL)
@@ -232,10 +236,13 @@ public class MaterialWidget extends MaterialUIObject
 				else if (item.index == Appender.START)
 					insert(item.widget, 0);
 				else if (item.index == Appender.END)
-					insert(item.widget, getWidgetCount());
+					end.add(item);
+				// insert(item.widget, onLoadAdd.size());
 				else
 					insert(item.widget, item.index);
 			}
+			end.forEach(item -> add(item.widget, getElement()));
+			end.clear();
 			onLoadAdd.clear();
 		}
 
@@ -283,7 +290,6 @@ public class MaterialWidget extends MaterialUIObject
 		if (!isAttached()) {
 			if (onLoadAdd == null)
 				onLoadAdd = new ArrayList<>();
-
 			onLoadAdd.add(new Appender(child, beforeIndex));
 		} else {
 			// Regular child addition

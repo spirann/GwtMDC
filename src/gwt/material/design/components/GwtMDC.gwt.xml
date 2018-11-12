@@ -10,7 +10,7 @@
   <!-- Inherit the core Web Toolkit stuff.                        -->
   <inherits name='com.google.gwt.user.User'/>
   <inherits name="com.google.gwt.i18n.I18N"/>
-  
+
   <!-- Specify the app entry point class.                         -->
   <entry-point class='gwt.material.design.components.client.GwtMDC'/>
 
@@ -32,5 +32,7 @@
   
   <!-- Default language --> 
   <set-property-fallback name="locale" value="en"/>
+      
+  <!-- Google Material Components Web v0.41.0 -->
   
 </module>

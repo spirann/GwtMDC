@@ -96,9 +96,9 @@
 	--mdc-list-item-primary-text-ink-color: var(--mdc-theme-on-surface);
 	--mdc-list-item-secondary-text-ink-color: var(--mdc-theme-on-surface);
 	--mdc-list-item-meta-ink-color: var(--mdc-theme-on-surface);
-	--mdc-list-item-selected-graphic-ink-color: var(--mdc-theme-primary);
-	--mdc-list-item-selected-primary-text-ink-color: var(--mdc-theme-primary);
-	--mdc-list-item-selected-meta-ink-color: var(--mdc-theme-primary);
+	--mdc-list-item-selected-graphic-ink-color: var(--mdc-theme-secondary);
+	--mdc-list-item-selected-primary-text-ink-color: var(--mdc-theme-secondary);
+	--mdc-list-item-selected-meta-ink-color: var(--mdc-theme-secondary);
 		
 	/* Dialog */
 	--mdc-dialog-header-fill-color: transparent;
@@ -127,7 +127,7 @@
     filter: grayscale(100%);
     pointer-events: none;
     cursor: default;
-    color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24));}   
+    color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24));}    
 .mdc-form-field[disabled],
 .material-icons[disabled] {
 	opacity: 0.26;}
@@ -264,7 +264,6 @@
 .mdc-slider:not(.mdc-slider--disabled) .mdc-slider__pin {
 	background-color: var(--mdc-slider-pin-color);
     color: var(--mdc-slider-value-pin-color);}
-    
 /* ==========================================================================
    Linear Progress
    ========================================================================== */
@@ -378,6 +377,8 @@ i.mdc-list-item__graphic {
 .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__outer-circle,
  [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__outer-circle {
     border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
+[disabled] .mdc-radio {
+ 	filter: invert(.5) grayscale(100%);}
 [disabled] .mdc-radio__label,
 [aria-disabled="true"] .mdc-radio__label{
 	color: var(--mdc-radio-label-color);}    
@@ -412,6 +413,8 @@ i.mdc-list-item__graphic {
 .mdc-checkbox__native-control:disabled:indeterminate ~ .mdc-checkbox__background {
 	border-color: transparent;
 	background-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26));}
+[disabled] .mdc-checkbox .mdc-checkbox__native-control:not(:checked):not(:indeterminate) ~ .mdc-checkbox__background {
+ 	filter: invert(.5) grayscale(100%);}	
 [disabled] .mdc-checkbox__label,
 [aria-disabled="true"] .mdc-checkbox__label{
 	color: var(--mdc-checkbox-label-color);}  	
@@ -468,6 +471,8 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Switch
    ========================================================================== */
+[disabled] .mdc-switch {	
+	filter: invert(.5) grayscale(100%);}
 .mdc-switch-wrapper {
 	display: flex;
 	align-content: center;

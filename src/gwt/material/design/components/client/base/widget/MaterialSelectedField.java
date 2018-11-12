@@ -95,12 +95,14 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 
 	@Override
 	protected void onInitialize() {
-		addClickHandler(event -> fireAutoSelect(event));
+		addClickHandler(event -> {
+			if (isEnabled())
+				fireAutoSelect(event);
+		});
 		super.onInitialize();
 	}
 
 	protected void fireAutoSelect(ClickEvent event) {
-
 		if (fireChangeOnClick && (event.getSource() == null || event.getSource() == this || !(event.getSource() instanceof HasSelectionHandlers)))
 			TimerHelper.schedule(1, () -> fireSelectEvent());
 
@@ -146,7 +148,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 	}
 
 	@Override
-	public void setSelected(boolean selected, boolean fireEvents) {		
+	public void setSelected(boolean selected, boolean fireEvents) {
 		if (checkedMixin != null)
 			checkedMixin.setValue(selected);
 
@@ -157,7 +159,7 @@ public class MaterialSelectedField extends MaterialWidget implements HasSelected
 		if (fireEvents && isAttached())
 			fireSelectEvent();
 	}
-	
+
 	@Override
 	public boolean isSelected() {
 		return checkedMixin == null ? getSelectedMixin().isApplied() : checkedMixin.getValue();

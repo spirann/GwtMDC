@@ -22,6 +22,7 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.Window;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasDiscrete;
@@ -49,8 +50,7 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialSlider extends MaterialValuedField<Double>
-		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
+public class MaterialSlider extends MaterialValuedField<Double> implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -66,20 +66,13 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
-	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this,
-			CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
-	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE);
-	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this, CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this, CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE);
+	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
@@ -111,7 +104,8 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 		// It is necessary in panels with horizontal scroll
 		// Or if the parent starts invisible
-		addMouseOverHandler(event -> layout());
+		Window.addResizeHandler(event -> layout());
+		// addMouseOverHandler(event -> layout());
 
 		super.onInitialize();
 	}
@@ -131,6 +125,15 @@ public class MaterialSlider extends MaterialValuedField<Double>
 
 		element.addEventListener('MDCSlider:change', onChange);
 
+		element.addEventListener("onresize", function() {
+			console.log('resize 1'); 
+		});
+
+		$wnd.jQuery(element).resize(function(e) {
+			console.log('resize'); 
+			var slider = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+			slider.layout();
+		});
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{

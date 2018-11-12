@@ -115,8 +115,10 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	@UiChild(tagname = "start")
 	public void addStartDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM__GRAPHIC, Appender.START);
-		if (prevent)
+		if (prevent) {
+			StyleHelper.setAttribute(widget, CssAttribute.PREVENT, "true");
 			prevent(widget.getElement());
+		}
 
 		if (widget instanceof MaterialCheckbox) {
 			final MaterialCheckbox checkbox = (MaterialCheckbox) widget;
