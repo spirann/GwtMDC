@@ -126,14 +126,17 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 		element.addEventListener('MDCSlider:change', onChange);
 
 		element.addEventListener("onresize", function() {
-			console.log('resize 1'); 
+			console.log('resize 1');
 		});
 
-		$wnd.jQuery(element).resize(function(e) {
-			console.log('resize'); 
-			var slider = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-			slider.layout();
-		});
+		$wnd
+				.jQuery(element)
+				.resize(
+						function(e) {
+							console.log('resize');
+							var slider = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+							slider.layout();
+						});
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
@@ -178,7 +181,8 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 
 	protected native void layout()/*-{
 		var slider = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-		slider.layout();
+		if (slider)
+			slider.layout();
 	}-*/;
 
 	protected native void nativeSetValue(final Double value)/*-{
