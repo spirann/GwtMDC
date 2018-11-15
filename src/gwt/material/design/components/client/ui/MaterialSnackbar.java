@@ -22,6 +22,7 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.dom.client.Style.Visibility;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -80,6 +81,7 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	@Override
 	protected void onInitialize() {
+		setVisibility(Visibility.HIDDEN);
 		actionWrapper.add(action);
 		add(text);
 		add(actionWrapper);
@@ -94,11 +96,10 @@ public class MaterialSnackbar extends Div implements HasText {
 
 		var _action = null;
 
-		if (actionText) {
+		if (actionText)
 			_action = function() {
 				_this.@gwt.material.design.components.client.ui.MaterialSnackbar::fireClickEvent()();
-			};
-		}
+			};	
 
 		var dataObj = {
 			message : text,
@@ -113,6 +114,11 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	}-*/;
 
+	/**
+	 * Keep snackbar when the action button is pressed
+	 * 
+	 * @param dismissesOnAction
+	 */
 	public native void setDismissesOnAction(final boolean dismissesOnAction) /*-{
 		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		snackbar.dismissesOnAction = dismissesOnAction;
@@ -137,24 +143,43 @@ public class MaterialSnackbar extends Div implements HasText {
 		textMixin.setText(text);
 	}
 
-	public void show() {
+	public final void open() {
+
+
+		hideOthers();
+
+		setVisibility(Visibility.VISIBLE);
+		
 		// ///////////////////////////////////////////////////////////////////////////
-		// Turn visible
+		// Add into the root
 		// ///////////////////////////////////////////////////////////////////////////
-		setVisible(true);
+		if (getParent() == null)
+			RootPanel.get().add(this);
+
+		show();
+
+		// ///////////////////////////////////////////////////////////////////////////
+		// Remove after timeout
+		// ///////////////////////////////////////////////////////////////////////////
+		final int time = this.getTimeout() + (containsFixedFab() ? 0 : 250);
+		TimerHelper.schedule(time + 100, () -> {
+			//this.removeFromParent();
+			setVisibility(Visibility.HIDDEN);
+		});
+	}
+
+	protected void show() {
+		
 		// ///////////////////////////////////////////////////////////////////////////
 		// Show snackbar
 		// ///////////////////////////////////////////////////////////////////////////
 		show(getText(), actionText, actionOnButtonMixin.isApplied(), multilineMixin.isApplied(), timeout);
+
 		// ///////////////////////////////////////////////////////////////////////////
 		// Adjust position
 		// ///////////////////////////////////////////////////////////////////////////
 		final Element fab = getFixedFab();
-		final int time;
-		if (fab == null) {
-			time = timeout + 250;
-		} else {
-			time = timeout;
+		if (fab != null) {
 			final int thisPosition = getElement().getAbsoluteRight();
 			final int fabPosition = fab.getAbsoluteLeft();
 			final boolean isLargeScreen = Window.getClientWidth() >= 1024;
@@ -163,10 +188,6 @@ public class MaterialSnackbar extends Div implements HasText {
 					: "0px";
 			setCssProperty(CssMixin.MDC_SNACKBAR__POSITION_ADJUST, adjustPosition);
 		}
-		// ///////////////////////////////////////////////////////////////////////////
-		// Turn invisible
-		// ///////////////////////////////////////////////////////////////////////////
-		TimerHelper.schedule(time, () -> setVisible(false));
 	}
 
 	public void setActionText(final String text) {
@@ -214,43 +235,27 @@ public class MaterialSnackbar extends Div implements HasText {
 		this.timeout = timeout;
 	}
 
-	public static void showSnackBar(final String text) {
-		showSnackBar(text, null, null);
-	}
-
-	public static void showSnackBar(final String text, final String actionText, final ClickHandler actionHandler) {
-		// ///////////////////////////////////////////////////////////////////////////
-		// Create an snackbar
-		// ///////////////////////////////////////////////////////////////////////////
-		final MaterialSnackbar snackbar = new MaterialSnackbar();
-		snackbar.setText(text);
-		snackbar.setActionText(actionText);
-		snackbar.addClickHandler(actionHandler);
-		// ///////////////////////////////////////////////////////////////////////////
-		// Add into the root
-		// ///////////////////////////////////////////////////////////////////////////
-		RootPanel.get().add(snackbar);
-		snackbar.show();
-		// ///////////////////////////////////////////////////////////////////////////
-		// Remove after timeout
-		// ///////////////////////////////////////////////////////////////////////////
-		final int time = snackbar.getTimeout() + (containsFixedFab() ? 0 : 250);
-		TimerHelper.schedule(time, () -> snackbar.removeFromParent());
-	}
-
-	protected static native boolean containsFixedFab() /*-{
-		var className = "." + @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
-		var elements = $wnd.jQuery("body").find(className);
-		return elements.length > 0;
-	}-*/;
-
-	protected static native Element getFixedFab() /*-{
-		var className = "." + @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
+	protected final native Element getFixedFab() /*-{
+		var className = "."
+				+ @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
 		var elements = $wnd.jQuery("body").find(className);
 
 		if (elements.length == 0)
 			return null;
 
 		return elements[0];
+	}-*/;
+
+	protected final native void hideOthers() /*-{
+		var className = "."
+				+ @gwt.material.design.components.client.constants.CssName::MDC_SNACKBAR;
+		$wnd.jQuery(className).css('visibility','hidden');
+	}-*/;
+
+	protected final native boolean containsFixedFab() /*-{
+		var className = "."
+				+ @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
+		var elements = $wnd.jQuery("body").find(className);
+		return elements.length > 0;
 	}-*/;
 }

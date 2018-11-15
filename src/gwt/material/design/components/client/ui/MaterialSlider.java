@@ -50,7 +50,8 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialSlider extends MaterialValuedField<Double> implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
+public class MaterialSlider extends MaterialValuedField<Double>
+		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -66,13 +67,20 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
-	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this, CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this, CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
-	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE);
-	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this, CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this,
+			CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_SLIDER__DISCRETE);
+	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
 
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
@@ -125,18 +133,6 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 
 		element.addEventListener('MDCSlider:change', onChange);
 
-		element.addEventListener("onresize", function() {
-			console.log('resize 1');
-		});
-
-		$wnd
-				.jQuery(element)
-				.resize(
-						function(e) {
-							console.log('resize');
-							var slider = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-							slider.layout();
-						});
 	}-*/;
 
 	protected native void initializeInputEventListener()/*-{
@@ -166,16 +162,14 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 		var formattedValue = parseFloat(value).toFixed(0);
 		pinMarkerElement.innerText = formattedValue;
 
-		if (value < 100.0) {
+		if (value < 100.0)
 			pinMarkerElement.style.fontSize = "0.875rem";
-		} else if (value < 1000.0) {
+		else if (value < 1000.0)
 			pinMarkerElement.style.fontSize = "0.745rem";
-		} else if (value < 10000.0) {
+		else if (value < 10000.0)
 			pinMarkerElement.style.fontSize = "0.645rem";
-		} else {
-			// Default size
-			pinMarkerElement.style.fontSize = "0.875rem";
-		}
+		else
+			pinMarkerElement.style.fontSize = "0.875rem"; // Default size
 
 	}-*/;
 
@@ -194,9 +188,8 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 	public void setValue(Double value, boolean fireEvents) {
 		valuenowMixin.setValue(value);
 		super.setValue(value, fireEvents);
-		if (initialized) {
+		if (initialized)
 			nativeSetValue(value);
-		}
 	}
 
 	@Override

@@ -184,6 +184,7 @@ public class MaterialWidget extends MaterialUIObject
 	protected final AttributeMixin<MaterialWidget, String> ariaLabelledByMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LABELLEDBY, FromString.TO_STRING);
 	protected final AttributeMixin<MaterialWidget, Integer> tabindexMixin = new AttributeMixin<>(this, CssAttribute.TABINDEX, FromString.TO_INTEGER);
 
+	
 	private String[] initialClasses;
 
 	private List<Appender> onLoadAdd;
