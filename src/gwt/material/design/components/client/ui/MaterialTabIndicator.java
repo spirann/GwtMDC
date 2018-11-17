@@ -36,7 +36,7 @@ public class MaterialTabIndicator extends MaterialSelectedField {
 
 	protected Span indicatorContent = new Span(CssName.MDC_TAB_INDICATOR__CONTENT, CssName.MDC_TAB_INDICATOR__CONTENT__UNDERLINE);
 	
-	public MaterialTabIndicator() {
+	protected MaterialTabIndicator() {
 		super(HtmlElements.SPAN.createElement(), CssName.MDC_TAB_INDICATOR);
 		super.initializeSelectedMixin(CssName.MDC_TAB_INDICATOR__ACTIVE);
 	}

@@ -187,7 +187,7 @@ public class MaterialWidget extends MaterialUIObject
 	
 	private String[] initialClasses;
 
-	private List<Appender> onLoadAdd;
+	protected List<Appender> onLoadAdd;
 
 	protected boolean initialized = false;
 

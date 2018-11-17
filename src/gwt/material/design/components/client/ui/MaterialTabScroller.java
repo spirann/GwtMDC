@@ -50,7 +50,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	protected Div scrollContent = new Div(CssName.MDC_TAB_SCROLLER__SCROLL_CONTENT);
 
 	protected final TypeMixin<MaterialTabScroller, TabScrollerAlign> alignMixin = new TypeMixin<>(this);
-	
+
 	private Integer selectedTabIndex;
 	private MaterialTab selectedTab;
 
@@ -67,9 +67,9 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	protected void onInitialize() {
 		scrollArea.add(scrollContent);
 		super.add(scrollArea);
-		super.onInitialize();		
+		super.onInitialize();
 	}
-	
+
 	@Override
 	protected void onLoad() {
 		super.onLoad();
@@ -77,25 +77,25 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	}
 
 	public void setSelectedTab(final int index) {
-		
+
 		selectedTabIndex = index;
-		
-		if(!initialized) {
+
+		if (!initialized) {
 			return;
 		}
-		
-		final MaterialTab tab = (MaterialTab) scrollContent.getWidget(index);		
-		if(selectedTab != null && tab == selectedTab) {
+
+		final MaterialTab tab = (MaterialTab) scrollContent.getWidget(index);
+		if (selectedTab != null && tab == selectedTab) {
 			return;
 		}
-		
+
 		setSelectedTab(tab);
 	}
-	
+
 	public void setSelectedTab(final MaterialTab tab) {
-		final boolean isFirst = selectedTab == null;		
+		final boolean isFirst = selectedTab == null;
 		selectedTab = tab;
-		if(isFirst) {
+		if (isFirst) {
 			selectedTab.setSelected(true, false);
 		} else {
 			JsHelper.doClick(selectedTab.getElement());
@@ -120,7 +120,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 
 		scrollContent.add(child);
 	}
-	
+
 	protected void fireSelectionEvent(final MaterialTab tab) {
 		SelectionEvent.fire(this, tab);
 	}
@@ -131,19 +131,24 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	}
 
 	public List<MaterialTab> getTabs() {
+
 		final List<MaterialTab> tabs = new LinkedList<>();
 
-		for (int i = 0; i < scrollContent.getWidgetCount(); i++) {
-
-			final Widget widget = scrollContent.getWidget(i);
-			if (widget instanceof MaterialTab) {
-				tabs.add((MaterialTab) widget);
+		if (onLoadAdd != null)
+			for (Appender item : onLoadAdd) {
+				if (item.widget instanceof MaterialTab)
+					tabs.add((MaterialTab) item.widget);
 			}
+
+		for (int i = 0; i < scrollContent.getWidgetCount(); i++) {
+			final Widget widget = scrollContent.getWidget(i);
+			if (widget instanceof MaterialTab)
+				tabs.add((MaterialTab) widget);
 		}
 
 		return tabs;
 	}
-	
+
 	@Override
 	public void setAlign(final TabScrollerAlign align) {
 		alignMixin.setType(align);
@@ -157,12 +162,12 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	public TabScrollerAlign getAlign() {
 		return alignMixin.getType();
 	}
-	
+
 	@Override
 	public void setColor(Color color) {
 		setTextColor(color);
 	}
-	
+
 	@Override
 	public void setTextColor(Color color) {
 		setCssProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());

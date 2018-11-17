@@ -285,6 +285,8 @@
    ========================================================================== */
 .mdc-tab[disabled] {
 	opacity: 0.37;}
+[disabled] .mdc-tab {	
+	filter: invert(.5) grayscale(100%);}
 .mdc-tab-bar {
 	background-color: var(--mdc-theme-primary);}
 .mdc-tab .mdc-tab__text-label:empty,
@@ -304,7 +306,10 @@
 .mdc-tab--active .mdc-tab__ripple::before, 
 .mdc-tab--active .mdc-tab__ripple::after {
     background-color: var(--mdc-tab-actived-color);}        
-
+.mdc-tab-scroller--align-start .mdc-tab,
+.mdc-tab-scroller--align-center .mdc-tab,
+.mdc-tab-scroller--align-end .mdc-tab {
+	flex: none;}
 /* ==========================================================================
    List
    ========================================================================== */
