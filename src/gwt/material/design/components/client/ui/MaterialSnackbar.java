@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -69,6 +70,9 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	protected String actionText;
 	protected int timeout = 2750;
+	// It's necessary because the MDC WEB bug, 
+	// where the action on bottom style is removed from the element
+	protected boolean actionOnBottom = false;
 
 	public MaterialSnackbar() {
 		super(CssName.MDC_SNACKBAR);
@@ -145,6 +149,7 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	public final void open() {
 
+		actionOnButtonMixin.toggle(actionOnBottom);
 
 		hideOthers();
 
@@ -165,6 +170,7 @@ public class MaterialSnackbar extends Div implements HasText {
 		TimerHelper.schedule(time + 100, () -> {
 			//this.removeFromParent();
 			setVisibility(Visibility.HIDDEN);
+			GWT.log("actionOnBottom: " + actionOnBottom);
 		});
 	}
 
@@ -220,11 +226,11 @@ public class MaterialSnackbar extends Div implements HasText {
 	}
 
 	public boolean isActionOnBottom() {
-		return actionOnButtonMixin.isApplied();
+		return actionOnBottom;
 	}
 
 	public void setActionOnBottom(boolean actionOnBottom) {
-		actionOnButtonMixin.toggle(actionOnBottom);
+		this.actionOnBottom = actionOnBottom;
 	}
 
 	public int getTimeout() {
