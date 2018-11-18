@@ -26,17 +26,18 @@ import gwt.material.design.components.client.base.interfaces.HasOpen;
 import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class TogglerMixin<UIO extends MaterialUIObject & HasOpen & HasToggler> extends AbstractMixin<UIO> implements HasToggler {
+public class TogglerMixin<UIO extends MaterialUIObject & HasOpen & HasToggler> extends AbstractMixin<UIO>
+		implements HasToggler {
 
 	private String togglerId;
 	private HandlerRegistration handler;
-	private JavaScriptObject toggler;
 	private JavaScriptObject event;
 
 	public TogglerMixin(UIO uiObject) {
@@ -45,12 +46,17 @@ public class TogglerMixin<UIO extends MaterialUIObject & HasOpen & HasToggler> e
 
 	void init() {
 		clearHandler();
-		if (toggler != null && event != null)
-			unbind(toggler, event);
-
-		toggler = find(togglerId);
-		
-		event = bind(toggler);
+		if (isAttached(togglerId)) {
+			unbind(togglerId, event);
+			event = bind(togglerId);
+		} else if (togglerId != null) {
+			TimerHelper.schedule(1000, () -> {
+				if (togglerId != null) {
+					unbind(togglerId, event);
+					event = bind(togglerId);
+				}
+			});
+		}
 	}
 
 	void clearHandler() {
@@ -60,35 +66,41 @@ public class TogglerMixin<UIO extends MaterialUIObject & HasOpen & HasToggler> e
 		}
 	}
 
-	native JavaScriptObject find(final String tooglerId) /*-{
-		return $wnd.jQuery('#' + tooglerId);
+	native boolean isAttached(final String togglerId) /*-{		
+		return togglerId && $wnd.jQuery("body").has('#' + togglerId).length > 0;
 	}-*/;
 
-	native JavaScriptObject bind(final JavaScriptObject toogler) /*-{		
-		if(!toogler)
+	native JavaScriptObject bind(final String togglerId) /*-{
+
+		var toggler = $wnd.jQuery('#' + togglerId);
+
+		if (!toggler)
 			return null;
-			
+
 		var _this = this;
 		var handler = function() {
 			_this.@gwt.material.design.components.client.base.mixin.TogglerMixin::toggle()();
 		};
-		$wnd.jQuery(toogler).bind("click", handler);
+		$wnd.jQuery(toggler).bind("click", handler);
 		return handler;
+
 	}-*/;
 
-	native void unbind(final JavaScriptObject toogler, final JavaScriptObject handler) /*-{
-		$wnd.jQuery(toogler).unbind("click", handler);
+	native void unbind(final String togglerId, final JavaScriptObject handler) /*-{
+		var toggler = $wnd.jQuery('#' + togglerId);
+		if (toggler && handler)
+			$wnd.jQuery(toggler).unbind("click", handler);
 	}-*/;
 
 	void toggle() {
-		final HasOpen hasOpen = (HasOpen) uiObject;	
+		final HasOpen hasOpen = (HasOpen) uiObject;
 		hasOpen.setOpen(!hasOpen.isOpen());
 	}
 
 	@Override
 	public void setToggler(String togglerId) {
+		unbind(this.togglerId, event);
 		this.togglerId = togglerId;
-
 		if (togglerId != null && !uiObject.isAttached() && handler == null)
 			handler = uiObject.addAttachHandler(event -> {
 				if (event.isAttached())

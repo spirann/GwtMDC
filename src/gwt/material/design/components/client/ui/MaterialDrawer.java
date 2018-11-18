@@ -23,7 +23,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -40,9 +42,11 @@ import gwt.material.design.components.client.ui.html.Nav;
  * @author Richeli Vargas
  *
  */
-public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpen {
+public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpen, HasToggler {
 
 	protected final TypeMixin<MaterialDrawer, DrawerType> typeMixin = new TypeMixin<>(this);
+	protected final TogglerMixin<MaterialDrawer> togglerMixin = new TogglerMixin<>(this);
+	
 
 	public MaterialDrawer() {
 		super(CssName.MDC_DRAWER);
@@ -64,7 +68,7 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 		if (containsModal) {
 			var div = $doc.createElement("div");
 			div.className = scrimClass;
-			parent.appendChild(div);
+			$wnd.jQuery(div).insertAfter(element);
 		}
 		
 		if (!isModal && !isDismissible)
@@ -94,6 +98,16 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 			element.setAttribute("open", open);
 		}
 	}-*/;
+	
+	@Override
+	public void setToggler(String togglerId) {
+		togglerMixin.setToggler(togglerId);		
+	}
+
+	@Override
+	public String getToggler() {
+		return togglerMixin.getToggler();
+	}
 
 	@Override
 	public void open() {
@@ -108,6 +122,8 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	@Override
 	public void setType(DrawerType type) {
 		typeMixin.setType(type);
+		if(initialized)
+			jsInit();
 	}
 
 	@Override
