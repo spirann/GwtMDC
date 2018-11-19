@@ -49,7 +49,6 @@ public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> 
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.topAppBar.MDCTopAppBar(element);
 	}-*/;
-
 	
 	@Override
 	public void setType(TopAppBarType type) {
