@@ -39,8 +39,6 @@ public class MaterialTopAppBar extends Header implements HasType<TopAppBarType> 
 
 	protected final TypeMixin<MaterialTopAppBar, TopAppBarType> typeMixin = new TypeMixin<>(this);
 
-	private boolean initialize = false;
-
 	public MaterialTopAppBar() {
 		super(CssName.MDC_TOP_APP_BAR);
 	}
