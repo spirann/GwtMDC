@@ -24,8 +24,10 @@ import com.google.gwt.uibinder.client.UiChild;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.BannerType;
 import gwt.material.design.components.client.constants.Color;
@@ -40,7 +42,7 @@ import gwt.material.design.components.client.ui.html.Label;
  * @author Richeli Vargas
  *
  */
-public class MaterialBanner extends Div implements HasText, HasType<BannerType>, HasOpen {
+public class MaterialBanner extends Div implements HasText, HasType<BannerType>, HasOpen, HasToggler {
 
 	protected final Div content = new Div(CssName.MDC_BANNER__CONTENT);
 	protected final Div avatar = new Div(CssName.MDC_BANNER__AVATAR);
@@ -50,6 +52,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 
 	protected final TypeMixin<MaterialBanner, BannerType> typeMixin = new TypeMixin<>(this, BannerType.VERTICAL);
 	protected final ToggleStyleMixin<MaterialBanner> openMixin = new ToggleStyleMixin<>(this, CssName.MDC_BANNER__OPENED);
+	protected final TogglerMixin<MaterialBanner> togglerMixin = new TogglerMixin<>(this);
 	
 	public MaterialBanner() {
 		super(CssName.MDC_BANNER);		
@@ -74,6 +77,16 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 		actions.add(action);
 	}
 
+	@Override
+	public void setToggler(String togglerId) {
+		togglerMixin.setToggler(togglerId);		
+	}
+
+	@Override
+	public String getToggler() {
+		return togglerMixin.getToggler();
+	}
+	
 	@Override
 	public String getText() {
 		return label.getText();
