@@ -44,31 +44,32 @@ import gwt.material.design.components.client.ui.html.Label;
  */
 public class MaterialBanner extends Div implements HasText, HasType<BannerType>, HasOpen, HasToggler {
 
+	protected final Div navegation = new Div(CssName.MDC_BANNER_NAVEGATION);
 	protected final Div content = new Div(CssName.MDC_BANNER__CONTENT);
 	protected final Div avatar = new Div(CssName.MDC_BANNER__AVATAR);
 	protected final Label label = new Label(CssName.MDC_BANNER__LABEL, CssName.MDC_TYPOGRAPHY__BODY_2);
 	protected final Div actions = new Div(CssName.MDC_BANNER__ACTIONS);
 	protected final MaterialDivider border = new MaterialDivider();
 
-	protected final TypeMixin<MaterialBanner, BannerType> typeMixin = new TypeMixin<>(this, BannerType.VERTICAL);
-	protected final ToggleStyleMixin<MaterialBanner> openMixin = new ToggleStyleMixin<>(this, CssName.MDC_BANNER__OPENED);
+	protected final TypeMixin<Div, BannerType> typeMixin = new TypeMixin<>(navegation, BannerType.VERTICAL);
+	protected final ToggleStyleMixin<Div> openMixin = new ToggleStyleMixin<>(navegation, CssName.MDC_BANNER__OPENED);
 	protected final TogglerMixin<MaterialBanner> togglerMixin = new TogglerMixin<>(this);
-	
+
 	public MaterialBanner() {
-		super(CssName.MDC_BANNER);		
+		super(CssName.MDC_BANNER);
 	}
 
 	@Override
 	protected void onInitialize() {
-
 		content.add(avatar);
 		content.add(label);
 
-		add(new MaterialDivider());
-		add(actions);
-		add(content);
-		add(new MaterialDivider());
+		navegation.add(new MaterialDivider());
+		navegation.add(actions);
+		navegation.add(content);
+		navegation.add(new MaterialDivider());
 
+		super.add(navegation);
 		super.onInitialize();
 	}
 
@@ -79,14 +80,14 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 
 	@Override
 	public void setToggler(String togglerId) {
-		togglerMixin.setToggler(togglerId);		
+		togglerMixin.setToggler(togglerId);
 	}
 
 	@Override
 	public String getToggler() {
 		return togglerMixin.getToggler();
 	}
-	
+
 	@Override
 	public String getText() {
 		return label.getText();
@@ -137,6 +138,8 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 			// It`s in ui:binder
 			if (url != null && !url.contains("http") && !url.contains("."))
 				setAvatar(IconType.valueOf(url));
+			else
+				avatar.add(new MaterialImage(url));
 		} catch (Throwable ignore) {
 			avatar.clear();
 			avatar.add(new MaterialImage(url));
@@ -152,7 +155,7 @@ public class MaterialBanner extends Div implements HasText, HasType<BannerType>,
 	}
 
 	@Override
-	public void setOpen(boolean open) {	
+	public void setOpen(boolean open) {
 		openMixin.toggle(open);
 	}
 

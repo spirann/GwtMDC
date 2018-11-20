@@ -182,6 +182,7 @@ public interface CssName {
 	// SNACKBAR
 	// //////////////////////////////////////////////////////
 	String MDC_BANNER = "mdc-banner";
+	String MDC_BANNER_NAVEGATION = "mdc-banner-navigation";
 	String MDC_BANNER__VERTICAL = "mdc-banner-vertical";
 	String MDC_BANNER__OPENED = "mdc-banner-opened";
 	String MDC_BANNER__CONTENT = "mdc-banner--content";

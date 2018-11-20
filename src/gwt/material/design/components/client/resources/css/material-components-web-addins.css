@@ -220,6 +220,10 @@
 }
 
 .mdc-banner {
+	overflow: hidden;
+	width: 100%;
+}
+.mdc-banner-navigation {
 	position: relative;
 	width: 100%;
 	margin-top: -148px;	
@@ -245,7 +249,7 @@
 	flex-direction: column-reverse;}
 	.mdc-banner-opened{
 	margin-top: 0;}
-	.mdc-banner:not(.mdc-banner-vertical) .mdc-list-divider:first-child {
+	.mdc-banner-navigation:not(.mdc-banner-vertical) .mdc-list-divider:first-child {
 	display: none;}
 	.mdc-banner-vertical .mdc-list-divider:last-child {
 	display: none;}		
@@ -259,7 +263,7 @@
 	justify-content: flex-start;
 	padding: 16px;
 	padding-right: 90px;}
-	.mdc-banner:not(.mdc-banner-vertical) .mdc-banner--actions:empty + .mdc-banner--content {
+	.mdc-banner-navigation:not(.mdc-banner-vertical) .mdc-banner--actions:empty + .mdc-banner--content {
 	padding-right: 16px;}	
 	.mdc-banner-vertical .mdc-banner--content {
 	flex: none;
