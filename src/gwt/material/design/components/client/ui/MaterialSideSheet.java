@@ -23,7 +23,9 @@ import com.google.gwt.dom.client.Style.Overflow;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasOpen;
+import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
@@ -34,13 +36,14 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class MaterialSideSheet extends Div implements HasOpen {
+public class MaterialSideSheet extends Div implements HasOpen, HasToggler {
 
 	protected final Div content = new Div(CssName.MDC_SIDE_SHEET__CONTENT);
 	protected final Div scrim = new Div(CssName.MDC_SIDE_SHEET__SCRIM);
 
 	protected final ToggleStyleMixin<MaterialSideSheet> openMixin = new ToggleStyleMixin<>(this,
 			CssName.MDC_SIDE_SHEET__OPENED);
+	protected final TogglerMixin<MaterialSideSheet> togglerMixin = new TogglerMixin<>(this);
 
 	public MaterialSideSheet() {
 		super(CssName.MDC_SIDE_SHEET);
@@ -57,6 +60,16 @@ public class MaterialSideSheet extends Div implements HasOpen {
 	@Override
 	public void add(Widget child) {
 		content.add(child);
+	}
+	
+	@Override
+	public void setToggler(String togglerId) {
+		togglerMixin.setToggler(togglerId);		
+	}
+
+	@Override
+	public String getToggler() {
+		return togglerMixin.getToggler();
 	}
 
 	@Override
