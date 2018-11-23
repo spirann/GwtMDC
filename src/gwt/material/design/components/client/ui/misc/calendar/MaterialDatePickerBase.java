@@ -177,6 +177,19 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 		return daySelector.getMinDate();
 	}
 
+	public void setMinDate(String minDate) {
+		daySelector.setMinDate(stringToDate(minDate));
+	}
+	
+	/**
+	 * Date at this format:
+	 * <p>yyyy-mm-dd</p>
+	 * It can be too:
+	 * <p>"now"</p>or
+	 * <p>"today"</p>
+	 * @param dateAsString
+	 * @return
+	 */
 	public void setMinDate(Date minDate) {
 		daySelector.setMinDate(minDate);
 	}
@@ -185,8 +198,45 @@ public abstract class MaterialDatePickerBase<T, H extends MaterialValuedField<T>
 		return daySelector.getMaxDate();
 	}
 
+	/**
+	 * Date at this format:
+	 * <p>yyyy-mm-dd</p>
+	 * It can be too:
+	 * <p>"now"</p>or
+	 * <p>"today"</p>
+	 * @param dateAsString
+	 * @return
+	 */
+	public void setMaxDate(String maxDate) {
+		setMaxDate(stringToDate(maxDate));
+	}
+
 	public void setMaxDate(Date maxDate) {
 		daySelector.setMaxDate(maxDate);
+	}
+
+	/**
+	 * Date at this format:
+	 * <p>yyyy-mm-dd</p>
+	 * It can be too:
+	 * <p>"now"</p>or
+	 * <p>"today"</p>
+	 * @param dateAsString
+	 * @return
+	 */
+	protected Date stringToDate(final String dateAsString) {
+		if (dateAsString == null || dateAsString.isEmpty())
+			return null;
+		if(dateAsString.equals("now") || dateAsString.equals("today"))
+			return new Date();
+		final String year = dateAsString.substring(0, 4);
+		final String month = dateAsString.substring(5, 7);
+		final String day = dateAsString.substring(8, 10);
+		final Date date = new Date();
+		date.setYear(Integer.valueOf(year) - 1900);
+		date.setMonth(Integer.valueOf(month) - 1);
+		date.setDate(Integer.valueOf(day));
+		return date;
 	}
 
 	@Override

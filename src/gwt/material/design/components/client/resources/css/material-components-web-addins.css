@@ -554,8 +554,13 @@
 	--mdc-datepicker--item-margin: 2px;
 	--mdc-datepicker-width: calc(8px + calc(7 * calc( var(--mdc-datepicker--item-width) + calc(2 * var(--mdc-datepicker--item-margin)))));
 }  
+[disabled] .mdc-datepicker,
+.mdc-datepicker[disabled] {	
+	opacity: .26;
+	filter: grayscale(100%);}
 .mdc-datepicker {
 	width: 100%;
+	min-width: var(--mdc-datepicker-width);	
 	max-width: var(--mdc-datepicker-width);
 	border-radius: var(--mdc-rounded-border-radius);
 	border: 1px solid var(--mdc-datepicker-active-fill); 
