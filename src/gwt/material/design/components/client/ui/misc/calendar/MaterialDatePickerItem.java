@@ -91,7 +91,10 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 		ripleMixin.initialize();		
 		fireChangeOnClick = true;
 		
-		addClickHandler(event -> setSelected(true, false));
+		addClickHandler(event -> {
+			event.stopPropagation();	
+			setSelected(true, false);
+		});
 		
 		if (isSelected()) 
 			updateHistory();
