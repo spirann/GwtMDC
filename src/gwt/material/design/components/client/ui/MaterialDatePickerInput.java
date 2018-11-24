@@ -169,12 +169,20 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	public void setMinDate(Date minDate) {
 		dialog.setMinDate(minDate);
 	}
+	
+	public void setMinDate(String minDate) {
+		dialog.setMinDate(minDate);
+	}
 
 	public Date getMaxDate() {
 		return dialog.getMaxDate();
 	}
 
 	public void setMaxDate(Date maxDate) {
+		dialog.setMaxDate(maxDate);
+	}
+	
+	public void setMaxDate(String maxDate) {
 		dialog.setMaxDate(maxDate);
 	}
 	

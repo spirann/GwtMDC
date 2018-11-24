@@ -169,12 +169,20 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 	public void setMinDate(Date minDate) {
 		datePicker.setMinDate(minDate);
 	}
+	
+	public void setMinDate(String minDate) {
+		datePicker.setMinDate(minDate);
+	}
 
 	public Date getMaxDate() {
 		return datePicker.getMaxDate();
 	}
 
 	public void setMaxDate(Date maxDate) {
+		datePicker.setMaxDate(maxDate);
+	}
+	
+	public void setMaxDate(String maxDate) {
 		datePicker.setMaxDate(maxDate);
 	}
 
