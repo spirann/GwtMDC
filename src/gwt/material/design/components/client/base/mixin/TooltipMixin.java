@@ -156,7 +156,7 @@ public class TooltipMixin<UIO extends MaterialUIObject & HasTooltip> extends Abs
 			left = targetLeft + targetWidth;
 			break;
 		case @gwt.material.design.components.client.constants.TooltipPosition::TOP:
-			top = targetTop - tooltipHeight - (tooltipMarginTop * 2);
+			top = targetTop - tooltipHeight - tooltipMarginTop;
 			left = targetLeft + ((targetWidth - tooltipWidth) / 2)
 					- tooltipMarginLeft;
 			break;
