@@ -158,6 +158,8 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	@Override
 	public void setReverse(boolean reverse) {
 		reverseMixin.toggle(reverse);
+		if (initialized)
+			setProgress(getProgress());
 	}
 
 	@Override
