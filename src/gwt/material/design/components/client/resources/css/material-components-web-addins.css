@@ -397,19 +397,20 @@
 	     -o-animation: dash 1.5s ease-in-out infinite;
 	        animation: dash 1.5s ease-in-out infinite;}
 .mdc-circular-progress--indeterminate .mdc-circular-progress__loader,	 
-.mdc-circular-progress--indeterminate .mdc-circular-progress__path,       
-.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader,
-.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path {
-	-webkit-animation-direction: reverse;
-	   -moz-animation-direction: reverse;
-	     -o-animation-direction: reverse;
-	        animation-direction: reverse;}
-.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__loader,
-.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__path {
+.mdc-circular-progress--indeterminate .mdc-circular-progress__path {
 	-webkit-animation-direction: normal;
 	   -moz-animation-direction: normal;
 	     -o-animation-direction: normal;
-	        animation-direction: normal;}	        
+	        animation-direction: normal;}
+	               
+.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader,
+.mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path, 
+.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__loader,
+.mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__path {	
+	-webkit-animation-direction: reverse;
+	   -moz-animation-direction: reverse;
+	     -o-animation-direction: reverse;
+	        animation-direction: reverse;}	        
 	        
 @keyframes rotate {
   100% {

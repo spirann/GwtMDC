@@ -59,10 +59,10 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		super.onInitialize();
 		path.setResource(MaterialResources.INSTANCE.mdcCircularProgressPath());
 		add(path);
-		setNativeProgress(getProgress(), false);
+		setNativeProgress(getProgress(), false, isReverse());
 	}
 
-	public native void setNativeProgress(double val, boolean animate)/*-{
+	public native void setNativeProgress(double val, boolean animate, boolean reverse)/*-{
 
 		var element = this.@gwt.material.design.components.client.ui.MaterialCircularProgress::getElement()();
 		var pathClass = @gwt.material.design.components.client.constants.CssName::MDC_CIRCULAR_PROGRESS__PATH;
@@ -85,6 +85,8 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 				val = 1;
 
 			var pct = ((100 - (val * 100)) / 100) * c;
+			if (reverse)
+				pct = pct * -1;
 			var dasharray = (c * 1.0) + ', ' + c;
 
 			if (animate)
@@ -135,7 +137,7 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	public void setProgress(double progress, boolean animate) {
 		progressMixin.setValue(progress);
 		if (initialized)
-			setNativeProgress(progress, animate);
+			setNativeProgress(progress, animate, isReverse());
 	}
 
 	@Override
