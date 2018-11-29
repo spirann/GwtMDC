@@ -6,7 +6,7 @@
   
   --mdc-theme-on-primary:  #FFF;
   --mdc-theme-on-secondary:  #000;
-  --mdc-theme-on-surface: #000;
+  --mdc-theme-on-surface: rgba(0,150,136,1);
   
   --mdc-theme-text-primary-on-background: rgba(0,0,0,1);
   --mdc-theme-text-secondary-on-background: rgba(0,0,0,0.7);
