@@ -20,9 +20,12 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HasText;
 
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.widget.MaterialSelectedField;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
@@ -43,12 +46,15 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 	// /////////////////////////////////////////////////////////////
 	// Switch
 	// /////////////////////////////////////////////////////////////
-	protected Div switch_ = new Div(CssName.MDC_SWITCH);
-	protected Div track = new Div(CssName.MDC_SWITCH__TRACK);
-	protected Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH__NATIVE_CONTROL);
-	protected Div thumbUnderlay = new Div(CssName.MDC_SWITCH__THUMB_UNDERLAY);
-	protected Div thumb = new Div(CssName.MDC_SWITCH__THUMB);
-	protected Label label = new Label(CssName.MDC_SWITCH__LABEL);
+	protected final Div switch_ = new Div(CssName.MDC_SWITCH);
+	protected final Div track = new Div(CssName.MDC_SWITCH__TRACK);
+	protected final Input input = new Input(InputType.CHECKBOX, CssName.MDC_SWITCH__NATIVE_CONTROL);
+	protected final Div thumbUnderlay = new Div(CssName.MDC_SWITCH__THUMB_UNDERLAY);
+	protected final Div thumb = new Div(CssName.MDC_SWITCH__THUMB);
+	protected final Label label = new Label(CssName.MDC_SWITCH__LABEL);
+	
+	protected final ToggleStyleMixin<Div> disabledMixin = new ToggleStyleMixin<>(switch_,
+			CssName.MDC_SWITCH__DISABLED);
 
 	public MaterialSwitch() {
 		super(CssName.MDC_SWITCH_WRAPPER);
@@ -69,6 +75,22 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 
 		add(switch_);
 		add(label);
+		
+		final ClickHandler handler = event -> {
+			if(!isEnabled()) {
+				event.stopPropagation();
+				event.preventDefault();
+				GWT.log("funfo");
+			} else 
+				GWT.log("não funfo");
+		}; 
+		
+		input.addClickHandler(handler);
+		label.addClickHandler(handler);
+		thumb.addClickHandler(handler);
+		thumbUnderlay.addClickHandler(handler);
+		switch_.addClickHandler(handler);
+		addClickHandler(handler);
 				
 		super.onInitialize();
 	}
@@ -112,5 +134,11 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 	
 	public void setUnselectedColor(final Color color) {
 		setCssProperty(CssMixin.MDC_SWITCH__UNCHECKED_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setEnabled(boolean enabled) {
+		super.setEnabled(enabled);
+		disabledMixin.toggle(!enabled);
 	}
 }

@@ -93,6 +93,7 @@
    Side Sheet
    ========================================================================== */	
  :root {
+ 	--mdc-side-sheet--ink-color: var(--mdc-theme-on-surface);
 	--mdc-side-sheet--fill-color: var(--mdc-theme-surface);
 	--mdc-side-sheet--content-width: 256px;
 }
@@ -128,16 +129,38 @@
 	        transform: translateX(0);}
 
 .mdc-side-sheet--content {
+	color: var(--mdc-side-sheet--ink-color);	
+	background-color: var(--mdc-side-sheet--fill-color);
 	display: flex;
 	width: var(--mdc-side-sheet--content-width);
 	height: 100%;
 	overflow-x: hidden;
 	overflow-y: auto;
-	background-color: var(--mdc-side-sheet--fill-color);
 	flex-direction: column;	
 	flex-shrink: 0;
   	box-sizing: border-box;
 	border-left: 1px solid rgba(0, 0, 0, 0.12);}
+	.mdc-side-sheet--content {
+	color: var(--mdc-side-sheet--ink-color);	
+	/* Radio button */
+	--mdc-radio-unchecked-color: var(--mdc-side-sheet--ink-color);
+	--mdc-radio-label-color: var(--mdc-side-sheet--ink-color);	
+	/* Checkbox */
+	--mdc-checkbox-unchecked-color: var(--mdc-side-sheet--ink-color);
+	--mdc-checkbox-label-color: var(--mdc-side-sheet--ink-color);		
+	/* Chip */
+	--mdc-chip-container-fill-color: var(--mdc-side-sheet--ink-color);
+	--mdc-chip-text-color: var(--mdc-side-sheet--ink-color);
+	--mdc-chip-icon_leading-color: var(--mdc-side-sheet--ink-color);
+	--mdc-chip-icon_trailing-color: var(--mdc-side-sheet--ink-color);
+	--mdc-chip-icon_selected-color: var(--mdc-side-sheet--ink-color);	
+	/* List */
+	--mdc-list-item-graphic-ink-color: var(--mdc-side-sheet--ink-color);
+	--mdc-list-item-primary-text-ink-color: var(--mdc-side-sheet--ink-color);
+	--mdc-list-item-secondary-text-ink-color: var(--mdc-side-sheet--ink-color);
+	--mdc-list-item-meta-ink-color: var(--mdc-side-sheet--ink-color);}
+	.mdc-side-sheet--content label {
+	color: var(--mdc-side-sheet--ink-color);}
 	
 .mdc-side-sheet--scrim{
 	flex: 1;

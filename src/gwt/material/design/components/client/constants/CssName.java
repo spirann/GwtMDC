@@ -367,6 +367,7 @@ public interface CssName {
 	String MDC_SWITCH_WRAPPER = "mdc-switch-wrapper";
 	String MDC_SWITCH = "mdc-switch";
 	String MDC_SWITCH__CHECKED = "mdc-switch--checked";
+	String MDC_SWITCH__DISABLED = "mdc-switch--disabled";
 	String MDC_SWITCH__TRACK = "mdc-switch__track";
 	String MDC_SWITCH__THUMB_UNDERLAY = "mdc-switch__thumb-underlay";
 	String MDC_SWITCH__THUMB = "mdc-switch__thumb";
