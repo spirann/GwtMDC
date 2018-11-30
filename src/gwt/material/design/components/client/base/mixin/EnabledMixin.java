@@ -47,7 +47,7 @@ public class EnabledMixin<UIO extends MaterialUIObject & HasEnabled> extends Att
 	}
 	
 	@Override
-	public void setEnabled(boolean enabled) {
+	public void setEnabled(boolean enabled) {		
 		// Invert because of the attribute name in CSS
 		setValue(enabled ? null : Boolean.TRUE);
 /*

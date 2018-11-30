@@ -131,6 +131,7 @@
 .mdc-form-field[disabled],
 .material-icons[disabled],
 [disabled] .mdc-fab__label,
+[disabled] .mdc-switch-label,
 [disabled] .material-icons {
 	opacity: 0.26;}
 

@@ -7,10 +7,14 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class JsHelper {
 
+	public static native void console(final String value)/*-{
+		console.log(value);
+	}-*/;
+
 	public static int getWidth(UIObject uiObject) {
 		return getWidth(uiObject.getElement());
 	}
-	
+
 	public static native int getWidth(Element element) /*-{
 		return $wnd.jQuery(element).outerWidth();
 	}-*/;
@@ -18,7 +22,7 @@ public class JsHelper {
 	public static int getHeight(UIObject uiObject) {
 		return getHeight(uiObject.getElement());
 	}
-	
+
 	public static native int getHeight(Element element) /*-{
 		return $wnd.jQuery(element).outerHeight();
 	}-*/;
@@ -107,53 +111,90 @@ public class JsHelper {
 		return arr;
 
 	}-*/;
-	
+
 	public static native void turnDraggable(final Element element)/*-{
-	
+
 		(function($) {
-		    $.fn.drags = function(opt) {
-		
-		        opt = $.extend({handle:"",cursor:"move"}, opt);
-		
-		        if(opt.handle === "") 
-		            var $el = this;
-		         else 
-		            var $el = this.find(opt.handle);
-		        
-		
-		        return $el.css('cursor', opt.cursor).on("mousedown", function(e) {
-		            if(opt.handle === "") 
-		                var $drag = $(this).addClass('draggable');
-		            else 
-		                var $drag = $(this).addClass('active-handle').parent().addClass('draggable');
-		            
-		            var z_idx = $drag.css('z-index'),
-		                drg_h = $drag.outerHeight(),
-		                drg_w = $drag.outerWidth(),
-		                pos_y = $drag.offset().top + drg_h - e.pageY,
-		                pos_x = $drag.offset().left + drg_w - e.pageX;
-		            $drag.css('z-index', 1000).parents().on("mousemove", function(e) {
-		                $('.draggable').offset({
-		                    top:e.pageY + pos_y - drg_h,
-		                    left:e.pageX + pos_x - drg_w
-		                }).on("mouseup", function() {
-		                    $wnd.jQuery(this).removeClass('draggable').css('z-index', z_idx);
-		                });
-		            });
-		            e.preventDefault(); // disable selection
-		        }).on("mouseup", function() {
-		            if(opt.handle === "") 
-		                $wnd.jQuery(this).removeClass('draggable');
-		            else 
-		                $wnd.jQuery(this).removeClass('active-handle').parent().removeClass('draggable');   
-		        });
-		    }
+			$.fn.drags = function(opt) {
+
+				opt = $.extend({
+					handle : "",
+					cursor : "move"
+				}, opt);
+
+				if (opt.handle === "")
+					var $el = this;
+				else
+					var $el = this.find(opt.handle);
+
+				return $el
+						.css('cursor', opt.cursor)
+						.on(
+								"mousedown",
+								function(e) {
+									if (opt.handle === "")
+										var $drag = $(this).addClass(
+												'draggable');
+									else
+										var $drag = $(this).addClass(
+												'active-handle').parent()
+												.addClass('draggable');
+
+									var z_idx = $drag.css('z-index'), drg_h = $drag
+											.outerHeight(), drg_w = $drag
+											.outerWidth(), pos_y = $drag
+											.offset().top
+											+ drg_h - e.pageY, pos_x = $drag
+											.offset().left
+											+ drg_w - e.pageX;
+									$drag
+											.css('z-index', 1000)
+											.parents()
+											.on(
+													"mousemove",
+													function(e) {
+														$('.draggable')
+																.offset(
+																		{
+																			top : e.pageY
+																					+ pos_y
+																					- drg_h,
+																			left : e.pageX
+																					+ pos_x
+																					- drg_w
+																		})
+																.on(
+																		"mouseup",
+																		function() {
+																			$wnd
+																					.jQuery(
+																							this)
+																					.removeClass(
+																							'draggable')
+																					.css(
+																							'z-index',
+																							z_idx);
+																		});
+													});
+									e.preventDefault(); // disable selection
+								}).on(
+								"mouseup",
+								function() {
+									if (opt.handle === "")
+										$wnd.jQuery(this).removeClass(
+												'draggable');
+									else
+										$wnd.jQuery(this).removeClass(
+												'active-handle').parent()
+												.removeClass('draggable');
+								});
+			}
 		})($wnd.jQuery);
-		
+
 		$wnd.jQuery(element).drags();
-		
+
 	}-*/;
-	
+
 	public static native Element clone(Element element)/*-{
 
 		(function($) {

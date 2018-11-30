@@ -20,9 +20,7 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.HasText;
 
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
@@ -76,22 +74,6 @@ public class MaterialSwitch extends MaterialSelectedField implements HasText {
 		add(switch_);
 		add(label);
 		
-		final ClickHandler handler = event -> {
-			if(!isEnabled()) {
-				event.stopPropagation();
-				event.preventDefault();
-				GWT.log("funfo");
-			} else 
-				GWT.log("não funfo");
-		}; 
-		
-		input.addClickHandler(handler);
-		label.addClickHandler(handler);
-		thumb.addClickHandler(handler);
-		thumbUnderlay.addClickHandler(handler);
-		switch_.addClickHandler(handler);
-		addClickHandler(handler);
-				
 		super.onInitialize();
 	}
 
