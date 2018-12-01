@@ -51,7 +51,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	protected final MaterialList items = new MaterialList();
 
 	protected final TogglerMixin<MaterialMenu> togglerMixin = new TogglerMixin<>(this);
-	
+
 	private boolean quickOpen = false;
 	private boolean closeOnClick = false;
 
@@ -81,15 +81,11 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 	}
 
 	protected native void addNativeCloseEvent(Element element)/*-{
-
 		var _this = this;
-		element
-				.addEventListener(
-						'MDCMenu:cancel',
-						function(event) {
-							_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
-						});
-
+		var handler = function(event) {
+			_this.@gwt.material.design.components.client.ui.MaterialMenu::fireCloseEvent()();
+		};
+		element.addEventListener('MDCMenu:cancel', handler);
 	}-*/;
 
 	@Override
@@ -218,10 +214,10 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 				handler.onOpen(event);
 		}, OpenEvent.getType());
 	}
-	
+
 	@Override
 	public void setToggler(String togglerId) {
-		togglerMixin.setToggler(togglerId);		
+		togglerMixin.setToggler(togglerId);
 	}
 
 	@Override
