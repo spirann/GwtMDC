@@ -824,16 +824,23 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Material select menu
    ========================================================================== */
+.mdc-select--disabled .mdc-select__native-control,
+[disabled] .mdc-select__native-control {
+	background-color: rgba(127,127,127,0.1);}
+
+/* Input border radius */    
 .mdc-select__native-control {
 	overflow: hidden;
     border-radius: var(--mdc-rounded-border-radius);}
+.mdc-select:not(.mdc-select--outlined):not(.mdc-select--box):not(.mdc-select--shaped) .mdc-select__native-control {
+	border-radius: var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0 0;}  
 .mdc-select--outlined .mdc-notched-outline {
     border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined .mdc-notched-outline__idle {
     border-radius: var(--mdc-rounded-border-radius);}
 .mdc-select--outlined__native-control {
     border-radius: var(--mdc-rounded-border-radius);} 
-
+	
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline,
 .mdc-select:not(.mdc-select--outlined) .mdc-notched-outline__idle {
 	display: none;}
@@ -881,31 +888,43 @@ i.mdc-list-item__graphic {
 .mdc-text-field input::-webkit-search-results-decoration,
 .mdc-text-field input::-webkit-outer-spin-button,
 .mdc-text-field input::-webkit-inner-spin-button {
-	display: none;} 
+	display: none;}
    
 /* Disabled General */   
 .mdc-text-field[disabled] * {
-	color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;}
-.mdc-text-field[disabled] .mdc-text-field__input {
-	border-bottom-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;}
+	color: var(--mdc-theme-text-disabled-on-background);}
+.mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-text-field__input,
+.mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-notched-outline__idle {
+	border-color: var(--mdc-theme-text-disabled-on-background);}
+.mdc-text-field-container[disabled] .mdc-text-field.mdc-text-field--textarea:not([state]) .mdc-text-field__input {
+	border: 1px solid var(--mdc-theme-text-disabled-on-background);}
+.mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-notched-outline__path {
+	stroke: var(--mdc-theme-text-disabled-on-background) !important;}	
 .mdc-text-field__input:required + .mdc-floating-label:empty::after {
 	content: "";}
-.mdc-text-field--box.mdc-text-field--disabled,
-.mdc-text-field--box[disabled] {
-	background-color: rgb(127,127,127, 0.2);}
+.mdc-text-field--disabled .mdc-text-field__input,
+[disabled] .mdc-text-field__input {
+	background-color: rgba(127,127,127,0.1);}
+
+/* Input border radius */
+.mdc-text-field__input {
+	border-radius: var(--mdc-rounded-border-radius);}
+.mdc-text-field:not(.mdc-text-field--outlined):not(.mdc-text-field--shaped) .mdc-text-field__input {
+	border-radius: var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0 0;}	
 
 /* Disabled Text Field */
 .mdc-text-field--fullwidth.mdc-text-field--disabled:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input,
 .mdc-text-field--fullwidth[disabled]:not([state]):not(.mdc-text-field--textarea) .mdc-text-field__input {	
-	border-bottom: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;}
+	border-bottom: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(127, 127, 127, 0.24));}
 
 /* Disabled Text Area */
 .mdc-text-field--textarea.mdc-text-field--disabled:not([state]) .mdc-text-field__input,
 .mdc-text-field--textarea[disabled]:not([state]) .mdc-text-field__input {
-	border: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24)) !important;}
-.mdc-text-field--textarea.mdc-text-field--disabled:not([state]) .mdc-floating-label:after,
-.mdc-text-field--textarea[disabled]:not([state]) .mdc-floating-label:after {
-	background-color: rgb(127,127,127, 0.2);}	
+	border: 1px solid var(--mdc-theme-text-disabled-on-background, rgba(127, 127, 127, 0.24));}
+
+/* .mdc-text-field-container[disabled]:not([state])  */
+.mdc-text-field-container[disabled] .mdc-text-field--textarea .mdc-floating-label {
+	background-color: transparent;}	
 	   
 /* General */
 .mdc-text-field {	
@@ -983,57 +1002,57 @@ i.mdc-list-item__graphic {
 /* --------------------------------------------------------------------	*/
 .mdc-text-field__input {
 	background-color: transparent;}
-.mdc-text-field,
-.mdc-text-field--textarea .mdc-floating-label {
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]),
+.mdc-text-field-container:not([disabled]) .mdc-text-field--textarea:not(.mdc-text-field--disabled):not([disabled]) .mdc-floating-label {
 	background-color: var(--mdc-text-field--fill-color) !important;} 
-.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
-.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,  
-.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) + .mdc-text-field-helper-text {
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,  
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) + .mdc-text-field-helper-text {
     color: var(--mdc-text-field--ink-color);
 	caret-color: var(--mdc-text-field--ink-color);}
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,	
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__icon,	
+.mdc-text-field-container:not([disabled]) .mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
 	caret-color: var(--mdc-text-field--focused-color);}
 .mdc-text-field:not(.mdc-text-field--outlined) .mdc-notched-outline,
 .mdc-text-field:not(.mdc-text-field--outlined) .mdc-notched-outline__idle {
 	display: none;}
 .mdc-text-field.mdc-text-field--outlined .mdc-line-ripple {
 	display: none;}
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--textarea):not([disabled]) .mdc-notched-outline__idle {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--textarea):not([disabled]) .mdc-notched-outline__idle {
     border-color: var(--mdc-text-field--ink-color);}
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not([disabled]) .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not([disabled]) .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--ink-color); }
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]):not(.mdc-text-field--textarea) .mdc-text-field__input:hover ~ .mdc-notched-outline__idle,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]):not(.mdc-text-field--textarea) .mdc-text-field__icon:hover ~ .mdc-notched-outline__idle {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]):not(.mdc-text-field--textarea) .mdc-text-field__input:hover ~ .mdc-notched-outline__idle,
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]):not(.mdc-text-field--textarea) .mdc-text-field__icon:hover ~ .mdc-notched-outline__idle {
     border-color: var(--mdc-text-field--focused-color);}
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]) .mdc-text-field__input:hover ~ .mdc-notched-outline .mdc-notched-outline__path,
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]) .mdc-text-field__icon:hover ~ .mdc-notched-outline .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]) .mdc-text-field__input:hover ~ .mdc-notched-outline .mdc-notched-outline__path,
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused):not([disabled]) .mdc-text-field__icon:hover ~ .mdc-notched-outline .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--focused-color);}
-.mdc-text-field--outlined:not(.mdc-text-field--disabled):not([disabled]).mdc-text-field--focused .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--outlined:not(.mdc-text-field--disabled):not([disabled]).mdc-text-field--focused .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--focused-color);}
-.mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-floating-label {
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not([disabled]) .mdc-floating-label {
     color: var(--mdc-text-field--ink-color);}
-.mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]):not([state]) .mdc-floating-label {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]):not([state]) .mdc-floating-label {
 	color: var(--mdc-text-field--focused-color) !important;}
 .mdc-text-field .mdc-line-ripple {
     background-color: var(--mdc-text-field--focused-color);}
-.mdc-text-field--box:not(.mdc-text-field--disabled):not([disabled]) {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--box:not(.mdc-text-field--disabled):not([disabled]) {
     background-color: rgb(127,127,127, 0.3);}
 .mdc-text-field--box::before, .mdc-text-field--box::after {
     background-color: rgba(0, 0, 0, 0.87);}
 
 /* Text Field */
-.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input,
-.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input:hover {    
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea):not([disabled]) .mdc-text-field__input:hover {    
     border-bottom-color: var(--mdc-text-field--ink-color); }
-.mdc-text-field--fullwidth:not([state]):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--fullwidth:not([state]):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
 	border-bottom: 1px solid var(--mdc-text-field--ink-color) !important;}
 
 /* Text Area */
-.mdc-text-field.mdc-text-field--textarea:not(.mdc-text-field--disabled):not([disabled]):not([state]):not(.mdc-text-field--focused) .mdc-text-field__input,
-.mdc-text-field.mdc-text-field--textarea:not(.mdc-text-field--disabled):not([disabled]):not([state]):not(.mdc-text-field--focused) .mdc-text-field__input:hover {    
+.mdc-text-field-container:not([disabled]) .mdc-text-field.mdc-text-field--textarea:not(.mdc-text-field--disabled):not([disabled]):not([state]):not(.mdc-text-field--focused) .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field.mdc-text-field--textarea:not(.mdc-text-field--disabled):not([disabled]):not([state]):not(.mdc-text-field--focused) .mdc-text-field__input:hover {    
     border: 1px solid var(--mdc-text-field--ink-color) !important;}
-.mdc-text-field--textarea:not([state]):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--focused) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--textarea:not([state]):not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--focused) .mdc-text-field__input {
 	border: 1px solid var(--mdc-text-field--ink-color) !important;}
 .mdc-text-field--textarea .mdc-notched-outline {
 	display: none;}
@@ -1043,7 +1062,7 @@ i.mdc-list-item__graphic {
 .mdc-text-field--textarea,
 .mdc-text-field--textarea.mdc-text-field--focused {
 	border: none !important;}
-
+	
 /* -------------------------------------------------------------------- */
 /* Adjust icon in full width											*/
 /* --------------------------------------------------------------------	*/ 
@@ -1076,91 +1095,105 @@ i.mdc-list-item__graphic {
 	width: calc(100% - 38px);
 	padding-left: 38px;} 
 
+/* shape dense */
+.mdc-text-field--shaped.mdc-text-field--dense.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-left: 38px;}
+[dir="rtl"] .mdc-text-field--shaped.mdc-text-field--dense.mdc-text-field--with-leading-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-right: 38px;}
+.mdc-text-field--shaped.mdc-text-field--dense.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-right: 38px;}
+[dir="rtl"] .mdc-text-field--shaped.mdc-text-field--dense.mdc-text-field--with-trailing-icon .mdc-text-field__input {
+	width: calc(100% - 38px);
+	padding-left: 38px;} 
+
 /* --------------------------------------------------------------------	*/
 /* Configure state class												*/
 /* -------------------------------------------------------------------- */ 
 /* --------------- */
 /* State = SUCCESS */
 /* --------------- */
-.mdc-text-field[state="success"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] {
 	caret-color: var(--mdc-state--success) !important;}
-.mdc-text-field[state="success"] .mdc-text-field__icon,
-.mdc-text-field[state="success"] .mdc-floating-label,
-.mdc-text-field[state="success"] + .mdc-text-field-helper-text {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-text-field__icon,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-floating-label,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] + .mdc-text-field-helper-text {
 	color: var(--mdc-state--success) !important;}
-.mdc-text-field[state="success"] .mdc-notched-outline__idle {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-notched-outline__idle {
 	border-color: var(--mdc-state--success) !important;}
-.mdc-text-field[state="success"] .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-notched-outline__path {
 	stroke: var(--mdc-state--success) !important;}
-.mdc-text-field[state="success"] .mdc-line-ripple {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-line-ripple {
     background-color: var(--mdc-state--success) !important;}
 
 /* Text Field */
-.mdc-text-field[state="success"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
 	border-bottom-color: var(--mdc-state--success) !important;}
-.mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
 	border-bottom: 1px solid var(--mdc-state--success) !important;}
 
 /* Text Area */
-.mdc-text-field.mdc-text-field--textarea[state="success"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field.mdc-text-field--textarea[state="success"] .mdc-text-field__input {
 	border-color: var(--mdc-state--success) !important;}
-.mdc-text-field--textarea.mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--textarea.mdc-text-field--fullwidth[state="success"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
 	border: 1px solid var(--mdc-state--success) !important;}
 
 /* --------------- */
 /* State = WARNING */
 /* --------------- */
-.mdc-text-field[state="warning"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] {
 	caret-color: var(--mdc-state--warning) !important;}
-.mdc-text-field[state="warning"] .mdc-text-field__icon,
-.mdc-text-field[state="warning"] .mdc-floating-label,
-.mdc-text-field[state="warning"] + .mdc-text-field-helper-text {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-text-field__icon,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-floating-label,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] + .mdc-text-field-helper-text {
 	color: var(--mdc-state--warning) !important;}
-.mdc-text-field[state="warning"] .mdc-notched-outline__idle {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-notched-outline__idle {
 	border-color: var(--mdc-state--warning) !important;}
-.mdc-text-field[state="warning"] .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-notched-outline__path {
 	stroke: var(--mdc-state--warning) !important;}
-.mdc-text-field[state="warning"] .mdc-line-ripple {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-line-ripple {
     background-color: var(--mdc-state--warning) !important;}
 
 /* Text Field */
-.mdc-text-field[state="warning"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
 	border-bottom-color: var(--mdc-state--warning) !important;}
-.mdc-text-field--fullwidth[state="warning"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--fullwidth[state="warning"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
 	border-bottom: 1px solid var(--mdc-state--warning) !important;}
 
 /* Text Area */
-.mdc-text-field.mdc-text-field--textarea[state="warning"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field.mdc-text-field--textarea[state="warning"] .mdc-text-field__input {
 	border-color: var(--mdc-state--warning) !important;}
-.mdc-text-field--textarea.mdc-text-field--fullwidth[state="warning"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--textarea.mdc-text-field--fullwidth[state="warning"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
 	border: 1px solid var(--mdc-state--warning) !important;}
 
 /* ------------- */
 /* State = ERROR */
 /* ------------- */
-.mdc-text-field[state="error"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] {
 	caret-color: var(--mdc-state--error) !important;}
-.mdc-text-field[state="error"] .mdc-text-field__icon,
-.mdc-text-field[state="error"] .mdc-floating-label,
-.mdc-text-field[state="error"] + .mdc-text-field-helper-text {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-text-field__icon,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-floating-label,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] + .mdc-text-field-helper-text {
 	color: var(--mdc-state--error) !important;}
-.mdc-text-field[state="error"] .mdc-notched-outline__idle {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-notched-outline__idle {
 	border-color: var(--mdc-state--error) !important;}
-.mdc-text-field[state="error"] .mdc-notched-outline__path {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-notched-outline__path {
 	stroke: var(--mdc-state--error) !important;}
-.mdc-text-field[state="error"] .mdc-line-ripple {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-line-ripple {
     background-color: var(--mdc-state--error) !important;}
 
 /* Text Field */
-.mdc-text-field[state="error"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"]:not(.mdc-text-field--textarea) .mdc-text-field__input {
 	border-bottom-color: var(--mdc-state--error) !important;}
-.mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]):not(.mdc-text-field--textarea)  .mdc-text-field__input {
 	border-bottom: 1px solid var(--mdc-state--error) !important;}
 
 /* Text Area */
-.mdc-text-field.mdc-text-field--textarea[state="error"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field.mdc-text-field--textarea[state="error"] .mdc-text-field__input {
 	border-color: var(--mdc-state--error) !important;}
-.mdc-text-field--textarea.mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--textarea.mdc-text-field--fullwidth[state="error"]:not(.mdc-text-field--disabled):not([disabled]) .mdc-text-field__input {
 	border: 1px solid var(--mdc-state--error) !important;}	
 
 /* ==========================================================================
