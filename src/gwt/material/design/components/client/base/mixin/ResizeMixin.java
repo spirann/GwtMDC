@@ -40,7 +40,6 @@ public class ResizeMixin<UIO extends MaterialUIObject & HasResize> extends Attri
 		setValue(resize);
 	}
 
-
 	@Override
 	public Resize getResize() {
 		return getValue();

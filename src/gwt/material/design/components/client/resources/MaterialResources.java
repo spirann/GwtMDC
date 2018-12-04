@@ -35,6 +35,9 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/jquery-3.3.1.min.js")
 	TextResource jquery();
 	
+	@Source("js/resize-sensor.min.js")
+	TextResource resizeSensor();
+		
 	@Source("js/vanilla-masker.min.js")
 	TextResource jqueryMaskJs();
 	

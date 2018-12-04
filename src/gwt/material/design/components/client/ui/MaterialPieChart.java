@@ -195,7 +195,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	public void setDonutWidth(String donutWidth) {
 		options.donutWidth = donutWidth;
-		redraw();
+		redraw(false);
 	}
 
 	public ChartLabelPosition getLabelPosition() {
@@ -206,7 +206,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 		options.labelPosition = labelPosition == null ? ChartLabelPosition.INSIDE.getCssName()
 				: labelPosition.getCssName();
 		labelPositionMixin.setValue(options.labelPosition);
-		redraw();
+		redraw(false);
 	}
 
 	public ChartLabelDirection getLabelDirection() {
@@ -216,7 +216,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 	public void setLabelDirection(ChartLabelDirection labelDirection) {
 		options.labelDirection = labelDirection == null ? ChartLabelDirection.NEUTRAL.getCssName()
 				: labelDirection.getCssName();
-		redraw();
+		redraw(false);
 	}
 
 	public int getLabelOffset() {
@@ -225,7 +225,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	public void setLabelOffset(int labelOffset) {
 		this.options.labelOffset = labelOffset;
-		redraw();
+		redraw(false);
 	}
 
 	public double getStartAngle() {
@@ -243,7 +243,7 @@ public class MaterialPieChart extends MaterialChartBase<Double, String, JsPieCha
 
 	public void setChartPadding(int padding) {
 		options.chartPadding = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**

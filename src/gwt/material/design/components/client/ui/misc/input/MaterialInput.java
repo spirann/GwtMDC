@@ -73,9 +73,8 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered,
-		HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
-		HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
+public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered, HasRequired, HasPlaceholder, HasType<TextFieldType>,
+		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -91,18 +90,12 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	// /////////////////////////////////////////////////////////////
 	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
-	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input,
-			CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
-	protected final PropertyMixin<MaterialWidget, Integer> minLengthMixin = new PropertyMixin<>(input,
-			CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
-	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input,
-			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
-	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input,
-			CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
-	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__DENSE);
-	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_TEXT_FIELD__UNBORDERED);
+	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input, CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
+	protected final PropertyMixin<MaterialWidget, Integer> minLengthMixin = new PropertyMixin<>(input, CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
+	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input, CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
+	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input, CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
+	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
 	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
 	protected final StateMixin<MaterialInput> stateMixin = new StateMixin<>(this);
@@ -145,28 +138,34 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		addKeyUpHandler(event -> fireValidation());
 
 		super.onInitialize();
-		
+
 		// To prevent label over the placeholder when input is empty
 		input.addBlurHandler(event -> updateFloatLabelAbove());
 		updateFloatLabelAbove();
+		addResizeHandler(event -> layout());
 	}
 
+	protected native void layout()/*-{
+		var jsElement = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (jsElement)
+			jsElement.layout();
+	}-*/;
+
 	protected void updateFloatLabelAbove() {
-		
+
 		final String text = getValue();
 		final String placeholder = getPlaceholder();
-		
-		if((text == null || text.isEmpty()) && (placeholder != null && !placeholder.isEmpty()))
+
+		if ((text == null || text.isEmpty()) && (placeholder != null && !placeholder.isEmpty()))
 			label.addStyleName(CssName.MDC_FLOATING_LABEL__FLOAT_ABOVE);
 	}
-	
+
 	protected void fireValidation() {
 
 		if (validation == null)
 			return;
 
-		final Result result = validation.validate(getValue(), getInputMask(), isRequired(), getMinLength(),
-				getMaxLength());
+		final Result result = validation.validate(getValue(), getInputMask(), isRequired(), getMinLength(), getMaxLength());
 
 		if (result == null)
 			return;
@@ -308,6 +307,8 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	@Override
 	public void setType(TextFieldType type) {
 		typeMixin.setType(type);
+		if (initialized)
+			layout();
 	}
 
 	@Override

@@ -22,7 +22,6 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.user.client.Window;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasDiscrete;
@@ -110,12 +109,9 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		initializeChageEventListener();
 		initializeInputEventListener();
 
-		// It is necessary in panels with horizontal scroll
-		// Or if the parent starts invisible
-		Window.addResizeHandler(event -> layout());
-		// addMouseOverHandler(event -> layout());
-
 		super.onInitialize();
+		
+		addResizeHandler(event -> layout());
 	}
 
 	protected native void initializeChageEventListener()/*-{
@@ -174,9 +170,9 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	}-*/;
 
 	protected native void layout()/*-{
-		var slider = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-		if (slider)
-			slider.layout();
+		var jsElement = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (jsElement)
+			jsElement.layout();
 	}-*/;
 
 	protected native void nativeSetValue(final Double value)/*-{

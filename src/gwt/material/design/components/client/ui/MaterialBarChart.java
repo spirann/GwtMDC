@@ -233,7 +233,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 
 	public void setBarLabelClass(String pointLabelClass) {
 		this.barLabelClass = pointLabelClass;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isShowBarLabel() {
@@ -242,7 +242,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 
 	public void setShowBarLabel(boolean showPointLabel) {
 		this.showBarLabel = showPointLabel;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -263,7 +263,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setReferenceValue(double referenceValue) {
 		this.options.referenceValue = referenceValue;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -330,7 +330,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setSeriesBarDistance(int seriesBarDistance) {
 		this.options.seriesBarDistance = seriesBarDistance;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -399,7 +399,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setShowGridBackground(final boolean showGridBackground) {
 		this.options.showGridBackground = showGridBackground;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -412,7 +412,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 		options.chartPadding.right = padding;
 		options.chartPadding.bottom = padding;
 		options.chartPadding.left = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -422,7 +422,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setChartPaddingTop(final int padding) {
 		options.chartPadding.top = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -432,7 +432,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setChartPaddingRight(final int padding) {
 		options.chartPadding.right = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -442,7 +442,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setChartPaddingBottom(final int padding) {
 		options.chartPadding.bottom = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -452,7 +452,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setChartPaddingLeft(final int padding) {
 		options.chartPadding.left = padding;
-		redraw();
+		redraw(false);
 	}
 
 	public void setGridBackgroundColor(Color color) {
@@ -479,7 +479,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXShowLabel(boolean showLabel) {
 		options.axisX.showLabel = showLabel;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -498,7 +498,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXShowGrid(boolean showGrid) {
 		options.axisX.showGrid = showGrid;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -517,7 +517,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXOnlyInteger(boolean onlyInteger) {
 		options.axisX.onlyInteger = onlyInteger;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -536,7 +536,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXOffset(int offset) {
 		options.axisX.offset = offset;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -559,7 +559,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXPosition(ChartAxisLabelPosition position) {
 		options.axisX.position = position.getCssName();
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -578,7 +578,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisXScaleMinSpace(int scaleMinSpace) {
 		options.axisX.scaleMinSpace = scaleMinSpace;
-		redraw();
+		redraw(false);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -601,7 +601,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYShowLabel(boolean showLabel) {
 		options.axisY.showLabel = showLabel;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -620,7 +620,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYShowGrid(boolean showGrid) {
 		options.axisY.showGrid = showGrid;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -639,7 +639,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYOnlyInteger(boolean onlyInteger) {
 		options.axisY.onlyInteger = onlyInteger;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -658,7 +658,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYOffset(int offset) {
 		options.axisY.offset = offset;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -681,7 +681,7 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYPosition(ChartAxisLabelPosition position) {
 		options.axisY.position = position.getCssName();
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -700,6 +700,6 @@ public class MaterialBarChart extends MaterialChartBase<Double[], String[], JsBa
 	 */
 	public void setAxisYScaleMinSpace(int scaleMinSpace) {
 		options.axisY.scaleMinSpace = scaleMinSpace;
-		redraw();
+		redraw(false);
 	}
 }

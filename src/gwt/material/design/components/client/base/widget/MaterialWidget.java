@@ -86,6 +86,7 @@ import gwt.material.design.components.client.base.interfaces.HasHideOn;
 import gwt.material.design.components.client.base.interfaces.HasId;
 import gwt.material.design.components.client.base.interfaces.HasInitialClasses;
 import gwt.material.design.components.client.base.interfaces.HasInteractionHandlers;
+import gwt.material.design.components.client.base.interfaces.HasResizeHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRipple;
 import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasRtl;
@@ -113,6 +114,8 @@ import gwt.material.design.components.client.events.DragStartEvent;
 import gwt.material.design.components.client.events.DropActivateEvent;
 import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
+import gwt.material.design.components.client.events.ResizeEvent;
+import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 
 /**
@@ -122,8 +125,8 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends MaterialUIObject
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl, HasHideOn, HasAlt,
-		HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
+		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasResizeHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl,
+		HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
 		autoInit();
@@ -184,7 +187,6 @@ public class MaterialWidget extends MaterialUIObject
 	protected final AttributeMixin<MaterialWidget, String> ariaLabelledByMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LABELLEDBY, FromString.TO_STRING);
 	protected final AttributeMixin<MaterialWidget, Integer> tabindexMixin = new AttributeMixin<>(this, CssAttribute.TABINDEX, FromString.TO_INTEGER);
 
-	
 	private String[] initialClasses;
 
 	protected List<Appender> onLoadAdd;
@@ -229,7 +231,7 @@ public class MaterialWidget extends MaterialUIObject
 		if (onLoadAdd != null) {
 
 			final List<Appender> end = new LinkedList<>();
-			
+
 			// Check the onLoadAdd items.
 			for (Appender item : onLoadAdd) {
 				if (item.index == Appender.SEQUENTIAL)
@@ -591,6 +593,30 @@ public class MaterialWidget extends MaterialUIObject
 		}, FocusEvent.getType());
 	}
 
+	private boolean resizeSensorInitialized = false;
+
+	protected native void initializeResizeSensor()/*-{
+		var _this = this;		
+		var initialized = this.@gwt.material.design.components.client.base.widget.MaterialWidget::resizeSensorInitialized;
+		if (!initialized) {
+			this.@gwt.material.design.components.client.base.widget.MaterialWidget::resizeSensorInitialized = true;
+			var element = this.@gwt.material.design.components.client.base.widget.MaterialWidget::getElement()();	
+			new $wnd.ResizeSensor(element, function() {
+				_this.@gwt.material.design.components.client.base.widget.MaterialWidget::fireResizeEvent()();
+			});
+		}
+	}-*/;
+
+	protected final void fireResizeEvent() {
+		ResizeEvent.fire(this);
+	}
+
+	@Override
+	public HandlerRegistration addResizeHandler(final ResizeHandler handler) {
+		initializeResizeSensor();
+		return addHandler(handler, ResizeEvent.getType());
+	}
+
 	@Override
 	public void setId(String id) {
 		idMixin.setValue(id);
@@ -773,6 +799,16 @@ public class MaterialWidget extends MaterialUIObject
 
 	public void setTooltipPosition(TooltipPosition position) {
 		tooltipMixin.setTooltipPosition(position);
+	}
+	
+	@Override
+	public void setTooltipColor(Color color) {
+		tooltipMixin.setTooltipColor(color);
+	}
+
+	@Override
+	public void setTooltipBackgroundColor(Color color) {
+		tooltipMixin.setTooltipBackgroundColor(color);
 	}
 
 	@Override

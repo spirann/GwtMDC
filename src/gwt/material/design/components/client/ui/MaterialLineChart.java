@@ -281,7 +281,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setEnableZoom(boolean enableZoom) {
 		this.enableZoom = enableZoom;
-		redraw();
+		redraw(false);
 	}
 
 	public String getPointLabelClass() {
@@ -290,7 +290,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setPointLabelClass(String pointLabelClass) {
 		this.pointLabelClass = pointLabelClass;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isShowPointLabel() {
@@ -299,7 +299,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setShowPointLabel(boolean showPointLabel) {
 		this.showPointLabel = showPointLabel;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isFullWidth() {
@@ -308,7 +308,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setFullWidth(final boolean fullWidth) {
 		this.options.fullWidth = fullWidth;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isLineSmooth() {
@@ -317,7 +317,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setLineSmooth(final boolean lineSmooth) {
 		this.options.lineSmooth = lineSmooth;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isShowArea() {
@@ -326,7 +326,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setShowArea(final boolean showArea) {
 		this.options.showArea = showArea;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isShowPoint() {
@@ -335,7 +335,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setShowPoint(final boolean showPoint) {
 		this.options.showPoint = showPoint;
-		redraw();
+		redraw(false);
 	}
 
 	public boolean isShowLine() {
@@ -344,7 +344,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 
 	public void setShowLine(final boolean showLine) {
 		this.options.showLine = showLine;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -363,7 +363,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setShowGridBackground(final boolean showGridBackground) {
 		this.options.showGridBackground = showGridBackground;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -376,7 +376,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 		options.chartPadding.right = padding;
 		options.chartPadding.bottom = padding;
 		options.chartPadding.left = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -386,7 +386,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setChartPaddingTop(final int padding) {
 		options.chartPadding.top = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -396,7 +396,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setChartPaddingRight(final int padding) {
 		options.chartPadding.right = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -406,7 +406,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setChartPaddingBottom(final int padding) {
 		options.chartPadding.bottom = padding;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -416,7 +416,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setChartPaddingLeft(final int padding) {
 		options.chartPadding.left = padding;
-		redraw();
+		redraw(false);
 	}
 
 	public void setGridBackgroundColor(Color color) {
@@ -443,7 +443,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisXShowLabel(boolean showLabel) {
 		options.axisX.showLabel = showLabel;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -462,7 +462,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisXShowGrid(boolean showGrid) {
 		options.axisX.showGrid = showGrid;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -481,7 +481,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisXOffset(int offset) {
 		options.axisX.offset = offset;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -504,7 +504,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisXPosition(ChartAxisLabelPosition position) {
 		options.axisX.position = position.getCssName();
-		redraw();
+		redraw(false);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -527,7 +527,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYShowLabel(boolean showLabel) {
 		options.axisY.showLabel = showLabel;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -546,7 +546,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYShowGrid(boolean showGrid) {
 		options.axisY.showGrid = showGrid;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -565,7 +565,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYOnlyInteger(boolean onlyInteger) {
 		options.axisY.onlyInteger = onlyInteger;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -584,7 +584,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYOffset(int offset) {
 		options.axisY.offset = offset;
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -607,7 +607,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYPosition(ChartAxisLabelPosition position) {
 		options.axisY.position = position.getCssName();
-		redraw();
+		redraw(false);
 	}
 
 	/**
@@ -626,7 +626,7 @@ public class MaterialLineChart extends MaterialChartBase<Double[], String[], JsL
 	 */
 	public void setAxisYScaleMinSpace(int scaleMinSpace) {
 		options.axisY.scaleMinSpace = scaleMinSpace;
-		redraw();
+		redraw(false);
 	}
 
 }

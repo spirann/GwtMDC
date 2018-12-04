@@ -204,6 +204,10 @@
 /* ==========================================================================
    Tooltip
    ========================================================================== */
+:root {
+	--mdc-tooltip--fill-color: var(--mdc-theme-surface);
+	--mdc-tooltip--ink-color: var(--mdc-theme-on-surface);
+}
 .mdc-tooltip {
 	font-size: 0.60rem;
 	line-height: 0.70rem;
@@ -212,8 +216,8 @@
 	min-width: 5em;
 	margin: 8px 16px 8px 16px;
 	padding: 8px;
-	background: var(--mdc-theme-on-surface);
-	color: var(--mdc-theme-surface);
+	background: var(--mdc-tooltip--fill-color);
+	color: var(--mdc-tooltip--ink-color);
 	border-radius: var(--mdc-rounded-border-radius);
 	text-align: center;
 	pointer-events: none;	

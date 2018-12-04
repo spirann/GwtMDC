@@ -132,8 +132,9 @@
 .material-icons[disabled],
 [disabled] .mdc-fab__label,
 [disabled] .mdc-switch-label,
-[disabled] .material-icons {
-	opacity: 0.26;}
+[disabled] .material-icons,
+.mdc-text-field-container[disabled]  {
+	opacity: 0.42;}
 
 /* ==========================================================================
    Material Icons
@@ -924,7 +925,7 @@ i.mdc-list-item__graphic {
 
 /* .mdc-text-field-container[disabled]:not([state])  */
 .mdc-text-field-container[disabled] .mdc-text-field--textarea .mdc-floating-label {
-	background-color: transparent;}	
+	background-color: transparent;}
 	   
 /* General */
 .mdc-text-field {	

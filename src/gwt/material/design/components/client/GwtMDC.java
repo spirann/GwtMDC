@@ -61,6 +61,7 @@ public class GwtMDC implements EntryPoint {
 
 	public static void loadJsResources() {
 		injectJs(MaterialResources.INSTANCE.jquery());
+		injectJs(MaterialResources.INSTANCE.resizeSensor());
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
 		injectJs(MaterialResources.INSTANCE.chartistJs());
 		injectJs(MaterialResources.INSTANCE.chartistTooltipPluginJs());

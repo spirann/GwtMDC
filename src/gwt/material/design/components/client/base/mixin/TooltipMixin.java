@@ -31,7 +31,9 @@ import com.google.gwt.user.client.Timer;
 import gwt.material.design.components.client.base.interfaces.HasTooltip;
 import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.TooltipPosition;
@@ -116,7 +118,7 @@ public class TooltipMixin<UIO extends MaterialUIObject & HasTooltip> extends Abs
 		longPressTimer = null;
 	}
 
-	protected native void setPosition(final Element tooltip, final Element target,
+	private native void setPosition(final Element tooltip, final Element target,
 			final TooltipPosition position)/*-{
 
 		var targetWidth = $wnd.jQuery(target).outerWidth();
@@ -198,5 +200,15 @@ public class TooltipMixin<UIO extends MaterialUIObject & HasTooltip> extends Abs
 
 	public void setTooltipPosition(TooltipPosition position) {
 		this.position = position;
+	}
+
+	@Override
+	public void setTooltipColor(Color color) {
+		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__INK, color);
+	}
+
+	@Override
+	public void setTooltipBackgroundColor(Color color) {
+		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__FILL, color);		
 	}
 }

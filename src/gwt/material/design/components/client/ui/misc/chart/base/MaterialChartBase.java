@@ -42,6 +42,7 @@ import gwt.material.design.components.client.ui.misc.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.misc.chart.js.base.JsChartData;
 import gwt.material.design.components.client.ui.misc.chart.js.base.JsChartOptions;
 import gwt.material.design.components.client.utils.helper.JsHelper;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
@@ -50,8 +51,7 @@ import gwt.material.design.components.client.utils.helper.JsHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialUIObject
-		implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
+public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialUIObject implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -61,8 +61,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 	private boolean initialized = false;
 
-	protected final ChartAspectRatioMixin<MaterialChartBase<V, L, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(
-			this);
+	protected final ChartAspectRatioMixin<MaterialChartBase<V, L, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(this);
 
 	// /////////////////////////////////////////////////////////////
 	// Plugings
@@ -97,15 +96,22 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		final List<JavaScriptObject> plugins = new LinkedList<>();
 
 		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(getElement(), options, showTooltip);
-		if (tooltipPlugin != null) {
+		if (tooltipPlugin != null)
 			plugins.add(tooltipPlugin);
-		}
 
 		return plugins;
 	}
 
-	protected final native JavaScriptObject loadTooltipPlugin(final Element element, final O options,
-			final boolean addTooltipPlugin)/*-{
+	protected native void initializeRedrawOnResize()/*-{
+		var _this = this;
+		var element = this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::getElement()();
+		var handler = function() {
+			_this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::redraw(Z)(false);
+		};
+		new $wnd.ResizeSensor(element, handler);
+	}-*/;
+
+	protected final native JavaScriptObject loadTooltipPlugin(final Element element, final O options, final boolean addTooltipPlugin)/*-{
 
 		var _this = this;
 
@@ -156,13 +162,23 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	protected void onLoad() {
 		super.onLoad();
 		jsInit();
+		initializeRedrawOnResize();
 		initialized = true;
 	}
 
 	protected void redraw() {
+		redraw(isAnimated());
+	}
+
+	protected void redraw(final boolean animate) {
 		if (initialized && jsElement != null) {
 			this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
+
+			// Some redrawers does not need be animated
+			final boolean isAnimated = isAnimated();			
+			setAnimated(animate);			
 			jsInit();
+			setAnimated(isAnimated);
 		}
 	}
 
@@ -170,8 +186,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		chart.off();
 	}-*/;
 
-	protected native void update(final JavaScriptObject chart, final JsChartData data,
-			final JsChartOptions options) /*-{
+	protected native void update(final JavaScriptObject chart, final JsChartData data, final JsChartOptions options) /*-{
 		chart.update(data, options, true);
 	}-*/;
 
@@ -186,17 +201,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		if (getValue() != null) {
 			for (int v = 0; v < getValue().length; v++) {
 				final Color color = getValue()[v].getColor();
-				if (color != null) {
-					setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v),
-							color.getCssName());
-				}
+				if (color != null)
+					setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v), color.getCssName());
 			}
 		}
 
-		if (animated) {
+		if (animated)
 			applyAnimations(jsElement, animationDuration);
-		}
-
 	}
 
 	protected native void applyAnimations(final JavaScriptObject chart, final int duration) /*-{		
@@ -226,11 +237,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		// Initialization code
 		if (!valueChangeHandlerInitialized) {
 			valueChangeHandlerInitialized = true;
-			addChangeHandler(new ChangeHandler() {
-				public void onChange(ChangeEvent event) {
-					fireChangeEvent();
-				}
-			});
+			addChangeHandler(event -> fireChangeEvent());
 		}
 		return addHandler(handler, ValueChangeEvent.getType());
 	}
@@ -249,15 +256,14 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	public void setValue(MaterialChartSerie<V, L>[] value, boolean fireEvents) {
 		this.value = value;
 		redraw();
-		if (fireEvents) {
+		if (fireEvents)
 			fireChangeEvent();
-		}
 	}
 
 	@Override
 	public void setChartAspectRatio(ChartAspectRatio aspectRatio) {
 		aspectRatioMixin.setChartAspectRatio(aspectRatio);
-		redraw();
+		redraw(false);
 	}
 
 	@Override
@@ -272,17 +278,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 	public void setColors(String colors) {
 		final String[] colorsArray = colors.split(" ");
-		for (int i = 0; i < colorsArray.length; i++) {
-			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
-					Color.valueOf(colorsArray[i]).getCssName());
-		}
+		for (int i = 0; i < colorsArray.length; i++)
+			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), Color.valueOf(colorsArray[i]).getCssName());
 	}
 
 	public void setColors(Color... colors) {
-		for (int i = 0; i < colors.length; i++) {
-			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
-					colors[i].getCssName());
-		}
+		for (int i = 0; i < colors.length; i++)
+			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), colors[i].getCssName());
 	}
 
 	public boolean isAnimated() {
@@ -291,7 +293,6 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 	public void setAnimated(boolean animated) {
 		this.animated = animated;
-		redraw();
 	}
 
 	/**
@@ -310,7 +311,6 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	 */
 	public void setAnimationDuration(int animationDuration) {
 		this.animationDuration = animationDuration;
-		redraw();
 	}
 
 	public boolean isShowLabel() {
@@ -319,7 +319,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 	public void setShowLabel(boolean showLabel) {
 		options.showLabel = showLabel;
-		redraw();
+		redraw(false);
 	}
 
 	public Double getHigh() {
@@ -352,13 +352,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	@Override
 	public void setWidth(String width) {
 		options.width = width;
-		redraw();
+		redraw(false);
 	}
 
 	@Override
 	public void setHeight(String height) {
 		options.height = height;
-		redraw();
+		redraw(false);
 	}
 
 	// ////////////////////////////////////////////////////////////////////
@@ -378,7 +378,15 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	 */
 	public void setShowTooltip(boolean showTooltip) {
 		this.showTooltip = showTooltip;
-		redraw();
+		redraw(false);
+	}
+
+	public void setTooltipColor(Color color) {
+		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__INK, color);
+	}
+
+	public void setTooltipBackgroundColor(Color color) {
+		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__FILL, color);
 	}
 
 	/**
@@ -397,8 +405,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	 */
 	public void setValueFormatter(ChartValueFormatter formatter) {
 		this.formatter = formatter;
-		if (isShowTooltip()) {
-			redraw();
-		}
+		if (isShowTooltip())
+			redraw(false);
 	}
 }

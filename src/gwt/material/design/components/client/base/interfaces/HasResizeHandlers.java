@@ -19,25 +19,16 @@
  */
 package gwt.material.design.components.client.base.interfaces;
 
-import gwt.material.design.components.client.constants.Color;
-import gwt.material.design.components.client.constants.TooltipPosition;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
+
+import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface HasTooltip {
-	
-	public void setTooltip(String tooltip);
-	
-	public String getTooltip();
-
-	public void setTooltipPosition(TooltipPosition position);
-	
-	public TooltipPosition getTooltipPosition();
-	
-	public void setTooltipColor(final Color color);
-
-	public void setTooltipBackgroundColor(final Color color);
+public interface HasResizeHandlers extends HasHandlers {
+	  HandlerRegistration addResizeHandler(ResizeHandler handler);
 }
