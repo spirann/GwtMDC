@@ -30,27 +30,41 @@ import gwt.material.design.components.client.utils.helper.Formatation;
  */
 public final class Console {
 
-	public static void log(Object value) {
-		log(String.valueOf(value));
+	public static interface ConsoleWriter {
+		public void write(final Object value);
 	}
 
-	public static void log(Long value) {
-		log(String.valueOf(value));
-	}
-
-	public static void log(Integer value) {
-		log(String.valueOf(value));
-	}
-
-	public static void log(Boolean value) {
-		log(String.valueOf(value));
-	}
-
-	public static void log(String value) {
-		log(Formatation.dateTime(new Date()) + ": " + value);
-	}
+	static ConsoleWriter writer = value -> write(Formatation.dateTime(new Date()) + ": " + String.valueOf(value));
 
 	static native void write(String text) /*-{
 		console.log(text);
 	}-*/;
+
+	public static void setWriter(final ConsoleWriter writer) {
+		Console.writer = writer;
+
+		if (Console.writer == null)
+			Console.writer = value -> write(Formatation.dateTime(new Date()) + ": " + String.valueOf(value));
+	}
+
+	public static void log(Object value) {
+		Console.writer.write(value);
+	}
+
+	public static void log(Long value) {
+		Console.writer.write(value);
+	}
+
+	public static void log(Integer value) {
+		Console.writer.write(value);
+	}
+
+	public static void log(Boolean value) {
+		Console.writer.write(value);
+	}
+
+	public static void log(String value) {
+		Console.writer.write(value);
+	}
+
 }

@@ -134,7 +134,7 @@
 [disabled] .mdc-switch-label,
 [disabled] .material-icons,
 .mdc-text-field-container[disabled]  {
-	opacity: 0.42;}
+	opacity: var(--mdc-disabled-opacity);}
 
 /* ==========================================================================
    Material Icons
@@ -292,10 +292,10 @@
 /* ==========================================================================
    Tab
    ========================================================================== */
-.mdc-tab[disabled] {
-	opacity: 0.37;}
-[disabled] .mdc-tab {	
-	filter: invert(.5) grayscale(100%);}
+.mdc-tab-bar[disabled] {
+	opacity: var(--mdc-disabled-opacity);}
+.mdc-tab-bar[disabled] .mdc-tab {
+	filter: invert(.5) grayscale(100%);}	
 .mdc-tab-bar {
 	background-color: var(--mdc-theme-primary);}
 .mdc-tab .mdc-tab__text-label:empty,
@@ -323,7 +323,11 @@
    List
    ========================================================================== */
 .mdc-list-item[disabled] {
-	opacity: 0.37;}
+	opacity: var(--mdc-disabled-opacity);}	
+.mdc-list-item:not([dir="rtl"]){
+	padding-right: 0;}
+	.mdc-list-item[dir="rtl"]{
+	padding-left: 0;}
 .mdc-list-item,
 .mdc-list-item * {
 	cursor: pointer;}
@@ -359,7 +363,7 @@ i.mdc-list-item__graphic {
 .mdc-list-group__subheader,
 .mdc-list-item__secondary-text {
 	color: var(--mdc-list-item-secondary-text-ink-color);
-	opacity: 0.64;}
+	opacity: .64;}
 .mdc-list-item__meta {
 	color: var(--mdc-list-item-meta-ink-color);}
 .mdc-list-item--selected .mdc-list-item__graphic {
@@ -367,7 +371,7 @@ i.mdc-list-item__graphic {
 .mdc-list-item--selected .mdc-list-item__primary-text {
 	color: var(--mdc-list-item-selected-primary-text-ink-color);}		
 .mdc-list-item--selected .mdc-list-item__meta {
-	color: var(--mdc-list-item-selected-meta-ink-color);}	
+	color: var(--mdc-list-item-selected-meta-ink-color);}
 .mdc-list-item.mdc-ripple-surface--color::before, 
 .mdc-list-item.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-list-item-primary-text-ink-color);}
@@ -526,7 +530,7 @@ i.mdc-list-item__graphic {
    Chip
    ========================================================================== */
 .mdc-chip[disabled] {
-	opacity: 0.37;
+	opacity: var(--mdc-disabled-opacity);
 	cursor: default;}
 .mdc-chip {
 	border-radius: var(--mdc-chip-corner-radius);
@@ -668,8 +672,7 @@ i.mdc-list-item__graphic {
 	
 /* ==========================================================================
    Snackbar
-   ========================================================================== */
-   
+   ========================================================================== */   
 .mdc-snackbar {
 	z-index: 4;
 	bottom: calc(var(--mdc-snackbar-bottom) + var(--mdc-snackbar-position-adjust));}  
@@ -766,7 +769,7 @@ i.mdc-list-item__graphic {
    Card
    ========================================================================== */
 .mdc-card[disabled] {
-	opacity: 0.37;}
+	opacity: var(--mdc-disabled-opacity);}
 .mdc-card {
 	overflow: hidden;
 	border-radius: var(--mdc-rounded-border-radius);}
@@ -1209,29 +1212,29 @@ i.mdc-list-item__graphic {
 :-moz-placeholder {
 	color: var(--mdc-placeholder-ink-color);}
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::-webkit-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input:-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::-ms-input-placeholder{
-  color: var(--mdc-placeholder-ink-color); }
+	color: var(--mdc-placeholder-ink-color); }
 .mdc-text-field--invalid:not(.mdc-text-field--disabled) .mdc-text-field__input::placeholder {
-  color: var(--mdc-placeholder-ink-color); }	
+	color: var(--mdc-placeholder-ink-color); }	
 
 /* ==========================================================================
    Adjust Image List

@@ -1,6 +1,7 @@
 :root {
 	--mdc-root-font-size: 16px;
 	--mdc-font-family: "Google Sans", monospace;	
+	--mdc-disabled-opacity: .42;
 	--mdc-scrollbar-width: 6px;
 	--mdc-scrollbar-track-fill: transparent;
 	--mdc-scrollbar-thumb-corner: 3px;

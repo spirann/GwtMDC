@@ -68,6 +68,7 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	public MaterialListItem() {
 		super(HtmlElements.LI.createElement(), CssName.MDC_LIST_ITEM);
 		super.initializeSelectedMixin(CssName.MDC_LIST_ITEM__SELECTED);
+		add(textContent);
 	}
 
 	protected native JavaScriptObject jsInit(final Element element)/*-{
@@ -92,8 +93,6 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 
 		textContent.add(primaryText);
 		textContent.add(secondaryText);
-
-		add(textContent);
 
 		super.onInitialize();
 	}

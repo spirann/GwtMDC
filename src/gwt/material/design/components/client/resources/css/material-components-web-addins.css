@@ -205,8 +205,8 @@
    Tooltip
    ========================================================================== */
 :root {
-	--mdc-tooltip--fill-color: var(--mdc-theme-surface);
-	--mdc-tooltip--ink-color: var(--mdc-theme-on-surface);
+	--mdc-tooltip--fill-color: var(--mdc-theme-on-surface);
+	--mdc-tooltip--ink-color: var(--mdc-theme-surface);
 }
 .mdc-tooltip {
 	font-size: 0.60rem;
@@ -370,6 +370,10 @@
 	--mdc-circular-progress-start-angle: -90deg;
 	--mdc-circular-progress-indicator-color: var(--mdc-theme-secondary);
 	--mdc-circular-progress-track-color: var(--mdc-theme-secondary);}
+
+.mdc-circular-progress[disabled] {
+	opacity: var(--mdc-disabled-opacity);
+}
 
 .mdc-circular-progress {
 	width: var(--mdc-circular-progress-width);
