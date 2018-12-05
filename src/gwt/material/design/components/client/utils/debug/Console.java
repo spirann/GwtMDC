@@ -19,6 +19,10 @@
  */
 package gwt.material.design.components.client.utils.debug;
 
+import java.util.Date;
+
+import gwt.material.design.components.client.utils.helper.Formatation;
+
 /**
  * 
  * @author Richeli Vargas
@@ -26,24 +30,27 @@ package gwt.material.design.components.client.utils.debug;
  */
 public final class Console {
 
-	public static void log(Object value){
+	public static void log(Object value) {
 		log(String.valueOf(value));
 	}
-	
-	public static void log(Long value){
+
+	public static void log(Long value) {
 		log(String.valueOf(value));
 	}
-	
-	public static void log(Integer value){
+
+	public static void log(Integer value) {
 		log(String.valueOf(value));
 	}
-	
-	public static void log(Boolean value){
+
+	public static void log(Boolean value) {
 		log(String.valueOf(value));
 	}
-	
-	public static native void log(String text) /*-{
-	    console.log(text);
+
+	public static void log(String value) {
+		log(Formatation.dateTime(new Date()) + ": " + value);
+	}
+
+	static native void write(String text) /*-{
+		console.log(text);
 	}-*/;
-	
 }
