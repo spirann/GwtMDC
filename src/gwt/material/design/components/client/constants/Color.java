@@ -52,7 +52,38 @@ public enum Color implements CssType {
 	//
 	MDC_THEME_ON_SURFACE("var(" + ThemeAttribute.MDC_THEME_ON_SURFACE + ")"),
 	//
-	BLACK(0, 0, 0, 1), WHITE(255, 255, 255, 1), TRANSPARENT(0, 0, 0, 0),
+	MDC_THEME_SUCCESS("var(" + ThemeAttribute.MDC_THEME_SUCCESS + ")"),
+	//
+	MDC_THEME_WARNING("var(" + ThemeAttribute.MDC_THEME_WARNING + ")"),
+	//
+	MDC_THEME_ERROR("var(" + ThemeAttribute.MDC_THEME_ERROR + ")"),
+	// BLACK
+	/**
+	 * The color BLACK with an RGB value of rgb(0, 0, 0).
+	 * <div style="border:1px solid
+	 * black;width:40px;height:20px;background-color:rgb(0, 0,
+	 * 0);float:right;margin: 0 10px 0 0"></div><br/>
+	 * <br/>
+	 */
+	BLACK(0, 0, 0, 1),
+	// WHITE
+	/**
+	 * The color WHITE with an RGB value of rgb(255, 255, 255).
+	 * <div style="border:1px solid
+	 * black;width:40px;height:20px;background-color:rgb(255, 255,
+	 * 255);float:right;margin: 0 10px 0 0"></div><br/>
+	 * <br/>
+	 */
+	WHITE(255, 255, 255, 1),
+	// TRANSPARENT
+	/**
+	 * The color WHITE with an RGB value of rgba(0, 0, 0, 0).
+	 * <div style="border:1px solid
+	 * black;width:40px;height:20px;background-color:rgba(0, 0, 0,
+	 * 0);float:right;margin: 0 10px 0 0"></div><br/>
+	 * <br/>
+	 */
+	TRANSPARENT(0, 0, 0, 0),
 	// RED
 	/**
 	 * The color RED with an RGB value of rgb(244, 67, 54).
@@ -2558,9 +2589,9 @@ public enum Color implements CssType {
 		sb.append('#').append(toHex(r)).append(toHex(g)).append(toHex(b));
 		return sb.toString();
 	}
-	
-	private String toHex(final int value) {		
-		final String hex = Integer.toHexString(value);		
+
+	private String toHex(final int value) {
+		final String hex = Integer.toHexString(value);
 		return (hex.length() == 1 ? "0" : "") + hex;
 	}
 

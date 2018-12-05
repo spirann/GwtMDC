@@ -7,6 +7,11 @@
 	--mdc-scrollbar-thumb-corner: 3px;
 	--mdc-scrollbar-thumb-fill: var(--mdc-theme-text-hint-on-background);
 	--mdc-placeholder-ink-color: var(--mdc-theme-text-hint-on-background);
+	
+		
+	--mdc-state--success: #00b020;
+	--mdc-state--warning: #FF8F00;
+	--mdc-state--error: #b00020;
 }
 
 html, body {

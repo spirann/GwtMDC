@@ -40,5 +40,9 @@ public interface ThemeAttribute {
 	public static final String MDC_THEME_TEXT_HINT_ON_BACKGROUND = "--mdc-theme-text-hint-on-background";
 	public static final String MDC_THEME_TEXT_DISABLED_ON_BACKGROUND = "--mdc-theme-text-disabled-on-background";
 	public static final String MDC_THEME_TEXT_ICON_ON_BACKGROUND = "--mdc-theme-text-icon-on-background";
+	//
+	public static final String MDC_THEME_SUCCESS = "--mdc-state--success";
+	public static final String MDC_THEME_WARNING = "--mdc-state--warning";
+	public static final String MDC_THEME_ERROR = "--mdc-state--error";
 	
 }

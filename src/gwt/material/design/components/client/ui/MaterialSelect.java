@@ -20,7 +20,6 @@
 package gwt.material.design.components.client.ui;
 
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.shared.GWT;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.HasText;
 import com.google.gwt.user.client.ui.Widget;
@@ -81,7 +80,6 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 		super.onLoad();
 
 		V value = getValue();
-		GWT.log("value: " + value);
 		if (value != null)
 			setValue(value, false);
 		else {
@@ -91,7 +89,15 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 			else
 				onSelect(index, false);
 		}
+		
+		addResizeHandler(event -> layout());
 	}
+
+	protected native void layout()/*-{
+		var jsElement = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (jsElement)
+			jsElement.layout();
+	}-*/;
 
 	@Override
 	protected void fireChangeEvent() {
@@ -127,7 +133,7 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	public void setValue(V value) {
 		setValue(value, true);
 	}
-	
+
 	@Override
 	@SuppressWarnings("unchecked")
 	public void setValue(V value, boolean fireEvents) {
@@ -182,6 +188,8 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	@Override
 	public void setType(SelectMenuType type) {
 		typeMixin.setType(type);
+		if(initialized)
+			layout();
 	}
 
 	@Override

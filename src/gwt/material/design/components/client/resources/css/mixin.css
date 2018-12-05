@@ -109,11 +109,7 @@
 	--mdc-dialog-action-ink-color: var(--mdc-theme-primary);
 	--mdc-dialog-action-raised-ink-color: var(--mdc-dialog-body-fill-color);
 	
-	/* Text field */
-	--mdc-state--success: #00b020;
-	--mdc-state--warning: #FF8F00;
-	--mdc-state--error: #b00020;
-		
+	/* Text field */		
 	--mdc-text-field--ink-color: var(--mdc-theme-text-secondary-on-background);
 	--mdc-text-field--fill-color: var(--mdc-theme-background);
 	--mdc-text-field--focused-color: var(--mdc-theme-primary, rgba(0, 0, 0, 1.0));
@@ -828,14 +824,34 @@ i.mdc-list-item__graphic {
 /* ==========================================================================
    Material select menu
    ========================================================================== */
-.mdc-select--disabled .mdc-select__native-control,
-[disabled] .mdc-select__native-control {
-	background-color: rgba(127,127,127,0.1);}
+/* Disabled General */   
+.mdc-select[disabled]{
+	opacity: var(--mdc-disabled-opacity);}
+.mdc-select[disabled] .mdc-select__native-control,
+.mdc-select[disabled] .mdc-floating-label,
+.mdc-select[disabled] .mdc-select-helper-text {
+	color: var(--mdc-theme-text-primary-on-background);}
+.mdc-select[disabled] .mdc-select__native-control,
+.mdc-select[disabled] .mdc-notched-outline__idle {
+	border-color: var(--mdc-theme-text-primary-on-background);}
+.mdc-select[disabled] .mdc-notched-outline__path {
+	stroke: var(--mdc-theme-text-primary-on-background) !important;}
+.mdc-select[disabled],	
+.mdc-select[disabled] .mdc-select__native-control {
+	background-color: rgb(127,127,127, 0.1);}
+	
+.mdc-select:not([disabled]):not(.mdc-select--outlined):not(.mdc-select--box):not(.mdc-select--shaped) {
+    background-color: rgb(127,127,127, 0.3);}
+.mdc-select:not([disabled]):not(.mdc-select--outlined):not(.mdc-select--box):not(.mdc-select--shaped)::before, 
+.mdc-select:not([disabled]):not(.mdc-select--outlined):not(.mdc-select--box):not(.mdc-select--shaped)::after {
+    background-color: rgba(0, 0, 0, 0.87);}	
 
 /* Input border radius */    
 .mdc-select__native-control {
 	overflow: hidden;
     border-radius: var(--mdc-rounded-border-radius);}
+.mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control {    
+    border-color: var(--mdc-text-field--ink-color) !important;}
 .mdc-select:not(.mdc-select--outlined):not(.mdc-select--box):not(.mdc-select--shaped) .mdc-select__native-control {
 	border-radius: var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0 0;}  
 .mdc-select--outlined .mdc-notched-outline {
@@ -850,9 +866,11 @@ i.mdc-list-item__graphic {
 	display: none;}
 .mdc-select--outlined .mdc-line-ripple {
 	display: none;}	
-
+	
+.mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control,
 .mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control ~ .mdc-floating-label {
     color: var(--mdc-text-field--ink-color);}
+.mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control:focus,
 .mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control:focus ~ .mdc-floating-label,    
 .mdc-select--focused:not(.mdc-select--disabled):not([disabled]) .mdc-floating-label {
 	color: var(--mdc-text-field--focused-color) !important;}
@@ -860,13 +878,13 @@ i.mdc-list-item__graphic {
     border-color: var(--mdc-text-field--ink-color);}
 .mdc-select--outlined:not(.mdc-select--disabled):not([disabled]) .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--ink-color); }    
-.mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select__native-control:focus) .mdc-select__native-control:hover ~ .mdc-notched-outline__idle {
+.mdc-select--outlined:not(.mdc-select--disabled):not([disabled]):not(.mdc-select__native-control:focus) .mdc-select__native-control:hover ~ .mdc-notched-outline__idle {
     border-color: var(--mdc-text-field--focused-color);}
-.mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select__native-control:focus) .mdc-select__native-control:hover ~ .mdc-notched-outline .mdc-notched-outline__path {
+.mdc-select--outlined:not(.mdc-select--disabled):not([disabled]):not(.mdc-select__native-control:focus) .mdc-select__native-control:hover ~ .mdc-notched-outline .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--focused-color);}
-.mdc-select--outlined:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-notched-outline .mdc-notched-outline__path {
+.mdc-select--outlined:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control:focus ~ .mdc-notched-outline .mdc-notched-outline__path {
     stroke: var(--mdc-text-field--focused-color);}  
-.mdc-select:not(.mdc-select--disabled) .mdc-select__native-control:focus ~ .mdc-line-ripple {
+.mdc-select:not(.mdc-select--disabled):not([disabled]) .mdc-select__native-control:focus ~ .mdc-line-ripple {
     background-color: var(--mdc-text-field--focused-color);}    
       	
 /* Shaped */
@@ -895,21 +913,24 @@ i.mdc-list-item__graphic {
 	display: none;}
    
 /* Disabled General */   
-.mdc-text-field[disabled] * {
-	color: var(--mdc-theme-text-disabled-on-background);}
+.mdc-text-field-container[disabled] .mdc-text-field__input,
+.mdc-text-field-container[disabled] .mdc-floating-label,
+.mdc-text-field-container[disabled] .mdc-text-field-helper-text {
+	color: var(--mdc-theme-text-primary-on-background);}
 .mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-text-field__input,
 .mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-notched-outline__idle {
-	border-color: var(--mdc-theme-text-disabled-on-background);}
+	border-color: var(--mdc-theme-text-primary-on-background);}
 .mdc-text-field-container[disabled] .mdc-text-field.mdc-text-field--textarea:not([state]) .mdc-text-field__input {
-	border: 1px solid var(--mdc-theme-text-disabled-on-background);}
+	border: 1px solid var(--mdc-theme-text-primary-on-background);}
 .mdc-text-field-container[disabled] .mdc-text-field:not([state]) .mdc-notched-outline__path {
-	stroke: var(--mdc-theme-text-disabled-on-background) !important;}	
+	stroke: var(--mdc-theme-text-primary-on-background) !important;}	
 .mdc-text-field__input:required + .mdc-floating-label:empty::after {
 	content: "";}
-.mdc-text-field--disabled .mdc-text-field__input,
-[disabled] .mdc-text-field__input {
-	background-color: rgba(127,127,127,0.1);}
-
+.mdc-text-field-container[disabled] .mdc-text-field {
+	background-color: transparent;}	
+.mdc-text-field-container[disabled] .mdc-text-field__input {
+	background-color: rgb(127,127,127, 0.2);}
+	
 /* Input border radius */
 .mdc-text-field__input {
 	border-radius: var(--mdc-rounded-border-radius);}
@@ -1038,11 +1059,12 @@ i.mdc-list-item__graphic {
     color: var(--mdc-text-field--ink-color);}
 .mdc-text-field-container:not([disabled]) .mdc-text-field--focused:not(.mdc-text-field--disabled):not([disabled]):not([state]) .mdc-floating-label {
 	color: var(--mdc-text-field--focused-color) !important;}
-.mdc-text-field .mdc-line-ripple {
+.mdc-text-field-container:not([disabled]) .mdc-text-field .mdc-line-ripple {
     background-color: var(--mdc-text-field--focused-color);}
 .mdc-text-field-container:not([disabled]) .mdc-text-field--box:not(.mdc-text-field--disabled):not([disabled]) {
     background-color: rgb(127,127,127, 0.3);}
-.mdc-text-field--box::before, .mdc-text-field--box::after {
+.mdc-text-field-container:not([disabled]) .mdc-text-field--box::before, 
+.mdc-text-field-container:not([disabled]) .mdc-text-field--box::after {
     background-color: rgba(0, 0, 0, 0.87);}
 
 /* Text Field */
