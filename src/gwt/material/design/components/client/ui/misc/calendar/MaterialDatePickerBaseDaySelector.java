@@ -280,7 +280,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		date.setMinutes(0);
 		date.setSeconds(0);
 
-		date = new Date(DateTimeHelper.fromTheDate(date.getTime()));
+		date = new Date(DateTimeHelper.removeTime(date.getTime()));
 		date.setHours(12);
 		date.setMinutes(0);
 		date.setSeconds(0);
