@@ -123,12 +123,11 @@
     filter: grayscale(100%);
     pointer-events: none;
     cursor: default;
-    color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.24));}    
+	opacity: var(--mdc-disabled-opacity);} 
+	   
 .mdc-form-field[disabled],
-.material-icons[disabled],
 [disabled] .mdc-fab__label,
 [disabled] .mdc-switch-label,
-[disabled] .material-icons,
 .mdc-text-field-container[disabled]  {
 	opacity: var(--mdc-disabled-opacity);}
 
@@ -141,8 +140,9 @@
 	justify-content: center;
 	align-content: center;
 	color: var(--mdc-theme-text-primary-on-background);}
-	
 
+/* Disabled settings */
+	
 /* ==========================================================================
    Button
    ========================================================================== */
@@ -152,20 +152,20 @@
 .mdc-button[dir="rtl"] .mdc-button__icon {
 	margin-left: 8px;
 	margin-right: 0px;}
-.mdc-button:not(:disabled) {
+.mdc-button:not([disabled]) {
     color: var(--mdc-button-ink-color);
     background-color: var(--mdc-button-fill-color);}
-.mdc-button:not(:disabled) .material-icons {
+.mdc-button:not([disabled]) .material-icons {
     color: var(--mdc-button-ink-color);}    
 .mdc-button::before, .mdc-button::after,
-.mdc-button--raised:not(:disabled),
-.mdc-button--unelevated:not(:disabled) {
+.mdc-button--raised:not([disabled]),
+.mdc-button--unelevated:not([disabled]) {
 	color: var(--mdc-button-raised-ink-color);
 	background-color: var(--mdc-button-raised-fill-color);}
-.mdc-button--raised:not(:disabled) .material-icons,
-.mdc-button--unelevated:not(:disabled) .material-icons {
+.mdc-button--raised:not([disabled]) .material-icons,
+.mdc-button--unelevated:not([disabled]) .material-icons {
 	color: var(--mdc-button-raised-ink-color);}	
-.mdc-button--outlined:not(:disabled) {
+.mdc-button--outlined:not([disabled]) {
 	border-color: var(--mdc-button-ink-color);}
 .mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::before, 
 .mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::after {
@@ -177,27 +177,26 @@
 	background-color: var(--mdc-button-raised-ink-color);}
 .mdc-button,	
 .mdc-button.mdc-button--dense {
-    border-radius: var(--mdc-rounded-border-radius);}		
+    border-radius: var(--mdc-rounded-border-radius);}	
+    
+/* Disabled settings */	
 
 /* ==========================================================================
    Icon button
    ========================================================================== */
-.mdc-icon-button {
+.mdc-icon-button:not([disabled]) {
 	color: var(--mdc-icon-button-ink-color);}
-.mdc-icon-button[disabled] {
-	color: var(--mdc-theme-text-disabled-on-background);}
 .mdc-icon-button.mdc-ripple-surface--color::before, 
 .mdc-icon-button.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-icon-button-ink-color);}
+	
+/* Disabled settings */	
 
 /* ==========================================================================
    Icon toggle
    ========================================================================== */
-.mdc-icon-toggle {
+.mdc-icon-toggle:not([disabled]) {
 	color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));}
-.mdc-icon-toggle[disabled] {
-	opacity: 0.26;
-	color: var(--mdc-theme-text-disabled-on-light, rgba(0, 0, 0, 0.38));}
 .mdc-icon-toggle.mdc-list-item__start-detail {
 	width: 36px;
 	height: 36px;
@@ -209,14 +208,16 @@
 .mdc-icon-toggle.mdc-ripple-surface--color::before, 
 .mdc-icon-toggle.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-icon-toggle-ink-color);}
-	
+
+/* Disabled settings */		
+
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
-.mdc-fab {
+.mdc-fab:not([disabled]) {
 	color: var(--mdc-fab-ink-color);
 	background-color: var(--mdc-fab-fill-color);}
-.mdc-fab * {
+.mdc-fab:not([disabled]) * {
 	color: var(--mdc-fab-ink-color);}
 .mdc-fab.mdc-ripple-surface--color::before, 
 .mdc-fab.mdc-ripple-surface--color::after {
@@ -245,6 +246,8 @@
 	.mdc-fab--fixed {
 		bottom: 1.5rem;
 		right: 1.5rem;}}	
+
+/* Disabled settings */
 		
 /* ==========================================================================
    Slider
@@ -253,22 +256,27 @@
 	display: none;}
 .mdc-slider:not(.mdc-slider--display-markers) .mdc-slider__track-marker-container {
 	display: none;}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track {
+.mdc-slider:not([disabled]) .mdc-slider__track {
 	background-color: var(--mdc-slider-track-color);}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-marker,
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-container {
+.mdc-slider:not([disabled]) .mdc-slider__track-marker,
+.mdc-slider:not([disabled]) .mdc-slider__track-container {
 	background: 
         var(--mdc-track-background-opacity),
 		linear-gradient(var(--mdc-slider-track-fill-color), var(--mdc-slider-track-fill-color)) no-repeat;}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-marker::after,
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__track-marker-container::after {background-color: var(--mdc-slider-tick-marker-color);}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__thumb {
+.mdc-slider:not([disabled]) .mdc-slider__track-marker::after,
+.mdc-slider:not([disabled]) .mdc-slider__track-marker-container::after {
+	background-color: var(--mdc-slider-tick-marker-color);}
+.mdc-slider:not([disabled]) .mdc-slider__thumb {
 	fill: var(--mdc-slider-thumb-color);
 	stroke: var(--mdc-slider-thumb-color);}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__focus-ring {background-color: green;}
-.mdc-slider:not(.mdc-slider--disabled) .mdc-slider__pin {
+.mdc-slider:not([disabled]) .mdc-slider__focus-ring {
+	background-color: green;}
+.mdc-slider:not([disabled]) .mdc-slider__pin {
 	background-color: var(--mdc-slider-pin-color);
     color: var(--mdc-slider-value-pin-color);}
+    
+/* Disabled settings */
+    
 /* ==========================================================================
    Linear Progress
    ========================================================================== */
