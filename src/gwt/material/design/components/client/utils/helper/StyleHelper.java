@@ -315,6 +315,17 @@ public final class StyleHelper {
 			$wnd.jQuery(element).removeAttr(attribute);
 	}-*/;
 
+	public final static void setAttribute(final UIObject parent, String child, String attribute, String value) {
+		setAttribute(parent.getElement(),  child, attribute, value);
+	}
+	
+	public final static native void setAttribute(final Element parent, String child, String attribute, String value) /*-{
+		if (value && value.length > 0)
+			$wnd.jQuery(parent).find(child).attr(attribute, value);
+		else
+			$wnd.jQuery(parent).find(child).removeAttr(attribute);
+	}-*/;
+
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// Remove attribute
 	// ////////////////////////////////////////////////////////////////////////////////////////////////

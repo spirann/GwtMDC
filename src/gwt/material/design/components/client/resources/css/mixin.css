@@ -124,12 +124,6 @@
     pointer-events: none;
     cursor: default;
 	opacity: var(--mdc-disabled-opacity);} 
-	   
-.mdc-form-field[disabled],
-[disabled] .mdc-fab__label,
-[disabled] .mdc-switch-label,
-.mdc-text-field-container[disabled]  {
-	opacity: var(--mdc-disabled-opacity);}
 
 /* ==========================================================================
    Material Icons
@@ -293,13 +287,11 @@
         var(--mdc-track-background-opacity),
 		linear-gradient(var(--mdc-linear-progress-track-color), var(--mdc-linear-progress-track-color)) no-repeat;}
 
+/* Disabled settings */
+
 /* ==========================================================================
    Tab
-   ========================================================================== */
-.mdc-tab-bar[disabled] {
-	opacity: var(--mdc-disabled-opacity);}
-.mdc-tab-bar[disabled] .mdc-tab {
-	filter: invert(.5) grayscale(100%);}	
+   ========================================================================== */	
 .mdc-tab-bar {
 	background-color: var(--mdc-theme-primary);}
 .mdc-tab .mdc-tab__text-label:empty,
@@ -323,11 +315,14 @@
 .mdc-tab-scroller--align-center .mdc-tab,
 .mdc-tab-scroller--align-end .mdc-tab {
 	flex: none;}
+	
+/* Disabled settings */
+.mdc-tab-bar[disabled] .mdc-tab {
+	filter: invert(.5) grayscale(100%);}
+	
 /* ==========================================================================
    List
    ========================================================================== */
-.mdc-list-item[disabled] {
-	opacity: var(--mdc-disabled-opacity);}	
 .mdc-list-item:not([dir="rtl"]){
 	padding-right: 0;}
 	.mdc-list-item[dir="rtl"]{
@@ -393,17 +388,11 @@ i.mdc-list-item__graphic {
 	--mdc-checkbox-unchecked-color: var(--mdc-list-item-graphic-ink-color);
 	--mdc-checkbox-checked-color: var(--mdc-list-item-selected-graphic-ink-color);}
 
+/* Disabled settings */
+
 /* ==========================================================================
    Radio button
-   ========================================================================== */
-.mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__outer-circle,
- [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__outer-circle {
-    border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
-[disabled] .mdc-radio {
- 	filter: invert(.5) grayscale(100%);}
-[disabled] .mdc-radio__label,
-[aria-disabled="true"] .mdc-radio__label{
-	color: var(--mdc-radio-label-color);}    
+   ========================================================================== */   
 .mdc-radio__native-control:disabled + .mdc-radio__background .mdc-radio__inner-circle,
 [aria-disabled="true"] .mdc-radio__native-control + .mdc-radio__background .mdc-radio__inner-circle {
     border-color: var(--mdc-theme-text-disabled-on-background, rgba(0, 0, 0, 0.26)); }
@@ -424,7 +413,8 @@ i.mdc-list-item__graphic {
 .mdc-radio.mdc-ripple-upgraded::before, 
 .mdc-radio.mdc-ripple-upgraded::after {
     background-color: var(--mdc-radio-checked-color); }
-    	
+ 
+/* Disabled settings */    
 	
 /* ==========================================================================
    Checkbox
