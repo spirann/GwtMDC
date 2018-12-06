@@ -168,6 +168,7 @@ public interface CssName {
 	String MDC_SELECT__SHAPED = "mdc-select--shaped";
 	String MDC_SELECT__UNBORDERED = "mdc-select--unbordered";
 	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";
+	String MDC_SELECT__DROPDOWN_ICON = "mdc-select__dropdown-icon";
 	// //////////////////////////////////////////////////////
 	// SNACKBAR
 	// //////////////////////////////////////////////////////
@@ -374,12 +375,25 @@ public interface CssName {
 	String MDC_SWITCH__NATIVE_CONTROL = "mdc-switch__native-control";
 	String MDC_SWITCH__LABEL = "mdc-switch-label";
 	// //////////////////////////////////////////////////////
-	// Textfield
+	// Floating Label
 	// //////////////////////////////////////////////////////
 	String MDC_FLOATING_LABEL = "mdc-floating-label";
 	String MDC_FLOATING_LABEL__FLOAT_ABOVE = "mdc-floating-label--float-above";
+	String MDC_FLOATING_LABEL__SHAKE = "mdc-floating-label--shake";
+	// //////////////////////////////////////////////////////
+	// Line Ripple
+	// //////////////////////////////////////////////////////
 	String MDC_LINE_RIPPLE = "mdc-line-ripple";
-
+	// //////////////////////////////////////////////////////
+	// Notched
+	// //////////////////////////////////////////////////////
+	String MDC_NOTCHED_OUTLINE = "mdc-notched-outline";
+	String MDC_NOTCHED_OUTLINE__LEADING = "mdc-notched-outline__leading";
+	String MDC_NOTCHED_OUTLINE__NOTCH = "mdc-notched-outline__notch";
+	String MDC_NOTCHED_OUTLINE__TRAILING = "mdc-notched-outline__trailing";
+	// //////////////////////////////////////////////////////
+	// Textfield
+	// //////////////////////////////////////////////////////
 	String MDC_TEXT_FIELD_CONTAINER = "mdc-text-field-container";
 	String MDC_TEXT_FIELD = "mdc-text-field";
 	String MDC_TEXT_FIELD__TEXTAREA = "mdc-text-field--textarea";
@@ -394,8 +408,6 @@ public interface CssName {
 	String MDC_TEXT_FIELD__BOX = "mdc-text-field--box";
 	String MDC_TEXT_FIELD__OUTLINED = "mdc-text-field--outlined";
 	String MDC_TEXT_FIELD__FULLWIDTH = "mdc-text-field--fullwidth";
-	String MDC_NOTCHED_OUTLINE = "mdc-notched-outline";
-	String MDC_NOTCHED_OUTLINE__IDLE = "mdc-notched-outline__idle";
 	String MDC_TEXT_FIELD__ICON = "mdc-text-field__icon";
 	String MDC_TEXT_FIELD__WITH_LEADING_ICON = "mdc-text-field--with-leading-icon";
 	String MDC_TEXT_FIELD__WITH_TRAILING_ICON = "mdc-text-field--with-trailing-icon";
@@ -445,7 +457,7 @@ public interface CssName {
 	// FAB PROGRESS
 	// //////////////////////////////////////////////////////
 	String MDC_FAB_PROGRESS = "mdc-fab-progess";
-	
+
 	// //////////////////////////////////////////////////////
 	// CHART
 	// //////////////////////////////////////////////////////

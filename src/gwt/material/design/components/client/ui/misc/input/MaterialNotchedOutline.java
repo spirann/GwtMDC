@@ -21,11 +21,9 @@ package gwt.material.design.components.client.ui.misc.input;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.resources.MaterialResources;
-import gwt.material.design.components.client.ui.MaterialSvg;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -35,8 +33,9 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialNotchedOutline extends Div {
 
-	protected MaterialSvg notchedOutline = new MaterialSvg();
-	protected Div notchedOutlineIdle = new Div(CssName.MDC_NOTCHED_OUTLINE__IDLE);
+	protected final Div leading = new Div(CssName.MDC_NOTCHED_OUTLINE__LEADING);
+	protected final Div notch = new Div(CssName.MDC_NOTCHED_OUTLINE__NOTCH);
+	protected final Div trailing = new Div(CssName.MDC_NOTCHED_OUTLINE__TRAILING);
 	
 	public MaterialNotchedOutline() {
 		super(CssName.MDC_NOTCHED_OUTLINE);
@@ -44,14 +43,15 @@ public class MaterialNotchedOutline extends Div {
 	
 	@Override
 	protected void onInitialize() {
-
-		notchedOutline.setResource(MaterialResources.INSTANCE.mdcNotchedOutline());
-		add(notchedOutline);
-
-		final MaterialWidget parent = (MaterialWidget) getParent();
-		parent.insert(notchedOutlineIdle, parent.getWidgetIndex(this) + 1);
-		
+		super.add(leading);
+		super.add(notch);
+		super.add(trailing);		
 		super.onInitialize();
+	}
+	
+	@Override
+	public void add(Widget child) {
+		notch.add(child);
 	}
 	
 	@Override

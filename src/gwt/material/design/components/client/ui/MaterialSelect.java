@@ -37,6 +37,7 @@ import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.constants.SelectMenuType;
+import gwt.material.design.components.client.ui.html.Icon;
 import gwt.material.design.components.client.ui.html.Select;
 import gwt.material.design.components.client.ui.misc.input.MaterialFloatLabel;
 import gwt.material.design.components.client.ui.misc.input.MaterialLineRipple;
@@ -53,7 +54,8 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 	protected final MaterialFloatLabel label = new MaterialFloatLabel();
 	protected final MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected final MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
-
+	protected final Icon dropdownIcon = new Icon(CssName.MDC_SELECT__DROPDOWN_ICON);
+	
 	protected final ToggleStyleMixin<MaterialSelect<V>> unborderedMixin = new ToggleStyleMixin<>(this, CssName.MDC_SELECT__UNBORDERED);
 	protected final TypeMixin<MaterialSelect<V>, SelectMenuType> typeMixin = new TypeMixin<>(this);
 
@@ -68,8 +70,9 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 
 	@Override
 	protected void onInitialize() {
+		notchedOutline.add(label);
+		add(dropdownIcon);
 		add(select);
-		add(label);
 		add(lineRipple);
 		add(notchedOutline);
 		super.onInitialize();
@@ -209,16 +212,16 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__INK_COLOR, color.getCssName());
 	}
 
 	public void setFocusedColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__FOCUSED_COLOR, color.getCssName());
 	}
 
 	public static class Option<T> extends MaterialSelectedField implements HasText {

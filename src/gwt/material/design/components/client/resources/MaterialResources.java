@@ -100,11 +100,7 @@ public interface MaterialResources extends ClientBundle {
 	@Source("image/mdc-chip__checkmark.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcChipCheckmark();
-	
-	@Source("image/mdc-notched-outline.svg")
-	@MimeType("image/svg+xml")
-	TextResource mdcNotchedOutline();
-	
+		
 	@Source("image/mdc-circular-progress__path.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcCircularProgressPath();

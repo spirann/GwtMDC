@@ -128,10 +128,11 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 			event.stopPropagation();
 			IconClickEvent.fire(this);
 		});
+		
+		notchedOutline.add(label);
 
 		add(icon);
 		add(input);
-		add(label);
 		add(lineRipple);
 		add(notchedOutline);
 
@@ -140,9 +141,9 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		super.onInitialize();
 
 		// To prevent label over the placeholder when input is empty
-		input.addBlurHandler(event -> updateFloatLabelAbove());
-		updateFloatLabelAbove();
-		addResizeHandler(event -> layout());
+		// input.addBlurHandler(event -> updateFloatLabelAbove());
+		//updateFloatLabelAbove();
+		//addResizeHandler(event -> layout());
 	}
 
 	protected native void layout()/*-{
@@ -246,16 +247,16 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 
 	@Override
 	public void setBackgroundColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__FILL_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__FILL_COLOR, color.getCssName());
 	}
 
 	@Override
 	public void setColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__TEXT_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__INK_COLOR, color.getCssName());
 	}
 
 	public void setFocusedColor(Color color) {
-		setCssProperty(CssMixin.MDC_TEXTFIELD__FOCUSED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_INPUT__FOCUSED_COLOR, color.getCssName());
 	}
 
 	@Override
