@@ -17,17 +17,33 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.interfaces;
+package gwt.material.design.components.client.constants;
+
+import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface HasMarkers {
+public enum SliderType implements CssType {
 
-	public void setMarkers(boolean markers);
-	
-	public boolean isMarkers();
-	
+	DEFAULT(""),
+	DISCRETE(CssName.MDC_SLIDER__DISCRETE),
+	DISCRETE_WITH_TICK_MARKERS(CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+
+    private final String cssClass;
+
+    SliderType(final String cssClass) {
+        this.cssClass = cssClass;
+    }
+
+    @Override
+    public String getCssName() {
+        return cssClass;
+    }
+
+    public static SliderType fromStyleName(final String styleName) {
+        return EnumHelper.fromStyleName(styleName, SliderType.class, DEFAULT);
+    }
 }

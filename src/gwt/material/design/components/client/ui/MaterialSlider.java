@@ -24,10 +24,9 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
-import gwt.material.design.components.client.base.interfaces.HasDiscrete;
 import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
-import gwt.material.design.components.client.base.interfaces.HasMarkers;
-import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
 import gwt.material.design.components.client.constants.Color;
@@ -35,6 +34,7 @@ import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
+import gwt.material.design.components.client.constants.SliderType;
 import gwt.material.design.components.client.events.InputEvent;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
@@ -49,8 +49,7 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialSlider extends MaterialValuedField<Double>
-		implements HasInputHandlers<Double>, HasDiscrete, HasMarkers {
+public class MaterialSlider extends MaterialValuedField<Double> implements HasInputHandlers<Double>, HasType<SliderType> {
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -66,20 +65,12 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	// /////////////////////////////////////////////////////////////
 	// Mixins
 	// /////////////////////////////////////////////////////////////
-	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this,
-			CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
-	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
-	protected final ToggleStyleMixin<MaterialSlider> discreteMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE);
-	protected final ToggleStyleMixin<MaterialSlider> markersMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SLIDER__DISCRETE + " " + CssName.MDC_SLIDER__DISPLAY_MARKERS);
+	protected final AttributeMixin<MaterialSlider, Double> valueminMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMIN, 0.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuenowMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUENOW, 5.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> valuemaxMixin = new AttributeMixin<>(this, CssAttribute.ARIA_VALUEMAX, 10.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Double> dataStepMixin = new AttributeMixin<>(this, CssAttribute.DATA_STEP, 1.0, FromString.TO_DOUBLE);
+	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this, CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
+	protected final TypeMixin<MaterialSlider, SliderType> typeMixin = new TypeMixin<>(this);
 
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
@@ -110,7 +101,7 @@ public class MaterialSlider extends MaterialValuedField<Double>
 		initializeInputEventListener();
 
 		super.onInitialize();
-		
+
 		addResizeHandler(event -> layout());
 	}
 
@@ -212,40 +203,32 @@ public class MaterialSlider extends MaterialValuedField<Double>
 	protected void fireInputEvent() {
 		InputEvent.fire(this, getValue());
 	}
-
+	
 	@Override
 	public HandlerRegistration addInputHandler(InputHandler<Double> handler) {
 		return addHandler(handler, InputEvent.getType());
 	}
 
 	@Override
-	public void setDiscrete(final boolean discrete) {
-		discreteMixin.toggle(discrete);
+	public void setType(SliderType type) {
+		typeMixin.setType(type);
 	}
 
 	@Override
-	public boolean isDiscrete() {
-		return discreteMixin.isApplied();
+	public SliderType getType() {
+		return typeMixin.getType();
 	}
 
 	public void setStep(final Double step) {
 		dataStepMixin.setValue(step);
+		if (initialized)
+			jsInit();
 	}
 
 	public Double getStep() {
 		return dataStepMixin.getValue();
 	}
-
-	@Override
-	public void setMarkers(boolean markers) {
-		markersMixin.toggle(markers);
-	}
-
-	@Override
-	public boolean isMarkers() {
-		return markersMixin.isApplied();
-	}
-
+	
 	@Override
 	public void setEnabled(boolean enabled) {
 		super.setEnabled(enabled);

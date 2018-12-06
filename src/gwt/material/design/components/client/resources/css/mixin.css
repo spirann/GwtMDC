@@ -146,20 +146,23 @@
 .mdc-button[dir="rtl"] .mdc-button__icon {
 	margin-left: 8px;
 	margin-right: 0px;}
-.mdc-button:not([disabled]) {
+.mdc-button {
     color: var(--mdc-button-ink-color);
     background-color: var(--mdc-button-fill-color);}
-.mdc-button:not([disabled]) .material-icons {
+.mdc-button .material-icons {
     color: var(--mdc-button-ink-color);}    
-.mdc-button::before, .mdc-button::after,
-.mdc-button--raised:not([disabled]),
-.mdc-button--unelevated:not([disabled]) {
+.mdc-button::before, 
+.mdc-button::after,
+.mdc-button--raised,
+.mdc-button--unelevated {
 	color: var(--mdc-button-raised-ink-color);
 	background-color: var(--mdc-button-raised-fill-color);}
-.mdc-button--raised:not([disabled]) .material-icons,
-.mdc-button--unelevated:not([disabled]) .material-icons {
+.mdc-button--raised .material-icons,
+.mdc-button--unelevated .material-icons,
+.mdc-button--raised *,
+.mdc-button--unelevated * {
 	color: var(--mdc-button-raised-ink-color);}	
-.mdc-button--outlined:not([disabled]) {
+.mdc-button--outlined {
 	border-color: var(--mdc-button-ink-color);}
 .mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::before, 
 .mdc-button.mdc-ripple-surface--color:not(.mdc-button--raised):not(.mdc-button--unelevated)::after {
@@ -178,7 +181,7 @@
 /* ==========================================================================
    Icon button
    ========================================================================== */
-.mdc-icon-button:not([disabled]) {
+.mdc-icon-button {
 	color: var(--mdc-icon-button-ink-color);}
 .mdc-icon-button.mdc-ripple-surface--color::before, 
 .mdc-icon-button.mdc-ripple-surface--color::after {
@@ -189,8 +192,8 @@
 /* ==========================================================================
    Icon toggle
    ========================================================================== */
-.mdc-icon-toggle:not([disabled]) {
-	color: var(--mdc-icon-toggle-ink-color, rgba(0, 0, 0, 0.38));}
+.mdc-icon-toggle {
+	color: var(--mdc-icon-toggle-ink-color);}
 .mdc-icon-toggle.mdc-list-item__start-detail {
 	width: 36px;
 	height: 36px;
@@ -208,10 +211,11 @@
 /* ==========================================================================
    Floating FAB
    ========================================================================== */
-.mdc-fab:not([disabled]) {
+.mdc-fab {
 	color: var(--mdc-fab-ink-color);
 	background-color: var(--mdc-fab-fill-color);}
-.mdc-fab:not([disabled]) * {
+.mdc-fab .material-icons,
+.mdc-fab * {
 	color: var(--mdc-fab-ink-color);}
 .mdc-fab.mdc-ripple-surface--color::before, 
 .mdc-fab.mdc-ripple-surface--color::after {
@@ -250,22 +254,22 @@
 	display: none;}
 .mdc-slider:not(.mdc-slider--display-markers) .mdc-slider__track-marker-container {
 	display: none;}
-.mdc-slider:not([disabled]) .mdc-slider__track {
+.mdc-slider .mdc-slider__track {
 	background-color: var(--mdc-slider-track-color);}
-.mdc-slider:not([disabled]) .mdc-slider__track-marker,
-.mdc-slider:not([disabled]) .mdc-slider__track-container {
+.mdc-slider .mdc-slider__track-marker,
+.mdc-slider .mdc-slider__track-container {
 	background: 
         var(--mdc-track-background-opacity),
 		linear-gradient(var(--mdc-slider-track-fill-color), var(--mdc-slider-track-fill-color)) no-repeat;}
-.mdc-slider:not([disabled]) .mdc-slider__track-marker::after,
-.mdc-slider:not([disabled]) .mdc-slider__track-marker-container::after {
+.mdc-slider .mdc-slider__track-marker::after,
+.mdc-slider .mdc-slider__track-marker-container::after {
 	background-color: var(--mdc-slider-tick-marker-color);}
-.mdc-slider:not([disabled]) .mdc-slider__thumb {
+.mdc-slider .mdc-slider__thumb {
 	fill: var(--mdc-slider-thumb-color);
 	stroke: var(--mdc-slider-thumb-color);}
-.mdc-slider:not([disabled]) .mdc-slider__focus-ring {
+.mdc-slider .mdc-slider__focus-ring {
 	background-color: green;}
-.mdc-slider:not([disabled]) .mdc-slider__pin {
+.mdc-slider .mdc-slider__pin {
 	background-color: var(--mdc-slider-pin-color);
     color: var(--mdc-slider-value-pin-color);}
     
