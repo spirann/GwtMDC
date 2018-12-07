@@ -28,7 +28,8 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  */
 public enum SelectMenuType implements CssType {
 
-	DEFAULT(""),
+	FILLED(""),
+	SHAPED_FILLED(CssName.MDC_SELECT__SHAPED_FILLED),
 	OUTLINED(CssName.MDC_SELECT__OUTLINE),
 	SHAPED(CssName.MDC_SELECT__OUTLINE + " " + CssName.MDC_SELECT__SHAPED);
 
@@ -44,6 +45,6 @@ public enum SelectMenuType implements CssType {
     }
 
     public static SelectMenuType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, SelectMenuType.class, DEFAULT);
+        return EnumHelper.fromStyleName(styleName, SelectMenuType.class, FILLED);
     }
 }

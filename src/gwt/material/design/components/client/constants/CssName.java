@@ -166,6 +166,7 @@ public interface CssName {
 	String MDC_SELECT = "mdc-select";
 	String MDC_SELECT__OUTLINE = "mdc-select--outlined";
 	String MDC_SELECT__SHAPED = "mdc-select--shaped";
+	String MDC_SELECT__SHAPED_FILLED = "mdc-select--shaped-filled";
 	String MDC_SELECT__UNBORDERED = "mdc-select--unbordered";
 	String MDC_SELECT__NATIVE_CONTROL = "mdc-select__native-control";
 	String MDC_SELECT__DROPDOWN_ICON = "mdc-select__dropdown-icon";
