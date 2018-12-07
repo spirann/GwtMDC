@@ -21,7 +21,9 @@ package gwt.material.design.components.client.ui.misc.input;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
+import com.google.gwt.user.client.ui.HasValue;
 
+import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Label;
 
@@ -35,9 +37,20 @@ public class MaterialFloatLabel extends Label {
 	public MaterialFloatLabel() {
 		super(CssName.MDC_FLOATING_LABEL);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.floatingLabel.MDCFloatingLabel(element);
 	}-*/;
+
+	public <W extends HasValue<?> & HasPlaceholder> void updateFloatLabelAbove(final W widget) {
+
+		final Object value = widget.getValue();
+		final String placeholder = widget.getPlaceholder();
+
+		if ((value == null || value.toString().isEmpty()) 
+				&& (placeholder != null && !placeholder.isEmpty()) 
+				&& !hasStyleName(CssName.MDC_FLOATING_LABEL__FLOAT_ABOVE))
+			addStyleName(CssName.MDC_FLOATING_LABEL__FLOAT_ABOVE);
+	}
 }

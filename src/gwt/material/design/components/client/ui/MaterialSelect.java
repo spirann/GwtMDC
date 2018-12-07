@@ -92,8 +92,6 @@ public class MaterialSelect<V> extends MaterialValuedField<V> implements HasLabe
 			else
 				onSelect(index, false);
 		}
-		
-		addResizeHandler(event -> layout());
 	}
 
 	protected native void layout()/*-{

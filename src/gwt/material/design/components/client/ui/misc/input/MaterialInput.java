@@ -31,6 +31,7 @@ import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
+import gwt.material.design.components.client.base.interfaces.HasIconPosition;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
@@ -41,11 +42,11 @@ import gwt.material.design.components.client.base.interfaces.HasTextFieldValidat
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.interfaces.HasUnbordered;
 import gwt.material.design.components.client.base.interfaces.HasValidationHandlers;
+import gwt.material.design.components.client.base.mixin.InputIconMixin;
 import gwt.material.design.components.client.base.mixin.InputMaskMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.StateMixin;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
-import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
@@ -54,10 +55,10 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
-import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
@@ -74,7 +75,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  *
  */
 public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered, HasRequired, HasPlaceholder, HasType<TextFieldType>,
-		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly {
+		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly, HasIconPosition {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -95,10 +96,10 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input, CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
 	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input, CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
 	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
-	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);
-	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(this);
-	protected final TypeMixin<MaterialInput, TextFieldIconPosition> iconPositionMixin = new TypeMixin<>(this);
+	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);	
 	protected final StateMixin<MaterialInput> stateMixin = new StateMixin<>(this);
+	
+	protected final InputIconMixin<MaterialInput, TextFieldType> inputIconMixin = new InputIconMixin<>(TextFieldType.FILLED, this, icon, input);
 
 	// /////////////////////////////////////////////////////////////
 	// Validation
@@ -141,9 +142,10 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		super.onInitialize();
 
 		// To prevent label over the placeholder when input is empty
-		// input.addBlurHandler(event -> updateFloatLabelAbove());
-		//updateFloatLabelAbove();
-		//addResizeHandler(event -> layout());
+		input.addBlurHandler(event -> label.updateFloatLabelAbove(this));
+		label.updateFloatLabelAbove(this);
+		// Update icon position class
+		inputIconMixin.updateIconPositionClass();
 	}
 
 	protected native void layout()/*-{
@@ -151,15 +153,6 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		if (jsElement)
 			jsElement.layout();
 	}-*/;
-
-	protected void updateFloatLabelAbove() {
-
-		final String text = getValue();
-		final String placeholder = getPlaceholder();
-
-		if ((text == null || text.isEmpty()) && (placeholder != null && !placeholder.isEmpty()))
-			label.addStyleName(CssName.MDC_FLOATING_LABEL__FLOAT_ABOVE);
-	}
 
 	protected void fireValidation() {
 
@@ -307,14 +300,12 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 
 	@Override
 	public void setType(TextFieldType type) {
-		typeMixin.setType(type);
-		if (initialized)
-			layout();
+		inputIconMixin.setType(type);
 	}
 
 	@Override
 	public TextFieldType getType() {
-		return typeMixin.getType();
+		return inputIconMixin.getType();
 	}
 
 	public void setMinLength(final Integer length) {
@@ -369,27 +360,22 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 
 	@Override
 	public IconType getIcon() {
-		return icon.getType();
+		return inputIconMixin.getIcon();
 	}
 
 	@Override
 	public void setIcon(IconType iconType) {
-		setIcon(iconType, false);
+		inputIconMixin.setIcon(iconType, false);
 	}
 
 	@Override
 	public void setIcon(IconType iconType, boolean animate) {
-		icon.setType(iconType, animate);
-		if (iconPositionMixin.getType() != null) {
-			removeStyleName(iconPositionMixin.getType().getCssName());
-			if (iconType != null)
-				addStyleName(iconPositionMixin.getType().getCssName());
-		}
+		inputIconMixin.setIcon(iconType, animate);
 	}
 
 	@Override
 	public void setIconColor(Color color) {
-		icon.setColor(color);
+		inputIconMixin.setIconColor(color);
 	}
 
 	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
@@ -400,15 +386,14 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		}, IconClickEvent.getType());
 	}
 
-	public TextFieldIconPosition getIconPosition() {
-		return iconPositionMixin.getType();
+	@Override
+	public IconPosition getIconPosition() {
+		return inputIconMixin.getIconPosition();
 	}
 
-	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		iconPositionMixin.setType(iconPosition);
-		if (icon.getType() == null && iconPosition != null)
-			removeStyleName(iconPositionMixin.getType().getCssName());
-
+	@Override
+	public void setIconPosition(IconPosition iconPosition) {
+		inputIconMixin.setIconPosition(iconPosition);
 	}
 
 	@Override

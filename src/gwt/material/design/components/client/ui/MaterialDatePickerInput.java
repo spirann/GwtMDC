@@ -21,8 +21,8 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
+import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.utils.helper.JsHelper;
@@ -73,7 +73,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy())
 					.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
 		setIcon(IconType.EVENT);
-		setIconPosition(TextFieldIconPosition.TRAILING);
+		setIconPosition(IconPosition.TRAILING);
 		setMaxLength(10);
 		addIconClickHandler(event -> openDatePicker());
 

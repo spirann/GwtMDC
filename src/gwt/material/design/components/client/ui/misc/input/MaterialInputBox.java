@@ -39,7 +39,6 @@ import gwt.material.design.components.client.base.interfaces.HasValidationHandle
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.State;
-import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.validation.TextFieldValidation;
@@ -201,14 +200,6 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	@Override
 	public State getState() {
 		return input.getState();
-	}
-
-	public TextFieldIconPosition getIconPosition() {
-		return input.getIconPosition();
-	}
-
-	public void setIconPosition(TextFieldIconPosition iconPosition) {
-		input.setIconPosition(iconPosition);
 	}
 
 	public TextFieldValidation getValidation() {

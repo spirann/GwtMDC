@@ -23,13 +23,14 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
+import gwt.material.design.components.client.base.interfaces.HasIconPosition;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasRequired;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
-import gwt.material.design.components.client.constants.TextFieldIconPosition;
 import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
@@ -39,7 +40,7 @@ import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextField extends MaterialInputBox implements HasRequired, HasType<TextFieldType>, HasInputMask, HasIcon, HasIconClickHandlers {
+public class MaterialTextField extends MaterialInputBox implements HasRequired, HasType<TextFieldType>, HasInputMask, HasIcon, HasIconClickHandlers, HasIconPosition {
 
 	@Override
 	public IconType getIcon() {
@@ -61,11 +62,13 @@ public class MaterialTextField extends MaterialInputBox implements HasRequired, 
 		input.setIconColor(color);
 	}
 
-	public TextFieldIconPosition getIconPosition() {
+	@Override
+	public IconPosition getIconPosition() {
 		return input.getIconPosition();
 	}
 
-	public void setIconPosition(TextFieldIconPosition iconPosition) {
+	@Override
+	public void setIconPosition(IconPosition iconPosition) {
 		input.setIconPosition(iconPosition);
 	}
 

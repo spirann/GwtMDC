@@ -405,6 +405,7 @@ public interface CssName {
 	String MDC_TEXT_FIELD__HELPER_TEXT_VALIDATION_MSG = "mdc-text-field-helper-text--validation-msg";
 	String MDC_TEXT_FIELD__DENSE = "mdc-text-field--dense";
 	String MDC_TEXT_FIELD__SHAPED = "mdc-text-field--shaped";
+	String MDC_TEXT_FIELD__SHAPED_FILLED = "mdc-text-field--shaped-filled";
 	String MDC_TEXT_FIELD__UNBORDERED = "mdc-text-field--unbordered";
 	String MDC_TEXT_FIELD__BOX = "mdc-text-field--box";
 	String MDC_TEXT_FIELD__OUTLINED = "mdc-text-field--outlined";
@@ -412,6 +413,8 @@ public interface CssName {
 	String MDC_TEXT_FIELD__ICON = "mdc-text-field__icon";
 	String MDC_TEXT_FIELD__WITH_LEADING_ICON = "mdc-text-field--with-leading-icon";
 	String MDC_TEXT_FIELD__WITH_TRAILING_ICON = "mdc-text-field--with-trailing-icon";
+	String MDC_TEXT_FIELD__OUTLINED__WITH_LEADING_ICON = MDC_TEXT_FIELD__WITH_LEADING_ICON + " mdc-text-field--outlined--with-leading-icon";
+	String MDC_TEXT_FIELD__OUTLINED__WITH_TRAILING_ICON = MDC_TEXT_FIELD__WITH_TRAILING_ICON + " mdc-text-field--outlined--with-trailing-icon";
 
 	String MDC_TEXT_FIELD_DISABLED = "mdc-text-field--disabled";
 	String MDC_TEXT_FIELD_MULTILINE = "mdc-text-field--multiline";

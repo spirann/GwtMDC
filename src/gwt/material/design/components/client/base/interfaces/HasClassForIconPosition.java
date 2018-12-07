@@ -17,32 +17,16 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.constants;
-
-import gwt.material.design.components.client.utils.helper.EnumHelper;
+package gwt.material.design.components.client.base.interfaces;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public enum TextFieldIconPosition implements CssType {
+public interface HasClassForIconPosition {
 
-	LEADING(CssName.MDC_TEXT_FIELD__WITH_LEADING_ICON), 
-	TRAILING(CssName.MDC_TEXT_FIELD__WITH_TRAILING_ICON);
-
-	private final String cssClass;
-
-	TextFieldIconPosition(final String cssClass) {
-		this.cssClass = cssClass;
-	}
-
-	@Override
-	public String getCssName() {
-		return cssClass;
-	}
-
-	public static TextFieldIconPosition fromStyleName(final String styleName) {
-		return EnumHelper.fromStyleName(styleName, TextFieldIconPosition.class, TRAILING);
-	}
+	public String getCssClassForLeadingIcon();
+	public String getCssClassForTrailingIcon();
+	
 }

@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.constants;
 
+import gwt.material.design.components.client.base.interfaces.HasClassForIconPosition;
 import gwt.material.design.components.client.utils.helper.EnumHelper;
 
 /**
@@ -26,18 +27,28 @@ import gwt.material.design.components.client.utils.helper.EnumHelper;
  * @author Richeli Vargas
  *
  */
-public enum TextFieldType implements CssType {
+public enum TextFieldType implements CssType, HasClassForIconPosition {
 
-	DEFAULT(""),
-	BOX(CssName.MDC_TEXT_FIELD__BOX),
-	OUTLINED(CssName.MDC_TEXT_FIELD__OUTLINED),
-	SHAPED(CssName.MDC_TEXT_FIELD__OUTLINED + " " + CssName.MDC_TEXT_FIELD__SHAPED),
-	FULLWIDTH(CssName.MDC_TEXT_FIELD__FULLWIDTH);
+	FILLED("", 
+			CssName.MDC_TEXT_FIELD__WITH_LEADING_ICON, CssName.MDC_TEXT_FIELD__WITH_TRAILING_ICON),
+	SHAPED_FILLED(CssName.MDC_TEXT_FIELD__SHAPED_FILLED, 
+			CssName.MDC_TEXT_FIELD__WITH_LEADING_ICON, CssName.MDC_TEXT_FIELD__WITH_TRAILING_ICON),
+	OUTLINED(CssName.MDC_TEXT_FIELD__OUTLINED, 
+			CssName.MDC_TEXT_FIELD__OUTLINED__WITH_LEADING_ICON, CssName.MDC_TEXT_FIELD__OUTLINED__WITH_TRAILING_ICON),
+	SHAPED(CssName.MDC_TEXT_FIELD__OUTLINED + " " + CssName.MDC_TEXT_FIELD__SHAPED, 
+			CssName.MDC_TEXT_FIELD__OUTLINED__WITH_LEADING_ICON, CssName.MDC_TEXT_FIELD__OUTLINED__WITH_TRAILING_ICON),
+	FULLWIDTH(CssName.MDC_TEXT_FIELD__FULLWIDTH, 
+			CssName.MDC_TEXT_FIELD__WITH_LEADING_ICON, CssName.MDC_TEXT_FIELD__WITH_TRAILING_ICON);
 
     private final String cssClass;
+    private final String cssClassForLeadingIcon;
+    private final String cssClassForTrailingIcon;
+    
 
-    TextFieldType(final String cssClass) {
+    TextFieldType(final String cssClass, final String cssClassForLeadingIcon, final String cssClassForTrailingIcon) {
         this.cssClass = cssClass;
+        this.cssClassForLeadingIcon = cssClassForLeadingIcon;
+        this.cssClassForTrailingIcon = cssClassForTrailingIcon;
     }
 
     @Override
@@ -45,7 +56,17 @@ public enum TextFieldType implements CssType {
         return cssClass;
     }
 
-    public static TextFieldType fromStyleName(final String styleName) {
-        return EnumHelper.fromStyleName(styleName, TextFieldType.class, DEFAULT);
+    @Override
+    public String getCssClassForLeadingIcon() {
+		return cssClassForLeadingIcon;
+	}
+
+    @Override
+	public String getCssClassForTrailingIcon() {
+		return cssClassForTrailingIcon;
+	}
+
+	public static TextFieldType fromStyleName(final String styleName) {
+        return EnumHelper.fromStyleName(styleName, TextFieldType.class, FILLED);
     }
 }
