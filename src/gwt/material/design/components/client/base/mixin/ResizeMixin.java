@@ -20,29 +20,37 @@
 package gwt.material.design.components.client.base.mixin;
 
 import gwt.material.design.components.client.base.interfaces.HasResize;
-import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
+import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
-import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.Resize;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
  * @author Richeli Vargas
  */
-public class ResizeMixin<UIO extends MaterialUIObject & HasResize> extends AttributeMixin<UIO, Resize> implements HasResize {
+public class ResizeMixin<UIO extends MaterialUIObject & HasResize> extends AbstractMixin<UIO> implements HasResize {
+	
+	private Resize resize;
 	
 	public ResizeMixin(final UIO uiObject) {
-		super(uiObject, CssAttribute.RESIZE, (value) -> Resize.fromStyleName(value));
+		this(uiObject, Resize.NONE);
+	}
+	
+	public ResizeMixin(final UIO uiObject, final Resize resize) {
+		super(uiObject);
+		setResize(resize);
 	}
 
 	@Override
 	public void setResize(Resize resize) {
-		setValue(resize);
+		this.resize = resize == null ? Resize.NONE : resize;
+		StyleHelper.setCssProperty(uiObject, "resize", resize.getCssName());
 	}
 
 	@Override
 	public Resize getResize() {
-		return getValue();
+		return resize;
 	}
 
 }

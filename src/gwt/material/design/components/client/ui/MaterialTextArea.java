@@ -20,7 +20,10 @@
 package gwt.material.design.components.client.ui;
 
 import gwt.material.design.components.client.base.interfaces.HasResize;
+import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Resize;
+import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.ui.misc.input.MaterialInput;
 import gwt.material.design.components.client.ui.misc.input.MaterialInputArea;
 import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
@@ -30,7 +33,9 @@ import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
  * @author Richeli Vargas
  *
  */
-public class MaterialTextArea extends MaterialInputBox implements HasResize {
+public class MaterialTextArea extends MaterialInputBox implements HasType<TextFieldType>, HasResize {
+	
+	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(input, TextFieldType.FILLED);
 	
 	public MaterialTextArea() {
 		super();
@@ -61,5 +66,15 @@ public class MaterialTextArea extends MaterialInputBox implements HasResize {
 	@Override
 	public Resize getResize() {
 		return ((MaterialInputArea) input).getResize();
+	}
+
+	@Override
+	public void setType(TextFieldType type) {
+		typeMixin.setType(type);
+	}
+
+	@Override
+	public TextFieldType getType() {
+		return typeMixin.getType();
 	}
 }
