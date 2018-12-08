@@ -998,22 +998,24 @@ i.mdc-list-item__graphic {
 	color: var(--mdc-input__ink-color);}
 
 /* Dense settings */	
-.mdc-text-field--dense .mdc-text-field__input {
+.mdc-text-field--dense:not(.mdc-text-field--fullwidth) .mdc-text-field__input {
 	height: 52px;}	
-.mdc-text-field--dense .mdc-text-field__icon {
+.mdc-text-field--dense:not(.mdc-text-field--fullwidth) .mdc-text-field__icon {
 	margin-bottom: -4px;
 	-webkit-transform: scale(0.7);
             transform: scale(0.7);}	
 
 /* Fullwidth with Icon settings */	
 :not([dir=rtl]) .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
-	padding-left: 48px;}
+	padding-left: 40px;}
+:not([dir=rtl]) .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon:not(.mdc-text-field--dense) .mdc-text-field__input {
+	padding-left: 46px;}	
 [dir=rtl] .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
-	padding-right: 48px;}
+	padding-right: 40px;}
 :not([dir=rtl]) .mdc-text-field--fullwidth.mdc-text-field--with-trailing-icon .mdc-text-field__input {
-	padding-right: 48px;}
+	padding-right: 40px;}
 [dir=rtl] .mdc-text-field--fullwidth.mdc-text-field--with-trailing-icon .mdc-text-field__input {
-	padding-left: 48px;}		
+	padding-left: 40px;}		
 
 /* Outlined settings */	
 .mdc-text-field--outlined,

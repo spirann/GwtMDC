@@ -74,32 +74,54 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered, HasRequired, HasPlaceholder, HasType<TextFieldType>,
-		HasInputMask, HasState, HasIcon, HasIconClickHandlers, HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly, HasIconPosition {
+public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered,
+		HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
+		HasTextFieldValidation, HasValidationHandlers<Result>, HasReadOnly, HasIconPosition {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
 	// /////////////////////////////////////////////////////////////
 	protected final MaterialWidget input = constructInput();
-	protected final MaterialFloatLabel label = new MaterialFloatLabel();
 	protected final MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected final MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
 	protected final MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
+	protected final MaterialFloatLabel label = new MaterialFloatLabel() {
+		@Override
+		public void setText(String text) {
+			super.setText(text);
+
+			if (initialized) {
+				if (text == null || text.isEmpty()) {
+					if (getParent() != null) {
+						removeFromParent();
+					}
+				} else
+					notchedOutline.add(this);
+			}
+		}
+	};
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin TextFieldIconPosition
 	// /////////////////////////////////////////////////////////////
 	protected final PlaceholderMixin<MaterialWidget> placeholderMixin = new PlaceholderMixin<>(input);
 	protected final InputMaskMixin<MaterialWidget> inputMaskMixin = new InputMaskMixin<>(input);
-	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input, CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
-	protected final PropertyMixin<MaterialWidget, Integer> minLengthMixin = new PropertyMixin<>(input, CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
-	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input, CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
-	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input, CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
-	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__DENSE);
-	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this, CssName.MDC_TEXT_FIELD__UNBORDERED);	
+	protected final AttributeMixin<MaterialWidget, Boolean> requeridMixin = new AttributeMixin<>(input,
+			CssAttribute.REQUIRED, FromString.TO_BOOLEAN);
+	protected final PropertyMixin<MaterialWidget, Integer> minLengthMixin = new PropertyMixin<>(input,
+			CssAttribute.MIN_LENGTH, 0, FromString.TO_INTEGER);
+	protected final PropertyMixin<MaterialWidget, Integer> maxLengthMixin = new PropertyMixin<>(input,
+			CssAttribute.MAX_LENGTH, Integer.MAX_VALUE, FromString.TO_INTEGER);
+	protected final AttributeMixin<MaterialWidget, Boolean> readOnlyMixin = new AttributeMixin<>(input,
+			CssAttribute.READONLY, false, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialInput> denseMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__DENSE);
+	protected final ToggleStyleMixin<MaterialInput> unborderedMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_TEXT_FIELD__UNBORDERED);
 	protected final StateMixin<MaterialInput> stateMixin = new StateMixin<>(this);
-	
-	protected final InputIconMixin<MaterialInput, TextFieldType> inputIconMixin = new InputIconMixin<>(TextFieldType.FILLED, this, icon, input);
+
+	protected final InputIconMixin<MaterialInput, TextFieldType> inputIconMixin = new InputIconMixin<>(
+			TextFieldType.FILLED, this, icon, input);
 
 	// /////////////////////////////////////////////////////////////
 	// Validation
@@ -129,8 +151,9 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 			event.stopPropagation();
 			IconClickEvent.fire(this);
 		});
-		
-		notchedOutline.add(label);
+
+		if (getLabel() != null && !getLabel().isEmpty())
+			notchedOutline.add(label);
 
 		add(icon);
 		add(input);
@@ -159,7 +182,8 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		if (validation == null)
 			return;
 
-		final Result result = validation.validate(getValue(), getInputMask(), isRequired(), getMinLength(), getMaxLength());
+		final Result result = validation.validate(getValue(), getInputMask(), isRequired(), getMinLength(),
+				getMaxLength());
 
 		if (result == null)
 			return;
