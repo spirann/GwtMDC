@@ -975,13 +975,12 @@ i.mdc-list-item__graphic {
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined),
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined)::before, 
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined)::after {
-	background-color: var(--mdc-filled-color);}		
-.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
-	color: var(--mdc-input__ink-color);}
+	background-color: var(--mdc-filled-color);}	
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
 	color: var(--mdc-input__ink-color);}
 .mdc-text-field .mdc-text-field__input {
 	caret-color: var(--mdc-input__focused-color);}
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input,	
 .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined) .mdc-text-field__input {
 	border-bottom-color: var(--mdc-input__ink-color);
 	border-bottom-width: 1px;
@@ -1021,13 +1020,17 @@ i.mdc-list-item__graphic {
 .mdc-text-field--shaped-filled .mdc-text-field__input {	
 	border-radius: var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0 0;}
 
-/* Floating Label on Outlined with Leading Icon settings */		
+/* Floating Label on Outlined with Leading Icon settings */				
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
+	color: var(--mdc-input__ink-color);}
+.mdc-text-field:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch .mdc-floating-label,
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input:hover ~ .mdc-notched-outline .mdc-notched-outline__notch .mdc-floating-label {
+	color: var(--mdc-input__focused-color);}
 :not([dir=rtl]) .mdc-text-field--outlined--with-leading-icon .mdc-floating-label:not(.mdc-floating-label--float-above) {
 	margin-left: 8px;}
 [dir=rtl] .mdc-text-field--outlined--with-leading-icon .mdc-floating-label:not(.mdc-floating-label--float-above), 
 .mdc-text-field--outlined--with-leading-icon .mdc-floating-label:not(.mdc-floating-label--float-above)[dir=rtl] {
-	margin-right: 8px;}
-	
+	margin-right: 8px;}	
 .mdc-text-field--shaped.mdc-text-field--outlined--with-leading-icon .mdc-floating-label:not(.mdc-floating-label--float-above) {
 	left: 12px;}
 [dir=rtl] .mdc-text-field--shaped.mdc-text-field--outlined--with-leading-icon .mdc-floating-label:not(.mdc-floating-label--float-above), 
@@ -1064,7 +1067,7 @@ i.mdc-list-item__graphic {
 .mdc-text-field:not(.mdc-text-field--outlined) .mdc-notched-outline .mdc-notched-outline__trailing {
 	display: none;}
 .mdc-text-field:not(.mdc-text-field--outlined) .mdc-notched-outline .mdc-notched-outline__notch {
-	border: none;}	
+	border: none;}
    
 /* TextArea settings */
 .mdc-text-field--textarea,
@@ -1088,17 +1091,23 @@ i.mdc-list-item__graphic {
 /* Configure state class */
 
 /* State = SUCCESS */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-text-field__input {
+	border-bottom-color: var(--mdc-state--success);}
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--success);
 	--mdc-input__focused-color: var(--mdc-state--success);}
 
 /* State = WARNING */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-text-field__input {
+	border-bottom-color: var(--mdc-state--warning);}
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"]  *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--warning);
 	--mdc-input__focused-color: var(--mdc-state--warning);}
 
 /* State = ERROR */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-text-field__input {
+	border-bottom-color: var(--mdc-state--error);}
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"]  *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--error);
 	--mdc-input__focused-color: var(--mdc-state--error);}
 
