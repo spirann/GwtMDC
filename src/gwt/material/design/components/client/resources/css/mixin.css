@@ -835,6 +835,7 @@ i.mdc-list-item__graphic {
 	border-color: var(--mdc-input__ink-color);}
 .mdc-notched-outline .mdc-notched-outline__leading,
 .mdc-notched-outline .mdc-notched-outline__trailing {
+	min-width: var(--mdc-rounded-border-radius);
 	width: var(--mdc-rounded-border-radius);}	
    
 .mdc-notched-outline .mdc-notched-outline__leading {
@@ -996,6 +997,13 @@ i.mdc-list-item__graphic {
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__icon {
 	color: var(--mdc-input__ink-color);}
 
+/* Dense settings */	
+.mdc-text-field--dense .mdc-text-field__input {
+	height: 52px;}	
+.mdc-text-field--dense .mdc-text-field__icon {
+	bottom: 8px;;
+}	
+
 /* Fullwidth with Icon settings */	
 :not([dir=rtl]) .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
 	padding-left: 48px;}
@@ -1020,7 +1028,9 @@ i.mdc-list-item__graphic {
 .mdc-text-field--shaped-filled .mdc-text-field__input {	
 	border-radius: var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0 0;}
 
-/* Floating Label on Outlined with Leading Icon settings */				
+/* Floating Label on Outlined with Leading Icon settings */
+.mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label:empty {
+	display: none;}					
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-floating-label {
 	color: var(--mdc-input__ink-color);}
 .mdc-text-field:not(.mdc-text-field--disabled).mdc-text-field--focused .mdc-notched-outline__notch .mdc-floating-label,
