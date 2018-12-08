@@ -1001,8 +1001,9 @@ i.mdc-list-item__graphic {
 .mdc-text-field--dense .mdc-text-field__input {
 	height: 52px;}	
 .mdc-text-field--dense .mdc-text-field__icon {
-	bottom: 8px;;
-}	
+	margin-bottom: -4px;
+	-webkit-transform: scale(0.7);
+            transform: scale(0.7);}	
 
 /* Fullwidth with Icon settings */	
 :not([dir=rtl]) .mdc-text-field--fullwidth.mdc-text-field--with-leading-icon .mdc-text-field__input {
