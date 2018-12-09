@@ -986,7 +986,7 @@ i.mdc-list-item__graphic {
 	border-bottom-color: var(--mdc-input__ink-color);
 	border-bottom-width: 1px;
 	border-bottom-style: solid;}
-.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined):not(.mdc-text-field--textarea) .mdc-text-field__input:hover {
+.mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--outlined) .mdc-text-field__input:hover {
 	border-bottom-color: var(--mdc-input__focused-color);}
 .mdc-text-field .mdc-line-ripple {
 	background-color: var(--mdc-input__focused-color);}

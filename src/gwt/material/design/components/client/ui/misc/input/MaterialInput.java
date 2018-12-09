@@ -85,21 +85,7 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	protected final MaterialLineRipple lineRipple = new MaterialLineRipple();
 	protected final MaterialNotchedOutline notchedOutline = new MaterialNotchedOutline();
 	protected final MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
-	protected final MaterialFloatLabel label = new MaterialFloatLabel() {
-		@Override
-		public void setText(String text) {
-			super.setText(text);
-
-			if (initialized) {
-				if (text == null || text.isEmpty()) {
-					if (getParent() != null) {
-						removeFromParent();
-					}
-				} else
-					notchedOutline.add(this);
-			}
-		}
-	};
+	protected final MaterialFloatLabel label = new MaterialFloatLabel();
 
 	// /////////////////////////////////////////////////////////////
 	// Style mixin TextFieldIconPosition
@@ -279,6 +265,14 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	@Override
 	public void setLabel(String label) {
 		this.label.setText(label);
+		
+		if (initialized) {
+			final boolean isEmpty = label != null && !label.isEmpty();
+			if (isEmpty && this.label.getParent() != null)
+				this.label.removeFromParent();
+			else if (!isEmpty)
+				notchedOutline.add(this);
+		}
 	}
 
 	@Override
