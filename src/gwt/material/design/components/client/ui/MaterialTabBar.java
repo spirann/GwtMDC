@@ -102,6 +102,11 @@ public class MaterialTabBar extends Div implements HasAlign<TabScrollerAlign>, H
 	}
 	
 	@Override
+	public void setBackgroundColor(Color color) {
+		scrollArea.setBackgroundColor(color);
+	}
+	
+	@Override
 	public void setTextColor(Color color) {
 		scrollArea.setTextColor(color);
 	}

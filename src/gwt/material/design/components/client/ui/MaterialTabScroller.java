@@ -170,7 +170,12 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 
 	@Override
 	public void setTextColor(Color color) {
-		setCssProperty(CssMixin.MDC_TAB__COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_TAB__INK_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setCssProperty(CssMixin.MDC_TAB__FILL_COLOR, color.getCssName());
 	}
 
 	public void setSelectedColor(Color color) {
