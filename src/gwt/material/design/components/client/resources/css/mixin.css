@@ -996,6 +996,14 @@ i.mdc-list-item__graphic {
 	color: var(--mdc-input__ink-color);}
 .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__icon {
 	color: var(--mdc-input__ink-color);}
+	
+.mdc-text-field--unbordered .mdc-text-field__input,
+.mdc-text-field--unbordered .mdc-notched-outline__leading,
+.mdc-text-field--unbordered .mdc-notched-outline__notch,
+.mdc-text-field--unbordered .mdc-notched-outline__trailing {
+	border: none !important;}	
+.mdc-text-field--unbordered	.mdc-line-ripple {
+	display: none;}	
 
 /* Dense settings */	
 .mdc-text-field--dense:not(.mdc-text-field--fullwidth) .mdc-text-field__input {
