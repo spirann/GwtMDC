@@ -28,6 +28,7 @@
 	/* Snackbar */
 	--mdc-snackbar-bottom: 8px;
 	--mdc-snackbar-position-adjust: 0px;
+	--mdc-snackbar-action-ink-color: var(--mdc-theme-secondary);
 	
 	/* Button */
 	--mdc-button-fill-color: transparent;
@@ -582,6 +583,8 @@ i.mdc-list-item__graphic {
 	margin-left: 0;}
 .mdc-chip-set > div:last-child {
 	margin-right: 0;}
+
+/* Disabled settings */ 
     
 /* ==========================================================================
    Top App Bar
@@ -616,6 +619,8 @@ i.mdc-list-item__graphic {
 .mdc-top-app-bar .mdc-floating-label,
 .mdc-top-app-bar .mdc-text-field-helper-text {
 	display: none;}	
+
+/* Disabled settings */ 
 	
 /* ==========================================================================
    Drawer
@@ -663,12 +668,17 @@ i.mdc-list-item__graphic {
 	width: 100%;
 	flex: 1;
 	display: flex;}
+
+/* Disabled settings */ 
+
 /* ==========================================================================
    Menu
    ========================================================================== */
 .mdc-menu-surface {
-	border-radius: var(--mdc-rounded-border-radius);}
-	
+	border-radius: var(--mdc-rounded-border-radius);}	
+
+/* Disabled settings */ 
+
 /* ==========================================================================
    Snackbar
    ========================================================================== */   
@@ -694,7 +704,7 @@ i.mdc-list-item__graphic {
   		border-radius: var(--mdc-rounded-border-radius);}
 }
 .mdc-snackbar__action-button {
-	color: var(--mdc-theme-secondary);}
+	color: var(--mdc-snackbar-action-ink-color);}
 .mdc-snackbar--action-on-bottom .mdc-snackbar__text {
 	margin: 16px 0 16px 0 !important;
 	width: 100%;
@@ -718,6 +728,8 @@ i.mdc-list-item__graphic {
 		-webkit-transition: bottom 0.25s;    
 		transition: bottom 0.25s;}
 }		
+
+/* Disabled settings */
 
 /* ==========================================================================
    Dialog
@@ -763,12 +775,12 @@ i.mdc-list-item__graphic {
 .mdc-dialog__button.mdc-button--unelevated:not(:disabled) {
 	--mdc-button-raised-ink-color: var(--mdc-dialog-action-raised-ink-color);
 	--mdc-button-raised-fill-color: var(--mdc-dialog-action-ink-color);}
+
+/* Disabled settings */
 	
 /* ==========================================================================
    Card
    ========================================================================== */
-.mdc-card[disabled] {
-	opacity: var(--mdc-disabled-opacity);}
 .mdc-card {
 	overflow: hidden;
 	border-radius: var(--mdc-rounded-border-radius);}
@@ -823,6 +835,8 @@ i.mdc-list-item__graphic {
 	color: var(--mdc-button-raised-ink-color);
 	background-color: var(--mdc-button-raised-fill-color);}	
 
+/* Disabled settings */
+
 /* ==========================================================================
    Notched
    ========================================================================== */
@@ -843,6 +857,8 @@ i.mdc-list-item__graphic {
 	border-radius: 0 var(--mdc-rounded-border-radius) var(--mdc-rounded-border-radius) 0;}
 [dir=rtl] .mdc-notched-outline .mdc-notched-outline__trailing, .mdc-select--outlined .mdc-notched-outline .mdc-notched-outline__trailing[dir=rtl] {
 	border-radius: var(--mdc-rounded-border-radius) 0 0 var(--mdc-rounded-border-radius);}
+
+/* Disabled settings */
 
 /* ==========================================================================
    Material select menu
@@ -1101,7 +1117,7 @@ i.mdc-list-item__graphic {
 	-webkit-transform: translateY(-70%) scale(0.75);
          	transform: translateY(-70%) scale(0.75);}   
    
-/* Disabled General */   
+/* Disabled settings */ 
 .mdc-text-field.mdc-text-field--outlined:[disabled],	
 .mdc-text-field.mdc-text-field--disabled.mdc-text-field--outlined {
 	background-color: transparent;}		
@@ -1213,6 +1229,8 @@ i.mdc-list-item__graphic {
 		margin: calc(var(--mdc-image-list--column-gap-phone, 8px) / 2);}
 }
 
+/* Disabled settings */
+
 /* ==========================================================================
    Layout Grid adjust
    ========================================================================== */
@@ -1223,3 +1241,5 @@ i.mdc-list-item__graphic {
 	align-content: flex-start;
 	align-items: flex-start;
 	justify-content: flex-start;}	
+	
+/* Disabled settings */	
