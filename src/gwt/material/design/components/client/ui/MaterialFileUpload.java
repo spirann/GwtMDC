@@ -66,47 +66,78 @@ public class MaterialFileUpload extends Input {
 
 	native void init(Element element) /*-{
 
-		$wnd.jQuery(element).fileupload(
-				{
-					sequentialUploads : true,
-					dataType : 'png',
-					add : function(e, data) {
-						$wnd.jQuery.each(data.files, function(index, file) {
-							console.log('add: ' + file.name);
-						});
-						data.submit();
-					},
-					done : function(e, data) {
-						$wnd.jQuery.each(data.result.files,
-								function(index, file) {
-									console.log('done: ' + file.name);
-								});
-					},
-					progress : function(e, data) {
-						var progress = parseInt(data.loaded / data.total * 100, 10);
-						console.log('progress: ' + progress + '%');
-					},
-					progressall : function(e, data) {
-						var progress = parseInt(data.loaded / data.total * 100, 10);
-						console.log('progressall: ' + progress + '%');
-					},
-					progressall : function(e, data) {
-						var progress = parseInt(data.loaded / data.total * 100,
-								10);
-						console.log('progressall: ' + progress + '%');
-					},
-					drop : function(e, data) {
-						$wnd.jQuery.each(data.files, function(index, file) {
-							console.log('drop: ' + file.name);
-						});
-					},
-					change : function(e, data) {
-						$wnd.jQuery.each(data.files, function(index, file) {
-							console.log('change: ' + file.name);
-						});
-					}
+		var printData = function(method, data) {
 
-				});
+			console.log(method + ' -------------------------------------');
+			console.log('fileInput: ' + data.fileInput);
+			console.log('form: ' + data.form);
+			console.log('files: ' + data.files);
+			console.log('fileInputClone: ' + data.fileInputClone);
+			console.log('originalFiles: ' + data.originalFiles);
+			console.log('paramName: ' + data.paramName);
+			console.log('_response: ' + data._response);
+			console.log('_progress: ' + data._progress);
+			// Functions			
+			// console.log('process: ' + data.process);
+			// console.log('submit: ' + data.submit);
+			// console.log('abort: ' + data.abort);
+			// console.log('submit: ' + data.submit);
+			// console.log('state: ' + data.state);
+			// console.log('processing: ' + data.processing);
+			// console.log('progress: ' + data.progress);
+			// console.log('response: ' + data.response);
+
+			$wnd.jQuery.each(data.files, function(index, file) {
+
+				// Attributes
+				console.log('		-------------------------------------');
+				console.log('name: ' + file.name);
+				console.log('lastModified: ' + file.lastModified);
+				console.log('lastModifiedDate: ' + file.lastModifiedDate);
+				console.log('webkitRelativePath: ' + file.webkitRelativePath);
+				console.log('size: ' + file.size);
+				console.log('type: ' + file.type);
+				console.log('slice: ' + file.slice);
+			});
+
+		};
+
+		$wnd.jQuery(element).fileupload({
+			sequentialUploads : true,
+			dataType : 'png',
+			singleFileUploads : false,
+			limitMultiFileUploads : 3,
+			
+			
+			add : function(e, data) {
+				printData('add', data);
+				data.submit();
+			},
+			start : function(e) {
+				console.log('start');
+			},
+			stop : function(e) {
+				console.log('stop');
+			},
+			drop : function(e, data) {
+				printData('drop', data);
+			},
+			done : function(e, data) {
+				printData('done', data);
+			},
+			progress : function(e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				console.log('progress: ' + progress + '%');
+			},
+			progressall : function(e, data) {
+				var progress = parseInt(data.loaded / data.total * 100, 10);
+				console.log('progressall: ' + progress + '%');
+			},
+			change : function(e, data) {
+				printData('change', data);
+			}
+
+		});
 
 	}-*/;
 
