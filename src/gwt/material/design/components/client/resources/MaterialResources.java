@@ -32,6 +32,8 @@ import com.google.gwt.resources.client.TextResource;
 public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
 
+	// JS
+	
 	@Source("js/jquery-3.3.1.min.js")
 	TextResource jquery();
 	
@@ -61,7 +63,18 @@ public interface MaterialResources extends ClientBundle {
 	
 	@Source("js/chroma.min.js")
 	TextResource chromaJs();
+	
+	@Source("js/fileUpload/jquery.fileupload.js")
+	TextResource fileUploadJs();
+	
+	@Source("js/fileUpload/jquery.iframe-transport.js")
+	TextResource fileUploadIframeTransportJs();
+	
+	@Source("js/fileUpload/jquery.ui.widget.js")
+	TextResource fileUploadWidgetJs();
 
+	// CSS
+	
 	@Source("css/prism.min.css")
 	TextResource prismCss();
 
