@@ -26,6 +26,7 @@ import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.ui.html.Input;
 
 /**
+ * https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin
  * 
  * @author Richeli Vargas
  *
@@ -65,21 +66,48 @@ public class MaterialFileUpload extends Input {
 
 	native void init(Element element) /*-{
 
-		$wnd.jQuery(element).fileupload({
-			dataType : 'json',
-			done : function(e, data) {
-				console.log(data.name);
-				$.each(data.result.files, function(index, file) {
-					console.log(file.name);
+		$wnd.jQuery(element).fileupload(
+				{
+					sequentialUploads : true,
+					dataType : 'png',
+					add : function(e, data) {
+						$wnd.jQuery.each(data.files, function(index, file) {
+							console.log('add: ' + file.name);
+						});
+						data.submit();
+					},
+					done : function(e, data) {
+						$wnd.jQuery.each(data.result.files,
+								function(index, file) {
+									console.log('done: ' + file.name);
+								});
+					},
+					progress : function(e, data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						console.log('progress: ' + progress + '%');
+					},
+					progressall : function(e, data) {
+						var progress = parseInt(data.loaded / data.total * 100, 10);
+						console.log('progressall: ' + progress + '%');
+					},
+					progressall : function(e, data) {
+						var progress = parseInt(data.loaded / data.total * 100,
+								10);
+						console.log('progressall: ' + progress + '%');
+					},
+					drop : function(e, data) {
+						$wnd.jQuery.each(data.files, function(index, file) {
+							console.log('drop: ' + file.name);
+						});
+					},
+					change : function(e, data) {
+						$wnd.jQuery.each(data.files, function(index, file) {
+							console.log('change: ' + file.name);
+						});
+					}
+
 				});
-			},
-
-			progressall : function(e, data) {
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				console.log(progress + '%');
-			}
-
-		});
 
 	}-*/;
+
 }
