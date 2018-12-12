@@ -103,11 +103,14 @@ public class MaterialFileUpload extends Input {
 		};
 
 		$wnd.jQuery(element).fileupload({
-			sequentialUploads : true,
-			dataType : 'png',
+			formAcceptCharset : 'utf-8',
+			multipart : true,
 			singleFileUploads : false,
+			sequentialUploads : true,
 			limitMultiFileUploads : 3,
-			
+			limitConcurrentUploads : 3,
+			//limitMultiFileUploadSizeOverhead : 512, // in bytes
+			// limitMultiFileUploadSize : undefined,  // in bytes
 			
 			add : function(e, data) {
 				printData('add', data);
