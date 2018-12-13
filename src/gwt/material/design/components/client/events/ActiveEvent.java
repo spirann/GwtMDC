@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasActiveHandlers;
 import gwt.material.design.components.client.events.ActiveEvent.ActiveHandler;
 
 /**
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.ActiveEvent.ActiveHandler;
  */
 public class ActiveEvent<V> extends GwtEvent<ActiveHandler<V>> {
 
+	public interface HasActiveHandlers<V> extends HasHandlers {
+		HandlerRegistration addActiveHandler(ActiveHandler<V> handler);
+	}
+	
 	public static interface ActiveHandler<V> extends EventHandler {
 		void onActive(ActiveEvent<V> event);
 	}

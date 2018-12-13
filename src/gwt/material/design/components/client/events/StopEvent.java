@@ -24,27 +24,27 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
+import gwt.material.design.components.client.events.StopEvent.StopHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class ResizeEvent extends GwtEvent<ResizeHandler> {
-	
-	public interface HasResizeHandlers extends HasHandlers {
-		  HandlerRegistration addResizeHandler(ResizeHandler handler);
-	}
+public class StopEvent extends GwtEvent<StopHandler> {
 
-	public static interface ResizeHandler extends EventHandler {
-		void onResize(ResizeEvent event);
+	public interface HasStopHandlers extends HasHandlers {
+		  HandlerRegistration addStopHandler(StopHandler handler);
+	}
+	
+	public static interface StopHandler extends EventHandler {
+		void onStop(StopEvent event);
 	}
 	
 	/**
 	 * Handler type.
 	 */
-	public static final Type<ResizeHandler> TYPE = new Type<ResizeHandler>();
+	public static final Type<StopHandler> TYPE = new Type<StopHandler>();
 
 	/**
 	 * Fires a value change event on all registered handlers in the handler
@@ -57,8 +57,8 @@ public class ResizeEvent extends GwtEvent<ResizeHandler> {
 	 * @param value
 	 *            the value
 	 */
-	public static void fire(HasResizeHandlers source) {
-		source.fireEvent(new ResizeEvent());
+	public static void fire(HasStopHandlers source) {
+		source.fireEvent(new StopEvent());
 	}
 
 	/**
@@ -66,7 +66,7 @@ public class ResizeEvent extends GwtEvent<ResizeHandler> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<ResizeHandler> getType() {
+	public static Type<StopHandler> getType() {
 		return TYPE;
 	}
 
@@ -76,19 +76,19 @@ public class ResizeEvent extends GwtEvent<ResizeHandler> {
 	 * @param value
 	 *            the value
 	 */
-	protected ResizeEvent() {
+	protected StopEvent() {
 	}
 
 	// The instance knows its BeforeSelectionHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
 	@Override
-	public final Type<ResizeHandler> getAssociatedType() {
+	public final Type<StopHandler> getAssociatedType() {
 		return TYPE;
 	}
 
 	@Override
-	protected void dispatch(ResizeHandler handler) {
-		handler.onResize(this);
+	protected void dispatch(StopHandler handler) {
+		handler.onStop(this);
 	}
 
 }

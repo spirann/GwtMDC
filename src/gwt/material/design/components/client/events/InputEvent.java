@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 
 /**
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.InputEvent.InputHandler;
  */
 public class InputEvent<T> extends GwtEvent<InputHandler<T>> {
 
+	public interface HasInputHandlers<T> extends HasHandlers {
+		HandlerRegistration addInputHandler(InputHandler<T> handler);
+	}
+	
 	public interface InputHandler<T> extends EventHandler {
 		void onInput(InputEvent<T> event);
 	}

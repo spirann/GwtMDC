@@ -26,13 +26,12 @@ import java.util.Date;
  *
  * @author Richeli Vargas
  */
-public class Formatation {
+public final class Formatation {
 
-	public static String document(final String document) {
+	public final static String document(final String document) {
 
-		if (document == null) {
+		if (document == null)
 			return "";
-		}
 
 		final StringBuilder formatedDocument = new StringBuilder();
 
@@ -67,11 +66,10 @@ public class Formatation {
 	 * @param seg
 	 * @return HH:mm:ss
 	 */
-	public static String seconds(final int seg) {
+	public final static String seconds(final int seg) {
 
-		if (seg < 0) {
+		if (seg < 0)
 			return "??:??:??";
-		}
 
 		final int segundos = (seg % 60);
 		final int minutos = (seg / 60) % 60;
@@ -79,23 +77,23 @@ public class Formatation {
 
 		final StringBuffer builder = new StringBuffer();
 
-		if (horas < 10) {
+		if (horas < 10)
 			builder.append("0");
-		}
+
 		builder.append(horas);
 
 		builder.append(":");
 
-		if (minutos < 10) {
+		if (minutos < 10)
 			builder.append("0");
-		}
+
 		builder.append(minutos);
 
 		builder.append(":");
 
-		if (segundos < 10) {
+		if (segundos < 10)
 			builder.append("0");
-		}
+
 		builder.append(segundos);
 
 		return builder.toString();
@@ -106,11 +104,10 @@ public class Formatation {
 	 * @param seg
 	 * @return
 	 */
-	public static String secondsII(final int seg) {
+	public final static String secondsII(final int seg) {
 
-		if (seg < 0) {
+		if (seg < 0)
 			return "??h ??min";
-		}
 
 		// final int segundos = (seg % 60);
 		final int minutos = (seg / 60) % 60;
@@ -126,37 +123,35 @@ public class Formatation {
 		return builder.toString();
 	}
 
-	public static String secondsIII(final int seg) {
+	public final static String secondsIII(final int seg) {
 
-		if (seg < 0) {
+		if (seg < 0)
 			return "??:??";
-		}
 
 		final int segundos = (seg % 60);
 		final int minutos = (seg / 60) % 60;
 
 		final StringBuffer builder = new StringBuffer();
 
-		if (minutos < 10) {
+		if (minutos < 10)
 			builder.append("0");
-		}
+
 		builder.append(minutos);
 
 		builder.append(":");
 
-		if (segundos < 10) {
+		if (segundos < 10)
 			builder.append("0");
-		}
+
 		builder.append(segundos);
 
 		return builder.toString();
 	}
 
-	public static String phoneNumber(final String phone) {
+	public final static String phoneNumber(final String phone) {
 
-		if (phone == null) {
+		if (phone == null)
 			return "";
-		}
 
 		final StringBuilder formated = new StringBuilder();
 
@@ -170,7 +165,7 @@ public class Formatation {
 		return formated.toString();
 	}
 
-	public static String currency(final double value) {
+	public final static String currency(final double value) {
 
 		final BigDecimal bigDecimal = new BigDecimal(String.valueOf(value)).setScale(2, BigDecimal.ROUND_FLOOR);
 		final String[] values = bigDecimal.toString().split("\\.");
@@ -179,9 +174,8 @@ public class Formatation {
 
 		final int countDot = (builder.toString().length() / 3) - (builder.toString().length() % 3 == 0 ? 1 : 0);
 
-		for (int i = 0, p = 1; i < countDot; i++, p++) {
+		for (int i = 0, p = 1; i < countDot; i++, p++)
 			builder.insert(builder.toString().length() - ((3 * p) + i), ".");
-		}
 
 		builder.append(",");
 		builder.append(values[1]);
@@ -189,7 +183,7 @@ public class Formatation {
 		return builder.toString().replace("-.", "-");
 	}
 
-	public static String integer(final double value) {
+	public final static String integer(final double value) {
 
 		final BigDecimal bigDecimal = new BigDecimal(String.valueOf(value)).setScale(2, BigDecimal.ROUND_FLOOR);
 		final String[] values = bigDecimal.toString().split("\\.");
@@ -198,38 +192,35 @@ public class Formatation {
 
 		final int countDot = (builder.toString().length() / 3) - (builder.toString().length() % 3 == 0 ? 1 : 0);
 
-		for (int i = 0, p = 1; i < countDot; i++, p++) {
+		for (int i = 0, p = 1; i < countDot; i++, p++)
 			builder.insert(builder.toString().length() - ((3 * p) + i), ".");
-		}
 
 		return builder.toString();
 	}
 
-	public static String bytes(final long size) {
+	public final static String bytes(final long size) {
 
 		final String value = String.valueOf(size);
 		final int length = value.length();
 
-		if (length > 15) {
+		if (length > 15)
 			return ((int) (size / (Math.pow(1000, 5)))) + " HB";
-		} else if (length > 12) {
+		else if (length > 12)
 			return ((int) (size / (Math.pow(1000, 4)))) + " TB";
-		} else if (length > 9) {
+		else if (length > 9)
 			return ((int) (size / (Math.pow(1000, 3)))) + " GB";
-		} else if (length > 6) {
+		else if (length > 6)
 			return ((int) (size / (Math.pow(1000, 2)))) + " MB";
-		} else if (length > 3) {
+		else if (length > 3)
 			return ((int) (size / (Math.pow(1000, 1)))) + " KB";
-		} else {
+		else
 			return size + " Bytes";
-		}
 	}
 
-	public static String barcode(final String barcodeNumber) {
+	public final static String barcode(final String barcodeNumber) {
 
-		if (barcodeNumber == null) {
+		if (barcodeNumber == null)
 			return "";
-		}
 
 		final StringBuilder builder = new StringBuilder();
 
@@ -258,16 +249,15 @@ public class Formatation {
 		return builder.toString();
 	}
 
-	public static String dateTime(final Date date) {
+	public final static String dateTime(final Date date) {
 		return date(date) + " " + time(date);
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String date(final Date date) {
+	public final static String date(final Date date) {
 
-		if (date == null) {
+		if (date == null)
 			return "??/??/????";
-		}
 
 		final StringBuilder formated = new StringBuilder();
 
@@ -275,14 +265,14 @@ public class Formatation {
 		final int month = date.getMonth() + 1;
 		final int year = date.getYear() + 1900;
 
-		if (day < 10) {
+		if (day < 10)
 			formated.append("0");
-		}
+
 		formated.append(String.valueOf(day));
 		formated.append("/");
-		if (month < 10) {
+		if (month < 10)
 			formated.append("0");
-		}
+
 		formated.append(String.valueOf(month));
 		formated.append("/");
 		formated.append(String.valueOf(year));
@@ -291,11 +281,10 @@ public class Formatation {
 	}
 
 	@SuppressWarnings("deprecation")
-	public static String time(final Date date) {
+	public final static String time(final Date date) {
 
-		if (date == null) {
+		if (date == null)
 			return "??:??:??";
-		}
 
 		final StringBuilder formated = new StringBuilder();
 
@@ -303,21 +292,21 @@ public class Formatation {
 		final int minutes = date.getMinutes();
 		final int seconds = date.getSeconds();
 
-		if (hours < 10) {
+		if (hours < 10)
 			formated.append("0");
-		}
+
 		formated.append(String.valueOf(hours));
 		formated.append(":");
 
-		if (minutes < 10) {
+		if (minutes < 10)
 			formated.append("0");
-		}
+
 		formated.append(String.valueOf(minutes));
 		formated.append(":");
 
-		if (seconds < 10) {
+		if (seconds < 10)
 			formated.append("0");
-		}
+
 		formated.append(String.valueOf(seconds));
 
 		return formated.toString();

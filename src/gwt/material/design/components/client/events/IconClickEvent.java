@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 
 /**
@@ -31,7 +32,11 @@ import gwt.material.design.components.client.events.IconClickEvent.IconClickHand
  *
  */
 public class IconClickEvent extends GwtEvent<IconClickHandler> {
-
+	
+	public interface HasIconClickHandlers extends HasHandlers {
+		HandlerRegistration addIconClickHandler(IconClickHandler handler);
+	}
+	
 	public static interface IconClickHandler extends EventHandler {
 		void onClick(IconClickEvent event);
 	}

@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
 import gwt.material.design.components.client.constants.CloseAction;
 import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
 
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
  *
  */
 public class CloseEvent extends GwtEvent<CloseHandler> {
+	
+	public interface HasCloseHandlers extends HasHandlers {
+		  HandlerRegistration addCloseHandler(CloseHandler handler);
+	}
 	
 	public static interface CloseHandler extends EventHandler {
 		void onClose(CloseEvent event);

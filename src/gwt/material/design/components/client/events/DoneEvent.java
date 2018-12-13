@@ -24,41 +24,42 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
+import gwt.material.design.components.client.events.DoneEvent.DoneHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class ResizeEvent extends GwtEvent<ResizeHandler> {
+@SuppressWarnings("rawtypes")
+public class DoneEvent<T> extends GwtEvent<DoneHandler<T>> {
 	
-	public interface HasResizeHandlers extends HasHandlers {
-		  HandlerRegistration addResizeHandler(ResizeHandler handler);
+	public interface HasDoneHandlers<T> extends HasHandlers {
+		  HandlerRegistration addDoneHandler(DoneHandler<T> handler);
+	}
+	
+	public static interface DoneHandler<T> extends EventHandler {
+		void onDone(DoneEvent<T> event);
 	}
 
-	public static interface ResizeHandler extends EventHandler {
-		void onResize(ResizeEvent event);
-	}
-	
 	/**
 	 * Handler type.
 	 */
-	public static final Type<ResizeHandler> TYPE = new Type<ResizeHandler>();
+	public static final Type<DoneHandler> TYPE = new Type<DoneHandler>();
 
 	/**
-	 * Fires a value change event on all registered handlers in the handler
-	 * manager. If no such handlers exist, this method will do nothing.
+	 * Fires a value change event on all registered handlers in the handler manager.
+	 * If no such handlers exist, this method will do nothing.
 	 * 
-	 * @param the
-	 *            old value type
+	 * @param <T>
+	 *            the old value type
 	 * @param source
 	 *            the source of the handlers
 	 * @param value
 	 *            the value
 	 */
-	public static void fire(HasResizeHandlers source) {
-		source.fireEvent(new ResizeEvent());
+	public static <T> void fire(final HasDoneHandlers<T> source, final T value) {
+		source.fireEvent(new DoneEvent<T>(value));
 	}
 
 	/**
@@ -66,7 +67,7 @@ public class ResizeEvent extends GwtEvent<ResizeHandler> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<ResizeHandler> getType() {
+	public static Type<DoneHandler> getType() {
 		return TYPE;
 	}
 
@@ -76,19 +77,27 @@ public class ResizeEvent extends GwtEvent<ResizeHandler> {
 	 * @param value
 	 *            the value
 	 */
-	protected ResizeEvent() {
+	private final T value;
+	
+	protected DoneEvent(final T value) {
+		this.value = value;
+	}
+
+	public T getValue() {
+		return value;
 	}
 
 	// The instance knows its BeforeSelectionHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
+	@SuppressWarnings("unchecked")
 	@Override
-	public final Type<ResizeHandler> getAssociatedType() {
-		return TYPE;
+	public final Type<DoneHandler<T>> getAssociatedType() {
+		return (Type) TYPE;
 	}
 
 	@Override
-	protected void dispatch(ResizeHandler handler) {
-		handler.onResize(this);
+	protected void dispatch(DoneHandler<T> handler) {
+		handler.onDone(this);
 	}
 
 }

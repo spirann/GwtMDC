@@ -17,18 +17,24 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.interfaces;
+package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.HasHandlers;
-
-import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface HasOpeningHandlers extends HasHandlers {
-	HandlerRegistration addOpeningHandler(OpeningHandler handler);
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+public class JsProgressAllData {
+
+	@JsProperty
+    public long loaded;
+	
+	@JsProperty
+    public long total;
+	
 }

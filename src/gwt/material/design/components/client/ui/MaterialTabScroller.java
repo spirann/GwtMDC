@@ -28,13 +28,13 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasAlign;
-import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.TabScrollerAlign;
 import gwt.material.design.components.client.events.SelectionEvent;
+import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.JsHelper;

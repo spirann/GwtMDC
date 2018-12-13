@@ -86,7 +86,6 @@ import gwt.material.design.components.client.base.interfaces.HasHideOn;
 import gwt.material.design.components.client.base.interfaces.HasId;
 import gwt.material.design.components.client.base.interfaces.HasInitialClasses;
 import gwt.material.design.components.client.base.interfaces.HasInteractionHandlers;
-import gwt.material.design.components.client.base.interfaces.HasResizeHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRipple;
 import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasRtl;
@@ -115,6 +114,7 @@ import gwt.material.design.components.client.events.DropActivateEvent;
 import gwt.material.design.components.client.events.DropDeactivateEvent;
 import gwt.material.design.components.client.events.DropEvent;
 import gwt.material.design.components.client.events.ResizeEvent;
+import gwt.material.design.components.client.events.ResizeEvent.HasResizeHandlers;
 import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
 import gwt.material.design.components.client.utils.helper.IdHelper;
 

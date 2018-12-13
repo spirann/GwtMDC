@@ -17,18 +17,21 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.base.interfaces;
+package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
-import com.google.gwt.event.shared.HandlerRegistration;
-import com.google.gwt.event.shared.HasHandlers;
-
-import gwt.material.design.components.client.events.ClosingEvent.ClosingHandler;
+import jsinterop.annotations.JsPackage;
+import jsinterop.annotations.JsProperty;
+import jsinterop.annotations.JsType;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface HasClosingHandlers extends HasHandlers {
-	HandlerRegistration addClosingHandler(ClosingHandler handler);
+@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
+public class JsFileUploadData {
+
+	@JsProperty
+    public JsFileUploadFile[] files;
+	
 }

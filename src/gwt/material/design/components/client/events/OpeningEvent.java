@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasOpeningHandlers;
 import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
 
 /**
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
  */
 public class OpeningEvent extends GwtEvent<OpeningHandler> {
 
+	public interface HasOpeningHandlers extends HasHandlers {
+		HandlerRegistration addOpeningHandler(OpeningHandler handler);
+	}
+	
 	public static interface OpeningHandler extends EventHandler {
 		void onOpening(OpeningEvent event);
 	}

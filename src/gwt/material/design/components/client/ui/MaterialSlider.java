@@ -24,7 +24,6 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
-import gwt.material.design.components.client.base.interfaces.HasInputHandlers;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
@@ -36,6 +35,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.constants.SliderType;
 import gwt.material.design.components.client.events.InputEvent;
+import gwt.material.design.components.client.events.InputEvent.HasInputHandlers;
 import gwt.material.design.components.client.events.InputEvent.InputHandler;
 import gwt.material.design.components.client.resources.MaterialResources;
 import gwt.material.design.components.client.ui.html.Div;

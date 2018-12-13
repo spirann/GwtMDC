@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 
 /**
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.SelectionEvent.SelectionHand
  */
 public class SelectionEvent<V> extends GwtEvent<SelectionHandler<V>> {
 
+	public interface HasSelectionHandlers<V> extends HasHandlers {
+		HandlerRegistration addSelectionHandler(SelectionHandler<V> handler);
+	}
+	
 	public static interface SelectionHandler<V> extends EventHandler {
 		void onSelect(SelectionEvent<V> event);
 	}

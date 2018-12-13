@@ -130,4 +130,10 @@ public interface IMessages extends Messages {
 	
 	@DefaultMessage("The value is invalid")
 	String mdc_validation__value_invalid();
+	
+	@DefaultMessage("Max number of files exceeded. You can upload a maximum of {0} files.")
+	String mdc_file_upload__err__max_number_of_files_exceeded(int maxNumberOfFiles);
+	
+	@DefaultMessage("File size is too big. Max size is {0} and {1} has {2}.")
+	String mdc_file_upload__err__file_size_is_too_bg(String maxSize, String file, String size);
 }

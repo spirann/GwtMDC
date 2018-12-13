@@ -21,8 +21,9 @@ package gwt.material.design.components.client.events;
 
 import com.google.gwt.event.shared.EventHandler;
 import com.google.gwt.event.shared.GwtEvent;
+import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.base.interfaces.HasCancelHandlers;
 import gwt.material.design.components.client.events.CancelEvent.CancelHandler;
 
 /**
@@ -32,6 +33,10 @@ import gwt.material.design.components.client.events.CancelEvent.CancelHandler;
  */
 public class CancelEvent extends GwtEvent<CancelHandler> {
 
+	public interface HasCancelHandlers extends HasHandlers {
+		HandlerRegistration addCancelHandler(CancelHandler handler);
+	}
+	
 	public static interface CancelHandler extends EventHandler {
 		void onCancel(CancelEvent event);
 	}

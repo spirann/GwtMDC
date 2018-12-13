@@ -26,9 +26,7 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasEnabled;
 import com.google.gwt.user.client.ui.Widget;
 
-import gwt.material.design.components.client.base.interfaces.HasCloseHandlers;
 import gwt.material.design.components.client.base.interfaces.HasOpen;
-import gwt.material.design.components.client.base.interfaces.HasOpenHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.mixin.TogglerMixin;
@@ -37,7 +35,9 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
 import gwt.material.design.components.client.events.CloseEvent.CloseHandler;
+import gwt.material.design.components.client.events.CloseEvent.HasCloseHandlers;
 import gwt.material.design.components.client.events.OpenEvent;
+import gwt.material.design.components.client.events.OpenEvent.HasOpenHandlers;
 import gwt.material.design.components.client.events.OpenEvent.OpenHandler;
 import gwt.material.design.components.client.ui.html.Div;
 

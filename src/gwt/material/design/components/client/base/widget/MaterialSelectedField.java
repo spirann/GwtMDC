@@ -28,13 +28,13 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasSelected;
-import gwt.material.design.components.client.base.interfaces.HasSelectionHandlers;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.events.SelectionEvent;
+import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.utils.helper.JsHelper;

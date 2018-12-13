@@ -22,7 +22,6 @@ package gwt.material.design.components.client.ui;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.HasIcon;
-import gwt.material.design.components.client.base.interfaces.HasIconClickHandlers;
 import gwt.material.design.components.client.base.interfaces.HasIconPosition;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasRequired;
@@ -32,6 +31,7 @@ import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.TextFieldType;
+import gwt.material.design.components.client.events.IconClickEvent.HasIconClickHandlers;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
 
