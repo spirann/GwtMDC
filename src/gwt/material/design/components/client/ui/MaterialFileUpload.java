@@ -114,8 +114,29 @@ public class MaterialFileUpload extends Input {
 			// limitMultiFileUploadSize : undefined,  // in bytes
 
 			add : function(e, data) {
-				printData('add', data);
-				data.submit();
+
+		var errs = [];
+        var acceptFileTypes = /(\.|\/)(gif|jpe?g|png)$/i;
+        var maxFileSize = 5000000;
+
+        // Validate file
+        $wnd.jQuery().each(data.files, function(index, file) {
+        	
+            if (file.type.length && !acceptFileTypes.test(file.type)) 
+                errs.push('Selected file "' + file.name + '" is not alloawed. Invalid file type.');
+            
+            if (this['size'] > maxFileSize) 
+                errs.push('Selected file "' + file.name + '" is too big, ' + parseInt(file.size / 1024 / 1024) + 'M.. File should be smaller than ' + parseInt(maxFileSize / 1024 / 1024) + 'M.');
+            
+        });
+
+        // Output errors or submit data
+        if (errs.length > 0) 
+            alert('An error occured. ' + errs.join(" "));
+         else 
+            data.submit();
+        				
+
 			},
 			start : function(e) {
 				console.log('start');
