@@ -25,6 +25,7 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -56,8 +57,8 @@ import gwt.material.design.components.client.utils.debug.Console;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<File>>, HasDoneHandlers<Collection<File>> {
+public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers,
+		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<File>>, HasDoneHandlers<Collection<File>> {
 
 	public MaterialFileUpload() {
 		super(InputType.FILE);
@@ -104,18 +105,12 @@ public class MaterialFileUpload extends Input
 			sequentialUploads : false,
 			//limitMultiFileUploadSizeOverhead : 512, // in bytes
 			//limitMultiFileUploadSize : null,  // in bytes
-			maxFileSize : 1024000,
+			maxFileSize : 102400000,
 			progressInterval : 100,
 			bitrateInterval : 500,
 
 			change : function(e, data) {
-
-				console
-						.log('Change ----------------------------------------------------');
-				for ( var key in data) {
-					//console.log(key);
-				}
-
+				
 				var uploadErrors = validation(e, data);
 
 				if (uploadErrors.length > 0) {
@@ -127,12 +122,6 @@ public class MaterialFileUpload extends Input
 
 			},
 			add : function(e, data) {
-
-				console
-						.log('Add ----------------------------------------------------');
-				for ( var key in data) {
-					//console.log(key);
-				}
 
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::validateFiles(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
 
@@ -155,14 +144,12 @@ public class MaterialFileUpload extends Input
 				printData('drop', data);
 			},
 			progress : function(e, data) {
-				console.log('Progress ---------------------------------------------------- ' +  data.data.values);
-				for ( var key in data.data.values) {
-					console.log(key);
-				}
-
-				$wnd.jQuery.each(data.data, function(index, file) {
+				console.log('Progress --------------------- ');
+				
+				$wnd.jQuery.each(data.files, function(index, file) {
+					//console.log('	File ' + file.name + ' -- ' + file.slice());
 					for ( var key in file) {
-						console.log(key);
+						//console.log(key);
 					}
 				});
 
@@ -170,8 +157,7 @@ public class MaterialFileUpload extends Input
 				console.log('progress: ' + progress + '%');
 			},
 			progressall : function(e, data) {
-				console
-						.log('Progressall ----------------------------------------------------');
+				console.log('Progressall ---------------');
 				for ( var key in data) {
 					//console.log(key);
 				}
@@ -181,11 +167,6 @@ public class MaterialFileUpload extends Input
 				console.log('data.bitrate: ' + data.bitrate);
 			},
 			done : function(e, data) {
-				console
-						.log('Done ----------------------------------------------------');
-				for ( var key in data) {
-					//console.log(key);
-				}
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireDoneEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
 			},
 			stop : function(e) {
@@ -323,7 +304,8 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected File toFile(final JsFileUploadFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
+		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
+				jsFile.size, jsFile.type, jsFile.data);
 	}
 
 	protected String[] validateFiles(final JsFileUploadData data) {
@@ -371,14 +353,17 @@ public class MaterialFileUpload extends Input
 		private final String webkitRelativePath;
 		private final Integer size;
 		private final String type;
+		private final JavaScriptObject data;
 
-		private File(String name, Long lastModified, Date lastModifiedDate, String webkitRelativePath, Integer size, String type) {
+		private File(String name, Long lastModified, Date lastModifiedDate, String webkitRelativePath, Integer size,
+				String type, JavaScriptObject data) {
 			this.name = name;
 			this.lastModified = lastModified;
 			this.lastModifiedDate = lastModifiedDate;
 			this.webkitRelativePath = webkitRelativePath;
 			this.size = size;
 			this.type = type;
+			this.data = data;
 		}
 
 		public String getName() {
@@ -403,6 +388,10 @@ public class MaterialFileUpload extends Input
 
 		public String getType() {
 			return type;
+		}
+
+		public JavaScriptObject getData() {
+			return data;
 		}
 
 	}
