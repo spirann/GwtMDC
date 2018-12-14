@@ -17,33 +17,32 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.fileUpload.js;
+package gwt.material.design.components.client.utils.helper;
 
-import java.util.Date;
-
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import com.google.gwt.core.client.GWT;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsFileUploadFile {
+public final class HttpHelper {
 
-	@JsProperty
-	public String name;
-	@JsProperty
-	public Long lastModified;
-	@JsProperty
-	public Date lastModifiedDate;
-	@JsProperty
-	public String webkitRelativePath;
-	@JsProperty
-	public Integer size;
-	@JsProperty
-	public String type;
-	
+	private static String appContainer = null;
+
+	public final static String getAppContainer() {
+
+		if (appContainer == null) {
+			final String[] str = GWT.getModuleBaseURL().split("/");
+
+			if (str.length > 4) {
+				appContainer = "/" + str[3];
+			} else {
+				appContainer = "";
+			}
+		}
+
+		return appContainer;
+	}
+
 }

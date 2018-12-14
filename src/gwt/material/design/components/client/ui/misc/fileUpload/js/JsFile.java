@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
+import java.util.Date;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -29,21 +31,19 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsFileUploadData {
+public class JsFile {
 
 	@JsProperty
-	public String  _response;
-
+	public String name;
 	@JsProperty
-	public Long  loaded;
-	
+	public Long lastModified;
 	@JsProperty
-	public Long  total;
-	
+	public Date lastModifiedDate;
 	@JsProperty
-	public Long  uploadedBytes;
-	
+	public String webkitRelativePath;
 	@JsProperty
-    public JsFileUploadFile[] files;
+	public Integer size;
+	@JsProperty
+	public String type;
 	
 }

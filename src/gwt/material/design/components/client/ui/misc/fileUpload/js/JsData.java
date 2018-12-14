@@ -29,8 +29,20 @@ import jsinterop.annotations.JsType;
  *
  */
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsProgressData {
+public class JsData {
 
+	@JsProperty
+	public String  _response;
+
+	@JsProperty
+	public Long  loaded;
+	
+	@JsProperty
+	public Long  total;
+	
+	@JsProperty
+	public Long  uploadedBytes;
+	
 	@JsProperty
     public JsFile[] files;
 	

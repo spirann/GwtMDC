@@ -30,13 +30,13 @@ public interface TextFieldValidation extends Validation {
 
 				switch (securityLevel) {
 				case 0:
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__password__very_weak());
+					return new Result(State.ERROR, 1201, IMessages.INSTANCE.mdc_validation__password__very_weak());
 				case 1:
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__password__weak());
+					return new Result(State.ERROR, 1202, IMessages.INSTANCE.mdc_validation__password__weak());
 				case 2:
-					return new Result(State.WARNING, IMessages.INSTANCE.mdc_validation__password__midium());
+					return new Result(State.WARNING, 1101, IMessages.INSTANCE.mdc_validation__password__midium());
 				case 3:
-					return new Result(State.SUCCESS, IMessages.INSTANCE.mdc_validation__password__strong());
+					return new Result(State.SUCCESS, 1001, IMessages.INSTANCE.mdc_validation__password__strong());
 				default:
 					return new Result(State.NONE, "");
 				}
@@ -62,9 +62,9 @@ public interface TextFieldValidation extends Validation {
 				final int length = value.length();
 
 				if (minLength != null && length < minLength)
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__less_than_min_length(minLength));
+					return new Result(State.ERROR, 1203, IMessages.INSTANCE.mdc_validation__less_than_min_length(minLength));
 				else if (maxLength != null && length > maxLength)
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
+					return new Result(State.ERROR, 1204, IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
 
 				return new Result(stateOnSuccess, "");
 
@@ -87,7 +87,7 @@ public interface TextFieldValidation extends Validation {
 			return (value, inputMask, isRequired, minLength, maxLength) -> {
 
 				if (isRequired != null && isRequired && value.isEmpty()) {
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__required());
+					return new Result(State.ERROR, 1205, IMessages.INSTANCE.mdc_validation__required());
 				}
 
 				return new Result(stateOnSuccess, "");
@@ -107,14 +107,14 @@ public interface TextFieldValidation extends Validation {
 				else if ((isRequired == null || !isRequired) && value.isEmpty())
 					return new Result(State.NONE, "");
 				else if (isRequired != null && isRequired && value.isEmpty())
-					return new Result(State.ERROR, "");
+					return new Result(State.ERROR, 1206, "");
 
 				final int length = Masker.toPattern(value, inputMask).length();
 
 				final int inputMaskLength = inputMask.length();
 
 				if (length != inputMaskLength)
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__value_invalid());
+					return new Result(State.ERROR, 1207, IMessages.INSTANCE.mdc_validation__value_invalid());
 				else if (isRequired != null && isRequired)
 					return new Result(State.SUCCESS, "");
 				else
@@ -131,18 +131,18 @@ public interface TextFieldValidation extends Validation {
 			return (value, inputMask, isRequired, minLength, maxLength) -> {
 
 				if (inputMask == null)
-					return new Result(State.NONE, "");				
+					return new Result(State.NONE, "");
 				else if ((isRequired == null || !isRequired) && value.isEmpty())
 					return new Result(State.NONE, "");
 				else if (isRequired != null && isRequired && value.isEmpty())
-					return new Result(State.ERROR, "");
-				
+					return new Result(State.ERROR, 1208, "");
+
 				final String maskedValue = Masker.toPattern(value, inputMask);
 				final int length = maskedValue.length();
 
 				if (length != inputMask.length())
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__value_invalid());
-				
+					return new Result(State.ERROR, 1209, IMessages.INSTANCE.mdc_validation__value_invalid());
+
 				final int day;
 				final int month;
 				final int year;
@@ -150,7 +150,7 @@ public interface TextFieldValidation extends Validation {
 				switch (inputMask) {
 				case "99/99/9999":
 				case "99-99-9999":
-					day = Integer.parseInt(maskedValue.substring(0, 2));
+					day = Integer.parseInt(maskedValue.substring(2));
 					month = Integer.parseInt(maskedValue.substring(3, 5));
 					year = Integer.parseInt(maskedValue.substring(6));
 					break;
@@ -158,18 +158,18 @@ public interface TextFieldValidation extends Validation {
 				case "9999-99-99":
 					day = Integer.parseInt(maskedValue.substring(9));
 					month = Integer.parseInt(maskedValue.substring(6, 8));
-					year = Integer.parseInt(maskedValue.substring(0, 5));
+					year = Integer.parseInt(maskedValue.substring(5));
 					break;
 				default:
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__value_invalid());
+					return new Result(State.ERROR, 1210, IMessages.INSTANCE.mdc_validation__value_invalid());
 				}
 
-				final int[] monthLength = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+				final int[] monthLength = { 31, 28, 31, 331, 331, 31, 331, 331 };
 				if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
 					monthLength[1] = 29;
 
 				if (year < 1970 || year > 3000 || month < 1 || month > 12 || day < 0 || day > monthLength[month - 1])
-					return new Result(State.ERROR, IMessages.INSTANCE.mdc_validation__value_invalid());
+					return new Result(State.ERROR, 1211, IMessages.INSTANCE.mdc_validation__value_invalid());
 				if (isRequired)
 					return new Result(State.SUCCESS, "");
 				else

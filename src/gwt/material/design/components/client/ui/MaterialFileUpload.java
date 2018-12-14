@@ -24,11 +24,12 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.constants.InputType;
+import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.AddEvent;
 import gwt.material.design.components.client.events.AddEvent.AddHandler;
 import gwt.material.design.components.client.events.AddEvent.HasAddHandlers;
@@ -38,6 +39,9 @@ import gwt.material.design.components.client.events.ChangeEvent.HasChangeHandler
 import gwt.material.design.components.client.events.DoneEvent;
 import gwt.material.design.components.client.events.DoneEvent.DoneHandler;
 import gwt.material.design.components.client.events.DoneEvent.HasDoneHandlers;
+import gwt.material.design.components.client.events.ErrorEvent;
+import gwt.material.design.components.client.events.ErrorEvent.ErrorHandler;
+import gwt.material.design.components.client.events.ErrorEvent.HasErrorHandlers;
 import gwt.material.design.components.client.events.StartEvent;
 import gwt.material.design.components.client.events.StartEvent.HasStartHandlers;
 import gwt.material.design.components.client.events.StartEvent.StartHandler;
@@ -46,9 +50,11 @@ import gwt.material.design.components.client.events.StopEvent.HasStopHandlers;
 import gwt.material.design.components.client.events.StopEvent.StopHandler;
 import gwt.material.design.components.client.ui.MaterialFileUpload.File;
 import gwt.material.design.components.client.ui.html.Input;
-import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFileUploadData;
-import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFileUploadFile;
-import gwt.material.design.components.client.utils.debug.Console;
+import gwt.material.design.components.client.ui.misc.fileUpload.js.JsData;
+import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFile;
+import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
+import gwt.material.design.components.client.validation.FileUploadValidation;
+import gwt.material.design.components.client.validation.Validation.Result;
 
 /**
  * https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin
@@ -56,202 +62,135 @@ import gwt.material.design.components.client.utils.debug.Console;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>,
+		HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data> {
+
+	protected final JsOptions options = new JsOptions();
+
+	private FileUploadValidation validation;
 
 	public MaterialFileUpload() {
 		super(InputType.FILE);
+		loadDefaultOptions();
+	}
+
+	protected void loadDefaultOptions() {
+		options.accept = null;
+		options.url = null;
+		options.type = "POST";
+		options.dataType = "json";
+		options.dropZone = null;
+		options.autoUpload = true;
+		options.formAcceptCharset = "utf-8";
+		options.multipart = true;
+		options.singleFileUploads = true;
+		options.sequentialUploads = false;
+		options.limitConcurrentUploads = null;
+		options.maxNumberOfFiles = null;
+		options.limitMultiFileUploadSize = null;
+		options.maxFileSize = null;
+		options.progressInterval = 100;
+		options.bitrateInterval = 500;
+	}
+	
+	protected void layout() {
+		if(initialized)
+			jsInit();
 	}
 
 	@Override
-	protected void onInitialize() {
-		super.onInitialize();
+	protected native JavaScriptObject jsInit(final Element element)/*-{
 
-		setAttribute("name", "filesToUpload[]");
-		setAttribute("data-url", getAppContainer() + "/file_upload");
-		setAttribute("multiple", "true");
-		setAttribute("accept", ".png");
-		init(getElement());
-	}
-
-	private String appContainer = null;
-
-	public String getAppContainer() {
-
-		if (appContainer == null) {
-			final String[] str = GWT.getModuleBaseURL().split("/");
-
-			if (str.length > 4) {
-				appContainer = "/" + str[3];
-			} else {
-				appContainer = "";
-			}
-		}
-
-		return appContainer;
-	}
-
-	native void init(Element element) /*-{
-
+		var appContainer = @gwt.material.design.components.client.utils.helper.HttpHelper::getAppContainer()();
 		var _this = this;
+		var options = this.@gwt.material.design.components.client.ui.MaterialFileUpload::options;
 
-		var options = {
-			autoUpload : true,
-			formAcceptCharset : 'utf-8',
-			maxNumberOfFiles : 2,
-			multipart : true,
-			singleFileUploads : false,
-			sequentialUploads : false,
-			//limitMultiFileUploadSizeOverhead : 512, // in bytes
-			//limitMultiFileUploadSize : null,  // in bytes
-			maxFileSize : 102400000,
-			progressInterval : 100,
-			bitrateInterval : 500,
+		if ($wnd.jQuery(element).attr("name"))
+			$wnd.jQuery(element).attr("name", "files[]");
 
-			change : function(e, data) {
+		if (options.url && options.url.indexOf("http") == -1)
+			$wnd.jQuery(element).attr("data-url", appContainer + options.url);
+		else
+			$wnd.jQuery(element).attr("data-url", options.url);
+			
+		$wnd.jQuery(element).attr("multiple", !options.singleFileUploads);
+		$wnd.jQuery(element).attr("accept", options.accept);
 
-				var uploadErrors = validation(e, data);
+		options.change = function(e, data) {
+			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
-				if (uploadErrors.length > 0) {
-					alert(uploadErrors.join("\n"));
-					return false;
-				}
+			if (!data)
+				return false;
 
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireDoneEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
-
-			},
-			add : function(e, data) {
-
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::validateFiles(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
-
-				var uploadErrors = validation(e, data);
-
-				if (uploadErrors.length > 0) {
-					alert(uploadErrors.join("\n"));
-					return false;
-				}
-
-				data.submit();
-
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
-
-			},
-			start : function(e) {
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStartEvent()();
-			},
-			drop : function(e, data) {
-				printData('drop', data);
-			},
-			progress : function(e, data) {
-				console.log('Progress --------------------- ');
-
-				$wnd.jQuery.each(data.files, function(index, file) {
-					//console.log('	File ' + file.name + ' -- ' + file.slice());
-					for ( var key in file) {
-						//console.log(key);
-					}
-				});
-
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				console.log('progress: ' + progress + '%');
-			},
-			progressall : function(e, data) {
-				console.log('Progressall ---------------');
-				for ( var key in data) {
-					//console.log(key);
-				}
-				var progress = parseInt(data.loaded / data.total * 100, 10);
-				console.log('data.loaded: ' + data.loaded);
-				console.log('data.total: ' + data.total);
-				console.log('data.bitrate: ' + data.bitrate);
-			},
-			done : function(e, data) {
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireDoneEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
-			},
-			stop : function(e) {
-				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStopEvent()();
-			}
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireChangeEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 		};
 
-		$wnd.jQuery(element).fileupload(options);
+		options.add = function(e, data) {
+			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
-		var validation = function(e, data) {
-			var messages = @gwt.material.design.components.client.resources.message.IMessages::INSTANCE;
-			var uploadErrors = [];
+			if (!data)
+				return false;
 
-			var maxFileSize;
-			if (options.maxFileSize)
-				maxFileSize = size_format(options.maxFileSize);
+			data.submit();
 
-			if (options.maxNumberOfFiles
-					&& data.files.length > options.maxNumberOfFiles)
-				uploadErrors
-						.push(messages.@gwt.material.design.components.client.resources.message.IMessages::mdc_file_upload__err__max_number_of_files_exceeded(I)(options.maxNumberOfFiles));
-
-			$wnd.jQuery
-					.each(
-							data.originalFiles,
-							function(index, file) {
-								if (options.maxFileSize
-										&& file.size > options.maxFileSize) {
-									var fileSize = size_format(file.size);
-									var message = messages.@gwt.material.design.components.client.resources.message.IMessages::mdc_file_upload__err__file_size_is_too_bg(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)(maxFileSize, file.name, fileSize);
-									uploadErrors.push(message);
-								}
-							});
-
-			return uploadErrors;
-		};
-
-		var printData = function(method, data) {
-
-			console.log(method + ' -------------------------------------');
-			console.log('fileInput: ' + data.fileInput);
-			console.log('form: ' + data.form);
-			console.log('files: ' + data.files);
-			console.log('fileInputClone: ' + data.fileInputClone);
-			console.log('originalFiles: ' + data.originalFiles);
-			console.log('paramName: ' + data.paramName);
-			console.log('_response: ' + data._response);
-			console.log('_progress: ' + data._progress);
-			// Functions			
-			// console.log('process: ' + data.process);
-			// console.log('submit: ' + data.submit);
-			// console.log('abort: ' + data.abort);
-			// console.log('submit: ' + data.submit);
-			// console.log('state: ' + data.state);
-			// console.log('processing: ' + data.processing);
-			// console.log('progress: ' + data.progress);
-			// console.log('response: ' + data.response);
-
-			$wnd.jQuery.each(data.files, function(index, file) {
-
-				// Attributes
-				console.log('		-------------------------------------');
-				console.log('name: ' + file.name);
-				console.log('lastModified: ' + file.lastModified);
-				console.log('lastModifiedDate: ' + file.lastModifiedDate);
-				console.log('webkitRelativePath: ' + file.webkitRelativePath);
-				console.log('size: ' + file.size);
-				console.log('type: ' + file.type);
-				console.log('slice: ' + file.slice);
-			});
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
 
 		};
 
-		var size_format = function bytesToSize(bytes) {
-			var sizes = [ 'Bytes', 'KB', 'MB', 'GB', 'TB', 'PB' ];
-			for (var i = 0; i < sizes.length; i++) {
-				if (bytes <= 1024)
-					return bytes + ' ' + sizes[i];
-				else
-					bytes = parseFloat(bytes / 1024).toFixed(2);
-			}
-			return bytes + ' PM';
+		options.start = function(e) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStartEvent()();
 		};
+
+		options.drop = function(e, data) {
+			printData('drop', data);
+		};
+
+		options.progress = function(e, data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			console.log('progress: ' + progress + '%');
+		};
+
+		options.progressall = function(e, data) {
+			var progress = parseInt(data.loaded / data.total * 100, 10);
+			console.log('data.loaded: ' + data.loaded);
+			console.log('data.total: ' + data.total);
+			console.log('data.bitrate: ' + data.bitrate);
+		};
+
+		options.done = function(e, data) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireDoneEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
+		};
+
+		options.stop = function(e) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStopEvent()();
+		};
+
+		options.fail = function(e, data) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireErrorEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;ILjava/lang/String;)(data, -1, 'teste');
+		};
+
+		return $wnd.jQuery(element).fileupload(options);
 
 	}-*/;
+
+	protected boolean validate(final JsData jsData) {
+
+		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
+
+		if (defaultResult.getState().equals(State.ERROR))
+			fireErrorEvent(jsData, defaultResult.getCode(), defaultResult.getMessage());
+
+		if (validation == null)
+			return true;
+
+		final Result result = validation.validate(this, toData(jsData).getFiles());
+
+		if (result.getState().equals(State.ERROR))
+			fireErrorEvent(jsData, result.getCode(), result.getMessage());
+
+		return true;
+	}
 
 	protected void fireStartEvent() {
 		StartEvent.fire(MaterialFileUpload.this);
@@ -271,7 +210,7 @@ public class MaterialFileUpload extends Input
 		return addHandler(handler, StopEvent.getType());
 	}
 
-	protected void fireChangeEvent(final JsFileUploadData data) {
+	protected void fireChangeEvent(final JsData data) {
 		ChangeEvent.fire(MaterialFileUpload.this, listFiles(data));
 	}
 
@@ -280,7 +219,7 @@ public class MaterialFileUpload extends Input
 		return addHandler(handler, ChangeEvent.getType());
 	}
 
-	protected void fireAddEvent(final JsFileUploadData data) {
+	protected void fireAddEvent(final JsData data) {
 		AddEvent.fire(MaterialFileUpload.this, listFiles(data));
 	}
 
@@ -289,7 +228,7 @@ public class MaterialFileUpload extends Input
 		return addHandler(handler, AddEvent.getType());
 	}
 
-	protected void fireDoneEvent(final JsFileUploadData data) {
+	protected void fireDoneEvent(final JsData data) {
 		DoneEvent.fire(MaterialFileUpload.this, toData(data));
 	}
 
@@ -298,6 +237,23 @@ public class MaterialFileUpload extends Input
 		return addHandler(handler, DoneEvent.getType());
 	}
 
+	protected void fireErrorEvent(final JsData data, final int code, final String description) {
+		ErrorEvent.fire(MaterialFileUpload.this, toData(data), code, description);
+	}
+
+	@Override
+	public HandlerRegistration addErrorHandler(final ErrorHandler<Data> handler) {
+		return addHandler(handler, ErrorEvent.getType());
+	}
+
+	public void setUrl(final String url) {
+		options.url = url;
+		layout();
+	}
+
+	public String getUrl() {
+		return options.url;
+	}
 
 	/**
 	 * accept file_extension|audio/*|video/*|image/*|media_type
@@ -323,47 +279,314 @@ public class MaterialFileUpload extends Input
 	 * @param accept
 	 */
 	public void setAccept(final String accept) {
-
+		options.accept = accept;
+		layout();
 	}
+
+	public String getAccept() {
+		return options.accept;
+	}
+
+	/**
+	 * The HTTP request method for the file uploads. Can be "POST", "PUT" or "PATCH"
+	 * and defaults to "POST".<br/>
+	 * 
+	 * Type: string<br/>
+	 * Example: 'PUT'
+	 * 
+	 * <p>
+	 * <strong>Note:<strong> "PUT" and "PATCH" are only supported by browser
+	 * supporting XHR file uploads, as iframe transport uploads rely on standard
+	 * HTML forms which only support "POST" file uploads. See Browser support. If
+	 * the type is defined as "PUT" or "PATCH", the iframe transport will send the
+	 * files via "POST" and transfer the original method as "_method" URL parameter.
+	 * </p>
+	 * <p>
+	 * <strong>Note:<strong> As was noted above, it's a common practice to use
+	 * "_method" to transfer the type of your request. For example, "Ruby on Rails"
+	 * framework uses a hidden input with the name "_method" within each form, so it
+	 * will likely override the value that you will set here.
+	 * </p>
+	 */
+	public void setHttpRequestMethod(final String type) {
+		options.type = type;
+		layout();
+	}
+
+	public String getHttpRequestMethod() {
+		return options.type;
+	}
+
+	/**
+	 * The type of data that is expected back from the server.
+	 * 
+	 * <p>
+	 * <strong>Note:<strong> The UI version of the File Upload plugin sets this
+	 * option to "json" by default.
+	 * </p>
+	 * Type: string<br/>
+	 * Example: 'json'
+	 */
+	public void setDataType(final String dataType) {
+		options.dataType = dataType;
+		layout();
+	}
+
+	public String getDataType() {
+		return options.dataType;
+	}
+
+	/**
+	 * The drop target jQuery object, by default the complete document. Set to null
+	 * or an empty jQuery collection to disable drag & drop support:
+	 * <p>
+	 * Type: jQuery Object Default: $(document) Note: If you want to allow specific
+	 * drop zones but disable the default browser action for file drops on the
+	 * document, add the following JavaScript code:
+	 * </p>
+	 * $(document).bind('drop dragover', function (e) { e.preventDefault(); }); Note
+	 * that preventing the default action for both the "drop" and "dragover" events
+	 * is required to disable the default browser drop action.
+	 */
+	public void setDropZone(final String dropZone) {
+		options.dropZone = dropZone;
+		layout();
+	}
+
+	public String getDropZone() {
+		return options.dropZone;
+	}
+
+	/**
+	 * By default, files added to the widget are uploaded as soon as the user clicks
+	 * on the start buttons. To enable automatic uploads, set this option to true.
+	 * 
+	 * Type: boolean <br/>
+	 * Default: true
+	 * 
+	 * <p>
+	 * Please note that in the basic File Upload plugin, this option is set to true
+	 * by default.
+	 * </p>
+	 */
+	public void setAutoUpload(final boolean autoUpload) {
+		options.autoUpload = autoUpload;
+		layout();
+	}
+
+	public boolean isAutoUpload() {
+		return options.autoUpload;
+	}
+
+	/**
+	 * Allows to set the accept-charset attribute for the iframe upload forms. If
+	 * formAcceptCharset is not set, the accept-charset attribute of the file upload
+	 * widget form is used, if available.<br/>
+	 * 
+	 * Type: string<br/>
+	 * Example: 'utf-8'
+	 */
+	public void setFormAcceptCharset(final String formAcceptCharset) {
+		options.formAcceptCharset = formAcceptCharset;
+		layout();
+	}
+
+	public String getFormAcceptCharset() {
+		return options.formAcceptCharset;
+	}
+
+	/**
+	 * By default, XHR file uploads are sent as multipart/form-data. The iframe
+	 * transport is always using multipart/form-data. If this option is set to
+	 * false, the file content is streamed to the server url instead of sending a
+	 * RFC 2388 multipart message for XMLHttpRequest file uploads. Non-multipart
+	 * uploads are also referred to as HTTP PUT file upload.
+	 * 
+	 * <p>
+	 * <strong>Note:<strong> Additional form data is ignored when the multipart
+	 * option is set to false. Non-multipart uploads (multipart: false) are broken
+	 * in Safari 5.1 - see issue #700.
+	 * </p>
+	 * 
+	 * Type: boolean <br/>
+	 * Default: true
+	 */
+	public void setMultipart(final boolean multipart) {
+		options.multipart = multipart;
+		layout();
+	}
+
+	public boolean isMultipart() {
+		return options.multipart;
+	}
+
+	/**
+	 * By default, each file of a selection is uploaded using an individual request
+	 * for XHR type uploads. Set this option to false to upload file selections in
+	 * one request each.
+	 * <p>
+	 * <strong>Note:<strong> Uploading multiple files with one request requires the
+	 * multipart option to be set to true (the default).
+	 * </p>
+	 * Type: boolean Default: true
+	 */
+	public void setSingleFileUploads(final boolean singleFileUploads) {
+		options.singleFileUploads = singleFileUploads;
+		layout();
+	}
+
+	public boolean isSingleFileUploads() {
+		return options.singleFileUploads;
+	}
+
+	/**
+	 * Set this option to true to issue all file upload requests in a sequential
+	 * order instead of simultaneous requests.<br/>
+	 * 
+	 * Type: boolean<br/>
+	 * Default: false
+	 */
+	public void setSequentialUploads(final boolean sequentialUploads) {
+		options.sequentialUploads = sequentialUploads;
+		layout();
+	}
+
+	public boolean isSequentialUploads() {
+		return options.sequentialUploads;
+	}
+
+	/**
+	 * To limit the number of concurrent uploads, set this option to an integer
+	 * value greater than 0.
+	 * 
+	 * Type: integer <br/>
+	 * Default: undefined <br/>
+	 * Example: 3 <br/>
+	 * 
+	 * <p>
+	 * <strong>Note:<strong> This option is ignored, if sequentialUploads is set to
+	 * true.
+	 * </p>
+	 */
+	public void setLimitConcurrentUploads(final Integer limitConcurrentUploads) {
+		options.limitConcurrentUploads = limitConcurrentUploads;
+		layout();
+	}
+
+	public Integer getLimitConcurrentUploads() {
+		return options.limitConcurrentUploads;
+	}
+
+	/**
+	 * This option limits the number of files that are allowed to be uploaded using
+	 * this widget. By default, unlimited file uploads are allowed.<br/>
+	 * 
+	 * Type: integer <br/>
+	 * Example: 10
+	 * 
+	 * <p>
+	 * <strong>Note:<strong> The maxNumberOfFiles option depends on the
+	 * getNumberOfFiles option, which is defined by the UI and AngularJS
+	 * implementations.
+	 * </p>
+	 */
+	public void setMaxNumberOfFiles(final Integer maxNumberOfFiles) {
+		options.maxNumberOfFiles = maxNumberOfFiles;
+		layout();
+	}
+
+	public Integer getMaxNumberOfFiles() {
+		return options.maxNumberOfFiles;
+	}
+
+	/**
+	 * The following option limits the number of files uploaded with one XHR request
+	 * to keep the request size under or equal to the defined limit in bytes:<br/>
+	 * 
+	 * Type: integer Default: undefined <br/>
+	 * Example: 1000000
+	 * <p>
+	 * <strong>Note:<strong> This option is ignored, if singleFileUploads is set to
+	 * true.
+	 * </p>
+	 */
+	public void setLimitMultiFileUploadSize(final Integer limitMultiFileUploadSize) {
+		options.limitMultiFileUploadSize = limitMultiFileUploadSize;
+		layout();
+	}
+
+	public Integer getLimitMultiFileUploadSize() {
+		return options.limitMultiFileUploadSize;
+	}
+
+	/**
+	 * The maximum allowed file size in bytes.<br/>
+	 * 
+	 * Type: integer <br/>
+	 * Default: undefined <br/>
+	 * Example: 10000000 // 10 MB
+	 */
+	public void setMaxFileSize(final Integer maxFileSize) {
+		options.maxFileSize = maxFileSize;
+		layout();
+	}
+
+	public Integer getMaxFileSize() {
+		return options.maxFileSize;
+	}
+
+	/**
+	 * The minimum time interval in milliseconds to calculate and trigger progress
+	 * events.<br/>
+	 * 
+	 * Type: integer <br/>
+	 * Default: 100
+	 */
+	public void setProgressInterval(final int progressInterval) {
+		options.progressInterval = progressInterval;
+		layout();
+	}
+
+	public int getProgressInterval() {
+		return options.progressInterval;
+	}
+
+	/**
+	 * The minimum time interval in milliseconds to calculate progress bitrate.<br/>
+	 * 
+	 * Type: integer <br/>
+	 * Default: 500
+	 */
+	public void setBitrateInterval(final int bitrateInterval) {
+		options.bitrateInterval = bitrateInterval;
+		layout();
+	}
+
+	public int getBitrateInterval() {
+		return options.bitrateInterval;
+	}
+
+	// ////////////////////////////////////////////////////////////////
+	// Utility methods
+	// ////////////////////////////////////////////////////////////////
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	protected Collection<File> listFiles(final JsFileUploadData jsData) {
+	protected Collection<File> listFiles(final JsData jsData) {
 		return toData(jsData).getFiles();
 	}
 
-	protected Data toData(final JsFileUploadData jsData) {
-		return new Data(jsData._response, jsData.loaded, jsData.total, jsData.uploadedBytes, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()));
+	protected Data toData(final JsData jsData) {
+		return new Data(jsData._response, jsData.loaded, jsData.total, jsData.uploadedBytes,
+				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()));
 	}
-	
-	protected File toFile(final JsFileUploadFile jsFile) {
+
+	protected File toFile(final JsFile jsFile) {
 		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
 	}
 
-	protected String[] validateFiles(final JsFileUploadData data) {
-
-		for (int index = 0; index < data.files.length; index++) {
-			final JsFileUploadFile file = data.files[index];
-			Console.log("funfo mesmo: " + file.lastModifiedDate);
-		}
-
-		return new String[] {};
-	}
-
+	// ////////////////////////////////////////////////////////////////
+	// Inner classes
+	// ////////////////////////////////////////////////////////////////
+	
 	public static class Data {
 
 		private final String response;
@@ -404,7 +627,7 @@ public class MaterialFileUpload extends Input
 		public Collection<File> getFiles() {
 			return files;
 		}
-		
+
 	}
 
 	public static class File {
