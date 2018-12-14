@@ -32,6 +32,18 @@ import jsinterop.annotations.JsType;
 public class JsFileUploadData {
 
 	@JsProperty
+	public String  _response;
+
+	@JsProperty
+	public Long  loaded;
+	
+	@JsProperty
+	public Long  total;
+	
+	@JsProperty
+	public Long  uploadedBytes;
+	
+	@JsProperty
     public JsFileUploadFile[] files;
 	
 }

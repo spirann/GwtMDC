@@ -25,7 +25,6 @@ import java.util.Date;
 import java.util.stream.Collectors;
 
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
@@ -57,8 +56,8 @@ import gwt.material.design.components.client.utils.debug.Console;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers,
-		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<File>>, HasDoneHandlers<Collection<File>> {
+public class MaterialFileUpload extends Input
+		implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data> {
 
 	public MaterialFileUpload() {
 		super(InputType.FILE);
@@ -110,7 +109,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			bitrateInterval : 500,
 
 			change : function(e, data) {
-				
+
 				var uploadErrors = validation(e, data);
 
 				if (uploadErrors.length > 0) {
@@ -145,7 +144,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			},
 			progress : function(e, data) {
 				console.log('Progress --------------------- ');
-				
+
 				$wnd.jQuery.each(data.files, function(index, file) {
 					//console.log('	File ' + file.name + ' -- ' + file.slice());
 					for ( var key in file) {
@@ -291,32 +290,14 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	}
 
 	protected void fireDoneEvent(final JsFileUploadData data) {
-		DoneEvent.fire(MaterialFileUpload.this, listFiles(data));
+		DoneEvent.fire(MaterialFileUpload.this, toData(data));
 	}
 
 	@Override
-	public HandlerRegistration addDoneHandler(final DoneHandler<Collection<File>> handler) {
+	public HandlerRegistration addDoneHandler(final DoneHandler<Data> handler) {
 		return addHandler(handler, DoneEvent.getType());
 	}
 
-	protected Collection<File> listFiles(final JsFileUploadData data) {
-		return Arrays.asList(data.files).stream().map(file -> toFile(file)).collect(Collectors.toList());
-	}
-
-	protected File toFile(final JsFileUploadFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
-				jsFile.size, jsFile.type, jsFile.data);
-	}
-
-	protected String[] validateFiles(final JsFileUploadData data) {
-
-		for (int index = 0; index < data.files.length; index++) {
-			final JsFileUploadFile file = data.files[index];
-			Console.log("funfo mesmo: " + file.lastModifiedDate);
-		}
-
-		return new String[] {};
-	}
 
 	/**
 	 * accept file_extension|audio/*|video/*|image/*|media_type
@@ -344,26 +325,104 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	public void setAccept(final String accept) {
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	protected Collection<File> listFiles(final JsFileUploadData jsData) {
+		return toData(jsData).getFiles();
+	}
+
+	protected Data toData(final JsFileUploadData jsData) {
+		return new Data(jsData._response, jsData.loaded, jsData.total, jsData.uploadedBytes, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()));
+	}
+	
+	protected File toFile(final JsFileUploadFile jsFile) {
+		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
+	}
+
+	protected String[] validateFiles(final JsFileUploadData data) {
+
+		for (int index = 0; index < data.files.length; index++) {
+			final JsFileUploadFile file = data.files[index];
+			Console.log("funfo mesmo: " + file.lastModifiedDate);
+		}
+
+		return new String[] {};
+	}
+
+	public static class Data {
+
+		private final String response;
+
+		private final long loaded;
+
+		private final long total;
+
+		private final long uploadedBytes;
+
+		private final Collection<File> files;
+
+		public Data(String response, Long loaded, Long total, Long uploadedBytes, Collection<File> files) {
+			super();
+			this.response = response;
+			this.loaded = loaded == null ? 0 : loaded;
+			this.total = total == null ? 0 : total;
+			this.uploadedBytes = uploadedBytes == null ? 0 : uploadedBytes;
+			this.files = files;
+		}
+
+		public String getResponse() {
+			return response;
+		}
+
+		public long getLoaded() {
+			return loaded;
+		}
+
+		public long getTotal() {
+			return total;
+		}
+
+		public long getUploadedBytes() {
+			return uploadedBytes;
+		}
+
+		public Collection<File> getFiles() {
+			return files;
+		}
+		
+	}
 
 	public static class File {
 
 		private final String name;
-		private final Long lastModified;
+		private final long lastModified;
 		private final Date lastModifiedDate;
 		private final String webkitRelativePath;
-		private final Integer size;
+		private final int size;
 		private final String type;
-		private final JavaScriptObject data;
 
-		private File(String name, Long lastModified, Date lastModifiedDate, String webkitRelativePath, Integer size,
-				String type, JavaScriptObject data) {
+		private File(String name, Long lastModified, Date lastModifiedDate, String webkitRelativePath, Integer size, String type) {
 			this.name = name;
-			this.lastModified = lastModified;
+			this.lastModified = lastModified == null ? 0 : lastModified;
 			this.lastModifiedDate = lastModifiedDate;
 			this.webkitRelativePath = webkitRelativePath;
-			this.size = size;
+			this.size = size == null ? 0 : size;
 			this.type = type;
-			this.data = data;
 		}
 
 		public String getName() {
@@ -388,10 +447,6 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 
 		public String getType() {
 			return type;
-		}
-
-		public JavaScriptObject getData() {
-			return data;
 		}
 
 	}

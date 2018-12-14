@@ -21,8 +21,6 @@ package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
 import java.util.Date;
 
-import com.google.gwt.core.client.JavaScriptObject;
-
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -47,8 +45,5 @@ public class JsFileUploadFile {
 	public Integer size;
 	@JsProperty
 	public String type;
-	@JsProperty
-	public JavaScriptObject data;
-
 	
 }
