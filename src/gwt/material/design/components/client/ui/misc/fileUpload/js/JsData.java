@@ -35,13 +35,13 @@ public class JsData {
 	public String  _response;
 
 	@JsProperty
-	public Long  loaded;
+	public int  loaded;
 	
 	@JsProperty
-	public Long  total;
+	public int  total;
 	
 	@JsProperty
-	public Long  uploadedBytes;
+	public int  uploadedBytes;
 	
 	@JsProperty
     public JsFile[] files;

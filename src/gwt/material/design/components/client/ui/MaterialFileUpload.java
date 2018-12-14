@@ -42,6 +42,9 @@ import gwt.material.design.components.client.events.DoneEvent.HasDoneHandlers;
 import gwt.material.design.components.client.events.ErrorEvent;
 import gwt.material.design.components.client.events.ErrorEvent.ErrorHandler;
 import gwt.material.design.components.client.events.ErrorEvent.HasErrorHandlers;
+import gwt.material.design.components.client.events.ProgressEvent;
+import gwt.material.design.components.client.events.ProgressEvent.HasProgressHandlers;
+import gwt.material.design.components.client.events.ProgressEvent.ProgressHandler;
 import gwt.material.design.components.client.events.StartEvent;
 import gwt.material.design.components.client.events.StartEvent.HasStartHandlers;
 import gwt.material.design.components.client.events.StartEvent.StartHandler;
@@ -53,6 +56,7 @@ import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsData;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFile;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
+import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressData;
 import gwt.material.design.components.client.validation.FileUploadValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
 
@@ -62,8 +66,9 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>,
-		HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input
+		implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>> {
 
 	protected final JsOptions options = new JsOptions();
 
@@ -92,9 +97,9 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		options.progressInterval = 100;
 		options.bitrateInterval = 500;
 	}
-	
+
 	protected void layout() {
-		if(initialized)
+		if (initialized)
 			jsInit();
 	}
 
@@ -112,7 +117,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			$wnd.jQuery(element).attr("data-url", appContainer + options.url);
 		else
 			$wnd.jQuery(element).attr("data-url", options.url);
-			
+
 		$wnd.jQuery(element).attr("multiple", !options.singleFileUploads);
 		$wnd.jQuery(element).attr("accept", options.accept);
 
@@ -134,7 +139,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 
 			data.submit();
 
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFileUploadData;)(data);
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 		};
 
@@ -147,15 +152,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		};
 
 		options.progress = function(e, data) {
-			var progress = parseInt(data.loaded / data.total * 100, 10);
-			console.log('progress: ' + progress + '%');
-		};
-
-		options.progressall = function(e, data) {
-			var progress = parseInt(data.loaded / data.total * 100, 10);
-			console.log('data.loaded: ' + data.loaded);
-			console.log('data.total: ' + data.total);
-			console.log('data.bitrate: ' + data.bitrate);
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireProgressEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsProgressData;)(data);
 		};
 
 		options.done = function(e, data) {
@@ -167,6 +164,9 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		};
 
 		options.fail = function(e, data) {
+			console.log('fail .............. ');
+			for ( var key in data)
+				console.log('----- ' + key);
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireErrorEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;ILjava/lang/String;)(data, -1, 'teste');
 		};
 
@@ -235,6 +235,15 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	@Override
 	public HandlerRegistration addDoneHandler(final DoneHandler<Data> handler) {
 		return addHandler(handler, DoneEvent.getType());
+	}
+
+	protected void fireProgressEvent(final JsProgressData jsData) {
+		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
+	}
+
+	@Override
+	public HandlerRegistration addProgressHandler(final ProgressHandler<Collection<File>> handler) {
+		return addHandler(handler, ProgressEvent.getType());
 	}
 
 	protected void fireErrorEvent(final JsData data, final int code, final String description) {
@@ -569,7 +578,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	// ////////////////////////////////////////////////////////////////
 	// Utility methods
 	// ////////////////////////////////////////////////////////////////
-	
+
 	protected Collection<File> listFiles(final JsData jsData) {
 		return toData(jsData).getFiles();
 	}
@@ -586,7 +595,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	// ////////////////////////////////////////////////////////////////
 	// Inner classes
 	// ////////////////////////////////////////////////////////////////
-	
+
 	public static class Data {
 
 		private final String response;
@@ -599,12 +608,12 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 
 		private final Collection<File> files;
 
-		public Data(String response, Long loaded, Long total, Long uploadedBytes, Collection<File> files) {
+		public Data(String response, long loaded, long total, long uploadedBytes, Collection<File> files) {
 			super();
 			this.response = response;
-			this.loaded = loaded == null ? 0 : loaded;
-			this.total = total == null ? 0 : total;
-			this.uploadedBytes = uploadedBytes == null ? 0 : uploadedBytes;
+			this.loaded = loaded;
+			this.total = total;
+			this.uploadedBytes = uploadedBytes;
 			this.files = files;
 		}
 
@@ -639,12 +648,12 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		private final int size;
 		private final String type;
 
-		private File(String name, Long lastModified, Date lastModifiedDate, String webkitRelativePath, Integer size, String type) {
+		private File(String name, long lastModified, Date lastModifiedDate, String webkitRelativePath, int size, String type) {
 			this.name = name;
-			this.lastModified = lastModified == null ? 0 : lastModified;
+			this.lastModified = lastModified;
 			this.lastModifiedDate = lastModifiedDate;
 			this.webkitRelativePath = webkitRelativePath;
-			this.size = size == null ? 0 : size;
+			this.size = size;
 			this.type = type;
 		}
 
@@ -652,7 +661,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			return name;
 		}
 
-		public Long getLastModified() {
+		public long getLastModified() {
 			return lastModified;
 		}
 
@@ -664,7 +673,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			return webkitRelativePath;
 		}
 
-		public Integer getSize() {
+		public int getSize() {
 			return size;
 		}
 

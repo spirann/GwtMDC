@@ -32,6 +32,12 @@ import jsinterop.annotations.JsType;
 public class JsProgressData {
 
 	@JsProperty
+    public long loaded;
+	
+	@JsProperty
+    public long total;
+	
+	@JsProperty
     public JsFile[] files;
 	
 }

@@ -36,13 +36,13 @@ public class JsFile {
 	@JsProperty
 	public String name;
 	@JsProperty
-	public Long lastModified;
+	public int lastModified;
 	@JsProperty
 	public Date lastModifiedDate;
 	@JsProperty
 	public String webkitRelativePath;
 	@JsProperty
-	public Integer size;
+	public int size;
 	@JsProperty
 	public String type;
 	
