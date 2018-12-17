@@ -134,6 +134,9 @@ public interface IMessages extends Messages {
 	@DefaultMessage("Max number of files exceeded. You can upload a maximum of {0} files.")
 	String mdc_file_upload__err__max_number_of_files_exceeded(int maxNumberOfFiles);
 	
+	@DefaultMessage("Max limit multi upload size was exceeded. You can upload a maximum of {0} and you are uploading {1}.")
+	String mdc_file_upload__err__max_limit_multi_upload_size_exceeded(String limitMultiFileUploadSize, String uploading);
+	
 	@DefaultMessage("File size is too big. Max size is {0} and {1} has {2}.")
 	String mdc_file_upload__err__file_size_is_too_bg(String maxSize, String file, String size);
 }

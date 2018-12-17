@@ -30,6 +30,9 @@ import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
+import gwt.material.design.components.client.events.AbortEvent;
+import gwt.material.design.components.client.events.AbortEvent.AbortHandler;
+import gwt.material.design.components.client.events.AbortEvent.HasAbortHandlers;
 import gwt.material.design.components.client.events.AddEvent;
 import gwt.material.design.components.client.events.AddEvent.AddHandler;
 import gwt.material.design.components.client.events.AddEvent.HasAddHandlers;
@@ -57,6 +60,7 @@ import gwt.material.design.components.client.ui.misc.fileUpload.js.JsData;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFile;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressData;
+import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
 import gwt.material.design.components.client.validation.FileUploadValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
 
@@ -66,9 +70,10 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>> {
+public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers,
+		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
+		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 
@@ -83,7 +88,7 @@ public class MaterialFileUpload extends Input
 		options.accept = null;
 		options.url = null;
 		options.type = "POST";
-		options.dataType = "json";
+		options.dataType = "text";
 		options.dropZone = null;
 		options.autoUpload = true;
 		options.formAcceptCharset = "utf-8";
@@ -122,25 +127,19 @@ public class MaterialFileUpload extends Input
 		$wnd.jQuery(element).attr("accept", options.accept);
 
 		options.change = function(e, data) {
-			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
-
-			if (!data)
-				return false;
-
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireChangeEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
-
 		};
 
 		options.add = function(e, data) {
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
-			if (!data)
+			if (validate) {
+				data.submit();
+				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
+			} else {
+				data.abort();
 				return false;
-
-			data.submit();
-
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
-
+			}
 		};
 
 		options.start = function(e) {
@@ -164,10 +163,10 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.fail = function(e, data) {
-			console.log('fail .............. ');
-			for ( var key in data)
-				console.log('----- ' + key);
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireErrorEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;ILjava/lang/String;)(data, -1, 'teste');
+			if (data.errorThrown === 'abort')
+				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAbortEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
+			else
+				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireErrorEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;ILjava/lang/String;)(data, 0, data.errorThrown);
 		};
 
 		return $wnd.jQuery(element).fileupload(options);
@@ -176,20 +175,26 @@ public class MaterialFileUpload extends Input
 
 	protected boolean validate(final JsData jsData) {
 
-		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
+		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this,
+				toData(jsData).getFiles());
 
-		if (defaultResult.getState().equals(State.ERROR))
+		boolean error = defaultResult.getState().equals(State.ERROR);
+
+		if (error)
 			fireErrorEvent(jsData, defaultResult.getCode(), defaultResult.getMessage());
+		else {
 
-		if (validation == null)
-			return true;
+			if (validation == null)
+				return true;
 
-		final Result result = validation.validate(this, toData(jsData).getFiles());
+			final Result result = validation.validate(this, toData(jsData).getFiles());
+			error = result.getState().equals(State.ERROR);
 
-		if (result.getState().equals(State.ERROR))
-			fireErrorEvent(jsData, result.getCode(), result.getMessage());
+			if (error)
+				fireErrorEvent(jsData, result.getCode(), result.getMessage());
+		}
 
-		return true;
+		return !error;
 	}
 
 	protected void fireStartEvent() {
@@ -238,12 +243,23 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected void fireProgressEvent(final JsProgressData jsData) {
-		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
+		ProgressEvent.fire(MaterialFileUpload.this,
+				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()),
+				jsData.loaded, jsData.total);
 	}
 
 	@Override
 	public HandlerRegistration addProgressHandler(final ProgressHandler<Collection<File>> handler) {
 		return addHandler(handler, ProgressEvent.getType());
+	}
+
+	protected void fireAbortEvent(final JsData data) {
+		AbortEvent.fire(MaterialFileUpload.this, toData(data));
+	}
+
+	@Override
+	public HandlerRegistration addAbortHandler(final AbortHandler<Data> handler) {
+		return addHandler(handler, AbortEvent.getType());
 	}
 
 	protected void fireErrorEvent(final JsData data, final int code, final String description) {
@@ -589,7 +605,8 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected File toFile(final JsFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
+		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
+				jsFile.size, jsFile.type);
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -600,20 +617,20 @@ public class MaterialFileUpload extends Input
 
 		private final String response;
 
-		private final long loaded;
+		private final int loaded;
 
-		private final long total;
+		private final int total;
 
-		private final long uploadedBytes;
+		private final int uploadedBytes;
 
 		private final Collection<File> files;
 
-		public Data(String response, long loaded, long total, long uploadedBytes, Collection<File> files) {
+		public Data(String response, int loaded, int total, int uploadedBytes, Collection<File> files) {
 			super();
 			this.response = response;
-			this.loaded = loaded;
-			this.total = total;
-			this.uploadedBytes = uploadedBytes;
+			this.loaded = PrimitiveHelper.noNull(loaded);
+			this.total = PrimitiveHelper.noNull(total);
+			this.uploadedBytes = PrimitiveHelper.noNull(uploadedBytes);
 			this.files = files;
 		}
 
@@ -648,12 +665,13 @@ public class MaterialFileUpload extends Input
 		private final int size;
 		private final String type;
 
-		private File(String name, long lastModified, Date lastModifiedDate, String webkitRelativePath, int size, String type) {
+		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size,
+				String type) {
 			this.name = name;
-			this.lastModified = lastModified;
+			this.lastModified = PrimitiveHelper.noNull(lastModified) * 1000L;
 			this.lastModifiedDate = lastModifiedDate;
 			this.webkitRelativePath = webkitRelativePath;
-			this.size = size;
+			this.size = PrimitiveHelper.noNull(size);
 			this.type = type;
 		}
 

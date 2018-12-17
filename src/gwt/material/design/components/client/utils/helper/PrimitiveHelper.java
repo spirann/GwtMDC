@@ -35,4 +35,46 @@ public class PrimitiveHelper {
 		return value == null || value.isEmpty() ? defaultValue : Integer.valueOf(value);
 	}
 
+	public static native char noNull(final char variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
+	public static native byte noNull(final byte variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
+	public static native int noNull(final int variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
+	public static native double noNull(final double variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
+	public static native float noNull(final float variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
+	public static native boolean noNull(final boolean variable) /*-{
+		if (typeof variable === 'undefined' || variable === undefined
+				|| variable === null)
+			return 0;
+		return variable;
+	}-*/;
+
 }

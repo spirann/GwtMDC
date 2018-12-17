@@ -31,6 +31,10 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class JsHelper {
 	
+	public static native <O> boolean isNull(final O variable) /*-{
+		return $wnd.jQuery.isEmptyObject(variable);
+	}-*/;
+	
 	public static int getWidth(UIObject uiObject) {
 		return getWidth(uiObject.getElement());
 	}
