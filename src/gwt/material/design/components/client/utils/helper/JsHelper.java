@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.UIObject;
@@ -30,11 +31,37 @@ import com.google.gwt.user.client.ui.Widget;
  *
  */
 public class JsHelper {
-	
+
+	public static native JavaScriptObject toJQueryObject(final Widget widget) /*-{
+
+		if (!widget)
+			return null;
+
+		var element = widget.@com.google.gwt.user.client.ui.Widget::getElement()();
+
+		if (!element)
+			return null;
+
+		return $wnd.jQuery(element);
+
+	}-*/;
+
+	public static native JavaScriptObject toJQueryObject(final Element element) /*-{
+		if (!element)
+			return null;
+		return $wnd.jQuery(element);
+	}-*/;
+
+	public static native JavaScriptObject toJQueryObject(final String element) /*-{
+		if (!element)
+			return null;
+		return $wnd.jQuery(element);
+	}-*/;
+
 	public static native <O> boolean isNull(final O variable) /*-{
 		return $wnd.jQuery.isEmptyObject(variable);
 	}-*/;
-	
+
 	public static int getWidth(UIObject uiObject) {
 		return getWidth(uiObject.getElement());
 	}
@@ -72,8 +99,7 @@ public class JsHelper {
 			element.setAttribute("empty", null);
 	}
 
-	public static native void setTooltip(final Element element, final String text,
-			final String... tooltipClasses)/*-{
+	public static native void setTooltip(final Element element, final String text, final String... tooltipClasses)/*-{
 		var classes = Array.from(tooltipClasses);
 		$wnd.jQuery(element).tooltip();
 	}-*/;

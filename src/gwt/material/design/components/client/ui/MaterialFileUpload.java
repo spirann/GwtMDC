@@ -27,7 +27,10 @@ import java.util.stream.Collectors;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.user.client.ui.Widget;
 
+import gwt.material.design.components.client.base.interfaces.HasFired;
+import gwt.material.design.components.client.base.mixin.FiredMixin;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.AbortEvent;
@@ -60,6 +63,7 @@ import gwt.material.design.components.client.ui.misc.fileUpload.js.JsData;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFile;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressData;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
 import gwt.material.design.components.client.validation.FileUploadValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
@@ -70,15 +74,16 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input implements HasStartHandlers, HasStopHandlers,
-		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
-		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input
+		implements HasFired, HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 
 	private JsData data;
 	private FileUploadValidation validation;
+	
+	private FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
 
 	public MaterialFileUpload() {
 		super(InputType.FILE);
@@ -140,7 +145,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 			} else {
 				data.abort();
 			}
-			
+
 			return validate;
 		};
 
@@ -179,8 +184,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 
 	protected boolean validate(final JsData jsData) {
 
-		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this,
-				toData(jsData).getFiles());
+		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
 
 		boolean error = defaultResult.getState().equals(State.ERROR);
 
@@ -202,11 +206,27 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	}
 
 	public void submit() {
-		data.submit();
+		if (data != null)
+			data.submit();
 	}
-	
+
 	public void abort() {
-		data.abort();
+		if (data != null)
+			data.abort();
+	}
+
+	public void fire() {
+		JsHelper.doClick(getElement());
+	}
+
+	@Override
+	public void setFired(String firedId) {
+		firedMixin.setFired(firedId);
+	}
+
+	@Override
+	public String getFired() {
+		return firedMixin.getFired();
 	}
 	
 	protected void fireStartEvent() {
@@ -255,9 +275,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	}
 
 	protected void fireProgressEvent(final JsProgressData jsData) {
-		ProgressEvent.fire(MaterialFileUpload.this,
-				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()),
-				jsData.loaded, jsData.total);
+		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
 	}
 
 	@Override
@@ -385,13 +403,19 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	 * that preventing the default action for both the "drop" and "dragover" events
 	 * is required to disable the default browser drop action.
 	 */
-	public void setDropZone(final String dropZone) {
-		options.dropZone = dropZone;
+	public void setDropZone(final Element dropZone) {
+		options.dropZone = JsHelper.toJQueryObject(dropZone);
 		layout();
 	}
 
-	public String getDropZone() {
-		return options.dropZone;
+	public void setDropZone(final Widget dropZone) {
+		options.dropZone = JsHelper.toJQueryObject(dropZone);
+		layout();
+	}
+
+	public void setDropZone(final String dropZone) {
+		options.dropZone = JsHelper.toJQueryObject(dropZone);
+		layout();
 	}
 
 	/**
@@ -617,8 +641,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 	}
 
 	protected File toFile(final JsFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
-				jsFile.size, jsFile.type);
+		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -677,8 +700,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		private final int size;
 		private final String type;
 
-		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size,
-				String type) {
+		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size, String type) {
 			this.name = name;
 			this.lastModified = PrimitiveHelper.noNull(lastModified) * 1000L;
 			this.lastModifiedDate = lastModifiedDate;

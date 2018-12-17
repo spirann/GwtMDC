@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -110,7 +112,7 @@ public class JsOptions {
 	 * is required to disable the default browser drop action.
 	 */
 	@JsProperty
-	public String dropZone;
+	public JavaScriptObject dropZone;
 	
 	/**
 	 * By default, files added to the widget are uploaded as soon as the user clicks
