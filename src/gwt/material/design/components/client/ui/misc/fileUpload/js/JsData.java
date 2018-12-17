@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -45,5 +46,11 @@ public class JsData {
 	
 	@JsProperty
     public JsFile[] files;
+	
+	@JsMethod
+	public native void submit();
+	
+	@JsMethod
+	public native void abort();
 	
 }

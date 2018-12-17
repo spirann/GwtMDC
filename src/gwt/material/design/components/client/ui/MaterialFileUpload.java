@@ -77,6 +77,7 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 
 	protected final JsOptions options = new JsOptions();
 
+	private JsData data;
 	private FileUploadValidation validation;
 
 	public MaterialFileUpload() {
@@ -131,15 +132,16 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		};
 
 		options.add = function(e, data) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = data;
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 			if (validate) {
-				data.submit();
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 			} else {
 				data.abort();
-				return false;
 			}
+			
+			return validate;
 		};
 
 		options.start = function(e) {
@@ -159,10 +161,12 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		};
 
 		options.stop = function(e) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = null;
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStopEvent()();
 		};
 
 		options.fail = function(e, data) {
+			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = null;
 			if (data.errorThrown === 'abort')
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAbortEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 			else
@@ -197,6 +201,14 @@ public class MaterialFileUpload extends Input implements HasStartHandlers, HasSt
 		return !error;
 	}
 
+	public void submit() {
+		data.submit();
+	}
+	
+	public void abort() {
+		data.abort();
+	}
+	
 	protected void fireStartEvent() {
 		StartEvent.fire(MaterialFileUpload.this);
 	}
