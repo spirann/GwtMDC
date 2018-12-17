@@ -67,13 +67,7 @@ public class TogglerMixin<UIO extends MaterialUIObject & HasOpen & HasToggler> e
 
 	native boolean isAttached(final String togglerId) /*-{
 		var ids = togglerId.split(" ");
-		var fullIds = '';
-		for (var i = 0; i < ids.length; i++) {
-			fullIds += '#' + ids[i];
-			if (i + 1 < ids.length)
-				fullIds += ', ';
-		}
-
+		var fullIds = @gwt.material.design.components.client.utils.helper.JsHelper::concatToId([Ljava/lang/String;)(ids);
 		return togglerId && $wnd.jQuery("body").find(fullIds).length == ids.length;
 	}-*/;
 

@@ -114,6 +114,9 @@ public class JsOptions {
 	@JsProperty
 	public JavaScriptObject dropZone;
 	
+	@JsProperty
+	public String dropZoneId;
+	
 	/**
 	 * By default, files added to the widget are uploaded as soon as the user clicks
 	 * on the start buttons. To enable automatic uploads, set this option to true.

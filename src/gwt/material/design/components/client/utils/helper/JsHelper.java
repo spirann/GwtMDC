@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
@@ -31,6 +34,39 @@ import com.google.gwt.user.client.ui.Widget;
  *
  */
 public class JsHelper {
+
+	/**
+	 * Put # if the elements name has not # or . at start
+	 * 
+	 * @param elements
+	 * @return
+	 */
+	public static String concatToId(final String elements) {
+		if (elements == null)
+			return null;
+		
+		return concatToId(elements.split(" "));
+	}
+
+	/**
+	 * Put # if the elements name has not # or . at start
+	 * 
+	 * @param elements
+	 * @return
+	 */
+	public static String concatToId(final String[] elements) {
+		if (elements == null)
+			return null;
+		
+		return Arrays.asList(elements).stream().map(element -> {
+
+			if (element.startsWith("#") || element.startsWith("."))
+				return element;
+			else
+				return "#" + element;
+
+		}).collect(Collectors.joining(", "));
+	}
 
 	public static native JavaScriptObject toJQueryObject(final Widget widget) /*-{
 

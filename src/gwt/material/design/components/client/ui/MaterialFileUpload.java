@@ -82,7 +82,7 @@ public class MaterialFileUpload extends Input
 
 	private JsData data;
 	private FileUploadValidation validation;
-	
+
 	private FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
 
 	public MaterialFileUpload() {
@@ -96,7 +96,7 @@ public class MaterialFileUpload extends Input
 		options.type = "POST";
 		options.dataType = "text";
 		options.dropZone = null;
-		options.autoUpload = true;
+		options.autoUpload = false;
 		options.formAcceptCharset = "utf-8";
 		options.multipart = true;
 		options.singleFileUploads = true;
@@ -132,6 +132,18 @@ public class MaterialFileUpload extends Input
 		$wnd.jQuery(element).attr("multiple", !options.singleFileUploads);
 		$wnd.jQuery(element).attr("accept", options.accept);
 
+		options.replaceFileInput = false;
+
+		if (options.dropZoneId)
+			options.dropZone = $wnd.jQuery(@gwt.material.design.components.client.utils.helper.JsHelper::concatToId(Ljava/lang/String;)(options.dropZoneId));
+
+		if (options.dropZone)
+			$wnd.jQuery(options.dropZone).bind('drop dragover', function(e) {
+				e.preventDefault();
+			});
+
+		options.pasteZone = options.dropZone;
+
 		options.change = function(e, data) {
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireChangeEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 		};
@@ -142,6 +154,10 @@ public class MaterialFileUpload extends Input
 
 			if (validate) {
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
+
+				if (options.autoUpload)
+					data.submit();
+
 			} else {
 				data.abort();
 			}
@@ -154,7 +170,10 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.drop = function(e, data) {
-			printData('drop', data);
+			console.log('drop');
+			for ( var v in data)
+				console.log(v);
+
 		};
 
 		options.progress = function(e, data) {
@@ -228,7 +247,7 @@ public class MaterialFileUpload extends Input
 	public String getFired() {
 		return firedMixin.getFired();
 	}
-	
+
 	protected void fireStartEvent() {
 		StartEvent.fire(MaterialFileUpload.this);
 	}
@@ -414,7 +433,7 @@ public class MaterialFileUpload extends Input
 	}
 
 	public void setDropZone(final String dropZone) {
-		options.dropZone = JsHelper.toJQueryObject(dropZone);
+		options.dropZoneId = dropZone;
 		layout();
 	}
 

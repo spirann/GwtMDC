@@ -68,13 +68,7 @@ public class FiredMixin<UIO extends MaterialUIObject> extends AbstractMixin<UIO>
 
 	native boolean isAttached(final String firedId) /*-{
 		var ids = firedId.split(" ");
-		var fullIds = '';
-		for (var i = 0; i < ids.length; i++) {
-			fullIds += '#' + ids[i];
-			if (i + 1 < ids.length)
-				fullIds += ', ';
-		}
-
+		var fullIds = @gwt.material.design.components.client.utils.helper.JsHelper::concatToId([Ljava/lang/String;)(ids);
 		return firedId && $wnd.jQuery("body").find(fullIds).length == ids.length;
 	}-*/;
 
