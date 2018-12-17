@@ -228,7 +228,27 @@ public class MaterialFileUpload extends Input
 		if (data != null)
 			data.submit();
 	}
+	
+	public void submit(final File[] files) {
+		final JsFile[] jsFiles = Arrays.asList(files).stream().map(file -> {
+			final JsFile jsFile = new JsFile();
+			jsFile.lastModified = file.getLastModified();
+			jsFile.lastModifiedDate = file.getLastModifiedDate();
+			jsFile.name = file.getName();
+			jsFile.size = file.getSize();
+			jsFile.type = file.getType();
+			jsFile.webkitRelativePath = file.getWebkitRelativePath();
+			return jsFile;
+		}).toArray(JsFile[]::new);
+		submit(jsFiles);
+	}
 
+	protected native void submit(final JsFile[] files) /*-{		
+		var data = this.@gwt.material.design.components.client.ui.MaterialFileUpload::data;
+		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();		
+		$wnd.jQuery(element).fileupload('send', {files: files});		
+	}-*/;
+	
 	public void abort() {
 		if (data != null)
 			data.abort();
@@ -679,7 +699,7 @@ public class MaterialFileUpload extends Input
 
 		private final Collection<File> files;
 
-		public Data(String response, int loaded, int total, int uploadedBytes, Collection<File> files) {
+		private Data(String response, int loaded, int total, int uploadedBytes, Collection<File> files) {
 			super();
 			this.response = response;
 			this.loaded = PrimitiveHelper.noNull(loaded);
@@ -713,7 +733,7 @@ public class MaterialFileUpload extends Input
 	public static class File {
 
 		private final String name;
-		private final long lastModified;
+		private final int lastModified;
 		private final Date lastModifiedDate;
 		private final String webkitRelativePath;
 		private final int size;
@@ -721,7 +741,7 @@ public class MaterialFileUpload extends Input
 
 		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size, String type) {
 			this.name = name;
-			this.lastModified = PrimitiveHelper.noNull(lastModified) * 1000L;
+			this.lastModified = PrimitiveHelper.noNull(lastModified);
 			this.lastModifiedDate = lastModifiedDate;
 			this.webkitRelativePath = webkitRelativePath;
 			this.size = PrimitiveHelper.noNull(size);
@@ -732,7 +752,7 @@ public class MaterialFileUpload extends Input
 			return name;
 		}
 
-		public long getLastModified() {
+		public int getLastModified() {
 			return lastModified;
 		}
 
