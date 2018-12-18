@@ -22,6 +22,8 @@ package gwt.material.design.components.client.ui;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.gwt.core.client.JavaScriptObject;
@@ -74,16 +76,18 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasFired, HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input implements HasFired, HasStartHandlers, HasStopHandlers,
+		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
+		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
+	protected final List<JsFile> files = new LinkedList<>();
 
-	private JsData data;
-	private FileUploadValidation validation;
+	protected JsData data;
+	protected FileUploadValidation validation;
 
-	private FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
+	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
 
 	public MaterialFileUpload() {
 		super(InputType.FILE);
@@ -135,7 +139,8 @@ public class MaterialFileUpload extends Input
 		options.replaceFileInput = false;
 
 		if (options.dropZoneId)
-			options.dropZone = $wnd.jQuery(@gwt.material.design.components.client.utils.helper.JsHelper::concatToId(Ljava/lang/String;)(options.dropZoneId));
+			options.dropZone = $wnd
+					.jQuery(@gwt.material.design.components.client.utils.helper.JsHelper::concatToId(Ljava/lang/String;)(options.dropZoneId));
 
 		if (options.dropZone)
 			$wnd.jQuery(options.dropZone).bind('drop dragover', function(e) {
@@ -153,6 +158,7 @@ public class MaterialFileUpload extends Input
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 			if (validate) {
+				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::addFiles([Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsFile;)(data.files);
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAddEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 				if (options.autoUpload)
@@ -173,7 +179,6 @@ public class MaterialFileUpload extends Input
 			console.log('drop');
 			for ( var v in data)
 				console.log(v);
-
 		};
 
 		options.progress = function(e, data) {
@@ -203,7 +208,8 @@ public class MaterialFileUpload extends Input
 
 	protected boolean validate(final JsData jsData) {
 
-		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
+		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this,
+				toData(jsData).getFiles());
 
 		boolean error = defaultResult.getState().equals(State.ERROR);
 
@@ -224,31 +230,39 @@ public class MaterialFileUpload extends Input
 		return !error;
 	}
 
-	public void submit() {
-		if (data != null)
-			data.submit();
+	protected void addFiles(final JsFile[] files) {
+		this.files.addAll(Arrays.asList(files));
+	}
+
+	public List<File> getFiles() {
+		return files.stream().map(file -> toFile(file)).collect(Collectors.toList());
+	}
+
+	public void removeFile(final File file) {
+		files.remove(file.toNative());
 	}
 	
+	public void removeFiles() {
+		files.clear();
+	}
+
+	public void submit() {
+		submit(files.stream().toArray(JsFile[]::new));
+	}
+
 	public void submit(final File[] files) {
-		final JsFile[] jsFiles = Arrays.asList(files).stream().map(file -> {
-			final JsFile jsFile = new JsFile();
-			jsFile.lastModified = file.getLastModified();
-			jsFile.lastModifiedDate = file.getLastModifiedDate();
-			jsFile.name = file.getName();
-			jsFile.size = file.getSize();
-			jsFile.type = file.getType();
-			jsFile.webkitRelativePath = file.getWebkitRelativePath();
-			return jsFile;
-		}).toArray(JsFile[]::new);
+		final JsFile[] jsFiles = Arrays.asList(files).stream().map(file -> file.toNative()).toArray(JsFile[]::new);
 		submit(jsFiles);
 	}
 
-	protected native void submit(final JsFile[] files) /*-{		
+	protected native void submit(final JsFile[] files) /*-{
 		var data = this.@gwt.material.design.components.client.ui.MaterialFileUpload::data;
-		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();		
-		$wnd.jQuery(element).fileupload('send', {files: files});		
+		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();
+		$wnd.jQuery(element).fileupload('send', {
+			files : files
+		});
 	}-*/;
-	
+
 	public void abort() {
 		if (data != null)
 			data.abort();
@@ -314,7 +328,9 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected void fireProgressEvent(final JsProgressData jsData) {
-		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
+		ProgressEvent.fire(MaterialFileUpload.this,
+				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()),
+				jsData.loaded, jsData.total);
 	}
 
 	@Override
@@ -680,7 +696,8 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected File toFile(final JsFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath, jsFile.size, jsFile.type);
+		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
+				jsFile.size, jsFile.type);
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -739,7 +756,8 @@ public class MaterialFileUpload extends Input
 		private final int size;
 		private final String type;
 
-		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size, String type) {
+		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size,
+				String type) {
 			this.name = name;
 			this.lastModified = PrimitiveHelper.noNull(lastModified);
 			this.lastModifiedDate = lastModifiedDate;
@@ -772,6 +790,16 @@ public class MaterialFileUpload extends Input
 			return type;
 		}
 
+		protected JsFile toNative() {
+			final JsFile jsFile = new JsFile();
+			jsFile.lastModified = getLastModified();
+			jsFile.lastModifiedDate = getLastModifiedDate();
+			jsFile.name = getName();
+			jsFile.size = getSize();
+			jsFile.type = getType();
+			jsFile.webkitRelativePath = getWebkitRelativePath();
+			return jsFile;
+		}
 	}
 
 }

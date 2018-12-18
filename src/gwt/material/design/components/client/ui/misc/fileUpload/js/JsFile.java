@@ -45,5 +45,4 @@ public class JsFile {
 	public int size;
 	@JsProperty
 	public String type;
-	
 }
