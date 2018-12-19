@@ -129,11 +129,19 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		setCssProperty(CssMixin.MDC_CIRCULAR_PROGRESS__TRACK_COLOR, color.getCssName());
 	}
 
+	/**
+	 * @param progress value between 0 and 1
+	 */
 	@Override
 	public void setProgress(double progress) {
 		setProgress(progress, true);
 	}
 
+	/**
+	 * 
+	 * @param progress value between 0 and 1
+	 * @param animate
+	 */
 	public void setProgress(double progress, boolean animate) {
 		progressMixin.setValue(progress);
 		if (initialized)

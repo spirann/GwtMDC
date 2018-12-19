@@ -76,10 +76,9 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input implements HasFired, HasStartHandlers, HasStopHandlers,
-		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
-		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input
+		implements HasFired, HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 	protected final List<JsFile> files = new LinkedList<>();
@@ -208,8 +207,7 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 
 	protected boolean validate(final JsData jsData) {
 
-		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this,
-				toData(jsData).getFiles());
+		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
 
 		boolean error = defaultResult.getState().equals(State.ERROR);
 
@@ -231,6 +229,8 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 	}
 
 	protected void addFiles(final JsFile[] files) {
+		if (isSingleFileUploads())
+			this.files.clear();
 		this.files.addAll(Arrays.asList(files));
 	}
 
@@ -239,26 +239,26 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 	}
 
 	public void removeFile(final File file) {
-		files.remove(file.toNative());
+		files.removeIf(jsFile -> File.toString(jsFile).equals(file.toString()));
 	}
-	
+
 	public void removeFiles() {
 		files.clear();
 	}
 
-	public void submit() {
-		submit(files.stream().toArray(JsFile[]::new));
+	public UploadRequest submit() {
+		return new UploadRequest(submit(files.stream().toArray(JsFile[]::new)));
 	}
 
-	public void submit(final File[] files) {
+	public UploadRequest submit(final File[] files) {
 		final JsFile[] jsFiles = Arrays.asList(files).stream().map(file -> file.toNative()).toArray(JsFile[]::new);
-		submit(jsFiles);
+		return new UploadRequest(submit(jsFiles));
 	}
 
-	protected native void submit(final JsFile[] files) /*-{
+	protected native JavaScriptObject submit(final JsFile[] files) /*-{
 		var data = this.@gwt.material.design.components.client.ui.MaterialFileUpload::data;
 		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();
-		$wnd.jQuery(element).fileupload('send', {
+		return $wnd.jQuery(element).fileupload('send', {
 			files : files
 		});
 	}-*/;
@@ -328,9 +328,7 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 	}
 
 	protected void fireProgressEvent(final JsProgressData jsData) {
-		ProgressEvent.fire(MaterialFileUpload.this,
-				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()),
-				jsData.loaded, jsData.total);
+		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
 	}
 
 	@Override
@@ -696,8 +694,7 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 	}
 
 	protected File toFile(final JsFile jsFile) {
-		return new File(jsFile.name, jsFile.lastModified, jsFile.lastModifiedDate, jsFile.webkitRelativePath,
-				jsFile.size, jsFile.type);
+		return new File(jsFile);
 	}
 
 	// ////////////////////////////////////////////////////////////////
@@ -749,6 +746,7 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 
 	public static class File {
 
+		private final JsFile jsFile;
 		private final String name;
 		private final int lastModified;
 		private final Date lastModifiedDate;
@@ -756,15 +754,19 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 		private final int size;
 		private final String type;
 
-		private File(String name, int lastModified, Date lastModifiedDate, String webkitRelativePath, int size,
-				String type) {
-			this.name = name;
-			this.lastModified = PrimitiveHelper.noNull(lastModified);
-			this.lastModifiedDate = lastModifiedDate;
-			this.webkitRelativePath = webkitRelativePath;
-			this.size = PrimitiveHelper.noNull(size);
-			this.type = type;
+		private File(final JsFile jsFile) {
+			this.jsFile = jsFile;
+			this.name = jsFile.name;
+			this.lastModified = PrimitiveHelper.noNull(jsFile.lastModified);
+			this.lastModifiedDate = new Date(toTime(jsFile.lastModifiedDate));
+			this.webkitRelativePath = jsFile.webkitRelativePath;
+			this.size = PrimitiveHelper.noNull(jsFile.size);
+			this.type = jsFile.type;
 		}
+
+		protected native int toTime(final JavaScriptObject obj) /*-{
+			return new Date(obj).getTime();
+		}-*/;
 
 		public String getName() {
 			return name;
@@ -790,16 +792,131 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 			return type;
 		}
 
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + lastModified;
+			result = prime * result + ((lastModifiedDate == null) ? 0 : lastModifiedDate.hashCode());
+			result = prime * result + ((name == null) ? 0 : name.hashCode());
+			result = prime * result + size;
+			result = prime * result + ((type == null) ? 0 : type.hashCode());
+			result = prime * result + ((webkitRelativePath == null) ? 0 : webkitRelativePath.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			File other = (File) obj;
+			if (lastModified != other.lastModified)
+				return false;
+			if (lastModifiedDate == null) {
+				if (other.lastModifiedDate != null)
+					return false;
+			} else if (!lastModifiedDate.equals(other.lastModifiedDate))
+				return false;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			if (size != other.size)
+				return false;
+			if (type == null) {
+				if (other.type != null)
+					return false;
+			} else if (!type.equals(other.type))
+				return false;
+			if (webkitRelativePath == null) {
+				if (other.webkitRelativePath != null)
+					return false;
+			} else if (!webkitRelativePath.equals(other.webkitRelativePath))
+				return false;
+			return true;
+		}
+
+		@Override
+		public String toString() {
+			return toString(toNative());
+		}
+
 		protected JsFile toNative() {
-			final JsFile jsFile = new JsFile();
-			jsFile.lastModified = getLastModified();
-			jsFile.lastModifiedDate = getLastModifiedDate();
-			jsFile.name = getName();
-			jsFile.size = getSize();
-			jsFile.type = getType();
-			jsFile.webkitRelativePath = getWebkitRelativePath();
 			return jsFile;
 		}
+
+		protected static native String toString(final JsFile file) /*-{
+			var json = '{';
+			for ( var prop in file)
+				json += prop + ':' + $wnd.jQuery(file).prop(prop) + ',';
+			json = json.substring(0, json.length - 1);
+			json += '}';
+			return json;
+		}-*/;
 	}
 
+	public static class UploadRequest {
+
+		private final JavaScriptObject jqxhr;
+
+		private UploadRequest(final JavaScriptObject jqxhr) {
+			this.jqxhr = jqxhr;
+		}
+
+		public native void abort() /*-{
+			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
+			jqxhr.abort();
+		}-*/;
+
+		public native void onDone(final Runnable runnable) /*-{
+			if (!runnable)
+				return;
+
+			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
+			jqxhr.done(function() {
+				runnable.@java.lang.Runnable::run()();
+			});
+
+		}-*/;
+
+		public native void onError(final Runnable runnable) /*-{
+			if (!runnable)
+				return;
+
+			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
+			jqxhr.fail(function(data) {
+				if (data.statusText !== 'abort')
+					runnable.@java.lang.Runnable::run()();
+			});
+
+		}-*/;
+
+		public native void onComplete(final Runnable runnable) /*-{
+			if (!runnable)
+				return;
+
+			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
+			jqxhr.always(function() {
+				runnable.@java.lang.Runnable::run()();
+			});
+
+		}-*/;
+
+		public native void onAbort(final Runnable runnable) /*-{
+			if (!runnable)
+				return;
+
+			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
+			jqxhr.fail(function(data) {
+				if (data.statusText === 'abort')
+					runnable.@java.lang.Runnable::run()();
+			});
+
+		}-*/;
+	}
 }

@@ -505,6 +505,19 @@
 .mdc-fab-progess:not([progress='0']):not(.mdc-circular-progress--indeterminate) {
 	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);}			
 
+.mdc-list-item__meta.mdc-circular-progress,
+.mdc-list-item__meta.mdc-fab-progess,
+.mdc-list-item__meta.mdc-fab-progess .mdc-fab {
+	--mdc-circular-progress-indicator-color: var(--mdc-list-item-selected-meta-ink-color);
+	--mdc-circular-progress-track-color: var(--mdc-list-item-meta-ink-color);
+	--mdc-fab-fill-color: transparent;
+	--mdc-fab-ink-color: var(--mdc-list-item-meta-ink-color);
+	box-shadow: 0;
+	box-shadow: none !important;}
+.mdc-list-item__meta.mdc-fab-progess .mdc-fab {
+	width: 40px;
+	height: 40px;}
+
 /* ==========================================================================
    Color palette
    ========================================================================== */

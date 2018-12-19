@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
-import java.util.Date;
+import com.google.gwt.core.client.JavaScriptObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -38,7 +38,7 @@ public class JsFile {
 	@JsProperty
 	public int lastModified;
 	@JsProperty
-	public Date lastModifiedDate;
+	public JavaScriptObject lastModifiedDate;
 	@JsProperty
 	public String webkitRelativePath;
 	@JsProperty

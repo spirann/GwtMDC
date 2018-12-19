@@ -200,14 +200,6 @@
    ========================================================================== */
 .mdc-icon-toggle {
 	color: var(--mdc-icon-toggle-ink-color);}
-.mdc-icon-toggle.mdc-list-item__start-detail {
-	width: 36px;
-	height: 36px;
-	margin-left: -6px;}
-.mdc-icon-toggle.mdc-list-item__end-detail {
-	width: 36px;
-	height: 36px;
-	margin-right: -6px;}
 .mdc-icon-toggle.mdc-ripple-surface--color::before, 
 .mdc-icon-toggle.mdc-ripple-surface--color::after {
 	background-color: var(--mdc-icon-toggle-ink-color);}
@@ -375,12 +367,16 @@ i.mdc-list-item__graphic {
 	color: var(--mdc-list-item-secondary-text-ink-color);
 	opacity: .64;}
 .mdc-list-item__meta {
+	--mdc-icon-button-ink-color: var(--mdc-list-item-meta-ink-color);
+	--mdc-icon-toggle-ink-color: var(--mdc-list-item-meta-ink-color);
 	color: var(--mdc-list-item-meta-ink-color);}
 .mdc-list-item--selected .mdc-list-item__graphic {
 	color: var(--mdc-list-item-selected-graphic-ink-color);}
 .mdc-list-item--selected .mdc-list-item__primary-text {
 	color: var(--mdc-list-item-selected-primary-text-ink-color);}		
 .mdc-list-item--selected .mdc-list-item__meta {
+	--mdc-icon-button-ink-color: var(--mdc-list-item-selected-meta-ink-color);
+	--mdc-icon-toggle-ink-color: var(--mdc-list-item-selected-meta-ink-color);
 	color: var(--mdc-list-item-selected-meta-ink-color);}
 .mdc-list-item.mdc-ripple-surface--color::before, 
 .mdc-list-item.mdc-ripple-surface--color::after {
