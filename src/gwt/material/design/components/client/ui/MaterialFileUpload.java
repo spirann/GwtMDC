@@ -689,7 +689,7 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected Data toData(final JsData jsData) {
-		return new Data(jsData._response, jsData.loaded, jsData.total, jsData.uploadedBytes,
+		return new Data(jsData.result, jsData.loaded, jsData.total, jsData.uploadedBytes,
 				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()));
 	}
 
@@ -860,6 +860,10 @@ public class MaterialFileUpload extends Input
 		}-*/;
 	}
 
+	public static interface UploadRequestResult {
+		public void onResult(final String result);
+	}
+	
 	public static class UploadRequest {
 
 		private final JavaScriptObject jqxhr;
@@ -873,13 +877,13 @@ public class MaterialFileUpload extends Input
 			jqxhr.abort();
 		}-*/;
 
-		public native void onDone(final Runnable runnable) /*-{
+		public native void onDone(final UploadRequestResult runnable) /*-{
 			if (!runnable)
 				return;
 
 			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
-			jqxhr.done(function() {
-				runnable.@java.lang.Runnable::run()();
+			jqxhr.done(function(result) {
+				runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(result);
 			});
 
 		}-*/;

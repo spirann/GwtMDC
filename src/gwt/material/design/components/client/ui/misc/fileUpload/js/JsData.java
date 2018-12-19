@@ -33,7 +33,7 @@ import jsinterop.annotations.JsType;
 public class JsData {
 
 	@JsProperty
-	public String  _response;
+	public String  result;
 
 	@JsProperty
 	public int  loaded;
