@@ -33,6 +33,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasFired;
 import gwt.material.design.components.client.base.mixin.FiredMixin;
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.AbortEvent;
@@ -89,7 +90,7 @@ public class MaterialFileUpload extends Input
 	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
 
 	public MaterialFileUpload() {
-		super(InputType.FILE);
+		super(InputType.FILE, CssName.MDC_FILE_UPLOAD);
 		loadDefaultOptions();
 	}
 
@@ -152,11 +153,7 @@ public class MaterialFileUpload extends Input
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireChangeEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 		};
 
-		options.add = function(e, data) {
-			
-			for(var v in data.files[0])
-				console.log(v + ': ' + $wnd.jQuery(data.files[0]).prop(v));
-			
+		options.add = function(e, data) {			
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = data;
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 

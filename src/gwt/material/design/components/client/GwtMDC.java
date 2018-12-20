@@ -24,12 +24,8 @@ import com.google.gwt.core.client.ScriptInjector;
 import com.google.gwt.dom.client.StyleElement;
 import com.google.gwt.dom.client.StyleInjector;
 import com.google.gwt.resources.client.TextResource;
-import com.google.gwt.user.client.ui.RootPanel;
 
 import gwt.material.design.components.client.resources.MaterialResources;
-import gwt.material.design.components.client.theme.MaterialThemes;
-import gwt.material.design.components.client.theme.ThemeManager;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -48,15 +44,6 @@ public class GwtMDC implements EntryPoint {
 		loadJsResources();
 		loadCssResources();
 
-		// ///////////////////////////////////////////////////////////////
-		// Configure background
-		// ///////////////////////////////////////////////////////////////
-		StyleHelper.setCssProperty(RootPanel.getBodyElement(), "background-color", "var(--mdc-theme-background)");
-
-		// ///////////////////////////////////////////////////////////////
-		// Apply default theme
-		// ///////////////////////////////////////////////////////////////
-		ThemeManager.applyTheme(MaterialThemes.INSTANCE.indigo_pink());
 	}
 
 	public static void loadJsResources() {
@@ -93,7 +80,9 @@ public class GwtMDC implements EntryPoint {
 				injectCss(MaterialResources.INSTANCE.mixinCss()), 
 				injectCss(MaterialResources.INSTANCE.chartistCss()),
 				injectCss(MaterialResources.INSTANCE.chartistTooltipPluginCss()),
-				injectCss(MaterialResources.INSTANCE.chartMixinCss()) };
+				injectCss(MaterialResources.INSTANCE.chartMixinCss()),
+				injectCss(MaterialResources.INSTANCE.componentsAttributesCss()),
+				injectCss(MaterialResources.INSTANCE.themeAttributesCss())};
 
 	}
 

@@ -19,7 +19,6 @@
  */
 package gwt.material.design.components.client.ui;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
@@ -55,22 +54,16 @@ public class MaterialSnackbar extends Div implements HasText {
 	protected final Button action = new Button(CssName.MDC_SNACKBAR__ACTION_BUTTON);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
-	protected final ToggleStyleMixin<MaterialSnackbar> atStartMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SNACKBAR__ALIGN_START);
-	protected final ToggleStyleMixin<MaterialSnackbar> multilineMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SNACKBAR__MULTILINE);
-	protected final ToggleStyleMixin<MaterialSnackbar> actionOnButtonMixin = new ToggleStyleMixin<>(this,
-			CssName.MDC_SNACKBAR__ACTION_ON_BUTTON);
-	protected final AttributeMixin<MaterialSnackbar, String> ariaLiveMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_LIVE, "assertive", FromString.TO_STRING);
-	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaAtomicMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_ATOMIC, true, FromString.TO_BOOLEAN);
-	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaHiddenMixin = new AttributeMixin<>(this,
-			CssAttribute.ARIA_HIDDEN, true, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialSnackbar> atStartMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__ALIGN_START);
+	protected final ToggleStyleMixin<MaterialSnackbar> multilineMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__MULTILINE);
+	protected final ToggleStyleMixin<MaterialSnackbar> actionOnButtonMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__ACTION_ON_BUTTON);
+	protected final AttributeMixin<MaterialSnackbar, String> ariaLiveMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LIVE, "assertive", FromString.TO_STRING);
+	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaAtomicMixin = new AttributeMixin<>(this, CssAttribute.ARIA_ATOMIC, true, FromString.TO_BOOLEAN);
+	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaHiddenMixin = new AttributeMixin<>(this, CssAttribute.ARIA_HIDDEN, true, FromString.TO_BOOLEAN);
 
 	protected String actionText;
 	protected int timeout = 2750;
-	// It's necessary because the MDC WEB bug, 
+	// It's necessary because the MDC WEB bug,
 	// where the action on bottom style is removed from the element
 	protected boolean actionOnBottom = false;
 
@@ -92,8 +85,7 @@ public class MaterialSnackbar extends Div implements HasText {
 		super.onInitialize();
 	}
 
-	protected native void show(final String text, final String actionText, final boolean actionOnBottom,
-			final boolean multiline, final int timeout)/*-{
+	protected native void show(final String text, final String actionText, final boolean actionOnBottom, final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
 		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
@@ -103,7 +95,7 @@ public class MaterialSnackbar extends Div implements HasText {
 		if (actionText)
 			_action = function() {
 				_this.@gwt.material.design.components.client.ui.MaterialSnackbar::fireClickEvent()();
-			};	
+			};
 
 		var dataObj = {
 			message : text,
@@ -149,17 +141,17 @@ public class MaterialSnackbar extends Div implements HasText {
 
 	public final void open() {
 
-		actionOnButtonMixin.toggle(actionOnBottom);
-
-		hideOthers();
-
-		setVisibility(Visibility.VISIBLE);
-		
 		// ///////////////////////////////////////////////////////////////////////////
 		// Add into the root
 		// ///////////////////////////////////////////////////////////////////////////
 		if (getParent() == null)
 			RootPanel.get().add(this);
+
+		actionOnButtonMixin.toggle(actionOnBottom);
+
+		hideOthers();
+
+		setVisibility(Visibility.VISIBLE);
 
 		show();
 
@@ -168,14 +160,13 @@ public class MaterialSnackbar extends Div implements HasText {
 		// ///////////////////////////////////////////////////////////////////////////
 		final int time = this.getTimeout() + (containsFixedFab() ? 0 : 250);
 		TimerHelper.schedule(time + 100, () -> {
-			//this.removeFromParent();
+			// this.removeFromParent();
 			setVisibility(Visibility.HIDDEN);
-			GWT.log("actionOnBottom: " + actionOnBottom);
 		});
 	}
 
 	protected void show() {
-		
+
 		// ///////////////////////////////////////////////////////////////////////////
 		// Show snackbar
 		// ///////////////////////////////////////////////////////////////////////////
@@ -189,9 +180,7 @@ public class MaterialSnackbar extends Div implements HasText {
 			final int thisPosition = getElement().getAbsoluteRight();
 			final int fabPosition = fab.getAbsoluteLeft();
 			final boolean isLargeScreen = Window.getClientWidth() >= 1024;
-			final String adjustPosition = thisPosition >= fabPosition
-					? "calc(56px + " + (isLargeScreen ? "1.5rem" : "1rem") + ")"
-					: "0px";
+			final String adjustPosition = thisPosition >= fabPosition ? "calc(56px + " + (isLargeScreen ? "1.5rem" : "1rem") + ")" : "0px";
 			setCssProperty(CssMixin.MDC_SNACKBAR__POSITION_ADJUST, adjustPosition);
 		}
 	}
@@ -255,7 +244,7 @@ public class MaterialSnackbar extends Div implements HasText {
 	protected final native void hideOthers() /*-{
 		var className = "."
 				+ @gwt.material.design.components.client.constants.CssName::MDC_SNACKBAR;
-		$wnd.jQuery(className).css('visibility','hidden');
+		$wnd.jQuery(className).css('visibility', 'hidden');
 	}-*/;
 
 	protected final native boolean containsFixedFab() /*-{

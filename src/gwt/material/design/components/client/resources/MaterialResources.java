@@ -74,6 +74,11 @@ public interface MaterialResources extends ClientBundle {
 	TextResource fileUploadWidgetJs();
 
 	// CSS
+	@Source("css/material-attr--theme.css")
+	TextResource themeAttributesCss();
+	
+	@Source("css/material-attr--components.css")
+	TextResource componentsAttributesCss();
 	
 	@Source("css/prism.min.css")
 	TextResource prismCss();

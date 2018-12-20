@@ -1,0 +1,114 @@
+:root {	
+	/* ================================ */
+  	/* Main attributes					*/
+  	/* ================================ */
+  	--mdc-theme-primary: rgba(63,81,181,1);
+	--mdc-theme-secondary:  #ff4081;
+	--mdc-theme-background:  #fff;
+	--mdc-theme-surface:  #fff;
+	--mdc-theme-on-primary:  #fff;
+	--mdc-theme-on-secondary:  #fff;
+	--mdc-theme-on-surface:  #000;
+	--mdc-theme-text-primary-on-background:  rgba(0, 0, 0, 0.87);
+	--mdc-theme-text-secondary-on-background:  rgba(0, 0, 0, 0.54);
+	--mdc-theme-text-hint-on-background:  rgba(0, 0, 0, 0.12);
+	--mdc-theme-text-disabled-on-background:  rgba(0, 0, 0, 0.38);
+	--mdc-theme-text-icon-on-background:  rgba(0, 0, 0, 0.38);
+			
+	--mdc-state--success: #00b020;
+	--mdc-state--warning: #FF8F00;
+	--mdc-state--error: #b00020;
+	
+	/* ================================ */
+  	/* Chart attributes					*/
+  	/* ================================ */
+	--mdc-chartist--series_a: #ff4081;
+	--mdc-chartist--label_a: #fff;
+	--mdc-chartist--series_b: #fd568f;
+	--mdc-chartist--label_b: #fff;
+	--mdc-chartist--series_c: #fb6c9c;
+	--mdc-chartist--label_c: #fff;
+	--mdc-chartist--series_d: #f981aa;
+	--mdc-chartist--label_d: #fff;
+	--mdc-chartist--series_e: #f797b8;
+	--mdc-chartist--label_e: #fff;
+	--mdc-chartist--series_f: #f4adc5;
+	--mdc-chartist--label_f: #000;
+	--mdc-chartist--series_g: #f2c3d3;
+	--mdc-chartist--label_g: #000;
+	--mdc-chartist--series_h: #f0d8e0;
+	--mdc-chartist--label_h: #000;
+	--mdc-chartist--series_i: #ff4081;
+	--mdc-chartist--label_i: #fff;
+	--mdc-chartist--series_j: #fd568f;
+	--mdc-chartist--label_j: #fff;
+	--mdc-chartist--series_k: #fb6c9c;
+	--mdc-chartist--label_k: #fff;
+	--mdc-chartist--series_l: #f981aa;
+	--mdc-chartist--label_l: #fff;
+	--mdc-chartist--series_m: #f797b8;
+	--mdc-chartist--label_m: #fff;
+	--mdc-chartist--series_n: #f4adc5;
+	--mdc-chartist--label_n: #000;
+	--mdc-chartist--series_o: #f2c3d3;
+	--mdc-chartist--label_o: #000;
+	--mdc-chartist--series_p: #f0d8e0;
+	--mdc-chartist--label_p: #000;
+	--mdc-chartist--series_q: #ff4081;
+	--mdc-chartist--label_q: #fff;
+	--mdc-chartist--series_r: #fd568f;
+	--mdc-chartist--label_r: #fff;
+	--mdc-chartist--series_s: #fb6c9c;
+	--mdc-chartist--label_s: #fff;
+	--mdc-chartist--series_t: #f981aa;
+	--mdc-chartist--label_t: #fff;
+	--mdc-chartist--series_u: #f797b8;
+	--mdc-chartist--label_u: #fff;
+	--mdc-chartist--series_v: #f4adc5;
+	--mdc-chartist--label_v: #000;
+	--mdc-chartist--series_w: #f2c3d3;
+	--mdc-chartist--label_w: #000;
+	--mdc-chartist--series_x: #f0d8e0;
+	--mdc-chartist--label_x: #000;
+	--mdc-chartist--series_y: #ff4081;
+	--mdc-chartist--label_y: #fff;
+	--mdc-chartist--series_z: #fd568f;
+	--mdc-chartist--label_z: #fff;
+	
+	/* ================================ */
+  	/* Used only in source code view 	*/
+  	/* - MaterialCode 					*/
+  	/* - MaterialCodeExample 			*/
+  	/* ================================ */
+  
+  	--mdc-theme-code-background: #272822;
+  	--mdc-theme-code-color: #f5f5f5;
+  	--mdc-theme-code-token-comment: slategray;
+  	--mdc-theme-code-token-prolog: slategray;
+  	--mdc-theme-code-token-doctype: slategray;
+  	--mdc-theme-code-token-cdata: slategray;
+  	--mdc-theme-code-token-punctuation: #f8f8f2;
+  	--mdc-theme-code-token-property: #f92672;
+  	--mdc-theme-code-token-tag: #f92672;
+  	--mdc-theme-code-token-constant: #f92672;
+  	--mdc-theme-code-token-symbol: #f92672;
+  	--mdc-theme-code-token-deleted: #f92672;
+  	--mdc-theme-code-token-boolean: #ae81ff;
+  	--mdc-theme-code-token-number: #ae81ff;
+  	--mdc-theme-code-token-selector: #a6e22e;
+  	--mdc-theme-code-token-attr-name: #a6e22e;
+  	--mdc-theme-code-token-string: #a6e22e;
+  	--mdc-theme-code-token-char: #a6e22e;
+  	--mdc-theme-code-token-builtin: #a6e22e;
+  	--mdc-theme-code-token-inserted: #a6e22e;
+  	--mdc-theme-code-token-operator: #f8f8f2;
+  	--mdc-theme-code-token-entity: #f8f8f2;
+  	--mdc-theme-code-token-url: #f8f8f2;
+  	--mdc-theme-code-token-variable: #f8f8f2;
+  	--mdc-theme-code-token-atrule: #e6db74;
+  	--mdc-theme-code-token-attr-value: #e6db74;
+  	--mdc-theme-code-token-function: #e6db74;
+  	--mdc-theme-code-token-keyword: #66d9ef;
+  	--mdc-theme-code-token-regex: #fd971f;
+  	--mdc-theme-code-token-important: #fd971f;
+}

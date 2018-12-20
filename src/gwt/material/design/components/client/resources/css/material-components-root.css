@@ -1,24 +1,8 @@
-:root {
-	--mdc-root-font-size: 16px;
-	--mdc-font-family: "Google Sans", monospace;	
-	--mdc-disabled-opacity: .42;
-	--mdc-disabled-color: var(--mdc-theme-text-primary-on-background);
-	--mdc-scrollbar-width: 6px;
-	--mdc-scrollbar-track-fill: transparent;
-	--mdc-scrollbar-thumb-corner: 3px;
-	--mdc-scrollbar-thumb-fill: var(--mdc-theme-text-hint-on-background);
-	--mdc-placeholder-ink-color: var(--mdc-theme-text-hint-on-background);
-	
-		
-	--mdc-state--success: #00b020;
-	--mdc-state--warning: #FF8F00;
-	--mdc-state--error: #b00020;
-}
-
 html, body {
 	margin: 0px;
 	padding: 0px;
 	height: 100%;
+	background-color: var(--mdc-theme-background);
 }
 
 i, button, a {
@@ -42,6 +26,15 @@ i {
 	font-feature-settings: 'liga';
 	transform: rotate(0.03deg);
 }
+
+/* ==========================================================================
+   Material disabled adjust
+   ========================================================================== */
+[disabled] {
+    filter: grayscale(100%);
+    pointer-events: none;
+    cursor: default;
+	opacity: var(--mdc-disabled-opacity);} 
 
 /* ==========================================================================
    Default colors

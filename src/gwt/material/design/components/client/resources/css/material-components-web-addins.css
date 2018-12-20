@@ -80,9 +80,6 @@
 /* ==========================================================================
    Animation on show
    ========================================================================== */
-:root{
-	--mdc-animation--on-show: mdc-animation--on-show 250ms ease-in-out;}
-
 @keyframes mdc-animation--on-show {
   from {
     transform: scale(0);
@@ -90,13 +87,14 @@
 }
 
 /* ==========================================================================
+   File Upload
+   ========================================================================== */	
+.mdc-file-upload {
+	display: none !important;}
+
+/* ==========================================================================
    Side Sheet
    ========================================================================== */	
- :root {
- 	--mdc-side-sheet--ink-color: var(--mdc-theme-on-surface);
-	--mdc-side-sheet--fill-color: var(--mdc-theme-surface);
-	--mdc-side-sheet--content-width: 256px;
-}
 .mdc-side-sheet {
 	position: relative;
 	width: var(--mdc-side-sheet--content-width);
@@ -204,10 +202,6 @@
 /* ==========================================================================
    Tooltip
    ========================================================================== */
-:root {
-	--mdc-tooltip--fill-color: var(--mdc-theme-on-surface);
-	--mdc-tooltip--ink-color: var(--mdc-theme-surface);
-}
 .mdc-tooltip {
 	font-size: 0.60rem;
 	line-height: 0.70rem;
@@ -231,19 +225,9 @@
 /* ==========================================================================
    Banner
    ========================================================================== */
-:root {
-	--mdc-banner--animation-duration: 250ms;
-	--mdc-banner--fill-color: var(--mdc-theme-surface);
-	--mdc-banner--ink-color: var(--mdc-theme-on-surface);
-	--mdc-banner--avatar-fill-color: transparent;
-	--mdc-banner--avatar-ink-color: var(--mdc-theme-on-surface);
-	--mdc-banner--label_lines_number: 3;
-}
-
 .mdc-banner {
 	overflow: hidden;
-	width: 100%;
-}
+	width: 100%;}
 .mdc-banner-navigation {
 	position: relative;
 	width: 100%;
@@ -274,7 +258,6 @@
 	display: none;}
 	.mdc-banner-vertical .mdc-list-divider:last-child {
 	display: none;}		
-
 .mdc-banner--content {
 	flex: 1;
 	flex-shrink: 0;
@@ -292,7 +275,6 @@
 	padding-right: 16px;}
 	.mdc-banner-vertical .mdc-banner--actions {
 	width: calc(100% - 8px);}
-
 .mdc-banner--avatar {
 	display: flex;
 	align-content: center;
@@ -317,8 +299,7 @@
 	height: 100%;
 	font-size: 28px;
 	color: var(--mdc-banner--avatar-ink-color);
-	background-color: var(--mdc-banner--avatar-fill-color);}
-	
+	background-color: var(--mdc-banner--avatar-fill-color);}	
 .mdc-banner--label {
 	flex: 1;
 	flex-shrink: 0;
@@ -328,8 +309,7 @@
 	display: -webkit-box;
 	-webkit-box-orient: vertical;
 	-webkit-line-clamp: var(--mdc-banner--label_lines_number);
-	max-height: calc(1.25rem * var(--mdc-banner--label_lines_number));}		
-	
+	max-height: calc(1.25rem * var(--mdc-banner--label_lines_number));}			
 .mdc-banner--actions {
 	display: flex;
 	flex-shrink: 0;
@@ -361,20 +341,12 @@
 	overflow: visible;
 	overflow-x: hidden;
 	position: relative;}
+	
 /* ==========================================================================
-   Circular progress
+   Circular Progress
    ========================================================================== */
-:root{
-	--mdc-circular-progress-width: 48px;
-	--mdc-circular-progress-stroke-width: 6;
-	--mdc-circular-progress-start-angle: -90deg;
-	--mdc-circular-progress-indicator-color: var(--mdc-theme-secondary);
-	--mdc-circular-progress-track-color: var(--mdc-theme-secondary);}
-
 .mdc-circular-progress[disabled] {
-	opacity: var(--mdc-disabled-opacity);
-}
-
+	opacity: var(--mdc-disabled-opacity);}
 .mdc-circular-progress {
 	width: var(--mdc-circular-progress-width);
  	height: var(--mdc-circular-progress-width);
@@ -433,8 +405,7 @@
 	-webkit-animation-direction: normal;
 	   -moz-animation-direction: normal;
 	     -o-animation-direction: normal;
-	        animation-direction: normal;}
-	               
+	        animation-direction: normal;}	               
 .mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader,
 .mdc-circular-progress--reversed:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__path, 
 .mdc-circular-progress--reversed.mdc-circular-progress--indeterminate .mdc-circular-progress__loader,
@@ -442,8 +413,7 @@
 	-webkit-animation-direction: reverse;
 	   -moz-animation-direction: reverse;
 	     -o-animation-direction: reverse;
-	        animation-direction: reverse;}	        
-	        
+	        animation-direction: reverse;}
 @keyframes rotate {
   100% {
     -webkit-transform: rotate(360deg);
@@ -461,16 +431,11 @@
     stroke-dashoffset: -35px;}
   100% {
     stroke-dasharray: 89, 200;
-    stroke-dashoffset: -124px;}
-}
+    stroke-dashoffset: -124px;}}
 
 /* ==========================================================================
    Fab Progress
-   ========================================================================== */
-:root {
-	--mdc-fab-progess--animation-duration: 400ms;
-	--mdc-fab-progess--animation-property: background-color;}
-	
+   ========================================================================== */	
 .mdc-fab-progess {
 	padding: 4px;
 	--mdc-circular-progress-stroke-width: 8;
@@ -480,8 +445,7 @@
 		 -o-transition: box-shadow 400ms;
 			transition: box-shadow 400ms;}
 	.mdc-fab-progess.mdc-fab--mini {
-	padding: 3px;}
-	
+	padding: 3px;}	
 .mdc-fab-progess .mdc-circular-progress__loader {
 	z-index: 1;	
 	-webkit-transition: opacity 400ms, box-shadow 400ms;
@@ -489,8 +453,7 @@
 		 -o-transition: opacity 400ms, box-shadow 400ms;
 			transition: opacity 400ms, box-shadow 400ms;}	
 	.mdc-fab-progess[progress='0']:not(.mdc-circular-progress--indeterminate) .mdc-circular-progress__loader {
-	opacity: 0;}
-	
+	opacity: 0;}	
 .mdc-fab-progess .mdc-fab {
 	z-index: 2;
 	box-shadow: none;
@@ -498,13 +461,11 @@
 	-webkit-transition: all 400ms;
 	   -moz-transition: all 400ms;
 		 -o-transition: all 400ms;
-			transition: all 400ms;}
-			
+			transition: all 400ms;}			
 .mdc-fab-progess.mdc-circular-progress--indeterminate,			
 .mdc-fab-progess[progress='0']:not(.mdc-circular-progress--indeterminate) .mdc-fab,
 .mdc-fab-progess:not([progress='0']):not(.mdc-circular-progress--indeterminate) {
-	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);}			
-
+	box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 6px 10px 0px rgba(0, 0, 0, 0.14), 0px 1px 18px 0px rgba(0, 0, 0, 0.12);}
 .mdc-list-item__meta.mdc-circular-progress,
 .mdc-list-item__meta.mdc-fab-progess,
 .mdc-list-item__meta.mdc-fab-progess .mdc-fab {
@@ -563,22 +524,6 @@
 /* ==========================================================================
    DatePiker
    ========================================================================== */
-:root{
-	--mdc-datepicker-ink: var(--mdc-theme-on-surface);
-	--mdc-datepicker-fill: var(--mdc-theme-surface);
-	--mdc-datepicker-active-ink: var(--mdc-theme-on-primary);
-	--mdc-datepicker-active-fill: var(--mdc-theme-primary);
-	--mdc-datepicker--header-ink: var(--mdc-theme-on-primary);
-	--mdc-datepicker--header-fill: var(--mdc-theme-primary);
-	
-	--mdc-datepicker--item-width: 30px;
-	--mdc-datepicker--item-margin: 2px;
-	--mdc-datepicker-width: calc(8px + calc(7 * calc( var(--mdc-datepicker--item-width) + calc(2 * var(--mdc-datepicker--item-margin)))));
-}  
-[disabled] .mdc-datepicker,
-.mdc-datepicker[disabled] {	
-	opacity: .26;
-	filter: grayscale(100%);}
 .mdc-datepicker {
 	width: 100%;
 	min-width: var(--mdc-datepicker-width);	
