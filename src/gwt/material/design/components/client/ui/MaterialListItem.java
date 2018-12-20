@@ -225,7 +225,7 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	public void setAvatarUrl(final String url) {
 		avatar.setUrl(url);
 		if (avatar.getUrl() != null && !avatar.getUrl().isEmpty() && isAttached() && avatar.getParent() == null)
-			insert(avatar, getWidgetIndex(primaryText));
+			insert(avatar, getWidgetIndex(textContent));
 		else if ((avatar.getUrl() == null || avatar.getUrl().isEmpty()) && avatar.getParent() != null)
 			avatar.removeFromParent();
 	}

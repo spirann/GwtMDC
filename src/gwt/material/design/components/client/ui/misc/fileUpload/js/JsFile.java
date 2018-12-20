@@ -21,6 +21,7 @@ package gwt.material.design.components.client.ui.misc.fileUpload.js;
 
 import com.google.gwt.core.client.JavaScriptObject;
 
+import jsinterop.annotations.JsMethod;
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -45,4 +46,6 @@ public class JsFile {
 	public int size;
 	@JsProperty
 	public String type;
+	@JsMethod
+	public native JavaScriptObject slice();
 }

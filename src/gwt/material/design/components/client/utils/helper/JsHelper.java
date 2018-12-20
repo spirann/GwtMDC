@@ -44,7 +44,7 @@ public class JsHelper {
 	public static String concatToId(final String elements) {
 		if (elements == null)
 			return null;
-		
+
 		return concatToId(elements.split(" "));
 	}
 
@@ -57,7 +57,7 @@ public class JsHelper {
 	public static String concatToId(final String[] elements) {
 		if (elements == null)
 			return null;
-		
+
 		return Arrays.asList(elements).stream().map(element -> {
 
 			if (element.startsWith("#") || element.startsWith("."))
@@ -135,7 +135,8 @@ public class JsHelper {
 			element.setAttribute("empty", null);
 	}
 
-	public static native void setTooltip(final Element element, final String text, final String... tooltipClasses)/*-{
+	public static native void setTooltip(final Element element, final String text,
+			final String... tooltipClasses)/*-{
 		var classes = Array.from(tooltipClasses);
 		$wnd.jQuery(element).tooltip();
 	}-*/;
@@ -392,4 +393,9 @@ public class JsHelper {
 		return d;
 
 	}-*/;
+
+	public static native String toUrl(final JavaScriptObject blob)/*-{
+		return $wnd.URL.createObjectURL(blob);
+	}-*/;
+
 }

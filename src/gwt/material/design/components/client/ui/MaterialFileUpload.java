@@ -153,6 +153,10 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.add = function(e, data) {
+			
+			for(var v in data.files[0])
+				console.log(v + ': ' + $wnd.jQuery(data.files[0]).prop(v));
+			
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = data;
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
@@ -753,6 +757,7 @@ public class MaterialFileUpload extends Input
 		private final String webkitRelativePath;
 		private final int size;
 		private final String type;
+		private final JavaScriptObject slice;
 
 		private File(final JsFile jsFile) {
 			this.jsFile = jsFile;
@@ -762,6 +767,7 @@ public class MaterialFileUpload extends Input
 			this.webkitRelativePath = jsFile.webkitRelativePath;
 			this.size = PrimitiveHelper.noNull(jsFile.size);
 			this.type = jsFile.type;
+			this.slice = jsFile.slice();
 		}
 
 		protected native int toTime(final JavaScriptObject obj) /*-{
@@ -790,6 +796,10 @@ public class MaterialFileUpload extends Input
 
 		public String getType() {
 			return type;
+		}
+		
+		public JavaScriptObject getSlice() {
+			return slice;
 		}
 
 		@Override
@@ -888,14 +898,14 @@ public class MaterialFileUpload extends Input
 
 		}-*/;
 
-		public native void onError(final Runnable runnable) /*-{
+		public native void onError(final UploadRequestResult runnable) /*-{
 			if (!runnable)
 				return;
 
 			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
 			jqxhr.fail(function(data) {
 				if (data.statusText !== 'abort')
-					runnable.@java.lang.Runnable::run()();
+					runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(data.statusText);
 			});
 
 		}-*/;
