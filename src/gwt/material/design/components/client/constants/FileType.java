@@ -1,0 +1,66 @@
+/*
+ * #%L
+ * Gwt Material Design Components
+ * %%
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
+package gwt.material.design.components.client.constants;
+
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
+public enum FileType {
+
+	UNKNOW("", ""),
+	AUDIO("audio/", ""),
+	IMAGE("image/", ""),
+	VIDEO("video/", ""),
+	//
+	TEXT("text/plain", "txt"),
+	JSON("application/json", "json"),
+	HTML("text/html", "html"),
+	JAVASCRIPT("text/javascript", "js"),
+	CSS("text/css", "css"),
+	//
+	ZIP("application/x-zip-compressed", "zip"),
+	WINRAR("", "rar"),
+	ZIP_7Z("", "7z"),
+	TAR("application/x-tar", "tar"),
+	TAR_GZ("application/x-gzip", "tar.gz"),
+	//
+	MS_WORD("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"),
+	MS_POWERPOINT("application/vnd.openxmlformats-officedocument.presentationml.presentation", "pptx"),
+	MS_EXCEL("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "xlsx"),
+	MS_PUBLISHER("application/vnd.ms-publisher", "pub"),
+	MS_ACCESS("application/msaccess", "access"),
+	//
+	EXE("application/x-msdownload", "exe"),
+	
+	;
+	private final String mimeType;
+	private final String fileExtension;
+	
+	FileType(final String mimeType, final String fileExtension){
+		this.mimeType = mimeType;
+		this.fileExtension = fileExtension;
+	}
+	
+	public static FileType fromMimeType(final String mimeType) {
+		return UNKNOW;
+	}
+}
