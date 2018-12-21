@@ -50,6 +50,8 @@ public enum FileType {
 	MS_ACCESS("application/msaccess", "access"),
 	//
 	EXE("application/x-msdownload", "exe"),
+	//
+	UNKNOW_APPLICATION("application/", ""),
 	
 	;
 	private final String mimeType;
