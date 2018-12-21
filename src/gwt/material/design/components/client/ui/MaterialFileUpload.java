@@ -34,6 +34,7 @@ import com.google.gwt.user.client.ui.Widget;
 import gwt.material.design.components.client.base.interfaces.HasFired;
 import gwt.material.design.components.client.base.mixin.FiredMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.FileType;
 import gwt.material.design.components.client.constants.InputType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.AbortEvent;
@@ -716,7 +717,7 @@ public class MaterialFileUpload extends Input
 
 		private Data(String response, int loaded, int total, int uploadedBytes, Collection<File> files) {
 			super();
-			this.response = response;
+			this.response = JsHelper.fromNativeObject(response);
 			this.loaded = PrimitiveHelper.noNull(loaded);
 			this.total = PrimitiveHelper.noNull(total);
 			this.uploadedBytes = PrimitiveHelper.noNull(uploadedBytes);
@@ -753,18 +754,20 @@ public class MaterialFileUpload extends Input
 		private final Date lastModifiedDate;
 		private final String webkitRelativePath;
 		private final int size;
-		private final String type;
-		private final JavaScriptObject slice;
+		private final String mineType;
+		private final JavaScriptObject data;
+		private final FileType type;
 
 		private File(final JsFile jsFile) {
 			this.jsFile = jsFile;
-			this.name = jsFile.name;
+			this.name = JsHelper.fromNativeObject(jsFile.name);
 			this.lastModified = PrimitiveHelper.noNull(jsFile.lastModified);
 			this.lastModifiedDate = new Date(toTime(jsFile.lastModifiedDate));
-			this.webkitRelativePath = jsFile.webkitRelativePath;
+			this.webkitRelativePath = JsHelper.fromNativeObject(jsFile.webkitRelativePath);
 			this.size = PrimitiveHelper.noNull(jsFile.size);
-			this.type = jsFile.type;
-			this.slice = jsFile.slice();
+			this.mineType = JsHelper.fromNativeObject(jsFile.type);
+			this.type = FileType.fromMimeType(this.name, this.mineType);
+			this.data = jsFile.slice();
 		}
 
 		protected native int toTime(final JavaScriptObject obj) /*-{
@@ -791,12 +794,28 @@ public class MaterialFileUpload extends Input
 			return size;
 		}
 
-		public String getType() {
+		public String getMineType() {
+			return mineType;
+		}
+		
+		public FileType getType() {
 			return type;
 		}
 		
-		public JavaScriptObject getSlice() {
-			return slice;
+		/**
+		 * 
+		 * @return It`s a blob object
+		 */
+		public JavaScriptObject getData() {
+			return data;
+		}
+		
+		/**
+		 * 
+		 * @return Turn the blob object into a url
+		 */
+		public String getDataAsUrl() {
+			return JsHelper.toUrl(data);
 		}
 
 		@Override

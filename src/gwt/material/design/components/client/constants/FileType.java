@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.constants;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author Richeli Vargas
@@ -26,43 +28,69 @@ package gwt.material.design.components.client.constants;
  */
 public enum FileType {
 
-	UNKNOW("", ""),
-	AUDIO("audio/", ""),
-	IMAGE("image/", ""),
+	UNKNOW_TYPE("", ""),
+	/* =========== */
+	/* Media types */
+	/* =========== */
+	AUDIO("audio/", ""), 
+	IMAGE("image/", ""), 
 	VIDEO("video/", ""),
-	//
-	TEXT("text/plain", "txt"),
-	JSON("application/json", "json"),
-	HTML("text/html", "html"),
-	JAVASCRIPT("text/javascript", "js"),
+	/* =========== */
+	/* Text types  */
+	/* =========== */
+	TEXT("text/plain", "txt"), 
+	JSON("application/json", "json"), 
+	HTML("text/html", "html"), 
+	JAVASCRIPT("text/javascript", "js"), 
 	CSS("text/css", "css"),
-	//
-	ZIP("application/x-zip-compressed", "zip"),
-	WINRAR("", "rar"),
-	ZIP_7Z("", "7z"),
-	TAR("application/x-tar", "tar"),
-	TAR_GZ("application/x-gzip", "tar.gz"),
-	//
-	MS_WORD("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"),
-	MS_POWERPOINT("application/vnd.openxmlformats-officedocument.presentationml.presentation", "pptx"),
-	MS_EXCEL("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "xlsx"),
-	MS_PUBLISHER("application/vnd.ms-publisher", "pub"),
+	/* =========== */
+	/* Zip types   */
+	/* =========== */
+	ZIP("application/x-zip-compressed", "zip"), 
+	WINRAR("", "rar"), ZIP_7Z("", "7z"), 
+	TAR("application/x-tar", "tar"), 
+	TAR_GZ("application/x-gzip", "gz"),
+	/* =========== */
+	/* MS types    */
+	/* =========== */
+	MS_WORD("application/vnd.openxmlformats-officedocument.wordprocessingml.document", "docx"), 
+	MS_POWERPOINT("application/vnd.openxmlformats-officedocument.presentationml.presentation", "pptx"), 
+	MS_EXCEL("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","xlsx"), 
+	MS_PUBLISHER("application/vnd.ms-publisher", "pub"), 
 	MS_ACCESS("application/msaccess", "access"),
-	//
+	/* =========== */
+	/* App types   */
+	/* =========== */
 	EXE("application/x-msdownload", "exe"),
-	//
-	UNKNOW_APPLICATION("application/", ""),
+	UNKNOW_APPLICATION("application/", "");
 	
-	;
 	private final String mimeType;
 	private final String fileExtension;
-	
-	FileType(final String mimeType, final String fileExtension){
+
+	FileType(final String mimeType, final String fileExtension) {
 		this.mimeType = mimeType;
 		this.fileExtension = fileExtension;
 	}
-	
-	public static FileType fromMimeType(final String mimeType) {
-		return UNKNOW;
+
+	public static FileType fromMimeType(final String fileName, final String mimeType) {
+
+		final boolean nameInvalid = fileName == null || fileName.trim().isEmpty();
+		final boolean mineTypeInvalid = mimeType == null || mimeType.trim().isEmpty();
+
+		if (nameInvalid && mineTypeInvalid)
+			return UNKNOW_TYPE;
+
+		if (mineTypeInvalid)
+			return Arrays.asList(values()).stream().filter(type -> {
+				final String[] parts = fileName.split(".");
+				final String extension = String.valueOf(parts[parts.length -1]);
+				return extension.toLowerCase().equals(type.fileExtension);
+			}).findAny().orElse(UNKNOW_TYPE);
+
+		return Arrays.asList(values()).stream().filter(type -> 
+			!type.mimeType.isEmpty() 
+			&& !type.equals(UNKNOW_APPLICATION)
+			&& mimeType.toLowerCase().startsWith(type.mimeType)).findAny()
+				.orElse(mimeType.toLowerCase().startsWith(UNKNOW_APPLICATION.mimeType) ? UNKNOW_APPLICATION : UNKNOW_TYPE);
 	}
 }

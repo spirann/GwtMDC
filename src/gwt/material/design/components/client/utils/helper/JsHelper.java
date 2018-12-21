@@ -94,6 +94,10 @@ public class JsHelper {
 		return $wnd.jQuery(element);
 	}-*/;
 
+	public static <O> O fromNativeObject(final O object) {
+		return isNull(object) ? null : object;
+	}
+	
 	public static native <O> boolean isNull(final O variable) /*-{
 		return $wnd.jQuery.isEmptyObject(variable);
 	}-*/;
@@ -135,8 +139,7 @@ public class JsHelper {
 			element.setAttribute("empty", null);
 	}
 
-	public static native void setTooltip(final Element element, final String text,
-			final String... tooltipClasses)/*-{
+	public static native void setTooltip(final Element element, final String text, final String... tooltipClasses)/*-{
 		var classes = Array.from(tooltipClasses);
 		$wnd.jQuery(element).tooltip();
 	}-*/;
@@ -395,6 +398,8 @@ public class JsHelper {
 	}-*/;
 
 	public static native String toUrl(final JavaScriptObject blob)/*-{
+		if (!blob)
+			return null;
 		return $wnd.URL.createObjectURL(blob);
 	}-*/;
 
