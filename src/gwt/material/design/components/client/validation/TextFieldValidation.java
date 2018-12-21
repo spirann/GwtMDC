@@ -3,19 +3,10 @@ package gwt.material.design.components.client.validation;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.ui.misc.input.MaterialInput;
 import gwt.material.design.components.client.validation.validators.PasswordValidator;
 
-public interface TextFieldValidation extends Validation {
-
-	/**
-	 * 
-	 * @param value
-	 * @param isRequired
-	 * @param minLength
-	 * @param maxLength
-	 * @return
-	 */
-	public Result validate(String value, String inputMask, Boolean isRequired, Integer minLength, Integer maxLength);
+public interface TextFieldValidation extends Validation<MaterialInput> {
 
 	public class Defaults {
 
@@ -24,7 +15,9 @@ public interface TextFieldValidation extends Validation {
 		// //////////////////////////////////////////////////////////////////////////////////////
 
 		public static final TextFieldValidation password_security_level() {
-			return (value, inputMask, isRequired, minLength, maxLength) -> {
+			return (input) -> {
+
+				final String value = input.getValue();
 
 				final int securityLevel = PasswordValidator.passwordLevel(value);
 
@@ -38,7 +31,7 @@ public interface TextFieldValidation extends Validation {
 				case 3:
 					return new Result(State.SUCCESS, 1001, IMessages.INSTANCE.mdc_validation__password__strong());
 				default:
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 				}
 
 			};
@@ -57,7 +50,11 @@ public interface TextFieldValidation extends Validation {
 		}
 
 		private static final TextFieldValidation min_max_length(final State stateOnSuccess) {
-			return (value, inputMask, isRequired, minLength, maxLength) -> {
+			return (input) -> {
+
+				final String value = input.getValue();
+				final Integer minLength = input.getMinLength();
+				final Integer maxLength = input.getMaxLength();
 
 				final int length = value.length();
 
@@ -66,7 +63,7 @@ public interface TextFieldValidation extends Validation {
 				else if (maxLength != null && length > maxLength)
 					return new Result(State.ERROR, 1204, IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
 
-				return new Result(stateOnSuccess, "");
+				return new Result(stateOnSuccess);
 
 			};
 		}
@@ -84,13 +81,16 @@ public interface TextFieldValidation extends Validation {
 		}
 
 		private static final TextFieldValidation required(final State stateOnSuccess) {
-			return (value, inputMask, isRequired, minLength, maxLength) -> {
+			return (input) -> {
 
+				final String value = input.getValue();
+				final Boolean isRequired = input.isRequired();
+				
 				if (isRequired != null && isRequired && value.isEmpty()) {
 					return new Result(State.ERROR, 1205, IMessages.INSTANCE.mdc_validation__required());
 				}
 
-				return new Result(stateOnSuccess, "");
+				return new Result(stateOnSuccess);
 
 			};
 		}
@@ -100,14 +100,18 @@ public interface TextFieldValidation extends Validation {
 		// //////////////////////////////////////////////////////////////////////////////////////
 
 		public static final TextFieldValidation input_mask() {
-			return (value, inputMask, isRequired, minLength, maxLength) -> {
+			return (input) -> {
+
+				final String value = input.getValue();
+				final String inputMask = input.getInputMask();
+				final Boolean isRequired = input.isRequired();
 
 				if (inputMask == null)
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 				else if ((isRequired == null || !isRequired) && value.isEmpty())
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 				else if (isRequired != null && isRequired && value.isEmpty())
-					return new Result(State.ERROR, 1206, "");
+					return new Result(State.ERROR, 1206);
 
 				final int length = Masker.toPattern(value, inputMask).length();
 
@@ -116,9 +120,9 @@ public interface TextFieldValidation extends Validation {
 				if (length != inputMaskLength)
 					return new Result(State.ERROR, 1207, IMessages.INSTANCE.mdc_validation__value_invalid());
 				else if (isRequired != null && isRequired)
-					return new Result(State.SUCCESS, "");
+					return new Result(State.SUCCESS);
 				else
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 
 			};
 		}
@@ -128,14 +132,18 @@ public interface TextFieldValidation extends Validation {
 		// //////////////////////////////////////////////////////////////////////////////////////
 
 		public static final TextFieldValidation date() {
-			return (value, inputMask, isRequired, minLength, maxLength) -> {
+			return (input) -> {
+
+				final String value = input.getValue();
+				final String inputMask = input.getInputMask();
+				final Boolean isRequired = input.isRequired();
 
 				if (inputMask == null)
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 				else if ((isRequired == null || !isRequired) && value.isEmpty())
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 				else if (isRequired != null && isRequired && value.isEmpty())
-					return new Result(State.ERROR, 1208, "");
+					return new Result(State.ERROR, 1208);
 
 				final String maskedValue = Masker.toPattern(value, inputMask);
 				final int length = maskedValue.length();
@@ -171,9 +179,9 @@ public interface TextFieldValidation extends Validation {
 				if (year < 1970 || year > 3000 || month < 1 || month > 12 || day < 0 || day > monthLength[month - 1])
 					return new Result(State.ERROR, 1211, IMessages.INSTANCE.mdc_validation__value_invalid());
 				if (isRequired)
-					return new Result(State.SUCCESS, "");
+					return new Result(State.SUCCESS);
 				else
-					return new Result(State.NONE, "");
+					return new Result(State.NONE);
 
 			};
 		}

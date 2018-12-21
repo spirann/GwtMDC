@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.ui.misc.input;
 
+import java.util.Collection;
+
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -33,8 +35,8 @@ import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
 import gwt.material.design.components.client.base.interfaces.HasReadOnly;
 import gwt.material.design.components.client.base.interfaces.HasState;
-import gwt.material.design.components.client.base.interfaces.HasTextFieldValidation;
 import gwt.material.design.components.client.base.interfaces.HasUnbordered;
+import gwt.material.design.components.client.base.interfaces.HasValidation;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.State;
@@ -43,6 +45,7 @@ import gwt.material.design.components.client.events.ValidationEvent.ValidationHa
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
+import gwt.material.design.components.client.validation.ValidationRegistration;
 
 /**
  * 
@@ -50,7 +53,7 @@ import gwt.material.design.components.client.validation.Validation.Result;
  *
  */
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
-		HasState, HasTextFieldValidation, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
+		HasState, HasValidation<MaterialInput, TextFieldValidation>, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
 
 	protected final MaterialInput input = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -202,12 +205,14 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		return input.getState();
 	}
 
-	public TextFieldValidation getValidation() {
-		return input.getValidation();
+	@Override
+	public ValidationRegistration addValidation(TextFieldValidation validation) {
+		return input.addValidation(validation);
 	}
-
-	public void setValidation(TextFieldValidation validation) {
-		input.setValidation(validation);
+	
+	@Override
+	public Collection<Result> validate() {
+		return input.validate();
 	}
 
 	@Override

@@ -32,7 +32,9 @@ import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.HasFired;
+import gwt.material.design.components.client.base.interfaces.HasValidation;
 import gwt.material.design.components.client.base.mixin.FiredMixin;
+import gwt.material.design.components.client.base.mixin.ValidationMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.FileType;
 import gwt.material.design.components.client.constants.InputType;
@@ -61,16 +63,19 @@ import gwt.material.design.components.client.events.StartEvent.StartHandler;
 import gwt.material.design.components.client.events.StopEvent;
 import gwt.material.design.components.client.events.StopEvent.HasStopHandlers;
 import gwt.material.design.components.client.events.StopEvent.StopHandler;
+import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.MaterialFileUpload.File;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsData;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsFile;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressData;
+import gwt.material.design.components.client.utils.helper.Formatation;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
 import gwt.material.design.components.client.validation.FileUploadValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
+import gwt.material.design.components.client.validation.ValidationRegistration;
 
 /**
  * https://github.com/blueimp/jQuery-File-Upload/wiki/Basic-plugin
@@ -78,17 +83,16 @@ import gwt.material.design.components.client.validation.Validation.Result;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasFired, HasStartHandlers, HasStopHandlers, HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, FileUploadValidation>,
+		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data>,
+		HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 	protected final List<JsFile> files = new LinkedList<>();
-
-	protected JsData data;
-	protected FileUploadValidation validation;
+	protected Collection<File> cacheFiles;
 
 	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
+	protected final ValidationMixin<MaterialFileUpload, FileUploadValidation> validationMixin = new ValidationMixin<>(this);
 
 	public MaterialFileUpload() {
 		super(InputType.FILE, CssName.MDC_FILE_UPLOAD);
@@ -112,6 +116,35 @@ public class MaterialFileUpload extends Input
 		options.maxFileSize = null;
 		options.progressInterval = 100;
 		options.bitrateInterval = 500;
+
+		addValidation((source) -> {
+
+			if (cacheFiles == null)
+				return new Result(State.NONE);
+
+			if (!source.isSingleFileUploads()) {
+				final Integer maxNumberOfFiles = source.getMaxNumberOfFiles();
+				if (maxNumberOfFiles != null && cacheFiles.size() > maxNumberOfFiles)
+					return new Result(State.ERROR, 2201, IMessages.INSTANCE.mdc_file_upload__err__max_number_of_files_exceeded(maxNumberOfFiles));
+
+				final int totalSize = cacheFiles.stream().mapToInt(f -> f.getSize()).sum();
+				final Integer limitMultiFileUploadSize = source.getLimitMultiFileUploadSize();
+				if (limitMultiFileUploadSize != null && totalSize > limitMultiFileUploadSize)
+					return new Result(State.ERROR, 2202, IMessages.INSTANCE.mdc_file_upload__err__max_limit_multi_upload_size_exceeded(Formatation.bytes(limitMultiFileUploadSize),
+							Formatation.bytes(totalSize)));
+
+			}
+
+			final Integer maxFileSize = source.getMaxFileSize();
+			if (maxFileSize != null)
+				for (MaterialFileUpload.File file : cacheFiles)
+					if (file.getSize() > maxFileSize)
+						return new Result(State.ERROR, 2203,
+								IMessages.INSTANCE.mdc_file_upload__err__file_size_is_too_bg(Formatation.bytes(maxFileSize), file.getName(), Formatation.bytes(file.getSize())));
+
+			return new Result(State.NONE);
+
+		});
 	}
 
 	protected void layout() {
@@ -154,8 +187,8 @@ public class MaterialFileUpload extends Input
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireChangeEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 		};
 
-		options.add = function(e, data) {			
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = data;
+		options.add = function(e, data) {
+
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 			if (validate) {
@@ -165,9 +198,8 @@ public class MaterialFileUpload extends Input
 				if (options.autoUpload)
 					data.submit();
 
-			} else {
+			} else
 				data.abort();
-			}
 
 			return validate;
 		};
@@ -191,12 +223,10 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.stop = function(e) {
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = null;
 			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireStopEvent()();
 		};
 
 		options.fail = function(e, data) {
-			_this.@gwt.material.design.components.client.ui.MaterialFileUpload::data = null;
 			if (data.errorThrown === 'abort')
 				_this.@gwt.material.design.components.client.ui.MaterialFileUpload::fireAbortEvent(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 			else
@@ -208,26 +238,20 @@ public class MaterialFileUpload extends Input
 	}-*/;
 
 	protected boolean validate(final JsData jsData) {
+		cacheFiles = this.listFiles(jsData);
+		final Collection<Result> erros = ValidationMixin.filterResults(validate(), State.ERROR);
+		erros.stream().forEach(result -> fireErrorEvent(jsData, result.getCode(), result.getMessage()));
+		return erros.isEmpty();
+	}
 
-		final Result defaultResult = FileUploadValidation.Defaults.default_validation().validate(this, toData(jsData).getFiles());
+	@Override
+	public ValidationRegistration addValidation(FileUploadValidation validation) {
+		return validationMixin.addValidation(validation);
+	}
 
-		boolean error = defaultResult.getState().equals(State.ERROR);
-
-		if (error)
-			fireErrorEvent(jsData, defaultResult.getCode(), defaultResult.getMessage());
-		else {
-
-			if (validation == null)
-				return true;
-
-			final Result result = validation.validate(this, toData(jsData).getFiles());
-			error = result.getState().equals(State.ERROR);
-
-			if (error)
-				fireErrorEvent(jsData, result.getCode(), result.getMessage());
-		}
-
-		return !error;
+	@Override
+	public Collection<Result> validate() {
+		return validationMixin.validate();
 	}
 
 	protected void addFiles(final JsFile[] files) {
@@ -258,17 +282,11 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected native JavaScriptObject submit(final JsFile[] files) /*-{
-		var data = this.@gwt.material.design.components.client.ui.MaterialFileUpload::data;
 		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();
 		return $wnd.jQuery(element).fileupload('send', {
 			files : files
 		});
 	}-*/;
-
-	public void abort() {
-		if (data != null)
-			data.abort();
-	}
 
 	public void fire() {
 		JsHelper.doClick(getElement());
@@ -797,11 +815,11 @@ public class MaterialFileUpload extends Input
 		public String getMineType() {
 			return mineType;
 		}
-		
+
 		public FileType getType() {
 			return type;
 		}
-		
+
 		/**
 		 * 
 		 * @return It`s a blob object
@@ -809,7 +827,7 @@ public class MaterialFileUpload extends Input
 		public JavaScriptObject getData() {
 			return data;
 		}
-		
+
 		/**
 		 * 
 		 * @return Turn the blob object into a url
@@ -889,7 +907,7 @@ public class MaterialFileUpload extends Input
 	public static interface UploadRequestResult {
 		public void onResult(final String result);
 	}
-	
+
 	public static class UploadRequest {
 
 		private final JavaScriptObject jqxhr;
@@ -908,9 +926,10 @@ public class MaterialFileUpload extends Input
 				return;
 
 			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
-			jqxhr.done(function(result) {
-				runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(result);
-			});
+			jqxhr
+					.done(function(result) {
+						runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(result);
+					});
 
 		}-*/;
 
@@ -919,10 +938,11 @@ public class MaterialFileUpload extends Input
 				return;
 
 			var jqxhr = this.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequest::jqxhr;
-			jqxhr.fail(function(data) {
-				if (data.statusText !== 'abort')
-					runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(data.statusText);
-			});
+			jqxhr
+					.fail(function(data) {
+						if (data.statusText !== 'abort')
+							runnable.@gwt.material.design.components.client.ui.MaterialFileUpload.UploadRequestResult::onResult(Ljava/lang/String;)(data.statusText);
+					});
 
 		}-*/;
 

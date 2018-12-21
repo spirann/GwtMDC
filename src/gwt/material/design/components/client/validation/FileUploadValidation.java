@@ -7,17 +7,7 @@ import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.MaterialFileUpload;
 import gwt.material.design.components.client.utils.helper.Formatation;
 
-public interface FileUploadValidation extends Validation {
-
-	/**
-	 * 
-	 * @param value
-	 * @param isRequired
-	 * @param minLength
-	 * @param maxLength
-	 * @return
-	 */
-	public Result validate(final MaterialFileUpload source, final Collection<MaterialFileUpload.File> files);
+public interface FileUploadValidation extends Validation<MaterialFileUpload> {
 
 	public class Defaults {
 
@@ -26,7 +16,9 @@ public interface FileUploadValidation extends Validation {
 		// //////////////////////////////////////////////////////////////////////////////////////
 
 		public static final FileUploadValidation default_validation() {
-			return (source, files) -> {
+			return (source) -> {
+				
+				final Collection<MaterialFileUpload.File> files = source.getFiles();
 
 				if (!source.isSingleFileUploads()) {
 					final Integer maxNumberOfFiles = source.getMaxNumberOfFiles();
@@ -52,7 +44,7 @@ public interface FileUploadValidation extends Validation {
 											Formatation.bytes(maxFileSize), file.getName(),
 											Formatation.bytes(file.getSize())));
 
-				return new Result(State.NONE, 0, "");
+				return new Result(State.NONE);
 
 			};
 		}

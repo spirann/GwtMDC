@@ -21,6 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
+import gwt.material.design.components.client.base.mixin.ValidationMixin;
 import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.masker.Masker;
@@ -66,12 +67,11 @@ public class MaterialDatePickerInput extends MaterialTextField {
 		add(dialog);
 
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());
-		setValidation(TextFieldValidation.Defaults.date());
+		addValidation(TextFieldValidation.Defaults.date());
+		
 		if (getPlaceholder() == null || getPlaceholder().isEmpty())
-			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/")
-					.replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
-					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy())
-					.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
+			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/").replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
+					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy()).replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
 		setIcon(IconType.EVENT);
 		setIconPosition(IconPosition.TRAILING);
 		setMaxLength(10);
@@ -116,16 +116,14 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	@SuppressWarnings("deprecation")
 	protected Date valueToDate(final String maskedValue) {
 
-		if(maskedValue.isEmpty())
+		if (maskedValue.isEmpty())
 			return null;
-		
-		final Result result = getValidation().validate(getValue(), getInputMask(), isRequired(), getMinLength(), getMaxLength());
+
+		final Result result = ValidationMixin.toResult(input.validate());
 		switch (result.getState()) {
-		case SUCCESS:
-		case NONE:
-			break;
-		default:
+		case ERROR:
 			return null;
+		default:
 		}
 
 		final String mask = getInputMask();
@@ -169,7 +167,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	public void setMinDate(Date minDate) {
 		dialog.setMinDate(minDate);
 	}
-	
+
 	public void setMinDate(String minDate) {
 		dialog.setMinDate(minDate);
 	}
@@ -181,20 +179,20 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	public void setMaxDate(Date maxDate) {
 		dialog.setMaxDate(maxDate);
 	}
-	
+
 	public void setMaxDate(String maxDate) {
 		dialog.setMaxDate(maxDate);
 	}
-	
+
 	public void setDateTooltip(final Date date, final String tooltip) {
 		dialog.setDateTooltip(date, tooltip);
 	}
-	
+
 	public String getDateTooltip(final Date date) {
 		return dialog.getDateTooltip(date);
 	}
-	
+
 	public String removeDateTooltip(final Date date) {
-		return dialog.removeDateTooltip(date); 
+		return dialog.removeDateTooltip(date);
 	}
 }
