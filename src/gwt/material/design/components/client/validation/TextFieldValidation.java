@@ -133,7 +133,6 @@ public interface TextFieldValidation extends Validation<MaterialInput> {
 
 		public static final TextFieldValidation date() {
 			return (input) -> {
-
 				final String value = input.getValue();
 				final String inputMask = input.getInputMask();
 				final Boolean isRequired = input.isRequired();

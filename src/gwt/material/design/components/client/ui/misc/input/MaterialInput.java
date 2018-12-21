@@ -156,7 +156,7 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 			jsElement.layout();
 	}-*/;
 
-	protected void fireValidation() {
+	public void fireValidation() {
 		final Collection<Result> results = validate();
 		applyResultValidation(ValidationMixin.toResult(results));
 		results.forEach(result -> fireValidationEvent(result));

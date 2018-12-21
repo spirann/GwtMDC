@@ -988,21 +988,24 @@ i.mdc-list-item__graphic {
 /* Configure state class */
 
 /* State = SUCCESS */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] .mdc-text-field__input:hover {
 	border-bottom-color: var(--mdc-state--success);}
 .mdc-text-field-container:not([disabled]) .mdc-text-field[state="success"] *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--success);
 	--mdc-input__focused-color: var(--mdc-state--success);}
 
 /* State = WARNING */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"] .mdc-text-field__input:hover {
 	border-bottom-color: var(--mdc-state--warning);}
 .mdc-text-field-container:not([disabled]) .mdc-text-field[state="warning"]  *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--warning);
 	--mdc-input__focused-color: var(--mdc-state--warning);}
 
 /* State = ERROR */
-.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-text-field__input {
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-text-field__input,
+.mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"] .mdc-text-field__input:hover {
 	border-bottom-color: var(--mdc-state--error);}
 .mdc-text-field-container:not([disabled]) .mdc-text-field[state="error"]  *:not(.mdc-text-field__input) {
 	--mdc-input__ink-color: var(--mdc-state--error);
