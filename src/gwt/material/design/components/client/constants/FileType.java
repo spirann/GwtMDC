@@ -21,6 +21,8 @@ package gwt.material.design.components.client.constants;
 
 import java.util.Arrays;
 
+import gwt.material.design.components.client.utils.helper.JsHelper;
+
 /**
  * 
  * @author Richeli Vargas
@@ -74,8 +76,8 @@ public enum FileType {
 
 	public static FileType fromMimeType(final String fileName, final String mimeType) {
 
-		final boolean nameInvalid = fileName == null || fileName.trim().isEmpty();
-		final boolean mineTypeInvalid = mimeType == null || mimeType.trim().isEmpty();
+		final boolean nameInvalid = JsHelper.isNull(fileName) ||  fileName.trim().isEmpty();
+		final boolean mineTypeInvalid = JsHelper.isNull(mimeType) ||  mimeType.trim().isEmpty();
 
 		if (nameInvalid && mineTypeInvalid)
 			return UNKNOW_TYPE;
