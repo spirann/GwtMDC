@@ -68,7 +68,6 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());
 		addValidation(TextFieldValidation.Defaults.date());
-		input.addKeyUpHandler(event -> input.fireValidation());
 		
 		if (getPlaceholder() == null || getPlaceholder().isEmpty())
 			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/").replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")

@@ -59,9 +59,11 @@ public interface TextFieldValidation extends Validation<MaterialInput> {
 				final int length = value.length();
 
 				if (minLength != null && length < minLength)
-					return new Result(State.ERROR, 1203, IMessages.INSTANCE.mdc_validation__less_than_min_length(minLength));
+					return new Result(State.ERROR, 1203,
+							IMessages.INSTANCE.mdc_validation__less_than_min_length(minLength));
 				else if (maxLength != null && length > maxLength)
-					return new Result(State.ERROR, 1204, IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
+					return new Result(State.ERROR, 1204,
+							IMessages.INSTANCE.mdc_validation__more_than_max_length(maxLength));
 
 				return new Result(stateOnSuccess);
 
@@ -85,7 +87,7 @@ public interface TextFieldValidation extends Validation<MaterialInput> {
 
 				final String value = input.getValue();
 				final Boolean isRequired = input.isRequired();
-				
+
 				if (isRequired != null && isRequired && value.isEmpty()) {
 					return new Result(State.ERROR, 1205, IMessages.INSTANCE.mdc_validation__required());
 				}
@@ -157,7 +159,7 @@ public interface TextFieldValidation extends Validation<MaterialInput> {
 				switch (inputMask) {
 				case "99/99/9999":
 				case "99-99-9999":
-					day = Integer.parseInt(maskedValue.substring(2));
+					day = Integer.parseInt(maskedValue.substring(0, 2));
 					month = Integer.parseInt(maskedValue.substring(3, 5));
 					year = Integer.parseInt(maskedValue.substring(6));
 					break;
