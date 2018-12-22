@@ -57,6 +57,10 @@ public class MaterialDatePickerInput extends MaterialTextField {
 			return valueToDate(value);
 		}
 	};
+	
+	public MaterialDatePickerInput() {
+		super();
+	}
 
 	@Override
 	protected void onInitialize() {
@@ -65,7 +69,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 		dialog.addAcceptHandler(event -> setValue(stringToDate.convert(dialog.getValue())));
 
 		add(dialog);
-
+		
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());
 		addValidation(TextFieldValidation.Defaults.date());
 		

@@ -34,6 +34,7 @@ import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent.HasIconClickHandlers;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
+import gwt.material.design.components.client.utils.debug.Console;
 
 /**
  * 
@@ -107,6 +108,7 @@ public class MaterialTextField extends MaterialInputBox implements HasRequired, 
 
 	@Override
 	public void setInputMask(String inputMask) {
+		Console.log("input mask");
 		input.setInputMask(inputMask);
 	}
 

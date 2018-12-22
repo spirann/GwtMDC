@@ -33,8 +33,7 @@ import gwt.material.design.components.client.masker.Masker;
  * @author Richeli Vargas
  *
  */
-public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String>
-		implements HasInputMask {
+public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String> implements HasInputMask {
 
 	public InputMaskMixin(UIO uiObject) {
 		super(uiObject, CssAttribute.INPUT_MASK, FromString.TO_STRING);
@@ -47,8 +46,11 @@ public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin
 	 */
 	@Override
 	public void setInputMask(String inputMask) {
+		if (getValue() != null)
+			Masker.unMask(uiObject.getElement());
+
 		setValue(inputMask);
-		Masker.unMask(uiObject.getElement());
+
 		if (inputMask != null)
 			Masker.maskPattern(uiObject.getElement(), inputMask);
 	}

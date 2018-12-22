@@ -22,13 +22,14 @@
       mergeMoneyOptions = function(opts) {
         opts = opts || {};
         opts = {
+          delimiter: opts.delimiter || ".",
+          lastOutput: opts.lastOutput,
           precision: opts.hasOwnProperty("precision") ? opts.precision : 2,
           separator: opts.separator || ",",
-          delimiter: opts.delimiter || ".",
-          unit: opts.unit && (opts.unit.replace(/[\s]/g,'') + " ") || "",
+          showSignal: opts.showSignal,
           suffixUnit: opts.suffixUnit && (" " + opts.suffixUnit.replace(/[\s]/g,'')) || "",
-          zeroCents: opts.zeroCents,
-          lastOutput: opts.lastOutput
+          unit: opts.unit && (opts.unit.replace(/[\s]/g,'') + " ") || "",
+          zeroCents: opts.zeroCents
         };
         opts.moneyPrecision = opts.zeroCents ? 0 : opts.precision;
         return opts;
@@ -96,7 +97,7 @@
     this.opts = {};
     this.bindElementToMask("toNumber");
   };
-  
+
   VanillaMasker.prototype.maskAlphaNum = function() {
     this.opts = {};
     this.bindElementToMask("toAlphaNumeric");
@@ -127,19 +128,31 @@
           zeroRegExp = new RegExp(zeroMatcher, "g"),
           digitsLength = value.toString().replace(/[\D]/g, "").length || 0,
           lastDigitLength = opts.lastOutput.toString().replace(/[\D]/g, "").length || 0
-      ;
+          ;
       value = value.toString().replace(zeroRegExp, "");
       if (digitsLength < lastDigitLength) {
         value = value.slice(0, value.length - 1);
       }
     }
-    var number = value.toString().replace(/[\D]/g, ""),
-        clearDelimiter = new RegExp("^(0|\\"+ opts.delimiter +")"),
+
+    var number = value.toString();
+    // if separator is in string, make sure we zero-pad to respect it
+    var separatorIndex = number.indexOf(opts.separator),
+        missingZeros = (opts.precision - (number.length - separatorIndex - 1));
+
+    if (separatorIndex !== -1 && (missingZeros > 0) ) {
+      number = number + ('0' * missingZeros);
+    }
+
+    number = number.replace(/[\D]/g, "");
+
+    var clearDelimiter = new RegExp("^(0|\\"+ opts.delimiter +")"),
         clearSeparator = new RegExp("(\\"+ opts.separator +")$"),
         money = number.substr(0, number.length - opts.moneyPrecision),
         masked = money.substr(0, money.length % 3),
         cents = new Array(opts.precision + 1).join("0")
-    ;
+        ;
+
     money = money.substr(money.length % 3, money.length);
     for (var i = 0, len = money.length; i < len; i++) {
       if (i % 3 === 0) {
@@ -149,16 +162,20 @@
     }
     masked = masked.replace(clearDelimiter, "");
     masked = masked.length ? masked : "0";
+    var signal = "";
+    if(opts.showSignal === true) {
+      signal = value < 0 || (value.startsWith && value.startsWith('-')) ? "-" :  "";
+    }
     if (!opts.zeroCents) {
-      var beginCents = number.length - opts.precision,
+      var beginCents = Math.max(0, number.length - opts.precision),
           centsValue = number.substr(beginCents, opts.precision),
           centsLength = centsValue.length,
           centsSliced = (opts.precision > centsLength) ? opts.precision : centsLength
       ;
       cents = (cents + centsValue).slice(-centsSliced);
     }
-    var output = opts.unit + masked + opts.separator + cents + opts.suffixUnit;
-    return output.replace(clearSeparator, "");
+    var output = opts.unit + signal + masked + opts.separator + cents;
+    return output.replace(clearSeparator, "") + opts.suffixUnit;
   };
 
   VMasker.toPattern = function(value, opts) {
@@ -172,7 +189,7 @@
         outputLength = output.length,
         placeholder = (typeof opts === 'object' ? opts.placeholder : undefined)
     ;
-    
+
     for (i = 0; i < outputLength; i++) {
       // Reached the end of input
       if (index >= values.length) {
@@ -199,7 +216,11 @@
           else{
             return output.slice(0, i).join("");
           }
+        // exact match for a non-magic character
+        } else if (output[i] === values[index]) {
+          index++;
         }
+
       }
     }
     return output.join("").substr(0, i);
@@ -208,7 +229,7 @@
   VMasker.toNumber = function(value) {
     return value.toString().replace(/(?!^-)[^0-9]/g, "");
   };
-  
+
   VMasker.toAlphaNumeric = function(value) {
     return value.toString().replace(/[^a-z0-9 ]+/i, "");
   };

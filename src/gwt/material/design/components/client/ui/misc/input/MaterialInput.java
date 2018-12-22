@@ -69,8 +69,6 @@ import gwt.material.design.components.client.events.ValidationEvent.HasValidatio
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
-import gwt.material.design.components.client.utils.debug.Console;
-import gwt.material.design.components.client.utils.helper.TimerHelper;
 import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
@@ -149,7 +147,10 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		add(lineRipple);
 		add(notchedOutline);
 
-		input.addKeyPressHandler(event -> TimerHelper.schedule(100, () -> fireValidation()));
+		//input.addKeyUpHandler(event -> fireValidation());
+		keyUp(input.getElement(), () -> fireValidation());
+		// input.addKeyPressHandler(event -> TimerHelper.schedule(100, () ->
+		// fireValidation()));
 
 		super.onInitialize();
 
@@ -160,20 +161,26 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		inputIconMixin.updateIconPositionClass();
 	}
 
+	protected native void keyUp(final Element input, final Runnable runnable)/*-{
+		if (input)
+			$wnd.jQuery(input).on('keyup', function(event) {
+				runnable.@java.lang.Runnable::run()();
+			});
+	}-*/;
+
 	protected native void layout()/*-{
 		var jsElement = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		if (jsElement)
 			jsElement.layout();
 	}-*/;
 
-	protected void fireValidation() {
+	private void fireValidation() {
 		final Collection<Result> results = validate();
 		applyResultValidation(ValidationMixin.toResult(results));
 		results.forEach(result -> fireValidationEvent(result));
 	}
 
 	protected void applyResultValidation(final Result result) {
-		Console.log(result.getState().toString() + ": " + getValue());
 		setState(result.getState());
 	}
 
