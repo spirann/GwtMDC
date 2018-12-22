@@ -59,7 +59,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 	};
 	
 	public MaterialDatePickerInput() {
-		super();
+		super();;
 	}
 
 	@Override
@@ -70,7 +70,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 		add(dialog);
 		
-		setInputMask(Masker.Defaults.INSTANCE.date__mask());
+		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
 		addValidation(TextFieldValidation.Defaults.date());
 		
 		if (getPlaceholder() == null || getPlaceholder().isEmpty())
