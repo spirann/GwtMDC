@@ -19,7 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc.chart.js.base;
 
-import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JavaScriptObject;
 
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
@@ -30,32 +30,15 @@ import jsinterop.annotations.JsType;
  * @author Richeli Vargas
  *
  */
-@SuppressWarnings("rawtypes")
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-public class JsChartOptions {
+public class JsTooltipOptions {
 
 	@JsProperty
-    public String width;
+    public JavaScriptObject transformTooltipTextFnc;
 	
 	@JsProperty
-    public String height;
-	
-	@JsProperty
-    public JsChartClassNames classNames;
+    public String pointClass;
 
     @JsProperty
-    public Double high;
-    
-    @JsProperty
-    public Double low;
-
-    @JsProperty
-    public boolean showLabel;
-    
-    @JsProperty
-    public boolean reverseData;
-    
-    @JsProperty
-    public JsArray plugins;
-
+    public boolean showTooltip;
 }

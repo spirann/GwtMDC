@@ -37,6 +37,7 @@
 
     Chartist.plugins = Chartist.plugins || {};
     Chartist.plugins.tooltip = function (options) {
+      var originalOptions = options;	
       options = Chartist.extend({}, defaultOptions, options);
 
       return function tooltip(chart) {
@@ -52,7 +53,7 @@
           }
         }
 
-        var $chart = chart.container;		
+        var $chart = chart.container;
         var $toolTip = $chart.querySelector('.chartist-tooltip');
         if (!$toolTip) {
           var styles = 'mdc-tooltip mdc-typography mdc-typography--caption chartist-tooltip ';
@@ -65,24 +66,26 @@
         hide($toolTip);
 
         function on(event, selector, callback) {
-          $chart.addEventListener(event, function (e) {
-            if (!selector || hasClass(e.target, selector))
-              callback(e);
-          });
+          var fireCallback = function (e) {          		
+            if (originalOptions.showTooltip){
+            	if (!selector || hasClass(e.target, selector))
+           			callback(e);
+            } else
+            	$chart.removeEventListener(event, fireCallback);            	            
+          }
+          $chart.addEventListener(event, fireCallback);
         }
 
         on('mouseover', tooltipSelector, function (event) {
-        
           var $point = event.target;
           var tooltipText = '';
-          
 
           var isPieChart = (chart instanceof Chartist.Pie) ? $point : $point.parentNode;
           var seriesName = (isPieChart) ? $point.parentNode.getAttribute('ct:meta') || $point.parentNode.getAttribute('ct:series-name') : '';
           var meta = $point.getAttribute('ct:meta') || seriesName || '';
           var hasMeta = !!meta;
           var value = $point.getAttribute('ct:value');
-
+          
           $point.setAttribute('tooltip', 'visible');
 
           if (options.transformTooltipTextFnc && typeof options.transformTooltipTextFnc === 'function') {

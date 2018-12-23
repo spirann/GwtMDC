@@ -41,6 +41,7 @@ import gwt.material.design.components.client.constants.HtmlElements;
 import gwt.material.design.components.client.ui.misc.chart.helper.ChartHelper;
 import gwt.material.design.components.client.ui.misc.chart.js.base.JsChartData;
 import gwt.material.design.components.client.ui.misc.chart.js.base.JsChartOptions;
+import gwt.material.design.components.client.ui.misc.chart.js.base.JsTooltipOptions;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
@@ -59,6 +60,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	private MaterialChartSerie<V, L>[] value;
 
 	protected O options;
+	protected final JsTooltipOptions tooltipOptions = new JsTooltipOptions();
 
 	private boolean initialized = false;
 
@@ -89,7 +91,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	}
 
 	protected void initializeDefaultOptions() {
-		this.options.showTooltip = false;
+		this.tooltipOptions.showTooltip = false;
 		this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
 	}
 
@@ -97,8 +99,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 		final List<JavaScriptObject> plugins = new LinkedList<>();
 
-		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(options, this.options.showTooltip);
-		if (this.options.showTooltip && tooltipPlugin != null)
+		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(options);
+		if (this.tooltipOptions.showTooltip && tooltipPlugin != null)
 			plugins.add(tooltipPlugin);
 
 		return plugins;
@@ -113,15 +115,14 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		new $wnd.ResizeSensor(element, handler);
 	}-*/;
 
-	protected final native JavaScriptObject loadTooltipPlugin(final O options, final boolean addTooltipPlugin)/*-{
+	protected final native JavaScriptObject loadTooltipPlugin(final O options)/*-{
 
 		var _this = this;
 		var element = this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::getElement()();
 		var tooltipClass = @gwt.material.design.components.client.constants.CssName::MDC_CHART__TOOLTIP;
+		var tooltipOptions = _this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::tooltipOptions; 
 		
-		@gwt.material.design.components.client.utils.helper.DOMHelper::removeByClass(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
-
-		if (!addTooltipPlugin)
+		if (!tooltipOptions.showTooltip)
 			return null;
 
 		// Instantiete the plugin
@@ -147,11 +148,11 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 			return _this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
 		};
 
+		tooltipOptions.transformTooltipTextFnc = func;
+		tooltipOptions.pointClass = pointClass;
+
 		// Create the tooltip plugin
-		var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
-			transformTooltipTextFnc : func,
-			pointClass : pointClass
-		});
+		var tooltipPlugin = $wnd.Chartist.plugins.tooltip(tooltipOptions);
 
 		return tooltipPlugin;
 
@@ -374,7 +375,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	// Tooltip
 
 	public boolean isShowTooltip() {
-		return this.options.showTooltip;
+		return this.tooltipOptions.showTooltip;
 	}
 
 	/**
@@ -383,7 +384,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	 * @param showTooltip
 	 */
 	public void setShowTooltip(boolean showTooltip) {
-		this.options.showTooltip = showTooltip;
+		this.tooltipOptions.showTooltip = showTooltip;
 		redraw(false);
 	}
 
