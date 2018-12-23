@@ -19,8 +19,10 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
+import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Node;
@@ -37,52 +39,119 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DOMHelper {
 
-	public static Element getChildElementByClass(Element parent, String className) {
-		if (parent != null) {
-			for (int i = 0; i < parent.getChildCount(); i++) {
-				Node childNode = parent.getChild(i);
-				if (Element.is(childNode)) {
-					Element child = Element.as(childNode);
-					if (child.getClassName().contains(className)) {
-						return child;
-					}
+	private final static boolean isClassOrId(final String selector) {
+		return selector.startsWith(".") || selector.startsWith("#");
+	}
 
-					if (child.getChildCount() > 0) {
+	private final static String toClass(final String selector) {
+		return Arrays.asList(selector.split(" ")).stream().map(_class -> isClassOrId(_class) ? _class : "." + _class)
+				.collect(Collectors.joining(" "));
+	}
+	
+	private final static String toId(final String selector) {
+		return Arrays.asList(selector.split(" ")).stream().map(_class -> isClassOrId(_class) ? _class : "#" + _class)
+				.collect(Collectors.joining(" "));
+	}
+
+	// //////////////////////////////////////////////////////////
+	// Remove methods
+	// //////////////////////////////////////////////////////////
+
+	public static void removeByClass(final String selector) {
+		remove(toClass(selector));
+	}
+
+	public static void removeByClass(final String selector, final Element parent) {
+		remove(toClass(selector), parent);
+	}
+
+	public static void removeById(final String selector) {
+		remove(toId(selector));
+	}
+
+	public static void removeById(final String selector, final Element parent) {
+		remove(toId(selector), parent);
+	}
+
+	public static native void remove(final String selector)/*-{
+		$wnd.jQuery(selector).remove();
+	}-*/;
+
+	public static native void remove(final String selector, final Element parent)/*-{
+		$wnd.jQuery(parent).find(selector).remove();
+	}-*/;
+
+	// //////////////////////////////////////////////////////////
+	// Contains methods
+	// //////////////////////////////////////////////////////////
+
+	public static boolean containsByClass(final String selector) {
+		return contains(toClass(selector));
+	}
+
+	public static boolean containsByClass(final String selector, final Element parent) {
+		return contains(toClass(selector), parent);
+	}
+
+	public static boolean containsById(final String selector) {
+		return contains(toId(selector));
+	}
+
+	public static boolean containsById(final String selector, final Element parent) {
+		return contains(toId(selector), parent);
+	}
+
+	public static native boolean contains(final String selector)/*-{
+		return $wnd.jQuery($doc).find(selector).length > 0;
+	}-*/;
+
+	public static native boolean contains(final String selector, final Element parent)/*-{
+		return $wnd.jQuery(parent).find(selector).length > 0;
+	}-*/;
+
+	// //////////////////////////////////////////////////////////
+	// Others methods
+	// //////////////////////////////////////////////////////////
+
+	public static Element getChildElementByClass(Element parent, String className) {
+		if (parent != null)
+			for (int i = 0; i < parent.getChildCount(); i++) {
+				final Node childNode = parent.getChild(i);
+				if (Element.is(childNode)) {
+					final Element child = Element.as(childNode);
+					if (child.getClassName().contains(className))
+						return child;
+
+					if (child.getChildCount() > 0)
 						return getChildElementByClass(child, className);
-					}
+
 				}
 			}
-		}
 		return null;
 	}
 
 	public static Element getChildElementById(Element parent, String id) {
-		if (parent != null) {
+		if (parent != null)
 			for (int i = 0; i < parent.getChildCount(); i++) {
 				Node childNode = parent.getChild(i);
 				if (Element.is(childNode)) {
 					Element child = Element.as(childNode);
-					if (child.getId().equals(id)) {
+					if (child.getId().equals(id))
 						return child;
-					}
 
-					if (child.getChildCount() > 0) {
+					if (child.getChildCount() > 0)
 						return getChildElementById(child, id);
-					}
+
 				}
 			}
-		}
 		return null;
 	}
 
 	public static Widget getChildWidgetById(HasWidgets parent, String id) {
-		if (parent != null) {
-			for (Widget child : parent) {
-				if (child.getElement().getId().equals(id)) {
+		if (parent != null)
+			for (Widget child : parent)
+				if (child.getElement().getId().equals(id))
 					return child;
-				}
-			}
-		}
 		return null;
 	}
 
@@ -91,26 +160,25 @@ public class DOMHelper {
 	}
 
 	public static Element getElementByAttribute(NodeList<Element> elems, String attr, String value) {
-		if (elems != null) {
+		if (elems != null)
 			for (int i = 0; i < elems.getLength(); i++) {
 				Element child = elems.getItem(i);
-				if (child.getAttribute(attr).equals(value)) {
+				if (child.getAttribute(attr).equals(value))
 					return child;
-				}
+
 			}
-		}
 		return null;
 	}
 
 	@SuppressWarnings("unchecked")
-	public static <W extends Widget> Set<W> findByClass(final Class<W> _class, final Widget parent) {		
+	public static <W extends Widget> Set<W> findByClass(final Class<W> _class, final Widget parent) {
 		final Set<W> widgets = new LinkedHashSet<>();
 		if (parent instanceof ComplexPanel) {
 			final ComplexPanel complexPanel = (ComplexPanel) parent;
 			for (int w = 0; w < complexPanel.getWidgetCount(); w++) {
 				final Widget child = complexPanel.getWidget(w);
 				if (child.getClass() == _class)
-					widgets.add((W) child);				
+					widgets.add((W) child);
 				widgets.addAll(findByClass(_class, child));
 			}
 		}

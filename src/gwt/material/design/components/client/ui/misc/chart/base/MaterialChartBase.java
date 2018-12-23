@@ -51,7 +51,8 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialUIObject implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
+public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialUIObject
+		implements HasValue<MaterialChartSerie<V, L>[]>, HasChartAspectRatio {
 
 	private boolean valueChangeHandlerInitialized;
 
@@ -61,13 +62,13 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 	private boolean initialized = false;
 
-	protected final ChartAspectRatioMixin<MaterialChartBase<V, L, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(this);
+	protected final ChartAspectRatioMixin<MaterialChartBase<V, L, O>> aspectRatioMixin = new ChartAspectRatioMixin<>(
+			this);
 
 	// /////////////////////////////////////////////////////////////
 	// Plugings
 	// /////////////////////////////////////////////////////////////
 	private ChartValueFormatter formatter;
-	private boolean showTooltip = false;
 
 	// /////////////////////////////////////////////////////////////
 	// Animation
@@ -88,6 +89,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	}
 
 	protected void initializeDefaultOptions() {
+		this.options.showTooltip = false;
 		this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
 	}
 
@@ -95,8 +97,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 
 		final List<JavaScriptObject> plugins = new LinkedList<>();
 
-		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(getElement(), options, showTooltip);
-		if (tooltipPlugin != null)
+		final JavaScriptObject tooltipPlugin = loadTooltipPlugin(options, this.options.showTooltip);
+		if (this.options.showTooltip && tooltipPlugin != null)
 			plugins.add(tooltipPlugin);
 
 		return plugins;
@@ -111,46 +113,47 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		new $wnd.ResizeSensor(element, handler);
 	}-*/;
 
-	protected final native JavaScriptObject loadTooltipPlugin(final Element element, final O options, final boolean addTooltipPlugin)/*-{
+	protected final native JavaScriptObject loadTooltipPlugin(final O options, final boolean addTooltipPlugin)/*-{
 
 		var _this = this;
-
+		var element = this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::getElement()();
 		var tooltipClass = @gwt.material.design.components.client.constants.CssName::MDC_CHART__TOOLTIP;
-		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElementsByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
+		
+		@gwt.material.design.components.client.utils.helper.DOMHelper::removeByClass(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(tooltipClass, element);
+
+		if (!addTooltipPlugin)
+			return null;
 
 		// Instantiete the plugin
-		if (addTooltipPlugin) {
+		// Find correct point class
+		var pointClass;
+		if (options.classNames.point)
+			pointClass = options.classNames.point;
+		else if (options.classNames.bar)
+			pointClass = options.classNames.bar;
+		else if (options.classNames.slicePie)
+			pointClass = options.classNames.slicePie;
+		else if (options.donut && !options.donutSolid
+				&& options.classNames.sliceDonut)
+			pointClass = options.classNames.sliceDonut;
+		else if (options.donut && options.donutSolid
+				&& options.classNames.sliceDonutSolid)
+			pointClass = options.classNames.sliceDonutSolid;
+		else if (options.classNames.slicePie)
+			pointClass = options.classNames.slicePie;
 
-			// Find correct point class
-			var pointClass;
-			if (options.classNames.point)
-				pointClass = options.classNames.point;
-			else if (options.classNames.bar)
-				pointClass = options.classNames.bar;
-			else if (options.classNames.slicePie)
-				pointClass = options.classNames.slicePie;
-			else if (options.donut && !options.donutSolid
-					&& options.classNames.sliceDonut)
-				pointClass = options.classNames.sliceDonut;
-			else if (options.donut && options.donutSolid
-					&& options.classNames.sliceDonutSolid)
-				pointClass = options.classNames.sliceDonutSolid;
-			else if (options.classNames.slicePie)
-				pointClass = options.classNames.slicePie;
+		// Create a function to format the value
+		var func = function(value) {
+			return _this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
+		};
 
-			// Create a function to format the value
-			var func = function(value) {
-				return _this.@gwt.material.design.components.client.ui.misc.chart.base.MaterialChartBase::format(Ljava/lang/Double;)(value);
-			};
+		// Create the tooltip plugin
+		var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
+			transformTooltipTextFnc : func,
+			pointClass : pointClass
+		});
 
-			// Create the tooltip plugin
-			var tooltipPlugin = $wnd.Chartist.plugins.tooltip({
-				transformTooltipTextFnc : func,
-				pointClass : pointClass
-			});
-
-			return tooltipPlugin;
-		}
+		return tooltipPlugin;
 
 	}-*/;
 
@@ -173,11 +176,11 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	protected void redraw(final boolean animate) {
 		if (initialized && jsElement != null) {
 			this.options.plugins = JsHelper.toJsArray(getPlugins().stream().toArray());
-
 			// Some redrawers does not need be animated
-			final boolean isAnimated = isAnimated();			
-			setAnimated(animate);			
+			final boolean isAnimated = isAnimated();
+			setAnimated(animate);
 			jsInit();
+			//update(jsElement, getValue() == null ? new JsChartData() : ChartHelper.toNativeData(getValue()), options);
 			setAnimated(isAnimated);
 		}
 	}
@@ -186,7 +189,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 		chart.off();
 	}-*/;
 
-	protected native void update(final JavaScriptObject chart, final JsChartData data, final JsChartOptions options) /*-{
+	protected native void update(final JavaScriptObject chart, final JsChartData data,
+			final JsChartOptions options) /*-{
 		chart.update(data, options, true);
 	}-*/;
 
@@ -202,7 +206,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 			for (int v = 0; v < getValue().length; v++) {
 				final Color color = getValue()[v].getColor();
 				if (color != null)
-					setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v), color.getCssName());
+					setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(v),
+							color.getCssName());
 			}
 		}
 
@@ -279,7 +284,8 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	public void setColors(String colors) {
 		final String[] colorsArray = colors.split(" ");
 		for (int i = 0; i < colorsArray.length; i++)
-			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i), Color.valueOf(colorsArray[i]).getCssName());
+			setCssProperty(CssMixin.MDC_CHARTIST__SERIES + "_" + ChartHelper.alphaNumerate(i),
+					Color.valueOf(colorsArray[i]).getCssName());
 	}
 
 	public void setColors(Color... colors) {
@@ -368,7 +374,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	// Tooltip
 
 	public boolean isShowTooltip() {
-		return showTooltip;
+		return this.options.showTooltip;
 	}
 
 	/**
@@ -377,7 +383,7 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	 * @param showTooltip
 	 */
 	public void setShowTooltip(boolean showTooltip) {
-		this.showTooltip = showTooltip;
+		this.options.showTooltip = showTooltip;
 		redraw(false);
 	}
 

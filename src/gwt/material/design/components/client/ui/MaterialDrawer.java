@@ -46,7 +46,6 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 
 	protected final TypeMixin<MaterialDrawer, DrawerType> typeMixin = new TypeMixin<>(this);
 	protected final TogglerMixin<MaterialDrawer> togglerMixin = new TogglerMixin<>(this);
-	
 
 	public MaterialDrawer() {
 		super(CssName.MDC_DRAWER);
@@ -62,15 +61,16 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 		var className = element.className;
 		var isModal = className.indexOf(modalClass) != -1;
 		var isDismissible = className.indexOf(dismissibleClass) != -1;
-		var containsModal = @gwt.material.design.components.client.utils.helper.JsHelper::containsElementByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(modalClass, parent);		
+		var containsModal = @gwt.material.design.components.client.utils.helper.DOMHelper::containsByClass(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(modalClass, parent);
 
-		@gwt.material.design.components.client.utils.helper.JsHelper::removeAllElementsByClassName(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(scrimClass, parent);
+		@gwt.material.design.components.client.utils.helper.DOMHelper::removeByClass(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;)(scrimClass, parent);
+
 		if (containsModal) {
 			var div = $doc.createElement("div");
 			div.className = scrimClass;
 			$wnd.jQuery(div).insertAfter(element);
 		}
-		
+
 		if (!isModal && !isDismissible)
 			return element;
 
@@ -98,10 +98,10 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 			element.setAttribute("open", open);
 		}
 	}-*/;
-	
+
 	@Override
 	public void setToggler(String togglerId) {
-		togglerMixin.setToggler(togglerId);		
+		togglerMixin.setToggler(togglerId);
 	}
 
 	@Override
@@ -122,7 +122,7 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	@Override
 	public void setType(DrawerType type) {
 		typeMixin.setType(type);
-		if(initialized)
+		if (initialized)
 			jsInit();
 	}
 

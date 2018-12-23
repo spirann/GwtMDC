@@ -52,7 +52,7 @@
           }
         }
 
-        var $chart = chart.container;
+        var $chart = chart.container;		
         var $toolTip = $chart.querySelector('.chartist-tooltip');
         if (!$toolTip) {
           var styles = 'mdc-tooltip mdc-typography mdc-typography--caption chartist-tooltip ';
@@ -72,15 +72,17 @@
         }
 
         on('mouseover', tooltipSelector, function (event) {
+        
           var $point = event.target;
           var tooltipText = '';
+          
 
           var isPieChart = (chart instanceof Chartist.Pie) ? $point : $point.parentNode;
           var seriesName = (isPieChart) ? $point.parentNode.getAttribute('ct:meta') || $point.parentNode.getAttribute('ct:series-name') : '';
           var meta = $point.getAttribute('ct:meta') || seriesName || '';
           var hasMeta = !!meta;
           var value = $point.getAttribute('ct:value');
-          
+
           $point.setAttribute('tooltip', 'visible');
 
           if (options.transformTooltipTextFnc && typeof options.transformTooltipTextFnc === 'function') {

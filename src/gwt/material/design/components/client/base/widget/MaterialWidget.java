@@ -83,7 +83,6 @@ import gwt.material.design.components.client.base.interfaces.HasAutoInitData;
 import gwt.material.design.components.client.base.interfaces.HasDataObject;
 import gwt.material.design.components.client.base.interfaces.HasElevation;
 import gwt.material.design.components.client.base.interfaces.HasHideOn;
-import gwt.material.design.components.client.base.interfaces.HasId;
 import gwt.material.design.components.client.base.interfaces.HasInitialClasses;
 import gwt.material.design.components.client.base.interfaces.HasInteractionHandlers;
 import gwt.material.design.components.client.base.interfaces.HasRipple;
@@ -116,7 +115,6 @@ import gwt.material.design.components.client.events.DropEvent;
 import gwt.material.design.components.client.events.ResizeEvent;
 import gwt.material.design.components.client.events.ResizeEvent.HasResizeHandlers;
 import gwt.material.design.components.client.events.ResizeEvent.ResizeHandler;
-import gwt.material.design.components.client.utils.helper.IdHelper;
 
 /**
  * 
@@ -125,7 +123,7 @@ import gwt.material.design.components.client.utils.helper.IdHelper;
  */
 @SuppressWarnings("deprecation")
 public class MaterialWidget extends MaterialUIObject
-		implements HasId, HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasResizeHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl,
+		implements HasInitialClasses, HasEnabled, HasInteractionHandlers, HasAllFocusHandlers, HasResizeHandlers, HasAutoInitData, HasRole, HasRipple, HasElevation, HasRtl,
 		HasHideOn, HasAlt, HasAriaLabel, HasTabindex, HasAriaControls, HasAriaDescribedBy, HasAriaSelected, HasAriaModal, HasAriaLabelledBy, HasTooltip, HasDataObject {
 
 	static {
@@ -176,7 +174,6 @@ public class MaterialWidget extends MaterialUIObject
 	protected final TypeMixin<MaterialWidget, HideOn> hideOnMixin = new TypeMixin<>(this);
 	protected final TooltipMixin<MaterialWidget> tooltipMixin = new TooltipMixin<>(this);
 	protected final AttributeMixin<MaterialWidget, Role> roleMixin = new AttributeMixin<>(this, CssAttribute.ROLE, value -> Role.fromStyleName(value));
-	protected final AttributeMixin<MaterialWidget, String> idMixin = new AttributeMixin<>(this, CssAttribute.ID, FromString.TO_STRING);
 	protected final AttributeMixin<MaterialWidget, String> rtlMixin = new AttributeMixin<>(this, CssAttribute.DIR, FromString.TO_STRING);
 	protected final AttributeMixin<MaterialWidget, String> altMixin = new AttributeMixin<>(this, CssAttribute.ALT, FromString.TO_STRING);
 	protected final AttributeMixin<MaterialWidget, String> ariaLabelMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LABEL, FromString.TO_STRING);
@@ -195,7 +192,6 @@ public class MaterialWidget extends MaterialUIObject
 
 	public MaterialWidget(Element element) {
 		super(element);
-		setId(IdHelper.createUniqueUiId());
 	}
 
 	public MaterialWidget(Element element, String... initialClass) {
@@ -615,16 +611,6 @@ public class MaterialWidget extends MaterialUIObject
 	public HandlerRegistration addResizeHandler(final ResizeHandler handler) {
 		initializeResizeSensor();
 		return addHandler(handler, ResizeEvent.getType());
-	}
-
-	@Override
-	public void setId(String id) {
-		idMixin.setValue(id);
-	}
-
-	@Override
-	public String getId() {
-		return idMixin.getValue();
 	}
 
 	@Override

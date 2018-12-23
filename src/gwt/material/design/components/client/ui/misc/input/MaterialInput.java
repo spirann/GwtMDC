@@ -22,6 +22,7 @@ package gwt.material.design.components.client.ui.misc.input;
 import java.util.Collection;
 
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.BrowserEvents;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
@@ -69,6 +70,7 @@ import gwt.material.design.components.client.events.ValidationEvent.HasValidatio
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
+import gwt.material.design.components.client.utils.helper.UiHelper;
 import gwt.material.design.components.client.validation.TextFieldValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
@@ -147,11 +149,8 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		add(lineRipple);
 		add(notchedOutline);
 
-		//input.addKeyUpHandler(event -> fireValidation());
-		keyUp(input.getElement(), () -> fireValidation());
-		// input.addKeyPressHandler(event -> TimerHelper.schedule(100, () ->
-		// fireValidation()));
-
+		// Add event to fire validation	
+		UiHelper.bindNativeEvent(input, BrowserEvents.KEYUP, () -> fireValidation());
 		super.onInitialize();
 
 		// To prevent label over the placeholder when input is empty
@@ -160,13 +159,6 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 		// Update icon position class
 		inputIconMixin.updateIconPositionClass();
 	}
-
-	protected native void keyUp(final Element input, final Runnable runnable)/*-{
-		if (input)
-			$wnd.jQuery(input).on('keyup', function(event) {
-				runnable.@java.lang.Runnable::run()();
-			});
-	}-*/;
 
 	protected native void layout()/*-{
 		var jsElement = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;

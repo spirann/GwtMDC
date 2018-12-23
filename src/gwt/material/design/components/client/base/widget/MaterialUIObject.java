@@ -31,11 +31,15 @@ import com.google.gwt.resources.client.ImageResource;
 import com.google.gwt.safehtml.shared.SafeHtml;
 import com.google.gwt.user.client.ui.ComplexPanel;
 
+import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasFlexbox;
+import gwt.material.design.components.client.base.interfaces.HasId;
 import gwt.material.design.components.client.base.mixin.FlexboxMixin;
+import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.constants.BorderCollapse;
 import gwt.material.design.components.client.constants.BorderRadius;
 import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.Display;
 import gwt.material.design.components.client.constants.Flex;
@@ -45,6 +49,7 @@ import gwt.material.design.components.client.constants.FlexAlignSelf;
 import gwt.material.design.components.client.constants.FlexDirection;
 import gwt.material.design.components.client.constants.FlexJustifyContent;
 import gwt.material.design.components.client.constants.FlexWrap;
+import gwt.material.design.components.client.utils.helper.IdHelper;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
@@ -52,13 +57,25 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
  * @author Richeli Vargas
  *
  */
-public class MaterialUIObject extends ComplexPanel implements HasFlexbox {
+public class MaterialUIObject extends ComplexPanel implements HasId, HasFlexbox {
 
 	protected final FlexboxMixin<MaterialUIObject> flexboxMixin = new FlexboxMixin<>(this);
+	protected final AttributeMixin<MaterialUIObject, String> idMixin = new AttributeMixin<>(this, CssAttribute.ID, FromString.TO_STRING);
 
 	public MaterialUIObject(Element element) {
 		super();
 		setElement(element);
+		setId(IdHelper.createUniqueUiId());
+	}
+
+	@Override
+	public void setId(String id) {
+		idMixin.setValue(id);
+	}
+
+	@Override
+	public String getId() {
+		return idMixin.getValue();
 	}
 	
 	public void setAttribute(final String attribute, final String value) {

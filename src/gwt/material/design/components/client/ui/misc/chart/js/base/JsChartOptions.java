@@ -57,5 +57,8 @@ public class JsChartOptions {
     
     @JsProperty
     public JsArray plugins;
+    
+    @JsProperty
+    public boolean showTooltip;
 
 }
