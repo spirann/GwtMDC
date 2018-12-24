@@ -218,9 +218,9 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.drop = function(e, data) {
-			console.log('drop');
-			for ( var v in data)
-				console.log(v);
+			//console.log('drop');
+			//for ( var v in data)
+			//	console.log(v);
 		};
 
 		options.progress = function(e, data) {
