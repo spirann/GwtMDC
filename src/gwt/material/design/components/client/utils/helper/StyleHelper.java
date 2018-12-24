@@ -357,4 +357,5 @@ public final class StyleHelper {
 		else
 			return new String(attr);
 	}-*/;
+	
 }

@@ -25,9 +25,9 @@ import gwt.material.design.components.client.base.interfaces.HasDense;
 import gwt.material.design.components.client.base.interfaces.HasHref;
 import gwt.material.design.components.client.base.interfaces.HasIcon;
 import gwt.material.design.components.client.base.interfaces.HasType;
-import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.HrefMixin;
 import gwt.material.design.components.client.base.mixin.TextMixin;
+import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.ButtonType;
 import gwt.material.design.components.client.constants.Color;
@@ -36,7 +36,7 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Span;
-import gwt.material.design.components.client.utils.helper.JsHelper;
+import gwt.material.design.components.client.utils.helper.DOMHelper;
 
 /**
  * 
@@ -62,7 +62,7 @@ public class MaterialButton extends Button implements HasType<ButtonType>, HasHr
 	protected void onInitialize() {
 		ripleMixin.initialize();
 		add(label);
-		addClickHandler(event -> JsHelper.clearFocus());
+		addClickHandler(event -> DOMHelper.clearFocus());
 		super.onInitialize();
 	}
 

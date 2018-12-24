@@ -55,7 +55,7 @@ import gwt.material.design.components.client.events.OpeningEvent.OpeningHandler;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.html.Footer;
 import gwt.material.design.components.client.ui.html.H2;
-import gwt.material.design.components.client.utils.helper.JsHelper;
+import gwt.material.design.components.client.utils.helper.UiHelper;
 
 /**
  * 
@@ -124,9 +124,9 @@ public class MaterialDialog extends Div implements  HasAcceptHandlers, HasCancel
 	}
 	
 	protected final void preventFooter() {
-		JsHelper.hideEmpty(accept);
-		JsHelper.hideEmpty(cancel);
-		JsHelper.hideEmpty(footer);
+		UiHelper.setAttrIfIsEmpty(accept, CssAttribute.EMPTY);
+		UiHelper.setAttrIfIsEmpty(cancel, CssAttribute.EMPTY);
+		UiHelper.setAttrIfIsEmpty(footer, CssAttribute.EMPTY);
 	}
 
 	protected native void initEvents()/*-{

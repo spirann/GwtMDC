@@ -39,17 +39,26 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DOMHelper {
 
-	private final static boolean isClassOrId(final String selector) {
+
+	protected final static boolean isClassOrId(final String selector) {
 		return selector.startsWith(".") || selector.startsWith("#");
 	}
 
-	private final static String toClass(final String selector) {
-		return Arrays.asList(selector.split(" ")).stream().map(_class -> isClassOrId(_class) ? _class : "." + _class)
+	protected final static String toClass(final String selector) {
+		return toClass(selector.split(" "));
+	}
+	
+	protected final static String toClass(final String[] selectors) {
+		return Arrays.asList(selectors).stream().map(_class -> isClassOrId(_class) ? _class : "." + _class)
 				.collect(Collectors.joining(" "));
 	}
 	
-	private final static String toId(final String selector) {
-		return Arrays.asList(selector.split(" ")).stream().map(_class -> isClassOrId(_class) ? _class : "#" + _class)
+	protected final static String toId(final String selector) {
+		return toId(selector.split(" "));
+	}
+	
+	protected final static String toId(final String[] selectors) {
+		return Arrays.asList(selectors).stream().map(_class -> isClassOrId(_class) ? _class : "#" + _class)
 				.collect(Collectors.joining(" "));
 	}
 
@@ -107,6 +116,15 @@ public class DOMHelper {
 
 	public static native boolean contains(final String selector, final Element parent)/*-{
 		return $wnd.jQuery(parent).find(selector).length > 0;
+	}-*/;
+	
+
+	// //////////////////////////////////////////////////////////
+	// Focus methods
+	// //////////////////////////////////////////////////////////
+	
+	public static native void clearFocus()/*-{
+		$doc.activeElement.blur();
 	}-*/;
 
 	// //////////////////////////////////////////////////////////

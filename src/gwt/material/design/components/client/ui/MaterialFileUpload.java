@@ -73,6 +73,7 @@ import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressDat
 import gwt.material.design.components.client.utils.helper.Formatation;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
+import gwt.material.design.components.client.utils.helper.UiHelper;
 import gwt.material.design.components.client.validation.FileUploadValidation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
@@ -83,16 +84,19 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, FileUploadValidation>,
-		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data>,
-		HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input
+		implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, FileUploadValidation>,
+		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
+		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
+		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 	protected final List<JsFile> files = new LinkedList<>();
 	protected Collection<File> cacheFiles;
 
 	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
-	protected final ValidationMixin<MaterialFileUpload, FileUploadValidation> validationMixin = new ValidationMixin<>(this);
+	protected final ValidationMixin<MaterialFileUpload, FileUploadValidation> validationMixin = new ValidationMixin<>(
+			this);
 
 	public MaterialFileUpload() {
 		super(InputType.FILE, CssName.MDC_FILE_UPLOAD);
@@ -125,13 +129,15 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 			if (!source.isSingleFileUploads()) {
 				final Integer maxNumberOfFiles = source.getMaxNumberOfFiles();
 				if (maxNumberOfFiles != null && cacheFiles.size() > maxNumberOfFiles)
-					return new Result(State.ERROR, 2201, IMessages.INSTANCE.mdc_file_upload__err__max_number_of_files_exceeded(maxNumberOfFiles));
+					return new Result(State.ERROR, 2201,
+							IMessages.INSTANCE.mdc_file_upload__err__max_number_of_files_exceeded(maxNumberOfFiles));
 
 				final int totalSize = cacheFiles.stream().mapToInt(f -> f.getSize()).sum();
 				final Integer limitMultiFileUploadSize = source.getLimitMultiFileUploadSize();
 				if (limitMultiFileUploadSize != null && totalSize > limitMultiFileUploadSize)
-					return new Result(State.ERROR, 2202, IMessages.INSTANCE.mdc_file_upload__err__max_limit_multi_upload_size_exceeded(Formatation.bytes(limitMultiFileUploadSize),
-							Formatation.bytes(totalSize)));
+					return new Result(State.ERROR, 2202,
+							IMessages.INSTANCE.mdc_file_upload__err__max_limit_multi_upload_size_exceeded(
+									Formatation.bytes(limitMultiFileUploadSize), Formatation.bytes(totalSize)));
 
 			}
 
@@ -140,7 +146,9 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 				for (MaterialFileUpload.File file : cacheFiles)
 					if (file.getSize() > maxFileSize)
 						return new Result(State.ERROR, 2203,
-								IMessages.INSTANCE.mdc_file_upload__err__file_size_is_too_bg(Formatation.bytes(maxFileSize), file.getName(), Formatation.bytes(file.getSize())));
+								IMessages.INSTANCE.mdc_file_upload__err__file_size_is_too_bg(
+										Formatation.bytes(maxFileSize), file.getName(),
+										Formatation.bytes(file.getSize())));
 
 			return new Result(State.NONE);
 
@@ -172,9 +180,10 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 
 		options.replaceFileInput = false;
 
-		if (options.dropZoneId)
-			options.dropZone = $wnd
-					.jQuery(@gwt.material.design.components.client.utils.helper.JsHelper::concatToId(Ljava/lang/String;)(options.dropZoneId));
+		if (options.dropZoneId) {
+			var elementId = @gwt.material.design.components.client.utils.helper.JsHelper::concatToId(Ljava/lang/String;)(options.dropZoneId);
+			options.dropZone = $wnd.jQuery(elementId);
+		}
 
 		if (options.dropZone)
 			$wnd.jQuery(options.dropZone).bind('drop dragover', function(e) {
@@ -285,11 +294,12 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();
 		return $wnd.jQuery(element).fileupload('send', {
 			files : files
+		// , formData: {param_1: 'test 1', param_2: 'test 2'}
 		});
 	}-*/;
 
 	public void fire() {
-		JsHelper.doClick(getElement());
+		UiHelper.fireClickEvent(getElement());
 	}
 
 	@Override
@@ -348,7 +358,9 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 	}
 
 	protected void fireProgressEvent(final JsProgressData jsData) {
-		ProgressEvent.fire(MaterialFileUpload.this, Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()), jsData.loaded, jsData.total);
+		ProgressEvent.fire(MaterialFileUpload.this,
+				Arrays.asList(jsData.files).stream().map(file -> toFile(file)).collect(Collectors.toList()),
+				jsData.loaded, jsData.total);
 	}
 
 	@Override

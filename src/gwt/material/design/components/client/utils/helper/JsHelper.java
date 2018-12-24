@@ -19,13 +19,9 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
-import java.util.Arrays;
-import java.util.stream.Collectors;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -38,36 +34,48 @@ public class JsHelper {
 	/**
 	 * Put # if the elements name has not # or . at start
 	 * 
-	 * @param elements
+	 * @param selector
 	 * @return
 	 */
-	public static String concatToId(final String elements) {
-		if (elements == null)
-			return null;
-
-		return concatToId(elements.split(" "));
+	public static String concatToId(final String selector) {
+		return DOMHelper.toId(selector);
 	}
-
+	
 	/**
 	 * Put # if the elements name has not # or . at start
 	 * 
-	 * @param elements
+	 * @param selectors
 	 * @return
 	 */
-	public static String concatToId(final String[] elements) {
-		if (elements == null)
-			return null;
-
-		return Arrays.asList(elements).stream().map(element -> {
-
-			if (element.startsWith("#") || element.startsWith("."))
-				return element;
-			else
-				return "#" + element;
-
-		}).collect(Collectors.joining(", "));
+	public static String concatToId(final String[] selectors) {
+		return DOMHelper.toId(selectors);
+	}
+	
+	/**
+	 * Put . if the elements name has not # or . at start
+	 * 
+	 * @param selector
+	 * @return
+	 */
+	public static String concatToClass(final String selector) {
+		return DOMHelper.toClass(selector);
+	}
+	
+	/**
+	 * Put . if the elements name has not # or . at start
+	 * 
+	 * @param selectors
+	 * @return
+	 */
+	public static String concatToClass(final String[] selectors) {
+		return DOMHelper.toClass(selectors);
 	}
 
+	/**
+	 * 
+	 * @param widget
+	 * @return
+	 */
 	public static native JavaScriptObject toJQueryObject(final Widget widget) /*-{
 
 		if (!widget)
@@ -79,7 +87,6 @@ public class JsHelper {
 			return null;
 
 		return $wnd.jQuery(element);
-
 	}-*/;
 
 	public static native JavaScriptObject toJQueryObject(final Element element) /*-{
@@ -102,22 +109,6 @@ public class JsHelper {
 		return $wnd.jQuery.isEmptyObject(variable);
 	}-*/;
 
-	public static int getWidth(UIObject uiObject) {
-		return getWidth(uiObject.getElement());
-	}
-
-	public static native int getWidth(Element element) /*-{
-		return $wnd.jQuery(element).outerWidth();
-	}-*/;
-
-	public static int getHeight(UIObject uiObject) {
-		return getHeight(uiObject.getElement());
-	}
-
-	public static native int getHeight(Element element) /*-{
-		return $wnd.jQuery(element).outerHeight();
-	}-*/;
-
 	public static long paserDate(final String value) {
 		return Long.valueOf(paser(value));
 	}
@@ -130,40 +121,6 @@ public class JsHelper {
 		$wnd.jQuery(element).keypress(function(event) {
 			return /\d/.test(String.fromCharCode(event.keyCode));
 		});
-	}-*/;
-
-	public static void hideEmpty(final Widget widget) {
-		final Element element = widget.getElement();
-		element.removeAttribute("empty");
-		if (element.getInnerText().trim().isEmpty())
-			element.setAttribute("empty", null);
-	}
-
-	public static native void setTooltip(final Element element, final String text, final String... tooltipClasses)/*-{
-		var classes = Array.from(tooltipClasses);
-		$wnd.jQuery(element).tooltip();
-	}-*/;
-
-	public static native void clearFocus()/*-{
-		$doc.activeElement.blur();
-	}-*/;
-
-	public static native void throwsWindowResize()/*-{
-		$wnd.dispatchEvent(new Event('resize'));
-	}-*/;
-
-	
-
-	public static native void doClick(Element element)/*-{
-
-		var evt = new MouseEvent("click", {
-			"view" : window,
-			"bubbles" : true,
-			"cancelable" : false
-		});
-
-		element.dispatchEvent(evt);
-
 	}-*/;
 
 	@SuppressWarnings("rawtypes")

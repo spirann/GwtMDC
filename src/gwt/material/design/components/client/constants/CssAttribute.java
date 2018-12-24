@@ -28,6 +28,7 @@ public class CssAttribute {
 	public static final String DATA_TOOGLE_ON = "data-toggle-on";
 	public static final String DIR = "dir";
 	public static final String DISABLED = "disabled";
+	public static final String EMPTY = "empty";
 	public static final String FOR = "for";
 	public static final String HEIGHT = "height";
 	public static final String HREF = "href";

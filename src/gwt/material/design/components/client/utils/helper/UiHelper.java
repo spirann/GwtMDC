@@ -25,6 +25,7 @@ import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.ui.UIObject;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -36,6 +37,83 @@ import com.google.gwt.user.client.ui.Widget;
 public final class UiHelper {
 
 	private static String PRESSED_CSS_STYLE_NAME = "pressed";
+
+	public static int getWidth(UIObject uiObject) {
+		return getWidth(uiObject.getElement());
+	}
+
+	public static native int getWidth(Element element) /*-{
+		return $wnd.jQuery(element).outerWidth();
+	}-*/;
+
+	public static int getHeight(UIObject uiObject) {
+		return getHeight(uiObject.getElement());
+	}
+
+	public static native int getHeight(Element element) /*-{
+		return $wnd.jQuery(element).outerHeight();
+	}-*/;
+
+	/**
+	 * 
+	 * @param widget
+	 * @return True if the widget and all children is empty
+	 */
+	public static boolean isEmpty(final Widget widget) {
+		return isEmpty(widget.getElement());
+	}
+
+	/**
+	 * 
+	 * @param widget
+	 * @return True if the widget and all children is empty
+	 */
+	public static boolean isEmpty(final Element element) {
+		return element.getInnerText().trim().isEmpty();
+	}
+
+	/**
+	 * Set an attribute if element is empty, or else the attribute is removed
+	 * 
+	 * @param element
+	 * @param attribute
+	 */
+	public static void setAttrIfIsEmpty(final Widget widget, final String attribute) {
+		setAttrIfIsEmpty(widget.getElement(), attribute);
+	}
+
+	/**
+	 * Set an attribute if element is empty, or else the attribute is removed
+	 * 
+	 * @param element
+	 * @param attribute
+	 */
+	public static native void setAttrIfIsEmpty(final Element element, final String attribute) /*-{
+		var isEmpty = @gwt.material.design.components.client.utils.helper.UiHelper::isEmpty(Lcom/google/gwt/dom/client/Element;)(element);
+		if (isEmpty)
+			$wnd.jQuery(element).attr(attribute, '');
+		else
+			$wnd.jQuery(element).removeAttr(attribute);
+	}-*/;
+
+	/**
+	 * Throws window resize event
+	 */
+	public static native void throwsWindowResize()/*-{
+		$wnd.dispatchEvent(new Event('resize'));
+	}-*/;
+
+	public static native void fireClickEvent(Element element)/*-{
+
+		var evt = new MouseEvent("click", {
+			"view" : window,
+			"bubbles" : true,
+			"cancelable" : false
+		});
+
+		element.dispatchEvent(evt);
+
+	}-*/;
 
 	/**
 	 * Adds a mouse pressed handler to a widget. Adds a CSS style ('pressed',
@@ -105,7 +183,7 @@ public final class UiHelper {
 			unbindNativeEvent(widget, event, handler);
 		};
 	}
-	
+
 	public static HandlerRegistration bindNativeEvent(final Element element, final String event,
 			final Runnable runnable) {
 
