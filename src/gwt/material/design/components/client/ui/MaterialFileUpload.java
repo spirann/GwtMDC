@@ -197,7 +197,7 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.add = function(e, data) {
-
+			
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 			if (validate) {
