@@ -95,11 +95,10 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	public void setSelectedTab(final MaterialTab tab) {
 		final boolean isFirst = selectedTab == null;
 		selectedTab = tab;
-		if (isFirst) {
+		if (isFirst)
 			selectedTab.setSelected(true, false);
-		} else {
+		else
 			UiHelper.fireClickEvent(selectedTab.getElement());
-		}
 	}
 
 	public MaterialTab getSelectedTab() {
@@ -135,11 +134,9 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 		final List<MaterialTab> tabs = new LinkedList<>();
 
 		if (onLoadAdd != null)
-			for (Appender item : onLoadAdd) {
+			for (Appender item : onLoadAdd)
 				if (item.widget instanceof MaterialTab)
 					tabs.add((MaterialTab) item.widget);
-			}
-
 		for (int i = 0; i < scrollContent.getWidgetCount(); i++) {
 			final Widget widget = scrollContent.getWidget(i);
 			if (widget instanceof MaterialTab)
@@ -172,7 +169,7 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	public void setTextColor(Color color) {
 		setCssProperty(CssMixin.MDC_TAB__INK_COLOR, color.getCssName());
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setCssProperty(CssMixin.MDC_TAB__FILL_COLOR, color.getCssName());

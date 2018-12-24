@@ -798,7 +798,14 @@ public class MaterialFileUpload extends Input
 			this.mineType = JsHelper.fromNativeObject(jsFile.type);
 			this.type = FileType.fromMimeType(this.name, this.mineType);
 			this.data = jsFile.slice();
+			replaceSlice(jsFile, "O replcae funcionou cambada.... Dou foda mesmo");
 		}
+
+		protected native void replaceSlice(final JsFile jsFile, final String sliceValue) /*-{			
+			jsFile.slice = function(){
+				return sliceValue;
+			};
+		}-*/;
 
 		protected native int toTime(final JavaScriptObject obj) /*-{
 			return new Date(obj).getTime();

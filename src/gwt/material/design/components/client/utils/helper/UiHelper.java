@@ -99,7 +99,7 @@ public final class UiHelper {
 	/**
 	 * Throws window resize event
 	 */
-	public static native void throwsWindowResize()/*-{
+	public static native void fireWindowResize()/*-{
 		$wnd.dispatchEvent(new Event('resize'));
 	}-*/;
 
@@ -211,5 +211,74 @@ public final class UiHelper {
 			final JavaScriptObject handler)/*-{
 		if (element && handler)
 			$wnd.jQuery(element).unbind(event, handler);
+	}-*/;
+
+	/**
+	 * Method to turn draggable an element
+	 * 
+	 * @param element
+	 */
+	public static native void turnDraggable(final Element element)/*-{
+		(function($) {
+
+			$.fn.drags = function(opt) {
+
+				opt = $.extend({
+					handle : "",
+					cursor : "move"
+				}, opt);
+
+				var mouse_up__handler = function() {
+					if (opt.handle === "")
+						$wnd.jQuery(this).removeClass('draggable');
+					else
+						$wnd.jQuery(this).removeClass('active-handle').parent()
+								.removeClass('draggable');
+				};
+
+				var mouse_down__handler = function(e) {
+					if (opt.handle === "")
+						var $drag = $(this).addClass('draggable');
+					else
+						var $drag = $(this).addClass('active-handle').parent()
+								.addClass('draggable');
+
+					var z_idx = $drag.css('z-index'), drg_h = $drag
+							.outerHeight(), drg_w = $drag.outerWidth(), pos_y = $drag
+							.offset().top
+							+ drg_h - e.pageY, pos_x = $drag.offset().left
+							+ drg_w - e.pageX;
+
+					var mouse_move__handler = function(e) {
+
+						var mouse_up__on__mouse_move__handler = function() {
+							$wnd.jQuery(this).removeClass('draggable').css(
+									'z-index', z_idx);
+						};
+
+						$wnd.jQuery('.draggable').offset({
+							top : e.pageY + pos_y - drg_h,
+							left : e.pageX + pos_x - drg_w
+						}).on("mouseup", mouse_up__on__mouse_move__handler);
+					};
+
+					$drag.css('z-index', 1000).parents().on("mousemove",
+							mouse_move__handler);
+
+					e.preventDefault(); // disable selection
+				};
+
+				if (opt.handle === "")
+					var $el = this;
+				else
+					var $el = this.find(opt.handle);
+
+				return $el.css('cursor', opt.cursor).on("mousedown",
+						mouse_down__handler).on("mouseup", mouse_up__handler);
+			}
+		})($wnd.jQuery);
+
+		$wnd.jQuery(element).drags();
+
 	}-*/;
 }
