@@ -34,9 +34,9 @@ import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
  *
  */
 public class MaterialTextArea extends MaterialInputBox implements HasType<TextFieldType>, HasResize {
-	
+
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(input, TextFieldType.FILLED);
-	
+
 	public MaterialTextArea() {
 		super();
 	}
@@ -45,19 +45,17 @@ public class MaterialTextArea extends MaterialInputBox implements HasType<TextFi
 	protected MaterialInput contructInput() {
 		return new MaterialInputArea();
 	}
-	
+
 	public void setRows(Integer rows) {
-		if (input instanceof MaterialInputArea) {
+		if (input instanceof MaterialInputArea)
 			((MaterialInputArea) input).setRows(rows);
-		}
 	}
 
 	public void setCols(Integer cols) {
-		if (input instanceof MaterialInputArea) {
+		if (input instanceof MaterialInputArea)
 			((MaterialInputArea) input).setCols(cols);
-		}
 	}
-	
+
 	@Override
 	public void setResize(Resize resize) {
 		((MaterialInputArea) input).setResize(resize);

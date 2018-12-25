@@ -38,8 +38,11 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.CssStyle;
 import gwt.material.design.components.client.ui.html.Button;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.utils.helper.DOMHelper;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 import gwt.material.design.components.client.utils.helper.TimerHelper;
 
 /**
@@ -54,12 +57,18 @@ public class MaterialSnackbar extends Div implements HasText {
 	protected final Button action = new Button(CssName.MDC_SNACKBAR__ACTION_BUTTON);
 
 	protected final TextMixin<Div> textMixin = new TextMixin<>(text);
-	protected final ToggleStyleMixin<MaterialSnackbar> atStartMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__ALIGN_START);
-	protected final ToggleStyleMixin<MaterialSnackbar> multilineMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__MULTILINE);
-	protected final ToggleStyleMixin<MaterialSnackbar> actionOnButtonMixin = new ToggleStyleMixin<>(this, CssName.MDC_SNACKBAR__ACTION_ON_BUTTON);
-	protected final AttributeMixin<MaterialSnackbar, String> ariaLiveMixin = new AttributeMixin<>(this, CssAttribute.ARIA_LIVE, "assertive", FromString.TO_STRING);
-	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaAtomicMixin = new AttributeMixin<>(this, CssAttribute.ARIA_ATOMIC, true, FromString.TO_BOOLEAN);
-	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaHiddenMixin = new AttributeMixin<>(this, CssAttribute.ARIA_HIDDEN, true, FromString.TO_BOOLEAN);
+	protected final ToggleStyleMixin<MaterialSnackbar> atStartMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_SNACKBAR__ALIGN_START);
+	protected final ToggleStyleMixin<MaterialSnackbar> multilineMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_SNACKBAR__MULTILINE);
+	protected final ToggleStyleMixin<MaterialSnackbar> actionOnButtonMixin = new ToggleStyleMixin<>(this,
+			CssName.MDC_SNACKBAR__ACTION_ON_BUTTON);
+	protected final AttributeMixin<MaterialSnackbar, String> ariaLiveMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_LIVE, "assertive", FromString.TO_STRING);
+	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaAtomicMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_ATOMIC, true, FromString.TO_BOOLEAN);
+	protected final AttributeMixin<MaterialSnackbar, Boolean> ariaHiddenMixin = new AttributeMixin<>(this,
+			CssAttribute.ARIA_HIDDEN, true, FromString.TO_BOOLEAN);
 
 	protected String actionText;
 	protected int timeout = 2750;
@@ -83,9 +92,11 @@ public class MaterialSnackbar extends Div implements HasText {
 		add(text);
 		add(actionWrapper);
 		super.onInitialize();
+		Window.addResizeHandler(event -> adjustPosition());
 	}
 
-	protected native void show(final String text, final String actionText, final boolean actionOnBottom, final boolean multiline, final int timeout)/*-{
+	protected native void show(final String text, final String actionText, final boolean actionOnBottom,
+			final boolean multiline, final int timeout)/*-{
 
 		var _this = this;
 		var snackbar = _this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
@@ -158,15 +169,11 @@ public class MaterialSnackbar extends Div implements HasText {
 		// ///////////////////////////////////////////////////////////////////////////
 		// Remove after timeout
 		// ///////////////////////////////////////////////////////////////////////////
-		final int time = this.getTimeout() + (containsFixedFab() ? 0 : 250);
-		TimerHelper.schedule(time + 100, () -> {
-			// this.removeFromParent();
-			setVisibility(Visibility.HIDDEN);
-		});
+		final int time = this.getTimeout() + (DOMHelper.containsByClass(CssName.MDC_FAB__FIXED) ? 0 : 250);
+		TimerHelper.schedule(time + 100, () -> setVisibility(Visibility.HIDDEN));
 	}
 
 	protected void show() {
-
 		// ///////////////////////////////////////////////////////////////////////////
 		// Show snackbar
 		// ///////////////////////////////////////////////////////////////////////////
@@ -175,14 +182,7 @@ public class MaterialSnackbar extends Div implements HasText {
 		// ///////////////////////////////////////////////////////////////////////////
 		// Adjust position
 		// ///////////////////////////////////////////////////////////////////////////
-		final Element fab = getFixedFab();
-		if (fab != null) {
-			final int thisPosition = getElement().getAbsoluteRight();
-			final int fabPosition = fab.getAbsoluteLeft();
-			final boolean isLargeScreen = Window.getClientWidth() >= 1024;
-			final String adjustPosition = thisPosition >= fabPosition ? "calc(56px + " + (isLargeScreen ? "1.5rem" : "1rem") + ")" : "0px";
-			setCssProperty(CssMixin.MDC_SNACKBAR__POSITION_ADJUST, adjustPosition);
-		}
+		adjustPosition();
 	}
 
 	public void setActionText(final String text) {
@@ -230,27 +230,21 @@ public class MaterialSnackbar extends Div implements HasText {
 		this.timeout = timeout;
 	}
 
-	protected final native Element getFixedFab() /*-{
-		var className = "."
-				+ @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
-		var elements = $wnd.jQuery("body").find(className);
+	protected void adjustPosition() {
 
-		if (elements.length == 0)
-			return null;
+		final Element fab = DOMHelper.getElementByClass(CssName.MDC_FAB__FIXED);
+		final int thisPosition = getElement().getAbsoluteRight();
+		final int fabPosition = fab == null ? Integer.MAX_VALUE : fab.getAbsoluteLeft();
+		final boolean isLargeScreen = Window.getClientWidth() >= 1024;
+		final String adjustPosition = thisPosition >= fabPosition
+				? "calc(56px + " + (isLargeScreen ? "1.5rem" : "1rem") + ")"
+				: "0px";
+		setCssProperty(CssMixin.MDC_SNACKBAR__POSITION_ADJUST, adjustPosition);
 
-		return elements[0];
-	}-*/;
+	}
 
-	protected final native void hideOthers() /*-{
-		var className = "."
-				+ @gwt.material.design.components.client.constants.CssName::MDC_SNACKBAR;
-		$wnd.jQuery(className).css('visibility', 'hidden');
-	}-*/;
+	protected final void hideOthers() {
+		StyleHelper.setCssPropertyByClass(CssName.MDC_SNACKBAR, CssStyle.STYLE_VISIBILITY, Visibility.HIDDEN);
+	}
 
-	protected final native boolean containsFixedFab() /*-{
-		var className = "."
-				+ @gwt.material.design.components.client.constants.CssName::MDC_FAB__FIXED;
-		var elements = $wnd.jQuery("body").find(className);
-		return elements.length > 0;
-	}-*/;
 }

@@ -39,7 +39,6 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DOMHelper {
 
-
 	protected final static boolean isClassOrId(final String selector) {
 		return selector.startsWith(".") || selector.startsWith("#");
 	}
@@ -47,16 +46,16 @@ public class DOMHelper {
 	protected final static String toClass(final String selector) {
 		return toClass(selector.split(" "));
 	}
-	
+
 	protected final static String toClass(final String[] selectors) {
 		return Arrays.asList(selectors).stream().map(_class -> isClassOrId(_class) ? _class : "." + _class)
 				.collect(Collectors.joining(" "));
 	}
-	
+
 	protected final static String toId(final String selector) {
 		return toId(selector.split(" "));
 	}
-	
+
 	protected final static String toId(final String[] selectors) {
 		return Arrays.asList(selectors).stream().map(_class -> isClassOrId(_class) ? _class : "#" + _class)
 				.collect(Collectors.joining(" "));
@@ -111,18 +110,17 @@ public class DOMHelper {
 	}
 
 	public static native boolean contains(final String selector)/*-{
-		return $wnd.jQuery($doc).find(selector).length > 0;
+		return $wnd.jQuery('body').find(selector).length > 0;
 	}-*/;
 
 	public static native boolean contains(final String selector, final Element parent)/*-{
 		return $wnd.jQuery(parent).find(selector).length > 0;
 	}-*/;
-	
 
 	// //////////////////////////////////////////////////////////
 	// Focus methods
 	// //////////////////////////////////////////////////////////
-	
+
 	public static native void clearFocus()/*-{
 		$doc.activeElement.blur();
 	}-*/;
@@ -131,6 +129,46 @@ public class DOMHelper {
 	// Others methods
 	// //////////////////////////////////////////////////////////
 
+	public static Element getElementByClass(final String selector) {
+		return getElement(toClass(selector));
+	}
+
+	public static Element getElementByClass(final String selector, final Element parent) {
+		return getElement(toClass(selector), parent);
+	}
+
+	public static Element getElementById(final String selector) {
+		return getElement(toId(selector));
+	}
+
+	public static Element getElementById(final String selector, final Element parent) {
+		return getElement(toId(selector), parent);
+	}
+
+	public static native Element getElement(final String selector)/*-{
+		var elements = $wnd.jQuery('body').find(selector);
+		if (elements.length > 0)
+			return elements[0];
+		else
+			return null;
+	}-*/;
+
+	public static native Element getElement(final String selector, final Element parent)/*-{
+		var elements = $wnd.jQuery(parent).find(selector);
+		if (elements.length > 0)
+			return elements[0];
+		else
+			return null;
+	}-*/;
+
+	/**
+	 * Utilize getElementByClass(final String selector, final Element parent)
+	 * 
+	 * @param parent
+	 * @param className
+	 * @return
+	 */
+	@Deprecated
 	public static Element getChildElementByClass(Element parent, String className) {
 		if (parent != null)
 			for (int i = 0; i < parent.getChildCount(); i++) {
@@ -148,6 +186,13 @@ public class DOMHelper {
 		return null;
 	}
 
+	/**
+	 * Utilize getElementById(final String selector, final Element parent)
+	 * 
+	 * @param parent
+	 * @param className
+	 * @return
+	 */
 	public static Element getChildElementById(Element parent, String id) {
 		if (parent != null)
 			for (int i = 0; i < parent.getChildCount(); i++) {

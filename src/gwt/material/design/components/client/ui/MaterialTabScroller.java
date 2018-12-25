@@ -80,14 +80,12 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 
 		selectedTabIndex = index;
 
-		if (!initialized) {
+		if (!initialized)
 			return;
-		}
 
 		final MaterialTab tab = (MaterialTab) scrollContent.getWidget(index);
-		if (selectedTab != null && tab == selectedTab) {
+		if (selectedTab != null && tab == selectedTab)
 			return;
-		}
 
 		setSelectedTab(tab);
 	}
@@ -108,14 +106,13 @@ public class MaterialTabScroller extends Div implements HasAlign<TabScrollerAlig
 	@Override
 	public void add(Widget child) {
 
-		if (child instanceof MaterialTab) {
+		if (child instanceof MaterialTab)
 			((MaterialTab) child).addSelectionHandler(event -> {
 				if (event.getValue()) {
 					selectedTab = (MaterialTab) child;
 					fireSelectionEvent(selectedTab);
 				}
 			});
-		}
 
 		scrollContent.add(child);
 	}
