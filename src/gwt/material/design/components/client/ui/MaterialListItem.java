@@ -142,7 +142,7 @@ public class MaterialListItem extends MaterialSelectedField implements HasHref, 
 	public void addEndDetail(final Widget widget, final boolean prevent) {
 		insertDetail(widget, CssName.MDC_LIST_ITEM__META, Appender.END);
 		if (prevent) {
-			StyleHelper.setAttribute(widget, CssAttribute.PREVENT, "true");
+			StyleHelper.setAttribute(widget, CssAttribute.PREVENT, Boolean.TRUE.toString().toLowerCase());
 			prevent(widget.getElement());
 		}
 	}

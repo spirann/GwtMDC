@@ -31,6 +31,7 @@ import gwt.material.design.components.client.base.interfaces.HasRole;
 import gwt.material.design.components.client.base.interfaces.HasToggler;
 import gwt.material.design.components.client.base.mixin.TogglerMixin;
 import gwt.material.design.components.client.constants.CloseAction;
+import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Role;
 import gwt.material.design.components.client.events.CloseEvent;
@@ -71,7 +72,7 @@ public class MaterialMenu extends Div implements HasOpen, HasOpenHandlers, HasCl
 
 		items.addStyleName(CssName.MDC_MENU__ITEMS);
 		items.setRole(Role.MENU);
-		items.getElement().setAttribute("aria-hidden", "true");
+		items.getElement().setAttribute(CssAttribute.ARIA_HIDDEN, Boolean.TRUE.toString().toLowerCase());
 
 		super.add(items);
 		super.onInitialize();

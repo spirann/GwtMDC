@@ -25,10 +25,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.Node;
 import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.HasWidgets;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -161,63 +159,9 @@ public class DOMHelper {
 			return null;
 	}-*/;
 
-	/**
-	 * Utilize getElementByClass(final String selector, final Element parent)
-	 * 
-	 * @param parent
-	 * @param className
-	 * @return
-	 */
-	@Deprecated
-	public static Element getChildElementByClass(Element parent, String className) {
-		if (parent != null)
-			for (int i = 0; i < parent.getChildCount(); i++) {
-				final Node childNode = parent.getChild(i);
-				if (Element.is(childNode)) {
-					final Element child = Element.as(childNode);
-					if (child.getClassName().contains(className))
-						return child;
-
-					if (child.getChildCount() > 0)
-						return getChildElementByClass(child, className);
-
-				}
-			}
-		return null;
-	}
-
-	/**
-	 * Utilize getElementById(final String selector, final Element parent)
-	 * 
-	 * @param parent
-	 * @param className
-	 * @return
-	 */
-	public static Element getChildElementById(Element parent, String id) {
-		if (parent != null)
-			for (int i = 0; i < parent.getChildCount(); i++) {
-				Node childNode = parent.getChild(i);
-				if (Element.is(childNode)) {
-					Element child = Element.as(childNode);
-					if (child.getId().equals(id))
-						return child;
-
-					if (child.getChildCount() > 0)
-						return getChildElementById(child, id);
-
-				}
-			}
-		return null;
-	}
-
-	public static Widget getChildWidgetById(HasWidgets parent, String id) {
-		if (parent != null)
-			for (Widget child : parent)
-				if (child.getElement().getId().equals(id))
-					return child;
-		return null;
-	}
-
+	// /////////// //
+	// OLD METHODS //
+	// /////////// //
 	public static Element getElementByAttribute(String attr, String value) {
 		return getElementByAttribute(RootPanel.getBodyElement().getElementsByTagName("*"), attr, value);
 	}

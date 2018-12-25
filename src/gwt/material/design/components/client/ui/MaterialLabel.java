@@ -34,7 +34,7 @@ public class MaterialLabel extends Label {
 	public MaterialLabel() {
 		super(CssName.MDC_TYPOGRAPHY);
 	}
-	
+
 	public MaterialLabel(final String text) {
 		this();
 		setText(text);
@@ -44,9 +44,8 @@ public class MaterialLabel extends Label {
 	protected void onInitialize() {
 		super.onInitialize();
 
-		if (getTypography() == null) {
+		if (getTypography() == null)
 			setTypography(Typography.BODY_2);
-		}
 
 		getElement().appendChild(HtmlElements.BR.createElement());
 	}

@@ -91,9 +91,9 @@ public class MaterialDrawer extends Aside implements HasType<DrawerType>, HasOpe
 	@Override
 	public native void setOpen(boolean open)/*-{
 		var drawer = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-		if (drawer) {
+		if (drawer)
 			drawer.open = open;
-		} else {
+		else {
 			var element = this.@gwt.material.design.components.client.ui.MaterialDrawer::getElement()();
 			element.setAttribute("open", open);
 		}

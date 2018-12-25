@@ -61,7 +61,7 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 		super(CssName.MDC_LINEAR_PROGRESS);
 		setRole(Role.PROGRESS_BAR);
 	}
-	
+
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return new $wnd.mdc.linearProgress.MDCLinearProgress(element);
@@ -122,7 +122,8 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 		var linearProgress = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
 		if (linearProgress) {
-			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100) + "% - 6px)";
+			bufferingDotsElement.style.width = "calc(" + ((1 - buffer) * 100)
+					+ "% - 6px)";
 			linearProgress.buffer = buffer;
 		}
 
@@ -142,9 +143,8 @@ public class MaterialLinearProgress extends Div implements HasReverse, HasIndete
 		this.@gwt.material.design.components.client.ui.MaterialLinearProgress::progress = progress;
 		var linearProgress = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 
-		if (linearProgress) {
+		if (linearProgress)
 			linearProgress.progress = progress;
-		}
 
 	}-*/;
 

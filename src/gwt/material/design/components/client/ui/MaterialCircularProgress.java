@@ -72,9 +72,9 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 		if (!path)
 			return;
 
-		if (isNaN(val)) {
+		if (isNaN(val))
 			val = 0;
-		} else {
+		else {
 			var r = $wnd.jQuery(path).attr('r');
 			var c = Math.PI * (r * 2);
 
@@ -130,7 +130,8 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 	}
 
 	/**
-	 * @param progress value between 0 and 1
+	 * @param progress
+	 *            value between 0 and 1
 	 */
 	@Override
 	public void setProgress(double progress) {
@@ -139,7 +140,8 @@ public class MaterialCircularProgress extends Div implements HasReverse, HasInde
 
 	/**
 	 * 
-	 * @param progress value between 0 and 1
+	 * @param progress
+	 *            value between 0 and 1
 	 * @param animate
 	 */
 	public void setProgress(double progress, boolean animate) {
