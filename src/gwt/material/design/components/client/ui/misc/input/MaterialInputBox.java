@@ -43,7 +43,7 @@ import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.ValidationEvent.HasValidationHandlers;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.Validation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
 
@@ -53,7 +53,7 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  *
  */
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
-		HasState, HasValidation<MaterialInput, TextFieldValidation>, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
+		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
 
 	protected final MaterialInput input = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -206,7 +206,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	}
 
 	@Override
-	public ValidationRegistration addValidation(TextFieldValidation validation) {
+	public ValidationRegistration addValidation(final Validation<MaterialInput> validation) {
 		return input.addValidation(validation);
 	}
 	

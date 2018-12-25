@@ -74,7 +74,7 @@ import gwt.material.design.components.client.utils.helper.Formatation;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
 import gwt.material.design.components.client.utils.helper.UiHelper;
-import gwt.material.design.components.client.validation.FileUploadValidation;
+import gwt.material.design.components.client.validation.Validation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
 
@@ -85,7 +85,7 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  *
  */
 public class MaterialFileUpload extends Input
-		implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, FileUploadValidation>,
+		implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, Validation<MaterialFileUpload>>,
 		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
 		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
 		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
@@ -95,7 +95,7 @@ public class MaterialFileUpload extends Input
 	protected Collection<File> cacheFiles;
 
 	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
-	protected final ValidationMixin<MaterialFileUpload, FileUploadValidation> validationMixin = new ValidationMixin<>(
+	protected final ValidationMixin<MaterialFileUpload, Validation<MaterialFileUpload>> validationMixin = new ValidationMixin<>(
 			this);
 
 	public MaterialFileUpload() {
@@ -138,7 +138,6 @@ public class MaterialFileUpload extends Input
 					return new Result(State.ERROR, 2202,
 							IMessages.INSTANCE.mdc_file_upload__err__max_limit_multi_upload_size_exceeded(
 									Formatation.bytes(limitMultiFileUploadSize), Formatation.bytes(totalSize)));
-
 			}
 
 			final Integer maxFileSize = source.getMaxFileSize();
@@ -254,7 +253,7 @@ public class MaterialFileUpload extends Input
 	}
 
 	@Override
-	public ValidationRegistration addValidation(FileUploadValidation validation) {
+	public ValidationRegistration addValidation(final Validation<MaterialFileUpload> validation) {
 		return validationMixin.addValidation(validation);
 	}
 

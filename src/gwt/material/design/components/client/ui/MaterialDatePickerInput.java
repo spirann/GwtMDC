@@ -27,7 +27,7 @@ import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.utils.helper.JsHelper;
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.ValidationForTextField;
 import gwt.material.design.components.client.validation.Validation.Result;
 
 /**
@@ -71,7 +71,7 @@ public class MaterialDatePickerInput extends MaterialTextField {
 		add(dialog);
 		
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
-		addValidation(TextFieldValidation.Defaults.date());
+		addValidation(ValidationForTextField.date());
 		
 		if (getPlaceholder() == null || getPlaceholder().isEmpty())
 			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/").replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")

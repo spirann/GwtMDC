@@ -71,7 +71,7 @@ import gwt.material.design.components.client.events.ValidationEvent.ValidationHa
 import gwt.material.design.components.client.ui.MaterialIcon;
 import gwt.material.design.components.client.ui.html.Input;
 import gwt.material.design.components.client.utils.helper.UiHelper;
-import gwt.material.design.components.client.validation.TextFieldValidation;
+import gwt.material.design.components.client.validation.Validation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
 
@@ -82,7 +82,7 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  */
 public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered,
 		HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
-		HasValidationHandlers<Result>, HasReadOnly, HasIconPosition, HasValidation<MaterialInput, TextFieldValidation> {
+		HasValidationHandlers<Result>, HasReadOnly, HasIconPosition, HasValidation<MaterialInput, Validation<MaterialInput>> {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -115,7 +115,7 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	protected final InputIconMixin<MaterialInput, TextFieldType> inputIconMixin = new InputIconMixin<>(
 			TextFieldType.FILLED, this, icon, input);
 
-	protected final ValidationMixin<MaterialInput, TextFieldValidation> validationMixin = new ValidationMixin<>(this);
+	protected final ValidationMixin<MaterialInput, Validation<MaterialInput>> validationMixin = new ValidationMixin<>(this);
 
 	public MaterialInput() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -177,7 +177,7 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	}
 
 	@Override
-	public ValidationRegistration addValidation(TextFieldValidation validation) {
+	public ValidationRegistration addValidation(final Validation<MaterialInput> validation) {
 		return validationMixin.addValidation(validation);
 	}
 
