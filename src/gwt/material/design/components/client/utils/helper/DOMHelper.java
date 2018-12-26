@@ -25,9 +25,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.NodeList;
 import com.google.gwt.user.client.ui.ComplexPanel;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.Widget;
 
 /**
@@ -57,6 +55,13 @@ public class DOMHelper {
 	protected final static String toId(final String[] selectors) {
 		return Arrays.asList(selectors).stream().map(_class -> isClassOrId(_class) ? _class : "#" + _class)
 				.collect(Collectors.joining(" "));
+	}
+
+	protected final static String toAttr(final String attribute, final String value) {
+		if (value == null || value.trim().isEmpty())
+			return "[" + attribute + "]";
+		else
+			return "[" + attribute + "=" + value + "]";
 	}
 
 	// //////////////////////////////////////////////////////////
@@ -124,7 +129,7 @@ public class DOMHelper {
 	}-*/;
 
 	// //////////////////////////////////////////////////////////
-	// Others methods
+	// Get elements methods
 	// //////////////////////////////////////////////////////////
 
 	public static Element getElementByClass(final String selector) {
@@ -143,6 +148,14 @@ public class DOMHelper {
 		return getElement(toId(selector), parent);
 	}
 
+	public static Element getElementByAttr(final String attribute, final String value) {
+		return getElement(toAttr(attribute, value));
+	}
+
+	public static Element getElementByAttr(final String attribute, final String value, final Element parent) {
+		return getElement(toAttr(attribute, value), parent);
+	}
+
 	public static native Element getElement(final String selector)/*-{
 		var elements = $wnd.jQuery('body').find(selector);
 		if (elements.length > 0)
@@ -158,24 +171,6 @@ public class DOMHelper {
 		else
 			return null;
 	}-*/;
-
-	// /////////// //
-	// OLD METHODS //
-	// /////////// //
-	public static Element getElementByAttribute(String attr, String value) {
-		return getElementByAttribute(RootPanel.getBodyElement().getElementsByTagName("*"), attr, value);
-	}
-
-	public static Element getElementByAttribute(NodeList<Element> elems, String attr, String value) {
-		if (elems != null)
-			for (int i = 0; i < elems.getLength(); i++) {
-				Element child = elems.getItem(i);
-				if (child.getAttribute(attr).equals(value))
-					return child;
-
-			}
-		return null;
-	}
 
 	@SuppressWarnings("unchecked")
 	public static <W extends Widget> Set<W> findByClass(final Class<W> _class, final Widget parent) {
