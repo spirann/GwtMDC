@@ -84,14 +84,15 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  * @author Richeli Vargas
  *
  */
-public class MaterialFileUpload extends Input
-		implements HasFired, HasStartHandlers, HasStopHandlers, HasValidation<MaterialFileUpload, Validation<MaterialFileUpload>>,
-		HasChangeHandlers<Collection<File>>, HasAddHandlers<Collection<MaterialFileUpload.File>>,
-		HasDoneHandlers<MaterialFileUpload.Data>, HasErrorHandlers<MaterialFileUpload.Data>,
-		HasProgressHandlers<Collection<File>>, HasAbortHandlers<MaterialFileUpload.Data> {
+public class MaterialFileUpload extends Input implements HasFired, HasStartHandlers, HasStopHandlers,
+		HasValidation<MaterialFileUpload, Validation<MaterialFileUpload>>, HasChangeHandlers<Collection<File>>,
+		HasAddHandlers<Collection<MaterialFileUpload.File>>, HasDoneHandlers<MaterialFileUpload.Data>,
+		HasErrorHandlers<MaterialFileUpload.Data>, HasProgressHandlers<Collection<File>>,
+		HasAbortHandlers<MaterialFileUpload.Data> {
 
 	protected final JsOptions options = new JsOptions();
 	protected final List<JsFile> files = new LinkedList<>();
+	protected JavaScriptObject formData;
 	protected Collection<File> cacheFiles;
 
 	protected final FiredMixin<MaterialFileUpload> firedMixin = new FiredMixin<MaterialFileUpload>(this, () -> fire());
@@ -196,7 +197,7 @@ public class MaterialFileUpload extends Input
 		};
 
 		options.add = function(e, data) {
-			
+
 			var validate = _this.@gwt.material.design.components.client.ui.MaterialFileUpload::validate(Lgwt/material/design/components/client/ui/misc/fileUpload/js/JsData;)(data);
 
 			if (validate) {
@@ -290,10 +291,11 @@ public class MaterialFileUpload extends Input
 	}
 
 	protected native JavaScriptObject submit(final JsFile[] files) /*-{
+		var formData = this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData;
 		var element = this.@gwt.material.design.components.client.ui.MaterialFileUpload::getElement()();
 		return $wnd.jQuery(element).fileupload('send', {
-			files : files
-		// , formData: {param_1: 'test 1', param_2: 'test 2'}
+			files : files,
+			formData : formData
 		});
 	}-*/;
 
@@ -385,6 +387,66 @@ public class MaterialFileUpload extends Input
 		return addHandler(handler, ErrorEvent.getType());
 	}
 
+	/**
+	 * Add properties to get in the servlet
+	 * 
+	 * @param property
+	 * @param value
+	 */
+	public native void addFormData(final String property, final String value) /*-{
+
+		if (!property)
+			return;
+
+		var formData = this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData;
+
+		if (!formData)
+			formData = {};
+
+		$wnd.jQuery(formData).prop(property, value);
+
+		this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData = formData;
+
+	}-*/;
+
+	/**
+	 * Remove a property
+	 * 
+	 * @param property
+	 */
+	public native void removeFormData(final String property) /*-{
+
+		var formData = this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData;
+
+		if (formData && property)
+			$wnd.jQuery(formData).removeProp(property);
+
+		this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData = formData;
+
+	}-*/;
+
+	/**
+	 * Get the value of a property
+	 * 
+	 * @param property If the element has not this property the return is null 
+	 * @return
+	 */
+	public native String getFormData(final String property) /*-{
+
+		var formData = this.@gwt.material.design.components.client.ui.MaterialFileUpload::formData;
+
+		if (formData && property)
+			return $wnd.jQuery(formData).prop(property);
+		else
+			return null;
+
+	}-*/;
+
+	/**
+	 * URL of the upload servlet
+	 * 
+	 * @param url
+	 */
 	public void setUrl(final String url) {
 		options.url = url;
 		layout();
