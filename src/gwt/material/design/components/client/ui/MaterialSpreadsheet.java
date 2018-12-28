@@ -21,6 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -30,18 +31,35 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialSpreadsheet extends Div {
 
+	private final Div spreadsheet = new Div();
+
 	public MaterialSpreadsheet() {
-		super();
+		super(CssName.MDC_SPREADSHEET);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		test(getElement());
+		add(spreadsheet);
+		test(spreadsheet.getElement());
 	}
 
+	public native void setUrl(final String url)/*-{
+
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		$wnd.jQuery(spreadsheet).jexcel({
+			// URL from the CSV file
+			csv : url,
+			// Get the first of the CSV file and consider the headers
+			csvHeaders : true,
+			// Default column widths
+			colWidths : [ 300, 80, 100 ]
+		});
+
+	}-*/;
+
 	protected native void test(final Element element)/*-{
-		
+
 		data = [ [ 'Google', 1998, 807.80 ], [ 'Apple', 1976, 116.52 ],
 				[ 'Yahoo', 1994, 38.66 ], ];
 
@@ -49,6 +67,6 @@ public class MaterialSpreadsheet extends Div {
 			data : data,
 			colWidths : [ 300, 80, 100 ]
 		});
-		
+
 	}-*/;
 }

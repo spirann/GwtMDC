@@ -508,6 +508,11 @@ public interface CssName {
 	String MDC_CHART__LINE_CHART__HORIZONTAL = "ct-horizontal";
 	String MDC_CHART__LINE_CHART__START = "ct-start";
 	String MDC_CHART__LINE_CHART__END = "ct-end";
+	
+	// //////////////////////////////////////////////////////
+	// CHART
+	// //////////////////////////////////////////////////////
+	String MDC_SPREADSHEET = ".mdc-spreadsheet";
 
 	// //////////////////////////////////////////////////////
 	// DATE PICKER

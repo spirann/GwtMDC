@@ -799,3 +799,12 @@
 	border: none;
 	border-radius: 0;
 	min-height: 380px;}
+	
+/* ==========================================================================
+   DatePiker Dialog
+   ========================================================================== */	
+.mdc-spreadsheet {
+	width: 100%;
+	overflow-x: auto;
+	position: relative;}
+.mdc-spreadsheet .jexcel {}   
