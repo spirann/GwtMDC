@@ -33,76 +33,111 @@ public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
 
 	// JS
-	
+
 	@Source("js/jquery-3.3.1.min.js")
 	TextResource jquery();
-	
+
 	@Source("js/resize-sensor.min.js")
 	TextResource resizeSensor();
-		
+
 	@Source("js/vanilla-masker.min.js")
 	TextResource jqueryMaskJs();
-	
+
 	@Source("js/material-components-web.js")
 	TextResource materialComponentsWebJs();
 
 	@Source("js/chartist/chartist.min.js")
 	TextResource chartistJs();
-	
+
 	@Source("js/chartist/chartist-plugin-tooltip.min.js")
 	TextResource chartistTooltipPluginJs();
-	
+
 	@Source("js/chartist/chartist-plugin-pointlabels.min.js")
 	TextResource chartistPointLabelPluginJs();
-	
+
 	@Source("js/chartist/chartist-plugin-zoom.min.js")
 	TextResource chartistZoomPluginJs();
-	
+
 	@Source("js/prism.min.js")
 	TextResource prismJs();
-	
+
 	@Source("js/chroma.min.js")
 	TextResource chromaJs();
-	
+
 	@Source("js/fileUpload/jquery.fileupload.js")
 	TextResource fileUploadJs();
-	
+
 	@Source("js/fileUpload/jquery.iframe-transport.js")
 	TextResource fileUploadIframeTransportJs();
-	
+
 	@Source("js/fileUpload/jquery.ui.widget.js")
 	TextResource fileUploadWidgetJs();
 
 	// CSS
 	@Source("css/material-attr--theme.css")
 	TextResource themeAttributesCss();
-	
+
 	@Source("css/material-attr--components.css")
 	TextResource componentsAttributesCss();
-	
+
 	@Source("css/prism.min.css")
 	TextResource prismCss();
 
 	@Source("css/material-components-root.css")
 	TextResource materialComponentsRootCss();
-	
+
 	@Source("css/mixin.css")
 	TextResource mixinCss();
-	
+
 	@Source("css/material-components-web-addins.css")
 	TextResource materialComponentsWebAddinsCss();
 
 	@Source("css/material-components-web.min.css")
 	TextResource materialComponentsWebCss();
-	
+
 	@Source("css/chartist/chartist.min.css")
 	TextResource chartistCss();
-	
+
 	@Source("css/chartist/chartist-plugin-tooltip.min.css")
 	TextResource chartistTooltipPluginCss();
-	
+
 	@Source("css/chartist/chartist-mixin.min.css")
 	TextResource chartMixinCss();
+
+
+	// ////////////////////////////////////////
+	// JExcel
+	// ////////////////////////////////////////
+
+	@Source("js/jexcel/excel-formula.min.js")
+	TextResource jExcelFormulaJs();
+	
+	@Source("js/jexcel/jquery.csv.min.js")
+	TextResource jExcelCsvJs();
+	
+	@Source("js/jexcel/jquery.jcalendar.js")
+	TextResource jExcelCalendarJs();
+	
+	@Source("js/jexcel/jquery.jdropdown.js")
+	TextResource jExcelDropdownJs();
+	
+	@Source("js/jexcel/jquery.jexcel.js")
+	TextResource jExcelJs();
+	
+	@Source("css/jexcel/jquery.jcalendar.css")
+	TextResource jExcelCalendarCss();
+	
+	@Source("css/jexcel/jquery.jdropdown.css")
+	TextResource jExcelDropdownCss();
+
+	@Source("css/jexcel/jquery.jexcel.bootstrap.css")
+	TextResource jExcelBootstrapCss();
+
+	@Source("css/jexcel/jquery.jexcel.css")
+	TextResource jExcelCss();
+
+	@Source("css/jexcel/jquery.jexcel.green.css")
+	TextResource jExcelGreenCss();
 
 	// ////////////////////////////////////////
 	// Images
@@ -110,17 +145,17 @@ public interface MaterialResources extends ClientBundle {
 	@Source("image/mdc-checkbox__checkmark.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcCheckboxCheckmark();
-	
+
 	@Source("image/mdc-slider__thumb.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcSliderThumb();
-	
+
 	@Source("image/mdc-chip__checkmark.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcChipCheckmark();
-		
+
 	@Source("image/mdc-circular-progress__path.svg")
 	@MimeType("image/svg+xml")
 	TextResource mdcCircularProgressPath();
-	
+
 }

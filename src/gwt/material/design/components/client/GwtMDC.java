@@ -37,31 +37,39 @@ public class GwtMDC implements EntryPoint {
 	private static StyleElement[] styles = {};
 
 	public void onModuleLoad() {
-		
 		// ///////////////////////////////////////////////////////////////
 		// Load main resources
 		// ///////////////////////////////////////////////////////////////
 		loadJsResources();
 		loadCssResources();
-
 	}
 
 	public static void loadJsResources() {
+		// Google Material Components
 		injectJs(MaterialResources.INSTANCE.jquery());
 		injectJs(MaterialResources.INSTANCE.resizeSensor());
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
+		// Chartist
 		injectJs(MaterialResources.INSTANCE.chartistJs());
 		injectJs(MaterialResources.INSTANCE.chartistTooltipPluginJs());
 		injectJs(MaterialResources.INSTANCE.chartistPointLabelPluginJs());
 		injectJs(MaterialResources.INSTANCE.chartistZoomPluginJs());
+		// Prism (Code formatation)
 		injectJs(MaterialResources.INSTANCE.prismJs());
+		// Chroma
 		injectJs(MaterialResources.INSTANCE.chromaJs());
+		// Masker
 		injectJs(MaterialResources.INSTANCE.jqueryMaskJs());
-
-
+		// File Upload
 		injectJs(MaterialResources.INSTANCE.fileUploadWidgetJs());
 		injectJs(MaterialResources.INSTANCE.fileUploadJs());
 		injectJs(MaterialResources.INSTANCE.fileUploadIframeTransportJs());
+		// JExcel
+		injectJs(MaterialResources.INSTANCE.jExcelJs());
+		injectJs(MaterialResources.INSTANCE.jExcelCsvJs());
+		injectJs(MaterialResources.INSTANCE.jExcelFormulaJs());
+		injectJs(MaterialResources.INSTANCE.jExcelDropdownJs());
+		injectJs(MaterialResources.INSTANCE.jExcelCalendarJs());
 	}
 
 	public static void loadCssResources() {
@@ -72,17 +80,27 @@ public class GwtMDC implements EntryPoint {
 		}
 
 		// Load new styles
-		styles = new StyleElement[] { 
-				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),				
-				injectCss(MaterialResources.INSTANCE.prismCss()), 
+		styles = new StyleElement[] {
+				// Google Material Components
+				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),
 				injectCss(MaterialResources.INSTANCE.materialComponentsRootCss()),
-				injectCss(MaterialResources.INSTANCE.materialComponentsWebAddinsCss()),				
-				injectCss(MaterialResources.INSTANCE.mixinCss()), 
+				injectCss(MaterialResources.INSTANCE.materialComponentsWebAddinsCss()),
+				injectCss(MaterialResources.INSTANCE.mixinCss()),
+				// Prism (Code formatation)
+				injectCss(MaterialResources.INSTANCE.prismCss()),
+				// Chartist
 				injectCss(MaterialResources.INSTANCE.chartistCss()),
 				injectCss(MaterialResources.INSTANCE.chartistTooltipPluginCss()),
 				injectCss(MaterialResources.INSTANCE.chartMixinCss()),
+				// JExcel
+				injectCss(MaterialResources.INSTANCE.jExcelCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelBootstrapCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelCalendarCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelDropdownCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelGreenCss()),
+				// Load default values
 				injectCss(MaterialResources.INSTANCE.componentsAttributesCss()),
-				injectCss(MaterialResources.INSTANCE.themeAttributesCss())};
+				injectCss(MaterialResources.INSTANCE.themeAttributesCss()) };
 
 	}
 
