@@ -805,6 +805,8 @@
    ========================================================================== */	
 .mdc-spreadsheet {
 	width: 100%;
-	overflow-x: auto;
+	overflow: hidden;
 	position: relative;}
-.mdc-spreadsheet .jexcel {}   
+.mdc-spreadsheet .jexcel {
+	width: 100%;
+}   

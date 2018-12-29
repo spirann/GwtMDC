@@ -65,11 +65,11 @@ public class GwtMDC implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.fileUploadJs());
 		injectJs(MaterialResources.INSTANCE.fileUploadIframeTransportJs());
 		// JExcel
-		injectJs(MaterialResources.INSTANCE.jExcelJs());
 		injectJs(MaterialResources.INSTANCE.jExcelCsvJs());
 		injectJs(MaterialResources.INSTANCE.jExcelFormulaJs());
 		injectJs(MaterialResources.INSTANCE.jExcelDropdownJs());
 		injectJs(MaterialResources.INSTANCE.jExcelCalendarJs());
+		injectJs(MaterialResources.INSTANCE.jExcelJs());
 	}
 
 	public static void loadCssResources() {

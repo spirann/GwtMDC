@@ -31,7 +31,7 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialSpreadsheet extends Div {
 
-	private final Div spreadsheet = new Div();
+	protected final Div spreadsheet = new Div();
 
 	public MaterialSpreadsheet() {
 		super(CssName.MDC_SPREADSHEET);
@@ -47,13 +47,25 @@ public class MaterialSpreadsheet extends Div {
 	public native void setUrl(final String url)/*-{
 
 		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
-		$wnd.jQuery(spreadsheet).jexcel({
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+
+		$wnd.jQuery(element).jexcel({
 			// URL from the CSV file
 			csv : url,
 			// Get the first of the CSV file and consider the headers
 			csvHeaders : true,
 			// Default column widths
-			colWidths : [ 300, 80, 100 ]
+			colWidths : [ 300, 80, 100 ],
+			// Allow scroll
+			tableOverflow : true,
+			// Set height
+			tableHeight : 'auto',
+			// csv file name
+			csvFileName : 'Uhuuuuu',
+			// Set csv separator
+			separator: ';',
+			// Set csv delimiter
+			delimiter: ';'
 		});
 
 	}-*/;
@@ -64,8 +76,9 @@ public class MaterialSpreadsheet extends Div {
 				[ 'Yahoo', 1994, 38.66 ], ];
 
 		$wnd.jQuery(element).jexcel({
-			data : data,
-			colWidths : [ 300, 80, 100 ]
+			csv : 'http://cdn.bossanova.uk/demo/demo1.csv',
+			csvHeaders : true,
+			colWidths : [ 70, 200, 300 ],
 		});
 
 	}-*/;

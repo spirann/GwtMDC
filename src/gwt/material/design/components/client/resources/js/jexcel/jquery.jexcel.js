@@ -161,7 +161,7 @@ var methods = {
                     url: $.fn.jexcel.defaults[id].csv,
                     success: function (result) {
                         // Convert data
-                        var data = $.csv.toArrays(result);
+                        var data = $.csv.toArrays(result, $.fn.jexcel.defaults[id]);
 
                         // Headers
                         if ($.fn.jexcel.defaults[this.id].csvHeaders == true) {
@@ -3923,7 +3923,7 @@ var methods = {
         }
 
         // Get data
-        data += $(this).jexcel('copy', false, ',', true);
+        data += $(this).jexcel('copy', false, options.separator, true);
 
         // Download element
         var pom = document.createElement('a');
