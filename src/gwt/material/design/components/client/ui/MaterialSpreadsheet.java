@@ -31,7 +31,7 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialSpreadsheet extends Div {
 
-	protected final Div spreadsheet = new Div();
+	protected final Div spreadsheet = new Div(CssName.MDC_SPREADSHEET__SPREADSHEET, CssName.MDC_TYPOGRAPHY);
 
 	public MaterialSpreadsheet() {
 		super(CssName.MDC_SPREADSHEET);
@@ -56,10 +56,14 @@ public class MaterialSpreadsheet extends Div {
 			csvHeaders : true,
 			// Default column widths
 			colWidths : [ 300, 80, 100 ],
+			// Allow row dragging
+            rowDrag:true,
+            // Disable corner selection
+            //selectionCopy: true,
 			// Allow scroll
-			tableOverflow : true,
+			//tableOverflow : true,
 			// Set height
-			tableHeight : 'auto',
+			tableHeight : '100%',
 			// csv file name
 			csvFileName : 'Uhuuuuu',
 			// Set csv separator

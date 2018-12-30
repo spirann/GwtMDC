@@ -221,4 +221,18 @@
 	--mdc-input__ink-color: var(--mdc-theme-text-secondary-on-background);
 	--mdc-input__fill-color: var(--mdc-theme-background);
 	--mdc-input__focused-color: var(--mdc-theme-primary);
+	
+	/* ================================ */
+  	/* Spreadsheet attributes			*/
+  	/* ================================ */
+  	--mdc-spreadsheet--cell-padding: 1px;
+  	--mdc-spreadsheet--ink-color: var(--mdc-theme-on-surface);  	
+  	--mdc-spreadsheet--fill-color: var(--mdc-theme-surface);
+  	--mdc-spreadsheet--fixed-ink-color: var(--mdc-theme-on-surface);  	
+  	--mdc-spreadsheet--fixed-fill-color: var(--mdc-theme-surface);
+  	--mdc-spreadsheet--border-width: 1px;
+  	--mdc-spreadsheet--border-color: #ccf;
+  	--mdc-spreadsheet--selected-color: var(--mdc-theme-primary);
+  	--mdc-spreadsheet--selected-ink-color: var(--mdc-theme-on-primary);
+  	--mdc-spreadsheet--corner--border-color: var(--mdc-theme-on-primary);
 }

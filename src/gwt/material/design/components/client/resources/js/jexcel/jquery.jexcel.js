@@ -445,6 +445,18 @@ var methods = {
             $(corner).prop('unselectable', 'on');
             $(corner).prop('onselectstart', 'return false');
             //$(corner).prop('draggable', 'false');
+            
+            // Hidde on enter or tab key to prevent erroneos scrolls
+            $($.fn.jexcel).keyup(function(e) {
+    			var code = e.keyCode || e.which;
+    			if (code === 9 || code === 13) {  
+    				$('.jexcel_corner').css('display', 'none');
+    			}
+			});
+			$($.fn.jexcel).click(function() {
+    			$('.jexcel_corner').css('display', '');    			
+			});
+			
 
             // Prevent dragging on the corner object
             $.fn.jexcel.dragStartControls = function (e) {

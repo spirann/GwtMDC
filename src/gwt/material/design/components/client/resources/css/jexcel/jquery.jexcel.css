@@ -110,7 +110,7 @@
 }
 .jexcel .highlight-top
 {
-    border-top:1px solid #000 !important;
+    border-top:1px solid #000;
 }
 .jexcel .highlight-left
 {

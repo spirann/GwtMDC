@@ -210,6 +210,9 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 			} else
 				data.abort();
 
+			// It is to get upload the same file twice
+			element.value = '';	
+
 			return validate;
 		};
 

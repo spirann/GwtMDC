@@ -805,8 +805,131 @@
    ========================================================================== */	
 .mdc-spreadsheet {
 	width: 100%;
-	overflow: hidden;
+	overflow: auto;
 	position: relative;}
-.mdc-spreadsheet .jexcel {
-	width: 100%;
-}   
+	
+.jexcel td {
+	font-size: 0.75rem;
+  	line-height: 1.25rem;
+  	font-weight: 400;
+  	letter-spacing: 0.0333333333em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+}
+	
+/* Header */
+.jexcel > thead > tr > td {
+	font-weight: normal;
+    border-left: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-bottom: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-right: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-top: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);    
+    background-color: var(--mdc-spreadsheet--fixed-fill-color);
+    color: var(--mdc-spreadsheet--fixed-ink-color);
+    padding: var(--mdc-spreadsheet--cell-padding);} 
+    
+.jexcel > thead > tr > td:first-child {    
+	margin-left: 1px;
+    border-left: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);}
+
+/* Selection and Highlight Header */
+.jexcel > thead > tr > td.selected {
+    background-color: var(--mdc-spreadsheet--selected-color) !important;
+    color: var(--mdc-spreadsheet--selected-ink-color) !important;} 
+    
+/* First column */    
+.jexcel > tbody > tr > td:first-child {
+    background-color: var(--mdc-spreadsheet--fixed-fill-color);
+    color: var(--mdc-spreadsheet--fixed-ink-color);    
+    border-left: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);}       
+
+/* Selection and Highlight First Column */
+.jexcel > tbody > tr.selected > td:first-child {
+    background-color: var(--mdc-spreadsheet--selected-color) !important;
+    color: var(--mdc-spreadsheet--selected-ink-color) !important;} 
+
+/* Cells */
+.jexcel > tbody > tr > td {
+    border-left: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-top: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-right: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
+    border-bottom: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);    
+    background-color: var(--mdc-spreadsheet--fill-color);
+    color: var(--mdc-spreadsheet--ink-color);
+    padding: var(--mdc-spreadsheet--cell-padding);}
+
+.jexcel > tbody > tr:first-child > td {
+    border-top: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);}
+
+/* Selection and Highlight Cells */
+
+.jexcel_corner {
+	background-color: var(--mdc-spreadsheet--selected-color) !important;
+	border: 1px solid var(--mdc-spreadsheet--corner--border-color) !important;}
+	
+.jexcel .highlight {
+    color: var(--mdc-spreadsheet--selected-ink-color) !important;    
+    background-color: transparent !important;
+	background: 
+        var(--mdc-container-background-opacity),
+		linear-gradient(var(--mdc-spreadsheet--selected-color), var(--mdc-spreadsheet--selected-color)) no-repeat !important;}	
+.jexcel .highlight-top{
+	padding-top: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-top: calc(var(--mdc-spreadsheet--border-width) + 1px) solid var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .highlight-left{
+	padding-left: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-left: calc(var(--mdc-spreadsheet--border-width) + 1px) solid var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .highlight-right{
+	padding-right: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-right: calc(var(--mdc-spreadsheet--border-width) + 1px) solid var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .highlight-bottom{
+	padding-bottom: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-bottom:calc(var(--mdc-spreadsheet--border-width) + 1px) solid var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .highlight-bottom.highlight-right {
+	padding-right: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+   padding-bottom: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-bottom: calc(var(--mdc-spreadsheet--border-width) + 1px) solid var(--mdc-spreadsheet--selected-color) !important;}
+
+.jexcel .highlight-top,
+.jexcel .highlight-left,
+.jexcel .highlight-right,
+.jexcel .highlight-bottom,    
+.jexcel .highlight-bottom.highlight-right {
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    -moz-box-shadow: none !important; }
+    
+.jexcel .selection {
+    color: var(--mdc-spreadsheet--selected-ink-color) !important;    
+    background-color: transparent !important;
+	background: 
+        var(--mdc-container-background-opacity),
+		linear-gradient(var(--mdc-spreadsheet--selected-color), var(--mdc-spreadsheet--selected-color)) no-repeat !important; }
+.jexcel .selection-left {
+	padding-left: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-left: calc(var(--mdc-spreadsheet--border-width) + 1px) dotted var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .selection-right {
+	padding-right: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-right: calc(var(--mdc-spreadsheet--border-width) + 1px) dotted var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .selection-top {
+	padding-top: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-top: calc(var(--mdc-spreadsheet--border-width) + 1px) dotted var(--mdc-spreadsheet--selected-color) !important;}
+.jexcel .selection-bottom {
+	padding-bottom: calc(var(--mdc-spreadsheet--cell-padding) - 1px);
+    border-bottom: calc(var(--mdc-spreadsheet--border-width) + 1px) dotted var(--mdc-spreadsheet--selected-color) !important;}	
+ 
+ 
+/* Border radius adjust */
+.jexcel,
+.jexcel > thead,
+.jexcel > thead > tr {	
+	background-color: transparent !important;
+	border: none !important;}	    
+.jexcel > thead > tr > td:first-child{
+	border-top-left-radius: var(--mdc-rounded-border-radius);} 
+.jexcel > thead > tr > td:last-child{
+	border-top-right-radius: var(--mdc-rounded-border-radius);}   
+.jexcel > tbody > tr:last-child > td:first-child {
+	border-bottom-left-radius: var(--mdc-rounded-border-radius);} 
+.jexcel > tbody > tr:last-child > td:last-child{
+	border-bottom-right-radius: var(--mdc-rounded-border-radius);}   	

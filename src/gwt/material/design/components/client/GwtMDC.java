@@ -81,6 +81,12 @@ public class GwtMDC implements EntryPoint {
 
 		// Load new styles
 		styles = new StyleElement[] {
+				// JExcel
+				injectCss(MaterialResources.INSTANCE.jExcelCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelBootstrapCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelCalendarCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelDropdownCss()),
+				injectCss(MaterialResources.INSTANCE.jExcelGreenCss()),
 				// Google Material Components
 				injectCss(MaterialResources.INSTANCE.materialComponentsWebCss()),
 				injectCss(MaterialResources.INSTANCE.materialComponentsRootCss()),
@@ -92,12 +98,6 @@ public class GwtMDC implements EntryPoint {
 				injectCss(MaterialResources.INSTANCE.chartistCss()),
 				injectCss(MaterialResources.INSTANCE.chartistTooltipPluginCss()),
 				injectCss(MaterialResources.INSTANCE.chartMixinCss()),
-				// JExcel
-				injectCss(MaterialResources.INSTANCE.jExcelCss()),
-				injectCss(MaterialResources.INSTANCE.jExcelBootstrapCss()),
-				injectCss(MaterialResources.INSTANCE.jExcelCalendarCss()),
-				injectCss(MaterialResources.INSTANCE.jExcelDropdownCss()),
-				injectCss(MaterialResources.INSTANCE.jExcelGreenCss()),
 				// Load default values
 				injectCss(MaterialResources.INSTANCE.componentsAttributesCss()),
 				injectCss(MaterialResources.INSTANCE.themeAttributesCss()) };
