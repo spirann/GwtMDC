@@ -944,27 +944,8 @@
 }	 	
 
 /* Context menu */
-.jexcel_contextmenu {
-	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-  	background-color: var(--mdc-menu__fill-color);
-  	color: var(--mdc-menu__ink-color);
-	transform-origin-left: top left;
-  	transform-origin-right: top right;
-  	border-radius: var(--mdc-rounded-border-radius);
-  	display: none;
-  	position: absolute;
-  	box-sizing: border-box;
-  	max-width: calc(100vw - 32px);
-  	max-height: calc(100vh - 32px);
-  	margin: 0;
-  	padding: 0;
-  	-webkit-transform: scale(1);
-          transform: scale(1);
-  	-webkit-transform-origin: top left;
-          transform-origin: top left;
-  	overflow: auto;
-  	will-change: transform, opacity;
-  	z-index: 4;}
+.jexcel_contextmenu.mdc-menu-surface  {
+	opacity: 1;}
   	
 .jexcel_contextmenu a {
 	color: var(--mdc-menu__ink-color);

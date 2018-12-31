@@ -51,6 +51,8 @@ var methods = {
             minDimensions:[0,0],
             // Custom context menu
             contextMenu:null,
+            // Context menu class
+            contextMenuClass:null,
             // Allow column sorting
             columnSorting:true,
             // Allow column resizing
@@ -425,7 +427,11 @@ var methods = {
             // Contextmenu container
             var contextMenu = document.createElement('div');
             $(contextMenu).css('display', 'none');
-            $(contextMenu).prop('class', 'jexcel_contextmenu');
+            console.log(options.contextMenuClass);
+            if(options.contextMenuClass)
+            	$(contextMenu).prop('class', 'jexcel_contextmenu ' + options.contextMenuClass);
+            else
+            	$(contextMenu).prop('class', 'jexcel_contextmenu');
             $(contextMenu).prop('id', 'jexcel_contextmenu');
 
             // Powered by
