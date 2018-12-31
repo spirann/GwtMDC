@@ -538,6 +538,8 @@ i.mdc-list-item__graphic {
    Menu
    ========================================================================== */
 .mdc-menu-surface {
+	background-color: var(--mdc-menu__fill-color);
+  	color: var(--mdc-menu__ink-color);
 	border-radius: var(--mdc-rounded-border-radius);}	
 
 /* Disabled settings */ 

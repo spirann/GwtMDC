@@ -946,9 +946,9 @@
 /* Context menu */
 .jexcel_contextmenu {
 	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-  	background-color: var(--mdc-theme-surface, #fff);
-  	color: var(--mdc-theme-on-surface, #000);
-  	transform-origin-left: top left;
+  	background-color: var(--mdc-menu__fill-color);
+  	color: var(--mdc-menu__ink-color);
+	transform-origin-left: top left;
   	transform-origin-right: top right;
   	border-radius: var(--mdc-rounded-border-radius);
   	display: none;
@@ -965,9 +965,44 @@
   	overflow: auto;
   	will-change: transform, opacity;
   	z-index: 4;}
+  	
+.jexcel_contextmenu a {
+	color: var(--mdc-menu__ink-color);
+	font-family: var(--mdc-font-family);
+  	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+  	font-size: 0.875rem;
+  	line-height: 1.25rem;
+  	font-weight: 400;
+  	letter-spacing: 0.0178571429em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	display: block;
+    position: relative;
+    cursor: default;}
 
+.jexcel_contextmenu a span {
+	color: var(--mdc-menu__ink-color);
+	opacity: var(--mdc-track-opacity);
+	font-family: var(--mdc-font-family);
+  	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+  	font-size: 0.875rem;
+  	line-height: 1.25rem;
+  	font-weight: 400;
+  	letter-spacing: 0.0178571429em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	display: block;}
 
-
+.jexcel_contextmenu a:hover {
+    background-color: var(--mdc-filled-color);}
 
 
 

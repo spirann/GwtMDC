@@ -203,6 +203,12 @@
 	--mdc-list-item-selected-meta-ink-color: var(--mdc-theme-secondary);
   	
   	/* ================================ */
+  	/* Menu attributes				*/
+  	/* ================================ */
+  	--mdc-menu__ink-color: var(--mdc-theme-on-surface);
+	--mdc-menu__fill-color: var(--mdc-theme-surface);
+  	
+  	/* ================================ */
   	/* Dialog attributes				*/
   	/* ================================ */
 	--mdc-dialog-header-fill-color: transparent;
