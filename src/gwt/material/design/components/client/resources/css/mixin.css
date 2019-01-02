@@ -541,6 +541,44 @@ i.mdc-list-item__graphic {
 	background-color: var(--mdc-menu__fill-color);
   	color: var(--mdc-menu__ink-color);
 	border-radius: var(--mdc-rounded-border-radius);}	
+/* It's not in Google Material Design Components */
+.mdc-menu-surface__text {
+	color: var(--mdc-menu__ink-color);
+	font-family: var(--mdc-font-family);
+  	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+  	font-size: 0.875rem;
+  	line-height: 1.25rem;
+  	font-weight: 400;
+  	letter-spacing: 0.0178571429em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	display: block;
+    position: relative;
+    cursor: default;
+    padding: 6px 8px 6px 30px;
+    width: 250px;}
+/* It's not in Google Material Design Components */
+.mdc-menu-surface__command {
+	color: var(--mdc-menu__ink-color);
+	opacity: var(--mdc-track-opacity);
+	font-family: var(--mdc-font-family);
+  	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+  	font-size: 0.875rem;
+  	line-height: 1.25rem;
+  	font-weight: 400;
+  	letter-spacing: 0.0178571429em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
+  	overflow: hidden;
+  	display: block;
+  	float: right;}
 
 /* Disabled settings */ 
 

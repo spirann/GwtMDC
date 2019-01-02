@@ -160,6 +160,8 @@ public interface CssName {
 	String MDC_MENU__ANCHOR = "mdc-menu-surface--anchor";
 	String MDC_MENU = "mdc-menu-surface";
 	String MDC_MENU__ITEMS = "mdc-menu__items";
+	String MDC_MENU__TEXT = "mdc-menu-surface__text";
+	String MDC_MENU__COMMAND = "mdc-menu-surface__command";
 	// //////////////////////////////////////////////////////
 	// SELECT MENU
 	// //////////////////////////////////////////////////////

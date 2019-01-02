@@ -53,6 +53,10 @@ var methods = {
             contextMenu:null,
             // Context menu class
             contextMenuClass:null,
+            // Context menu item primary text class
+            contextMenuItemPrimaryTextClass:null,
+            // Context menu item secondary text class
+            contextMenuItemSecondaryTextClass:null,
             // Allow column sorting
             columnSorting:true,
             // Allow column resizing
@@ -506,36 +510,43 @@ var methods = {
                             if (typeof($.fn.jexcel.defaults[$.fn.jexcel.current].contextMenu) == 'function') {
                                 contextMenuContent = $.fn.jexcel.defaults[$.fn.jexcel.current].contextMenu(o[0], o[1]);
                             } else {
+                            	
+                            	var textClass = options.contextMenuTextClass ? 'class="' + options.contextMenuTextClass + '"' : '';
+                            	var commandClass = options.contextMenuCommandClass ? 'class="' + options.contextMenuCommandClass + '"' : '';
+                            	
+                            	console.log(textClass);
+                            	console.log(commandClass);
+                            
                                 // Default context menu for the columns
                                 if ($(e.target).parent().parent().is('thead')) {
-                                    contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('orderBy', " + o[1] + ", 0)\">Order ascending <span></span></a>";
-                                    contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('orderBy', " + o[1] + ", 1)\">Order descending <span></span></a><hr>";
+                                    contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('orderBy', " + o[1] + ", 0)\">Order ascending <span></span " + commandClass + "></a>";
+                                    contextMenuContent += "<a " + textClass + "onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('orderBy', " + o[1] + ", 1)\">Order descending <span></span " + commandClass + "></a><hr>";
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowInsertColumn == true) {
-                                        contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + o[1] + ")\">Insert a new column<span></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + o[1] + ")\">Insert a new column<span " + commandClass + "></span></a>";
                                     }
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowDeleteColumn == true) {
-                                        contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteColumn')\">Delete this column<span></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteColumn')\">Delete this column<span " + commandClass + "></span></a>";
                                     }
-                                    contextMenuContent += "<hr><a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('copy', true)\">Copy...<span>Ctrl + C</span></a>";
-                                    contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('download')\">Save as...<span>Ctrl + S</span></a>";
+                                    contextMenuContent += "<hr><a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('copy', true)\">Copy...<span " + commandClass + ">Ctrl + C</span></a>";
+                                    contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('download')\">Save as...<span " + commandClass + ">Ctrl + S</span></a>";
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].about) {
-                                        contextMenuContent += "<a onclick=\"alert('" + $.fn.jexcel.defaults[$.fn.jexcel.current].about + "')\">About<span></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"alert('" + $.fn.jexcel.defaults[$.fn.jexcel.current].about + "')\">About<span " + commandClass + "></span></a>";
                                     }
                                 } else if ($(e.target).parent().parent().is('tbody')) {
                                     // Default context menu for the rows
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowInsertColumn == true) {
-                                        contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + o[1] + ")\">Insert a new column<span></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + o[1] + ")\">Insert a new column<span " + commandClass + "></span></a>";
                                     }
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowInsertRow == true) {
-                                        contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertRow', 1, " + o[1] + ")\">Insert a new row<span></span></a><hr>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertRow', 1, " + o[1] + ")\">Insert a new row<span " + commandClass + "></span></a><hr>";
                                     }
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowDeleteRow == true) {
-                                        contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteRow')\">Delete this row<span></span></a><hr>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteRow')\">Delete this row<span " + commandClass + "></span></a><hr>";
                                     }
-                                    contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('copy', true)\">Copy...<span>Ctrl + C</span></a>";
-                                    contextMenuContent += "<a onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('download')\">Save as...<span>Ctrl + S</span></a>";
+                                    contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('copy', true)\">Copy...<span " + commandClass + ">Ctrl + C</span></a>";
+                                    contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('download')\">Save as...<span " + commandClass + ">Ctrl + S</span></a>";
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].about) {
-                                        contextMenuContent += "<a onclick=\"alert('" + $.fn.jexcel.defaults[$.fn.jexcel.current].about + "')\">About<span></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"alert('" + $.fn.jexcel.defaults[$.fn.jexcel.current].about + "')\">About<span " + commandClass + "></span></a>";
                                     }
                                 }
                             }

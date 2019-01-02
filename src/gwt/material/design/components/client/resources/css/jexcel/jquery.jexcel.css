@@ -337,7 +337,7 @@
     padding-top:5px;
 }
 
-.jexcel_contextmenu a
+.jexcel_contextmenu a[class=""]
 {
     display: block;
     color: #555;
@@ -348,14 +348,14 @@
     cursor: default;
 }
 
-.jexcel_contextmenu a span
+.jexcel_contextmenu a[class=""] span
 {
     color: #a1a192;
     float: right;
     margin-right:10px;
 }
 
-.jexcel_contextmenu a:hover
+.jexcel_contextmenu a[class=""]:hover
 {
     background: #ebebeb;
 }

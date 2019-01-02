@@ -65,6 +65,14 @@ public class JsOptions {
 	// Default: null
 	@JsProperty
 	public String contextMenuClass;
+	// Context menu class
+	// Default: null
+	@JsProperty
+	public String contextMenuTextClass;
+	// Context menu class
+	// Default: null
+	@JsProperty
+	public String contextMenuCommandClass;
 	// Allow column sorting
 	// Default: true
 	@JsProperty
@@ -149,5 +157,5 @@ public class JsOptions {
 	// Default: null
 	@JsProperty
 	public String about;
-	
+
 }

@@ -946,41 +946,6 @@
 /* Context menu */
 .jexcel_contextmenu.mdc-menu-surface  {
 	opacity: 1;}
-  	
-.jexcel_contextmenu a {
-	color: var(--mdc-menu__ink-color);
-	font-family: var(--mdc-font-family);
-  	-moz-osx-font-smoothing: grayscale;
-  	-webkit-font-smoothing: antialiased;
-  	font-size: 0.875rem;
-  	line-height: 1.25rem;
-  	font-weight: 400;
-  	letter-spacing: 0.0178571429em;
-  	text-decoration: inherit;
-  	text-transform: inherit;
-  	text-overflow: ellipsis;
-  	white-space: nowrap;
-  	overflow: hidden;
-  	display: block;
-    position: relative;
-    cursor: default;}
-
-.jexcel_contextmenu a span {
-	color: var(--mdc-menu__ink-color);
-	opacity: var(--mdc-track-opacity);
-	font-family: var(--mdc-font-family);
-  	-moz-osx-font-smoothing: grayscale;
-  	-webkit-font-smoothing: antialiased;
-  	font-size: 0.875rem;
-  	line-height: 1.25rem;
-  	font-weight: 400;
-  	letter-spacing: 0.0178571429em;
-  	text-decoration: inherit;
-  	text-transform: inherit;
-  	text-overflow: ellipsis;
-  	white-space: nowrap;
-  	overflow: hidden;
-  	display: block;}
 
 .jexcel_contextmenu a:hover {
     background-color: var(--mdc-filled-color);}

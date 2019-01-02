@@ -71,6 +71,8 @@ public class MaterialSpreadsheet extends Div {
 		options.tableOverflow = false;
 		options.tableHeight = "300px";
 		options.contextMenuClass = CssName.MDC_MENU;
+		options.contextMenuTextClass = CssName.MDC_MENU__TEXT;
+		options.contextMenuCommandClass = CssName.MDC_MENU__COMMAND;
 	}
 	
 	@Override
