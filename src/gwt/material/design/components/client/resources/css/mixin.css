@@ -561,6 +561,9 @@ i.mdc-list-item__graphic {
     cursor: default;
     padding: 6px 8px 6px 30px;
     width: 250px;}
+	.mdc-menu-surface__text:hover {
+	color: var(--mdc-menu__ink-color);
+    background-color: var(--mdc-filled-color);}    
 /* It's not in Google Material Design Components */
 .mdc-menu-surface__command {
 	color: var(--mdc-menu__ink-color);
