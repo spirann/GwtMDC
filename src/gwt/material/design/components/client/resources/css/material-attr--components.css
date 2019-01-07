@@ -237,7 +237,7 @@
   	--mdc-spreadsheet--fixed-ink-color: var(--mdc-theme-on-surface);  	
   	--mdc-spreadsheet--fixed-fill-color: var(--mdc-theme-surface);
   	--mdc-spreadsheet--border-width: 1px;
-  	--mdc-spreadsheet--border-color: #ccf;
+  	--mdc-spreadsheet--border-color: var(--mdc-theme-on-surface);
   	--mdc-spreadsheet--selected-color: var(--mdc-theme-primary);
   	--mdc-spreadsheet--selected-ink-color: var(--mdc-theme-on-primary);
   	--mdc-spreadsheet--corner--border-color: var(--mdc-theme-on-primary);

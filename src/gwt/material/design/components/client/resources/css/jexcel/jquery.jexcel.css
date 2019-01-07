@@ -40,6 +40,16 @@
         width:0px;
     }
 }
+
+.jexcel,
+.jexcel > thead,
+.jexcel > thead > tr
+.jexcel > tbody,
+.jexcel > tbody > tr {
+	background: none;
+	background-color: transparent;
+}
+
 .jexcel > thead > tr, .jexcel > tbody > tr
 {
     display:flex;
@@ -66,6 +76,10 @@
     padding-right:3px;
     padding-bottom:1px;
 }
+.jexcel > tbody > tr
+{
+ 	margin-left: -1px;
+}
 .jexcel > tbody > tr > td.edition
 {
     padding:0px;
@@ -77,6 +91,7 @@
     width:30px;
     text-align:center;
 }
+
 .jexcel > tbody > tr > td
 {
     border-left:1px solid transparent;

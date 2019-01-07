@@ -828,8 +828,7 @@
     color: var(--mdc-spreadsheet--fixed-ink-color);
     padding: var(--mdc-spreadsheet--cell-padding);} 
     
-.jexcel > thead > tr > td:first-child {    
-	margin-left: 1px;
+.jexcel > thead > tr > td:first-child {  
     border-left: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);}
 
 /* Selection and Highlight Header */
@@ -923,8 +922,8 @@
 .jexcel {
 	border-radius: var(--mdc-rounded-border-radius);
 	border: var(--mdc-spreadsheet--border-width) solid var(--mdc-spreadsheet--border-color);
-	border-left-width: 0;
 }
+
 .jexcel > thead,
 .jexcel > thead > tr {	
 	background-color: transparent !important;
@@ -939,7 +938,20 @@
 	border-bottom-right-radius: var(--mdc-rounded-border-radius);}  
 	
 /* Cell inputs */
-.jexcel > tbody > tr > td > select, .jexcel > tbody > tr > td > input, .jexcel > tbody > tr > td > textarea {
+.jexcel > tbody > tr > td > select, 
+.jexcel > tbody > tr > td > input, 
+.jexcel > tbody > tr > td > textarea {
+	font-family: var(--mdc-font-family);
+  	-moz-osx-font-smoothing: grayscale;
+  	-webkit-font-smoothing: antialiased;
+  	font-size: 0.75rem;
+  	line-height: 1.25rem;
+	font-weight: normal;
+  	letter-spacing: 0.0178571429em;
+  	text-decoration: inherit;
+  	text-transform: inherit;
+  	text-overflow: ellipsis;
+  	white-space: nowrap;
     color: var(--mdc-spreadsheet--selected-ink-color) !important;	
 }	 	
 
@@ -950,6 +962,11 @@
 .jexcel_contextmenu a:hover {
     background-color: var(--mdc-filled-color);}
 
-
+/* Order arrows */
+.jexcel .arrow-up {
+    border-bottom: 4px solid var(--mdc-spreadsheet--selected-ink-color);}
+.jexcel .arrow-down {
+    border-top: 4px solid var(--mdc-spreadsheet--selected-ink-color); }    
+    
 
 

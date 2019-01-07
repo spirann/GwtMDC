@@ -139,4 +139,31 @@ public interface IMessages extends Messages {
 	
 	@DefaultMessage("File size is too big. Max size is {0} and {1} has {2}.")
 	String mdc_file_upload__err__file_size_is_too_bg(String maxSize, String file, String size);
+	
+	@DefaultMessage("Insert a new row")
+	String mdc_jexcel_insert_row();
+	
+	@DefaultMessage("Insert a new column")
+	String mdc_jexcel_insert_column();
+	
+	@DefaultMessage("Delete this row")
+	String mdc_jexcel_delete_row();
+	
+	@DefaultMessage("Delete this column")
+	String mdc_jexcel_delete_column();
+	
+	@DefaultMessage("Copy...")
+	String mdc_jexcel_copy();
+	
+	@DefaultMessage("About")
+	String mdc_jexcel_about();
+	
+	@DefaultMessage("Save as...")
+	String mdc_jexcel_save_as();
+	
+	@DefaultMessage("Order ascending")
+	String mdc_jexcel_order_ascending();
+	
+	@DefaultMessage("Order descending")
+	String mdc_jexcel_order_descending();
 }

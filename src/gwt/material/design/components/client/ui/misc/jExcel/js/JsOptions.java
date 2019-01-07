@@ -33,12 +33,17 @@ import jsinterop.annotations.JsType;
 @JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
 public class JsOptions {
 
+	@JsProperty
+	public Object[][] data;
 	// Column types and configurations
-	// columns:[],
+	@JsProperty
+	public JsColumnSettings[] columns;
 	// Column header titles
-	// colHeaders:[],
+	@JsProperty
+	public String[] colHeaders;
 	// Column width sizes
-	// colWidths:[],
+	@JsProperty
+	public int[] colWidths;
 	// Column alignment
 	// colAlignments:[],
 	// Colum header classes
@@ -73,6 +78,9 @@ public class JsOptions {
 	// Default: null
 	@JsProperty
 	public String contextMenuCommandClass;
+	// Texts of the menu items
+	@JsProperty
+	public JsContextMenuTexts contextMenuTexts;
 	// Allow column sorting
 	// Default: true
 	@JsProperty
