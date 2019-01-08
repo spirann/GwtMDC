@@ -137,6 +137,10 @@ public class MaterialSpreadsheet extends Div {
 		return jsElement;
 	}-*/;
 
+	public void setFormatter(Formatter formatter) {
+		this.formatter = formatter;
+	}
+
 	public void setUrl(final String url) {
 		options.csv = url;
 		options.data = null;
@@ -180,8 +184,70 @@ public class MaterialSpreadsheet extends Div {
 		if (initialized)
 			jsInit();
 	}
-
-	public void setFormatter(Formatter formatter) {
-		this.formatter = formatter;
+	
+	public void setRowDrag(final boolean rowDrag) {
+		options.rowDrag = rowDrag;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setEditable(final boolean editable) {
+		options.editable = editable;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowInsertRow(final boolean allowInsertRow) {
+		options.allowInsertRow = allowInsertRow;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowManualInsertRow(final boolean allowManualInsertRow) {
+		options.allowManualInsertRow = allowManualInsertRow;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowInsertColumn(final boolean allowInsertColumn) {
+		options.allowInsertColumn = allowInsertColumn;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowManualInsertColumn(final boolean allowManualInsertColumn) {
+		options.allowManualInsertColumn = allowManualInsertColumn;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowDeleteRow(final boolean allowDeleteRow) {
+		options.allowDeleteRow = allowDeleteRow;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setAllowDeleteColumn(final boolean allowDeleteColumn) {
+		options.allowDeleteColumn = allowDeleteColumn;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setWordWrap(final boolean wordWrap) {
+		options.wordWrap = wordWrap;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setCsvFileName(final String csvFileName) {
+		options.csvFileName = csvFileName;
+		if (initialized)
+			jsInit();
+	}
+	
+	public void setCsvHeaders(final boolean csvHeaders) {
+		options.csvHeaders = csvHeaders;
+		if (initialized)
+			jsInit();
 	}
 }
