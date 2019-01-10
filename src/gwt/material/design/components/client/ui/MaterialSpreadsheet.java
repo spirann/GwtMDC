@@ -55,8 +55,7 @@ public class MaterialSpreadsheet extends Div {
 		super.onInitialize();
 
 		final Object[][] data = new Object[][] { { "João", "da Silva", 18, 19.9, "=C1+D1" },
-				{ "Paulo", "da Trindade", 19, 23.7, "=C2+D2" },
-				{ "Maria", "da Costa", 13, 12.5, "=C3+D3" },
+				{ "Paulo", "da Trindade", 19, 23.7, "=C2+D2" }, { "Maria", "da Costa", 13, 12.5, "=C3+D3" },
 				{ "Flávia", "de Lurdes", 12, 10.8, "=C4+41" } };
 		setData(data);
 		setHeaders(new String[] { "Nome", "Sobrenome", "Algo", "Sei lá", "Total" });
@@ -158,34 +157,36 @@ public class MaterialSpreadsheet extends Div {
 	}
 
 	public native Object[][] getData()/*-{
-		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
-		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
-		return $wnd.jQuery(element).jexcel('getData');
+		var spreadsheet = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (spreadsheet)
+			return spreadsheet.jexcel('getData');
+		else 
+			return {};
 	}-*/;
 
 	public void setHeaders(final String[] headers) {
 		options.colHeaders = headers;
 		if (initialized)
-			for (int col = 0; col < headers.length; col++)
+			for (int col = 0; headers != null && col < headers.length; col++)
 				setHeader(headers[col], col);
 	}
 
 	/**
 	 * 
-	 * @param header New header title
-	 * @param column Column number starting on zero
+	 * @param header
+	 *            New header title
+	 * @param column
+	 *            Column number starting on zero
 	 */
 	public native void setHeader(final String header, final int column) /*-{
-		var initialized = this.@gwt.material.design.components.client.base.widget.MaterialWidget::initialized;
-		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
-		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		var spreadsheet = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		var options = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::options;
 
 		if (options && options.colHeaders && options.colHeaders.length > column)
 			options.colHeaders[column] = header;
-	
-		if (initialized)
-			$wnd.jQuery(element).jexcel('setHeader', column, header);
+
+		if (spreadsheet)
+			spreadsheet.jexcel('setHeader', column, header);
 	}-*/;
 
 	public void setColumnsWidth(final int[] widths) {
