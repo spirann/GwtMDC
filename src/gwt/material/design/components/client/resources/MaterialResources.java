@@ -109,6 +109,9 @@ public interface MaterialResources extends ClientBundle {
 	// JExcel
 	// ////////////////////////////////////////
 
+	@Source("js/jexcel/numeral.min.js")
+	TextResource jExcelNumeralJs();
+	
 	@Source("js/jexcel/excel-formula.min.js")
 	TextResource jExcelFormulaJs();
 	

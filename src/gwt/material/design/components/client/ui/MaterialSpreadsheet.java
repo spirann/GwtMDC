@@ -54,18 +54,20 @@ public class MaterialSpreadsheet extends Div {
 		add(spreadsheet);
 		super.onInitialize();
 
-		final Object[][] data = new Object[][] { { "João", "da Silva", 18, 19.9 }, { "Paulo", "da Trindade", 19, 23.7 },
-				{ "Maria", "da Costa", 13, 12.5 }, { "Flávia", "de Lurdes", 12, 10.8 } };
+		final Object[][] data = new Object[][] { { "João", "da Silva", 18, 19.9, "=C1+D1" },
+				{ "Paulo", "da Trindade", 19, 23.7, "=C2+D2" },
+				{ "Maria", "da Costa", 13, 12.5, "=C3+D3" },
+				{ "Flávia", "de Lurdes", 12, 10.8, "=C4+41" } };
 		setData(data);
-		setHeaders(new String[] { "Nome", "Sobrenome", "Algo", "Sei lá" });
+		setHeaders(new String[] { "Nome", "Sobrenome", "Algo", "Sei lá", "Total" });
 		setColumnsWidth(new int[] { 100, 100, 60, 60 });
 
 		final JsColumnSettings text = new JsColumnSettings();
 		text.type = "text";
 		final JsColumnSettings numeric = new JsColumnSettings();
-		numeric.type = "numeric";
+		numeric.type = "number";
 
-		options.columns = new JsColumnSettings[] { text, text, numeric, numeric };
+		options.columns = new JsColumnSettings[] { text, text, numeric, numeric, numeric };
 
 		jsInit();
 	}
@@ -87,7 +89,7 @@ public class MaterialSpreadsheet extends Div {
 		options.allowDeleteColumn = true;
 		options.wordWrap = false;
 		options.csvFileName = "csv_file";
-		options.csvHeaders = true;
+		options.csvHeaders = false;
 		options.separator = ";";
 		options.delimiter = ";";
 		options.selectionCopy = true;
@@ -155,7 +157,7 @@ public class MaterialSpreadsheet extends Div {
 			jsInit();
 	}
 
-	public native Object[][] getData()/*-{		
+	public native Object[][] getData()/*-{
 		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
 		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
 		return $wnd.jQuery(element).jexcel('getData');
@@ -164,87 +166,106 @@ public class MaterialSpreadsheet extends Div {
 	public void setHeaders(final String[] headers) {
 		options.colHeaders = headers;
 		if (initialized)
-			jsInit();
+			for (int col = 0; col < headers.length; col++)
+				setHeader(headers[col], col);
 	}
+
+	/**
+	 * 
+	 * @param header New header title
+	 * @param column Column number starting on zero
+	 */
+	public native void setHeader(final String header, final int column) /*-{
+		var initialized = this.@gwt.material.design.components.client.base.widget.MaterialWidget::initialized;
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		var options = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::options;
+
+		if (options && options.colHeaders && options.colHeaders.length > column)
+			options.colHeaders[column] = header;
+	
+		if (initialized)
+			$wnd.jQuery(element).jexcel('setHeader', column, header);
+	}-*/;
 
 	public void setColumnsWidth(final int[] widths) {
 		options.colWidths = widths;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setSort(final boolean sort) {
 		options.columnSorting = sort;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setResize(final boolean resize) {
 		options.columnResize = resize;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setRowDrag(final boolean rowDrag) {
 		options.rowDrag = rowDrag;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setEditable(final boolean editable) {
 		options.editable = editable;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowInsertRow(final boolean allowInsertRow) {
 		options.allowInsertRow = allowInsertRow;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowManualInsertRow(final boolean allowManualInsertRow) {
 		options.allowManualInsertRow = allowManualInsertRow;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowInsertColumn(final boolean allowInsertColumn) {
 		options.allowInsertColumn = allowInsertColumn;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowManualInsertColumn(final boolean allowManualInsertColumn) {
 		options.allowManualInsertColumn = allowManualInsertColumn;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowDeleteRow(final boolean allowDeleteRow) {
 		options.allowDeleteRow = allowDeleteRow;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setAllowDeleteColumn(final boolean allowDeleteColumn) {
 		options.allowDeleteColumn = allowDeleteColumn;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setWordWrap(final boolean wordWrap) {
 		options.wordWrap = wordWrap;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setCsvFileName(final String csvFileName) {
 		options.csvFileName = csvFileName;
 		if (initialized)
 			jsInit();
 	}
-	
+
 	public void setCsvHeaders(final boolean csvHeaders) {
 		options.csvHeaders = csvHeaders;
 		if (initialized)

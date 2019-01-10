@@ -66,9 +66,10 @@ public class GwtMDC implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.fileUploadIframeTransportJs());
 		// JExcel
 		injectJs(MaterialResources.INSTANCE.jExcelCsvJs());
+		//injectJs(MaterialResources.INSTANCE.jExcelNumeralJs());
 		injectJs(MaterialResources.INSTANCE.jExcelFormulaJs());
-		injectJs(MaterialResources.INSTANCE.jExcelDropdownJs());
-		injectJs(MaterialResources.INSTANCE.jExcelCalendarJs());
+		//injectJs(MaterialResources.INSTANCE.jExcelDropdownJs());
+		//injectJs(MaterialResources.INSTANCE.jExcelCalendarJs());
 		injectJs(MaterialResources.INSTANCE.jExcelJs());
 	}
 
