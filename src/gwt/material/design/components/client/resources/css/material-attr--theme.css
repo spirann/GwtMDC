@@ -19,6 +19,10 @@
 	--mdc-state--warning: #FF8F00;
 	--mdc-state--error: #b00020;
 	
+	--mdc-state--on-success: #fff;
+	--mdc-state--on-warning: #fff;
+	--mdc-state--on-error: #fff;
+	
 	/* ================================ */
   	/* Chart attributes					*/
   	/* ================================ */

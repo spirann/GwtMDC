@@ -40,7 +40,7 @@ public class JsHelper {
 	public static String concatToId(final String selector) {
 		return DOMHelper.toId(selector);
 	}
-	
+
 	/**
 	 * Put # if the elements name has not # or . at start
 	 * 
@@ -50,7 +50,7 @@ public class JsHelper {
 	public static String concatToId(final String[] selectors) {
 		return DOMHelper.toId(selectors);
 	}
-	
+
 	/**
 	 * Put . if the elements name has not # or . at start
 	 * 
@@ -60,7 +60,7 @@ public class JsHelper {
 	public static String concatToClass(final String selector) {
 		return DOMHelper.toClass(selector);
 	}
-	
+
 	/**
 	 * Put . if the elements name has not # or . at start
 	 * 
@@ -104,7 +104,7 @@ public class JsHelper {
 	public static <O> O fromNativeObject(final O object) {
 		return isNull(object) ? null : object;
 	}
-	
+
 	public static native <O> boolean isNull(final O variable) /*-{
 		return $wnd.jQuery.isEmptyObject(variable);
 	}-*/;
@@ -122,7 +122,7 @@ public class JsHelper {
 			return /\d/.test(String.fromCharCode(event.keyCode));
 		});
 	}-*/;
-
+	
 	@SuppressWarnings("rawtypes")
 	public static native JsArray toJsArray(final Object[] labels)/*-{
 

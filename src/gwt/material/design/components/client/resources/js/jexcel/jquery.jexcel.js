@@ -450,18 +450,10 @@ var methods = {
             	$(contextMenu).prop('class', 'jexcel_contextmenu');
             $(contextMenu).prop('id', 'jexcel_contextmenu');
 
-            // Powered by
-            var ads = document.createElement('div');
-            $(ads).css('display', 'none');
-            $(ads).prop('id', 'jexcel_about');
-            $(ads).prop('class', 'jexcel_about');
-            $(ads).html('<a href="http://github.com/paulhodel/jexcel">jExcel Spreadsheet</a>');
-
             // Append elements
             $('body').append(corner);
             $('body').append(textarea);
             $('body').append(contextMenu);
-            $('body').append(ads);
 
             // Unselectable properties
             $(corner).prop('unselectable', 'on');
@@ -469,14 +461,13 @@ var methods = {
             //$(corner).prop('draggable', 'false');
             
             // Hidde on enter or tab key to prevent erroneos scrolls
-            $($.fn.jexcel).keyup(function(e) {
-    			var code = e.keyCode || e.which;
-    			if (code === 9 || code === 13) {  
-    				$('.jexcel_corner').css('display', 'none');
-    			}
+            $(document).keyup(function(e) {
+            		var code = e.keyCode || e.which;
+    				if (code === 9 || code === 13) 
+    						$('.jexcel_corner').css('display', 'none');    				
 			});
-			$($.fn.jexcel).click(function() {
-    			$('.jexcel_corner').css('display', '');    			
+			$(document).click(function() {
+    				$('.jexcel_corner').css('display', '');    			
 			});
 			
 
@@ -521,14 +512,10 @@ var methods = {
                             // Custom context menu
                             if (typeof($.fn.jexcel.defaults[$.fn.jexcel.current].contextMenu) == 'function') {
                                 contextMenuContent = $.fn.jexcel.defaults[$.fn.jexcel.current].contextMenu(o[0], o[1]);
-                            } else {
-                            	
+                            } else {                            	
                             	var textClass = options.contextMenuTextClass ? 'class="' + options.contextMenuTextClass + '"' : '';
                             	var commandClass = options.contextMenuCommandClass ? 'class="' + options.contextMenuCommandClass + '"' : '';
-                            	
-                            	console.log(textClass);
-                            	console.log(commandClass);
-                            
+                            	                            
                                 // Default context menu for the columns
                                 if ($(e.target).parent().parent().is('thead')) {
                                     contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('orderBy', " + o[1] + ", 0)\">" + options.contextMenuTexts.orderAscending + "<span></span " + commandClass + "></a>";
@@ -545,15 +532,20 @@ var methods = {
                                         contextMenuContent += "<a " + textClass + " onclick=\"alert('" + $.fn.jexcel.defaults[$.fn.jexcel.current].about + "')\">" + options.contextMenuTexts.about + "<span " + commandClass + "></span></a>";
                                     }
                                 } else if ($(e.target).parent().parent().is('tbody')) {
+                                	
+                                	// [0] --> column pos 
+									// [1] --> row pos
+                                	var col_row = $(e.target).prop('id').split('-'); 
+                                
                                     // Default context menu for the rows
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowInsertColumn == true) {
-                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + o[1] + ")\">" + options.contextMenuTexts.insertColumn + "<span " + commandClass + "></span></a>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertColumn', 1, null, " + col_row[0] + ")\">" + options.contextMenuTexts.insertColumn + "<span " + commandClass + "></span></a>";
                                     }
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowInsertRow == true) {
-                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertRow', 1, " + o[1] + ")\">" + options.contextMenuTexts.insertRow + "<span " + commandClass + "></span></a><hr>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('insertRow', 1, " + col_row[1] + ")\">" + options.contextMenuTexts.insertRow + "<span " + commandClass + "></span></a><hr>";
                                     }
                                     if ($.fn.jexcel.defaults[$.fn.jexcel.current].allowDeleteRow == true) {
-                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteRow')\">" + options.contextMenuTexts.deleteRow + "<span " + commandClass + "></span></a><hr>";
+                                        contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('deleteRow', " + col_row[1] + ")\">" + options.contextMenuTexts.deleteRow + "<span " + commandClass + "></span></a><hr>";
                                     }
                                     contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('copy', true)\">" + options.contextMenuTexts.copy + "<span " + commandClass + ">Ctrl + C</span></a>";
                                     contextMenuContent += "<a " + textClass + " onclick=\"jQuery('#" + $.fn.jexcel.current + "').jexcel('download')\">" + options.contextMenuTexts.saveAs + "<span " + commandClass + ">Ctrl + S</span></a>";
@@ -3584,9 +3576,7 @@ var methods = {
      */
     setHeader : function (column, title) {
         if (title) {
-        	console.log('column: ' + column);
             var col = $(this).find('thead #col-' + column);
-            console.log('col: ' + col);
             if (col.length) {
                 $(col).html(title);
             }

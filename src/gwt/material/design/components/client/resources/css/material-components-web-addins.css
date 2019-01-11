@@ -866,7 +866,7 @@
 	background-color: var(--mdc-spreadsheet--selected-color) !important;
 	border: 1px solid var(--mdc-spreadsheet--corner--border-color) !important;}
 	
-.jexcel .highlight {
+.jexcel .highlight:not([state]) {
     color: var(--mdc-spreadsheet--selected-ink-color) !important;    
     background-color: transparent !important;
 	background: 
@@ -898,7 +898,7 @@
     -webkit-box-shadow: none !important;
     -moz-box-shadow: none !important; }
     
-.jexcel .selection {
+.jexcel .selection:not([state]) {
     color: var(--mdc-spreadsheet--selected-ink-color) !important;    
     background-color: transparent !important;
 	background: 
@@ -967,6 +967,14 @@
     border-bottom: 4px solid var(--mdc-spreadsheet--selected-ink-color);}
 .jexcel .arrow-down {
     border-top: 4px solid var(--mdc-spreadsheet--selected-ink-color); }    
-    
-
+ /* State */   
+.jexcel > tbody > tr > td[state="success"] {
+	color: var(--mdc-state--on-success);
+	background-color: var(--mdc-state--success);}
+.jexcel > tbody > tr > td[state="warning"] {
+	color: var(--mdc-state--on-warning);
+	background-color: var(--mdc-state--warning);}
+.jexcel > tbody > tr > td[state="error"] {
+	color: var(--mdc-state--on-error);
+	background-color: var(--mdc-state--error);}
 

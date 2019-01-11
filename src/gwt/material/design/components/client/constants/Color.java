@@ -57,6 +57,12 @@ public enum Color implements CssType {
 	MDC_THEME_WARNING("var(" + ThemeAttribute.MDC_THEME_WARNING + ")"),
 	//
 	MDC_THEME_ERROR("var(" + ThemeAttribute.MDC_THEME_ERROR + ")"),
+	//
+	MDC_THEME_ON_SUCCESS("var(" + ThemeAttribute.MDC_THEME_ON_SUCCESS + ")"),
+	//
+	MDC_THEME_ON_WARNING("var(" + ThemeAttribute.MDC_THEME_ON_WARNING + ")"),
+	//
+	MDC_THEME_ON_ERROR("var(" + ThemeAttribute.MDC_THEME_ON_ERROR + ")"),
 	// BLACK
 	/**
 	 * The color BLACK with an RGB value of rgb(0, 0, 0).

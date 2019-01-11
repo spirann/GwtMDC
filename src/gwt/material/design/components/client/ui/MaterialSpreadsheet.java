@@ -19,13 +19,17 @@
  */
 package gwt.material.design.components.client.ui;
 
+import java.util.Arrays;
+
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.ColumnAlign;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.OrderBy;
+import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.ui.misc.jExcel.js.JsColumnSettings;
 import gwt.material.design.components.client.ui.misc.jExcel.js.JsContextMenuTexts;
 import gwt.material.design.components.client.ui.misc.jExcel.js.JsOptions;
 
@@ -37,7 +41,8 @@ import gwt.material.design.components.client.ui.misc.jExcel.js.JsOptions;
 public class MaterialSpreadsheet extends Div {
 
 	public static interface Formatter {
-		public Object format(final Element cell, final int row, final int column, final Object value);
+		public Object format(final String id, final Element cell, final int row, final int column,
+				final Object value);
 	}
 
 	protected final Div spreadsheet = new Div(CssName.MDC_SPREADSHEET__SPREADSHEET, CssName.MDC_TYPOGRAPHY);
@@ -53,23 +58,6 @@ public class MaterialSpreadsheet extends Div {
 	protected void onInitialize() {
 		add(spreadsheet);
 		super.onInitialize();
-
-		final Object[][] data = new Object[][] { { "João", "da Silva", 18, 19.9, "=C1+D1" },
-				{ "Paulo", "da Trindade", 19, 23.7, "=C2+D2" }, { "Maria", "da Costa", 13, 12.5, "=C3+D3" },
-				{ "Flávia", "de Lurdes", 12, 10.8, "=C4+41" } };
-
-		setData(data);
-		setHeaders(new String[] { "Nome", "Sobrenome", "Algo", "Sei lá", "Total" });
-		setColumnsWidth(new int[] { 100, 100, 60, 60 });
-
-		final JsColumnSettings text = new JsColumnSettings();
-		text.type = "text";
-		final JsColumnSettings numeric = new JsColumnSettings();
-		numeric.type = "number";
-
-		options.columns = new JsColumnSettings[] { text, text, numeric, numeric, numeric };
-
-		jsInit();
 	}
 
 	protected void loadDefaultOptions() {
@@ -126,12 +114,11 @@ public class MaterialSpreadsheet extends Div {
 				if (formatter) {
 					var jCell = $wnd.jQuery(cell);
 					var element = $doc.getElementById(jCell.attr('id'));
-					var value = formatter.@gwt.material.design.components.client.ui.MaterialSpreadsheet.Formatter::format(Lcom/google/gwt/dom/client/Element;IILjava/lang/Object;)(element,row,col,val);
+					var value = formatter.@gwt.material.design.components.client.ui.MaterialSpreadsheet.Formatter::format(Ljava/lang/String;Lcom/google/gwt/dom/client/Element;IILjava/lang/Object;)(id,element,row,col,val);
 					if (value)
 						jCell.html('' + value);
 					else
 						jCell.html('' + val);
-
 				}
 			}
 		};
@@ -145,7 +132,6 @@ public class MaterialSpreadsheet extends Div {
 
 	public void setUrl(final String url) {
 		options.csv = url;
-		options.data = null;
 		if (initialized)
 			jsInit();
 	}
@@ -157,12 +143,59 @@ public class MaterialSpreadsheet extends Div {
 			jsInit();
 	}
 
+	/**
+	 * 
+	 * @param cellId Str compatible with excel, or as object. Ex.: A1
+	 * @param data   New value for the cell
+	 */
+	public native void setData(final String cellId, final Object data) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('setValue', cellId, data);
+	}-*/;
+
 	public native Object[][] getData()/*-{
-		var spreadsheet = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
-		if (spreadsheet)
-			return spreadsheet.jexcel('getData');
-		else 
-			return {};
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('getData', false);
+	}-*/;
+
+	public native Object[][] getSelectedData() /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('getData', true);
+	}-*/;
+
+	/**
+	 * 
+	 * @param cell Compatible with excel, or as object. Ex.: A1
+	 */
+	public native Object getData(final String cellId) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('getValue', cellId);
+	}-*/;
+
+	/**
+	 * 
+	 * @param row Row number starting from zero.
+	 * @return
+	 */
+	public native Object[] getRowData(final int row) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('getRowData', row);
+	}-*/;
+
+	/**
+	 * 
+	 * @param column Column number starting from zero.
+	 * @return
+	 */
+	public native Object[] getColumnData(final int column) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('getColumnData', column);
 	}-*/;
 
 	/**
@@ -178,27 +211,113 @@ public class MaterialSpreadsheet extends Div {
 
 	/**
 	 * 
-	 * @param header
-	 *            New header title
-	 * @param column
-	 *            Column number starting on zero
+	 * @param header New header title
+	 * @param column Column number starting on zero
 	 */
 	public native void setHeader(final String header, final int column) /*-{
-		var spreadsheet = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
 		var options = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::options;
 
 		if (options && options.colHeaders && options.colHeaders.length > column)
 			options.colHeaders[column] = header;
 
-		if (spreadsheet)
-			spreadsheet.setHeader(column, header);
+		$wnd.jQuery(element).jexcel('setHeader', column, header);
+
+	}-*/;
+
+	public native void insertColumn(final int countColumns, final String[] headers) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('insertColumn', countColumns,
+				headers);
+	}-*/;
+
+	public native void deleteColumn(final int column) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('deleteColumn', column);
+	}-*/;
+
+	public native void insertRow(final int countRows) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('insertRow', countRows);
+	}-*/;
+
+	public native void deleteRow(final int row) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		return $wnd.jQuery(element).jexcel('deleteRow', row);
 	}-*/;
 
 	public void setColumnsWidth(final int[] widths) {
 		options.colWidths = widths;
+
 		if (initialized)
-			jsInit();
+			for (int col = 0; widths != null && col < widths.length; col++)
+				setColumnWidth(widths[col], col);
 	}
+
+	public native void setColumnWidth(final int column, final int width) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		var options = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::options;
+
+		if (options && options.colHeaders && options.colHeaders.length > column)
+			options.colWidths[column] = width;
+
+		return $wnd.jQuery(element).jexcel('setWidth', column, width);
+
+	}-*/;
+
+	/**
+	 * 
+	 * @param column  Column number starting on zero
+	 * @param orderBy
+	 */
+	public void orderBy(final int column, final OrderBy orderBy) {
+		switch (orderBy) {
+		case ASC:
+			orderBy(column, 2);
+			break;
+		case DESC:
+			orderBy(column, 1);
+			break;
+		case NONE:
+		default:
+			orderBy(column, 0);
+			break;
+		}
+	}
+
+	/**
+	 * 
+	 * @param column  Column number starting on zero
+	 * @param orderBy Zero will toggle current option, one for desc, two for asc
+	 */
+	protected native void orderBy(final int column, final int orderBy) /*-{
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		$wnd.jQuery(element).jexcel('orderBy', column, orderBy);
+	}-*/;
+
+	/**
+	 * 
+	 * @param cellId Compatible with excel, or as object. Ex.: A1
+	 * @param state
+	 */
+	public native void setCellState(final String cellId, final State state) /*-{
+		var _state = state ? state.@gwt.material.design.components.client.constants.State::getCssName()()
+				: '';
+		var spreadsheet = this.@gwt.material.design.components.client.ui.MaterialSpreadsheet::spreadsheet;
+		var element = spreadsheet.@com.google.gwt.user.client.ui.UIObject::getElement()();
+		var cell = $wnd.jQuery(element).jexcel('getCell', cellId);
+		if (_state && _state.length > 0)
+			$wnd.jQuery(cell).attr('state', _state);
+		else
+			$wnd.jQuery(cell).removeAttr('state');
+	}-*/;
 
 	public void setSort(final boolean sort) {
 		options.columnSorting = sort;
@@ -274,6 +393,18 @@ public class MaterialSpreadsheet extends Div {
 
 	public void setCsvHeaders(final boolean csvHeaders) {
 		options.csvHeaders = csvHeaders;
+		if (initialized)
+			jsInit();
+	}
+
+	/**
+	 * 
+	 * @param aligns
+	 */
+	public void setAlignments(final ColumnAlign[] aligns) {
+		options.colAlignments = aligns == null ? null
+				: Arrays.asList(aligns).stream().map(align -> align.getCssName())
+						.toArray(String[]::new);
 		if (initialized)
 			jsInit();
 	}

@@ -45,7 +45,8 @@ public class JsOptions {
 	@JsProperty
 	public int[] colWidths;
 	// Column alignment
-	// colAlignments:[],
+	@JsProperty
+	public String[] colAlignments;
 	// Colum header classes
 	// colHeaderClasses:[],
 	// Column width that is used by default

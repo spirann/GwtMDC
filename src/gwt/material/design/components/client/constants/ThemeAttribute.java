@@ -45,4 +45,8 @@ public interface ThemeAttribute {
 	public static final String MDC_THEME_WARNING = "--mdc-state--warning";
 	public static final String MDC_THEME_ERROR = "--mdc-state--error";
 	
+	public static final String MDC_THEME_ON_SUCCESS = "--mdc-state--on-success";
+	public static final String MDC_THEME_ON_WARNING = "--mdc-state--on-warning";
+	public static final String MDC_THEME_ON_ERROR = "--mdc-state--on-error";
+	
 }
