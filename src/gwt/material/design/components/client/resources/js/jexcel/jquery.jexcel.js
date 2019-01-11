@@ -3584,7 +3584,9 @@ var methods = {
      */
     setHeader : function (column, title) {
         if (title) {
+        	console.log('column: ' + column);
             var col = $(this).find('thead #col-' + column);
+            console.log('col: ' + col);
             if (col.length) {
                 $(col).html(title);
             }

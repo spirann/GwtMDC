@@ -57,6 +57,7 @@ public class MaterialSpreadsheet extends Div {
 		final Object[][] data = new Object[][] { { "João", "da Silva", 18, 19.9, "=C1+D1" },
 				{ "Paulo", "da Trindade", 19, 23.7, "=C2+D2" }, { "Maria", "da Costa", 13, 12.5, "=C3+D3" },
 				{ "Flávia", "de Lurdes", 12, 10.8, "=C4+41" } };
+
 		setData(data);
 		setHeaders(new String[] { "Nome", "Sobrenome", "Algo", "Sei lá", "Total" });
 		setColumnsWidth(new int[] { 100, 100, 60, 60 });
@@ -164,6 +165,10 @@ public class MaterialSpreadsheet extends Div {
 			return {};
 	}-*/;
 
+	/**
+	 * 
+	 * @param headers
+	 */
 	public void setHeaders(final String[] headers) {
 		options.colHeaders = headers;
 		if (initialized)
@@ -186,7 +191,7 @@ public class MaterialSpreadsheet extends Div {
 			options.colHeaders[column] = header;
 
 		if (spreadsheet)
-			spreadsheet.jexcel('setHeader', column, header);
+			spreadsheet.setHeader(column, header);
 	}-*/;
 
 	public void setColumnsWidth(final int[] widths) {
