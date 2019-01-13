@@ -799,10 +799,59 @@
 	border: none;
 	border-radius: 0;
 	min-height: 380px;}
-	
+
 /* ==========================================================================
-   DatePiker Dialog
-   ========================================================================== */	
+   Tree
+   ========================================================================== */
+.mdc-tree {
+	color: var(--mdc-tree--ink-color);
+	background-color: var(--mdc-tree--fill-color);
+	font-size: .75rem;
+	background-color: blue;
+	border-radius: var(--mdc-rounded-border-radius);}
+
+.mdc-tree:not([dir=rtl]) {
+  	padding-right: 16px;}
+.mdc-tree[dir=rtl] {
+	padding-left: 16px;}
+
+.mdc-tree:not([dir=rtl]) ul {
+  	list-style: none;
+  	padding-left: 16px;}
+.mdc-tree[dir=rtl] ul {
+  	list-style: none;
+  	padding-right: 16px;}  	
+  	
+.mdc-tree ul li {
+	border-radius: var(--mdc-rounded-border-radius);
+    position:relative;}
+.mdc-tree ul li > div {       
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;}    
+.mdc-tree ul li i {
+	vertical-align: middle;
+	font-size: 1rem;}    
+.mdc-tree:not([dir=rtl]) ul li i {
+	margin-right: 4px;}
+.mdc-tree[dir=rtl] ul li i {
+	margin-left: 4px;}	      
+.mdc-tree ul li.mdc-tree--collapse {}
+.mdc-tree ul li.mdc-tree--expand {}
+.mdc-tree ul li.active {}
+.mdc-tree ul li span {
+	vertical-align: middle;}
+.mdc-tree:not([dir=rtl]) ul li span:first-child {
+	margin-left: 16px;} 	
+.mdc-tree[dir=rtl] ul li span:first-child {
+	margin-right: 16px;} 		 
+
+/* ==========================================================================
+   JExcel
+   ========================================================================== */
+   
 .mdc-spreadsheet {
 	width: 100%;
 	overflow: auto;

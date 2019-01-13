@@ -32,19 +32,96 @@ import com.google.gwt.resources.client.TextResource;
 public interface MaterialResources extends ClientBundle {
 	MaterialResources INSTANCE = GWT.create(MaterialResources.class);
 
-	// JS
+	// ////////////////////////////////////////
+	// CSS attributes
+	// ////////////////////////////////////////
+
+	@Source("css/material-attr--theme.css")
+	TextResource themeAttributesCss();
+
+	@Source("css/material-attr--components.css")
+	TextResource componentsAttributesCss();
+
+	// ////////////////////////////////////////
+	// JQuery
+	// ////////////////////////////////////////
 
 	@Source("js/jquery-3.3.1.min.js")
 	TextResource jquery();
 
-	@Source("js/resize-sensor.min.js")
-	TextResource resizeSensor();
+	// ////////////////////////////////////////
+	// Google Material Compoentes Web
+	// ////////////////////////////////////////
+
+	@Source("js/material-components-web.min.js")
+	TextResource materialComponentsWebJs();
+
+	@Source("css/material-components-web.min.css")
+	TextResource materialComponentsWebCss();
+
+	// ////////////////////////////////////////
+	// GWT MDC Compoentes
+	// ////////////////////////////////////////
+	
+	@Source("js/mdc_tree.js")
+	TextResource mdcTreeJs();
+
+	@Source("css/material-components-root.css")
+	TextResource materialComponentsRootCss();
+
+	@Source("css/mixin.css")
+	TextResource mixinCss();
+
+	@Source("css/material-components-web-addins.css")
+	TextResource materialComponentsWebAddinsCss();
+
+	// ////////////////////////////////////////
+	// Chroma - Colors utils
+	// ////////////////////////////////////////
+
+	@Source("js/chroma.min.js")
+	TextResource chromaJs();
+
+	// ////////////////////////////////////////
+	// Vanilla Masker
+	// ////////////////////////////////////////
 
 	@Source("js/vanilla-masker.min.js")
 	TextResource jqueryMaskJs();
 
-	@Source("js/material-components-web.js")
-	TextResource materialComponentsWebJs();
+	// ////////////////////////////////////////
+	// Resize Sensor
+	// ////////////////////////////////////////
+
+	@Source("js/resize-sensor.min.js")
+	TextResource resizeSensor();
+
+	// ////////////////////////////////////////
+	// Prism
+	// ////////////////////////////////////////
+
+	@Source("js/prism.min.js")
+	TextResource prismJs();
+
+	@Source("css/prism.min.css")
+	TextResource prismCss();
+
+	// ////////////////////////////////////////
+	// File Upload
+	// ////////////////////////////////////////
+
+	@Source("js/fileUpload/jquery.fileupload.js")
+	TextResource fileUploadJs();
+
+	@Source("js/fileUpload/jquery.iframe-transport.js")
+	TextResource fileUploadIframeTransportJs();
+
+	@Source("js/fileUpload/jquery.ui.widget.js")
+	TextResource fileUploadWidgetJs();
+
+	// ////////////////////////////////////////
+	// Chartist
+	// ////////////////////////////////////////
 
 	@Source("js/chartist/chartist.min.js")
 	TextResource chartistJs();
@@ -58,43 +135,6 @@ public interface MaterialResources extends ClientBundle {
 	@Source("js/chartist/chartist-plugin-zoom.min.js")
 	TextResource chartistZoomPluginJs();
 
-	@Source("js/prism.min.js")
-	TextResource prismJs();
-
-	@Source("js/chroma.min.js")
-	TextResource chromaJs();
-
-	@Source("js/fileUpload/jquery.fileupload.js")
-	TextResource fileUploadJs();
-
-	@Source("js/fileUpload/jquery.iframe-transport.js")
-	TextResource fileUploadIframeTransportJs();
-
-	@Source("js/fileUpload/jquery.ui.widget.js")
-	TextResource fileUploadWidgetJs();
-
-	// CSS
-	@Source("css/material-attr--theme.css")
-	TextResource themeAttributesCss();
-
-	@Source("css/material-attr--components.css")
-	TextResource componentsAttributesCss();
-
-	@Source("css/prism.min.css")
-	TextResource prismCss();
-
-	@Source("css/material-components-root.css")
-	TextResource materialComponentsRootCss();
-
-	@Source("css/mixin.css")
-	TextResource mixinCss();
-
-	@Source("css/material-components-web-addins.css")
-	TextResource materialComponentsWebAddinsCss();
-
-	@Source("css/material-components-web.min.css")
-	TextResource materialComponentsWebCss();
-
 	@Source("css/chartist/chartist.min.css")
 	TextResource chartistCss();
 
@@ -104,32 +144,31 @@ public interface MaterialResources extends ClientBundle {
 	@Source("css/chartist/chartist-mixin.min.css")
 	TextResource chartMixinCss();
 
-
 	// ////////////////////////////////////////
 	// JExcel
 	// ////////////////////////////////////////
 
 	@Source("js/jexcel/numeral.min.js")
 	TextResource jExcelNumeralJs();
-	
+
 	@Source("js/jexcel/excel-formula.min.js")
 	TextResource jExcelFormulaJs();
-	
+
 	@Source("js/jexcel/jquery.csv.min.js")
 	TextResource jExcelCsvJs();
-	
+
 	@Source("js/jexcel/jquery.jcalendar.js")
 	TextResource jExcelCalendarJs();
-	
+
 	@Source("js/jexcel/jquery.jdropdown.js")
 	TextResource jExcelDropdownJs();
-	
+
 	@Source("js/jexcel/jquery.jexcel.js")
 	TextResource jExcelJs();
-	
+
 	@Source("css/jexcel/jquery.jcalendar.css")
 	TextResource jExcelCalendarCss();
-	
+
 	@Source("css/jexcel/jquery.jdropdown.css")
 	TextResource jExcelDropdownCss();
 

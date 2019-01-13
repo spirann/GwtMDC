@@ -229,6 +229,12 @@
 	--mdc-input__focused-color: var(--mdc-theme-primary);
 	
 	/* ================================ */
+  	/* Tree attributes					*/
+  	/* ================================ */
+	--mdc-tree--ink-color: var(--mdc-theme-on-surface);	
+  	--mdc-tree--fill-color: var(--mdc-theme-surface);
+  	
+	/* ================================ */
   	/* Spreadsheet attributes			*/
   	/* ================================ */
   	--mdc-spreadsheet--cell-padding: 1px;

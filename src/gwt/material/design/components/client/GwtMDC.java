@@ -49,6 +49,8 @@ public class GwtMDC implements EntryPoint {
 		injectJs(MaterialResources.INSTANCE.jquery());
 		injectJs(MaterialResources.INSTANCE.resizeSensor());
 		injectJs(MaterialResources.INSTANCE.materialComponentsWebJs());
+		// Tree
+		injectJs(MaterialResources.INSTANCE.mdcTreeJs());
 		// Chartist
 		injectJs(MaterialResources.INSTANCE.chartistJs());
 		injectJs(MaterialResources.INSTANCE.chartistTooltipPluginJs());
@@ -67,7 +69,7 @@ public class GwtMDC implements EntryPoint {
 		// JExcel
 		injectJs(MaterialResources.INSTANCE.jExcelCsvJs());
 		//injectJs(MaterialResources.INSTANCE.jExcelNumeralJs());
-		injectJs(MaterialResources.INSTANCE.jExcelFormulaJs());
+		//injectJs(MaterialResources.INSTANCE.jExcelFormulaJs());
 		//injectJs(MaterialResources.INSTANCE.jExcelDropdownJs());
 		//injectJs(MaterialResources.INSTANCE.jExcelCalendarJs());
 		injectJs(MaterialResources.INSTANCE.jExcelJs());
