@@ -389,11 +389,11 @@ public class MaterialChartBase<V, L, O extends JsChartOptions> extends MaterialU
 	}
 
 	public void setTooltipColor(Color color) {
-		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__INK, color);
+		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__INK_COLOR, color);
 	}
 
 	public void setTooltipBackgroundColor(Color color) {
-		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__FILL, color);
+		StyleHelper.setCssProperty(this, CssMixin.MDC_TOOLTIP__FILL_COLOR, color);
 	}
 
 	/**

@@ -807,7 +807,6 @@
 	color: var(--mdc-tree--ink-color);
 	background-color: var(--mdc-tree--fill-color);
 	font-size: .75rem;
-	background-color: blue;
 	border-radius: var(--mdc-rounded-border-radius);}
 
 .mdc-tree:not([dir=rtl]) {
@@ -830,10 +829,13 @@
     flex-direction: row;
     justify-content: flex-start;
     align-content: center;
-    align-items: center;}    
+    align-items: center;
+    padding: 2px;}    
 .mdc-tree ul li i {
 	vertical-align: middle;
-	font-size: 1rem;}    
+	font-size: 1rem;}
+.mdc-tree ul li i:hover{
+	color: var(--mdc-tree--hover-color);}	    
 .mdc-tree:not([dir=rtl]) ul li i {
 	margin-right: 4px;}
 .mdc-tree[dir=rtl] ul li i {
@@ -842,7 +844,8 @@
 .mdc-tree ul li.mdc-tree--expand {}
 .mdc-tree ul li.active {}
 .mdc-tree ul li span {
-	vertical-align: middle;}
+	vertical-align: middle;
+	cursor: pointer;}
 .mdc-tree:not([dir=rtl]) ul li span:first-child {
 	margin-left: 16px;} 	
 .mdc-tree[dir=rtl] ul li span:first-child {
@@ -912,7 +915,7 @@
 /* Selection and Highlight Cells */
 
 .jexcel_corner {
-	background-color: var(--mdc-spreadsheet--selected-color) !important;
+	background-color: var(--mdc-spreadsheet--corner--fill-color) !important;
 	border: 1px solid var(--mdc-spreadsheet--corner--border-color) !important;}
 	
 .jexcel .highlight:not([state]) {

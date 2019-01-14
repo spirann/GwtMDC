@@ -24,7 +24,9 @@ import java.util.Arrays;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.ColumnAlign;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.OrderBy;
 import gwt.material.design.components.client.constants.State;
@@ -407,5 +409,43 @@ public class MaterialSpreadsheet extends Div {
 						.toArray(String[]::new);
 		if (initialized)
 			jsInit();
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__INK_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__FILL_COLOR, color.getCssName());
+	}
+	
+	public void setSelectedColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__SELECTED_COLOR, color.getCssName());
+	}
+	
+	public void setOnSelectedColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__SELECTED_INK_COLOR, color.getCssName());
+	}
+	
+	public void setCellPadding(int width) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__CELL_PADDING, String.valueOf(width));
+	}
+	
+	public void setCellBorderColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__BORDER_COLOR, color.getCssName());
+	}
+	
+	public void setCellBorderWidth(int width) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__BORDER_WIDTH, String.valueOf(width));
+	}
+	
+	public void setCornerColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__CORNER__FILL_COLOR, color.getCssName());
+	}
+	
+	public void setCornerBorderColor(Color color) {
+		setCssProperty(CssMixin.MDC_SPREADSHEET__CORNER__BORDER_COLOR, color.getCssName());
 	}
 }

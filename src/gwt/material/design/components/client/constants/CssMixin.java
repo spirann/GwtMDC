@@ -196,8 +196,8 @@ public interface CssMixin {
 	// ////////////////////////////////////////////////////////////////////////////
 	// Tooltip
 	// ////////////////////////////////////////////////////////////////////////////
-	String MDC_TOOLTIP__INK = "--mdc-tooltip--ink-color";
-	String MDC_TOOLTIP__FILL = "--mdc-tooltip--fill-color";
+	String MDC_TOOLTIP__INK_COLOR = "--mdc-tooltip--ink-color";
+	String MDC_TOOLTIP__FILL_COLOR = "--mdc-tooltip--fill-color";
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Text Field
@@ -207,10 +207,6 @@ public interface CssMixin {
 	String MDC_INPUT__INK_COLOR = "--mdc-input__ink-color";
 	String MDC_INPUT__FILL_COLOR = "--mdc-input__fill-color";
 	String MDC_INPUT__FOCUSED_COLOR = "--mdc-input__focused-color";
-	
-	// ////////////////////////////////////////////////////////////////////////////
-	// OLD
-	// ////////////////////////////////////////////////////////////////////////////
 
 	// ////////////////////////////////////////////////////////////////////////////
 	// Image List
@@ -232,4 +228,27 @@ public interface CssMixin {
 	String MDC_LAYOUT_GRID_GUTTER_TABLET = "--mdc-layout-grid-gutter-tablet";
 	String MDC_LAYOUT_GRID_GUTTER_PHONE = "--mdc-layout-grid-gutter-phone";
 
+	// ////////////////////////////////////////////////////////////////////////////
+	// Tree
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_TREE__INK_COLOR = "--mdc-tree--ink-color";
+	String MDC_TREE__FILL_COLOR = "--mdc-tree--fill-color";
+	String MDC_TREE__HOVER_INK_COLOR = "--mdc-tree--hover-ink-color";
+	String MDC_TREE__HOVER_COLOR = "--mdc-tree--hover-color";
+	
+	// ////////////////////////////////////////////////////////////////////////////
+	// Spreadsheet
+	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_SPREADSHEET__CELL_PADDING = "--mdc-spreadsheet--cell-padding";
+	String MDC_SPREADSHEET__INK_COLOR = "--mdc-spreadsheet--ink-color";
+	String MDC_SPREADSHEET__FILL_COLOR = "--mdc-spreadsheet--fill-color";
+	String MDC_SPREADSHEET__FIXED_INK_COLOR = "--mdc-spreadsheet--fixed-ink-color";
+	String MDC_SPREADSHEET__FIXED_FILL_COLOR = "--mdc-spreadsheet--fixed-fill-color";
+	String MDC_SPREADSHEET__BORDER_WIDTH = "--mdc-spreadsheet--border-width";
+	String MDC_SPREADSHEET__BORDER_COLOR = "--mdc-spreadsheet--border-color";
+	String MDC_SPREADSHEET__SELECTED_COLOR = "--mdc-spreadsheet--selected-color";
+	String MDC_SPREADSHEET__SELECTED_INK_COLOR = "--mdc-spreadsheet--selected-ink-color";
+	String MDC_SPREADSHEET__CORNER__FILL_COLOR = "--mdc-spreadsheet--corner--fill-color";
+	String MDC_SPREADSHEET__CORNER__BORDER_COLOR = "--mdc-spreadsheet--corner--border-color";
+	
 }

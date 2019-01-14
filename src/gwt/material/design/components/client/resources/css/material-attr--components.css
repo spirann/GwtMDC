@@ -233,6 +233,8 @@
   	/* ================================ */
 	--mdc-tree--ink-color: var(--mdc-theme-on-surface);	
   	--mdc-tree--fill-color: var(--mdc-theme-surface);
+  	--mdc-tree--hover-color: var(--mdc-theme-primary);
+  	--mdc-tree--hover-ink-color: var(--mdc-theme-on-primary);
   	
 	/* ================================ */
   	/* Spreadsheet attributes			*/
@@ -240,11 +242,12 @@
   	--mdc-spreadsheet--cell-padding: 1px;
   	--mdc-spreadsheet--ink-color: var(--mdc-theme-on-surface);  	
   	--mdc-spreadsheet--fill-color: var(--mdc-theme-surface);
-  	--mdc-spreadsheet--fixed-ink-color: var(--mdc-theme-on-surface);  	
-  	--mdc-spreadsheet--fixed-fill-color: var(--mdc-theme-surface);
+  	--mdc-spreadsheet--fixed-ink-color: var(--mdc-spreadsheet--ink-color);  	
+  	--mdc-spreadsheet--fixed-fill-color: var(--mdc-spreadsheet--fill-color);
   	--mdc-spreadsheet--border-width: 1px;
   	--mdc-spreadsheet--border-color: var(--mdc-theme-on-surface);
   	--mdc-spreadsheet--selected-color: var(--mdc-theme-primary);
   	--mdc-spreadsheet--selected-ink-color: var(--mdc-theme-on-primary);
-  	--mdc-spreadsheet--corner--border-color: var(--mdc-theme-on-primary);
+  	--mdc-spreadsheet--corner--fill-color: var(--mdc-spreadsheet--selected-color);
+  	--mdc-spreadsheet--corner--border-color: var(--mdc-spreadsheet--selected-ink-color);
 }

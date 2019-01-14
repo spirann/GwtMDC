@@ -24,6 +24,8 @@ import java.util.Arrays;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
+import gwt.material.design.components.client.constants.Color;
+import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 import jsinterop.annotations.JsPackage;
@@ -84,5 +86,23 @@ public class MaterialTree extends Div {
 		@JsProperty
 		public String parent;
 
+	}
+	
+	@Override
+	public void setColor(Color color) {
+		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());
+	}
+	
+	@Override
+	public void setBackgroundColor(Color color) {
+		setCssProperty(CssMixin.MDC_TREE__FILL_COLOR, color.getCssName());
+	}
+	
+	public void setHoverColor(Color color) {
+		setCssProperty(CssMixin.MDC_TREE__HOVER_COLOR, color.getCssName());
+	}
+	
+	public void setOnHoverColor(Color color) {
+		setCssProperty(CssMixin.MDC_TREE__HOVER_INK_COLOR, color.getCssName());
 	}
 }

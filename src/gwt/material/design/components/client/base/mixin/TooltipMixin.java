@@ -204,11 +204,11 @@ public class TooltipMixin<UIO extends MaterialUIObject & HasTooltip> extends Abs
 
 	@Override
 	public void setTooltipColor(Color color) {
-		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__INK, color);
+		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__INK_COLOR, color);
 	}
 
 	@Override
 	public void setTooltipBackgroundColor(Color color) {
-		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__FILL, color);		
+		StyleHelper.setCssProperty(uiObject, CssMixin.MDC_TOOLTIP__FILL_COLOR, color);		
 	}
 }

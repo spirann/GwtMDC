@@ -18,12 +18,13 @@ function MDCTree(element) {
     var root = element;
     var data = null;
     var expand_class = 'mdc-tree--collapse';
-    var expand_icon = 'expand_more';
+    var expand_icon = 'chevron_right';
     var collapse_class = 'mdc-tree--expand';
-    var collapse_icon = 'expand_less';
+    var collapse_icon = 'expand_more';
        
     this.setData = function (data) {
     	MDCTree.data = data;
+    	$(root).empty();
 		const orphansArray = orphans();
   		if (orphansArray.length) {
     		const items = orphansArray.map(generateListItem),
@@ -57,17 +58,27 @@ function MDCTree(element) {
   		const li = document.createElement('li');
   		const li_header = document.createElement('div');
   		li.id = 'item-' + item.id;
+  		
+  		const span = document.createElement('span');
+  		span.innerHTML = item.name;
+  		
   		if (hasChildren(item.id)) {
+  		
     		const a = document.createElement('i');
     		a.href = '#';
     		a.textContent = expand_icon;
     		a.classList.add(expand_class);
     		a.addEventListener('click', expand);
     		li_header.appendChild(a);
+    		
+    		span.addEventListener('dblclick', function(){
+    			a.click();
+    		});
   		}
-  		const span = document.createElement('span');
-  		span.textContent = item.name;
+  		
+  		
   		li_header.appendChild(span);
+  		
   		li.appendChild(li_header);
   		return li;
 	}
