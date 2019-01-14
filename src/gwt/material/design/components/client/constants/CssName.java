@@ -398,6 +398,10 @@ public interface CssName {
 	// Tree
 	// //////////////////////////////////////////////////////
 	String MDC_TREE = "mdc-tree";
+	String MDC_TREE__COLLAPSE = "mdc-tree--collapse";
+	String MDC_TREE__EXPAND = "mdc-tree--expand";
+	String MDC_TREE__ACTION = "mdc-tree--action";
+	String MDC_TREE__NAME = "mdc-tree--name";
 	// //////////////////////////////////////////////////////
 	// Textfield
 	// //////////////////////////////////////////////////////

@@ -843,13 +843,29 @@
 .mdc-tree ul li.mdc-tree--collapse {}
 .mdc-tree ul li.mdc-tree--expand {}
 .mdc-tree ul li.active {}
-.mdc-tree ul li span {
+.mdc-tree ul li .mdc-tree--name {
 	vertical-align: middle;
 	cursor: pointer;}
-.mdc-tree:not([dir=rtl]) ul li span:first-child {
-	margin-left: 16px;} 	
-.mdc-tree[dir=rtl] ul li span:first-child {
-	margin-right: 16px;} 		 
+
+ .mdc-tree--action {
+ 	margin: 0; }
+
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--action:first-child,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--name:first-child {
+	margin-left: 20px;} 	
+.mdc-tree[dir=rtl] ul li  .mdc-tree--action:first-child,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--name:first-child {
+	margin-right: 20px;} 		
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--expand +  .mdc-tree--action,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--expand +  .mdc-tree--name,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--collapse +  .mdc-tree--action,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--collapse +  .mdc-tree--name {
+	margin-left: 0px;}
+.mdc-tree[dir=rtl] ul li  .mdc-tree--expand +  .mdc-tree--action,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--expand +  .mdc-tree--name,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--collapse +  .mdc-tree--action,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--collapse +  .mdc-tree--name {
+	margin-right: 0px;}	
 
 /* ==========================================================================
    JExcel
