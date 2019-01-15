@@ -233,8 +233,8 @@
   	/* ================================ */
 	--mdc-tree--ink-color: var(--mdc-theme-on-surface);	
   	--mdc-tree--fill-color: var(--mdc-theme-surface);
-  	--mdc-tree--hover-color: var(--mdc-theme-primary);
-  	--mdc-tree--hover-ink-color: var(--mdc-theme-on-primary);
+  	--mdc-tree--hover-color: var(--mdc-theme-secondary);
+  	--mdc-tree--hover-ink-color: var(--mdc-theme-on-secondary);
   	
 	/* ================================ */
   	/* Spreadsheet attributes			*/

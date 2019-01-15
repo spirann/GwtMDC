@@ -27,6 +27,9 @@ function MDCTree(element) {
     var action_class ='mdc-tree--action';
     var last_selected_item;
        
+    /**
+	* Set data
+	*/   
     this.setData = function (data) {
     	MDCTree.data = data;
     	MDCTree.last_selected_item = null;
@@ -46,30 +49,46 @@ function MDCTree(element) {
   		$(root).find('.' + expand_class).click();
 	}
 	
+	/**
+	* List all orphan items
+	*/
 	function orphans() {
   		return MDCTree.data.filter(function(item) {
     		return item.parent === null || item.parent === undefined;
   		});
 	}
 	
+	/**
+	* Return true if the item has at least one item
+	*/
 	function hasChildren(parentId) {
   		return MDCTree.data.some(function(item) {
     		return item.parent === parentId;
   		});
 	}
 	
+	/**
+	* Return true if the item has at least one unselected item
+	*/
 	function hasUnselectedChildren(parentId) {
   		return MDCTree.data.some(function(item) {
     		return item.parent === parentId && !item.selected;
   		});
 	}
 
+	/**
+	* List direct children of an item
+	*/
 	function getChildren(parentId) {
   		return MDCTree.data.filter(function(item) {
     		return item.parent === parentId;
   		});
 	}
 	
+	/**
+	* List all children of an item
+	* This goes to the last level
+	*/
 	function getAllChildren(parentId) {
   		var children = MDCTree.data.filter(function(item) {
     		return item.parent === parentId;
@@ -80,6 +99,10 @@ function MDCTree(element) {
   		return children;
 	}
 	
+	/**
+	* List all parents of an item
+	* This goes to the first level
+	*/
 	function getAllParents(parent) {
   		var parents = MDCTree.data.filter(function(item) {
     		return item.id === parent;
@@ -90,6 +113,9 @@ function MDCTree(element) {
   		return parents;
 	}
 
+	/**
+	* Create an element for the tree
+	*/
 	function generateListItem(item) {  
   		const li = document.createElement('li');
   		li.id = 'item-' + item.id;
@@ -215,6 +241,10 @@ function MDCTree(element) {
   		return li;
 	}
 
+	/**
+	* Expand event
+	* It's called when you click at arrow
+	*/
 	function expand(event) {
   		event.preventDefault();
   		event.stopPropagation();
@@ -235,6 +265,10 @@ function MDCTree(element) {
 		et.addEventListener('click', collapse);
 	}
 
+	/**
+	* Collapse event
+	* It's called when you click at arrow
+	*/
 	function collapse(event) {
 		event.preventDefault();
 		event.stopPropagation();
@@ -249,6 +283,9 @@ function MDCTree(element) {
 		et.addEventListener('click', expand);
 	}
 	
+	/**
+	* Create a checkbox for filter type
+	*/
 	function getCheckbox(item){		
 		var checkbox = document.createElement('div');
     	checkbox.classList.add('mdc-checkbox');
@@ -283,6 +320,9 @@ function MDCTree(element) {
     	return checkbox;
 	}
 	
+	/**
+	* Create a radio button for choice type
+	*/
 	function getRadio(item){		
 		var radio = document.createElement('div');
     	radio.classList.add('mdc-radio');
