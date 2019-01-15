@@ -58,7 +58,7 @@ public class MaterialTree extends Div {
 
 	protected Item[] generateData_forTest() {
 
-		final int count = 10;
+		final int count = 1000;
 		final List<Item> items = new LinkedList<>();
 
 		for (int i = 0; i < count; i++) {
@@ -66,9 +66,9 @@ public class MaterialTree extends Div {
 			final Item item = new Item();
 			item.id = "item_" + i;
 			item.name = "Item " + i;
-			item.onClick = onClick(item);
-			item.onSelect = onSelect(item);
-			item.onUnselect = onUnselect(item);
+			//item.onClick = onClick(item);
+			//item.onSelect = onSelect(item);
+			//item.onUnselect = onUnselect(item);
 			// Checkbox
 			item.action = "filter";
 			// Radio button

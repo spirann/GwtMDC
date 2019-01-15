@@ -57,6 +57,12 @@ function MDCTree(element) {
     		return item.parent === parentId;
   		});
 	}
+	
+	function hasUnselectedChildren(parentId) {
+  		return MDCTree.data.some(function(item) {
+    		return item.parent === parentId && !item.selected;
+  		});
+	}
 
 	function getChildren(parentId) {
   		return MDCTree.data.filter(function(item) {
@@ -69,15 +75,26 @@ function MDCTree(element) {
     		return item.parent === parentId;
   		});
   		children.forEach(function(item){
-  			children.push(getAllChildren(item.id));
+  			children = children.concat(getAllChildren(item.id));
   		});
   		return children;
+	}
+	
+	function getAllParents(parent) {
+  		var parents = MDCTree.data.filter(function(item) {
+    		return item.id === parent;
+  		});
+  		parents.forEach(function(item){
+  			parents = parents.concat(getAllParents(item.parent));
+  		});
+  		return parents;
 	}
 
 	function generateListItem(item) {  
   		const li = document.createElement('li');
-  		const li_header = document.createElement('div');
   		li.id = 'item-' + item.id;
+  		
+  		const li_header = document.createElement('div');
   		
   		const span = document.createElement('span');
   		span.classList.add(name_class);
@@ -101,59 +118,99 @@ function MDCTree(element) {
   			span.addEventListener('click', item.onClick);
   		
   		if(item.action) {
+  			
   			var action;
   			
+  			// Create action element
   			if(item.action === 'filter')
   				action = getCheckbox(item);
   			else if(item.action === 'choice') 
   				action = getRadio(item);
   				
   			if(action)  {	
+  			
+  				// Append the action element
   				li_header.appendChild(action);		
+  				
+  				// It is to remoe the focus after the click
+  				// and remove the waves circle
   				action.addEventListener('click', function(){
   					document.activeElement.blur();	
   				});
   				
-  				if(item.onSelect || item.onUnselect) {
-  					 $(li_header).find('input').change(function() {
+  				// Add change event
+  				$(li_header).find('input').change(function() {  					
+  					var selected = this.checked;
+  					
+  					// Update the item
+  					var item_index = jQuery.inArray(item, MDCTree.data);
+  					MDCTree.data[item_index].selected = this.checked;
   					 	
-  					 	var item_index = jQuery.inArray(item, MDCTree.data);
-  					 	MDCTree.data[item_index].selected = this.checked;
-  					 	
-  					 	if(item.onSelect && this.checked) 
-  							item.onSelect();  							
-  						else if(item.onUnselect && !this.checked) 
-  							item.onUnselect();	
+  					// Throw the event 	
+  					if(item.onSelect && selected) 
+  						item.onSelect();  							
+  					else if	(item.onUnselect && !selected) 
+  						item.onUnselect();	
   							
-  						if(item.action === 'filter') {  						
+					// Add events if action is a checkbox  							
+  					if(item.action === 'filter') {  						
+  							  						
+  						// //////////////////////////////////////////////
+  						// Update all itens and throws the events	
+  						// //////////////////////////////////////////////
+  						// Update all drawed children	
+  						$(li).find('ul input').prop('checked', item.selected);
+  						getAllChildren(item.id).forEach(function(child){  							
+  							// Update the itens								
+  							var child_index = jQuery.inArray(child, MDCTree.data);
+							MDCTree.data[child_index].selected = selected;
+							// Throw the events
+							if(child.onSelect && selected) 
+  								child.onSelect();  							
+  							else if(child.onUnselect && !selected) 
+  								child.onUnselect();									
+						});
+						
+						// //////////////////////////////////////////////
+						// Update all parents	
+						// //////////////////////////////////////////////
+  						getAllParents(item.parent).forEach(function(parent){  							
+  							// Update the itens								
+  							var parent_index = jQuery.inArray(parent, MDCTree.data);
+							MDCTree.data[parent_index].selected = selected;		
+							// Throws the events
+							if(parent.onSelect && selected) 
+  								parent.onSelect();  							
+  							else if(parent.onUnselect && !selected) 
+  								parent.onUnselect();					
+							// Update drawed parent
+							// To select the parent, the parent can not has unslected children
+							$('#item-' + parent.id + ' > div input').prop('checked', item.selected && !hasUnselectedChildren(parent.id));
+																					
+						});
+  						
   							
-  							$(li).find('ul input').attr('checked', item.selected);
-  							$(li).find('ul input').change();
-  							
-  							getAllChildren(item.id).forEach(function(item){  								
-  					 		 	var item_index = jQuery.inArray(item, MDCTree.data);
-  					 			MDCTree.data[item_index].selected = this.checked;
-  							});
-  							
-  							console.log();
-  							
-  						} else if(item.action === 'choice') {
-  							// Notify last selected item that who is unselected
-  							if(MDCTree.last_selected_item && MDCTree.last_selected_item.onUnselect)
-  								MDCTree.last_selected_item.onUnselect();  								
-  							MDCTree.last_selected_item = item;
-  						}  						  							
-  					 });
-  				}
+  					} 
+  					// Add events if action is a radio button
+  					else if(item.action === 'choice') {
+  						// Notify last selected item that who is unselected
+  						
+  						if(MDCTree.last_selected_item && MDCTree.last_selected_item.onUnselect)
+  							MDCTree.last_selected_item.onUnselect();  								
+  						
+  						MDCTree.last_selected_item = item;
+  					}  						  							
+  				});  				
   					  				
+				// Set type of action, it's necessary because of css file				  					  					
   				action.setAttribute('type', item.action);
-  				$(li_header).find('input').attr('checked', item.selected);	 
+  				// Select the item if it's selected
+  				$(li_header).find('input').prop('checked', item.selected);	 
   			
   			}
   		}
   		
-  		li_header.appendChild(span);
-  		
+  		li_header.appendChild(span);  		
   		li.appendChild(li_header);
   		return li;
 	}
