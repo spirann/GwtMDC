@@ -809,6 +809,11 @@
 	font-size: .75rem;
 	border-radius: var(--mdc-rounded-border-radius);}
 
+.mdc-tree--filter-text {
+	color: var(--mdc-tree--hover-ink-color);
+	background-color: var(--mdc-tree--hover-color);
+}
+
 .mdc-tree:not([dir=rtl]) {
   	padding-right: 16px;}
 .mdc-tree[dir=rtl] {

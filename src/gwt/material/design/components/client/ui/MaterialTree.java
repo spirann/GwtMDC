@@ -30,9 +30,8 @@ import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
-import jsinterop.annotations.JsPackage;
-import jsinterop.annotations.JsProperty;
-import jsinterop.annotations.JsType;
+import gwt.material.design.components.client.ui.misc.tree.js.JsItem;
+import gwt.material.design.components.client.ui.misc.tree.js.JsOptions;
 
 /**
  * 
@@ -41,13 +40,17 @@ import jsinterop.annotations.JsType;
  */
 public class MaterialTree extends Div {
 
+	protected final JsOptions options = new JsOptions();
+	
 	public MaterialTree() {
 		super(CssName.MDC_TREE);
+		options.selectionType = "choice";
 	}
 
 	@Override
 	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.MDCTree(element);
+		var options = this.@gwt.material.design.components.client.ui.MaterialTree::options;
+		return new $wnd.MDCTree(element, options);
 	}-*/;
 
 	protected void onInitialize() {
@@ -56,21 +59,21 @@ public class MaterialTree extends Div {
 		setData(generateData_forTest());
 	}
 
-	protected Item[] generateData_forTest() {
+	protected JsItem[] generateData_forTest() {
 
 		final int count = 1000;
-		final List<Item> items = new LinkedList<>();
+		final List<JsItem> items = new LinkedList<>();
 
 		for (int i = 0; i < count; i++) {
 
-			final Item item = new Item();
+			final JsItem  item = new JsItem();
 			item.id = "item_" + i;
 			item.name = "Item " + i;
 			//item.onClick = onClick(item);
 			//item.onSelect = onSelect(item);
 			//item.onUnselect = onUnselect(item);
 			// Checkbox
-			item.action = "filter";
+			item.selected = i == 1;
 			// Radio button
 			//item.action = "choice";
 
@@ -82,62 +85,33 @@ public class MaterialTree extends Div {
 			items.add(item);
 		}
 
-		return items.stream().toArray(Item[]::new);
+		return items.stream().toArray(JsItem[]::new);
 	}
 
-	protected native JavaScriptObject onClick(final Item item) /*-{
+	protected native JavaScriptObject onClick(final JsItem item) /*-{
 		return function() {
 			console.log('click on: ' + item.name);
 		};
 	}-*/;
 
-	protected native JavaScriptObject onSelect(final Item item) /*-{
+	protected native JavaScriptObject onSelect(final JsItem item) /*-{
 		return function() {
 			console.log('select on: ' + item.name);
 		};
 	}-*/;
 
-	protected native JavaScriptObject onUnselect(final Item item) /*-{
+	protected native JavaScriptObject onUnselect(final JsItem item) /*-{
 		return function() {
 			console.log('unselect on: ' + item.name);
 		};
 	}-*/;
 
-	protected native void setData(final Item[] data)/*-{
+	protected native void setData(final JsItem[] data)/*-{
 		var tree = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		if (tree)
 			tree.setData(data);
 	}-*/;
-
-	@JsType(isNative = true, name = "Object", namespace = JsPackage.GLOBAL)
-	public static class Item {
-
-		@JsProperty
-		public String id;
-
-		@JsProperty
-		public String name;
-
-		@JsProperty
-		public String parent;
-
-		@JsProperty
-		public String action;
-
-		@JsProperty
-		public boolean selected;
-		
-		@JsProperty
-		public JavaScriptObject onClick;
-
-		@JsProperty
-		public JavaScriptObject onSelect;
-
-		@JsProperty
-		public JavaScriptObject onUnselect;
-
-	}
-
+	
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());

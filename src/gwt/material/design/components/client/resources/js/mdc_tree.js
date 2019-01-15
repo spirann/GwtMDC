@@ -15,9 +15,10 @@
   }
 ]
 */
-function MDCTree(element) {
+function MDCTree(element, opts) {
 
     var root = element;
+    var options = opts;
     var data = null;
     var expand_class = 'mdc-tree--collapse';
     var expand_icon = 'chevron_right';
@@ -26,6 +27,7 @@ function MDCTree(element) {
     var name_class ='mdc-tree--name';
     var action_class ='mdc-tree--action';
     var last_selected_item;
+    var textFilter = '11';
        
     /**
 	* Set data
@@ -44,9 +46,33 @@ function MDCTree(element) {
     		root.appendChild(ul);
   		}
   		
+  		// Atualiza os items selecionados
+  		select(selected());
+  		
   		// Open first level
   		// Do not open all levels, because it`s slow 
   		$(root).find('.' + expand_class).click();
+	}
+	
+	/**
+	* Select a list of items
+	*/
+	this.select = function(itemsToSelect) {
+		select(itemsToSelect);
+	}
+	
+	/**
+	* Unselect a list of items
+	*/
+	this.unselect = function(itemsToUnselect) {
+		unselect(itemsToUnselect);
+	}
+	
+	/**
+	* Return all selected items
+	*/
+	this.getSelectedItems = function(){
+		return selected();
 	}
 	
 	/**
@@ -55,6 +81,15 @@ function MDCTree(element) {
 	function orphans() {
   		return MDCTree.data.filter(function(item) {
     		return item.parent === null || item.parent === undefined;
+  		});
+	}
+	
+	/**
+	* List all selected items
+	*/
+	function selected() {
+  		return MDCTree.data.filter(function(item) {
+    		return item.selected;
   		});
 	}
 	
@@ -119,7 +154,7 @@ function MDCTree(element) {
 	function generateListItem(item) {  
   		const li = document.createElement('li');
   		li.id = 'item-' + item.id;
-  		
+  		  		
   		const li_header = document.createElement('div');
   		
   		const span = document.createElement('span');
@@ -143,14 +178,14 @@ function MDCTree(element) {
   		if(item.onClick)
   			span.addEventListener('click', item.onClick);
   		
-  		if(item.action) {
+  		if(options.selectionType) {
   			
   			var action;
   			
   			// Create action element
-  			if(item.action === 'filter')
+  			if(options.selectionType === 'filter')
   				action = getCheckbox(item);
-  			else if(item.action === 'choice') 
+  			else if(options.selectionType === 'choice') 
   				action = getRadio(item);
   				
   			if(action)  {	
@@ -165,71 +200,52 @@ function MDCTree(element) {
   				});
   				
   				// Add change event
-  				$(li_header).find('input').change(function() {  					
-  					var selected = this.checked;
-  					
+  				$(li_header).find('input').change(function() {
   					// Update the item
-  					var item_index = jQuery.inArray(item, MDCTree.data);
-  					MDCTree.data[item_index].selected = this.checked;
-  					 	
-  					// Throw the event 	
-  					if(item.onSelect && selected) 
-  						item.onSelect();  							
-  					else if	(item.onUnselect && !selected) 
-  						item.onUnselect();	
-  							
-					// Add events if action is a checkbox  							
-  					if(item.action === 'filter') {  						
+  					item.selected = this.checked;
+  					
+  					// //////////////////////////////////////////////
+  					// Update item  and throws the events	
+  					// //////////////////////////////////////////////
+  					updateItemState(item);
+  					
+  					if(options.selectionType === 'filter') {
+  						// Add events if action is a checkbox  						
   							  						
   						// //////////////////////////////////////////////
-  						// Update all itens and throws the events	
+  						// Update all children and throws the events	
   						// //////////////////////////////////////////////
-  						// Update all drawed children	
-  						$(li).find('ul input').prop('checked', item.selected);
-  						getAllChildren(item.id).forEach(function(child){  							
-  							// Update the itens								
-  							var child_index = jQuery.inArray(child, MDCTree.data);
-							MDCTree.data[child_index].selected = selected;
-							// Throw the events
-							if(child.onSelect && selected) 
-  								child.onSelect();  							
-  							else if(child.onUnselect && !selected) 
-  								child.onUnselect();									
-						});
+  						updateChildrenState(item);
 						
 						// //////////////////////////////////////////////
-						// Update all parents	
+						// Update all parents and throws the events		
 						// //////////////////////////////////////////////
-  						getAllParents(item.parent).forEach(function(parent){  							
-  							// Update the itens								
-  							var parent_index = jQuery.inArray(parent, MDCTree.data);
-							MDCTree.data[parent_index].selected = selected;		
-							// Throws the events
-							if(parent.onSelect && selected) 
-  								parent.onSelect();  							
-  							else if(parent.onUnselect && !selected) 
-  								parent.onUnselect();					
-							// Update drawed parent
-							// To select the parent, the parent can not has unslected children
-							$('#item-' + parent.id + ' > div input').prop('checked', item.selected && !hasUnselectedChildren(parent.id));
-																					
-						});
-  						
+						updateParentsState(item);  						
   							
-  					} 
-  					// Add events if action is a radio button
-  					else if(item.action === 'choice') {
-  						// Notify last selected item that who is unselected
+  					} else if(options.selectionType === 'choice') {
+  						// Add events if action is a radio button
   						
-  						if(MDCTree.last_selected_item && MDCTree.last_selected_item.onUnselect)
-  							MDCTree.last_selected_item.onUnselect();  								
+  						if(item.selected) {  						
+  							// Notify last selected item that who is unselected  						
+  							if(last_selected_item){
+  								var last_selected_index = jQuery.inArray(last_selected_item, MDCTree.data);
+								MDCTree.data[last_selected_index].selected = false;
+								if(last_selected_item.onUnselect)
+  									last_selected_item.onUnselect();  								
+  								}
   						
-  						MDCTree.last_selected_item = item;
+  							last_selected_item = item;
+  						} else {
+  							if(last_selected_item && last_selected_item.id === item.id)
+  								last_selected_item = null
+  						}
   					}  						  							
   				});  				
-  					  				
+  				
+  				if(last_selected_item)	  	
+  					item.selected = last_selected_item.id === item.id;  					  				
 				// Set type of action, it's necessary because of css file				  					  					
-  				action.setAttribute('type', item.action);
+  				action.setAttribute('type', options.selectionType);
   				// Select the item if it's selected
   				$(li_header).find('input').prop('checked', item.selected);	 
   			
@@ -238,7 +254,124 @@ function MDCTree(element) {
   		
   		li_header.appendChild(span);  		
   		li.appendChild(li_header);
+  		
+  		// Apply text filter  			
+  		var defined_text_filter = MDCTree.textFilter && MDCTree.textFilter.length > 0;
+  		var has_text_filter = hasTextFilter(item);
+		var has_child_with_text_filter = hasChildWithTextFilter(item);		
+  		
+  		if(has_text_filter && defined_text_filter)
+  			span.classList.add('mdc-tree--filter-text');
+  		else 
+  			span.classList.remove('mdc-tree--filter-text');
+  		
+  		if(has_text_filter || has_child_with_text_filter || !defined_text_filter)
+  			$(li).css('display','');
+  		else
+  			$(li).css('display','none');
+  		
   		return li;
+	}
+	
+	/**
+	* Select a list of items
+	*/
+	function select(itemsToSelect) {
+	
+		if(options.selectionType === 'filter') {
+	
+			const toSelectArray = [];
+			itemsToSelect.forEach(function(item){
+				if(item.parent) {
+			
+					// List all parents 
+					var itemParents = getAllParents(item.parent);
+					// Verifies if any parent will be selected
+					var hasParentToSelect = itemParents.some(function(parent){
+						return itemsToSelect.includes(parent);
+					});
+					// If any parent will be selected
+					// so this item should be selected
+					if(!hasParentToSelect)
+						toSelectArray.push(item);
+					
+				} else {
+					// If the item has not parent,
+					// so I add it to the list
+					toSelectArray.push(item);
+				}	
+			});
+		
+			toSelectArray.forEach(function(item){
+			
+				// If the developer did not set to true, I do it
+				item.selected = true;
+		
+				// //////////////////////////////////////////////
+  				// Update item  and throws the events	
+  				// //////////////////////////////////////////////
+  				updateItemState(item);
+		
+				// //////////////////////////////////////////////
+  				// Update all children and throws the events	
+  				// //////////////////////////////////////////////
+  				updateChildrenState(item);
+						
+				// //////////////////////////////////////////////
+				// Update all parents and throws the events		
+				// //////////////////////////////////////////////
+				updateParentsState(item);  	
+			
+			});
+			
+		} else if(options.selectionType === 'choice' && itemsToSelect.length > 0) {
+			// //////////////////////////////////////////////
+  			// Update item  and throws the events	
+  			// //////////////////////////////////////////////
+  			itemsToSelect[0].selected = true;
+  			updateItemState(itemsToSelect[0]);
+		}
+	}
+	
+	/**
+	* Unselect a list of items
+	*/
+	function unselect(itemsToUnselect) {
+		
+		if(options.selectionType === 'filter') {
+		
+			itemsToUnselect.forEach(function(item){
+				// If the developer did not set to false, I do it
+				item.selected = false;
+				
+				// //////////////////////////////////////////////
+  				// Update item  and throws the events	
+  				// //////////////////////////////////////////////
+  				updateItemState(item);
+		
+				// //////////////////////////////////////////////
+  				// Update all children and throws the events	
+  				// //////////////////////////////////////////////
+  				updateChildrenState(item);	
+						
+				// //////////////////////////////////////////////
+				// Update all parents and throws the events		
+				// //////////////////////////////////////////////
+				updateParentsState(item);
+			});	
+		
+		} else if(options.selectionType === 'choice' && itemsToSelect.length > 0) {
+			itemsToUnselect.forEach(function(item){
+				// If the developer did not set to false, I do it
+				item.selected = false;
+				
+				// //////////////////////////////////////////////
+  				// Update item  and throws the events	
+  				// //////////////////////////////////////////////
+  				updateItemState(item);
+			});	
+		}
+	
 	}
 
 	/**
@@ -281,6 +414,80 @@ function MDCTree(element) {
 		et.textContent = expand_icon;
 		et.removeEventListener('click', collapse);
 		et.addEventListener('click', expand);
+	}
+	
+	function hasTextFilter(item){
+		return item.name && item.name.toLowerCase().indexOf(textFilter) > -1;
+	}
+	
+	function hasChildWithTextFilter(item){
+		return getAllChildren(item.id).some(function(child) {
+    		return hasTextFilter(child);
+  		});
+	}
+	
+	/**
+	* Update item and throws the events
+	*/
+	function updateItemState(item){
+		var item_index = jQuery.inArray(item, MDCTree.data);
+  		MDCTree.data[item_index].selected = item.selected;
+  				 	
+  		// Throw the event 	
+  		if(item.onSelect && selected) 
+  			item.onSelect();  							
+  		else if	(item.onUnselect && !selected) 
+  			item.onUnselect();	
+	}
+	
+	/**
+	* Update all children and throws the events
+	*/
+	function updateChildrenState(item){
+	
+		if(!item || !item.id)
+			return;	
+		
+  		$('#item-' + item.id).find('ul input').prop('checked', item.selected);
+  		getAllChildren(item.id).forEach(function(child){  		
+  							
+			// Update the itens								
+  			var child_index = jQuery.inArray(child, MDCTree.data);
+			MDCTree.data[child_index].selected = item.selected;
+			// Throw the events
+			if(child.onSelect && selected) 
+  				child.onSelect();  							
+  			else if(child.onUnselect && !selected) 
+  				child.onUnselect();
+  													
+		});
+	}
+	
+	/**
+	* Update all children and throws the events
+	*/
+	function updateParentsState(item){
+
+		if(!item || !item.parent)
+			return;	
+	
+		getAllParents(item.parent).forEach(function(parent){
+		  				
+  			var parentIsSelected = item.selected && !hasUnselectedChildren(parent.id);			
+  			// Update the itens								
+  			var parent_index = jQuery.inArray(parent, MDCTree.data);
+			MDCTree.data[parent_index].selected = parentIsSelected;		
+			// Throws the events
+			if(parent.onSelect && parentIsSelected) 
+  				parent.onSelect();  							
+  			else if(parent.onUnselect && !parentIsSelected) 
+  				parent.onUnselect();					
+			
+			// Update drawed parent
+			// To select the parent, the parent can not has unslected children
+			$('#item-' + parent.id + ' > div input').prop('checked', parentIsSelected);
+																					
+		});
 	}
 	
 	/**

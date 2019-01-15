@@ -126,18 +126,26 @@ textarea,
 }
 
 /* ==========================================================================
+   Configure the text selection
+   ========================================================================== */
+::-moz-selection { 
+	color: var(--mdc-select-text-ink-color);
+	background: var(--mdc-select-text-fill-color); }
+	
+::selection {
+	color: var(--mdc-select-text-ink-color);
+	background: var(--mdc-select-text-fill-color); }
+
+/* ==========================================================================
    Configure the scrollsbars
    ========================================================================== */
 ::-webkit-scrollbar {
 	width: var(--mdc-scrollbar-width); /* for vertical scrollbars */
-	height: var(--mdc-scrollbar-width); /* for horizontal scrollbars */
-}
+	height: var(--mdc-scrollbar-width); /* for horizontal scrollbars */}
 
 ::-webkit-scrollbar-track {
-	background-color: var(--mdc-scrollbar-track-fill);
-}
+	background-color: var(--mdc-scrollbar-track-fill);}
 
 ::-webkit-scrollbar-thumb {
 	border-radius: var(--mdc-scrollbar-thumb-corner) !important;
-	background: var(--mdc-scrollbar-thumb-fill);
-}
+	background: var(--mdc-scrollbar-thumb-fill);}
