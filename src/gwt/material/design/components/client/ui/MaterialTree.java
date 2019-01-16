@@ -112,6 +112,10 @@ public class MaterialTree extends Div {
 			tree.setData(data);
 	}-*/;
 	
+	public void filter(final String filter) {
+		
+	}
+	
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());
