@@ -850,7 +850,8 @@
 .mdc-tree ul li.active {}
 .mdc-tree ul li .mdc-tree--name {
 	vertical-align: middle;
-	cursor: pointer;}
+	cursor: pointer;
+	border-radius: var(--mdc-rounded-border-radius);}
 
  .mdc-tree--action {
  	margin: 0; }

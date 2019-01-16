@@ -61,7 +61,7 @@ public class MaterialTree extends Div {
 
 	protected JsItem[] generateData_forTest() {
 
-		final int count = 1000;
+		final int count = 20;
 		final List<JsItem> items = new LinkedList<>();
 
 		for (int i = 0; i < count; i++) {

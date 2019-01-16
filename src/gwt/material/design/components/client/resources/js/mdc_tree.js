@@ -256,9 +256,15 @@ function MDCTree(element, opts) {
   		li.appendChild(li_header);
   		
   		// Apply text filter  			
-  		var defined_text_filter = MDCTree.textFilter && MDCTree.textFilter.length > 0;
+  		var defined_text_filter = textFilter && textFilter.length > 0;
   		var has_text_filter = hasTextFilter(item);
 		var has_child_with_text_filter = hasChildWithTextFilter(item);		
+  		
+  		console.log('---------------------------------');
+  		console.log('Item: ' + item.name);
+  		console.log('defined_text_filter: ' + defined_text_filter);
+  		console.log('has_text_filter: ' + has_text_filter);
+  		console.log('has_child_with_text_filter: ' + has_child_with_text_filter);
   		
   		if(has_text_filter && defined_text_filter)
   			span.classList.add('mdc-tree--filter-text');
@@ -417,7 +423,8 @@ function MDCTree(element, opts) {
 	}
 	
 	function hasTextFilter(item){
-		return item.name && item.name.toLowerCase().indexOf(textFilter) > -1;
+		var defined_text_filter = textFilter && textFilter.length > 0;
+		return defined_text_filter && item.name && item.name.toLowerCase().indexOf(textFilter.toLowerCase()) > -1;
 	}
 	
 	function hasChildWithTextFilter(item){
