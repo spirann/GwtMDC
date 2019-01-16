@@ -809,7 +809,7 @@
 	font-size: .75rem;
 	border-radius: var(--mdc-rounded-border-radius);}
 
-.mdc-tree--filter-text {
+.mdc-tree--filtered-text {
 	color: var(--mdc-tree--hover-ink-color);
 	background-color: var(--mdc-tree--hover-color);
 }
@@ -853,23 +853,23 @@
 	cursor: pointer;
 	border-radius: var(--mdc-rounded-border-radius);}
 
- .mdc-tree--action {
+ .mdc-tree--selector {
  	margin: 0; }
 
-.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--action:first-child,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--selector:first-child,
 .mdc-tree:not([dir=rtl]) ul li  .mdc-tree--name:first-child {
 	margin-left: 20px;} 	
-.mdc-tree[dir=rtl] ul li  .mdc-tree--action:first-child,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--selector:first-child,
 .mdc-tree[dir=rtl] ul li  .mdc-tree--name:first-child {
 	margin-right: 20px;} 		
-.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--expand +  .mdc-tree--action,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--expand +  .mdc-tree--selector,
 .mdc-tree:not([dir=rtl]) ul li  .mdc-tree--expand +  .mdc-tree--name,
-.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--collapse +  .mdc-tree--action,
+.mdc-tree:not([dir=rtl]) ul li  .mdc-tree--collapse +  .mdc-tree--selector,
 .mdc-tree:not([dir=rtl]) ul li  .mdc-tree--collapse +  .mdc-tree--name {
 	margin-left: 0px;}
-.mdc-tree[dir=rtl] ul li  .mdc-tree--expand +  .mdc-tree--action,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--expand +  .mdc-tree--selector,
 .mdc-tree[dir=rtl] ul li  .mdc-tree--expand +  .mdc-tree--name,
-.mdc-tree[dir=rtl] ul li  .mdc-tree--collapse +  .mdc-tree--action,
+.mdc-tree[dir=rtl] ul li  .mdc-tree--collapse +  .mdc-tree--selector,
 .mdc-tree[dir=rtl] ul li  .mdc-tree--collapse +  .mdc-tree--name {
 	margin-right: 0px;}	
 

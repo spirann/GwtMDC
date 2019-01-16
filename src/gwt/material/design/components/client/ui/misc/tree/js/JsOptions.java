@@ -20,4 +20,10 @@ public class JsOptions {
 	@JsProperty
 	public String selectionType;
 	
+	@JsProperty
+	public String expandIcon;
+	
+	@JsProperty
+	public String collapseIcon;
+	
 }
