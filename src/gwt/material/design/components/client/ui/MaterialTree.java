@@ -132,10 +132,6 @@ public class MaterialTree extends Div implements HasType<TreeType> {
 		return TreeType.fromStyleName(options.selectionType);
 	}
 	
-	public void filter(final String filter) {
-		
-	}
-	
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());
