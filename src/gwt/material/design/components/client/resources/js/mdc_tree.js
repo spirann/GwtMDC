@@ -523,7 +523,18 @@ function MDCTree(element, options) {
 	this.expand = function (item, element, parent) {
   		const _this = this, 
   			id = parent.id.replace('item-', ''),
-        	kids = this.getChildren(id),
+        	kids = this.getChildren(id).sort(function(a, b){
+        	
+        		var aHasChildren = _this.hasChildren(a.id);
+        		var bHasChildren = _this.hasChildren(b.id);
+        		
+        		if(aHasChildren && !bHasChildren)
+        			return 1;
+        		if(!aHasChildren && bHasChildren)
+        			return -1;	
+        		
+        		return a.name.localeCompare(b.name);
+        	}),
         	items = this.toDraw(kids),
         	ul = document.createElement('ul');
   		items.forEach(function(li) {
