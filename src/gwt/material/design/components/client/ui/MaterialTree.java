@@ -86,7 +86,7 @@ public class MaterialTree extends Div
 	}
 	
 	protected void fireFilterEvent() {
-		SelectionEvent.fire(MaterialTree.this, getFilteredItems());
+		FilterEvent.fire(MaterialTree.this, getFilteredItems());
 	}
 
 	@Override
