@@ -1,85 +1,118 @@
-
-/* data is in flat array format like this:
-[
-  {
-    id: 'abc',
-    name: 'ABCDE',
-    parent: null,
-    onClick: function(e) {}
-  },
-  {
-    id: 'def',
-    name: 'DEFGH',
-    parent: 'abc',
-    onClick: function(e) {}
-  }
-]
+/*
+*
+*
+*
 */
-function MDCTree(element, opts) {
+function MDCTree(element, options) {
+		var defaults = {
+			/**
+			* Without selection
+		 	* <code>none</code> or <code>null</code>
+		 	* 
+		 	* Checkbox selection
+		 	* <code>filter</code>
+		 	* 
+		 	* Radio button selection
+		 	* <code>choice</code>
+		 	*/
+			selectionType : null,
+			// Class for selector element
+			selectorClass : 'mdc-tree--selector',
+			// Class for show filtered text
+			filteredTextClass : 'mdc-tree--filtered-text',
+			// Expand class  for to expand action
+			expandClass : 'mdc-tree--collapse',
+			// Material design icon for to expand action
+			expandIcon : 'chevron_right',
+			// Expand class  for to collapse action
+	     	collapseClass : 'mdc-tree--expand',
+			// Material design icon for to collapse action
+	    	collapseIcon : 'expand_more',
+			// Class  for to name element
+			nameClass : 'mdc-tree--name',
+			//
+			maxToAutoExpand : 10
+		};
 
-    var root = element;
-    var options = opts;
-    var data = null;
-    var expand_class = 'mdc-tree--collapse';
-    var expand_icon = 'chevron_right';
-    var collapse_class = 'mdc-tree--expand';
-    var collapse_icon = 'expand_more';
-    var name_class ='mdc-tree--name';
-    var action_class ='mdc-tree--action';
-    var last_selected_item;
-    var textFilter = '11';
-       
+    	this.root = element;	
+    	this.options = $.extend(defaults, options);
+    	this.data = null;	
+    	this.last_selected_item;
+    	this.textFilter = '';
+    
     /**
 	* Set data
 	*/   
     this.setData = function (data) {
-    	MDCTree.data = data;
-    	MDCTree.last_selected_item = null;
-    	$(root).empty();
-		const orphansArray = orphans();
+    	this.last_selected_item = null;    	
+    	this.data = data;
+    	this.draw();
+	}
+	
+	/**
+	* Set data
+	*/   
+    this.setOptions = function (options) {
+    	this.options = options;
+		this.draw();
+	}
+	
+	/**
+	* Filter all items
+	*/   
+	this.filter = function(text){
+    	this.textFilter = text;		
+    	this.draw();
+    	var count = this.countFilteredItems();
+    	
+    	if(count > 0 && count <= this.options.maxToAutoExpand) 
+    		this.expandAll();
+	}
+		
+	/**
+	* Draw all data items
+	*/
+	this.draw = function () {
+    	$(this.root).empty();
+    	const _this = this;
+		const orphansArray = this.orphans();
   		if (orphansArray.length) {
-    		const items = orphansArray.map(generateListItem),
+    		const items = this.toDraw(orphansArray),
         	ul = document.createElement('ul');
     		items.forEach(function(li) {
       			ul.appendChild(li);
     		});
-    		root.appendChild(ul);
+    		this.root.appendChild(ul);
   		}
   		
   		// Atualiza os items selecionados
-  		select(selected());
+  		this.select(this.getSelectedItems());
   		
   		// Open first level
   		// Do not open all levels, because it`s slow 
-  		$(root).find('.' + expand_class).click();
+  		$(this.root).find('.' + this.options.expandClass).click();
 	}
 	
-	/**
-	* Select a list of items
-	*/
-	this.select = function(itemsToSelect) {
-		select(itemsToSelect);
-	}
-	
-	/**
-	* Unselect a list of items
-	*/
-	this.unselect = function(itemsToUnselect) {
-		unselect(itemsToUnselect);
-	}
-	
-	/**
-	* Return all selected items
-	*/
-	this.getSelectedItems = function(){
-		return selected();
+	this.toDraw = function(items){
+		const _this = this;
+		return items.filter(function(item){
+		
+			var defined_text_filter = _this.textFilter && _this.textFilter.length > 0;
+  			var has_text_filter = _this.hasTextFilter(item);
+			var has_child_with_text_filter = _this.hasChildWithTextFilter(item);
+		
+			return !defined_text_filter || has_text_filter || has_child_with_text_filter;	
+		
+		}).map(function(item){
+    			return _this.generateListItem(item);
+    	});
 	}
 	
 	/**
 	* List all orphan items
 	*/
-	function orphans() {
-  		return MDCTree.data.filter(function(item) {
+	this.orphans = function () {
+  		return this.data.filter(function(item) {
     		return item.parent === null || item.parent === undefined;
   		});
 	}
@@ -87,17 +120,41 @@ function MDCTree(element, opts) {
 	/**
 	* List all selected items
 	*/
-	function selected() {
-  		return MDCTree.data.filter(function(item) {
+	this.getSelectedItems = function () {
+  		return this.data.filter(function(item) {
     		return item.selected;
   		});
 	}
 	
 	/**
+	* Return the number of selected items
+	*/	
+	this.countSelectedItems = function(){
+		return this.getSelectedItems().length;
+	}
+
+	/**
+	* List all filtered items
+	*/
+	this.getFilteredItems = function(){
+		const _this = this;
+		return this.data.filter(function(item) {
+    		return _this.hasTextFilter(item);
+  		});
+	}
+	
+	/**
+	* Return the number of filtered items
+	*/	
+	this.countFilteredItems = function(){
+		return this.getFilteredItems().length;
+	}
+	
+	/**
 	* Return true if the item has at least one item
 	*/
-	function hasChildren(parentId) {
-  		return MDCTree.data.some(function(item) {
+	this.hasChildren = function (parentId) {
+  		return this.data.some(function(item) {
     		return item.parent === parentId;
   		});
 	}
@@ -105,8 +162,8 @@ function MDCTree(element, opts) {
 	/**
 	* Return true if the item has at least one unselected item
 	*/
-	function hasUnselectedChildren(parentId) {
-  		return MDCTree.data.some(function(item) {
+	this.hasUnselectedChildren = function (parentId) {
+  		return this.data.some(function(item) {
     		return item.parent === parentId && !item.selected;
   		});
 	}
@@ -114,8 +171,8 @@ function MDCTree(element, opts) {
 	/**
 	* List direct children of an item
 	*/
-	function getChildren(parentId) {
-  		return MDCTree.data.filter(function(item) {
+	this.getChildren = function (parentId) {
+  		return this.data.filter(function(item) {
     		return item.parent === parentId;
   		});
 	}
@@ -124,12 +181,13 @@ function MDCTree(element, opts) {
 	* List all children of an item
 	* This goes to the last level
 	*/
-	function getAllChildren(parentId) {
-  		var children = MDCTree.data.filter(function(item) {
+	this.getAllChildren = function (parentId) {		
+		const _this = this;
+  		var children = this.data.filter(function(item) {
     		return item.parent === parentId;
   		});
   		children.forEach(function(item){
-  			children = children.concat(getAllChildren(item.id));
+  			children = children.concat(_this.getAllChildren(item.id));
   		});
   		return children;
 	}
@@ -138,12 +196,13 @@ function MDCTree(element, opts) {
 	* List all parents of an item
 	* This goes to the first level
 	*/
-	function getAllParents(parent) {
-  		var parents = MDCTree.data.filter(function(item) {
+	this.getAllParents = function (parent) {
+		const _this = this;
+  		var parents = this.data.filter(function(item) {
     		return item.id === parent;
   		});
   		parents.forEach(function(item){
-  			parents = parents.concat(getAllParents(item.parent));
+  			parents = parents.concat(_this.getAllParents(item.parent));
   		});
   		return parents;
 	}
@@ -151,23 +210,29 @@ function MDCTree(element, opts) {
 	/**
 	* Create an element for the tree
 	*/
-	function generateListItem(item) {  
+	this.generateListItem = function (item) {  
+		const _this = this;
   		const li = document.createElement('li');
   		li.id = 'item-' + item.id;
   		  		
   		const li_header = document.createElement('div');
   		
   		const span = document.createElement('span');
-  		span.classList.add(name_class);
+  		span.classList.add(this.options.nameClass);
   		span.innerHTML = item.name;
-  		
-  		if (hasChildren(item.id)) {
+  	
+  		if (this.hasChildren(item.id)) {
   		
     		const a = document.createElement('i');
     		a.href = '#';
-    		a.textContent = expand_icon;
-    		a.classList.add(expand_class);
-    		a.addEventListener('click', expand);
+    		a.textContent = this.options.expandIcon;
+    		a.classList.add(this.options.expandClass);
+    		a.addEventListener('click', function(){
+    			if($(a).hasClass(_this.options.expandClass))
+    				_this.expand(item, a, li);
+    			else if($(a).hasClass(_this.options.collapseClass))
+    				_this.expand(item, a, li);
+    		});
     		li_header.appendChild(a);
     		
     		span.addEventListener('dblclick', function(){
@@ -178,15 +243,15 @@ function MDCTree(element, opts) {
   		if(item.onClick)
   			span.addEventListener('click', item.onClick);
   		
-  		if(options.selectionType) {
+  		if(this.options.selectionType) {
   			
   			var action;
   			
   			// Create action element
-  			if(options.selectionType === 'filter')
-  				action = getCheckbox(item);
-  			else if(options.selectionType === 'choice') 
-  				action = getRadio(item);
+  			if(this.options.selectionType === 'filter')
+  				action = this.getCheckbox(item);
+  			else if(this.options.selectionType === 'choice') 
+  				action = this.getRadio(item);
   				
   			if(action)  {	
   			
@@ -207,45 +272,46 @@ function MDCTree(element, opts) {
   					// //////////////////////////////////////////////
   					// Update item  and throws the events	
   					// //////////////////////////////////////////////
-  					updateItemState(item);
+  					_this.updateItemState(item);
   					
-  					if(options.selectionType === 'filter') {
+  					if(_this.options.selectionType === 'filter') {
   						// Add events if action is a checkbox  						
   							  						
   						// //////////////////////////////////////////////
   						// Update all children and throws the events	
   						// //////////////////////////////////////////////
-  						updateChildrenState(item);
+  						_this.updateChildrenState(item);
 						
 						// //////////////////////////////////////////////
 						// Update all parents and throws the events		
 						// //////////////////////////////////////////////
-						updateParentsState(item);  						
+						_this.updateParentsState(item);  						
   							
-  					} else if(options.selectionType === 'choice') {
+  					} else if(_this.options.selectionType === 'choice') {
   						// Add events if action is a radio button
   						
   						if(item.selected) {  						
   							// Notify last selected item that who is unselected  						
-  							if(last_selected_item){
-  								var last_selected_index = jQuery.inArray(last_selected_item, MDCTree.data);
-								MDCTree.data[last_selected_index].selected = false;
-								if(last_selected_item.onUnselect)
-  									last_selected_item.onUnselect();  								
-  								}
+  							if(_this.last_selected_item){
+  								var last_selected_index = jQuery.inArray(_this.last_selected_item, _this.data);
+								_this.data[last_selected_index].selected = false;
+								if(_this.last_selected_item.onUnselect)
+  									_this.last_selected_item.onUnselect();  								
+  							}
   						
-  							last_selected_item = item;
+  							_this.last_selected_item = item;
   						} else {
-  							if(last_selected_item && last_selected_item.id === item.id)
-  								last_selected_item = null
+  							if(_this.last_selected_item && _this.last_selected_item.id === item.id)
+  								_this.last_selected_item = null
   						}
   					}  						  							
   				});  				
   				
-  				if(last_selected_item)	  	
-  					item.selected = last_selected_item.id === item.id;  					  				
+  				if(this.last_selected_item) {	  	
+  					item.selected = this.last_selected_item.id === item.id;  					  				
+				}
 				// Set type of action, it's necessary because of css file				  					  					
-  				action.setAttribute('type', options.selectionType);
+  				action.setAttribute('type', this.options.selectionType);
   				// Select the item if it's selected
   				$(li_header).find('input').prop('checked', item.selected);	 
   			
@@ -255,21 +321,17 @@ function MDCTree(element, opts) {
   		li_header.appendChild(span);  		
   		li.appendChild(li_header);
   		
-  		// Apply text filter  			
-  		var defined_text_filter = textFilter && textFilter.length > 0;
-  		var has_text_filter = hasTextFilter(item);
-		var has_child_with_text_filter = hasChildWithTextFilter(item);		
-  		
-  		console.log('---------------------------------');
-  		console.log('Item: ' + item.name);
-  		console.log('defined_text_filter: ' + defined_text_filter);
-  		console.log('has_text_filter: ' + has_text_filter);
-  		console.log('has_child_with_text_filter: ' + has_child_with_text_filter);
+  		// //////////////////////////////////////////////////////////////////////////
+  		// Apply text filter
+  		// //////////////////////////////////////////////////////////////////////////  	
+  		var defined_text_filter = this.textFilter && this.textFilter.length > 0;
+  		var has_text_filter = this.hasTextFilter(item);
+		var has_child_with_text_filter = this.hasChildWithTextFilter(item);		
   		
   		if(has_text_filter && defined_text_filter)
-  			span.classList.add('mdc-tree--filter-text');
+  			span.classList.add(this.options.filteredTextClass);
   		else 
-  			span.classList.remove('mdc-tree--filter-text');
+  			span.classList.remove(this.options.filteredTextClass);
   		
   		if(has_text_filter || has_child_with_text_filter || !defined_text_filter)
   			$(li).css('display','');
@@ -282,16 +344,17 @@ function MDCTree(element, opts) {
 	/**
 	* Select a list of items
 	*/
-	function select(itemsToSelect) {
-	
-		if(options.selectionType === 'filter') {
-	
+	this.select = function (itemsToSelect) {
+		if(this.options.selectionType === 'filter') {
+			const _this = this;
 			const toSelectArray = [];
+			
 			itemsToSelect.forEach(function(item){
+			
 				if(item.parent) {
 			
 					// List all parents 
-					var itemParents = getAllParents(item.parent);
+					var itemParents = _this.getAllParents(item.parent);
 					// Verifies if any parent will be selected
 					var hasParentToSelect = itemParents.some(function(parent){
 						return itemsToSelect.includes(parent);
@@ -312,39 +375,39 @@ function MDCTree(element, opts) {
 			
 				// If the developer did not set to true, I do it
 				item.selected = true;
-		
+				
 				// //////////////////////////////////////////////
   				// Update item  and throws the events	
   				// //////////////////////////////////////////////
-  				updateItemState(item);
-		
+  				_this.updateItemState(item);
+				
 				// //////////////////////////////////////////////
   				// Update all children and throws the events	
   				// //////////////////////////////////////////////
-  				updateChildrenState(item);
-						
+  				_this.updateChildrenState(item);
+				
 				// //////////////////////////////////////////////
 				// Update all parents and throws the events		
 				// //////////////////////////////////////////////
-				updateParentsState(item);  	
+				_this.updateParentsState(item);  	
 			
 			});
 			
-		} else if(options.selectionType === 'choice' && itemsToSelect.length > 0) {
+		} else if(this.options.selectionType === 'choice' && itemsToSelect.length > 0) {
 			// //////////////////////////////////////////////
   			// Update item  and throws the events	
   			// //////////////////////////////////////////////
   			itemsToSelect[0].selected = true;
-  			updateItemState(itemsToSelect[0]);
+  			this.updateItemState(itemsToSelect[0]);
 		}
 	}
 	
 	/**
-	* Unselect a list of items
+	* Unselect all list of items
 	*/
-	function unselect(itemsToUnselect) {
-		
-		if(options.selectionType === 'filter') {
+	this.unselect = function (itemsToUnselect) {
+	
+		if(this.options.selectionType === 'filter') {
 		
 			itemsToUnselect.forEach(function(item){
 				// If the developer did not set to false, I do it
@@ -353,17 +416,17 @@ function MDCTree(element, opts) {
 				// //////////////////////////////////////////////
   				// Update item  and throws the events	
   				// //////////////////////////////////////////////
-  				updateItemState(item);
+  				this.updateItemState(item);
 		
 				// //////////////////////////////////////////////
   				// Update all children and throws the events	
   				// //////////////////////////////////////////////
-  				updateChildrenState(item);	
+  				this.updateChildrenState(item);	
 						
 				// //////////////////////////////////////////////
 				// Update all parents and throws the events		
 				// //////////////////////////////////////////////
-				updateParentsState(item);
+				this.updateParentsState(item);
 			});	
 		
 		} else if(options.selectionType === 'choice' && itemsToSelect.length > 0) {
@@ -374,97 +437,100 @@ function MDCTree(element, opts) {
 				// //////////////////////////////////////////////
   				// Update item  and throws the events	
   				// //////////////////////////////////////////////
-  				updateItemState(item);
+  				this.updateItemState(item);
 			});	
-		}
+		}	
+	}
 	
+	/**
+	* Expand all items
+	*/
+	this.expandAll = function() {		
+		var count = 0;
+		do {			
+  			$(this.root).find('.' + this.options.expandClass).click();
+  			count = $(this.root).find('.' + this.options.expandClass).length;
+  			console.log('to click: ' + count);
+		} while(count > 0);		
 	}
 
 	/**
 	* Expand event
 	* It's called when you click at arrow
 	*/
-	function expand(event) {
-  		event.preventDefault();
-  		event.stopPropagation();
-  		const et = event.target,
-        	parent = et.parentElement.parentElement,
-        	id = parent.id.replace('item-', ''),
-        	kids = getChildren(id),
-        	items = kids.map(generateListItem),
+	this.expand = function (item, element, parent) {
+  		const _this = this, 
+  			id = parent.id.replace('item-', ''),
+        	kids = this.getChildren(id),
+        	items = this.toDraw(kids),
         	ul = document.createElement('ul');
   		items.forEach(function(li) {
     		ul.appendChild(li);
   		});
 		parent.appendChild(ul);
-		et.classList.remove(expand_class);
-		et.classList.add(collapse_class);
-		et.textContent = collapse_icon;
-		et.removeEventListener('click', expand);
-		et.addEventListener('click', collapse);
+		element.classList.remove(this.options.expandClass);
+		element.classList.add(this.options.collapseClass);
+		element.textContent = this.options.collapseIcon;
 	}
 
 	/**
 	* Collapse event
 	* It's called when you click at arrow
 	*/
-	function collapse(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		const et = event.target,
-		      parent = et.parentElement.parentElement,
-		      ul = parent.querySelector('ul');        
+	this.collapse = function (item, element, parent) {
+  		const ul = parent.querySelector('ul');        
 		parent.removeChild(ul);
-		et.classList.remove(collapse_class);
-		et.classList.add(expand_class);
-		et.textContent = expand_icon;
-		et.removeEventListener('click', collapse);
-		et.addEventListener('click', expand);
+		element.classList.remove(this.options.collapseClass);
+		element.classList.add(this.options.expandClass);
+		element.textContent = this.options.expandIcon;
 	}
 	
-	function hasTextFilter(item){
-		var defined_text_filter = textFilter && textFilter.length > 0;
-		return defined_text_filter && item.name && item.name.toLowerCase().indexOf(textFilter.toLowerCase()) > -1;
+	this.hasTextFilter = function (item){
+		var defined_text_filter = this.textFilter && this.textFilter.length > 0;
+		return defined_text_filter && item.name && item.name.toLowerCase().indexOf(this.textFilter.toLowerCase()) > -1;
 	}
 	
-	function hasChildWithTextFilter(item){
-		return getAllChildren(item.id).some(function(child) {
-    		return hasTextFilter(child);
+	this.hasChildWithTextFilter = function (item){
+		const _this = this;
+		return this.getAllChildren(item.id).some(function(child) {
+    		return _this.hasTextFilter(child);
   		});
 	}
 	
 	/**
 	* Update item and throws the events
 	*/
-	function updateItemState(item){
-		var item_index = jQuery.inArray(item, MDCTree.data);
-  		MDCTree.data[item_index].selected = item.selected;
+	this.updateItemState = function (item){
+		var item_index = jQuery.inArray(item, this.data);
+  		this.data[item_index].selected = item.selected;
   				 	
   		// Throw the event 	
-  		if(item.onSelect && selected) 
+  		if(item.onSelect && item.selected) 
   			item.onSelect();  							
-  		else if	(item.onUnselect && !selected) 
+  		else if	(item.onUnselect && !item.selected) 
   			item.onUnselect();	
 	}
 	
 	/**
 	* Update all children and throws the events
 	*/
-	function updateChildrenState(item){
+	this.updateChildrenState = function (item){
 	
 		if(!item || !item.id)
 			return;	
 		
+		const _this = this; 
+		
   		$('#item-' + item.id).find('ul input').prop('checked', item.selected);
-  		getAllChildren(item.id).forEach(function(child){  		
+  		this.getAllChildren(item.id).forEach(function(child){  		
   							
 			// Update the itens								
-  			var child_index = jQuery.inArray(child, MDCTree.data);
-			MDCTree.data[child_index].selected = item.selected;
+  			var child_index = jQuery.inArray(child, _this.data);
+			_this.data[child_index].selected = item.selected;
 			// Throw the events
-			if(child.onSelect && selected) 
+			if(child.onSelect && item.selected) 
   				child.onSelect();  							
-  			else if(child.onUnselect && !selected) 
+  			else if(child.onUnselect && !item.selected) 
   				child.onUnselect();
   													
 		});
@@ -473,17 +539,19 @@ function MDCTree(element, opts) {
 	/**
 	* Update all children and throws the events
 	*/
-	function updateParentsState(item){
+	this.updateParentsState = function (item){
 
 		if(!item || !item.parent)
 			return;	
 	
-		getAllParents(item.parent).forEach(function(parent){
+		const _this = this; 
+		
+		this.getAllParents(item.parent).forEach(function(parent){
 		  				
-  			var parentIsSelected = item.selected && !hasUnselectedChildren(parent.id);			
+  			var parentIsSelected = item.selected && !_this.hasUnselectedChildren(parent.id);			
   			// Update the itens								
-  			var parent_index = jQuery.inArray(parent, MDCTree.data);
-			MDCTree.data[parent_index].selected = parentIsSelected;		
+  			var parent_index = jQuery.inArray(parent, _this.data);
+			_this.data[parent_index].selected = parentIsSelected;		
 			// Throws the events
 			if(parent.onSelect && parentIsSelected) 
   				parent.onSelect();  							
@@ -500,10 +568,10 @@ function MDCTree(element, opts) {
 	/**
 	* Create a checkbox for filter type
 	*/
-	function getCheckbox(item){		
+	this.getCheckbox = function (item){		
 		var checkbox = document.createElement('div');
     	checkbox.classList.add('mdc-checkbox');
-    	checkbox.classList.add(action_class);
+    	checkbox.classList.add(this.options.selectorClass);
     	
     	var input = document.createElement('input');
     	input.classList.add('mdc-checkbox__native-control');
@@ -537,16 +605,16 @@ function MDCTree(element, opts) {
 	/**
 	* Create a radio button for choice type
 	*/
-	function getRadio(item){		
+	this.getRadio = function (item){		
 		var radio = document.createElement('div');
     	radio.classList.add('mdc-radio');
-    	radio.classList.add(action_class);
+    	radio.classList.add(this.options.selectorClass);
     	
     	var input = document.createElement('input');
     	input.classList.add('mdc-radio__native-control');
     	input.setAttribute('id', 'radio_' + item.id);
     	input.setAttribute('type', 'radio');
-    	input.setAttribute('name', root.getAttribute('id'));
+    	input.setAttribute('name', this.root.getAttribute('id'));
     	radio.appendChild(input);
     	
 		var radio__background = document.createElement('div');

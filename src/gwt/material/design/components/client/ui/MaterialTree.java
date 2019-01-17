@@ -26,9 +26,12 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.Random;
 
+import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.constants.TreeType;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.tree.js.JsItem;
 import gwt.material.design.components.client.ui.misc.tree.js.JsOptions;
@@ -38,13 +41,13 @@ import gwt.material.design.components.client.ui.misc.tree.js.JsOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialTree extends Div {
+public class MaterialTree extends Div implements HasType<TreeType> {
 
 	protected final JsOptions options = new JsOptions();
-	
+
 	public MaterialTree() {
 		super(CssName.MDC_TREE);
-		options.selectionType = "choice";
+		options.selectionType = "filter";
 	}
 
 	@Override
@@ -57,25 +60,26 @@ public class MaterialTree extends Div {
 		super.onInitialize();
 
 		setData(generateData_forTest());
+		
 	}
 
 	protected JsItem[] generateData_forTest() {
 
-		final int count = 20;
+		final int count = 1000;
 		final List<JsItem> items = new LinkedList<>();
 
 		for (int i = 0; i < count; i++) {
 
-			final JsItem  item = new JsItem();
+			final JsItem item = new JsItem();
 			item.id = "item_" + i;
 			item.name = "Item " + i;
-			//item.onClick = onClick(item);
-			//item.onSelect = onSelect(item);
-			//item.onUnselect = onUnselect(item);
+			// item.onClick = onClick(item);
+			// item.onSelect = onSelect(item);
+			// item.onUnselect = onUnselect(item);
 			// Checkbox
 			item.selected = i == 1;
 			// Radio button
-			//item.action = "choice";
+			// item.action = "choice";
 
 			final int parent = Random.nextInt(i);
 
@@ -88,29 +92,45 @@ public class MaterialTree extends Div {
 		return items.stream().toArray(JsItem[]::new);
 	}
 
-	protected native JavaScriptObject onClick(final JsItem item) /*-{
-		return function() {
-			console.log('click on: ' + item.name);
-		};
-	}-*/;
-
-	protected native JavaScriptObject onSelect(final JsItem item) /*-{
-		return function() {
-			console.log('select on: ' + item.name);
-		};
-	}-*/;
-
-	protected native JavaScriptObject onUnselect(final JsItem item) /*-{
-		return function() {
-			console.log('unselect on: ' + item.name);
-		};
-	}-*/;
-
 	protected native void setData(final JsItem[] data)/*-{
 		var tree = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
 		if (tree)
 			tree.setData(data);
 	}-*/;
+
+	protected native void setOptions(final JsOptions options)/*-{
+		this.@gwt.material.design.components.client.ui.MaterialTree::options = options;
+		var tree = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (tree)
+			tree.setOptions(options);
+	}-*/;
+
+	public native void filter(final String text)/*-{
+		var tree = this.@gwt.material.design.components.client.base.widget.MaterialWidget::jsElement;
+		if (tree)
+			tree.filter(text);
+	}-*/;
+	
+	public void setExpandIcon(final IconType icon) {
+		options.expandIcon = icon.getCssName();
+		setOptions(options);
+	}
+	
+	public void setCollapseIcon(final IconType icon) {
+		options.collapseIcon = icon.getCssName();
+		setOptions(options);
+	}
+
+	@Override
+	public void setType(final TreeType type) {
+		options.selectionType = type.getCssName();
+		setOptions(options);
+	}
+	
+	@Override
+	public TreeType getType() {
+		return TreeType.fromStyleName(options.selectionType);
+	}
 	
 	public void filter(final String filter) {
 		
@@ -119,6 +139,8 @@ public class MaterialTree extends Div {
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_RADIO_BUTTON__UNCHECKED_COLOR, color.getCssName());
 	}
 
 	@Override
@@ -128,6 +150,8 @@ public class MaterialTree extends Div {
 
 	public void setHoverColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__HOVER_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
+		setCssProperty(CssMixin.MDC_RADIO_BUTTON__CHECKED_COLOR, color.getCssName());
 	}
 
 	public void setOnHoverColor(Color color) {
