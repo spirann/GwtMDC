@@ -140,6 +140,7 @@
   	/* Checkbox attributes				*/
   	/* ================================ */
 	--mdc-checkbox-checked-color: var(--mdc-theme-secondary);
+	--mdc-checkbox-on-checked-color: var(--mdc-theme-on-secondary);
 	--mdc-checkbox-unchecked-color: var(--mdc-theme-text-secondary-on-background);
 	--mdc-checkbox-label-color: var(--mdc-theme-text-primary-on-background);
   	
@@ -233,8 +234,8 @@
 	/* ================================ */
   	/* Tree attributes					*/
   	/* ================================ */
-	--mdc-tree--ink-color: var(--mdc-theme-on-surface);	
-  	--mdc-tree--fill-color: var(--mdc-theme-surface);
+	--mdc-tree--ink-color: var(--mdc-theme-text-primary-on-background);	
+  	--mdc-tree--fill-color: var(--mdc-theme-background);
   	--mdc-tree--hover-color: var(--mdc-theme-secondary);
   	--mdc-tree--hover-ink-color: var(--mdc-theme-on-secondary);
   	

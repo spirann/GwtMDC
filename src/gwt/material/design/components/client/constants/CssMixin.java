@@ -100,6 +100,7 @@ public interface CssMixin {
 	// Checkbox
 	// ////////////////////////////////////////////////////////////////////////////
 	String MDC_CHECKBOX__CHECKED_COLOR = "--mdc-checkbox-checked-color";
+	String MDC_CHECKBOX__ON_CHECKED_COLOR = "--mdc-checkbox-on-checked-color";
 	String MDC_CHECKBOX__UNCHECKED_COLOR = "--mdc-checkbox-unchecked-color";
 	String MDC_CHECKBOX__LABEL_COLOR = "--mdc-checkbox-label-color";
 

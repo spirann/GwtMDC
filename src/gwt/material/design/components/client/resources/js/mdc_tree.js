@@ -80,9 +80,9 @@ function MDCTree(element, options) {
     		const items = this.toDraw(orphansArray),
         	ul = document.createElement('ul');
     		items.forEach(function(li) {
-      			ul.appendChild(li);
+      			$(ul).append(li);
     		});
-    		this.root.appendChild(ul);
+    		$(this.root).append(ul);
   		}
   		
   		// Atualiza os items selecionados
@@ -218,30 +218,30 @@ function MDCTree(element, options) {
   		const li_header = document.createElement('div');
   		
   		const span = document.createElement('span');
-  		span.classList.add(this.options.nameClass);
-  		span.innerHTML = item.name;
+  		$(span).addClass(this.options.nameClass);
+  		$(span).html(item.name);
   	
   		if (this.hasChildren(item.id)) {
   		
     		const a = document.createElement('i');
     		a.href = '#';
-    		a.textContent = this.options.expandIcon;
-    		a.classList.add(this.options.expandClass);
-    		a.addEventListener('click', function(){
+    		$(a).html(this.options.expandIcon);
+    		$(a).addClass(this.options.expandClass);
+    		$(a).click(function(){
     			if($(a).hasClass(_this.options.expandClass))
     				_this.expand(item, a, li);
     			else if($(a).hasClass(_this.options.collapseClass))
-    				_this.expand(item, a, li);
+    				_this.collapse(item, a, li);
     		});
-    		li_header.appendChild(a);
+    		$(li_header).append(a); 
     		
-    		span.addEventListener('dblclick', function(){
-    			a.click();
+    		$(span).dblclick(function(){
+    			$(a).click();
     		});
   		}
   		
   		if(item.onClick)
-  			span.addEventListener('click', item.onClick);
+  			$(span).click(item.onClick);
   		
   		if(this.options.selectionType) {
   			
@@ -256,7 +256,7 @@ function MDCTree(element, options) {
   			if(action)  {	
   			
   				// Append the action element
-  				li_header.appendChild(action);		
+  				$(li_header).append(action);  
   				
   				// It is to remoe the focus after the click
   				// and remove the waves circle
@@ -311,15 +311,15 @@ function MDCTree(element, options) {
   					item.selected = this.last_selected_item.id === item.id;  					  				
 				}
 				// Set type of action, it's necessary because of css file				  					  					
-  				action.setAttribute('type', this.options.selectionType);
+  				$(action).attr('type', this.options.selectionType);
   				// Select the item if it's selected
   				$(li_header).find('input').prop('checked', item.selected);	 
   			
   			}
   		}
   		
-  		li_header.appendChild(span);  		
-  		li.appendChild(li_header);
+  		$(li_header).append(span);  		
+  		$(li).append(li_header);
   		
   		// //////////////////////////////////////////////////////////////////////////
   		// Apply text filter
@@ -329,9 +329,9 @@ function MDCTree(element, options) {
 		var has_child_with_text_filter = this.hasChildWithTextFilter(item);		
   		
   		if(has_text_filter && defined_text_filter)
-  			span.classList.add(this.options.filteredTextClass);
+  			$(span).addClass(this.options.filteredTextClass);
   		else 
-  			span.classList.remove(this.options.filteredTextClass);
+  			$(span).removeClass(this.options.filteredTextClass);
   		
   		if(has_text_filter || has_child_with_text_filter || !defined_text_filter)
   			$(li).css('display','');
@@ -450,7 +450,6 @@ function MDCTree(element, options) {
 		do {			
   			$(this.root).find('.' + this.options.expandClass).click();
   			count = $(this.root).find('.' + this.options.expandClass).length;
-  			console.log('to click: ' + count);
 		} while(count > 0);		
 	}
 
@@ -465,12 +464,12 @@ function MDCTree(element, options) {
         	items = this.toDraw(kids),
         	ul = document.createElement('ul');
   		items.forEach(function(li) {
-    		ul.appendChild(li);
+			$(ul).append(li);
   		});
-		parent.appendChild(ul);
-		element.classList.remove(this.options.expandClass);
-		element.classList.add(this.options.collapseClass);
-		element.textContent = this.options.collapseIcon;
+		$(parent).append(ul);
+		$(element).removeClass(this.options.expandClass);
+		$(element).addClass(this.options.collapseClass);
+		$(element).html(this.options.collapseIcon);
 	}
 
 	/**
@@ -478,11 +477,10 @@ function MDCTree(element, options) {
 	* It's called when you click at arrow
 	*/
 	this.collapse = function (item, element, parent) {
-  		const ul = parent.querySelector('ul');        
-		parent.removeChild(ul);
-		element.classList.remove(this.options.collapseClass);
-		element.classList.add(this.options.expandClass);
-		element.textContent = this.options.expandIcon;
+  		$(parent).find('ul').remove();
+		$(element).removeClass(this.options.collapseClass);
+		$(element).addClass(this.options.expandClass);
+		$(element).html(this.options.expandIcon);
 	}
 	
 	this.hasTextFilter = function (item){
@@ -570,34 +568,35 @@ function MDCTree(element, options) {
 	*/
 	this.getCheckbox = function (item){		
 		var checkbox = document.createElement('div');
-    	checkbox.classList.add('mdc-checkbox');
-    	checkbox.classList.add(this.options.selectorClass);
+    	$(checkbox).addClass('mdc-checkbox');
+    	$(checkbox).addClass(this.options.selectorClass);
     	
     	var input = document.createElement('input');
-    	input.classList.add('mdc-checkbox__native-control');
-    	input.setAttribute('id', 'chk_' + item.id);
-    	input.setAttribute('type', 'checkbox');
-    	checkbox.appendChild(input);
+    	$(input).addClass('mdc-checkbox__native-control');
+    	$(input).attr('id', 'chk_' + item.id);
+    	$(input).attr('type', 'checkbox');
+    	$(checkbox).append(input);
     	
 		var checkbox__background = document.createElement('div');
-    	checkbox__background.classList.add('mdc-checkbox__background');
-    	checkbox.appendChild(checkbox__background);
+    	$(checkbox__background).addClass('mdc-checkbox__background');    	
+    	$(checkbox).append(checkbox__background);
     	
 		var checkbox__checkmark = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    	checkbox__checkmark.classList.add('mdc-checkbox__checkmark');
-    	checkbox__checkmark.setAttribute('viewBox', '0 0 24 24');
-    	checkbox__background.appendChild(checkbox__checkmark);
+    	$(checkbox__checkmark).addClass('mdc-checkbox__checkmark');
+    	$(checkbox__checkmark).attr('viewBox', '0 0 24 24');
+    	$(checkbox__background).append(checkbox__checkmark);
     	
     	var checkbox__checkmark_path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    	checkbox__checkmark_path.classList.add('mdc-checkbox__checkmark-path');
-    	checkbox__checkmark_path.setAttribute('fill', 'none');
-    	checkbox__checkmark_path.setAttribute('stroke', 'white');
-    	checkbox__checkmark_path.setAttribute('d', 'M1.73,12.91 8.1,19.28 22.79,4.59');
-    	checkbox__checkmark.appendChild(checkbox__checkmark_path);
+    	$(checkbox__checkmark_path).addClass('mdc-checkbox__checkmark-path');
+    	$(checkbox__checkmark_path).attr('fill', 'none');
+    	$(checkbox__checkmark_path).css('stroke', 'var(--mdc-checkbox-on-checked-color)');
+    	$(checkbox__checkmark_path).attr('d', 'M1.73,12.91 8.1,19.28 22.79,4.59');
+    	$(checkbox__checkmark).append(checkbox__checkmark_path);
     	
     	var checkbox__mixedmark = document.createElement('div');
-    	checkbox__mixedmark.classList.add('mdc-checkbox__mixedmark');
-    	checkbox__background.appendChild(checkbox__mixedmark);
+    	$(checkbox__mixedmark).addClass('mdc-checkbox__mixedmark');
+    	$(checkbox__mixedmark).css('border-color', 'var(--mdc-checkbox-on-checked-color)');
+    	$(checkbox__background).append(checkbox__mixedmark);
     	
     	return checkbox;
 	}
@@ -607,27 +606,27 @@ function MDCTree(element, options) {
 	*/
 	this.getRadio = function (item){		
 		var radio = document.createElement('div');
-    	radio.classList.add('mdc-radio');
-    	radio.classList.add(this.options.selectorClass);
+    	$(radio).addClass('mdc-radio');
+    	$(radio).addClass(this.options.selectorClass);
     	
     	var input = document.createElement('input');
-    	input.classList.add('mdc-radio__native-control');
-    	input.setAttribute('id', 'radio_' + item.id);
-    	input.setAttribute('type', 'radio');
-    	input.setAttribute('name', this.root.getAttribute('id'));
-    	radio.appendChild(input);
+    	$(input).addClass('mdc-radio__native-control');
+    	$(input).attr('id', 'radio_' + item.id);
+    	$(input).attr('type', 'radio');
+    	$(input).attr('name', this.root.getAttribute('id'));
+    	$(radio).append(input);
     	
 		var radio__background = document.createElement('div');
-    	radio__background.classList.add('mdc-radio__background');
-    	radio.appendChild(radio__background);
+    	$(radio__background).addClass('mdc-radio__background');
+    	$(radio).append(radio__background);
     	
 		var radio__outer_circle = document.createElement('div');
-    	radio__outer_circle.classList.add('mdc-radio__outer-circle');
-    	radio__background.appendChild(radio__outer_circle);
+    	$(radio__outer_circle).addClass('mdc-radio__outer-circle');
+    	$(radio__background).append(radio__outer_circle);
     	
     	var radio__inner_circle = document.createElement('div');
-    	radio__inner_circle.classList.add('mdc-radio__inner-circle');
-    	radio__background.appendChild(radio__inner_circle);
+    	$(radio__inner_circle).addClass('mdc-radio__inner-circle');
+    	$(radio__background).append(radio__inner_circle);
     	
     	return radio;
 	}

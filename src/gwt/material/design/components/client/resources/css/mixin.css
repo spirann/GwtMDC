@@ -295,6 +295,8 @@ i.mdc-list-item__graphic {
 .mdc-checkbox__background::before,
 .mdc-checkbox::before, .mdc-checkbox::after {
     background-color: var(--mdc-checkbox-checked-color); }
+.mdc-checkbox__mixedmark {
+	border-color: var(--mdc-checkbox-on-checked-color);}    
 .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
 .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
 	border-color: var(--mdc-checkbox-checked-color);
@@ -341,6 +343,8 @@ i.mdc-list-item__graphic {
     background-color: transparent; } }	
     
 /* Disabled settings */ 
+[disabled] .mdc-checkbox__mixedmark {
+	filter: invert(.5) grayscale(100%);}
 
 /* ==========================================================================
    Switch

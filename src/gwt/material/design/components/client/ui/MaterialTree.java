@@ -135,8 +135,6 @@ public class MaterialTree extends Div implements HasType<TreeType> {
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__INK_COLOR, color.getCssName());
-		setCssProperty(CssMixin.MDC_CHECKBOX__UNCHECKED_COLOR, color.getCssName());
-		setCssProperty(CssMixin.MDC_RADIO_BUTTON__UNCHECKED_COLOR, color.getCssName());
 	}
 
 	@Override
@@ -146,8 +144,6 @@ public class MaterialTree extends Div implements HasType<TreeType> {
 
 	public void setHoverColor(Color color) {
 		setCssProperty(CssMixin.MDC_TREE__HOVER_COLOR, color.getCssName());
-		setCssProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
-		setCssProperty(CssMixin.MDC_RADIO_BUTTON__CHECKED_COLOR, color.getCssName());
 	}
 
 	public void setOnHoverColor(Color color) {

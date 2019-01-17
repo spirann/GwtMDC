@@ -83,8 +83,8 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 
 		checkbox.setBorderRadius(BorderRadius.CIRCLE);
 
-		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());
-
+		checkmark.setResource(MaterialResources.INSTANCE.mdcCheckboxCheckmark());		
+		
 		background.add(checkmark);
 		background.add(mixedmark);
 
@@ -141,6 +141,10 @@ public class MaterialCheckbox extends MaterialSelectedField implements HasText, 
 
 	public void setSelectedColor(final Color color) {
 		setCssProperty(CssMixin.MDC_CHECKBOX__CHECKED_COLOR, color.getCssName());
+	}
+	
+	public void setOnSelectedColor(final Color color) {
+		setCssProperty(CssMixin.MDC_CHECKBOX__ON_CHECKED_COLOR, color.getCssName());
 	}
 
 	public void setUnselectedColor(final Color color) {

@@ -807,7 +807,16 @@
 	color: var(--mdc-tree--ink-color);
 	background-color: var(--mdc-tree--fill-color);
 	font-size: .75rem;
-	border-radius: var(--mdc-rounded-border-radius);}
+	border-radius: var(--mdc-rounded-border-radius);
+	/* Checkbox settings */
+	--mdc-checkbox-checked-color: var(--mdc-tree--hover-color);
+	--mdc-checkbox-on-checked-color: var(--mdc-tree--hover-ink-color);
+	--mdc-checkbox-unchecked-color: var(--mdc-tree--ink-color);
+	--mdc-checkbox-label-color: var(--mdc-tree--ink-color);
+	/* Radio button settings */
+	--mdc-radio-checked-color: var(--mdc-tree--hover-color);
+	--mdc-radio-unchecked-color: var(--mdc-tree--ink-color);
+	--mdc-radio-label-color: var(--mdc-tree--ink-color);}
 
 .mdc-tree--filtered-text {
 	color: var(--mdc-tree--hover-ink-color);
