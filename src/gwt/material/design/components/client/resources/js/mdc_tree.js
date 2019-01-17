@@ -30,8 +30,12 @@ function MDCTree(element, options) {
 	    	collapseIcon : 'expand_more',
 			// Class  for to name element
 			nameClass : 'mdc-tree--name',
-			//
-			maxToAutoExpand : 10
+			// Limit of filtered items to expand
+			maxToAutoExpand : 10,
+			// Event for selection action
+			onSelect : null,
+			// Event for filter action
+			onFilter : null
 		};
 
     	this.root = element;	
@@ -44,7 +48,7 @@ function MDCTree(element, options) {
 	* Set data
 	*/   
     this.setData = function (data) {
-    	this.last_selected_item = null;    	
+    	this.clear(); 	
     	this.data = data;
     	this.draw();
 	}
@@ -53,7 +57,14 @@ function MDCTree(element, options) {
 	* Set data
 	*/   
     this.setOptions = function (options) {
-    	this.options = options;
+    
+    	// Clear selected items
+	   	if(this.options.selectionType !== options.selectionType){
+    		this.unselectAll();
+    		this.last_selected_item = null;   
+    	}
+    		
+    	this.options = $.extend(defaults, options);
 		this.draw();
 	}
 	
@@ -67,6 +78,18 @@ function MDCTree(element, options) {
     	
     	if(count > 0 && count <= this.options.maxToAutoExpand) 
     		this.expandAll();
+    		
+    	if(this.options.onFilter)
+    		this.options.onFilter();	
+	}
+	
+	/**
+	* Remove all data
+	*/
+	this.clear = function () {
+    	$(this.root).empty();
+    	this.data = [];
+    	this.last_selected_item = null;    	
 	}
 		
 	/**
@@ -86,13 +109,13 @@ function MDCTree(element, options) {
   		}
   		
   		// Atualiza os items selecionados
-  		this.select(this.getSelectedItems());
+  		this.select(this.getSelectedItems());		
   		
   		// Open first level
   		// Do not open all levels, because it`s slow 
   		$(this.root).find('.' + this.options.expandClass).click();
 	}
-	
+
 	this.toDraw = function(items){
 		const _this = this;
 		return items.filter(function(item){
@@ -260,7 +283,7 @@ function MDCTree(element, options) {
   				
   				// It is to remoe the focus after the click
   				// and remove the waves circle
-  				action.addEventListener('click', function(){
+  				$(action).click(function(){
   					document.activeElement.blur();	
   				});
   				
@@ -304,7 +327,9 @@ function MDCTree(element, options) {
   							if(_this.last_selected_item && _this.last_selected_item.id === item.id)
   								_this.last_selected_item = null
   						}
-  					}  						  							
+  					}  	
+  					
+  					_this.notifySelection();				  							
   				});  				
   				
   				if(this.last_selected_item) {	  	
@@ -328,17 +353,25 @@ function MDCTree(element, options) {
   		var has_text_filter = this.hasTextFilter(item);
 		var has_child_with_text_filter = this.hasChildWithTextFilter(item);		
   		
-  		if(has_text_filter && defined_text_filter)
-  			$(span).addClass(this.options.filteredTextClass);
-  		else 
-  			$(span).removeClass(this.options.filteredTextClass);
+  		if(has_text_filter && defined_text_filter){
+			span.innerHTML = highlightsSearchedText(item.name, this.textFilter, this.options.filteredTextClass);
+  			//$(span).addClass(this.options.filteredTextClass);
+  		} 
   		
   		if(has_text_filter || has_child_with_text_filter || !defined_text_filter)
   			$(li).css('display','');
   		else
   			$(li).css('display','none');
-  		
+  		  		
   		return li;
+	}
+	
+	/**
+	* Select all items
+	*/
+	this.selectAll = function (){
+		this.select(this.orphans());
+		this.notifySelection();
 	}
 	
 	/**
@@ -399,15 +432,40 @@ function MDCTree(element, options) {
   			// //////////////////////////////////////////////
   			itemsToSelect[0].selected = true;
   			this.updateItemState(itemsToSelect[0]);
-		}
+		}		
+	}
+	
+	/**
+	* Unselect all items
+	*/
+	this.unselectAll = function (){
+		const _this = this;
+		this.orphans().forEach(function(item){
+		
+				// If the developer did not set to false, I do it
+				item.selected = false;
+				
+				// //////////////////////////////////////////////
+  				// Update item  and throws the events	
+  				// //////////////////////////////////////////////
+  				_this.updateItemState(item);
+		
+				// //////////////////////////////////////////////
+  				// Update all children and throws the events	
+  				// //////////////////////////////////////////////
+  				_this.updateChildrenState(item);	
+  				
+			});	
+		
+		this.notifySelection();
 	}
 	
 	/**
 	* Unselect all list of items
 	*/
 	this.unselect = function (itemsToUnselect) {
-	
-		if(this.options.selectionType === 'filter') {
+		const _this = this;
+		if(this.options.selectionType === 'filter' && itemsToUnselect) {
 		
 			itemsToUnselect.forEach(function(item){
 				// If the developer did not set to false, I do it
@@ -416,20 +474,20 @@ function MDCTree(element, options) {
 				// //////////////////////////////////////////////
   				// Update item  and throws the events	
   				// //////////////////////////////////////////////
-  				this.updateItemState(item);
+  				_this.updateItemState(item);
 		
 				// //////////////////////////////////////////////
   				// Update all children and throws the events	
   				// //////////////////////////////////////////////
-  				this.updateChildrenState(item);	
+  				_this.updateChildrenState(item);	
 						
 				// //////////////////////////////////////////////
 				// Update all parents and throws the events		
 				// //////////////////////////////////////////////
-				this.updateParentsState(item);
+				_this.updateParentsState(item);
 			});	
 		
-		} else if(options.selectionType === 'choice' && itemsToSelect.length > 0) {
+		} else if(options.selectionType === 'choice' && itemsToUnselect) {
 			itemsToUnselect.forEach(function(item){
 				// If the developer did not set to false, I do it
 				item.selected = false;
@@ -437,9 +495,14 @@ function MDCTree(element, options) {
 				// //////////////////////////////////////////////
   				// Update item  and throws the events	
   				// //////////////////////////////////////////////
-  				this.updateItemState(item);
+  				_this.updateItemState(item);
 			});	
-		}	
+		}
+	}
+	
+	this.notifySelection = function() {
+  		if(this.options.onSelect)
+  			this.options.onSelect();		
 	}
 	
 	/**
@@ -630,7 +693,40 @@ function MDCTree(element, options) {
     	
     	return radio;
 	}
-}
-
-
 	
+	function highlightsSearchedText(text, searchedText, highlightsClass) {
+	
+		const filter_lower = searchedText; 
+		const to_replace = [];
+		var html = text;
+		var name_lower = text.toLowerCase();
+		var name =text;
+		var indexOf = name_lower.indexOf(filter_lower);
+		var count = 0;
+		do {		
+			var finded = name.substring(indexOf, indexOf + filter_lower.length);			
+			if(!to_replace.includes(finded)){
+				var re = new RegExp(finded, 'g');
+				html = html.replace(re, indexToRemove(count));
+				to_replace.push(finded);
+				count++;
+			}			
+			name_lower = name_lower.substring(indexOf + filter_lower.length);
+			name = name.substring(indexOf + filter_lower.length);		
+			indexOf = name_lower.indexOf(filter_lower);						
+		}	while(indexOf > -1);
+
+		for(var i = 0; i < to_replace.length; i++){
+			var finded = indexToRemove(i);
+			var re = new RegExp(finded, 'g');
+			html = html.replace(re, '<span class=" '+ highlightsClass + '">' + to_replace[i] + '</span>');
+		}		
+		
+		return html;
+	} 
+	
+	function indexToRemove(index){
+		return '_remove_' + index + '_remove_';
+	}
+	
+}

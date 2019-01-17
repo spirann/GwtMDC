@@ -818,10 +818,9 @@
 	--mdc-radio-unchecked-color: var(--mdc-tree--ink-color);
 	--mdc-radio-label-color: var(--mdc-tree--ink-color);}
 
-.mdc-tree--filtered-text {
+.mdc-tree--filtered-text   {
 	color: var(--mdc-tree--hover-ink-color);
-	background-color: var(--mdc-tree--hover-color);
-}
+	background-color: var(--mdc-tree--hover-color);}
 
 .mdc-tree:not([dir=rtl]) {
   	padding-right: 16px;}
@@ -860,7 +859,9 @@
 .mdc-tree ul li .mdc-tree--name {
 	vertical-align: middle;
 	cursor: pointer;
-	border-radius: var(--mdc-rounded-border-radius);}
+	border-radius: var(--mdc-rounded-border-radius);
+	padding-left: 2px;
+	padding-right: 2px;}
 
  .mdc-tree--selector {
  	margin: 0; }

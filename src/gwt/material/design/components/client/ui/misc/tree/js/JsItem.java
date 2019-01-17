@@ -22,6 +22,9 @@ public class JsItem {
 	public boolean selected;
 	
 	@JsProperty
+	public Object data;
+	
+	@JsProperty
 	public JavaScriptObject onClick;
 
 	@JsProperty
@@ -29,5 +32,5 @@ public class JsItem {
 
 	@JsProperty
 	public JavaScriptObject onUnselect;
-	
+
 }

@@ -891,6 +891,10 @@ i.mdc-list-item__graphic {
 .mdc-text-field input::-webkit-outer-spin-button,
 .mdc-text-field input::-webkit-inner-spin-button {
 	display: none;}
+
+.mdc-text-field-container .mdc-text-field,
+.mdc-text-field-container .mdc-text-field input {
+	width: 100%;}
 	
 .mdc-text-field:not(.mdc-text-field--disabled),
 .mdc-text-field::before, 

@@ -1,5 +1,7 @@
 package gwt.material.design.components.client.ui.misc.tree.js;
 
+import com.google.gwt.core.client.JavaScriptObject;
+
 import jsinterop.annotations.JsPackage;
 import jsinterop.annotations.JsProperty;
 import jsinterop.annotations.JsType;
@@ -26,4 +28,12 @@ public class JsOptions {
 	@JsProperty
 	public String collapseIcon;
 	
+	@JsProperty
+	public JavaScriptObject onSelect;
+	
+	@JsProperty
+	public JavaScriptObject onFilter;
+
+	@JsProperty
+	public int maxToAutoExpand;
 }
