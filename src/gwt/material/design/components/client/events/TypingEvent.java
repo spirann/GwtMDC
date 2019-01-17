@@ -24,27 +24,28 @@ import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.event.shared.HasHandlers;
 
-import gwt.material.design.components.client.events.FilterEvent.FilterHandler;
+import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class FilterEvent<V> extends GwtEvent<FilterHandler<V>> {
+public class TypingEvent extends GwtEvent<TypingHandler> {
 
-	public interface HasFilterHandlers<V> extends HasHandlers {
-		HandlerRegistration addFilterHandler(FilterHandler<V> handler);
+	public interface HasTypingHandlers extends HasHandlers {
+		HandlerRegistration addTypingHandler(TypingHandler handler);
+		public void setTypeingDelay(int typingDelay);
 	}
 	
-	public static interface FilterHandler<V> extends EventHandler {
-		void onFilter(FilterEvent<V> event);
+	public static interface TypingHandler extends EventHandler {
+		void onTyping(TypingEvent event);
 	}
 	
 	/**
 	 * Handler type.
 	 */
-	public static Type<FilterHandler<?>> TYPE;
+	public static Type<TypingHandler> TYPE;
 
 	
 	/**
@@ -55,11 +56,11 @@ public class FilterEvent<V> extends GwtEvent<FilterHandler<V>> {
 	 *            old value type
 	 * @param source
 	 *            the source of the handlers
-	 * @param value
+	 * @param text
 	 *            the value
 	 */
-	public static <V> void fire(HasFilterHandlers<V> source, final V value) {
-		source.fireEvent(new FilterEvent<V>(value));
+	public static  void fire(HasTypingHandlers source, final String text) {
+		source.fireEvent(new TypingEvent(text));
 	}
 
 	/**
@@ -67,16 +68,16 @@ public class FilterEvent<V> extends GwtEvent<FilterHandler<V>> {
 	 * 
 	 * @return returns the handler type
 	 */
-	public static Type<FilterHandler<?>> getType() {
+	public static Type<TypingHandler> getType() {
 		
 		if (TYPE == null) {
-			TYPE = new Type<FilterHandler<?>>();
+			TYPE = new Type<TypingHandler>();
 		}
 		
 		return TYPE;
 	}
 
-	private final V value;
+	private final String text;
 	
 	/**
 	 * Creates a value change event.
@@ -84,25 +85,25 @@ public class FilterEvent<V> extends GwtEvent<FilterHandler<V>> {
 	 * @param value
 	 *            the value
 	 */
-	protected FilterEvent(final V value) {
-		this.value = value;
+	protected TypingEvent(final String text) {
+		this.text = text;
 	}
 	
-	public V getValue() {
-		return value;
+	public String getText() {
+		return text;
 	}
 
-	// The instance knows its BeforeFilterHandler is of type I, but the TYPE
+	// The instance knows its BeforeTypingHandler is of type I, but the TYPE
 	// field itself does not, so we have to do an unsafe cast here.
 	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Override
-	public final Type<FilterHandler<V>> getAssociatedType() {
+	public final Type<TypingHandler> getAssociatedType() {
 		return (Type) TYPE;
 	}
 
 	@Override
-	protected void dispatch(FilterHandler<V> handler) {
-		handler.onFilter(this);
+	protected void dispatch(TypingHandler handler) {
+		handler.onTyping(this);
 	}
 
 }

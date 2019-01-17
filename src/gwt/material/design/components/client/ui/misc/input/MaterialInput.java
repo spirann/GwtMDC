@@ -48,6 +48,7 @@ import gwt.material.design.components.client.base.mixin.InputMaskMixin;
 import gwt.material.design.components.client.base.mixin.PlaceholderMixin;
 import gwt.material.design.components.client.base.mixin.StateMixin;
 import gwt.material.design.components.client.base.mixin.ToggleStyleMixin;
+import gwt.material.design.components.client.base.mixin.TypingMixin;
 import gwt.material.design.components.client.base.mixin.ValidationMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.mixin.base.PropertyMixin;
@@ -65,6 +66,8 @@ import gwt.material.design.components.client.constants.TextFieldType;
 import gwt.material.design.components.client.events.IconClickEvent;
 import gwt.material.design.components.client.events.IconClickEvent.HasIconClickHandlers;
 import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
+import gwt.material.design.components.client.events.TypingEvent.HasTypingHandlers;
+import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 import gwt.material.design.components.client.events.ValidationEvent;
 import gwt.material.design.components.client.events.ValidationEvent.HasValidationHandlers;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
@@ -82,7 +85,7 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  */
 public class MaterialInput extends MaterialValuedField<String> implements HasText, HasLabel, HasDense, HasUnbordered,
 		HasRequired, HasPlaceholder, HasType<TextFieldType>, HasInputMask, HasState, HasIcon, HasIconClickHandlers,
-		HasValidationHandlers<Result>, HasReadOnly, HasIconPosition, HasValidation<MaterialInput, Validation<MaterialInput>> {
+		HasValidationHandlers<Result>, HasReadOnly, HasIconPosition, HasValidation<MaterialInput, Validation<MaterialInput>>, HasTypingHandlers {
 
 	// /////////////////////////////////////////////////////////////
 	// Textfield
@@ -116,6 +119,7 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 			TextFieldType.FILLED, this, icon, input);
 
 	protected final ValidationMixin<MaterialInput, Validation<MaterialInput>> validationMixin = new ValidationMixin<>(this);
+	protected final TypingMixin<MaterialInput> typingMixin = new TypingMixin<>(this);
 
 	public MaterialInput() {
 		super(CssName.MDC_TEXT_FIELD);
@@ -211,6 +215,16 @@ public class MaterialInput extends MaterialValuedField<String> implements HasTex
 	@Override
 	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
 		return input.addKeyPressHandler(handler);
+	}
+
+	@Override
+	public HandlerRegistration addTypingHandler(TypingHandler handler) {
+		return typingMixin.addTypingHandler(handler);
+	}
+
+	@Override
+	public void setTypeingDelay(int typingDelay) {
+		typingMixin.setTypeingDelay(typingDelay);
 	}
 
 	@Override

@@ -40,6 +40,8 @@ import gwt.material.design.components.client.base.interfaces.HasValidation;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.State;
+import gwt.material.design.components.client.events.TypingEvent.HasTypingHandlers;
+import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 import gwt.material.design.components.client.events.ValidationEvent.HasValidationHandlers;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
 import gwt.material.design.components.client.ui.html.Div;
@@ -53,7 +55,7 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  *
  */
 public class MaterialInputBox extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
-		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasValue<String>, HasReadOnly {
+		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasTypingHandlers, HasValue<String>, HasReadOnly {
 
 	protected final MaterialInput input = contructInput();
 	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
@@ -293,5 +295,15 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 	@Override
 	public boolean isUnbordered() {
 		return input.isUnbordered();
+	}
+
+	@Override
+	public HandlerRegistration addTypingHandler(TypingHandler handler) {
+		return input.addTypingHandler(handler);
+	}
+
+	@Override
+	public void setTypeingDelay(int typingDelay) {
+		input.setTypeingDelay(typingDelay);
 	}
 }
