@@ -250,7 +250,9 @@ function MDCTree(element, options) {
     		a.href = '#';
     		$(a).html(this.options.expandIcon);
     		$(a).addClass(this.options.expandClass);
-    		$(a).click(function(){
+    		$(a).click(function(event){
+  				event.preventDefault();
+  				event.stopPropagation();
     			if($(a).hasClass(_this.options.expandClass))
     				_this.expand(item, a, li);
     			else if($(a).hasClass(_this.options.collapseClass))
