@@ -98,7 +98,7 @@ function MDCTree(element, options) {
 	this.draw = function () {
     	$(this.root).empty();
     	const _this = this;
-		const orphansArray = this.orphans();
+		const orphansArray = this.orphans().sort(function(a, b){return a.name.toLowerCase().localeCompare(b.name.toLowerCase());});
   		if (orphansArray.length) {
     		const items = this.toDraw(orphansArray),
         	ul = document.createElement('ul');
