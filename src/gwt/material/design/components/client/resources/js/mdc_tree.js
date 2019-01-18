@@ -524,7 +524,10 @@ function MDCTree(element, options) {
   		const _this = this, 
   			id = parent.id.replace('item-', ''),
         	kids = this.getChildren(id).sort(function(a, b){
-        	
+        		
+        		// First order by no children items
+        		// After by name
+        		
         		var aHasChildren = _this.hasChildren(a.id);
         		var bHasChildren = _this.hasChildren(b.id);
         		
@@ -533,7 +536,7 @@ function MDCTree(element, options) {
         		if(!aHasChildren && bHasChildren)
         			return -1;	
         		
-        		return a.name.localeCompare(b.name);
+        		return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
         	}),
         	items = this.toDraw(kids),
         	ul = document.createElement('ul');
