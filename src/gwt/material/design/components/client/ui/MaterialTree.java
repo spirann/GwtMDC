@@ -26,6 +26,7 @@ import java.util.stream.Collectors;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
+import com.google.gwt.resources.client.ImageResource;
 
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.constants.Color;
@@ -48,8 +49,8 @@ import gwt.material.design.components.client.ui.misc.tree.js.JsOptions;
  * @author Richeli Vargas
  *
  */
-public class MaterialTree extends Div
-		implements HasType<TreeType>, HasSelectionHandlers<Collection<MaterialTree.Item>>, HasFilterHandlers<Collection<MaterialTree.Item>> {
+public class MaterialTree extends Div implements HasType<TreeType>, HasSelectionHandlers<Collection<MaterialTree.Item>>,
+		HasFilterHandlers<Collection<MaterialTree.Item>> {
 
 	protected final JsOptions options = new JsOptions();
 	protected JsItem[] data;
@@ -58,7 +59,7 @@ public class MaterialTree extends Div
 		super(CssName.MDC_TREE);
 		loadDefaultOptions();
 	}
-	
+
 	protected void loadDefaultOptions() {
 		options.onSelect = toFunction(() -> fireSelectionEvent());
 		options.onFilter = toFunction(() -> fireFilterEvent());
@@ -84,7 +85,7 @@ public class MaterialTree extends Div
 	public HandlerRegistration addSelectionHandler(SelectionHandler<Collection<Item>> handler) {
 		return addHandler(handler, SelectionEvent.getType());
 	}
-	
+
 	protected void fireFilterEvent() {
 		FilterEvent.fire(MaterialTree.this, getFilteredItems());
 	}
@@ -300,6 +301,18 @@ public class MaterialTree extends Div
 
 		public void setSelected(boolean selected) {
 			jsItem.selected = selected;
+		}
+
+		public void setAvatar(final IconType icon) {
+			jsItem.avatar = (new MaterialIcon(icon)).getElement();
+		}
+
+		public void setAvatar(final String url) {
+			jsItem.avatar = (new MaterialImage(url)).getElement();
+		}
+
+		public void setAvatar(final ImageResource resource) {
+			jsItem.avatar = (new MaterialImage(resource)).getElement();
 		}
 
 		public void setOnClick(final Runnable onClick) {

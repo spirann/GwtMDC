@@ -14,6 +14,9 @@ public class JsItem {
 
 	@JsProperty
 	public String name;
+	
+	@JsProperty
+	public JavaScriptObject avatar;
 
 	@JsProperty
 	public String parent;

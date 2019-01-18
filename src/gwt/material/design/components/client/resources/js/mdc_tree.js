@@ -28,6 +28,8 @@ function MDCTree(element, options) {
 	     	collapseClass : 'mdc-tree--expand',
 			// Material design icon for to collapse action
 	    	collapseIcon : 'expand_more',
+	    	// Class  for to avatar element
+			avatarClass : 'mdc-tree--avatar',
 			// Class  for to name element
 			nameClass : 'mdc-tree--name',
 			// Limit of filtered items to expand
@@ -290,7 +292,7 @@ function MDCTree(element, options) {
   				});
   				
   				// Add change event
-  				$(li_header).find('input').change(function() {
+  				$(action).find('input').change(function() {
   					// Update the item
   					item.selected = this.checked;
   					
@@ -345,6 +347,11 @@ function MDCTree(element, options) {
   			}
   		}
   		
+  		if(item.avatar) {
+  			$(item.avatar).addClass(this.options.avatarClass);
+  			$(li_header).append(item.avatar);
+  		}
+  			
   		$(li_header).append(span);  		
   		$(li).append(li_header);
   		
