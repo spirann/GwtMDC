@@ -53,7 +53,7 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		addStyleName(CssName.MDC_DATEPICKER_DIALOG);
+		addStyleName(CssName.MDC_DATEPICKER__DIALOG);
 		initializeDatePicker();
 		addContent(datePicker);
 		setAcceptText(IMessages.INSTANCE.mdc_calendar_ok());

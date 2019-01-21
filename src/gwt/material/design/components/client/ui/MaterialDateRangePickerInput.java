@@ -47,7 +47,6 @@ import gwt.material.design.components.client.events.ValidationEvent.ValidationHa
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.input.MaterialInput;
-import gwt.material.design.components.client.ui.misc.input.MaterialTextFieldHelper;
 import gwt.material.design.components.client.validation.Validation;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
@@ -60,15 +59,11 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
 public class MaterialDateRangePickerInput extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
 		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasTypingHandlers, HasValue<String>, HasReadOnly {
 
-	protected final MaterialInput startDate = new MaterialInput();
-	protected final MaterialInput endDate = new MaterialInput();
-	protected final MaterialIcon icon = new MaterialIcon(CssName.MDC_TEXT_FIELD__ICON);
-	protected final Div inputs = new Div();
-	protected final Div content = new Div();
-	protected final MaterialTextFieldHelper helper = new MaterialTextFieldHelper();
-
+	protected final MaterialDatePickerInput startDate = new MaterialDatePickerInput();
+	protected final MaterialDatePickerInput endDate = new MaterialDatePickerInput();
+	
 	public MaterialDateRangePickerInput() {
-		super(CssName.MDC_TEXT_FIELD_CONTAINER);
+		super(CssName.MDC_DATEPICKER__RANGE__INPUTS);
 	}
 
 	protected MaterialInput contructInput() {
@@ -78,79 +73,182 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	protected void onInitialize() {
 
-		startDate.setAriaControls(helper.getId());
-		startDate.setAriaDescribedBy(helper.getId());
 		startDate.setPlaceholder(IMessages.INSTANCE.mdc_calendar_initial_date());
-		
-		endDate.setAriaControls(helper.getId());
-		endDate.setAriaDescribedBy(helper.getId());
 		endDate.setPlaceholder(IMessages.INSTANCE.mdc_calendar_final_date());
 
 		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));
 
-		inputs.add(startDate);
-		inputs.add(endDate);
-		content.add(inputs);
-		content.add(icon);
+		add(startDate);
+		add(endDate);
 		
-		add(content);
-		add(helper);
-
 		super.onInitialize();
 	}
 
 	@Override
 	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
-		return startDate.addValidationHandler(handler);
+		final HandlerRegistration startHandlerRegistration = startDate.addValidationHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addValidationHandler(handler);		
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}	
+
+
+	@Override
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
+		final HandlerRegistration startHandlerRegistration = startDate.addValueChangeHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addValueChangeHandler(handler);
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}
+
+	@Override
+	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
+		final HandlerRegistration startHandlerRegistration = startDate.addKeyDownHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addKeyDownHandler(handler);
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}
+	
+	@Override
+	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
+		final HandlerRegistration startHandlerRegistration = startDate.addKeyUpHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addKeyUpHandler(handler);
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}
+	
+	@Override
+	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
+		final HandlerRegistration startHandlerRegistration = startDate.addKeyPressHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addKeyPressHandler(handler);
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}
+
+	@Override
+	public ValidationRegistration addValidation(final Validation<MaterialInput> validation) {
+		final ValidationRegistration startHandlerRegistration = startDate.addValidation(validation);
+		final ValidationRegistration endHandlerRegistration = endDate.addValidation(validation);
+		return () -> {
+			startHandlerRegistration.removeValidation();
+			endHandlerRegistration.removeValidation();
+		};
+	}
+
+	@Override
+	public HandlerRegistration addTypingHandler(TypingHandler handler) {
+		final HandlerRegistration startHandlerRegistration = startDate.addTypingHandler(handler);
+		final HandlerRegistration endHandlerRegistration = endDate.addTypingHandler(handler);
+		return () -> {
+			startHandlerRegistration.removeHandler();
+			endHandlerRegistration.removeHandler();
+		};
+	}
+
+	@Override
+	public void setTypeingDelay(int typingDelay) {
+		startDate.setTypeingDelay(typingDelay);
+		endDate.setTypeingDelay(typingDelay);
 	}
 
 	@Override
 	public void setBackgroundColor(Color color) {
 		startDate.setBackgroundColor(color);
-	}
-
-	@Override
-	public void setHelperText(String text) {
-		helper.setHelperText(text);
-	}
-
-	@Override
-	public String getHelperText() {
-		return helper.getHelperText();
+		endDate.setBackgroundColor(color);
 	}
 
 	@Override
 	public void setTextColor(Color color) {
 		startDate.setTextColor(color);
+		endDate.setTextColor(color);
 	}
 
 	@Override
 	public void setColor(Color color) {
 		startDate.setColor(color);
+		endDate.setColor(color);
 	}
 
 	public void setFocusedColor(Color color) {
 		startDate.setFocusedColor(color);
+		endDate.setFocusedColor(color);
+	}
+
+	@Override
+	public void setDense(boolean dense) {
+		startDate.setDense(dense);
+		endDate.setDense(dense);
+	}
+
+	@Override
+	public boolean isDense() {
+		return startDate.isDense() || endDate.isDense();
+	}
+	
+	@Override
+	public void setUnbordered(boolean unbordered) {
+		startDate.setUnbordered(unbordered);
+		endDate.setUnbordered(unbordered);
+	}
+
+	@Override
+	public boolean isUnbordered() {
+		return startDate.isUnbordered() || endDate.isUnbordered();
+	}
+	
+	
+	
+
+	
+	
+	
+	
+	@Override
+	public Collection<Result> validate() {
+		return startDate.validate();		
+	}
+	
+	@Override
+	public void setHelperText(String text) {
+		startDate.setHelperText(text);
+		endDate.setHelperText(text);
+	}
+
+	@Override
+	public String getHelperText() {
+		return startDate.getHelperText();
+	}
+	
+	@Override
+	public void setHelperTextValidation(boolean validation) {
+		startDate.setHelperTextValidation(validation);
+		endDate.setHelperTextValidation(validation);
 	}
 
 	@Override
 	public void setHelperTextPersistent(boolean persistent) {
-		helper.setHelperTextPersistent(persistent);
+		startDate.setHelperTextPersistent(persistent);
+		endDate.setHelperTextPersistent(persistent);
 	}
 
 	@Override
 	public boolean isHelperTextPersistent() {
-		return helper.isHelperTextPersistent();
-	}
-
-	@Override
-	public void setHelperTextValidation(boolean validation) {
-		helper.setHelperTextValidation(validation);
+		return startDate.isHelperTextPersistent();
 	}
 
 	@Override
 	public boolean isHelperTextValidation() {
-		return helper.isHelperTextValidation();
+		return startDate.isHelperTextValidation();
 	}
 
 	@Override
@@ -166,17 +264,9 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	public void setPlaceholderColor(Color color) {
 		startDate.setPlaceholderColor(color);
+		endDate.setPlaceholderColor(color);
 	}
 
-	@Override
-	public void setDense(boolean dense) {
-		startDate.setDense(dense);
-	}
-
-	@Override
-	public boolean isDense() {
-		return startDate.isDense();
-	}
 
 	@Override
 	public void setLabel(String label) {
@@ -198,22 +288,6 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 		startDate.setText(text);
 	}
 
-	public void setMinLength(final Integer length) {
-		startDate.setMinLength(length);
-	}
-
-	public int getMinLength() {
-		return startDate.getMinLength();
-	}
-
-	public void setMaxLength(final Integer length) {
-		startDate.setMaxLength(length);
-	}
-
-	public int getMaxLength() {
-		return startDate.getMaxLength();
-	}
-
 	@Override
 	public void setState(State state) {
 		startDate.setState(state);
@@ -222,57 +296,6 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	public State getState() {
 		return startDate.getState();
-	}
-
-	@Override
-	public ValidationRegistration addValidation(final Validation<MaterialInput> validation) {
-		return startDate.addValidation(validation);
-	}
-	
-	@Override
-	public Collection<Result> validate() {
-		return startDate.validate();
-	}
-
-	@Override
-	public void setWidth(String width) {
-		super.setWidth(width);
-		startDate.setWidth(width);
-		helper.setWidth(width);
-	}
-
-	@Override
-	public void setMaxWidth(String maxWidth) {
-		super.setMaxWidth(maxWidth);
-		startDate.setMaxWidth(maxWidth);
-		helper.setMaxWidth(maxWidth);
-	}
-
-	@Override
-	public void setMinHeight(String minHeight) {
-		super.setMinHeight(minHeight);
-		startDate.setMinHeight(minHeight);
-		helper.setMinHeight(minHeight);
-	}
-
-	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-		return startDate.addValueChangeHandler(handler);
-	}
-
-	@Override
-	public HandlerRegistration addKeyDownHandler(KeyDownHandler handler) {
-		return startDate.addKeyDownHandler(handler);
-	}
-	
-	@Override
-	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
-		return startDate.addKeyUpHandler(handler);
-	}
-	
-	@Override
-	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
-		return startDate.addKeyPressHandler(handler);
 	}
 	
 	@Override
@@ -290,10 +313,6 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 		startDate.setValue(value, fireEvents);
 	}
 
-	protected MaterialInput getInput() {
-		return startDate;
-	}
-
 	@Override
 	public void setReadOnly(boolean readOnly) {
 		startDate.setReadOnly(readOnly);
@@ -302,25 +321,5 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	public boolean isReadOnly() {
 		return startDate.isReadOnly();
-	}
-	
-	@Override
-	public void setUnbordered(boolean unbordered) {
-		startDate.setUnbordered(unbordered);
-	}
-
-	@Override
-	public boolean isUnbordered() {
-		return startDate.isUnbordered();
-	}
-
-	@Override
-	public HandlerRegistration addTypingHandler(TypingHandler handler) {
-		return startDate.addTypingHandler(handler);
-	}
-
-	@Override
-	public void setTypeingDelay(int typingDelay) {
-		startDate.setTypeingDelay(typingDelay);
 	}
 }

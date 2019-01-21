@@ -786,16 +786,16 @@
 /* ==========================================================================
    DatePiker Dialog
    ========================================================================== */
-.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__surface {
+.mdc-datepicker__dialog.mdc-dialog .mdc-dialog__surface {
 	padding: 0;
 	min-width: var(--mdc-datepicker-width);
 	overflow: hidden;}
-	.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__title:empty  + .mdc-dialog__content {
+	.mdc-datepicker__dialog.mdc-dialog .mdc-dialog__title:empty  + .mdc-dialog__content {
   	padding-top: 0; }
-  	.mdc-datepicker-dialog.mdc-dialog .mdc-dialog__content {
+  	.mdc-datepicker__dialog.mdc-dialog .mdc-dialog__content {
 	padding: 0;
 	overflow-x: hidden;}
-	.mdc-datepicker-dialog.mdc-dialog .mdc-datepicker {
+	.mdc-datepicker__dialog.mdc-dialog .mdc-datepicker {
 	border: none;
 	border-radius: 0;
 	min-height: 380px;}
@@ -803,11 +803,12 @@
 /* ==========================================================================
    DateRangePiker Input
    ========================================================================== */
-.mdc-datepicker__range_inputs {
+.mdc-datepicker__range__inputs {
+	width: 100%;
 	flex: 1;
 	display: flex;
 	flex-direction: column;}
-	.mdc-datepicker__range_inputs > div {
+	.mdc-datepicker__range__inputs > div {
 		width: 100%;}
 
 /* ==========================================================================

@@ -555,11 +555,12 @@ public interface CssName {
 	String MDC_DATEPICKER__MONTH_SELECTOR = "mdc-datepicker__month-selector";
 	String MDC_DATEPICKER__YEAR_SELECTOR = "mdc-datepicker__year-selector";
 
+	String MDC_DATEPICKER__RANGE__INPUTS = "mdc-datepicker__range__inputs";
 	String MDC_DATEPICKER__RANGE__MIN = "mdc_datepicker__range--min";
 	String MDC_DATEPICKER__RANGE__MAX = "mdc_datepicker__range--max";
 	String MDC_DATEPICKER__RANGE__BETWEEN = "mdc_datepicker__range--between";
 	// Dialog
-	String MDC_DATEPICKER_DIALOG = "mdc-datepicker-dialog";
+	String MDC_DATEPICKER__DIALOG = "mdc-datepicker__dialog";
 
 	// //////////////////////////////////////////////////////
 	// COLOR PALETTE
