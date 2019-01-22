@@ -21,14 +21,13 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import gwt.material.design.components.client.base.mixin.ValidationMixin;
+import gwt.material.design.components.client.base.interfaces.StringToDate;
 import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.masker.Masker;
-import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.ui.misc.calendar.DatePickerHelper;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.ValidationForTextField;
-import gwt.material.design.components.client.validation.Validation.Result;
 
 /**
  * 
@@ -37,30 +36,9 @@ import gwt.material.design.components.client.validation.Validation.Result;
  */
 public class MaterialDatePickerInput extends MaterialTextField {
 
-	public static interface StringToDate {
-		public Date convert(final String value);
-
-		public String convert(final Date value);
-	}
-
 	protected final MaterialDatePickerDialog dialog = new MaterialDatePickerDialog();
 
-	private StringToDate stringToDate = new StringToDate() {
-
-		@Override
-		public String convert(Date value) {
-			return dateToString(value);
-		}
-
-		@Override
-		public Date convert(String value) {
-			return valueToDate(value);
-		}
-	};
-	
-	public MaterialDatePickerInput() {
-		super();;
-	}
+	private StringToDate stringToDate = DatePickerHelper.defaultStringToDate(input);
 
 	@Override
 	protected void onInitialize() {
@@ -73,9 +51,8 @@ public class MaterialDatePickerInput extends MaterialTextField {
 		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
 		addValidation(ValidationForTextField.date());
 		
-		if (getPlaceholder() == null || getPlaceholder().isEmpty())
-			setPlaceholder(getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/").replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
-					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy()).replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
+		DatePickerHelper.formatPlaceholder(this);
+		
 		setIcon(IconType.EVENT);
 		setIconPosition(IconPosition.TRAILING);
 		setMaxLength(10);
@@ -91,69 +68,6 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 	public void setStringToDate(StringToDate stringToDate) {
 		this.stringToDate = stringToDate;
-	}
-
-	@SuppressWarnings("deprecation")
-	protected String dateToString(final Date date) {
-
-		if (date == null)
-			return "";
-
-		final String mask = getInputMask();
-
-		final String day = date.getDate() < 9 ? "0" + date.getDate() : String.valueOf(date.getDate());
-		final String month = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : String.valueOf((date.getMonth() + 1));
-		final String year = String.valueOf(date.getYear() + 1900);
-
-		switch (mask) {
-		case "99/99/9999":
-		case "99-99-9999":
-			return Masker.toPattern(day + month + year, mask);
-		case "9999/99/99":
-		case "9999-99-99":
-			return year + month + day;
-		default:
-			return "";
-		}
-	}
-
-	@SuppressWarnings("deprecation")
-	protected Date valueToDate(final String maskedValue) {
-
-		if (maskedValue.isEmpty())
-			return null;
-
-		final Result result = ValidationMixin.toResult(input.validate());
-		switch (result.getState()) {
-		case ERROR:
-			return null;
-		default:
-		}
-
-		final String mask = getInputMask();
-
-		final int day;
-		final int month;
-		final int year;
-
-		switch (mask) {
-		case "99/99/9999":
-		case "99-99-9999":
-			day = Integer.parseInt(maskedValue.substring(0, 2));
-			month = Integer.parseInt(maskedValue.substring(3, 5));
-			year = Integer.parseInt(maskedValue.substring(6));
-			break;
-		case "9999/99/99":
-		case "9999-99-99":
-			day = Integer.parseInt(maskedValue.substring(9));
-			month = Integer.parseInt(maskedValue.substring(6, 8));
-			year = Integer.parseInt(maskedValue.substring(0, 5));
-			break;
-		default:
-			return null;
-		}
-
-		return new Date(year - 1900, month - 1, day);
 	}
 
 	public void openDatePicker() {

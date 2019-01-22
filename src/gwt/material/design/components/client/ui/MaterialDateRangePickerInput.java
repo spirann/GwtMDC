@@ -37,17 +37,24 @@ import gwt.material.design.components.client.base.interfaces.HasReadOnly;
 import gwt.material.design.components.client.base.interfaces.HasState;
 import gwt.material.design.components.client.base.interfaces.HasUnbordered;
 import gwt.material.design.components.client.base.interfaces.HasValidation;
+import gwt.material.design.components.client.base.interfaces.StringToDate;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconPosition;
+import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.events.TypingEvent.HasTypingHandlers;
 import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 import gwt.material.design.components.client.events.ValidationEvent.HasValidationHandlers;
 import gwt.material.design.components.client.events.ValidationEvent.ValidationHandler;
+import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.misc.calendar.DatePickerHelper;
 import gwt.material.design.components.client.ui.misc.input.MaterialInput;
+import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.Validation;
+import gwt.material.design.components.client.validation.ValidationForTextField;
 import gwt.material.design.components.client.validation.Validation.Result;
 import gwt.material.design.components.client.validation.ValidationRegistration;
 
@@ -59,8 +66,12 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
 public class MaterialDateRangePickerInput extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
 		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasTypingHandlers, HasValue<String>, HasReadOnly {
 
-	protected final MaterialDatePickerInput startDate = new MaterialDatePickerInput();
-	protected final MaterialDatePickerInput endDate = new MaterialDatePickerInput();
+	protected final MaterialTextField startDate = new MaterialTextField();
+	protected final MaterialTextField endDate = new MaterialTextField();
+	protected final MaterialDateRangePickerDialog dialog = new MaterialDateRangePickerDialog();
+	
+	private StringToDate stringToDateToStart = DatePickerHelper.defaultStringToDate(startDate);
+	private StringToDate stringToDateToEnd = DatePickerHelper.defaultStringToDate(endDate);
 	
 	public MaterialDateRangePickerInput() {
 		super(CssName.MDC_DATEPICKER__RANGE__INPUTS);
@@ -73,10 +84,25 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	protected void onInitialize() {
 
-		startDate.setPlaceholder(IMessages.INSTANCE.mdc_calendar_initial_date());
-		endDate.setPlaceholder(IMessages.INSTANCE.mdc_calendar_final_date());
+		startDate.setLabel(IMessages.INSTANCE.mdc_calendar_initial_date());
+		endDate.setLabel(IMessages.INSTANCE.mdc_calendar_final_date());
 
-		addValidationHandler(event -> setHelperText(event.getResult().getMessage()));
+		dialog.addAcceptHandler(event -> setValue(stringToDate.convert(dialog.getValue())));
+
+		add(dialog);
+		
+		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
+		addValidation(ValidationForTextField.date());
+		
+		DatePickerHelper.formatPlaceholder(this);
+		
+		setIcon(IconType.EVENT);
+		setIconPosition(IconPosition.TRAILING);
+		setMaxLength(10);
+		addIconClickHandler(event -> openDatePicker());
+
+		JsHelper.allowNumbersOnly(getInput().getElement());
+
 
 		add(startDate);
 		add(endDate);
