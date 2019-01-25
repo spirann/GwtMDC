@@ -57,7 +57,7 @@ public class DatePickerHelper {
 
 			@Override
 			public Date convert(String value) {
-				return valueToDate(widget, value);
+				return stringToDate(widget, value);
 			}
 		};
 	}
@@ -87,7 +87,7 @@ public class DatePickerHelper {
 	}
 
 	@SuppressWarnings("deprecation")
-	protected static final <W extends HasInputMask & HasValidation<?,?>> Date valueToDate(final W widget, final String maskedValue) {
+	protected static final <W extends HasInputMask & HasValidation<?,?>> Date stringToDate(final W widget, final String maskedValue) {
 
 		if (maskedValue.isEmpty())
 			return null;
@@ -121,7 +121,7 @@ public class DatePickerHelper {
 		default:
 			return null;
 		}
-
+		
 		return new Date(year - 1900, month - 1, day);
 	}
 }

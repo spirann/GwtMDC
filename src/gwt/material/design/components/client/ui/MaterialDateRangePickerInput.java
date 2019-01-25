@@ -20,10 +20,13 @@
 package gwt.material.design.components.client.ui;
 
 import java.util.Collection;
+import java.util.Date;
 
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpHandler;
+import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
+import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasText;
@@ -54,8 +57,8 @@ import gwt.material.design.components.client.ui.misc.calendar.DatePickerHelper;
 import gwt.material.design.components.client.ui.misc.input.MaterialInput;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.Validation;
-import gwt.material.design.components.client.validation.ValidationForTextField;
 import gwt.material.design.components.client.validation.Validation.Result;
+import gwt.material.design.components.client.validation.ValidationForTextField;
 import gwt.material.design.components.client.validation.ValidationRegistration;
 
 /**
@@ -63,16 +66,18 @@ import gwt.material.design.components.client.validation.ValidationRegistration;
  * @author Richeli Vargas
  *
  */
-public class MaterialDateRangePickerInput extends Div implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder,
-		HasState, HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasTypingHandlers, HasValue<String>, HasReadOnly {
+public class MaterialDateRangePickerInput extends Div
+		implements HasHelperText, HasText, HasLabel, HasDense, HasUnbordered, HasPlaceholder, HasState,
+		HasValidation<MaterialInput, Validation<MaterialInput>>, HasValidationHandlers<Result>, HasTypingHandlers,
+		HasValue<Date[]>, HasValueChangeHandlers<Date[]>, HasReadOnly {
 
 	protected final MaterialTextField startDate = new MaterialTextField();
 	protected final MaterialTextField endDate = new MaterialTextField();
 	protected final MaterialDateRangePickerDialog dialog = new MaterialDateRangePickerDialog();
-	
+
 	private StringToDate stringToDateToStart = DatePickerHelper.defaultStringToDate(startDate);
 	private StringToDate stringToDateToEnd = DatePickerHelper.defaultStringToDate(endDate);
-	
+
 	public MaterialDateRangePickerInput() {
 		super(CssName.MDC_DATEPICKER__RANGE__INPUTS);
 	}
@@ -87,44 +92,57 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 		startDate.setLabel(IMessages.INSTANCE.mdc_calendar_initial_date());
 		endDate.setLabel(IMessages.INSTANCE.mdc_calendar_final_date());
 
-		dialog.addAcceptHandler(event -> setValue(stringToDate.convert(dialog.getValue())));
-
+		dialog.addAcceptHandler(event -> setValue(dialog.getValue()));
 		add(dialog);
-		
-		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
+
+		startDate.setInputMask(Masker.Defaults.INSTANCE.date__mask());
+		endDate.setInputMask(Masker.Defaults.INSTANCE.date__mask());
+
 		addValidation(ValidationForTextField.date());
-		
-		DatePickerHelper.formatPlaceholder(this);
-		
-		setIcon(IconType.EVENT);
-		setIconPosition(IconPosition.TRAILING);
-		setMaxLength(10);
-		addIconClickHandler(event -> openDatePicker());
 
-		JsHelper.allowNumbersOnly(getInput().getElement());
-
+		DatePickerHelper.formatPlaceholder(startDate);
+		DatePickerHelper.formatPlaceholder(endDate);
 
 		add(startDate);
 		add(endDate);
-		
+
 		super.onInitialize();
+		
+		startDate.setIcon(IconType.EVENT);
+		startDate.setIconPosition(IconPosition.TRAILING);
+		startDate.setMaxLength(10);
+		startDate.addIconClickHandler(event -> openDatePicker());
+		
+		endDate.setIcon(IconType.EVENT);
+		endDate.setIconPosition(IconPosition.TRAILING);
+		endDate.setMaxLength(10);
+		endDate.addIconClickHandler(event -> openDatePicker());
+
+		JsHelper.allowNumbersOnly(startDate.getInput().getElement());
+		JsHelper.allowNumbersOnly(endDate.getInput().getElement());
+
+
 	}
 
 	@Override
 	public HandlerRegistration addValidationHandler(ValidationHandler<Result> handler) {
 		final HandlerRegistration startHandlerRegistration = startDate.addValidationHandler(handler);
-		final HandlerRegistration endHandlerRegistration = endDate.addValidationHandler(handler);		
+		final HandlerRegistration endHandlerRegistration = endDate.addValidationHandler(handler);
 		return () -> {
 			startHandlerRegistration.removeHandler();
 			endHandlerRegistration.removeHandler();
 		};
-	}	
+	}
 
+	protected void fireChangeEvent() {
+		ValueChangeEvent.fire(MaterialDateRangePickerInput.this, getValue());
+	}
 
 	@Override
-	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> handler) {
-		final HandlerRegistration startHandlerRegistration = startDate.addValueChangeHandler(handler);
-		final HandlerRegistration endHandlerRegistration = endDate.addValueChangeHandler(handler);
+	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<Date[]> handler) {
+		final HandlerRegistration startHandlerRegistration = startDate
+				.addValueChangeHandler(event -> fireChangeEvent());
+		final HandlerRegistration endHandlerRegistration = endDate.addValueChangeHandler(event -> fireChangeEvent());
 		return () -> {
 			startHandlerRegistration.removeHandler();
 			endHandlerRegistration.removeHandler();
@@ -140,7 +158,7 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 			endHandlerRegistration.removeHandler();
 		};
 	}
-	
+
 	@Override
 	public HandlerRegistration addKeyUpHandler(KeyUpHandler handler) {
 		final HandlerRegistration startHandlerRegistration = startDate.addKeyUpHandler(handler);
@@ -150,7 +168,7 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 			endHandlerRegistration.removeHandler();
 		};
 	}
-	
+
 	@Override
 	public HandlerRegistration addKeyPressHandler(KeyPressHandler handler) {
 		final HandlerRegistration startHandlerRegistration = startDate.addKeyPressHandler(handler);
@@ -179,6 +197,39 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 			startHandlerRegistration.removeHandler();
 			endHandlerRegistration.removeHandler();
 		};
+	}
+
+	@Override
+	public Date[] getValue() {
+		return new Date[] { stringToDateToStart.convert(Masker.toPattern(startDate.getValue(), startDate.getInputMask())),
+				stringToDateToEnd.convert(Masker.toPattern(endDate.getValue(), endDate.getInputMask())) };
+	}
+
+	@Override
+	public void setValue(Date[] value) {
+		setValue(value, true);
+	}
+
+	@Override
+	public void setValue(Date[] value, boolean fireEvents) {
+		if (value == null || value.length == 0) {
+			startDate.setValue("");
+			endDate.setValue("");
+		} else if (value.length == 1) {
+			startDate.setValue(stringToDateToStart.convert(value[0]));
+			endDate.setValue("");
+		} else if (value.length > 1) {
+			startDate.setValue(stringToDateToStart.convert(value[0]));
+			endDate.setValue(stringToDateToEnd.convert(value[1]));
+		}
+
+		if (fireEvents)
+			fireChangeEvent();
+	}
+
+	public void openDatePicker() {
+		dialog.setValue(getValue());
+		dialog.open();
 	}
 
 	@Override
@@ -220,7 +271,7 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	public boolean isDense() {
 		return startDate.isDense() || endDate.isDense();
 	}
-	
+
 	@Override
 	public void setUnbordered(boolean unbordered) {
 		startDate.setUnbordered(unbordered);
@@ -231,19 +282,12 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	public boolean isUnbordered() {
 		return startDate.isUnbordered() || endDate.isUnbordered();
 	}
-	
-	
-	
 
-	
-	
-	
-	
 	@Override
 	public Collection<Result> validate() {
-		return startDate.validate();		
+		return startDate.validate();
 	}
-	
+
 	@Override
 	public void setHelperText(String text) {
 		startDate.setHelperText(text);
@@ -254,7 +298,7 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	public String getHelperText() {
 		return startDate.getHelperText();
 	}
-	
+
 	@Override
 	public void setHelperTextValidation(boolean validation) {
 		startDate.setHelperTextValidation(validation);
@@ -293,7 +337,6 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 		endDate.setPlaceholderColor(color);
 	}
 
-
 	@Override
 	public void setLabel(String label) {
 		startDate.setLabel(label);
@@ -322,21 +365,6 @@ public class MaterialDateRangePickerInput extends Div implements HasHelperText, 
 	@Override
 	public State getState() {
 		return startDate.getState();
-	}
-	
-	@Override
-	public String getValue() {
-		return startDate.getValue();
-	}
-
-	@Override
-	public void setValue(String value) {
-		startDate.setValue(value);
-	}
-
-	@Override
-	public void setValue(String value, boolean fireEvents) {
-		startDate.setValue(value, fireEvents);
 	}
 
 	@Override
