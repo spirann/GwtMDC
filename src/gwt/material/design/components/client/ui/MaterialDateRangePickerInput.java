@@ -201,7 +201,8 @@ public class MaterialDateRangePickerInput extends Div
 
 	@Override
 	public Date[] getValue() {
-		return new Date[] { stringToDateToStart.convert(Masker.toPattern(startDate.getValue(), startDate.getInputMask())),
+		return new Date[] { 
+				stringToDateToStart.convert(Masker.toPattern(startDate.getValue(), startDate.getInputMask())),
 				stringToDateToEnd.convert(Masker.toPattern(endDate.getValue(), endDate.getInputMask())) };
 	}
 
@@ -228,7 +229,7 @@ public class MaterialDateRangePickerInput extends Div
 	}
 
 	public void openDatePicker() {
-		dialog.setValue(getValue());
+		dialog.setValue(getValue(), false);
 		dialog.open();
 	}
 
