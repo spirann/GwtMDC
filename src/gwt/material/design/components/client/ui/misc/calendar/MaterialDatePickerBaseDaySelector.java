@@ -169,8 +169,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 
 	protected void drawDays() {
 
-		if (currentMonth == this.auxDate.getMonth() 
-				&& currentYear == this.auxDate.getYear())
+		if (currentMonth == this.auxDate.getMonth() && currentYear == this.auxDate.getYear())
 			return;
 
 		mapedItems.clear();
@@ -208,7 +207,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			mapedItems.put(adjustedDate.getTime(), item);
 			items.add(item);
 		}
-		
+
 		currentMonth = this.auxDate.getMonth();
 		currentYear = this.auxDate.getYear();
 	}
@@ -217,7 +216,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 			final boolean enabled) {
 
 		final MaterialDatePickerItem item = new MaterialDatePickerItem();
-	
+
 		item.setEnabled(enabled);
 
 		if (today.getTime() == date.getTime())
@@ -286,6 +285,19 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		date.setSeconds(0);
 
 		return date;
+	}
+
+	protected Date[] adjustDate(Date[] dates) {
+
+		if (dates == null)
+			return null;
+
+		final Date[] adjustedDates = new Date[dates.length];
+		for (int i = 0; i < adjustedDates.length; i++) {
+			adjustedDates[i] = dates[i] == null ? null : adjustDate(dates[i]);
+		}
+
+		return adjustedDates;
 	}
 
 	protected class WeekLabel extends Label {

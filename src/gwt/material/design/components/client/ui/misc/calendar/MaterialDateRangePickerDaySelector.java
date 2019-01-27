@@ -173,7 +173,7 @@ public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDa
 
 		final Long minDateAsTime = minDate.getTime();
 		final Long maxDateAsTime = maxDate.getTime();
-
+		
 		mapedItems.entrySet().parallelStream().forEach(entry -> {
 			final Long time = entry.getKey();
 			final MaterialDatePickerItem item = entry.getValue();
@@ -217,12 +217,14 @@ public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDa
 	 */
 	@Override
 	public void setValue(Date[] value, boolean fireEvents) {
-
+		
 		if (value != null && value.length > 2)
 			throw new IllegalArgumentException(
 					"The value must has two dates, the first is the smaller and the last is the bigger.");
-
-		super.setValue(value, fireEvents);
+		
+		final Date[] adjustedValue = adjustDate(value);
+		
+		super.setValue(adjustedValue, fireEvents);
 		if (initialized) {
 			drawDays();
 			drawMonth();

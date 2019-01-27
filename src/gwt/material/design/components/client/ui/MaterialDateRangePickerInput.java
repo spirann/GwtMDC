@@ -223,7 +223,7 @@ public class MaterialDateRangePickerInput extends Div
 			startDate.setValue(stringToDateToStart.convert(value[0]));
 			endDate.setValue(stringToDateToEnd.convert(value[1]));
 		}
-
+		
 		if (fireEvents)
 			fireChangeEvent();
 	}
