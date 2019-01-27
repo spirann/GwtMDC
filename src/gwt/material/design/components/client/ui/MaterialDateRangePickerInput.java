@@ -377,4 +377,26 @@ public class MaterialDateRangePickerInput extends Div
 	public boolean isReadOnly() {
 		return startDate.isReadOnly();
 	}
+	
+	// /////////////////////////////////////////////
+	public Date getInitialDate() {
+		return getValue()[0];
+	}
+	
+	
+	public void setInitialDate(final Date date) {
+		final Date[] values = getValue();
+		values[0] = date;
+		setValue(values);
+	}
+	
+	public Date getFinalDate() {
+		return getValue()[1];
+	}
+	
+	public void setFinalDate(final Date date) {
+		final Date[] values = getValue();
+		values[1] = date;
+		setValue(values);
+	}
 }

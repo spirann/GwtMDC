@@ -35,6 +35,11 @@ public class MaterialDateRangePickerDialog extends MaterialDatePickerDialogBase<
 		datePicker = new MaterialDateRangePicker();
 	}
 	
+	public Date getInitialDate() {
+		return getValue()[0];
+	}
+	
+	
 	public void setInitialDate(final Date date) {
 		final Date[] values = getValue();
 		values[0] = date;
