@@ -75,12 +75,12 @@ public class MaterialTextFieldHelper extends P implements HasHelperText {
 
 	@Override
 	public void setHelperTextValidation(boolean validation) {
-		helpValidationMixin.toggle(validation);
+		helpValidationMixin.toggle(!validation);
 	}
 
 	@Override
 	public boolean isHelperTextValidation() {
-		return helpValidationMixin.isApplied();
+		return !helpValidationMixin.isApplied();
 	}
 
 }

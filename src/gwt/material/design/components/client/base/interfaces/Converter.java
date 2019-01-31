@@ -19,15 +19,17 @@
  */
 package gwt.material.design.components.client.base.interfaces;
 
-import java.util.Date;
+import gwt.material.design.components.client.base.widget.MaterialUIObject;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public interface StringToDate {
-	public Date convert(final String value);
-	public String convert(final Date value);
+public interface Converter<S extends MaterialUIObject, V, K> {
+	
+	public V convert(S source, K value);
+	
+	public K undo(S source,  V value);
 
 }

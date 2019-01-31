@@ -21,13 +21,14 @@ package gwt.material.design.components.client.ui.misc.calendar;
 
 import java.util.Date;
 
+import gwt.material.design.components.client.base.interfaces.Converter;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
 import gwt.material.design.components.client.base.interfaces.HasValidation;
-import gwt.material.design.components.client.base.interfaces.StringToDate;
 import gwt.material.design.components.client.base.mixin.ValidationMixin;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.ui.MaterialTextField;
 import gwt.material.design.components.client.validation.Validation.Result;
 
 /**
@@ -46,22 +47,25 @@ public class DatePickerHelper {
 							.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
 
 	}
-
-	public static final <W extends HasInputMask & HasValidation<?,?>> StringToDate defaultStringToDate(final W widget) {
-		return new StringToDate() {
-
-			@Override
-			public String convert(Date value) {
-				return dateToString(widget, value);
-			}
-
-			@Override
-			public Date convert(String value) {
-				return stringToDate(widget, value);
-			}
-		};
+	
+	public static Converter<MaterialTextField, Date, String> getConverter(){
+		return new DateConverter();
 	}
 	
+	
+	protected static class DateConverter implements Converter<MaterialTextField, Date, String>{
+
+		@Override
+		public Date convert(MaterialTextField source, String value) {
+			return stringToDate(source, value);
+		}
+
+		@Override
+		public String undo(MaterialTextField source, Date value) {
+			return dateToString(source, value);
+		}
+	}
+		
 	@SuppressWarnings("deprecation")
 	protected static final <W extends HasInputMask & HasValidation<?,?>> String dateToString(final W widget, final Date date) {
 
@@ -70,8 +74,8 @@ public class DatePickerHelper {
 
 		final String mask = widget.getInputMask();
 
-		final String day = date.getDate() < 9 ? "0" + date.getDate() : String.valueOf(date.getDate());
-		final String month = date.getMonth() < 9 ? "0" + (date.getMonth() + 1) : String.valueOf((date.getMonth() + 1));
+		final String day = date.getDate() < 10 ? "0" + date.getDate() : String.valueOf(date.getDate());
+		final String month = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : String.valueOf((date.getMonth() + 1));
 		final String year = String.valueOf(date.getYear() + 1900);
 
 		switch (mask) {

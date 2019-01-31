@@ -77,10 +77,8 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
-		// Initialization code
 		if (!valueChangeHandlerInitialized)
 			valueChangeHandlerInitialized = addChangeHandler(event -> fireChangeEvent()) != null;
-
 		return addHandler(handler, ValueChangeEvent.getType());
 	}
 

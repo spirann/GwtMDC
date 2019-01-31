@@ -273,7 +273,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		input.setValue(value, fireEvents);
 	}
 
-	public MaterialInput getInput() {
+	protected MaterialInput getInput() {
 		return input;
 	}
 

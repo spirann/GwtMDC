@@ -21,7 +21,7 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import gwt.material.design.components.client.base.interfaces.StringToDate;
+import gwt.material.design.components.client.base.interfaces.Converter;
 import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.masker.Masker;
@@ -38,13 +38,13 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 	protected final MaterialDatePickerDialog dialog = new MaterialDatePickerDialog();
 
-	private StringToDate stringToDate = DatePickerHelper.defaultStringToDate(input);
+	private Converter<MaterialTextField, Date, String> converter = DatePickerHelper.getConverter();
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
-		dialog.addAcceptHandler(event -> setValue(stringToDate.convert(dialog.getValue())));
+		dialog.addAcceptHandler(event -> setValue(converter.undo(this, dialog.getValue())));
 
 		add(dialog);
 		
@@ -62,19 +62,19 @@ public class MaterialDatePickerInput extends MaterialTextField {
 
 	}
 
-	public StringToDate getStringToDate() {
-		return stringToDate;
+	public Converter<MaterialTextField, Date, String> getConverter() {
+		return converter;
 	}
 
-	public void setStringToDate(StringToDate stringToDate) {
-		this.stringToDate = stringToDate;
+	public void setConverter(Converter<MaterialTextField, Date, String> stringToDate) {
+		this.converter = stringToDate;
 	}
 
 	public void openDatePicker() {
 		if (getValue().isEmpty())
-			dialog.setValue(stringToDate.convert(getValue()));
+			dialog.setValue(converter.convert(this, getValue()));
 		else
-			dialog.setValue(stringToDate.convert(Masker.toPattern(getValue(), getInputMask())));
+			dialog.setValue(converter.convert(this, Masker.toPattern(getValue(), getInputMask())));
 		dialog.open();
 	}
 
