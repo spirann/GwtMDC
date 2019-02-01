@@ -48,8 +48,9 @@ public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 			super.onInitialize();
 		}
 	};
-	
-	protected Label headerDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE, CssName.MDC_TYPOGRAPHY__HEADLINE_5);
+
+	protected Label headerDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE,
+			CssName.MDC_TYPOGRAPHY__HEADLINE_5);
 
 	public MaterialDatePickerHeader() {
 		super(CssName.MDC_DATEPICKER__HEADER);
@@ -69,20 +70,20 @@ public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 	}
 
 	protected void drawHeader() {
-		
+
 		final Date date;
-		
-		if(getValue() == null)
+
+		if (getValue() == null)
 			date = new Date();
-		else	
+		else
 			date = getValue();
-		
+
 		final int year = date.getYear() + 1900;
 		final int month = date.getMonth() + 1;
 		final String week = IMessages.INSTANCE.mdc_calendar_short_week(date.getDay() + 1);
 		final String shortMonth = IMessages.INSTANCE.mdc_calendar_short_month(month);
 		final int day = date.getDate();
-		headerYear.setText(String.valueOf(year));
+		headerYear.setText(DatePickerHelper.completeWithZero(String.valueOf(year), 4));
 		headerDate.setText(IMessages.INSTANCE.mdc_calendar_header_day(week, shortMonth, day));
 	}
 
@@ -96,16 +97,16 @@ public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 	public HandlerRegistration addYearClickHandler(ClickHandler handler) {
 		return headerYear.addClickHandler(handler);
 	}
-	
+
 	public HandlerRegistration addDateClickHandler(ClickHandler handler) {
 		return headerDate.addClickHandler(handler);
 	}
-	
+
 	@Override
 	public void setColor(Color color) {
 		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_INK, color.getCssName());
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setCssProperty(CssMixin.MDC_DATEPICKER__HEADER_FILL, color.getCssName());

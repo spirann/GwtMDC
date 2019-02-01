@@ -178,7 +178,7 @@ public class ValidationForTextField {
 			if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0))
 				monthLength[1] = 29;
 
-			if (year < 1970 || year > 3000 || month < 1 || month > 12 || day < 0 || day > monthLength[month - 1])
+			if (year < 0 || year > 3000 || month < 1 || month > 12 || day < 0 || day > monthLength[month - 1])
 				return new Result(State.ERROR, 1211, IMessages.INSTANCE.mdc_validation__value_invalid());
 			if (isRequired)
 				return new Result(State.SUCCESS);

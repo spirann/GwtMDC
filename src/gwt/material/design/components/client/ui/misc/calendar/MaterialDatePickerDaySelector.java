@@ -21,6 +21,8 @@ package gwt.material.design.components.client.ui.misc.calendar;
 
 import java.util.Date;
 
+import gwt.material.design.components.client.utils.debug.Console;
+
 /**
  * 
  * @author Richeli Vargas
@@ -59,6 +61,9 @@ public class MaterialDatePickerDaySelector extends MaterialDatePickerBaseDaySele
 
 		final long key = this.auxDate.getTime();
 		final MaterialDatePickerItem item = mapedItems.get(key);
+
+		if (item != null)
+			Console.log(value + " | day: " + item.getText() + " | " + this.auxDate);
 
 		if (initialized && item == null && value != null) {
 			drawDays();

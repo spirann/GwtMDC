@@ -83,6 +83,12 @@ public abstract class MaterialDatePickerDialogBase<T, D extends MaterialDatePick
 	}
 
 	@Override
+	public void open() {		
+		datePicker.setValue(getValue(), false);		
+		super.open();
+	}
+	
+	@Override
 	public void setValue(T value) {
 		setValue(value, true);
 	}

@@ -89,7 +89,7 @@ public class DateTimeHelper {
 	 * @param date
 	 * @return Date in milliseconds without hours, minutes and seconds
 	 */
-	private static long removeTimeIgnoringGMT(final Date date) {
+	public static long removeTimeIgnoringGMT(final Date date) {
 		final long time = date.getTime();
 		final long fromTheDate = time - (time % daysInMillis(1));
 		return fromTheDate;

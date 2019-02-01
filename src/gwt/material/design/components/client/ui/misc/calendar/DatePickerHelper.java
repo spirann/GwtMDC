@@ -40,19 +40,19 @@ public class DatePickerHelper {
 
 	public static final <W extends HasPlaceholder & HasInputMask> void formatPlaceholder(final W widget) {
 		if (widget.getPlaceholder() == null || widget.getPlaceholder().trim().isEmpty())
-			widget.setPlaceholder(
-					widget.getInputMask().replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/")
-							.replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
-							.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy())
-							.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
+			widget.setPlaceholder(widget.getInputMask()
+					.replace("/99/", "/" + IMessages.INSTANCE.mdc_calendar_mm() + "/")
+					.replace("-99-", "-" + IMessages.INSTANCE.mdc_calendar_mm() + "-")
+					.replace("9999", IMessages.INSTANCE.mdc_calendar_yyyy())
+					.replace("99", IMessages.INSTANCE.mdc_calendar_dd()));
 
 	}
-	
-	public static Converter<MaterialTextField, Date, String> getConverter(){
+
+	public static Converter<MaterialTextField, Date, String> getConverter() {
 		return new DateConverter();
 	}
-	
-	protected static class DateConverter implements Converter<MaterialTextField, Date, String>{
+
+	protected static class DateConverter implements Converter<MaterialTextField, Date, String> {
 
 		@Override
 		public Date convert(MaterialTextField source, String value) {
@@ -64,18 +64,25 @@ public class DatePickerHelper {
 			return dateToString(source, value);
 		}
 	}
-		
+
+	public  static String completeWithZero(String text, final int finalSize) {
+		while (text.length() < finalSize)
+			text = "0" + text;
+		return text;
+	}
+
 	@SuppressWarnings("deprecation")
-	protected static final <W extends HasInputMask & HasValidation<?,?>> String dateToString(final W widget, final Date date) {
+	protected static final <W extends HasInputMask & HasValidation<?, ?>> String dateToString(final W widget,
+			final Date date) {
 
 		if (date == null)
 			return "";
 
 		final String mask = widget.getInputMask();
 
-		final String day = date.getDate() < 10 ? "0" + date.getDate() : String.valueOf(date.getDate());
-		final String month = date.getMonth() < 10 ? "0" + (date.getMonth() + 1) : String.valueOf((date.getMonth() + 1));
-		final String year = String.valueOf(date.getYear() + 1900);
+		final String day = completeWithZero(String.valueOf(date.getDate()), 2);
+		final String month = completeWithZero(String.valueOf((date.getMonth() + 1)), 2);
+		final String year = completeWithZero(String.valueOf(date.getYear() + 1900), 4);
 
 		switch (mask) {
 		case "99/99/9999":
@@ -90,7 +97,8 @@ public class DatePickerHelper {
 	}
 
 	@SuppressWarnings("deprecation")
-	protected static final <W extends HasInputMask & HasValidation<?,?>> Date stringToDate(final W widget, final String maskedValue) {
+	protected static final <W extends HasInputMask & HasValidation<?, ?>> Date stringToDate(final W widget,
+			final String maskedValue) {
 
 		if (maskedValue.isEmpty())
 			return null;
@@ -104,7 +112,7 @@ public class DatePickerHelper {
 
 		final String mask = widget.getInputMask();
 		final String unmaskedValue = maskedValue.replaceAll("[^0-9]", "");
-		
+
 		final int day;
 		final int month;
 		final int year;
@@ -125,7 +133,13 @@ public class DatePickerHelper {
 		default:
 			return null;
 		}
-		
-		return new Date(year - 1900, month - 1, day);
+
+		final Date date = new Date();
+		date.setHours(12);
+		date.setYear(year - 1900);
+		date.setMonth(month - 1);
+		date.setDate(day);
+
+		return date;
 	}
 }
