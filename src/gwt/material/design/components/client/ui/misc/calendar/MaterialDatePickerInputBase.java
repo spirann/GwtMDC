@@ -51,7 +51,6 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 
 	@Override
 	protected void onInitialize() {
-
 		for (Widget input : getInputs())
 			add(input);
 
@@ -82,7 +81,6 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 
 	@Override
 	public void setValue(T value, boolean fireEvents) {
-
 		if (dialog != null)
 			dialog.setValue(value, false);
 

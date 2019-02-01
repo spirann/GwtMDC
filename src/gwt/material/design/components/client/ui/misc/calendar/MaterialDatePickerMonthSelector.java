@@ -82,7 +82,6 @@ public class MaterialDatePickerMonthSelector extends MaterialValuedField<Integer
 				((MaterialDatePickerItem) getWidget(oldValue - 1)).setSelected(false, false);
 			else if (value != null)
 				((MaterialDatePickerItem) getWidget(value - 1)).setSelected(true, false);
-
 		}
 	}
 

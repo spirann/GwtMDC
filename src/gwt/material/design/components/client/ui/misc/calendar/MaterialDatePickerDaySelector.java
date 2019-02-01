@@ -56,15 +56,14 @@ public class MaterialDatePickerDaySelector extends MaterialDatePickerBaseDaySele
 
 		super.setValue(value == null ? null : adjustDate(value), fireEvents);
 		this.auxDate = adjustDate(value);
-		
+
 		final long key = this.auxDate.getTime();
 		final MaterialDatePickerItem item = mapedItems.get(key);
-		
+
 		if (initialized && item == null && value != null) {
 			drawDays();
 			drawMonth();
-		} else if (initialized && item != null && value != null) {
+		} else if (initialized && item != null && value != null)
 			item.setSelected(true);
-		}
 	}
 }

@@ -49,13 +49,12 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 	protected final static Map<String, MaterialDatePickerItem> history = new HashMap<>();
 
 	protected void updateHistory() {
-		if (isSelected()) {
+		if (isSelected())
 			putInHistory(true);
-		} else {
+		else
 			removeFromHistory();
-		}
 	}
-	
+
 	protected void putInHistory(final boolean fireEvent) {
 		final MaterialDatePickerItem old = history.get(getName());
 		if (fireEvent && old != null && old != this) {
@@ -67,41 +66,42 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 
 	protected void removeFromHistory() {
 		final MaterialDatePickerItem old = history.get(getName());
-		if (old == this) {
+		if (old == this)
 			history.remove(getName());
-		}
 	}
-	
+
 	protected final TextMixin<MaterialDatePickerItem> textMixin = new TextMixin<>(this);
-	protected final AttributeMixin<MaterialDatePickerItem, String> nameMixin = new AttributeMixin<>(this, CssAttribute.NAME, FromString.TO_STRING);
-	
+	protected final AttributeMixin<MaterialDatePickerItem, String> nameMixin = new AttributeMixin<>(this,
+			CssAttribute.NAME, FromString.TO_STRING);
+
 	public MaterialDatePickerItem() {
-		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__ITEM, CssName.MDC_TYPOGRAPHY__CAPTION);
+		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__ITEM,
+				CssName.MDC_TYPOGRAPHY__CAPTION);
 		super.initializeSelectedMixin(this, CssName.MDC_DATEPICKER__ITEM_ACTIVE);
 	}
-	
+
 	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{		
+	protected native JavaScriptObject jsInit(final Element element)/*-{
 		return element;
 	}-*/;
 
 	@Override
 	protected void onInitialize() {
 
-		ripleMixin.initialize();		
+		ripleMixin.initialize();
 		fireChangeOnClick = true;
-		
+
 		addClickHandler(event -> {
-			event.stopPropagation();	
+			event.stopPropagation();
 			setSelected(true, false);
 		});
-		
-		if (isSelected()) 
+
+		if (isSelected())
 			updateHistory();
-		
+
 		super.onInitialize();
 	}
-	
+
 	@Override
 	public void setSelected(boolean selected, boolean fireEvents) {
 		super.setSelected(selected, fireEvents);

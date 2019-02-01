@@ -55,7 +55,6 @@ public class MaterialDateRangePickerDaySelector extends MaterialDatePickerBaseDa
 		if ((minValueAsTime != null && date.getTime() == minValueAsTime)
 				|| (maxValueAsTime != null && date.getTime() == maxValueAsTime))
 			item.setSelected(true, false);
-
 		
 		return item;
 	}

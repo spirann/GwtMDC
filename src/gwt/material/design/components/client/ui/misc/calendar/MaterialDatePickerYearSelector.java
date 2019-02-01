@@ -42,12 +42,12 @@ import gwt.material.design.components.client.ui.html.Div;
 public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer> {
 
 	protected final static int NUMBER_OF_YERAS = 25;
-	
+
 	protected Div actions = new Div(CssName.MDC_DATEPICKER__ACTIONS);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 	protected Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
-	
+
 	protected Map<Integer, MaterialDatePickerItem> years = new LinkedHashMap<>();
 	private int minValue;
 	private int maxValue;
@@ -64,40 +64,41 @@ public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer>
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		
+
 		previousMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
-		previousMonth.addClickHandler(event -> drawYears(minValue - NUMBER_OF_YERAS, maxValue - NUMBER_OF_YERAS));
+		previousMonth.addClickHandler(
+				event -> drawYears(minValue - NUMBER_OF_YERAS, maxValue - NUMBER_OF_YERAS));
 
 		nextMonth.addStyleName(CssName.MDC_DATEPICKER__ACTION);
 		nextMonth.addClickHandler(event -> drawYears(minValue + NUMBER_OF_YERAS, maxValue + NUMBER_OF_YERAS));
-		
+
 		actions.add(previousMonth);
 		actions.add(nextMonth);
-		
+
 		add(actions);
 		add(items);
-		
+
 		drawYears();
 	}
 
 	@SuppressWarnings("deprecation")
-	protected void drawYears() {		
+	protected void drawYears() {
 		final Date date = new Date();
 		final Integer value = getValue();
 		final int auxYear = value == null ? date.getYear() + 1900 : value;
 		drawYears(auxYear - (NUMBER_OF_YERAS / 2), auxYear + (NUMBER_OF_YERAS / 2));
 	}
-	
+
 	protected void drawYears(final int minValue, final int maxValue) {
 
 		this.minValue = minValue;
 		this.maxValue = maxValue;
-		
+
 		items.clear();
 		years.clear();
 
 		final String name = getId();
-		final Integer value = getValue();		
+		final Integer value = getValue();
 
 		for (int y = minValue; y <= maxValue; y++) {
 
@@ -122,17 +123,15 @@ public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer>
 		final Integer oldValue = getValue();
 		super.setValue(value, fireEvents);
 		if (initialized) {
-			
-			if(value == null && oldValue != null) {
+			if (value == null && oldValue != null)
 				years.get(oldValue).setSelected(false, false);
-			} else if (value != null && years.containsKey(value)) {
+			else if (value != null && years.containsKey(value))
 				years.get(value).setSelected(true, false);
-			} else {
+			else
 				drawYears();
-			}
 		}
 	}
-	
+
 	@Override
 	public void setBackgroundColor(Color color) {
 		setCssProperty(CssMixin.MDC_DATEPICKER__FILL, color.getCssName());
@@ -146,7 +145,7 @@ public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer>
 	public void setActiveColor(Color color) {
 		setCssProperty(CssMixin.MDC_DATEPICKER__ACTIVE_INK, color.getCssName());
 	}
-	
+
 	public void setActiveBackgroundColor(Color color) {
 		setCssProperty(CssMixin.MDC_DATEPICKER__ACTIVE_FILL, color.getCssName());
 	}

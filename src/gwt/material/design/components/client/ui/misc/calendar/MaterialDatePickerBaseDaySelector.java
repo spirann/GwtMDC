@@ -288,14 +288,12 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	}
 
 	protected Date[] adjustDate(Date[] dates) {
-
 		if (dates == null)
 			return null;
 
 		final Date[] adjustedDates = new Date[dates.length];
-		for (int i = 0; i < adjustedDates.length; i++) {
+		for (int i = 0; i < adjustedDates.length; i++)
 			adjustedDates[i] = dates[i] == null ? null : adjustDate(dates[i]);
-		}
 
 		return adjustedDates;
 	}

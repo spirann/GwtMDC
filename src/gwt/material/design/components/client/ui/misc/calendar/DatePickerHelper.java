@@ -52,7 +52,6 @@ public class DatePickerHelper {
 		return new DateConverter();
 	}
 	
-	
 	protected static class DateConverter implements Converter<MaterialTextField, Date, String>{
 
 		@Override
