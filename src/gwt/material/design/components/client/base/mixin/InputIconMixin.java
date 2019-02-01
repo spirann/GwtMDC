@@ -23,7 +23,7 @@ public class InputIconMixin<UIO extends MaterialWidget & HasType<T>, T extends C
 
 	private IconPosition iconPosition = IconPosition.LEADING;
 
-	public InputIconMixin(final T type, final UIO uiObject, final MaterialIcon iconElement, final Widget input) {
+	public InputIconMixin(final UIO uiObject, final MaterialIcon iconElement, final Widget input, final T type) {
 		super(uiObject);
 		this.typeMixin = new TypeMixin<>(uiObject, type);
 		this.iconElement = iconElement;

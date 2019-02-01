@@ -72,7 +72,7 @@ import gwt.material.design.components.client.ui.misc.fileUpload.js.JsOptions;
 import gwt.material.design.components.client.ui.misc.fileUpload.js.JsProgressData;
 import gwt.material.design.components.client.utils.helper.Formatation;
 import gwt.material.design.components.client.utils.helper.JsHelper;
-import gwt.material.design.components.client.utils.helper.PrimitiveHelper;
+import gwt.material.design.components.client.utils.helper.ObjectHelper;
 import gwt.material.design.components.client.utils.helper.UiHelper;
 import gwt.material.design.components.client.validation.Validation;
 import gwt.material.design.components.client.validation.Validation.Result;
@@ -812,9 +812,9 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 		private Data(String response, int loaded, int total, int uploadedBytes, Collection<File> files) {
 			super();
 			this.response = JsHelper.fromNativeObject(response);
-			this.loaded = PrimitiveHelper.noNull(loaded);
-			this.total = PrimitiveHelper.noNull(total);
-			this.uploadedBytes = PrimitiveHelper.noNull(uploadedBytes);
+			this.loaded = ObjectHelper.noNull(loaded);
+			this.total = ObjectHelper.noNull(total);
+			this.uploadedBytes = ObjectHelper.noNull(uploadedBytes);
 			this.files = files;
 		}
 
@@ -855,10 +855,10 @@ public class MaterialFileUpload extends Input implements HasFired, HasStartHandl
 		private File(final JsFile jsFile) {
 			this.jsFile = jsFile;
 			this.name = JsHelper.fromNativeObject(jsFile.name);
-			this.lastModified = PrimitiveHelper.noNull(jsFile.lastModified);
+			this.lastModified = ObjectHelper.noNull(jsFile.lastModified);
 			this.lastModifiedDate = new Date(toTime(jsFile.lastModifiedDate));
 			this.webkitRelativePath = JsHelper.fromNativeObject(jsFile.webkitRelativePath);
-			this.size = PrimitiveHelper.noNull(jsFile.size);
+			this.size = ObjectHelper.noNull(jsFile.size);
 			this.mineType = JsHelper.fromNativeObject(jsFile.type);
 			this.type = FileType.fromMimeType(this.name, this.mineType);
 			this.data = jsFile.slice();

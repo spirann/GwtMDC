@@ -19,7 +19,8 @@
  */
 package gwt.material.design.components.client.base.mixin;
 
-import com.google.gwt.dom.client.Element;
+import com.google.gwt.event.dom.client.HasKeyUpHandlers;
+import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.FromString;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
@@ -27,13 +28,19 @@ import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.masker.Masker;
+import gwt.material.design.components.client.utils.debug.Console;
+import gwt.material.design.components.client.utils.helper.DOMHelper;
+import gwt.material.design.components.client.utils.helper.ObjectHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin<UIO, String> implements HasInputMask {
+public class InputMaskMixin<UIO extends MaterialUIObject & HasKeyUpHandlers> extends AttributeMixin<UIO, String>
+		implements HasInputMask {
+
+	private HandlerRegistration handler;
 
 	public InputMaskMixin(UIO uiObject) {
 		super(uiObject, CssAttribute.INPUT_MASK, FromString.TO_STRING);
@@ -46,13 +53,18 @@ public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin
 	 */
 	@Override
 	public void setInputMask(String inputMask) {
-		if (getValue() != null)
-			Masker.unMask(uiObject.getElement());
 
 		setValue(inputMask);
 
-		if (inputMask != null)
-			Masker.maskPattern(uiObject.getElement(), inputMask);
+		if (ObjectHelper.isNullOrEmpty(inputMask))
+			clearHandler();
+		else if (handler == null)
+			handler = uiObject.addKeyUpHandler(event -> {
+				Console.log("Value: " + DOMHelper.getValue(uiObject.getElement()));
+				DOMHelper.setValue(uiObject.getElement(),
+						Masker.toPattern(DOMHelper.getValue(uiObject.getElement()), getInputMask()));
+				
+			});
 	}
 
 	@Override
@@ -61,11 +73,14 @@ public class InputMaskMixin<UIO extends MaterialUIObject> extends AttributeMixin
 	}
 
 	public String getValue() {
-		return Masker.fromPattern(getValue(uiObject.getElement()), getInputMask());
+		return Masker.fromPattern(DOMHelper.getValue(uiObject.getElement()), getInputMask());
 	}
 
-	protected native String getValue(final Element element) /*-{
-		return element.value;
-	}-*/;
+	protected void clearHandler() {
+		if (handler != null) {
+			handler.removeHandler();
+			handler = null;
+		}
+	}
 
 }

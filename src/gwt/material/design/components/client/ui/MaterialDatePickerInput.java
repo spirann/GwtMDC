@@ -21,96 +21,70 @@ package gwt.material.design.components.client.ui;
 
 import java.util.Date;
 
-import gwt.material.design.components.client.base.interfaces.Converter;
-import gwt.material.design.components.client.constants.IconPosition;
-import gwt.material.design.components.client.constants.IconType;
-import gwt.material.design.components.client.masker.Masker;
-import gwt.material.design.components.client.ui.misc.calendar.DatePickerHelper;
-import gwt.material.design.components.client.utils.helper.JsHelper;
-import gwt.material.design.components.client.validation.ValidationForTextField;
+import gwt.material.design.components.client.base.interfaces.HasHelperText;
+import gwt.material.design.components.client.base.interfaces.HasLabel;
+import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerInputBase;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MaterialDatePickerInput extends MaterialTextField {
+public class MaterialDatePickerInput extends MaterialDatePickerInputBase<Date, MaterialDatePickerDialog> implements HasLabel, HasPlaceholder, HasHelperText {
 
-	protected final MaterialDatePickerDialog dialog = new MaterialDatePickerDialog();
-
-	private Converter<MaterialTextField, Date, String> converter = DatePickerHelper.getConverter();
+	protected MaterialTextField input = getInputs()[0];
 
 	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-
-		dialog.addAcceptHandler(event -> setValue(converter.undo(this, dialog.getValue())));
-
-		add(dialog);
-		
-		setInputMask(Masker.Defaults.INSTANCE.date__mask());;
-		addValidation(ValidationForTextField.date());
-		
-		DatePickerHelper.formatPlaceholder(this);
-		
-		setIcon(IconType.EVENT);
-		setIconPosition(IconPosition.TRAILING);
-		setMaxLength(10);
-		addIconClickHandler(event -> openDatePicker());
-
-		JsHelper.allowNumbersOnly(getInput().getElement());
-
+	protected MaterialDatePickerDialog getDialog() {
+		return dialog == null ?  new MaterialDatePickerDialog() : dialog;
 	}
 
-	public Converter<MaterialTextField, Date, String> getConverter() {
-		return converter;
+	@Override
+	protected MaterialTextField[] getInputs() {		
+		return inputs == null ? new MaterialTextField[] { newInput() } : inputs;
 	}
 
-	public void setConverter(Converter<MaterialTextField, Date, String> stringToDate) {
-		this.converter = stringToDate;
-	}
-
-	public void openDatePicker() {
-		if (getValue().isEmpty())
-			dialog.setValue(converter.convert(this, getValue()));
+	@Override
+	public void setValue(Date value) {
+	
+		if (value == null)
+			input.setValue("");
 		else
-			dialog.setValue(converter.convert(this, Masker.toPattern(getValue(), getInputMask())));
-		dialog.open();
+			input.setValue(converter.undo(input, value));
+
+		super.setValue(value);
+
 	}
 
-	public Date getMinDate() {
-		return dialog.getMinDate();
+	@Override
+	public void setPlaceholder(String placeholder) {
+		input.setPlaceholder(placeholder);
 	}
 
-	public void setMinDate(Date minDate) {
-		dialog.setMinDate(minDate);
+	@Override
+	public String getPlaceholder() {
+		return input.getPlaceholder();
 	}
 
-	public void setMinDate(String minDate) {
-		dialog.setMinDate(minDate);
+	@Override
+	public void setLabel(String label) {
+		input.setLabel(label);
 	}
 
-	public Date getMaxDate() {
-		return dialog.getMaxDate();
+	@Override
+	public String getLabel() {
+		return input.getLabel();
 	}
 
-	public void setMaxDate(Date maxDate) {
-		dialog.setMaxDate(maxDate);
+	@Override
+	public void setHelperText(String text) {
+		input.setHelperText(text);
 	}
 
-	public void setMaxDate(String maxDate) {
-		dialog.setMaxDate(maxDate);
+	@Override
+	public String getHelperText() {
+		return input.getHelperText();
 	}
 
-	public void setDateTooltip(final Date date, final String tooltip) {
-		dialog.setDateTooltip(date, tooltip);
-	}
-
-	public String getDateTooltip(final Date date) {
-		return dialog.getDateTooltip(date);
-	}
-
-	public String removeDateTooltip(final Date date) {
-		return dialog.removeDateTooltip(date);
-	}
 }

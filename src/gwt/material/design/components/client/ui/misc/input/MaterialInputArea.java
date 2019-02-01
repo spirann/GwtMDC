@@ -20,7 +20,6 @@
 package gwt.material.design.components.client.ui.misc.input;
 
 import gwt.material.design.components.client.base.interfaces.HasResize;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.Resize;
 import gwt.material.design.components.client.ui.html.Textarea;
@@ -38,7 +37,7 @@ public class MaterialInputArea extends MaterialInput implements HasResize {
 	}
 	
 	@Override
-	protected MaterialWidget constructInput() {
+	protected Textarea constructInput() {
 		return new Textarea(CssName.MDC_TEXT_FIELD__INPUT);
 	}
 

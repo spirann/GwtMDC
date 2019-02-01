@@ -23,7 +23,7 @@ import com.google.gwt.event.dom.client.HasKeyUpHandlers;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.Timer;
-import com.google.gwt.user.client.ui.HasText;
+import com.google.gwt.user.client.ui.HasValue;
 
 import gwt.material.design.components.client.base.mixin.base.AbstractMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
@@ -35,23 +35,16 @@ import gwt.material.design.components.client.utils.helper.TimerHelper;
 /**
  * @author Richeli Vargas
  */
-public class TypingMixin<UIO extends MaterialUIObject & HasKeyUpHandlers & HasTypingHandlers & HasText> extends AbstractMixin<UIO> implements HasTypingHandlers  {
+public class TypingMixin<UIO extends MaterialUIObject & HasTypingHandlers & HasKeyUpHandlers & HasValue<String>>
+		extends AbstractMixin<UIO> implements HasTypingHandlers {
 
+	private HandlerRegistration handler;
 	private int typingDelay = 350;
 	protected long lastTyping = 0L;
 	protected Timer typingTimer;
-	
+
 	public TypingMixin(final UIO uiObject) {
 		super(uiObject);
-		
-		uiObject.addKeyUpHandler(event -> {
-			
-			if(typingTimer != null)
-				typingTimer.cancel();
-			
-			typingTimer = TimerHelper.schedule(typingDelay, () -> fireTypingEvent());
-			
-		});
 	}
 
 	@Override
@@ -64,13 +57,21 @@ public class TypingMixin<UIO extends MaterialUIObject & HasKeyUpHandlers & HasTy
 		typingTimer = null;
 		uiObject.fireEvent(event);
 	}
-	
+
 	protected void fireTypingEvent() {
-		TypingEvent.fire(uiObject, uiObject.getText());
+		TypingEvent.fire(uiObject, uiObject.getValue());
 	}
 
 	@Override
 	public HandlerRegistration addTypingHandler(TypingHandler handler) {
+
+		if (this.handler == null)
+			this.handler = uiObject.addKeyUpHandler(event -> {
+				if (typingTimer != null)
+					typingTimer.cancel();
+				typingTimer = TimerHelper.schedule(typingDelay, () -> fireTypingEvent());
+			});
+
 		return uiObject.addHandler(handler, TypingEvent.getType());
 	}
 }

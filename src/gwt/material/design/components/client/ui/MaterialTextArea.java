@@ -34,7 +34,7 @@ import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
  *
  */
 public class MaterialTextArea extends MaterialInputBox implements HasType<TextFieldType>, HasResize {
-
+	
 	protected final TypeMixin<MaterialInput, TextFieldType> typeMixin = new TypeMixin<>(input, TextFieldType.FILLED);
 
 	public MaterialTextArea() {

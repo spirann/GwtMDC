@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 import com.google.gwt.event.dom.client.KeyUpHandler;
@@ -17,23 +19,30 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.Converter;
+import gwt.material.design.components.client.base.interfaces.HasIconPosition;
+import gwt.material.design.components.client.base.interfaces.HasInputMask;
+import gwt.material.design.components.client.base.interfaces.HasRequired;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.IconPosition;
 import gwt.material.design.components.client.constants.IconType;
+import gwt.material.design.components.client.events.IconClickEvent.HasIconClickHandlers;
+import gwt.material.design.components.client.events.IconClickEvent.IconClickHandler;
 import gwt.material.design.components.client.events.TypingEvent.HasTypingHandlers;
 import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.ui.MaterialTextField;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
+import gwt.material.design.components.client.utils.debug.Console;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.ValidationForTextField;
 
 public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePickerDialogBase<T, ?>> extends Div
-		implements HasValue<T>, HasValueChangeHandlers<T>, HasTypingHandlers {
+		implements HasValue<T>, HasValueChangeHandlers<T>, HasTypingHandlers, HasInputMask, HasRequired,
+		HasIconClickHandlers, HasIconPosition {
 
-	protected final MaterialInputBox[] inputs = getInputs();
+	private boolean valueChangeHandlerInitialized;
+	protected final MaterialTextField[] inputs = getInputs();
 	protected final D dialog = getDialog();
 	protected Converter<MaterialTextField, Date, String> converter = DatePickerHelper.getConverter();
 
@@ -46,17 +55,18 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 
 		for (Widget input : getInputs())
 			add(input);
-				
+
 		dialog.addAcceptHandler(event -> setValue(dialog.getValue()));
 		add(dialog);
 		super.onInitialize();
 	}
 
 	protected abstract D getDialog();
-	protected abstract MaterialInputBox[] getInputs();
+
+	protected abstract MaterialTextField[] getInputs();
 
 	protected void fireChangeEvent() {
-		ValueChangeEvent.fire(MaterialDatePickerInputBase.this, getValue());
+		ValueChangeEvent.fire(this, getValue());
 	}
 
 	public void openDatePicker() {
@@ -91,13 +101,16 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	public void setConverter(Converter<MaterialTextField, Date, String> stringToDate) {
 		this.converter = stringToDate;
 	}
-	
+
+	protected HandlerRegistration addChangeHandler(ChangeHandler handler) {
+		return addDomHandler(handler, ChangeEvent.getType());
+	}
+
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
-		final Collection<HandlerRegistration> registrations = Arrays.asList(inputs).stream()
-				.map(input -> input.addValueChangeHandler(event -> fireChangeEvent()))
-				.collect(Collectors.toList());
-		return () -> registrations.forEach(registration -> registration.removeHandler());
+		if (!valueChangeHandlerInitialized)
+			valueChangeHandlerInitialized = addChangeHandler(event -> fireChangeEvent()) != null;
+		return addHandler(handler, ValueChangeEvent.getType());
 	}
 
 	@Override
@@ -125,6 +138,13 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	public HandlerRegistration addTypingHandler(TypingHandler handler) {
 		final Collection<HandlerRegistration> registrations = Arrays.asList(inputs).stream()
 				.map(input -> input.addTypingHandler(handler)).collect(Collectors.toList());
+		return () -> registrations.forEach(registration -> registration.removeHandler());
+	}
+
+	@Override
+	public HandlerRegistration addIconClickHandler(IconClickHandler handler) {
+		final Collection<HandlerRegistration> registrations = Arrays.asList(inputs).stream()
+				.map(input -> input.addIconClickHandler(handler)).collect(Collectors.toList());
 		return () -> registrations.forEach(registration -> registration.removeHandler());
 	}
 
@@ -226,7 +246,7 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	public String removeDateTooltip(final Date date) {
 		return dialog.removeDateTooltip(date);
 	}
-	
+
 	public void setDense(boolean dense) {
 		Arrays.asList(inputs).forEach(input -> input.setDense(dense));
 	}
@@ -234,7 +254,7 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	public boolean isDense() {
 		return Arrays.asList(inputs).stream().filter(input -> input.isDense()).count() > 0;
 	}
-	
+
 	public void setUnbordered(boolean unbordered) {
 		Arrays.asList(inputs).forEach(input -> input.setUnbordered(unbordered));
 	}
@@ -254,25 +274,56 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	public void setHelperTextPersistent(boolean persistent) {
 		Arrays.asList(inputs).forEach(input -> input.setHelperTextPersistent(persistent));
 	}
-	
+
+	public boolean isHelperTextPersistent() {
+		return Arrays.asList(inputs).stream().filter(input -> input.isHelperTextPersistent()).count() > 0;
+	}
+
+	public boolean isHelperTextValidation() {
+		return Arrays.asList(inputs).stream().filter(input -> input.isHelperTextValidation()).count() > 0;
+	}
+
+	@Override
+	public void setInputMask(String inputMask) {
+		Arrays.asList(inputs).forEach(input -> input.setInputMask(inputMask));
+	}
+
+	@Override
+	public String getInputMask() {
+		return inputs == null || inputs.length == 0 ? null : inputs[0].getInputMask();
+	}
+
+	@Override
+	public void setRequired(boolean required) {
+		Arrays.asList(inputs).forEach(input -> input.setRequired(required));
+	}
+
+	@Override
+	public boolean isRequired() {
+		return Arrays.asList(inputs).stream().filter(input -> input.isRequired()).count() > 0;
+	}
+
+	public void setIconColor(Color color) {
+		Arrays.asList(inputs).forEach(input -> input.setIconColor(color));
+	}
+
+	@Override
+	public IconPosition getIconPosition() {
+		return inputs == null || inputs.length == 0 ? null : inputs[0].getIconPosition();
+	}
+
+	@Override
+	public void setIconPosition(IconPosition iconPosition) {
+		Arrays.asList(inputs).forEach(input -> input.setIconPosition(iconPosition));
+	}
+
 	protected MaterialTextField newInput() {
-		return new MaterialTextField() {
+
+		final MaterialTextField input = new MaterialTextField() {
 
 			@Override
 			protected void onLoad() {
 				super.onLoad();
-				addValidation(ValidationForTextField.date());
-				setIcon(IconType.EVENT);
-				setIconPosition(IconPosition.TRAILING);
-				setMaxLength(10);
-				addIconClickHandler(event -> openDatePicker());
-			}
-
-			@Override
-			protected void onInitialize() {
-				setInputMask(Masker.Defaults.INSTANCE.date__mask());
-				super.onInitialize();
-				setInputMask(Masker.Defaults.INSTANCE.date__mask());
 				JsHelper.allowNumbersOnly(getInput().getElement());
 			}
 
@@ -283,5 +334,18 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 			}
 
 		};
+
+		input.addValidation(ValidationForTextField.date());
+		input.setIcon(IconType.EVENT);
+		input.setIconPosition(IconPosition.TRAILING);
+		input.setMaxLength(10);
+		input.addIconClickHandler(event -> openDatePicker());
+		input.addTypingHandler(event -> {
+			Console.log("typing...");
+			MaterialDatePickerInputBase.this.fireChangeEvent();
+		});
+		input.setInputMask(Masker.Defaults.INSTANCE.date__mask());
+
+		return input;
 	}
 }

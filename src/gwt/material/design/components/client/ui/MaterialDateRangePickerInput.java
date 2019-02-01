@@ -23,7 +23,6 @@ import java.util.Date;
 
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerInputBase;
-import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
 
 /**
  * 
@@ -32,8 +31,8 @@ import gwt.material.design.components.client.ui.misc.input.MaterialInputBox;
  */
 public class MaterialDateRangePickerInput extends MaterialDatePickerInputBase<Date[], MaterialDateRangePickerDialog> {
 
-	protected final MaterialTextField startDate = newInput();
-	protected final MaterialTextField endDate = newInput();	
+	protected final MaterialTextField startDate = getInputs()[0];
+	protected final MaterialTextField endDate = getInputs()[1];	
 		
 	@Override
 	protected void onInitialize() {
@@ -44,12 +43,12 @@ public class MaterialDateRangePickerInput extends MaterialDatePickerInputBase<Da
 	
 	@Override
 	protected MaterialDateRangePickerDialog getDialog() {
-		return new MaterialDateRangePickerDialog();
+		return dialog == null ?  new MaterialDateRangePickerDialog() : dialog;
 	}	
 
 	@Override
-	protected MaterialInputBox[] getInputs() {
-		return new MaterialInputBox[] {startDate, endDate};	
+	protected MaterialTextField[] getInputs() {
+		return inputs == null ? new MaterialTextField[] { newInput(), newInput() } : inputs;
 	}
 	
 	@Override

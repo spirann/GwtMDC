@@ -24,7 +24,25 @@ package gwt.material.design.components.client.utils.helper;
  * @author Richeli Vargas
  *
  */
-public class PrimitiveHelper {
+public class ObjectHelper {
+
+	public final static boolean isNullOrEmpty(final Object object) {
+		return object == null || object.toString().trim().isEmpty()
+				|| (object instanceof Object[] ? ((Object[]) object).length == 0 : false);
+	}
+
+	public final static boolean isNotNullAndNotEmpty(final Object object) {
+		return object != null && !object.toString().trim().isEmpty()
+				&& (object instanceof Object[] ? ((Object[]) object).length > 0 : true);
+	}
+
+	public final static boolean isNull(final Object object) {
+		return object == null;
+	}
+
+	public final static boolean isNotNull(final Object object) {
+		return object != null;
+	}
 
 	public static Integer toInteger(final String string) {
 		return toInteger(string, null);

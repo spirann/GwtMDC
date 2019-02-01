@@ -64,7 +64,7 @@ public class MaterialInputBox extends Div implements HasHelperText, HasText, Has
 		super(CssName.MDC_TEXT_FIELD_CONTAINER);
 	}
 
-	protected MaterialInput contructInput() {
+	protected MaterialInput contructInput() {	
 		return new MaterialInput();
 	}
 

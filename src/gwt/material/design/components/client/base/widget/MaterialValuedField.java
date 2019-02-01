@@ -61,7 +61,7 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 
 	protected void fireChangeEvent() {
 		ValueChangeEvent.fire(MaterialValuedField.this, getValue());
-	}
+	}	
 
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {

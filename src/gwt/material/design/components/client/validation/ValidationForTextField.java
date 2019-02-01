@@ -136,7 +136,7 @@ public class ValidationForTextField {
 
 	public static final Validation<MaterialInput> date() {
 		return (input) -> {
-			final String value = input.getValue();
+			final String value = input.getValue() == null ? "" : input.getValue();
 			final String inputMask = input.getInputMask();
 			final Boolean isRequired = input.isRequired();
 

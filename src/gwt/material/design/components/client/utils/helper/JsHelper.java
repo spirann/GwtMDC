@@ -122,7 +122,13 @@ public class JsHelper {
 			return /\d/.test(String.fromCharCode(event.keyCode));
 		});
 	}-*/;
-	
+
+	public static native void allowNumbersAndBarOnly(final Element element)/*-{
+		$wnd.jQuery(element).keypress(function(event) {
+			return /^\d*\/?\d*$/.test(String.fromCharCode(event.keyCode));
+		});
+	}-*/;
+
 	@SuppressWarnings("rawtypes")
 	public static native JsArray toJsArray(final Object[] labels)/*-{
 
@@ -184,25 +190,33 @@ public class JsHelper {
 							return b.toUpperCase();
 						};
 						var camelize = function(string) {
-							return string.replace(pattern, uc);
+							return string
+									.replace(
+											pattern,
+											uc);
 						};
 
 						// make sure we're getting a good reference
-						if (style = window.getComputedStyle(dom, null)) {
+						if (style = window
+								.getComputedStyle(
+										dom,
+										null)) {
 							var camel, value;
 							// opera doesn't give back style.length - use truthy since a 0 length may as well be skipped anyways
 							if (style.length) {
 								for (var i = 0, l = style.length; i < l; i++) {
 									name = style[i];
 									camel = camelize(name);
-									value = style.getPropertyValue(name);
+									value = style
+											.getPropertyValue(name);
 									product[camel] = value;
 								}
 							} else {
 								// opera
 								for (name in style) {
 									camel = camelize(name);
-									value = style.getPropertyValue(name)
+									value = style
+											.getPropertyValue(name)
 											|| style[name];
 									product[camel] = value;
 								}

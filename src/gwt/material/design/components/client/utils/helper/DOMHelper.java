@@ -35,6 +35,15 @@ import com.google.gwt.user.client.ui.Widget;
  */
 public class DOMHelper {
 
+	public static native String getValue(final Element element)/*-{
+		var value = element.value;
+		return value ? value : '';
+	}-*/;
+
+	public static native void setValue(final Element element, final String value)/*-{
+		element.value = value;
+	}-*/;
+
 	protected final static boolean isClassOrId(final String selector) {
 		return selector.startsWith(".") || selector.startsWith("#");
 	}

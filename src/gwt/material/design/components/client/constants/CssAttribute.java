@@ -55,6 +55,7 @@ public class CssAttribute {
 	public static final String TARGET = "target";
 	public static final String TOOLTIP = "tooltip";
 	public static final String TYPE = "type";
+	public static final String VALUE = "value";
 	public static final String WIDTH = "width";
 	
 }
