@@ -33,7 +33,6 @@ import gwt.material.design.components.client.events.TypingEvent.TypingHandler;
 import gwt.material.design.components.client.masker.Masker;
 import gwt.material.design.components.client.ui.MaterialTextField;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.debug.Console;
 import gwt.material.design.components.client.utils.helper.JsHelper;
 import gwt.material.design.components.client.validation.ValidationForTextField;
 
@@ -64,6 +63,8 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 	protected abstract D getDialog();
 
 	protected abstract MaterialTextField[] getInputs();
+
+	protected abstract void setValueChangeOnTyping();
 
 	protected void fireChangeEvent() {
 		ValueChangeEvent.fire(this, getValue());
@@ -341,7 +342,7 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 		input.setMaxLength(10);
 		input.addIconClickHandler(event -> openDatePicker());
 		input.addTypingHandler(event -> {
-			Console.log("typing...");
+			setValueChangeOnTyping();
 			MaterialDatePickerInputBase.this.fireChangeEvent();
 		});
 		input.setInputMask(Masker.Defaults.INSTANCE.date__mask());

@@ -24,6 +24,9 @@ import java.util.Date;
 import gwt.material.design.components.client.base.interfaces.HasHelperText;
 import gwt.material.design.components.client.base.interfaces.HasLabel;
 import gwt.material.design.components.client.base.interfaces.HasPlaceholder;
+import gwt.material.design.components.client.base.interfaces.HasReadOnly;
+import gwt.material.design.components.client.base.interfaces.HasState;
+import gwt.material.design.components.client.constants.State;
 import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerInputBase;
 
 /**
@@ -31,7 +34,7 @@ import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePicker
  * @author Richeli Vargas
  *
  */
-public class MaterialDatePickerInput extends MaterialDatePickerInputBase<Date, MaterialDatePickerDialog> implements HasLabel, HasPlaceholder, HasHelperText {
+public class MaterialDatePickerInput extends MaterialDatePickerInputBase<Date, MaterialDatePickerDialog> implements HasLabel, HasPlaceholder, HasHelperText, HasReadOnly, HasState {
 
 	protected MaterialTextField input = getInputs()[0];
 
@@ -55,6 +58,11 @@ public class MaterialDatePickerInput extends MaterialDatePickerInputBase<Date, M
 
 		super.setValue(value);
 
+	}
+	
+	@Override
+	protected void setValueChangeOnTyping() {
+		super.setValue(converter.convert(input, input.getValue()));
 	}
 
 	@Override
@@ -85,6 +93,26 @@ public class MaterialDatePickerInput extends MaterialDatePickerInputBase<Date, M
 	@Override
 	public String getHelperText() {
 		return input.getHelperText();
+	}
+
+	@Override
+	public void setState(State state) {
+		input.setState(state);
+	}
+
+	@Override
+	public State getState() {
+		return input.getState();
+	}
+
+	@Override
+	public void setReadOnly(boolean readOnly) {
+		input.setReadOnly(readOnly);
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return input.isReadOnly();
 	}
 
 }

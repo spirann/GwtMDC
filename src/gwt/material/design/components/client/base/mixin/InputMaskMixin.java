@@ -28,7 +28,6 @@ import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
 import gwt.material.design.components.client.base.widget.MaterialUIObject;
 import gwt.material.design.components.client.constants.CssAttribute;
 import gwt.material.design.components.client.masker.Masker;
-import gwt.material.design.components.client.utils.debug.Console;
 import gwt.material.design.components.client.utils.helper.DOMHelper;
 import gwt.material.design.components.client.utils.helper.ObjectHelper;
 
@@ -59,12 +58,8 @@ public class InputMaskMixin<UIO extends MaterialUIObject & HasKeyUpHandlers> ext
 		if (ObjectHelper.isNullOrEmpty(inputMask))
 			clearHandler();
 		else if (handler == null)
-			handler = uiObject.addKeyUpHandler(event -> {
-				Console.log("Value: " + DOMHelper.getValue(uiObject.getElement()));
-				DOMHelper.setValue(uiObject.getElement(),
-						Masker.toPattern(DOMHelper.getValue(uiObject.getElement()), getInputMask()));
-				
-			});
+			handler = uiObject.addKeyUpHandler(event -> DOMHelper.setValue(uiObject.getElement(),
+					Masker.toPattern(DOMHelper.getValue(uiObject.getElement()), getInputMask())));
 	}
 
 	@Override

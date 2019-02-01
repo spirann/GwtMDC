@@ -104,7 +104,8 @@ public class DatePickerHelper {
 		}
 
 		final String mask = widget.getInputMask();
-
+		final String unmaskedValue = maskedValue.replaceAll("[^0-9]", "");
+		
 		final int day;
 		final int month;
 		final int year;
@@ -112,15 +113,15 @@ public class DatePickerHelper {
 		switch (mask) {
 		case "99/99/9999":
 		case "99-99-9999":
-			day = Integer.parseInt(maskedValue.substring(0, 2));
-			month = Integer.parseInt(maskedValue.substring(3, 5));
-			year = Integer.parseInt(maskedValue.substring(6));
+			day = Integer.parseInt(unmaskedValue.substring(0, 2));
+			month = Integer.parseInt(unmaskedValue.substring(2, 4));
+			year = Integer.parseInt(unmaskedValue.substring(4));
 			break;
 		case "9999/99/99":
 		case "9999-99-99":
-			day = Integer.parseInt(maskedValue.substring(9));
-			month = Integer.parseInt(maskedValue.substring(6, 8));
-			year = Integer.parseInt(maskedValue.substring(0, 5));
+			day = Integer.parseInt(unmaskedValue.substring(6));
+			month = Integer.parseInt(unmaskedValue.substring(4, 6));
+			year = Integer.parseInt(unmaskedValue.substring(0, 4));
 			break;
 		default:
 			return null;
