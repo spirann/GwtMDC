@@ -3,6 +3,7 @@ html, body {
 	padding: 0px;
 	height: 100%;
 	background-color: var(--mdc-theme-background);
+	zoom: var(--mdc-zoom);
 }
 
 i, button, a {

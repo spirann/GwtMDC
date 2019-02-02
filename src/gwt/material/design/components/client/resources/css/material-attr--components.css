@@ -2,7 +2,8 @@
 	/* ================================ */
   	/* Body attributes					*/
   	/* ================================ */
-  	--mdc-root-font-size: 16px;
+  	--mdc-zoom: 1;
+  	--mdc-root-font-size: 14px;
 	--mdc-font-family: "Google Sans", monospace;	
 	--mdc-disabled-opacity: .42;
 	--mdc-rounded-border-radius: 4px;
