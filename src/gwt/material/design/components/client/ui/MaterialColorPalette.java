@@ -1,18 +1,11 @@
 package gwt.material.design.components.client.ui;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 
 import gwt.material.design.components.client.base.widget.MaterialValuedField;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.Color;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.html.Button;
-import gwt.material.design.components.client.ui.html.Div;
 
 public class MaterialColorPalette extends MaterialValuedField<Color> {
 
@@ -107,38 +100,15 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 
 	};
 
-	protected Map<Color, MaterialWidget> items = new LinkedHashMap<>();
-
 	public MaterialColorPalette() {
 		super(CssName.MDC_COLOR_PALETTE);
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
-		final Div labesContent = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
-		
-		Arrays.asList(COLORS_NAMES).parallelStream().forEach(name -> {
-			final Button colorName = new Button(CssName.MDC_COLOR_PALETTE__LABEL);
-			colorName.setInnerHTML(name);
-			labesContent.add(colorName);
-		});
-		add(labesContent);
-
-		Arrays.asList(COLORS).forEach(colorsGroup -> {
-			final Div content = new Div(CssName.MDC_COLOR_PALETTE__BUTTON_GROUP);
-			Arrays.asList(colorsGroup).forEach(color -> {
-				final Button colorItem = new Button(CssName.MDC_COLOR_PALETTE__BUTTON);
-				colorItem.setBackgroundColor(color);
-				colorItem.setAttribute("color", color.toString().toLowerCase());
-				colorItem.addClickHandler(event -> setValue(color));
-				content.add(colorItem);
-				items.put(color, colorItem);
-			});
-			add(content);
-		});
-
+		drawHeader(getElement(), COLORS_NAMES);
+		drawItems(getElement(), COLORS);
 	}
 
 	@Override
@@ -146,19 +116,87 @@ public class MaterialColorPalette extends MaterialValuedField<Color> {
 		return element;
 	}-*/;
 
+	native void drawHeader(final Element parent, final String[] colors)/*-{
+		var _this = this;
+		var group_class = @gwt.material.design.components.client.constants.CssName::MDC_COLOR_PALETTE__BUTTON_GROUP;
+		var item_class = @gwt.material.design.components.client.constants.CssName::MDC_COLOR_PALETTE__LABEL;
+
+		var content = $doc.createElement('div');
+		$wnd.jQuery(content).addClass(group_class);
+
+		colors.forEach(function(color) {
+			var item = $doc.createElement('button');
+			$wnd.jQuery(item).addClass(item_class);
+			$wnd.jQuery(item).html(color);
+			$wnd.jQuery(content).append(item);
+		});
+		$wnd.jQuery(parent).append(content);
+
+	}-*/;
+
+	native void drawItems(final Element parent, final Color[][] colors)/*-{
+		var _this = this;
+		var group_class = @gwt.material.design.components.client.constants.CssName::MDC_COLOR_PALETTE__BUTTON_GROUP;
+		var item_class = @gwt.material.design.components.client.constants.CssName::MDC_COLOR_PALETTE__BUTTON;
+		
+		var setValue = function(color) {
+			_this.@gwt.material.design.components.client.ui.MaterialColorPalette::setValue(Lgwt/material/design/components/client/constants/Color;)(color);
+		};
+
+		var generateItem = function(color) {
+
+			var color_name = color.@gwt.material.design.components.client.constants.Color::toString()();
+			var color_css = color.@gwt.material.design.components.client.constants.Color::getCssName()();
+
+			var item = $doc.createElement('button');
+			$wnd.jQuery(item).addClass(item_class);
+			$wnd.jQuery(item).addClass(color_name);
+			$wnd.jQuery(item).css('background-color', color_css);
+			$wnd.jQuery(item).attr('color', color_css);
+			$wnd.jQuery(item).click(function() {
+				setValue(color);
+			});
+
+			return item;
+
+		};
+
+		colors.forEach(function(colorsGroup) {
+			var content = $doc.createElement('div');
+			$wnd.jQuery(content).addClass(group_class);
+
+			colorsGroup.forEach(function(color) {
+				$wnd.jQuery(content).append(generateItem(color));
+			});
+
+			$wnd.jQuery(parent).append(content);
+		});
+
+	}-*/;
+
 	@Override
 	public void setValue(Color value) {
-
-		final MaterialWidget old = items.get(getValue());
-		if (old != null) 
-			old.removeStyleName(CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
-		
+		unselect(getValue());
+		select(value);
 		super.setValue(value);
-
-		final MaterialWidget selected = items.get(value);
-		if (selected != null) 
-			selected.addStyleName(CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
-				
 	}
+
+	void unselect(Color color) {
+		if (color != null)
+			unselect(getElement(), color.toString(), CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
+	}
+
+	void select(Color color) {
+		if (color != null)
+			select(getElement(), color.toString(), CssName.MDC_COLOR_PALETTE__BUTTON_SELECTED);
+	}
+
+	native void unselect(final Element element, final String colorClass, final String style)/*-{
+		$wnd.jQuery(element).find('.' + colorClass).removeClass(style);
+	}-*/;
+
+	native void select(final Element element, final String colorClass, final String style)/*-{
+		$wnd.jQuery(element).find('.' + colorClass).addClass(style);
+	}-*/;
 
 }
