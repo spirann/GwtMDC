@@ -164,8 +164,7 @@ HasConverter<MaterialSlider, Double, String>{
 		else
 			fontSize = '0.875rem'; // Default size
 		
-		$wnd.jQuery(pinMarkerElement).css('font-size', fontSize);
-		setTimeout(function(){$wnd.jQuery(pinMarkerElement).text(formattedValue);}, 1);
+		$wnd.jQuery(pinMarkerElement).text(formattedValue);
 
 	}-*/;
 
