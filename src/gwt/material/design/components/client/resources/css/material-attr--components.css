@@ -3,7 +3,7 @@
   	/* Body attributes					*/
   	/* ================================ */
   	--mdc-zoom: 1;
-  	--mdc-root-font-size: 14px;
+  	--mdc-root-font-size: 1rem;
 	--mdc-font-family: "Google Sans", monospace;	
 	--mdc-disabled-opacity: .42;
 	--mdc-rounded-border-radius: 4px;

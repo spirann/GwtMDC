@@ -191,6 +191,13 @@ public final class StyleHelper {
 		else
 			$wnd.jQuery(element).css(property, '');
 	}-*/;
+	
+	public final static native void setCssProperty(final String property, final String value)/*-{
+		if (value && value.length > 0)
+			$wnd.jQuery('html').css(property, value);
+		else
+			$wnd.jQuery('html').css(property, '');
+	}-*/;
 
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// Set css property at an element by selector

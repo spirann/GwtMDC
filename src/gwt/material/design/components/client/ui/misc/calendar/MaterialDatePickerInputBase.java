@@ -19,6 +19,7 @@ import com.google.gwt.user.client.ui.HasValue;
 import com.google.gwt.user.client.ui.Widget;
 
 import gwt.material.design.components.client.base.interfaces.Converter;
+import gwt.material.design.components.client.base.interfaces.HasConverter;
 import gwt.material.design.components.client.base.interfaces.HasIconPosition;
 import gwt.material.design.components.client.base.interfaces.HasInputMask;
 import gwt.material.design.components.client.base.interfaces.HasRequired;
@@ -38,7 +39,7 @@ import gwt.material.design.components.client.validation.ValidationForTextField;
 
 public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePickerDialogBase<T, ?>> extends Div
 		implements HasValue<T>, HasValueChangeHandlers<T>, HasTypingHandlers, HasInputMask, HasRequired,
-		HasIconClickHandlers, HasIconPosition {
+		HasIconClickHandlers, HasIconPosition, HasConverter<MaterialTextField, Date, String> {
 
 	private boolean valueChangeHandlerInitialized;
 	protected final MaterialTextField[] inputs = getInputs();
@@ -93,10 +94,12 @@ public abstract class MaterialDatePickerInputBase<T, D extends MaterialDatePicke
 		return dialog.getValue();
 	}
 
+	@Override
 	public Converter<MaterialTextField, Date, String> getConverter() {
 		return converter;
 	}
 
+	@Override
 	public void setConverter(Converter<MaterialTextField, Date, String> stringToDate) {
 		this.converter = stringToDate;
 	}

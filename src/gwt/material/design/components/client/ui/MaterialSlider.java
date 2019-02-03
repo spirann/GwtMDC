@@ -23,7 +23,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
+import gwt.material.design.components.client.base.interfaces.Converter;
 import gwt.material.design.components.client.base.interfaces.FromString;
+import gwt.material.design.components.client.base.interfaces.HasConverter;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.base.mixin.base.AttributeMixin;
@@ -49,7 +51,8 @@ import gwt.material.design.components.client.ui.html.Span;
  * @author Richeli Vargas
  *
  */
-public class MaterialSlider extends MaterialValuedField<Double> implements HasInputHandlers<Double>, HasType<SliderType> {
+public class MaterialSlider extends MaterialValuedField<Double> implements HasInputHandlers<Double>, HasType<SliderType>,
+HasConverter<MaterialSlider, Double, String>{
 
 	// /////////////////////////////////////////////////////////////
 	// Slider
@@ -72,6 +75,8 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 	protected final AttributeMixin<MaterialSlider, Boolean> enabledMixin = new AttributeMixin<>(this, CssAttribute.ARIA_DISABLED, FromString.TO_BOOLEAN);
 	protected final TypeMixin<MaterialSlider, SliderType> typeMixin = new TypeMixin<>(this);
 
+	private Converter<MaterialSlider, Double, String> converter;
+	
 	public MaterialSlider() {
 		super(CssName.MDC_SLIDER);
 		setRole(Role.SLIDER);
@@ -145,18 +150,22 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 		var pinMarker = this.@gwt.material.design.components.client.ui.MaterialSlider::pinValueMarker;
 		var pinMarkerElement = pinMarker.@gwt.material.design.components.client.ui.html.Span::getElement()();
 		var value = this.@gwt.material.design.components.client.ui.MaterialSlider::getValue()();
-
-		var formattedValue = parseFloat(value).toFixed(0);
-		pinMarkerElement.innerText = formattedValue;
-
-		if (value < 100.0)
-			pinMarkerElement.style.fontSize = "0.875rem";
-		else if (value < 1000.0)
-			pinMarkerElement.style.fontSize = "0.745rem";
-		else if (value < 10000.0)
-			pinMarkerElement.style.fontSize = "0.645rem";
+		var formattedValue = this.@gwt.material.design.components.client.ui.MaterialSlider::formatValue(D)(value);
+		var valueLength = formattedValue.length;
+		
+		var fontSize;
+		
+		if (valueLength < 3)
+			fontSize = '0.875rem';
+		else if (value == 3)
+			fontSize = '0.745rem';
+		else if (value > 3)
+			fontSize = '0.645rem';
 		else
-			pinMarkerElement.style.fontSize = "0.875rem"; // Default size
+			fontSize = '0.875rem'; // Default size
+		
+		$wnd.jQuery(pinMarkerElement).css('font-size', fontSize);
+		setTimeout(function(){$wnd.jQuery(pinMarkerElement).text(formattedValue);}, 1);
 
 	}-*/;
 
@@ -171,6 +180,10 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 		slider.value = value;
 	}-*/;
 
+	protected String formatValue(final double value) {
+		return converter == null ? String.valueOf((int) value) : converter.undo(this, value);
+	}
+	
 	@Override
 	public void setValue(Double value, boolean fireEvents) {
 		valuenowMixin.setValue(value);
@@ -182,6 +195,16 @@ public class MaterialSlider extends MaterialValuedField<Double> implements HasIn
 	@Override
 	public Double getValue() {
 		return valuenowMixin.getValue();
+	}
+	
+	@Override
+	public Converter<MaterialSlider, Double, String> getConverter() {
+		return converter;
+	}
+
+	@Override
+	public void setConverter(Converter<MaterialSlider, Double, String> converter) {
+		this.converter = converter;
 	}
 
 	public void setMin(final double min) {

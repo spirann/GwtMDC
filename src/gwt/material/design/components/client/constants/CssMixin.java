@@ -25,8 +25,10 @@ package gwt.material.design.components.client.constants;
 public interface CssMixin {
 
 	// ////////////////////////////////////////////////////////////////////////////
-	// EXTRAS
+	// ROOT
 	// ////////////////////////////////////////////////////////////////////////////
+	String MDC_ZOOM = "--mdc-zoom";
+	String MDC_ROOT_FONT_SIZE = "--mdc-root-font-size";
 	String MDC_PLACEHOLDER__INK_COLOR = "--mdc-placeholder-ink-color";
 	String MDC_SCROLLBAR_WIDTH = "--mdc-scrollbar-width";
 	String MDC_SCROLLBAR_TRACK_FILL = "--mdc-scrollbar-track-fill";
