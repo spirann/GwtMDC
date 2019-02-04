@@ -83,8 +83,13 @@ HasConverter<MaterialSlider, Double, String>{
 	}
 
 	@Override
-	protected native JavaScriptObject jsInit(final Element element)/*-{
-		return new $wnd.mdc.slider.MDCSlider(element);
+	protected native JavaScriptObject jsInit(final Element element)/*-{		
+		var _this = this;	
+		var slider = new $wnd.mdc.slider.MDCSlider(element);		
+		slider.foundation_.adapter_.setMarkerValue = function setMarkerValue(value) {
+			_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();
+        };		
+		return slider;
 	}-*/;
 
 	@Override
@@ -136,7 +141,6 @@ HasConverter<MaterialSlider, Double, String>{
 			var now = new Date().getTime();
 			if ((now - milliseconds) > 100) {
 				milliseconds = now;
-				_this.@gwt.material.design.components.client.ui.MaterialSlider::draw()();
 				_this.@gwt.material.design.components.client.ui.MaterialSlider::fireInputEvent()();
 			}
 		}
@@ -157,15 +161,16 @@ HasConverter<MaterialSlider, Double, String>{
 		
 		if (valueLength < 3)
 			fontSize = '0.875rem';
-		else if (value == 3)
+		else if (valueLength == 3)
 			fontSize = '0.745rem';
-		else if (value > 3)
-			fontSize = '0.645rem';
+		else if (valueLength > 3)
+			fontSize = '0.565rem';
 		else
 			fontSize = '0.875rem'; // Default size
 		
-		$wnd.jQuery(pinMarkerElement).text(formattedValue);
-
+		$wnd.jQuery(pinMarkerElement).css('font-size', fontSize);
+		$wnd.jQuery(pinMarkerElement).html(formattedValue);
+		
 	}-*/;
 
 	protected native void layout()/*-{
