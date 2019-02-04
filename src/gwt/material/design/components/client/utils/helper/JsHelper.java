@@ -129,6 +129,11 @@ public class JsHelper {
 		});
 	}-*/;
 
+	public static native String onlyNumbersAndDots(final String text)/*-{	
+		return text.replace(/[^0-9.]/g, '');	
+	}-*/;
+
+	
 	@SuppressWarnings("rawtypes")
 	public static native JsArray toJsArray(final Object[] labels)/*-{
 

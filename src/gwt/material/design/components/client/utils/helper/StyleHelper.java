@@ -42,7 +42,6 @@ import com.google.gwt.dom.client.Element;
  */
 
 import com.google.gwt.dom.client.Style;
-import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.UIObject;
 
 /**
@@ -59,10 +58,8 @@ public final class StyleHelper {
 	 * Returns {@code true} if specified style is contained in space-separated list
 	 * of styles
 	 *
-	 * @param styleNames
-	 *            Space-separated list of styles
-	 * @param style
-	 *            Style to look for
+	 * @param styleNames Space-separated list of styles
+	 * @param style      Style to look for
 	 * @return True if contains style
 	 */
 	public static boolean containsStyle(final String styleNames, final String style) {
@@ -81,12 +78,9 @@ public final class StyleHelper {
 	/**
 	 * Toggles a style name on a ui object
 	 *
-	 * @param uiObject
-	 *            Object to toggle style on
-	 * @param toggleStyle
-	 *            whether or not to toggle the style name on the object
-	 * @param styleName
-	 *            Style name
+	 * @param uiObject    Object to toggle style on
+	 * @param toggleStyle whether or not to toggle the style name on the object
+	 * @param styleName   Style name
 	 */
 	public static void toggleStyle(final UIObject uiObject, final boolean toggleStyle, final String styleName) {
 		if (toggleStyle)
@@ -191,7 +185,7 @@ public final class StyleHelper {
 		else
 			$wnd.jQuery(element).css(property, '');
 	}-*/;
-	
+
 	public final static native void setCssProperty(final String property, final String value)/*-{
 		if (value && value.length > 0)
 			$wnd.jQuery('html').css(property, value);
@@ -217,7 +211,8 @@ public final class StyleHelper {
 		setCssProperty(DOMHelper.toClass(selector), property, value == null ? null : value.getCssName());
 	}
 
-	public final static void setCssPropertyByClass(final String selector, final String property, final String value) {
+	public final static void setCssPropertyByClass(final String selector, final String property,
+			final String value) {
 		setCssProperty(DOMHelper.toClass(selector), property, value);
 	}
 
@@ -270,10 +265,6 @@ public final class StyleHelper {
 	// Get css property
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static String getCssProperty(final String property) {
-		return getCssProperty(RootPanel.get().getElement(), property);
-	}
-
 	public final static String getCssProperty(final UIObject uiObject, final String property) {
 		return getCssProperty(uiObject.getElement(), property);
 	}
@@ -282,15 +273,21 @@ public final class StyleHelper {
 		return $wnd.jQuery(element).css(property);
 	}-*/;
 
+	public final static native String getCssProperty(final String property)/*-{
+		return $wnd.jQuery('html').css(property);
+	}-*/;
+
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 	// Set property
 	// ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	public final static void setProperty(final UIObject uiObject, final String property, final Style.HasCssName value) {
+	public final static void setProperty(final UIObject uiObject, final String property,
+			final Style.HasCssName value) {
 		setProperty(uiObject.getElement(), property, value == null ? null : value.getCssName());
 	}
 
-	public final static void setProperty(final Element element, final String property, final Style.HasCssName value) {
+	public final static void setProperty(final Element element, final String property,
+			final Style.HasCssName value) {
 		setProperty(element, property, value == null ? null : value.getCssName());
 	}
 
@@ -347,7 +344,8 @@ public final class StyleHelper {
 		setAttribute(uiObject.getElement(), attribute, value == null ? null : value.getCssName());
 	}
 
-	public final static void setAttribute(final Element element, final String attribute, final Style.HasCssName value) {
+	public final static void setAttribute(final Element element, final String attribute,
+			final Style.HasCssName value) {
 		setAttribute(element, attribute, value == null ? null : value.getCssName());
 	}
 
