@@ -538,7 +538,8 @@
 	-webkit-user-select: none;
     -moz-user-select: -moz-none;
     -ms-user-select: none;
-    user-select: none;}
+    user-select: none;
+    overflow: hidden;}
 	.mdc-datepicker__item {
 	cursor: pointer;
 	margin: var(--mdc-datepicker--item-margin);

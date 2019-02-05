@@ -148,6 +148,14 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		drawDays();
 		drawMonth();
 	}
+	
+	public void setYearAndMonth(final int year, final int month) {
+		auxDate.setDate(1);
+		auxDate.setMonth(month);
+		auxDate.setYear(year);
+		drawDays();
+		drawMonth();
+	}
 
 	public boolean isChangeMonth() {
 		return changeMonth;
@@ -182,7 +190,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 		final Long maxDateAsTime = getMaxDate() == null ? null
 				: adjustDate(getMaxDate()).getTime() + DateTimeHelper.hoursInMillis(6);
 
-		final Date date = adjustDate(this.auxDate);
+		final Date date = new Date(this.auxDate.getTime());
 		final int month = date.getMonth();
 		final int year = date.getYear();
 		final int firstDay = 1;
