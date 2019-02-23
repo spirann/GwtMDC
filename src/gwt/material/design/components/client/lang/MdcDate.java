@@ -21,9 +21,14 @@ public class MdcDate {
 
 	public MdcDate(final int year, final int month, final int day) {
 		super();
-		setYear(year);
-		setMonth(month);
-		setDay(day);
+		
+		this.year = year;
+		this.month = month;
+		this.day = day;
+		
+		setYear(this.year);
+		setMonth(this.month);
+		setDay(this.day);
 	}
 
 	public int getYear() {
@@ -36,7 +41,7 @@ public class MdcDate {
 			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__year_out_of_range(year));
 
 		this.year = year;
-		
+
 		setMonth(month);
 
 	}
@@ -113,6 +118,37 @@ public class MdcDate {
 		var day = this.@gwt.material.design.components.client.lang.MdcDate::day;
 		return new Date(year, month - 1, day).getTime();
 	}-*/;
+
+	public MdcDate next() {
+
+		final boolean isLastDayOfMonth = day == getLastDayOfMonth();
+		final boolean isLastMonthOfYear = month == 12;
+
+		final int nextDay = isLastDayOfMonth ? 1 : day + 1;
+		final int nextMonth = isLastDayOfMonth ? isLastMonthOfYear ? 1 : month + 1 : month;
+		final int nextYear = isLastDayOfMonth && isLastMonthOfYear ? year + 1 : year;
+
+		return new MdcDate(nextYear, nextMonth, nextDay);
+
+	}
+
+	public MdcDate previous() {
+
+		final boolean isFirstDayOfMonth = day == 1;
+		final boolean isFirstMonthOfYear = month == 1;
+		
+		final int previousYear = isFirstDayOfMonth && isFirstMonthOfYear ? year - 1 : year;
+		final int previousMonth = isFirstDayOfMonth ? isFirstMonthOfYear ? 12 : month - 1 : month;
+		final int previousDay = isFirstDayOfMonth ? 1 /* First day because I will calculate it before */ : day - 1;
+
+		final MdcDate mdcDate = new MdcDate(previousYear, previousMonth, previousDay);
+		/* Update day if It is the first day of month */
+		if (isFirstDayOfMonth)
+			mdcDate.setDay(mdcDate.getLastDayOfMonth());
+
+		return mdcDate;
+
+	}
 
 	public Date getDate() {
 		return new Date(getTimestamp());
