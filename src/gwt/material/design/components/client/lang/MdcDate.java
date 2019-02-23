@@ -10,15 +10,20 @@ public class MdcDate {
 	private int month;
 	private int day;
 
-	@SuppressWarnings("deprecation")
 	public MdcDate() {
-		super();
-		final Date date = new Date();
-		this.year = date.getYear() + 1900;
-		this.month = date.getMonth() + 1;
-		this.day = date.getDate();
+		this(new Date());
 	}
 
+	public MdcDate(final long timestamp) {
+		this(new Date(timestamp));
+	}
+	
+
+	@SuppressWarnings("deprecation")
+	public MdcDate(final Date date) {
+		this(date.getYear() + 1900, date.getMonth() + 1, date.getDate());
+	}
+	
 	public MdcDate(final int year, final int month, final int day) {
 		super();
 		
