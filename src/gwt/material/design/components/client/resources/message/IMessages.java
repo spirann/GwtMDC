@@ -107,6 +107,21 @@ public interface IMessages extends Messages {
 	@DefaultMessage("Cancel")
 	String mdc_calendar_cancel();
 	
+	@DefaultMessage("{0}, {1} {2} {3}")
+	String mdc_date__to_string(String weekDay, int day, String month, int year);
+	
+	@DefaultMessage("{0} is invalid. The defined year must be greater than or equal to 0.")
+	String mdc_date__err__year_out_of_range(int year);
+	
+	@DefaultMessage("{0} is invalid. The defined month must be greater than or equal to 1 and less than or equal to 12.")
+	String mdc_date__err__month_out_of_range(int month);
+	
+	@DefaultMessage("The day {0} is invalid, because the first day of the month is 1.")
+	String mdc_date__err__day_smaller_than_first_day_of_month(int settedDay);
+	
+	@DefaultMessage("The day {3} is invalid, because in {0}, {1} go to until the day {2}.")
+	String mdc_date__err__day_bigger_than_last_day_of_month(int year, int month, int lastDayOfMonth, int settedDay);
+	
 	@DefaultMessage("Password is very weak")
 	String mdc_validation__password__very_weak();
 		
