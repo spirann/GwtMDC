@@ -36,6 +36,8 @@ public class MdcDate {
 			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__year_out_of_range(year));
 
 		this.year = year;
+		
+		setMonth(month);
 
 	}
 
