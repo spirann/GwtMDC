@@ -532,9 +532,14 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	String MDC_DATEPICKER = "mdc-datepicker";
 	String MDC_DATEPICKER__ITEMS = "mdc-datepicker__items";
-	String MDC_DATEPICKER__ITEM = "mdc-datepicker__item";
+	String MDC_DATEPICKER__ITEMS__HEADER = "mdc-datepicker__ietms__header";
+	String MDC_DATEPICKER__ITEMS__ITEM = "mdc-datepicker__ietms__item";
+	String MDC_DATEPICKER__ITEMS__ACTIVE = "mdc-datepicker__items__active";
+	String MDC_DATEPICKER__ITEMS__ACTIVE_FIRST = "mdc-datepicker__items__active_first";
+	String MDC_DATEPICKER__ITEMS__ACTIVE_LAST = "mdc-datepicker__items__active_last";
+	
+	
 	String MDC_DATEPICKER__ITEM_TODAY = "mdc-datepicker__item_today";
-	String MDC_DATEPICKER__ITEM_ACTIVE = "mdc-datepicker__item-active";
 	String MDC_DATEPICKER__ITEM__TOOLTIP_INDICATOR = "mdc-datepicker__item--tooltip-indicator";
 	String MDC_DATEPICKER__ACTIONS = "mdc-datepicker__actions";
 	String MDC_DATEPICKER__ACTION = "mdc-datepicker__action";

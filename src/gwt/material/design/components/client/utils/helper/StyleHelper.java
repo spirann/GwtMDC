@@ -296,7 +296,7 @@ public final class StyleHelper {
 	}
 
 	public final static native void setProperty(final Element element, final String property,
-			final String value)/*-{
+			final Object value)/*-{
 		if (value && value.length > 0)
 			$wnd.jQuery(element).prop(property, value);
 		else

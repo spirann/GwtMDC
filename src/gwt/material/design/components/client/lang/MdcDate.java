@@ -1,8 +1,11 @@
 package gwt.material.design.components.client.lang;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 
 public class MdcDate {
 
@@ -17,20 +20,19 @@ public class MdcDate {
 	public MdcDate(final long timestamp) {
 		this(new Date(timestamp));
 	}
-	
 
 	@SuppressWarnings("deprecation")
 	public MdcDate(final Date date) {
 		this(date.getYear() + 1900, date.getMonth() + 1, date.getDate());
 	}
-	
+
 	public MdcDate(final int year, final int month, final int day) {
 		super();
-		
+
 		this.year = year;
 		this.month = month;
 		this.day = day;
-		
+
 		setYear(this.year);
 		setMonth(this.month);
 		setDay(this.day);
@@ -141,7 +143,7 @@ public class MdcDate {
 
 		final boolean isFirstDayOfMonth = day == 1;
 		final boolean isFirstMonthOfYear = month == 1;
-		
+
 		final int previousYear = isFirstDayOfMonth && isFirstMonthOfYear ? year - 1 : year;
 		final int previousMonth = isFirstDayOfMonth ? isFirstMonthOfYear ? 12 : month - 1 : month;
 		final int previousDay = isFirstDayOfMonth ? 1 /* First day because I will calculate it before */ : day - 1;
@@ -182,5 +184,68 @@ public class MdcDate {
 	@Override
 	public String toString() {
 		return IMessages.INSTANCE.mdc_date__to_string(getDayOfWeekFullName(), day, getMonthFullName(), year);
+	}	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + day;
+		result = prime * result + month;
+		result = prime * result + year;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MdcDate other = (MdcDate) obj;
+		if (day != other.day)
+			return false;
+		if (month != other.month)
+			return false;
+		if (year != other.year)
+			return false;
+		return true;
+	}
+
+	@SuppressWarnings("deprecation")
+	public static Collection<MdcDate> daysOfMonth(final boolean is42Format) {
+		final Date date = new Date();
+		final int year = date.getYear() + 1900;
+		final int month = date.getMonth() + 1;
+		return daysOfMonth(year, month, is42Format);
+	}
+	
+	public static Collection<MdcDate> daysOfMonth(final int year, final int month, final boolean is42Format) {
+
+		final Collection<MdcDate> result = new LinkedList<>();
+		final MdcDate firstDayOfMonth = new MdcDate(year, month, 1);
+
+		final int countDays;
+		MdcDate lastDayAdded;
+
+		if (is42Format) {
+			final int countPreviousDays = firstDayOfMonth.getDayOfWeek();
+			final long previousDays = firstDayOfMonth.getTimestamp() - DateTimeHelper.daysInMillis(countPreviousDays);
+			final MdcDate firstDayOfPreviousMonth = new MdcDate(previousDays);
+			countDays = 42;
+			lastDayAdded = firstDayOfPreviousMonth;
+		} else {
+			countDays = firstDayOfMonth.getLastDayOfMonth();
+			lastDayAdded = firstDayOfMonth;
+		}
+
+		result.add(lastDayAdded);
+		for (int i = result.size(); i < countDays; i++)
+			result.add(lastDayAdded = lastDayAdded.next());
+
+		return result;
+
 	}
 }
