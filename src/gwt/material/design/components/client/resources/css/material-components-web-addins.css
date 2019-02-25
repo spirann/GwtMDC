@@ -558,6 +558,9 @@
 		text-align: center;
 		color: var(--mdc-datepicker-ink);
 		background-color: var(--mdc-datepicker-fill);}
+		.mdc-datepicker__items > .mdc-datepicker__ietms__item.mdc-ripple-surface--color::before, 
+		.mdc-datepicker__items > .mdc-datepicker__ietms__item.mdc-ripple-surface--color::after{
+			background-color: var(--mdc-datepicker-ink);}
 		.mdc-datepicker__items > .mdc-datepicker__ietms__header * {
 			cursor: pointer;
 			text-align: center;

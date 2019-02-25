@@ -42,6 +42,7 @@ public class ItemsItem extends Div {
 	
 	@Override
 	protected void onInitialize() {
+		ripleMixin.initialize();
 		super.onInitialize();		
 		label.setText(String.valueOf(date.getDay()));		
 		StyleHelper.setProperty(getElement(), "timestamp", date.getTimestamp());
