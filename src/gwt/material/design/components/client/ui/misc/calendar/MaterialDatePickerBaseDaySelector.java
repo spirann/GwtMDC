@@ -51,7 +51,7 @@ public abstract class MaterialDatePickerBaseDaySelector<T> extends MaterialValue
 	protected final MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 	protected final Label monthLabel = new Label(CssName.MDC_DATEPICKER__DAY_SELECTOR__MONTH__LABEL);
 	protected final Div contentWeek = new Div(CssName.MDC_DATEPICKER__DAY_SELECTOR__WEEK__CONTENT);
-	protected final Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
+	protected final Div items = new Div(CssName.MDC_DATEPICKER__DAYS);
 
 	protected final Map<Long, MaterialDatePickerItem> mapedItems = new LinkedHashMap<>();
 

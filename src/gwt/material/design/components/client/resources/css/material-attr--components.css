@@ -76,6 +76,7 @@
   	/* ================================ 	*/
   	/* DatePiker attributes														*/
   	/* ================================ 	*/
+  	--mdc-datepicker-tooltip-indicator: var(--mdc-theme-secondary);
   	--mdc-datepicker-ink: var(--mdc-theme-on-surface);
 	--mdc-datepicker-fill: var(--mdc-theme-surface);
 	--mdc-datepicker-active-ink: var(--mdc-theme-on-primary);
@@ -83,6 +84,9 @@
 	--mdc-datepicker--header-ink: var(--mdc-theme-on-primary);
 	--mdc-datepicker--header-fill: var(--mdc-theme-primary);	
 	--mdc-datepicker--item-width: 30px;
+	--mdc-datepicker--month-item-width: calc(calc(var(--mdc-datepicker--item-width) * 7) / 4);
+	--mdc-datepicker--year-item-width: calc(calc(var(--mdc-datepicker--item-width) * 7) / 5);
+	
 	--mdc-datepicker--item-margin: 2px;
 	--mdc-datepicker-width: calc(8px + calc(7 * calc( var(--mdc-datepicker--item-width) + calc(2 * var(--mdc-datepicker--item-margin)))));
   	

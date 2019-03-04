@@ -46,7 +46,7 @@ public class MaterialDatePickerYearSelector extends MaterialValuedField<Integer>
 	protected Div actions = new Div(CssName.MDC_DATEPICKER__ACTIONS);
 	protected MaterialIconButton previousMonth = new MaterialIconButton(IconType.CHEVRON_LEFT);
 	protected MaterialIconButton nextMonth = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	protected Div items = new Div(CssName.MDC_DATEPICKER__ITEMS);
+	protected Div items = new Div(CssName.MDC_DATEPICKER__DAYS);
 
 	protected Map<Integer, MaterialDatePickerItem> years = new LinkedHashMap<>();
 	private int minValue;

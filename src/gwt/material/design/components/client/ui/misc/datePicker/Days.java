@@ -22,16 +22,24 @@ package gwt.material.design.components.client.ui.misc.datePicker;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import com.google.gwt.event.shared.HandlerRegistration;
+
+import gwt.material.design.components.client.base.interfaces.HasSelection;
 import gwt.material.design.components.client.base.interfaces.HasType;
+import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.DatePickerType;
+import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
+import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.lang.MdcDate;
+import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.ui.html.Div;
 
 /**
@@ -39,24 +47,28 @@ import gwt.material.design.components.client.ui.html.Div;
  * @author Richeli Vargas
  *
  */
-public class Items extends Div implements HasType<DatePickerType> {
+public class Days extends Div
+		implements HasType<DatePickerType>, HasSelection<MdcDate[]>, HasSelectionHandlers<MdcDate[]> {
 
-	protected final TypeMixin<Items, DatePickerType> typeMixin = new TypeMixin<>(this, DatePickerType.RANGE);
+	protected final TypeMixin<Days, DatePickerType> typeMixin = new TypeMixin<>(this, DatePickerType.RANGE);
+	protected final HasSelectionMixin<Days, MdcDate[]> selectionMixin = new HasSelectionMixin<>(this);
+	protected final Map<MdcDate, DaysItem> items = new LinkedHashMap<>();
+	
+	private int year;
+	private int month;
+	
 
-	private MdcDate[] selectedItems;
-	private final Map<MdcDate, ItemsItem> items = new LinkedHashMap<>();
-
-	public Items() {
-		super(CssName.MDC_DATEPICKER__ITEMS);
+	public Days() {
+		super(CssName.MDC_DATEPICKER__DAYS);
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-
 		drawDates();
 
-		select(new MdcDate(2019, 2, 15), new MdcDate(2019, 2, 16), new MdcDate(2019, 2, 17), new MdcDate(2019, 2, 25));
+		setSelection(new MdcDate[] { new MdcDate(2019, 2, 15), new MdcDate(2019, 2, 16), new MdcDate(2019, 2, 17),
+				new MdcDate(2019, 2, 25) });
 	}
 
 	@Override
@@ -69,12 +81,18 @@ public class Items extends Div implements HasType<DatePickerType> {
 		return typeMixin.getType();
 	}
 
+	@SuppressWarnings("deprecation")
 	public void drawDates() {
-		drawDates(MdcDate.daysOfMonth(true));
+		final Date date = new Date();
+		year = date.getYear() + 1900;
+		month = date.getMonth() + 1;
+		drawDates(year, month);
 	}
 
 	public void drawDates(final int year, final int month) {
-		drawDates(MdcDate.daysOfMonth(year, month, true));
+		this.year = year;
+		this.month = month;
+		drawDates(MdcMonth.daysOfMonth(year, month, true));
 	}
 
 	protected void drawDates(final Collection<MdcDate> dates) {
@@ -82,14 +100,17 @@ public class Items extends Div implements HasType<DatePickerType> {
 		clear();
 
 		for (int weekDay = 0; weekDay < 7; weekDay++)
-			add(new ItemsHeader(weekDay));
+			add(new DaysHeader(weekDay));
 
 		dates.forEach(date -> {
-			final ItemsItem item = new ItemsItem(date);
+			final DaysItem item = new DaysItem(date);
+			if (date.getMonth() != month)
+				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__OUT_OF_MONTH);
+
 			item.addClickHandler(event -> {
 
 				final List<MdcDate> selectedDates = new LinkedList<>(
-						selectedItems == null ? Arrays.asList() : Arrays.asList(selectedItems));
+						getSelection() == null ? Arrays.asList() : Arrays.asList(getSelection()));
 
 				final boolean isSelected = selectedDates.contains(item.getDate());
 
@@ -97,7 +118,7 @@ public class Items extends Div implements HasType<DatePickerType> {
 				case RANGE:
 					if (selectedDates.size() > 1) {
 						selectedDates.clear();
-						selectedDates.add(getTheFarthestFrom(date, selectedItems));
+						selectedDates.add(getTheFarthestFrom(date, getSelection()));
 					}
 					break;
 				case SINGLE:
@@ -113,13 +134,13 @@ public class Items extends Div implements HasType<DatePickerType> {
 				else
 					selectedDates.add(date);
 
-				select(selectedDates.stream().toArray(MdcDate[]::new));
+				setSelection(selectedDates.stream().toArray(MdcDate[]::new));
 			});
 			add(item);
 			items.put(date, item);
 		});
 
-		select(selectedItems);
+		drawSelection(getSelection());
 	}
 
 	protected MdcDate getTheFarthestFrom(final MdcDate date, final MdcDate... dates) {
@@ -143,72 +164,63 @@ public class Items extends Div implements HasType<DatePickerType> {
 
 	}
 
-	public void select(final MdcDate... selectedItems) {
-		unSelectAll();
-		this.selectedItems = null;
-
-		if (selectedItems == null || selectedItems.length == 0)
-			return;
-
-		switch (getType()) {
-		case RANGE:
-			this.selectedItems = rangeSelect(selectedItems);
-			break;
-		case MULTIPLE:
-			this.selectedItems = multipleSelect(selectedItems);
-			break;
-		case SINGLE:
-		default:
-			this.selectedItems = singleSelect(selectedItems);
-			break;
-		}
-	}
-
 	protected final native void unSelectAll()/*-{
-		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ITEMS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ITEMS__ACTIVE;
-		var activeFirstClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ITEMS__ACTIVE_FIRST;
-		var activeLastClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ITEMS__ACTIVE_LAST;
+		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ITEM;
+		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE;
+		var activeFirstClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE_FIRST;
+		var activeLastClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE_LAST;
 		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
 		$wnd.jQuery('.' + itemClass).removeClass(activeFirstClass);
 		$wnd.jQuery('.' + itemClass).removeClass(activeLastClass);
 	}-*/;
 
-	protected MdcDate[] singleSelect(final MdcDate... selectedItems) {
+	protected void drawSelection(final MdcDate[] values) {
+		unSelectAll();
 
-		final ItemsItem item = Arrays.asList(selectedItems).stream().filter(date -> items.containsKey(date)).findAny()
+		if (values != null)
+			switch (getType()) {
+			case RANGE:
+				drawRangeSelect(values);
+				break;
+			case MULTIPLE:
+				drawMultipleSelect(values);
+				break;
+			case SINGLE:
+			default:
+				drawSingleSelect(values);
+				break;
+			}
+	}
+
+	protected void drawSingleSelect(final MdcDate... selectedItems) {
+
+		final DaysItem item = Arrays.asList(selectedItems).stream().filter(date -> items.containsKey(date)).findAny()
 				.map(date -> items.get(date)).orElse(null);
 
 		if (item != null) {
-			item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE);
-			item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_FIRST);
-			item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_LAST);
+			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
+			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
+			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
 		}
-
-		return selectedItems;
 	}
 
-	protected MdcDate[] multipleSelect(final MdcDate... selectedItems) {
-
+	protected void drawMultipleSelect(final MdcDate... selectedItems) {
 		final List<MdcDate> collection = Arrays.asList(selectedItems);
-
 		collection.stream().filter(date -> items.containsKey(date)).forEach(date -> {
 
-			final ItemsItem item = items.get(date);
-			item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE);
+			final DaysItem item = items.get(date);
+			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
 
 			if (!collection.contains(date.previous()))
-				item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_FIRST);
+				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
 
 			if (!collection.contains(date.next()))
-				item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_LAST);
+				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
 
 		});
-
-		return selectedItems;
 	}
 
-	protected MdcDate[] rangeSelect(MdcDate... selectedItems) {
+	protected void drawRangeSelect(MdcDate... selectedItems) {
 
 		selectedItems = Arrays.asList(selectedItems).stream()
 				.sorted((d1, d2) -> Long.compare(d1.getTimestamp(), d2.getTimestamp())).toArray(MdcDate[]::new);
@@ -222,15 +234,34 @@ public class Items extends Div implements HasType<DatePickerType> {
 			final int timestamp = date.getTimestamp();
 
 			if (timestamp >= start.getTimestamp() && timestamp <= end.getTimestamp()) {
-				item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE);
+				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
 				if (item.getDate().equals(start))
-					item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_FIRST);
+					item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
 				if (item.getDate().equals(end))
-					item.addStyleName(CssName.MDC_DATEPICKER__ITEMS__ACTIVE_LAST);
+					item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
 			}
 		});
-
-		return selectedItems;
 	}
 
+	@Override
+	public HandlerRegistration addSelectionHandler(SelectionHandler<MdcDate[]> handler) {
+		return selectionMixin.addSelectionHandler(handler);
+	}
+
+	@Override
+	public void setSelection(MdcDate[] selected) {
+		drawSelection(selected);
+		selectionMixin.setSelection(selected);
+	}
+
+	@Override
+	public void setSelection(MdcDate[] selected, boolean fireEvents) {
+		drawSelection(selected);
+		selectionMixin.setSelection(selected, fireEvents);
+	}
+
+	@Override
+	public MdcDate[] getSelection() {
+		return selectionMixin.getSelection();
+	}
 }

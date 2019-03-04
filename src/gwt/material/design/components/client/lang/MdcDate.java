@@ -1,16 +1,36 @@
+/*
+ * #%L
+ * Gwt Material Design Components
+ * %%
+ * Copyright (C) 2017 - 2017 Gwt Material Design Components
+ * %%
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ * #L%
+ */
 package gwt.material.design.components.client.lang;
 
-import java.util.Collection;
 import java.util.Date;
-import java.util.LinkedList;
 
 import gwt.material.design.components.client.resources.message.IMessages;
-import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 
+/**
+ * 
+ * @author Richeli Vargas
+ *
+ */
 public class MdcDate {
 
-	private int year;
-	private int month;
+	private MdcMonth month;
 	private int day;
 
 	public MdcDate() {
@@ -29,17 +49,16 @@ public class MdcDate {
 	public MdcDate(final int year, final int month, final int day) {
 		super();
 
-		this.year = year;
-		this.month = month;
+		this.month = new MdcMonth(year, month);
 		this.day = day;
 
-		setYear(this.year);
-		setMonth(this.month);
+		setYear(year);
+		setMonth(month);
 		setDay(this.day);
 	}
 
 	public int getYear() {
-		return year;
+		return month.getYear();
 	}
 
 	public void setYear(final int year) {
@@ -47,14 +66,14 @@ public class MdcDate {
 		if (year < 0)
 			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__year_out_of_range(year));
 
-		this.year = year;
-
-		setMonth(month);
+		month.setYear(year);
+		
+		setMonth(month.getMonth());
 
 	}
 
 	public int getMonth() {
-		return month;
+		return month.getMonth();
 	}
 
 	public void setMonth(final int month) {
@@ -62,7 +81,7 @@ public class MdcDate {
 		if (month < 1 || month > 12)
 			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__month_out_of_range(month));
 
-		this.month = month;
+		this.month.setMonth(month);		
 
 		final int lastDayOfMonth = getLastDayOfMonth();
 
@@ -84,17 +103,15 @@ public class MdcDate {
 		final int lastDayOfMonth = getLastDayOfMonth();
 
 		if (day > lastDayOfMonth)
-			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__day_bigger_than_last_day_of_month(year,
-					month, lastDayOfMonth, day));
+			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__day_bigger_than_last_day_of_month(month.getYear(),
+					month.getYear(), lastDayOfMonth, day));
 
 		this.day = day;
 	}
 
-	public native int getLastDayOfMonth()/*-{
-		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
-		var month = this.@gwt.material.design.components.client.lang.MdcDate::month;
-		return new Date(year, month, 0).getDate();
-	}-*/;
+	public int getLastDayOfMonth() {
+		return month.getLastDayOfMonth();
+	}
 
 	public native int getDayOfWeek()/*-{
 		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
@@ -128,6 +145,9 @@ public class MdcDate {
 
 	public MdcDate next() {
 
+		final int month = this.month.getMonth();
+		final int year = this.month.getYear();
+		
 		final boolean isLastDayOfMonth = day == getLastDayOfMonth();
 		final boolean isLastMonthOfYear = month == 12;
 
@@ -141,6 +161,9 @@ public class MdcDate {
 
 	public MdcDate previous() {
 
+		final int month = this.month.getMonth();
+		final int year = this.month.getYear();
+		
 		final boolean isFirstDayOfMonth = day == 1;
 		final boolean isFirstMonthOfYear = month == 1;
 
@@ -162,11 +185,11 @@ public class MdcDate {
 	}
 
 	public String getMonthFullName() {
-		return IMessages.INSTANCE.mdc_calendar_full_month(month);
+		return month.getMonthFullName();
 	}
 
 	public String getMonthShortName() {
-		return IMessages.INSTANCE.mdc_calendar_short_month(month);
+		return month.getMonthShortName();
 	}
 
 	public String getDayOfWeekFullName() {
@@ -183,16 +206,16 @@ public class MdcDate {
 
 	@Override
 	public String toString() {
-		return IMessages.INSTANCE.mdc_date__to_string(getDayOfWeekFullName(), day, getMonthFullName(), year);
-	}	
+		return IMessages.INSTANCE.mdc_date__to_string(getDayOfWeekFullName(), day, getMonthFullName(), month.getYear());
+	}
+
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + day;
-		result = prime * result + month;
-		result = prime * result + year;
+		result = prime * result + ((month == null) ? 0 : month.hashCode());
 		return result;
 	}
 
@@ -207,45 +230,12 @@ public class MdcDate {
 		MdcDate other = (MdcDate) obj;
 		if (day != other.day)
 			return false;
-		if (month != other.month)
-			return false;
-		if (year != other.year)
+		if (month == null) {
+			if (other.month != null)
+				return false;
+		} else if (!month.equals(other.month))
 			return false;
 		return true;
 	}
 
-	@SuppressWarnings("deprecation")
-	public static Collection<MdcDate> daysOfMonth(final boolean is42Format) {
-		final Date date = new Date();
-		final int year = date.getYear() + 1900;
-		final int month = date.getMonth() + 1;
-		return daysOfMonth(year, month, is42Format);
-	}
-	
-	public static Collection<MdcDate> daysOfMonth(final int year, final int month, final boolean is42Format) {
-
-		final Collection<MdcDate> result = new LinkedList<>();
-		final MdcDate firstDayOfMonth = new MdcDate(year, month, 1);
-
-		final int countDays;
-		MdcDate lastDayAdded;
-
-		if (is42Format) {
-			final int countPreviousDays = firstDayOfMonth.getDayOfWeek();
-			final long previousDays = firstDayOfMonth.getTimestamp() - DateTimeHelper.daysInMillis(countPreviousDays);
-			final MdcDate firstDayOfPreviousMonth = new MdcDate(previousDays);
-			countDays = 42;
-			lastDayAdded = firstDayOfPreviousMonth;
-		} else {
-			countDays = firstDayOfMonth.getLastDayOfMonth();
-			lastDayAdded = firstDayOfMonth;
-		}
-
-		result.add(lastDayAdded);
-		for (int i = result.size(); i < countDays; i++)
-			result.add(lastDayAdded = lastDayAdded.next());
-
-		return result;
-
-	}
 }

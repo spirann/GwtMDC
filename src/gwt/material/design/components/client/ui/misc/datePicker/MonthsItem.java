@@ -23,27 +23,33 @@ import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.MaterialLabel;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class ItemsHeader extends Div {
+public class MonthsItem extends Div {
 	
-	protected final int weekDay;
-	protected final MaterialLabel label = new MaterialLabel();
+	protected final int month;
+	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
 	
-	public ItemsHeader(final int weekDay) {
-		super(CssName.MDC_DATEPICKER__ITEMS__HEADER, CssName.MDC_TYPOGRAPHY__CAPTION);
-		this.weekDay = weekDay;
+	public MonthsItem(final int date) {
+		super(CssName.MDC_DATEPICKER__MONTHS__ITEM);
+		this.month = date;
 	}
 	
 	@Override
 	protected void onInitialize() {
+		ripleMixin.initialize();
 		super.onInitialize();		
-		label.setText(IMessages.INSTANCE.mdc_calendar_letter_week(weekDay + 1));		
-		add(label);
+		label.setText(IMessages.INSTANCE.mdc_calendar_short_month(month));		
+		StyleHelper.setProperty(getElement(), "month", month);
+		add(label);		
 	}
 
+	public int getMonth() {
+		return month;
+	}
 }

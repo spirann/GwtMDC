@@ -20,36 +20,30 @@
 package gwt.material.design.components.client.ui.misc.datePicker;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.lang.MdcDate;
+import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.MaterialLabel;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class ItemsItem extends Div {
-	
-	protected final MdcDate date;
-	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
-	
-	public ItemsItem(final MdcDate date) {
-		super(CssName.MDC_DATEPICKER__ITEMS__ITEM);
-		this.date = date;
-	}
-	
-	@Override
-	protected void onInitialize() {
-		ripleMixin.initialize();
-		super.onInitialize();		
-		label.setText(String.valueOf(date.getDay()));		
-		StyleHelper.setProperty(getElement(), "timestamp", date.getTimestamp());
-		add(label);		
+public class DaysHeader extends Div {
+
+	protected final int weekDay;
+	protected final MaterialLabel label = new MaterialLabel();
+
+	public DaysHeader(final int weekDay) {
+		super(CssName.MDC_DATEPICKER__DAYS__HEADER, CssName.MDC_TYPOGRAPHY__CAPTION);
+		this.weekDay = weekDay;
 	}
 
-	public MdcDate getDate() {
-		return date;
+	@Override
+	protected void onInitialize() {
+		super.onInitialize();
+		label.setText(IMessages.INSTANCE.mdc_calendar_letter_week(weekDay + 1));
+		add(label);
 	}
+
 }
