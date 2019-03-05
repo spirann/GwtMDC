@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.datePicker;
+package gwt.material.design.components.client.ui.misc.datePicker.selectors.day;
 
 import java.util.Arrays;
 import java.util.Collection;

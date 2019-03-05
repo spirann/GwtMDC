@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.datePicker;
+package gwt.material.design.components.client.ui.misc.datePicker.selectors.year;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -68,6 +68,10 @@ public class Years extends Div implements HasSelection<Integer>, HasSelectionHan
 		for (int year = minDrawedYear; year <= maxDrawedYear; year++) {
 			final YearsItem item = new YearsItem(year);
 			item.addClickHandler(event -> setSelection(item.getYear()));
+			
+			if (getSelection() != null && year == getSelection())
+				item.addStyleName(CssName.MDC_DATEPICKER__YEARS__ACTIVE);
+			
 			items.put(year, item);
 			add(item);
 		}

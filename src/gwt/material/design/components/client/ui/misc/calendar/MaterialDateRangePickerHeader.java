@@ -47,7 +47,7 @@ public class MaterialDateRangePickerHeader extends MaterialValuedField<Date[]> {
 	protected Label maxDate = new Label(CssName.MDC_DATEPICKER__HEADER__DATE, CssName.MDC_TYPOGRAPHY__CAPTION);
 
 	public MaterialDateRangePickerHeader() {
-		super(CssName.MDC_DATEPICKER__HEADER, CssName.MDC_DATEPICKER__HEADER_PERIOD);
+		super(CssName.MDC_DATEPICKER__HEADER__SINGLE_DATE, CssName.MDC_DATEPICKER__HEADER_PERIOD);
 	}
 
 	@Override

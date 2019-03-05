@@ -17,74 +17,67 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.datePicker;
+package gwt.material.design.components.client.ui.misc.datePicker.inlines;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.HasSelection;
 import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
-import gwt.material.design.components.client.lang.MdcDate;
+import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.ui.MaterialIconButton;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Label;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class Months extends Div implements HasSelection<Integer>, HasSelectionHandlers<Integer> {
+public class YearRange extends Div implements HasSelection<Integer>, HasSelectionHandlers<Integer> {
 
-	protected final HasSelectionMixin<Months, Integer> selectionMixin = new HasSelectionMixin<>(this);
-	protected final Map<Integer, MonthsItem> items = new LinkedHashMap<>();
+	protected final MaterialIconButton previousMonthAct = new MaterialIconButton(IconType.CHEVRON_LEFT);
+	protected final Label label = new Label(CssName.MDC_DATEPICKER__INLINE_SELECTOR__LABEL, CssName.MDC_TYPOGRAPHY__BODY_1);
+	protected final MaterialIconButton nextMonthAct = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 
-	public Months() {
-		super(CssName.MDC_DATEPICKER__MONTHS);
+	protected final HasSelectionMixin<YearRange, Integer> selectionMixin = new HasSelectionMixin<>(this);
+
+	public YearRange() {
+		super(CssName.MDC_DATEPICKER__INLINE_SELECTOR);
+		setSelection(new MdcMonth().getYear());
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
-		drawMonths();
-		if (getSelection() == null)
-			setSelection((new MdcDate()).getMonth(), false);
+
+		previousMonthAct.addClickHandler(event -> previous());
+		nextMonthAct.addClickHandler(event -> next());
+
+		add(previousMonthAct);
+		add(label);
+		add(nextMonthAct);
 	}
 
-	public void drawMonths() {
-
-		clear();
-		items.clear();
-
-		for (int month = 1; month <= 12; month++) {
-			final MonthsItem item = new MonthsItem(month);			
-			item.addClickHandler(event -> setSelection(item.getMonth()));
-			items.put(month, item);
-			add(item);
-		}
-
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		drawSelection(getSelection());
 	}
 
-	protected void drawSelection(final Integer month) {
-		unSelectAll();
-
-		if (month == null)
-			return;
-
-		final MonthsItem item = items.getOrDefault(month, null);
-		if (item != null)
-			item.addStyleName(CssName.MDC_DATEPICKER__MONTHS__ACTIVE);
-
+	@Override
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return label.addClickHandler(handler);
 	}
 
-	protected final native void unSelectAll()/*-{
-		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__MONTHS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__MONTHS__ACTIVE;
-		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
-	}-*/;
+	protected void drawSelection(final Integer year) {
+		if (initialized)
+			label.setText((year - 12) + " ~ " + (year + 12));
+	}
 
 	@Override
 	public HandlerRegistration addSelectionHandler(SelectionHandler<Integer> handler) {
@@ -106,5 +99,13 @@ public class Months extends Div implements HasSelection<Integer>, HasSelectionHa
 	@Override
 	public Integer getSelection() {
 		return selectionMixin.getSelection();
+	}
+
+	public void previous() {
+		setSelection(getSelection() - 25);
+	}
+
+	public void next() {
+		setSelection(getSelection() + 25);
 	}
 }

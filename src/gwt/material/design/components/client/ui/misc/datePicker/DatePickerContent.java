@@ -20,8 +20,16 @@
 package gwt.material.design.components.client.ui.misc.datePicker;
 
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.lang.MdcDate;
 import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.misc.datePicker.headers.SingleDateHeader;
+import gwt.material.design.components.client.ui.misc.datePicker.inlines.DayMonthYear;
+import gwt.material.design.components.client.ui.misc.datePicker.inlines.MonthYear;
+import gwt.material.design.components.client.ui.misc.datePicker.inlines.YearRange;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.day.Days;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.month.Months;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.year.Years;
 
 /**
  * 
@@ -29,6 +37,10 @@ import gwt.material.design.components.client.ui.html.Div;
  *
  */
 public class DatePickerContent extends Div {
+	
+	protected final SingleDateHeader singleDateHeader = new SingleDateHeader();
+	protected final DayMonthYear dayMonthYear = new DayMonthYear();
+	protected final YearRange yearRange = new YearRange();
 	
 	protected final Days days = new Days();
 	protected final Months months = new Months();
@@ -63,11 +75,28 @@ public class DatePickerContent extends Div {
 			days.drawDates(mdcMonth.getYear(), mdcMonth.getMonth());
 		});
 
-		days.addSelectionHandler(event -> {});
+		days.addSelectionHandler(event -> {
+			
+			final MdcDate date;
+			if(event.getValue() == null || event.getValue().length == 0)
+				date = new MdcDate();
+			else 
+				date = event.getValue()[0];
+			
+			singleDateHeader.setValue(date);
+			
+		});
+		yearRange.addSelectionHandler(event -> years.drawYears(yearRange.getSelection()));
+		
+		add(singleDateHeader);
+		add(dayMonthYear);
+		add(yearRange);
 		
 		add(monthYear);
 		add(days);
 		add(months);
 		add(years);
 	}
+	
+	
 }

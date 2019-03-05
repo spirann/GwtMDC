@@ -89,8 +89,10 @@
 	--mdc-datepicker--year-item-width: calc(calc(var(--mdc-datepicker--item-width) * 7) / 5);
 	
 	--mdc-datepicker--item-margin: 2px;
+	/*
 	--mdc-datepicker-width: calc(8px + calc(7 * calc( var(--mdc-datepicker--item-width) + calc(2 * var(--mdc-datepicker--item-margin)))));
-  	
+  	*/
+  	--mdc-datepicker-width: calc(var(--mdc-datepicker--item-width) * 7);
   	/* ================================	*/
   	/* Top app bar attributes													*/
   	/* ================================	*/

@@ -524,6 +524,9 @@
 /* ==========================================================================
    DatePicker
    ========================================================================== */
+.mdc-datepicker {
+	width: var(--mdc-datepicker-width);
+}   
 /* Days */   
 .mdc-datepicker__days {	
 	width: 100%;
@@ -683,27 +686,51 @@
 		color: var(--mdc-datepicker-active-ink);
 		background-color: var(--mdc-datepicker-active-fill);}	
 
-/* Month Year Selector */
-.mdc-datepicker__month_year {
+/* In Line Selector */
+.mdc-datepicker__inline_selector {
 		width: 100%;
+		overflow: hidden;
 		flex: 1;
 		display: flex;
 		align-content: center;
 		align-items: center;
 		justify-content: center;
 		--mdc-icon-button-ink-color: var(--mdc-datepicker-ink);}
-	.mdc-datepicker__month_year > .mdc-datepicker__month_year--label {
+	.mdc-datepicker__inline_selector > .mdc-datepicker__inline_selector--label {
 		flex: 1;
 		color: var(--mdc-datepicker-ink);
 		text-align: center;
 		margin-left: 8px;
 		margin-right: 8px;}
-	.mdc-datepicker__month_year > i {
+	.mdc-datepicker__inline_selector > i {
 		width: var(--mdc-datepicker--item-width);
 		height: var(--mdc-datepicker--item-width);
 		font-size: calc(var(--mdc-datepicker--items-font_size) * 1.75);
 		line-height: 100%;
-	}			
+}
+
+/* Header */
+.mdc-datepicker__header--single_date {
+	width: 100%;
+	flex: 1;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	background-color: var(--mdc-datepicker--header-fill);
+	color: var(--mdc-datepicker--header-ink);}
+	.mdc-datepicker__header--single_date > * {
+		width: 100%;
+		text-align: center;
+		padding: 4px;}
+	.mdc-datepicker__header--single_date--weeek {
+		background-color: var(--mdc-filled-color);}
+	.mdc-datepicker__header--single_date--day {}
+	.mdc-datepicker__header--single_date--month {}
+	.mdc-datepicker__header--single_date--year {}
+	
+			
 			
 /* ==========================================================================
    Tree

@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.datePicker;
+package gwt.material.design.components.client.ui.misc.datePicker.inlines;
 
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
@@ -42,13 +42,13 @@ import gwt.material.design.components.client.ui.html.Label;
 public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelectionHandlers<MdcMonth> {
 
 	protected final MaterialIconButton previousMonthAct = new MaterialIconButton(IconType.CHEVRON_LEFT);
-	protected final Label label = new Label(CssName.MDC_DATEPICKER__MONTH_YEAR__LABEL, CssName.MDC_TYPOGRAPHY__BODY_1);
+	protected final Label label = new Label(CssName.MDC_DATEPICKER__INLINE_SELECTOR__LABEL, CssName.MDC_TYPOGRAPHY__BODY_1);
 	protected final MaterialIconButton nextMonthAct = new MaterialIconButton(IconType.CHEVRON_RIGHT);
 
 	protected final HasSelectionMixin<MonthYear, MdcMonth> selectionMixin = new HasSelectionMixin<>(this);
 
 	public MonthYear() {
-		super(CssName.MDC_DATEPICKER__MONTH_YEAR);
+		super(CssName.MDC_DATEPICKER__INLINE_SELECTOR);
 		setSelection(new MdcMonth());
 	}
 
@@ -56,12 +56,12 @@ public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelecti
 	protected void onInitialize() {
 		super.onInitialize();
 
-		previousMonthAct.addClickHandler(event -> setSelection(getSelection().previous()));
-		nextMonthAct.addClickHandler(event -> setSelection(getSelection().next()));
+		previousMonthAct.addClickHandler(event -> previous());
+		nextMonthAct.addClickHandler(event -> next());
 
 		add(previousMonthAct);
 		add(label);
-		add(nextMonthAct);	
+		add(nextMonthAct);
 	}
 
 	@Override
@@ -69,12 +69,12 @@ public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelecti
 		super.onLoad();
 		drawSelection(getSelection());
 	}
-	
+
 	@Override
 	public HandlerRegistration addClickHandler(ClickHandler handler) {
 		return label.addClickHandler(handler);
 	}
-	
+
 	protected void drawSelection(final MdcMonth month) {
 		if (initialized)
 			label.setText(IMessages.INSTANCE.mdc_calendar_body_month(
@@ -101,5 +101,13 @@ public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelecti
 	@Override
 	public MdcMonth getSelection() {
 		return selectionMixin.getSelection();
+	}
+
+	public void previous() {
+		setSelection(getSelection().previous());
+	}
+
+	public void next() {
+		setSelection(getSelection().next());
 	}
 }

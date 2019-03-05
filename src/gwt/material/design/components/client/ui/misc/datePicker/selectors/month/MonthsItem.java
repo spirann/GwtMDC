@@ -17,7 +17,7 @@
  * limitations under the License.
  * #L%
  */
-package gwt.material.design.components.client.ui.misc.datePicker;
+package gwt.material.design.components.client.ui.misc.datePicker.selectors.month;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.resources.message.IMessages;

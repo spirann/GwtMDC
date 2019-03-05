@@ -53,7 +53,7 @@ public class MaterialDatePickerHeader extends MaterialValuedField<Date> {
 			CssName.MDC_TYPOGRAPHY__HEADLINE_5);
 
 	public MaterialDatePickerHeader() {
-		super(CssName.MDC_DATEPICKER__HEADER);
+		super(CssName.MDC_DATEPICKER__HEADER__SINGLE_DATE);
 	}
 
 	@Override
