@@ -189,6 +189,9 @@ public class Days extends Div
 	}
 
 	protected void drawSingleSelect(final MdcDate... selectedItems) {
+		
+		if (selectedItems == null || selectedItems.length == 0)
+			return;
 
 		final DaysItem item = Arrays.asList(selectedItems).stream().filter(date -> items.containsKey(date)).findAny()
 				.map(date -> items.get(date)).orElse(null);
@@ -201,6 +204,10 @@ public class Days extends Div
 	}
 
 	protected void drawMultipleSelect(final MdcDate... selectedItems) {
+		
+		if (selectedItems == null || selectedItems.length == 0)
+			return;
+		
 		final List<MdcDate> collection = Arrays.asList(selectedItems);
 		collection.stream().filter(date -> items.containsKey(date)).forEach(date -> {
 
@@ -217,6 +224,9 @@ public class Days extends Div
 	}
 
 	protected void drawRangeSelect(MdcDate... selectedItems) {
+
+		if (selectedItems == null || selectedItems.length == 0)
+			return;
 
 		selectedItems = Arrays.asList(selectedItems).stream()
 				.sorted((d1, d2) -> Long.compare(d1.getTimestamp(), d2.getTimestamp())).toArray(MdcDate[]::new);
