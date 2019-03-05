@@ -21,13 +21,11 @@ package gwt.material.design.components.client.base.widget;
 
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
 
+import gwt.material.design.components.client.base.mixin.HasValueMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.ui.html.Div;
 
@@ -38,9 +36,7 @@ import gwt.material.design.components.client.ui.html.Div;
  */
 public class MaterialValuedField<T> extends Div implements HasValue<T> {
 
-	private boolean valueChangeHandlerInitialized;
-
-	private T value;
+	protected final HasValueMixin<MaterialValuedField<T>, T> hasValueMixin = new HasValueMixin<>(this);
 
 	protected MaterialValuedField() {
 		this(CssName.MDC_FORM_FIELD);
@@ -55,38 +51,28 @@ public class MaterialValuedField<T> extends Div implements HasValue<T> {
 		return new $wnd.mdc.formField.MDCFormField(element);
 	}-*/;
 
-	protected HandlerRegistration addChangeHandler(ChangeHandler handler) {
-		return addDomHandler(handler, ChangeEvent.getType());
-	}
-
 	protected void fireChangeEvent() {
-		ValueChangeEvent.fire(MaterialValuedField.this, getValue());
-	}	
-
+		hasValueMixin.fireChangeEvent();
+	}
+	
 	@Override
 	public HandlerRegistration addValueChangeHandler(ValueChangeHandler<T> handler) {
-		// Initialization code
-		if (!valueChangeHandlerInitialized)
-			valueChangeHandlerInitialized = addChangeHandler(event -> fireChangeEvent()) != null;
-
-		return addHandler(handler, ValueChangeEvent.getType());
+		return hasValueMixin.addValueChangeHandler(handler);
 	}
 
 	@Override
 	public void setValue(T value) {
-		setValue(value, true);
+		hasValueMixin.setValue(value);
 	}
 
 	@Override
 	public T getValue() {
-		return value;
+		return hasValueMixin.getValue();
 	}
 
 	@Override
 	public void setValue(T value, boolean fireEvents) {
-		this.value = value;
-		if (fireEvents && isAttached())
-			fireChangeEvent();
+		hasValueMixin.setValue(value, fireEvents);		
 	}
 
 }

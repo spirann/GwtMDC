@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.HasSelection;
@@ -67,6 +68,11 @@ public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelecti
 	protected void onLoad() {
 		super.onLoad();
 		drawSelection(getSelection());
+	}
+	
+	@Override
+	public HandlerRegistration addClickHandler(ClickHandler handler) {
+		return label.addClickHandler(handler);
 	}
 	
 	protected void drawSelection(final MdcMonth month) {
