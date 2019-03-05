@@ -86,8 +86,8 @@ public class MdcMonth {
 	}
 
 	public native int getLastDayOfMonth()/*-{
-		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
-		var month = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var year = this.@gwt.material.design.components.client.lang.MdcMonth::year;
+		var month = this.@gwt.material.design.components.client.lang.MdcMonth::month;
 		return new Date(year, month, 0).getDate();
 	}-*/;
 

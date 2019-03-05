@@ -114,15 +114,17 @@ public class MdcDate {
 	}
 
 	public native int getDayOfWeek()/*-{
-		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
-		var month = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var mdcMonth = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var year = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getYear()();
+		var month = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getMonth()();
 		var day = this.@gwt.material.design.components.client.lang.MdcDate::day;
 		return new Date(year, month - 1, day).getDay();
 	}-*/;
 
 	public native int getDayOfYear()/*-{
-		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
-		var month = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var mdcMonth = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var year = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getYear()();
+		var month = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getMonth()();
 		var day = this.@gwt.material.design.components.client.lang.MdcDate::day;
 
 		return --month >= 0
@@ -137,8 +139,9 @@ public class MdcDate {
 	}-*/;
 
 	public native int getTimestamp()/*-{
-		var year = this.@gwt.material.design.components.client.lang.MdcDate::year;
-		var month = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var mdcMonth = this.@gwt.material.design.components.client.lang.MdcDate::month;
+		var year = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getYear()();
+		var month = mdcMonth.@gwt.material.design.components.client.lang.MdcMonth::getMonth()();
 		var day = this.@gwt.material.design.components.client.lang.MdcDate::day;
 		return new Date(year, month - 1, day).getTime();
 	}-*/;

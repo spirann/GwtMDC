@@ -53,10 +53,9 @@ public class Days extends Div
 	protected final TypeMixin<Days, DatePickerType> typeMixin = new TypeMixin<>(this, DatePickerType.RANGE);
 	protected final HasSelectionMixin<Days, MdcDate[]> selectionMixin = new HasSelectionMixin<>(this);
 	protected final Map<MdcDate, DaysItem> items = new LinkedHashMap<>();
-	
+
 	private int year;
 	private int month;
-	
 
 	public Days() {
 		super(CssName.MDC_DATEPICKER__DAYS);
@@ -156,12 +155,9 @@ public class Days extends Div
 	}
 
 	protected long calcDifference(final MdcDate dateOne, final MdcDate dateTwo) {
-
 		final long timestampOne = dateOne.getTimestamp();
 		final long timestampTwo = dateTwo.getTimestamp();
-
 		return timestampOne > timestampTwo ? timestampOne - timestampTwo : timestampTwo - timestampOne;
-
 	}
 
 	protected final native void unSelectAll()/*-{

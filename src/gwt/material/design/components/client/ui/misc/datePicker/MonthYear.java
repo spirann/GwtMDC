@@ -28,30 +28,51 @@ import gwt.material.design.components.client.constants.IconType;
 import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.ui.MaterialIconButton;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.html.Label;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MonthYearChooser extends Div implements HasSelection<MdcMonth>, HasSelectionHandlers<MdcMonth> {
+public class MonthYear extends Div implements HasSelection<MdcMonth>, HasSelectionHandlers<MdcMonth> {
 
 	protected final MaterialIconButton previousMonthAct = new MaterialIconButton(IconType.CHEVRON_LEFT);
+	protected final Label label = new Label(CssName.MDC_DATEPICKER__MONTH_YEAR__LABEL, CssName.MDC_TYPOGRAPHY__BODY_1);
 	protected final MaterialIconButton nextMonthAct = new MaterialIconButton(IconType.CHEVRON_RIGHT);
-	
-	protected final HasSelectionMixin<MonthYearChooser, MdcMonth> selectionMixin = new HasSelectionMixin<>(this);
-		public MonthYearChooser() {
-		super(CssName.MDC_DATEPICKER__YEARS);
+
+	protected final HasSelectionMixin<MonthYear, MdcMonth> selectionMixin = new HasSelectionMixin<>(this);
+
+	public MonthYear() {
+		super(CssName.MDC_DATEPICKER__MONTH_YEAR);
+		setSelection(new MdcMonth());
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
+
+		previousMonthAct.addClickHandler(event -> setSelection(getSelection().previous()));
+		nextMonthAct.addClickHandler(event -> setSelection(getSelection().next()));
+
+		add(previousMonthAct);
+		add(label);
+		add(nextMonthAct);	
 	}
 
+	@Override
+	protected void onLoad() {
+		super.onLoad();
+		drawSelection(getSelection());
+	}
+	
 	protected void drawSelection(final MdcMonth month) {
+		if (initialized)
+			label.setText(IMessages.INSTANCE.mdc_calendar_body_month(
+					IMessages.INSTANCE.mdc_calendar_full_month(month.getMonth()), month.getYear()));
 	}
 
 	@Override

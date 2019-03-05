@@ -83,6 +83,7 @@
 	--mdc-datepicker-active-fill: var(--mdc-theme-primary);
 	--mdc-datepicker--header-ink: var(--mdc-theme-on-primary);
 	--mdc-datepicker--header-fill: var(--mdc-theme-primary);	
+	--mdc-datepicker--items-font_size: 0.75rem;
 	--mdc-datepicker--item-width: 30px;
 	--mdc-datepicker--month-item-width: calc(calc(var(--mdc-datepicker--item-width) * 7) / 4);
 	--mdc-datepicker--year-item-width: calc(calc(var(--mdc-datepicker--item-width) * 7) / 5);
