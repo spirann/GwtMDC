@@ -77,7 +77,7 @@ public class MaterialDatePickerItem extends MaterialSelectedField implements Has
 	public MaterialDatePickerItem() {
 		super(HtmlElements.LABEL.createElement(), CssName.MDC_DATEPICKER__DAYS__ITEM,
 				CssName.MDC_TYPOGRAPHY__CAPTION);
-		super.initializeSelectedMixin(this, CssName.MDC_DATEPICKER__DAYS__ACTIVE);
+		super.initializeSelectedMixin(this, CssName.MDC_DATEPICKER__ACTIVE);
 	}
 
 	@Override

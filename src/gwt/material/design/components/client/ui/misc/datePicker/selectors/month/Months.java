@@ -22,89 +22,55 @@ package gwt.material.design.components.client.ui.misc.datePicker.selectors.month
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.google.gwt.event.shared.HandlerRegistration;
-
-import gwt.material.design.components.client.base.interfaces.HasSelection;
 import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
-import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
-import gwt.material.design.components.client.lang.MdcDate;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractSelector;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class Months extends Div implements HasSelection<Integer>, HasSelectionHandlers<Integer> {
+public class Months extends AbstractSelector<MdcMonth[], MonthsItem> {
 
-	protected final HasSelectionMixin<Months, Integer> selectionMixin = new HasSelectionMixin<>(this);
-	protected final Map<Integer, MonthsItem> items = new LinkedHashMap<>();
+	protected final HasSelectionMixin<Months, MdcMonth[]> selectionMixin = new HasSelectionMixin<>(this);
+	protected final Map<MdcMonth, MonthsItem> items = new LinkedHashMap<>();
 
 	public Months() {
 		super(CssName.MDC_DATEPICKER__MONTHS);
 	}
 
 	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-		drawMonths();
-		if (getSelection() == null)
-			setSelection((new MdcDate()).getMonth(), false);
-	}
-
-	public void drawMonths() {
-
-		clear();
-		items.clear();
-
-		for (int month = 1; month <= 12; month++) {
-			final MonthsItem item = new MonthsItem(month);			
-			item.addClickHandler(event -> setSelection(item.getMonth()));
-			items.put(month, item);
-			add(item);
-		}
-
-	}
-
-	protected void drawSelection(final Integer month) {
-		unSelectAll();
-
-		if (month == null)
-			return;
-
-		final MonthsItem item = items.getOrDefault(month, null);
-		if (item != null)
-			item.addStyleName(CssName.MDC_DATEPICKER__MONTHS__ACTIVE);
-
-	}
-
-	protected final native void unSelectAll()/*-{
-		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__MONTHS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__MONTHS__ACTIVE;
-		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
-	}-*/;
-
-	@Override
-	public HandlerRegistration addSelectionHandler(SelectionHandler<Integer> handler) {
-		return selectionMixin.addSelectionHandler(handler);
+	protected MdcMonth[] getInitialValues() {
+		return getValues(new MdcMonth().getYear());
 	}
 
 	@Override
-	public void setSelection(Integer selected) {
-		drawSelection(selected);
-		selectionMixin.setSelection(selected);
+	protected <V> long toNumber(final V value) {
+		final MdcMonth month = (MdcMonth) value;
+		return (month.getYear() * 12) + month.getMonth();
 	}
 
 	@Override
-	public void setSelection(Integer selected, boolean fireEvents) {
-		drawSelection(selected);
-		selectionMixin.setSelection(selected, fireEvents);
+	protected <V> MonthsItem drawItem(V value) {
+		final MdcMonth month = (MdcMonth) value;
+		return new MonthsItem(month);
 	}
 
-	@Override
-	public Integer getSelection() {
-		return selectionMixin.getSelection();
+	protected MdcMonth[] getValues(final int year) {
+		final MdcMonth initial = new MdcMonth(year, 1);
+
+		final MdcMonth[] initialValues = new MdcMonth[12];
+		initialValues[0] = initial;
+
+		for (int index = 1; index < initialValues.length; index++)
+			initialValues[index] = initialValues[index - 1].next();
+
+		return initialValues;
+	}
+
+	public void draw(final int year) {
+		draw(getValues(year));
 	}
 }

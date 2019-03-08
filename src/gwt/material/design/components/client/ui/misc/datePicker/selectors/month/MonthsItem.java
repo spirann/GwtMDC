@@ -20,7 +20,7 @@
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.month;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.resources.message.IMessages;
+import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.ui.MaterialLabel;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.StyleHelper;
@@ -32,24 +32,20 @@ import gwt.material.design.components.client.utils.helper.StyleHelper;
  */
 public class MonthsItem extends Div {
 	
-	protected final int month;
 	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
 	
-	public MonthsItem(final int date) {
+	public MonthsItem(final MdcMonth month) {
 		super(CssName.MDC_DATEPICKER__MONTHS__ITEM);
-		this.month = date;
+		setDataObject(month);
 	}
 	
 	@Override
 	protected void onInitialize() {
 		ripleMixin.initialize();
 		super.onInitialize();		
-		label.setText(IMessages.INSTANCE.mdc_calendar_short_month(month));		
-		StyleHelper.setProperty(getElement(), "month", month);
+		final MdcMonth month = (MdcMonth) getDataObject();
+		label.setText(month.getMonthShortName());		
+		StyleHelper.setProperty(getElement(), "month", month.getMonth());
 		add(label);		
-	}
-
-	public int getMonth() {
-		return month;
 	}
 }

@@ -70,7 +70,7 @@ public class Years extends Div implements HasSelection<Integer>, HasSelectionHan
 			item.addClickHandler(event -> setSelection(item.getYear()));
 			
 			if (getSelection() != null && year == getSelection())
-				item.addStyleName(CssName.MDC_DATEPICKER__YEARS__ACTIVE);
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 			
 			items.put(year, item);
 			add(item);
@@ -90,13 +90,13 @@ public class Years extends Div implements HasSelection<Integer>, HasSelectionHan
 		final YearsItem item = items.getOrDefault(year, null);
 
 		if (item != null)
-			item.addStyleName(CssName.MDC_DATEPICKER__YEARS__ACTIVE);
+			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 
 	}
 
 	protected final native void unSelectAll()/*-{
 		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__YEARS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__YEARS__ACTIVE;
+		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE;
 		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
 	}-*/;
 

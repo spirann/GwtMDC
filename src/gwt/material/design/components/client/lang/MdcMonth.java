@@ -23,6 +23,8 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedList;
 
+import gwt.material.design.components.client.base.interfaces.HasNext;
+import gwt.material.design.components.client.base.interfaces.HasPrevious;
 import gwt.material.design.components.client.resources.message.IMessages;
 import gwt.material.design.components.client.utils.helper.DateTimeHelper;
 
@@ -31,7 +33,7 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
  * @author Richeli Vargas
  *
  */
-public class MdcMonth {
+public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Comparable<MdcMonth> {
 
 	private int year;
 	private int month;
@@ -184,4 +186,10 @@ public class MdcMonth {
 		return result;
 
 	}
+	
+	@Override
+	public int compareTo(MdcMonth month) {
+		return Integer.compare((getYear() * 12) + getMonth(), (month.getYear() * 12) + month.getMonth());
+	}
+
 }

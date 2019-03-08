@@ -21,6 +21,8 @@ package gwt.material.design.components.client.lang;
 
 import java.util.Date;
 
+import gwt.material.design.components.client.base.interfaces.HasNext;
+import gwt.material.design.components.client.base.interfaces.HasPrevious;
 import gwt.material.design.components.client.resources.message.IMessages;
 
 /**
@@ -28,7 +30,7 @@ import gwt.material.design.components.client.resources.message.IMessages;
  * @author Richeli Vargas
  *
  */
-public class MdcDate {
+public class MdcDate implements HasPrevious<MdcDate>, HasNext<MdcDate>, Comparable<MdcDate> {
 
 	private MdcMonth month;
 	private int day;
@@ -239,6 +241,11 @@ public class MdcDate {
 		} else if (!month.equals(other.month))
 			return false;
 		return true;
+	}
+
+	@Override
+	public int compareTo(MdcDate date) {
+		return Integer.compare(getTimestamp(), date.getTimestamp());
 	}
 
 }

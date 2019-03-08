@@ -65,9 +65,6 @@ public class Days extends Div
 	protected void onInitialize() {
 		super.onInitialize();
 		drawDates();
-
-		setSelection(new MdcDate[] { new MdcDate(2019, 2, 15), new MdcDate(2019, 2, 16), new MdcDate(2019, 2, 17),
-				new MdcDate(2019, 2, 25) });
 	}
 
 	@Override
@@ -97,6 +94,7 @@ public class Days extends Div
 	protected void drawDates(final Collection<MdcDate> dates) {
 
 		clear();
+		items.clear();
 
 		for (int weekDay = 0; weekDay < 7; weekDay++)
 			add(new DaysHeader(weekDay));
@@ -162,9 +160,9 @@ public class Days extends Div
 
 	protected final native void unSelectAll()/*-{
 		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE;
-		var activeFirstClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE_FIRST;
-		var activeLastClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__DAYS__ACTIVE_LAST;
+		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE;
+		var activeFirstClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE_FIRST;
+		var activeLastClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE_LAST;
 		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
 		$wnd.jQuery('.' + itemClass).removeClass(activeFirstClass);
 		$wnd.jQuery('.' + itemClass).removeClass(activeLastClass);
@@ -197,9 +195,9 @@ public class Days extends Div
 				.map(date -> items.get(date)).orElse(null);
 
 		if (item != null) {
-			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
-			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
-			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
+			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
+			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
+			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_LAST);
 		}
 	}
 
@@ -212,13 +210,13 @@ public class Days extends Div
 		collection.stream().filter(date -> items.containsKey(date)).forEach(date -> {
 
 			final DaysItem item = items.get(date);
-			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
+			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 
 			if (!collection.contains(date.previous()))
-				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
 
 			if (!collection.contains(date.next()))
-				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_LAST);
 
 		});
 	}
@@ -240,11 +238,11 @@ public class Days extends Div
 			final int timestamp = date.getTimestamp();
 
 			if (timestamp >= start.getTimestamp() && timestamp <= end.getTimestamp()) {
-				item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE);
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 				if (item.getDate().equals(start))
-					item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_FIRST);
+					item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
 				if (item.getDate().equals(end))
-					item.addStyleName(CssName.MDC_DATEPICKER__DAYS__ACTIVE_LAST);
+					item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_LAST);
 			}
 		});
 	}

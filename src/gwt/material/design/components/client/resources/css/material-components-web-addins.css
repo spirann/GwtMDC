@@ -577,17 +577,7 @@
 		cursor: pointer;
 		text-align: center;}
 	.mdc-datepicker__days > .mdc-datepicker__days--out_of_month * {
-		opacity: .5;}	
-	.mdc-datepicker__days > .mdc-datepicker__days--active {
-		border-radius: 0;
-		color: var(--mdc-datepicker-active-ink);
-		background-color: var(--mdc-datepicker-active-fill);}	
-	.mdc-datepicker__days > .mdc-datepicker__days--active.mdc-datepicker__days--active_first {
-		border-top-left-radius: calc(var(--mdc-datepicker--item-width) / 2);
-		border-bottom-left-radius: calc(var(--mdc-datepicker--item-width) / 2);}
-	.mdc-datepicker__days > .mdc-datepicker__days--active.mdc-datepicker__days--active_last {			
-		border-top-right-radius: calc(var(--mdc-datepicker--item-width) / 2);
-		border-bottom-right-radius: calc(var(--mdc-datepicker--item-width) / 2);}	
+		opacity: .5;}		
 	.mdc-datepicker__days > .mdc-datepicker__days--item > .mdc-datepicker__days--tooltip_indicator {
 		position: absolute;
 		border-radius: 50%;
@@ -638,9 +628,6 @@
 	.mdc-datepicker__months > .mdc-datepicker__months--item * {
 		cursor: pointer;
 		text-align: center;}	
-	.mdc-datepicker__months > .mdc-datepicker__months--active {
-		color: var(--mdc-datepicker-active-ink);
-		background-color: var(--mdc-datepicker-active-fill);}
 /* Years */		
 .mdc-datepicker__years {
 	width: 100%;
@@ -682,9 +669,6 @@
 		cursor: pointer;
 		text-align: center;
 		padding-top: 2px;}	
-	.mdc-datepicker__years > .mdc-datepicker__years--active {
-		color: var(--mdc-datepicker-active-ink);
-		background-color: var(--mdc-datepicker-active-fill);}	
 
 /* In Line Selector */
 .mdc-datepicker__inline_selector {
@@ -730,7 +714,17 @@
 	.mdc-datepicker__header--single_date--month {}
 	.mdc-datepicker__header--single_date--year {}
 	
-			
+/* Active */
+.mdc-datepicker__active {
+	border-radius: 0;
+	color: var(--mdc-datepicker-active-ink);
+	background-color: var(--mdc-datepicker-active-fill);}	
+.mdc-datepicker__active.mdc-datepicker__active_first {
+	border-top-left-radius: calc(var(--mdc-datepicker--item-width) / 2);
+	border-bottom-left-radius: calc(var(--mdc-datepicker--item-width) / 2);}
+.mdc-datepicker__active.mdc-datepicker__active_last {			
+	border-top-right-radius: calc(var(--mdc-datepicker--item-width) / 2);
+	border-bottom-right-radius: calc(var(--mdc-datepicker--item-width) / 2);}			
 			
 /* ==========================================================================
    Tree

@@ -58,13 +58,13 @@ public class DatePickerContent extends Div {
 		monthYear.addSelectionHandler(event -> {
 			final int month = monthYear.getSelection().getMonth();
 			final int year = monthYear.getSelection().getYear();			
-			months.setSelection(month, false);
+			//months.setSelection(month, false);
 			years.setSelection(year, false);
 			days.drawDates(year, month);
 		});
 		months.addSelectionHandler(event -> {			
 			final MdcMonth mdcMonth = monthYear.getSelection();
-			mdcMonth.setMonth(months.getSelection());
+			//mdcMonth.setMonth(months.getSelection());
 			monthYear.setSelection(mdcMonth, false);	
 			days.drawDates(mdcMonth.getYear(), mdcMonth.getMonth());		
 		});
