@@ -95,7 +95,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 			final W item = drawItem(value);
 			item.addClickHandler(event -> {
 
-				final List selectedDates = asList(getSelection());
+				final List<Object> selectedDates = asList(getSelection());
 				final boolean isSelected = selectedDates.contains(value);
 
 				switch (getType()) {
@@ -187,7 +187,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void drawRangeSelect(final D selectedItems) {
 
-		final List<Comparable> ordened = (List<Comparable>) asList(selectedItems).stream().sorted()
+		final List<Comparable> ordened = (List<Comparable>) (List<?>) asList(selectedItems).stream().sorted()
 				.collect(Collectors.toList());
 
 		final Comparable start = ordened.get(0);
@@ -238,17 +238,17 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		return valueOne > valueTwo ? valueOne - valueTwo : valueTwo - valueOne;
 	}
 	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected List asList(final D value) {
+	@SuppressWarnings("unchecked")
+	protected <T> List<T> asList(final D value) {
 		if(value == null)
 			return new LinkedList<>();
 		
 		if(value instanceof Collection)
-			return (List) ((Collection) value).stream().collect(Collectors.toList());
+			return (List<T>) ((Collection<T>) value).stream().collect(Collectors.toList());
 		
 		if(value.getClass().isArray())
-			return Arrays.asList((Object[]) value);
+			return Arrays.asList((T[]) value);
 		
-		return Arrays.asList(value);
+		return (List<T>) Arrays.asList(value);
 	}
 }
