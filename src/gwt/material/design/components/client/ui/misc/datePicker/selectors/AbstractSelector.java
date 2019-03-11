@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.shared.HandlerRegistration;
 
 import gwt.material.design.components.client.base.interfaces.HasNext;
@@ -28,7 +29,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		implements HasType<DatePickerType>, HasSelection<D>, HasSelectionHandlers<D> {
 
 	protected final TypeMixin<AbstractSelector<D, W>, DatePickerType> typeMixin = new TypeMixin<>(this,
-			DatePickerType.SINGLE);
+			DatePickerType.RANGE);
 	protected final HasSelectionMixin<AbstractSelector<D, W>, D> selectionMixin = new HasSelectionMixin<>(this);
 	protected final Map<Object, W> items = new LinkedHashMap<>();
 
@@ -82,7 +83,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 
 	protected abstract D getInitialValues();
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings({ "unchecked" })
 	public void draw(final D values) {
 		
 		clear();
@@ -94,10 +95,8 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		asList(values).forEach(value -> {
 			final W item = drawItem(value);
 			item.addClickHandler(event -> {
-
 				final List<Object> selectedDates = asList(getSelection());
 				final boolean isSelected = selectedDates.contains(value);
-
 				switch (getType()) {
 				case RANGE:
 					if (selectedDates.size() > 1) {
@@ -112,7 +111,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 				case MULTIPLE:
 					break;
 				}
-				
+
 				if (isSelected)
 					selectedDates.remove(value);
 				else
@@ -131,7 +130,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	}
 
 	protected void drawSelection(final D values) {
-		unSelectAll();
+		unSelectAll(getElement());
 
 		if (values != null)
 			switch (getType()) {
@@ -148,7 +147,6 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 			}
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void drawSingleSelect(final D selectedItems) {
 
 		final W item = (W) asList(selectedItems).stream().filter(selectedItem -> items.containsKey(selectedItem))
@@ -210,13 +208,14 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		});
 	}
 
-	protected final native void unSelectAll() /*-{
+	protected final native void unSelectAll(final Element parent) /*-{
 		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE;
 		var activeFirstClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE_FIRST;
 		var activeLastClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE_LAST;
-		$wnd.jQuery(this).find().removeClass(activeClass);
-		$wnd.jQuery(this).find().removeClass(activeFirstClass);
-		$wnd.jQuery(this).find().removeClass(activeLastClass);
+		var jQueryChildren = $wnd.jQuery(parent).find("*");
+		jQueryChildren.removeClass(activeClass);
+		jQueryChildren.removeClass(activeFirstClass);
+		jQueryChildren.removeClass(activeLastClass);
 	}-*/;
 
 	protected abstract <V> long toNumber(final V value);
@@ -247,7 +246,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 			return (List<T>) ((Collection<T>) value).stream().collect(Collectors.toList());
 		
 		if(value.getClass().isArray())
-			return Arrays.asList((T[]) value);
+			return Arrays.stream((T[]) value).collect(Collectors.toList());
 		
 		return (List<T>) Arrays.asList(value);
 	}

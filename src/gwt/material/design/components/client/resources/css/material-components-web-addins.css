@@ -718,13 +718,13 @@
 .mdc-datepicker__active {
 	border-radius: 0;
 	color: var(--mdc-datepicker-active-ink);
-	background-color: var(--mdc-datepicker-active-fill);}	
+	background-color: var(--mdc-datepicker-active-fill) !important;}	
 .mdc-datepicker__active.mdc-datepicker__active_first {
-	border-top-left-radius: calc(var(--mdc-datepicker--item-width) / 2);
-	border-bottom-left-radius: calc(var(--mdc-datepicker--item-width) / 2);}
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;}
 .mdc-datepicker__active.mdc-datepicker__active_last {			
-	border-top-right-radius: calc(var(--mdc-datepicker--item-width) / 2);
-	border-bottom-right-radius: calc(var(--mdc-datepicker--item-width) / 2);}			
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;}			
 			
 /* ==========================================================================
    Tree
