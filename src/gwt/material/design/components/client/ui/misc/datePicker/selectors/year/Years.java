@@ -19,106 +19,49 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.year;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import com.google.gwt.event.shared.HandlerRegistration;
-
-import gwt.material.design.components.client.base.interfaces.HasSelection;
-import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
-import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
-import gwt.material.design.components.client.lang.MdcDate;
-import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.lang.MdcYear;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractSelector;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class Years extends Div implements HasSelection<Integer>, HasSelectionHandlers<Integer> {
-
-	protected final HasSelectionMixin<Years, Integer> selectionMixin = new HasSelectionMixin<>(this);
-	protected final Map<Integer, YearsItem> items = new LinkedHashMap<>();
-
-	protected int minDrawedYear = -1;
-	protected int maxDrawedYear = -1;
+public class Years extends AbstractSelector<MdcYear[], YearsItem> {
 
 	public Years() {
 		super(CssName.MDC_DATEPICKER__YEARS);
 	}
 
 	@Override
-	protected void onInitialize() {
-		super.onInitialize();
-		// drawYears();
-		if (getSelection() == null)
-			setSelection((new MdcDate()).getYear(), false);
-	}
-
-	public void drawYears(final Integer yearBase) {
-
-		clear();
-		items.clear();
-
-		minDrawedYear = yearBase - 12;
-		maxDrawedYear = yearBase + 12;
-
-		for (int year = minDrawedYear; year <= maxDrawedYear; year++) {
-			final YearsItem item = new YearsItem(year);
-			item.addClickHandler(event -> setSelection(item.getYear()));
-			
-			if (getSelection() != null && year == getSelection())
-				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
-			
-			items.put(year, item);
-			add(item);
-		}
-
-	}
-
-	protected void drawSelection(final Integer year) {
-		unSelectAll();
-
-		if (year == null)
-			return;
-
-		if (year < minDrawedYear || year > maxDrawedYear)
-			drawYears(year);
-
-		final YearsItem item = items.getOrDefault(year, null);
-
-		if (item != null)
-			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
-
-	}
-
-	protected final native void unSelectAll()/*-{
-		var itemClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__YEARS__ITEM;
-		var activeClass = @gwt.material.design.components.client.constants.CssName::MDC_DATEPICKER__ACTIVE;
-		$wnd.jQuery('.' + itemClass).removeClass(activeClass);
-	}-*/;
-
-	@Override
-	public HandlerRegistration addSelectionHandler(SelectionHandler<Integer> handler) {
-		return selectionMixin.addSelectionHandler(handler);
+	protected MdcYear[] getInitialValues() {
+		return getValues(new MdcMonth().getYear());
 	}
 
 	@Override
-	public void setSelection(Integer selected) {
-		drawSelection(selected);
-		selectionMixin.setSelection(selected);
+	protected <V> long toNumber(final V value) {
+		return ((MdcYear) value).getYear();
 	}
 
 	@Override
-	public void setSelection(Integer selected, boolean fireEvents) {
-		drawSelection(selected);
-		selectionMixin.setSelection(selected, fireEvents);
+	protected <V> YearsItem drawItem(V value) {
+		final MdcYear month = (MdcYear) value;
+		return new YearsItem(month);
 	}
 
-	@Override
-	public Integer getSelection() {
-		return selectionMixin.getSelection();
+	protected MdcYear[] getValues(final int year) {
+
+		final MdcYear[] initialValues = new MdcYear[25];
+
+		for (int index = 0, auxYear = year - 12; index < initialValues.length; index++, auxYear++)
+			initialValues[index] = new MdcYear(auxYear);
+
+		return initialValues;
+	}
+
+	public void draw(final int year) {
+		draw(getValues(year));
 	}
 }

@@ -19,10 +19,6 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.month;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractSelector;
@@ -33,9 +29,6 @@ import gwt.material.design.components.client.ui.misc.datePicker.selectors.Abstra
  *
  */
 public class Months extends AbstractSelector<MdcMonth[], MonthsItem> {
-
-	protected final HasSelectionMixin<Months, MdcMonth[]> selectionMixin = new HasSelectionMixin<>(this);
-	protected final Map<MdcMonth, MonthsItem> items = new LinkedHashMap<>();
 
 	public Months() {
 		super(CssName.MDC_DATEPICKER__MONTHS);

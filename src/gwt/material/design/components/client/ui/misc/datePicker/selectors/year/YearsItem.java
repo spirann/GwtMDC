@@ -20,35 +20,22 @@
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.year;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.ui.MaterialLabel;
-import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
+import gwt.material.design.components.client.lang.MdcYear;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractItem;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class YearsItem extends Div {
+public class YearsItem extends AbstractItem<MdcYear> {
 	
-	protected final int year;
-	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
-	
-	public YearsItem(final int date) {
-		super(CssName.MDC_DATEPICKER__YEARS__ITEM);
-		this.year = date;
+	public YearsItem(final MdcYear year) {
+		super(year, CssName.MDC_DATEPICKER__YEARS__ITEM);
 	}
 	
 	@Override
-	protected void onInitialize() {
-		ripleMixin.initialize();
-		super.onInitialize();		
-		label.setText(String.valueOf(year));		
-		StyleHelper.setProperty(getElement(), "year", year);
-		add(label);		
-	}
-
-	public int getYear() {
-		return year;
+	protected String dataToString(MdcYear data) {
+		return String.valueOf(data.getYear());
 	}
 }

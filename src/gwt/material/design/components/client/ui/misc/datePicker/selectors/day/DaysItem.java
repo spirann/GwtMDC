@@ -26,27 +26,22 @@ import java.util.stream.Collectors;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcDate;
-import gwt.material.design.components.client.ui.MaterialLabel;
 import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractItem;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class DaysItem extends Div {
+public class DaysItem extends AbstractItem<MdcDate> {
 
-	protected final MdcDate date;
-
-	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
 	protected final Div tooltipIndicator = new Div(CssName.MDC_DATEPICKER__DAYS__TOOLTIP_INDICATOR);
 
 	protected final Collection<String> tooltips = new LinkedList<>();
 
 	public DaysItem(final MdcDate date) {
-		super(CssName.MDC_DATEPICKER__DAYS__ITEM);
-		this.date = date;
+		super(date, CssName.MDC_DATEPICKER__DAYS__ITEM);		
 	}
 
 	@Override
@@ -57,16 +52,8 @@ public class DaysItem extends Div {
 
 	@Override
 	protected void onInitialize() {
-		ripleMixin.initialize();
-		super.onInitialize();
-		label.setText(String.valueOf(date.getDay()));
-		StyleHelper.setProperty(getElement(), "timestamp", date.getTimestamp());
-		add(label);
+		super.onInitialize();		
 		add(tooltipIndicator);
-	}
-
-	public MdcDate getDate() {
-		return date;
 	}
 
 	public void addTooltip(final String... tooltips) {
@@ -93,5 +80,10 @@ public class DaysItem extends Div {
 				setTooltip("<div style=\"text-align: left;\">" + this.tooltips.stream()
 						.map(tooltip -> "&#8226; " + tooltip).collect(Collectors.joining("<br/>")) + "</div>");
 		}
+	}
+
+	@Override
+	protected String dataToString(MdcDate data) {
+		return String.valueOf(data.getDay());
 	}
 }

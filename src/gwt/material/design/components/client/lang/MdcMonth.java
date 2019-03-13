@@ -35,7 +35,7 @@ import gwt.material.design.components.client.utils.helper.DateTimeHelper;
  */
 public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Comparable<MdcMonth> {
 
-	private int year;
+	private MdcYear year;
 	private int month;
 
 	public MdcMonth() {
@@ -54,24 +54,19 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 	public MdcMonth(final int year, final int month) {
 		super();
 
-		this.year = year;
+		this.year = new MdcYear(year);
 		this.month = month;
-		
-		setYear(this.year);
+
+		setYear(year);
 		setMonth(this.month);
 	}
 
 	public int getYear() {
-		return year;
+		return year.getYear();
 	}
 
 	public void setYear(final int year) {
-
-		if (year < 0)
-			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__year_out_of_range(year));
-
-		this.year = year;
-
+		this.year.setYear(year);
 	}
 
 	public int getMonth() {
@@ -96,6 +91,7 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 	public MdcMonth next() {
 
 		final boolean isLastMonthOfYear = month == 12;
+		final int year = this.year.getYear();
 
 		final int nextMonth = isLastMonthOfYear ? 1 : month + 1;
 		final int nextYear = isLastMonthOfYear ? year + 1 : year;
@@ -107,6 +103,7 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 	public MdcMonth previous() {
 
 		final boolean isFirstMonthOfYear = month == 1;
+		final int year = this.year.getYear();
 
 		final int previousYear = isFirstMonthOfYear ? year - 1 : year;
 		final int previousMonth = isFirstMonthOfYear ? 12 : month - 1;
@@ -124,15 +121,15 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 
 	@Override
 	public String toString() {
-		return IMessages.INSTANCE.mdc_calendar_body_month(getMonthFullName(), year);
-	}	
+		return IMessages.INSTANCE.mdc_calendar_body_month(getMonthFullName(), year.getYear());
+	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + month;
-		result = prime * result + year;
+		result = prime * result + ((year == null) ? 0 : year.hashCode());
 		return result;
 	}
 
@@ -147,7 +144,10 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 		MdcMonth other = (MdcMonth) obj;
 		if (month != other.month)
 			return false;
-		if (year != other.year)
+		if (year == null) {
+			if (other.year != null)
+				return false;
+		} else if (!year.equals(other.year))
 			return false;
 		return true;
 	}
@@ -159,7 +159,7 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 		final int month = date.getMonth() + 1;
 		return daysOfMonth(year, month, is42Format);
 	}
-	
+
 	public static Collection<MdcDate> daysOfMonth(final int year, final int month, final boolean is42Format) {
 
 		final Collection<MdcDate> result = new LinkedList<>();
@@ -186,9 +186,11 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 		return result;
 
 	}
-	
+
 	@Override
 	public int compareTo(MdcMonth month) {
+		if (month == null)
+			return -1;
 		return Integer.compare((getYear() * 12) + getMonth(), (month.getYear() * 12) + month.getMonth());
 	}
 

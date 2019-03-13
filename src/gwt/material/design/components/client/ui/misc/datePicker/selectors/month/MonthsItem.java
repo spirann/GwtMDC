@@ -21,31 +21,21 @@ package gwt.material.design.components.client.ui.misc.datePicker.selectors.month
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcMonth;
-import gwt.material.design.components.client.ui.MaterialLabel;
-import gwt.material.design.components.client.ui.html.Div;
-import gwt.material.design.components.client.utils.helper.StyleHelper;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractItem;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-public class MonthsItem extends Div {
-	
-	protected final MaterialLabel label = new MaterialLabel(CssName.MDC_TYPOGRAPHY__CAPTION);
+public class MonthsItem extends AbstractItem<MdcMonth> {
 	
 	public MonthsItem(final MdcMonth month) {
-		super(CssName.MDC_DATEPICKER__MONTHS__ITEM);
-		setDataObject(month);
+		super(month, CssName.MDC_DATEPICKER__MONTHS__ITEM);
 	}
 	
 	@Override
-	protected void onInitialize() {
-		ripleMixin.initialize();
-		super.onInitialize();		
-		final MdcMonth month = (MdcMonth) getDataObject();
-		label.setText(month.getMonthShortName());		
-		StyleHelper.setProperty(getElement(), "month", month.getMonth());
-		add(label);		
+	protected String dataToString(MdcMonth data) {
+		return data.getMonthShortName();
 	}
 }

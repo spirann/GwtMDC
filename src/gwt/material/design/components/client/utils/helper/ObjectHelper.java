@@ -19,6 +19,8 @@
  */
 package gwt.material.design.components.client.utils.helper;
 
+import java.util.Arrays;
+
 /**
  * 
  * @author Richeli Vargas
@@ -95,4 +97,9 @@ public class ObjectHelper {
 		return variable;
 	}-*/;
 
+	public static <T> T[] concat(final T[] first, final T[] second) {
+		T[] result = Arrays.copyOf(first, first.length + second.length);
+		System.arraycopy(second, 0, result, first.length, second.length);
+		return result;
+	}
 }

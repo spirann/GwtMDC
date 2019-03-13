@@ -20,8 +20,8 @@
 package gwt.material.design.components.client.ui.misc.datePicker;
 
 import gwt.material.design.components.client.constants.CssName;
-import gwt.material.design.components.client.lang.MdcDate;
 import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.lang.MdcYear;
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.ui.misc.datePicker.headers.SingleDateHeader;
 import gwt.material.design.components.client.ui.misc.datePicker.inlines.DayMonthYear;
@@ -59,34 +59,34 @@ public class DatePickerContent extends Div {
 			final int month = monthYear.getSelection().getMonth();
 			final int year = monthYear.getSelection().getYear();			
 			//months.setSelection(month, false);
-			years.setSelection(year, false);
-			days.drawDates(year, month);
+			years.setSelection(new MdcYear[] {new MdcYear(year)}, false);
+			days.draw(year, month);
 		});
 		months.addSelectionHandler(event -> {			
 			final MdcMonth mdcMonth = monthYear.getSelection();
 			//mdcMonth.setMonth(months.getSelection());
 			monthYear.setSelection(mdcMonth, false);	
-			days.drawDates(mdcMonth.getYear(), mdcMonth.getMonth());		
+			days.draw(mdcMonth.getYear(), mdcMonth.getMonth());		
 		});
 		years.addSelectionHandler(event -> {		
-			final MdcMonth mdcMonth = monthYear.getSelection();
-			mdcMonth.setYear(years.getSelection());
-			monthYear.setSelection(mdcMonth, false);
-			days.drawDates(mdcMonth.getYear(), mdcMonth.getMonth());
+			//final MdcMonth mdcMonth = monthYear.getSelection();
+			//mdcMonth.setYear(years.getSelection()[0]);
+			//monthYear.setSelection(mdcMonth, false);
+			//days.drawDates(mdcMonth.getYear(), mdcMonth.getMonth());
 		});
 
 		days.addSelectionHandler(event -> {
 			
-			final MdcDate date;
-			if(event.getValue() == null || event.getValue().length == 0)
-				date = new MdcDate();
-			else 
-				date = event.getValue()[0];
+			//final MdcDate date;
+			//if(event.getValue() == null || event.getValue().length == 0)
+				//	date = new MdcDate();
+			//else 
+				//	date = event.getValue()[0];
 			
-			singleDateHeader.setValue(date);
+			//singleDateHeader.setValue(date);
 			
 		});
-		yearRange.addSelectionHandler(event -> years.drawYears(yearRange.getSelection()));
+		yearRange.addSelectionHandler(event -> years.draw(yearRange.getSelection()));
 		
 		add(singleDateHeader);
 		add(dayMonthYear);

@@ -64,18 +64,16 @@ public class MdcDate implements HasPrevious<MdcDate>, HasNext<MdcDate>, Comparab
 	}
 
 	public void setYear(final int year) {
-
-		if (year < 0)
-			throw new IllegalArgumentException(IMessages.INSTANCE.mdc_date__err__year_out_of_range(year));
-
-		month.setYear(year);
-		
+		month.setYear(year);		
 		setMonth(month.getMonth());
-
 	}
 
 	public int getMonth() {
 		return month.getMonth();
+	}
+	
+	public MdcMonth getMdcMonth() {
+		return month;
 	}
 
 	public void setMonth(final int month) {

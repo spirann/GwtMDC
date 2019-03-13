@@ -535,6 +535,9 @@ public interface CssName {
 	String MDC_DATEPICKER__ACTIVE_FIRST 			= "mdc-datepicker__active_first";
 	String MDC_DATEPICKER__ACTIVE_LAST 				= "mdc-datepicker__active_last";
 	
+	String MDC_DATEPICKER__CONTENT	 				= "mdc-datepicker__content";
+	String MDC_DATEPICKER__ITEM 					= "mdc-datepicker__item";
+	
 	String MDC_DATEPICKER__DAYS 					= "mdc-datepicker__days";
 	String MDC_DATEPICKER__DAYS__HEADER 			= "mdc-datepicker__days--header";
 	String MDC_DATEPICKER__DAYS__ITEM 				= "mdc-datepicker__days--item";

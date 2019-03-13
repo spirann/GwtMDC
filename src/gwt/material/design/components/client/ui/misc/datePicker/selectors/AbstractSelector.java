@@ -24,6 +24,7 @@ import gwt.material.design.components.client.constants.DatePickerType;
 import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
 import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
 import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.utils.helper.ObjectHelper;
 
 public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		implements HasType<DatePickerType>, HasSelection<D>, HasSelectionHandlers<D> {
@@ -34,11 +35,11 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	protected final Map<Object, W> items = new LinkedHashMap<>();
 
 	public AbstractSelector() {
-		super();
+		super(CssName.MDC_DATEPICKER__CONTENT);
 	}
 
 	public AbstractSelector(final String... initialClasses) {
-		super(initialClasses);
+		super(ObjectHelper.concat(new String[] {CssName.MDC_DATEPICKER__CONTENT}, initialClasses));
 	}
 	
 	@Override
@@ -48,12 +49,12 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	}
 
 	@Override
-	public HandlerRegistration addSelectionHandler(SelectionHandler<D> handler) {
+	public HandlerRegistration addSelectionHandler(final SelectionHandler<D> handler) {
 		return selectionMixin.addSelectionHandler(handler);
 	}
 
 	@Override
-	public void setType(DatePickerType type) {
+	public void setType(final DatePickerType type) {
 		typeMixin.setType(type);
 	}
 
@@ -63,13 +64,13 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	}
 
 	@Override
-	public void setSelection(D selected) {
+	public void setSelection(final D selected) {
 		drawSelection(selected);
 		selectionMixin.setSelection(selected);
 	}
 
 	@Override
-	public void setSelection(D selected, boolean fireEvents) {
+	public void setSelection(final D selected, boolean fireEvents) {
 		drawSelection(selected);
 		selectionMixin.setSelection(selected, fireEvents);
 	}
@@ -82,6 +83,8 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	protected abstract <V> W drawItem(final V value);
 
 	protected abstract D getInitialValues();
+	
+	protected abstract <V> long toNumber(final V value);
 	
 	@SuppressWarnings({ "unchecked" })
 	public void draw(final D values) {
@@ -100,8 +103,9 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 				switch (getType()) {
 				case RANGE:
 					if (selectedDates.size() > 1) {
+						final Object theFarthestFrom =  getTheFarthestFrom(value, selectedDates);
 						selectedDates.clear();
-						selectedDates.add(getTheFarthestFrom(value, selectedDates));
+						selectedDates.add(theFarthestFrom);
 					}
 					break;
 				case SINGLE:
@@ -187,18 +191,20 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 
 		final List<Comparable> ordened = (List<Comparable>) (List<?>) asList(selectedItems).stream().sorted()
 				.collect(Collectors.toList());
-
+		
+		if(ordened.isEmpty())
+			return;
+		
 		final Comparable start = ordened.get(0);
 		final Comparable end = ordened.get(ordened.size() - 1);
 
 		items.values().stream().forEach(item -> {
 
 			final Comparable dataObComparable = item.getDataObject();
-
 			final int startCompare = dataObComparable.compareTo(start);
 			final int endCompare = dataObComparable.compareTo(end);
-
-			if (startCompare >= 0 || endCompare <= 0) {
+			
+			if (startCompare >= 0 && endCompare <= 0) {
 				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 				if (startCompare == 0)
 					item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
@@ -217,18 +223,24 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		jQueryChildren.removeClass(activeFirstClass);
 		jQueryChildren.removeClass(activeLastClass);
 	}-*/;
-
-	protected abstract <V> long toNumber(final V value);
-
+	
+	/**
+	 * 
+	 * @param value
+	 * @param values
+	 * @return
+	 */
 	protected <V> V getTheFarthestFrom(final V value, final Collection<V> values) {
-
+		
 		if (values == null || values.isEmpty())
 			return null;
 
 		if (values.size() == 1)
 			return values.iterator().next();
 
-		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), toNumber(value))))
+		final long valueAsNumber = toNumber(value);
+		
+		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), valueAsNumber)))
 				.orElse(null);
 
 	}
