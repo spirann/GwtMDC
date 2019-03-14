@@ -18,7 +18,6 @@ import gwt.material.design.components.client.base.interfaces.HasSelection;
 import gwt.material.design.components.client.base.interfaces.HasType;
 import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
 import gwt.material.design.components.client.base.mixin.TypeMixin;
-import gwt.material.design.components.client.base.widget.MaterialWidget;
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.constants.DatePickerType;
 import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
@@ -26,22 +25,24 @@ import gwt.material.design.components.client.events.SelectionEvent.SelectionHand
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.ObjectHelper;
 
-public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
+public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		implements HasType<DatePickerType>, HasSelection<D>, HasSelectionHandlers<D> {
 
 	protected final TypeMixin<AbstractSelector<D, W>, DatePickerType> typeMixin = new TypeMixin<>(this,
 			DatePickerType.RANGE);
 	protected final HasSelectionMixin<AbstractSelector<D, W>, D> selectionMixin = new HasSelectionMixin<>(this);
+
 	protected final Map<Object, W> items = new LinkedHashMap<>();
+	protected final Map<Object, Collection<String>> tooltips = new LinkedHashMap<>();
 
 	public AbstractSelector() {
 		super(CssName.MDC_DATEPICKER__CONTENT);
 	}
 
 	public AbstractSelector(final String... initialClasses) {
-		super(ObjectHelper.concat(new String[] {CssName.MDC_DATEPICKER__CONTENT}, initialClasses));
+		super(ObjectHelper.concat(new String[] { CssName.MDC_DATEPICKER__CONTENT }, initialClasses));
 	}
-	
+
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
@@ -83,27 +84,28 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	protected abstract <V> W drawItem(final V value);
 
 	protected abstract D getInitialValues();
-	
+
 	protected abstract <V> long toNumber(final V value);
-	
+
 	@SuppressWarnings({ "unchecked" })
 	public void draw(final D values) {
-		
+
 		clear();
 		items.clear();
-		
-		if(values == null)
+
+		if (values == null)
 			return;
-		
+
 		asList(values).forEach(value -> {
 			final W item = drawItem(value);
+			applyTooltips(value, item);
 			item.addClickHandler(event -> {
 				final List<Object> selectedDates = asList(getSelection());
 				final boolean isSelected = selectedDates.contains(value);
 				switch (getType()) {
 				case RANGE:
 					if (selectedDates.size() > 1) {
-						final Object theFarthestFrom =  getTheFarthestFrom(value, selectedDates);
+						final Object theFarthestFrom = getTheFarthestFrom(value, selectedDates);
 						selectedDates.clear();
 						selectedDates.add(theFarthestFrom);
 					}
@@ -191,10 +193,10 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 
 		final List<Comparable> ordened = (List<Comparable>) (List<?>) asList(selectedItems).stream().sorted()
 				.collect(Collectors.toList());
-		
-		if(ordened.isEmpty())
+
+		if (ordened.isEmpty())
 			return;
-		
+
 		final Comparable start = ordened.get(0);
 		final Comparable end = ordened.get(ordened.size() - 1);
 
@@ -203,7 +205,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 			final Comparable dataObComparable = item.getDataObject();
 			final int startCompare = dataObComparable.compareTo(start);
 			final int endCompare = dataObComparable.compareTo(end);
-			
+
 			if (startCompare >= 0 && endCompare <= 0) {
 				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 				if (startCompare == 0)
@@ -223,7 +225,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 		jQueryChildren.removeClass(activeFirstClass);
 		jQueryChildren.removeClass(activeLastClass);
 	}-*/;
-	
+
 	/**
 	 * 
 	 * @param value
@@ -231,7 +233,7 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 	 * @return
 	 */
 	protected <V> V getTheFarthestFrom(final V value, final Collection<V> values) {
-		
+
 		if (values == null || values.isEmpty())
 			return null;
 
@@ -239,27 +241,54 @@ public abstract class AbstractSelector<D, W extends MaterialWidget> extends Div
 			return values.iterator().next();
 
 		final long valueAsNumber = toNumber(value);
-		
-		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), valueAsNumber)))
-				.orElse(null);
+
+		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), valueAsNumber))).orElse(null);
 
 	}
 
 	protected long calcDifference(final long valueOne, final long valueTwo) {
 		return valueOne > valueTwo ? valueOne - valueTwo : valueTwo - valueOne;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	protected <T> List<T> asList(final D value) {
-		if(value == null)
+		if (value == null)
 			return new LinkedList<>();
-		
-		if(value instanceof Collection)
+
+		if (value instanceof Collection)
 			return (List<T>) ((Collection<T>) value).stream().collect(Collectors.toList());
-		
-		if(value.getClass().isArray())
+
+		if (value.getClass().isArray())
 			return Arrays.stream((T[]) value).collect(Collectors.toList());
-		
+
 		return (List<T>) Arrays.asList(value);
+	}
+
+	protected <V> void applyTooltips(final V value, final W item) {
+		final Collection<String> tooltips = this.tooltips.get(value);
+		item.clearTooltips();
+		if (tooltips != null)
+			item.addTooltip(tooltips.stream().toArray(String[]::new));
+	}
+
+	public <V> void clearTooltips(final V value) {
+		this.tooltips.remove(value);
+
+		final W item = items.get(value);
+		if (item != null)
+			item.clearTooltips();
+	}
+
+	public <V> void addTooltips(final V value, final String... tooltip) {
+		final Collection<String> tooltips = this.tooltips.getOrDefault(value, new LinkedList<String>());
+		tooltips.addAll(Arrays.asList(tooltip));
+		if (tooltips.isEmpty())
+			this.tooltips.remove(value);
+		else
+			this.tooltips.put(value, tooltips);
+
+		final W item = items.get(value);
+		if (item != null)
+			item.addTooltip(tooltips.stream().toArray(String[]::new));
 	}
 }

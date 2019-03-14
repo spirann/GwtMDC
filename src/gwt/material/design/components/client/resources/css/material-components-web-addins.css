@@ -577,18 +577,7 @@
 		cursor: pointer;
 		text-align: center;}
 	.mdc-datepicker__days > .mdc-datepicker__days--out_of_month * {
-		opacity: .5;}		
-	.mdc-datepicker__days > .mdc-datepicker__days--item > .mdc-datepicker__days--tooltip_indicator {
-		position: absolute;
-		border-radius: 50%;
-		padding: 0;
-		width:  4px;
-		height: 4px;
-		bottom: 6px;
-		right: 6px;
-		background-color: var(--mdc-datepicker-tooltip-indicator);}
-	.mdc-datepicker__days > .mdc-datepicker__days--item[count_tooltips="0"] > .mdc-datepicker__days--tooltip_indicator {
-		display: none;}
+		opacity: .5;}	
 /* Months */		
 .mdc-datepicker__months {
 	width: 100%;
@@ -724,7 +713,20 @@
 	border-bottom-left-radius: 50%;}
 .mdc-datepicker__content > .mdc-datepicker__item.mdc-datepicker__active_last {			
 	border-top-right-radius: 50%;
-	border-bottom-right-radius: 50%;}			
+	border-bottom-right-radius: 50%;}	
+	
+/* Tooltip */	
+.mdc-datepicker__content > .mdc-datepicker__item > .mdc-datepicker__tooltip_indicator {
+		position: absolute;
+		border-radius: 50%;
+		padding: 0;
+		width:  4px;
+		height: 4px;
+		bottom: 6px;
+		right: 6px;
+		background-color: var(--mdc-datepicker-tooltip-indicator);}
+	.mdc-datepicker__content > .mdc-datepicker__item[count_tooltips="0"] > .mdc-datepicker__tooltip_indicator {
+		display: none;}			
 			
 /* ==========================================================================
    Tree
