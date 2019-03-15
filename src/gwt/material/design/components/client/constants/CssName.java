@@ -530,34 +530,34 @@ public interface CssName {
 	// //////////////////////////////////////////////////////
 	// DATE PICKER
 	// //////////////////////////////////////////////////////
-	String MDC_DATEPICKER 							= "mdc-datepicker";
-	String MDC_DATEPICKER__ACTIVE 					= "mdc-datepicker__active";
-	String MDC_DATEPICKER__ACTIVE_FIRST 			= "mdc-datepicker__active_first";
-	String MDC_DATEPICKER__ACTIVE_LAST 				= "mdc-datepicker__active_last";
+	String MDC_DATEPICKER 										= "mdc-datepicker";
+	String MDC_DATEPICKER__ACTIVE 							= "mdc-datepicker__active";
+	String MDC_DATEPICKER__ACTIVE_FIRST 						= "mdc-datepicker__active_first";
+	String MDC_DATEPICKER__ACTIVE_LAST 						= "mdc-datepicker__active_last";
 	
-	String MDC_DATEPICKER__CONTENT	 				= "mdc-datepicker__content";
-	String MDC_DATEPICKER__ITEM 					= "mdc-datepicker__item";
-	String MDC_DATEPICKER__TOOLTIP_INDICATOR 		= "mdc-datepicker__tooltip_indicator";
+	String MDC_DATEPICKER__CONTENT	 						= "mdc-datepicker__content";
+	String MDC_DATEPICKER__ITEM 								= "mdc-datepicker__item";
+	String MDC_DATEPICKER__TOOLTIP_INDICATOR 				= "mdc-datepicker__tooltip_indicator";
 	
-	String MDC_DATEPICKER__DAYS 					= "mdc-datepicker__days";
-	String MDC_DATEPICKER__DAYS__HEADER 			= "mdc-datepicker__days--header";
-	String MDC_DATEPICKER__DAYS__ITEM 				= "mdc-datepicker__days--item";
-	String MDC_DATEPICKER__DAYS__OUT_OF_MONTH		= "mdc-datepicker__days--out_of_month";	
+	String MDC_DATEPICKER__DAYS 								= "mdc-datepicker__days";
+	String MDC_DATEPICKER__DAYS__HEADER 						= "mdc-datepicker__days--header";
+	String MDC_DATEPICKER__DAYS__ITEM 						= "mdc-datepicker__days--item";
+	String MDC_DATEPICKER__DAYS__OUT_OF_MONTH				= "mdc-datepicker__days--out_of_month";	
 	
-	String MDC_DATEPICKER__MONTHS 					= "mdc-datepicker__months";
-	String MDC_DATEPICKER__MONTHS__ITEM				= "mdc-datepicker__months--item";
+	String MDC_DATEPICKER__MONTHS 							= "mdc-datepicker__months";
+	String MDC_DATEPICKER__MONTHS__ITEM						= "mdc-datepicker__months--item";
 	
-	String MDC_DATEPICKER__YEARS 					= "mdc-datepicker__years";
-	String MDC_DATEPICKER__YEARS__ITEM				= "mdc-datepicker__years--item";
+	String MDC_DATEPICKER__YEARS 								= "mdc-datepicker__years";
+	String MDC_DATEPICKER__YEARS__ITEM						= "mdc-datepicker__years--item";
 	
-	String MDC_DATEPICKER__INLINE_SELECTOR			= "mdc-datepicker__inline_selector";
-	String MDC_DATEPICKER__INLINE_SELECTOR__LABEL	= "mdc-datepicker__inline_selector--label";
+	String MDC_DATEPICKER__INLINE_SELECTOR					= "mdc-datepicker__inline_selector";
+	String MDC_DATEPICKER__INLINE_SELECTOR__LABEL			= "mdc-datepicker__inline_selector--label";
 
-	String MDC_DATEPICKER__HEADER__SINGLE_DATE 			= "mdc-datepicker__header--single_date";
-	String MDC_DATEPICKER__HEADER__SINGLE_DATE__WEEK	= "mdc-datepicker__header--single_date--weeek";
+	String MDC_DATEPICKER__HEADER__SINGLE_DATE 				= "mdc-datepicker__header--single_date";
+	String MDC_DATEPICKER__HEADER__SINGLE_DATE__WEEK		= "mdc-datepicker__header--single_date--weeek";
 	String MDC_DATEPICKER__HEADER__SINGLE_DATE__DAY		= "mdc-datepicker__header--single_date--day";
-	String MDC_DATEPICKER__HEADER__SINGLE_DATE__MONTH	= "mdc-datepicker__header--single_date--month";
-	String MDC_DATEPICKER__HEADER__SINGLE_DATE__YEAR	= "mdc-datepicker__header--single_date--year";
+	String MDC_DATEPICKER__HEADER__SINGLE_DATE__MONTH		= "mdc-datepicker__header--single_date--month";
+	String MDC_DATEPICKER__HEADER__SINGLE_DATE__YEAR		= "mdc-datepicker__header--single_date--year";
 	
 	
 	// OLD

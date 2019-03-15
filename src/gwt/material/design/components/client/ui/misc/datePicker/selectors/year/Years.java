@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.year;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.lang.MdcYear;
@@ -29,39 +32,41 @@ import gwt.material.design.components.client.ui.misc.datePicker.selectors.Abstra
  * @author Richeli Vargas
  *
  */
-public class Years extends AbstractSelector<MdcYear[], YearsItem> {
+public class Years extends AbstractSelector<MdcYear, YearsItem> {
 
 	public Years() {
 		super(CssName.MDC_DATEPICKER__YEARS);
 	}
 
 	@Override
-	protected MdcYear[] getInitialValues() {
+	protected Collection<MdcYear> getInitialValues() {
 		return getValues(new MdcMonth().getYear());
 	}
 
 	@Override
-	protected <V> long toNumber(final V value) {
-		return ((MdcYear) value).getYear();
+	protected long toNumber(final MdcYear value) {
+		return value.getYear();
 	}
 
 	@Override
-	protected <V> YearsItem drawItem(V value) {
-		final MdcYear month = (MdcYear) value;
-		return new YearsItem(month);
-	}
-
-	protected MdcYear[] getValues(final int year) {
-
-		final MdcYear[] initialValues = new MdcYear[25];
-
-		for (int index = 0, auxYear = year - 12; index < initialValues.length; index++, auxYear++)
-			initialValues[index] = new MdcYear(auxYear);
-
-		return initialValues;
+	protected YearsItem drawItem(final MdcYear value) {
+		return new YearsItem(value);
 	}
 
 	public void draw(final int year) {
 		draw(getValues(year));
+	}
+
+	protected Collection<MdcYear> getValues(final int year) {
+
+		final Collection<MdcYear> initialValues = new LinkedList<>();
+		
+		MdcYear next = new MdcYear(year - 12);
+		do {
+			initialValues.add(next);
+			next = next.next();
+		} while (initialValues.size() < 25);
+		
+		return initialValues;
 	}
 }

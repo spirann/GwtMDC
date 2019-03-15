@@ -35,7 +35,7 @@ public class DaysHeader extends Div {
 	protected final MaterialLabel label = new MaterialLabel();
 
 	public DaysHeader(final int weekDay) {
-		super(CssName.MDC_DATEPICKER__DAYS__HEADER, CssName.MDC_TYPOGRAPHY__CAPTION);
+		super(CssName.MDC_DATEPICKER__ITEM, CssName.MDC_DATEPICKER__DAYS__HEADER, CssName.MDC_TYPOGRAPHY__CAPTION);
 		this.weekDay = weekDay;
 	}
 

@@ -19,7 +19,10 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker;
 
+import java.util.Arrays;
+
 import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.lang.MdcDate;
 import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.lang.MdcYear;
 import gwt.material.design.components.client.ui.html.Div;
@@ -55,11 +58,13 @@ public class DatePickerContent extends Div {
 	protected void onInitialize() {
 		super.onInitialize();
 		
+		days.setMinValue(new MdcDate());
+		
 		monthYear.addSelectionHandler(event -> {
 			final int month = monthYear.getSelection().getMonth();
 			final int year = monthYear.getSelection().getYear();			
 			//months.setSelection(month, false);
-			years.setSelection(new MdcYear[] {new MdcYear(year)}, false);
+			years.setSelection(Arrays.asList(new MdcYear(year)), false);
 			days.draw(year, month);
 		});
 		months.addSelectionHandler(event -> {			

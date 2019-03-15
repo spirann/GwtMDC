@@ -19,7 +19,9 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.day;
 
+import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcDate;
@@ -31,34 +33,37 @@ import gwt.material.design.components.client.ui.misc.datePicker.selectors.Abstra
  * @author Richeli Vargas
  *
  */
-public class Days extends AbstractSelector<MdcDate[], DaysItem> {
+public class Days extends AbstractSelector<MdcDate, DaysItem> {
 
+	protected MdcMonth visibleMonth;
+	
 	public Days() {
 		super(CssName.MDC_DATEPICKER__DAYS);
 	}
 
 	@Override
-	protected MdcDate[] getInitialValues() {
+	protected Collection<MdcDate> getInitialValues() {
 		return getValues(new MdcMonth());
 	}
 
 	@Override
-	protected <V> long toNumber(final V value) {
-		return ((MdcDate) value).getTimestamp();
+	protected long toNumber(final MdcDate value) {
+		return value.getTimestamp();
 	}
 
 	@Override
-	protected <V> DaysItem drawItem(V value) {
-		final MdcDate month = (MdcDate) value;
-		return new DaysItem(month);
-	}
-
-	protected MdcDate[] getValues(final MdcMonth month) {
-		return MdcMonth.daysOfMonth(month.getYear(), month.getMonth(), true).stream().toArray(MdcDate[]::new);
+	protected DaysItem drawItem(final MdcDate value) {
+		final DaysItem item = new DaysItem(value);
+		if(!value.getMdcMonth().equals(visibleMonth))
+			item.addStyleName(CssName.MDC_DATEPICKER__DAYS__OUT_OF_MONTH);
+		return item;
 	}
 	
 	@Override
-	public void draw(final MdcDate[] values) {
+	public void draw(final Collection<MdcDate> values) {
+		
+		visibleMonth = new LinkedList<>(values).get(values.size() / 2).getMdcMonth();
+		
 		super.draw(values);
 		
 		for (int weekDay = 0; weekDay < 7; weekDay++)
@@ -79,5 +84,9 @@ public class Days extends AbstractSelector<MdcDate[], DaysItem> {
 	
 	public void draw(final MdcMonth mdcMonth) {
 		draw(getValues(mdcMonth));
+	}
+
+	protected Collection<MdcDate> getValues(final MdcMonth month) {
+		return MdcMonth.daysOfMonth(month.getYear(), month.getMonth(), true);
 	}
 }

@@ -19,6 +19,9 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.selectors.month;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import gwt.material.design.components.client.constants.CssName;
 import gwt.material.design.components.client.lang.MdcMonth;
 import gwt.material.design.components.client.ui.misc.datePicker.selectors.AbstractSelector;
@@ -28,42 +31,41 @@ import gwt.material.design.components.client.ui.misc.datePicker.selectors.Abstra
  * @author Richeli Vargas
  *
  */
-public class Months extends AbstractSelector<MdcMonth[], MonthsItem> {
+public class Months extends AbstractSelector<MdcMonth, MonthsItem> {
 
 	public Months() {
 		super(CssName.MDC_DATEPICKER__MONTHS);
 	}
 
 	@Override
-	protected MdcMonth[] getInitialValues() {
+	protected Collection<MdcMonth> getInitialValues() {
 		return getValues(new MdcMonth().getYear());
 	}
 
 	@Override
-	protected <V> long toNumber(final V value) {
-		final MdcMonth month = (MdcMonth) value;
-		return (month.getYear() * 12) + month.getMonth();
+	protected long toNumber(final MdcMonth value) {
+		return (value.getYear() * 12) + value.getMonth();
 	}
 
 	@Override
-	protected <V> MonthsItem drawItem(V value) {
-		final MdcMonth month = (MdcMonth) value;
-		return new MonthsItem(month);
-	}
-
-	protected MdcMonth[] getValues(final int year) {
-		final MdcMonth initial = new MdcMonth(year, 1);
-
-		final MdcMonth[] initialValues = new MdcMonth[12];
-		initialValues[0] = initial;
-
-		for (int index = 1; index < initialValues.length; index++)
-			initialValues[index] = initialValues[index - 1].next();
-
-		return initialValues;
+	protected MonthsItem drawItem(final MdcMonth value) {
+		return new MonthsItem(value);
 	}
 
 	public void draw(final int year) {
 		draw(getValues(year));
+	}
+
+	protected Collection<MdcMonth> getValues(final int year) {
+
+		final Collection<MdcMonth> initialValues = new LinkedList<>();
+
+		MdcMonth next = new MdcMonth(year, 1);
+		do {
+			initialValues.add(next);
+			next = next.next();
+		} while (initialValues.size() < 12);
+
+		return initialValues;
 	}
 }

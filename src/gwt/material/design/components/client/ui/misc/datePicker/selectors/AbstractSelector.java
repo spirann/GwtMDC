@@ -25,15 +25,18 @@ import gwt.material.design.components.client.events.SelectionEvent.SelectionHand
 import gwt.material.design.components.client.ui.html.Div;
 import gwt.material.design.components.client.utils.helper.ObjectHelper;
 
-public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
-		implements HasType<DatePickerType>, HasSelection<D>, HasSelectionHandlers<D> {
+public abstract class AbstractSelector<D extends Comparable<D> & HasPrevious<D> & HasNext<D>, W extends AbstractItem<D>>
+		extends Div implements HasType<DatePickerType>, HasSelection<Collection<D>>, HasSelectionHandlers<Collection<D>> {
 
 	protected final TypeMixin<AbstractSelector<D, W>, DatePickerType> typeMixin = new TypeMixin<>(this,
 			DatePickerType.RANGE);
-	protected final HasSelectionMixin<AbstractSelector<D, W>, D> selectionMixin = new HasSelectionMixin<>(this);
+	protected final HasSelectionMixin<AbstractSelector<D, W>, Collection<D>> selectionMixin = new HasSelectionMixin<>(this);
 
-	protected final Map<Object, W> items = new LinkedHashMap<>();
-	protected final Map<Object, Collection<String>> tooltips = new LinkedHashMap<>();
+	protected final Map<D, W> items = new LinkedHashMap<>();
+	protected final Map<D, Collection<String>> tooltips = new LinkedHashMap<>();
+
+	private D minValue;
+	private D maxValue;
 
 	public AbstractSelector() {
 		super(CssName.MDC_DATEPICKER__CONTENT);
@@ -50,7 +53,7 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 	}
 
 	@Override
-	public HandlerRegistration addSelectionHandler(final SelectionHandler<D> handler) {
+	public HandlerRegistration addSelectionHandler(final SelectionHandler<Collection<D>> handler) {
 		return selectionMixin.addSelectionHandler(handler);
 	}
 
@@ -65,30 +68,29 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 	}
 
 	@Override
-	public void setSelection(final D selected) {
+	public void setSelection(final Collection<D> selected) {
 		drawSelection(selected);
 		selectionMixin.setSelection(selected);
 	}
 
 	@Override
-	public void setSelection(final D selected, boolean fireEvents) {
+	public void setSelection(final Collection<D> selected, boolean fireEvents) {
 		drawSelection(selected);
 		selectionMixin.setSelection(selected, fireEvents);
 	}
 
 	@Override
-	public D getSelection() {
+	public Collection<D> getSelection() {
 		return selectionMixin.getSelection();
 	}
 
-	protected abstract <V> W drawItem(final V value);
+	protected abstract W drawItem(final D value);
 
-	protected abstract D getInitialValues();
+	protected abstract Collection<D> getInitialValues();
 
-	protected abstract <V> long toNumber(final V value);
+	protected abstract long toNumber(final D value);
 
-	@SuppressWarnings({ "unchecked" })
-	public void draw(final D values) {
+	public void draw(final Collection<D> values) {
 
 		clear();
 		items.clear();
@@ -96,16 +98,22 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		if (values == null)
 			return;
 
-		asList(values).forEach(value -> {
+		values.forEach(value -> {
 			final W item = drawItem(value);
+			applyMinMaxValues(item);
 			applyTooltips(value, item);
 			item.addClickHandler(event -> {
-				final List<Object> selectedDates = asList(getSelection());
+				
+				if(!item.isEnabled())
+					return;
+				
+				final Collection<D> selectedDates = getSelection() == null ? new LinkedList<>() : getSelection();				
 				final boolean isSelected = selectedDates.contains(value);
+				
 				switch (getType()) {
 				case RANGE:
 					if (selectedDates.size() > 1) {
-						final Object theFarthestFrom = getTheFarthestFrom(value, selectedDates);
+						final D theFarthestFrom = getTheFarthestFrom(value, selectedDates);
 						selectedDates.clear();
 						selectedDates.add(theFarthestFrom);
 					}
@@ -123,11 +131,7 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 				else
 					selectedDates.add(value);
 
-				if (values.getClass().isArray())
-					setSelection((D) selectedDates.stream().toArray(Object[]::new));
-				else
-					setSelection((D) selectedDates.iterator().next());
-
+				setSelection(selectedDates);			
 			});
 			items.put(value, item);
 			add(item);
@@ -135,7 +139,7 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		drawSelection(getSelection());
 	}
 
-	protected void drawSelection(final D values) {
+	protected void drawSelection(final Collection<D> values) {
 		unSelectAll(getElement());
 
 		if (values != null)
@@ -153,10 +157,10 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 			}
 	}
 
-	protected void drawSingleSelect(final D selectedItems) {
-
-		final W item = (W) asList(selectedItems).stream().filter(selectedItem -> items.containsKey(selectedItem))
-				.findAny().map(selectedItem -> items.get(selectedItem)).orElse(null);
+	protected void drawSingleSelect(final Collection<D> selectedItems) {
+		final W item = (W) selectedItems.stream()
+				.filter(selectedItem -> items.containsKey(selectedItem)).findAny()
+				.map(selectedItem -> items.get(selectedItem)).orElse(null);
 
 		if (item != null) {
 			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
@@ -165,44 +169,35 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		}
 	}
 
-	protected void drawMultipleSelect(final D selectedItems) {
+	protected void drawMultipleSelect(final Collection<D> collection) {
 
-		final List<?> collection = asList(selectedItems);
 		collection.stream().filter(selectedItem -> items.containsKey(selectedItem)).forEach(selectedItem -> {
 
 			final W item = items.get(selectedItem);
 			item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE);
 
-			if (selectedItem instanceof HasPrevious) {
-				final HasPrevious<?> hasPrevious = (HasPrevious<?>) selectedItem;
-				if (!collection.contains(hasPrevious.previous()))
-					item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
-			}
+			if (!collection.contains(selectedItem.previous()))
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_FIRST);
 
-			if (selectedItem instanceof HasNext) {
-				final HasNext<?> hasNext = (HasNext<?>) selectedItem;
-				if (!collection.contains(hasNext.next()))
-					item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_LAST);
-			}
-
+			if (!collection.contains(selectedItem.next()))
+				item.addStyleName(CssName.MDC_DATEPICKER__ACTIVE_LAST);
+			
 		});
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void drawRangeSelect(final D selectedItems) {
+	protected void drawRangeSelect(final Collection<D> selectedItems) {
 
-		final List<Comparable> ordened = (List<Comparable>) (List<?>) asList(selectedItems).stream().sorted()
-				.collect(Collectors.toList());
+		final List<D> ordened = selectedItems.stream().sorted().collect(Collectors.toList());
 
 		if (ordened.isEmpty())
 			return;
 
-		final Comparable start = ordened.get(0);
-		final Comparable end = ordened.get(ordened.size() - 1);
+		final D start = ordened.get(0);
+		final D end = ordened.get(ordened.size() - 1);
 
 		items.values().stream().forEach(item -> {
 
-			final Comparable dataObComparable = item.getDataObject();
+			final D dataObComparable = item.getDataObject();
 			final int startCompare = dataObComparable.compareTo(start);
 			final int endCompare = dataObComparable.compareTo(end);
 
@@ -232,7 +227,7 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 	 * @param values
 	 * @return
 	 */
-	protected <V> V getTheFarthestFrom(final V value, final Collection<V> values) {
+	protected D getTheFarthestFrom(final D value, final Collection<D> values) {
 
 		if (values == null || values.isEmpty())
 			return null;
@@ -242,7 +237,8 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 
 		final long valueAsNumber = toNumber(value);
 
-		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), valueAsNumber))).orElse(null);
+		return values.stream().max(Comparator.comparing(d -> calcDifference(toNumber(d), valueAsNumber)))
+				.orElse(null);
 
 	}
 
@@ -250,36 +246,21 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		return valueOne > valueTwo ? valueOne - valueTwo : valueTwo - valueOne;
 	}
 
-	@SuppressWarnings("unchecked")
-	protected <T> List<T> asList(final D value) {
-		if (value == null)
-			return new LinkedList<>();
-
-		if (value instanceof Collection)
-			return (List<T>) ((Collection<T>) value).stream().collect(Collectors.toList());
-
-		if (value.getClass().isArray())
-			return Arrays.stream((T[]) value).collect(Collectors.toList());
-
-		return (List<T>) Arrays.asList(value);
-	}
-
-	protected <V> void applyTooltips(final V value, final W item) {
+	protected void applyTooltips(final D value, final W item) {
 		final Collection<String> tooltips = this.tooltips.get(value);
 		item.clearTooltips();
 		if (tooltips != null)
 			item.addTooltip(tooltips.stream().toArray(String[]::new));
 	}
 
-	public <V> void clearTooltips(final V value) {
+	public void clearTooltips(final D value) {
 		this.tooltips.remove(value);
-
 		final W item = items.get(value);
 		if (item != null)
 			item.clearTooltips();
 	}
 
-	public <V> void addTooltips(final V value, final String... tooltip) {
+	public void addTooltips(final D value, final String... tooltip) {
 		final Collection<String> tooltips = this.tooltips.getOrDefault(value, new LinkedList<String>());
 		tooltips.addAll(Arrays.asList(tooltip));
 		if (tooltips.isEmpty())
@@ -291,4 +272,32 @@ public abstract class AbstractSelector<D, W extends AbstractItem<?>> extends Div
 		if (item != null)
 			item.addTooltip(tooltips.stream().toArray(String[]::new));
 	}
+
+	protected void applyMinMaxValues(final W widget) {
+		final long min = minValue == null ? 0 : toNumber(minValue);
+		final long max = maxValue == null ? Long.MAX_VALUE : toNumber(maxValue);
+		final long value = toNumber(widget.getDataObject());		
+		widget.setEnabled(value >= min && value <= max);
+	}
+
+	public D getMinValue() {
+		return minValue;
+	}
+
+	public void setMinValue(final D minValue) {
+		this.minValue = minValue;
+		if(initialized)
+			items.values().forEach(item -> applyMinMaxValues(item));
+	}
+
+	public D getMaxValue() {
+		return maxValue;
+	}
+
+	public void setMaxValue(final D maxValue) {
+		this.maxValue = maxValue;
+		if(initialized)
+			items.values().forEach(item -> applyMinMaxValues(item));
+	}
+
 }
