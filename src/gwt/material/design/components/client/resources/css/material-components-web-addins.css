@@ -526,6 +526,9 @@
    ========================================================================== */
 .mdc-datepicker {
 	width: var(--mdc-datepicker-width);}   
+.mdc-datepicker__content {
+	grid-column-gap: var(--mdc-datepicker--item-horizontal-margin);
+	grid-row-gap: var(--mdc-datepicker--item-vertical-margin);}
 
 .mdc-datepicker__content > .mdc-datepicker__item {
 		position: relative;	
@@ -539,11 +542,18 @@
 		color: var(--mdc-datepicker-ink);
 		background-color: var(--mdc-datepicker-fill);	
 		font-size: var(--mdc-datepicker--items-font_size);
-		line-height: 100%;}
+		line-height: 100%;
+		padding: 2px;}
 		.mdc-datepicker__content > .mdc-datepicker__item > label {
 		color: var(--mdc-datepicker-ink);
 		cursor: pointer;
-		text-align: center;}
+		text-align: center;
+		width: 100%;
+		height: 100%;
+		display: flex;
+		align-content: center;
+		align-items: center;
+		justify-content: center;}
 		.mdc-datepicker__content > .mdc-datepicker__item.mdc-ripple-surface--color::before, 
 		.mdc-datepicker__content > .mdc-datepicker__item.mdc-ripple-surface--color::after {
 		background-color: var(--mdc-datepicker-ink);}	
@@ -566,13 +576,13 @@
 		var(--mdc-datepicker--item-width) 
 		var(--mdc-datepicker--item-width);
 	grid-template-rows: 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width) 
-		var(--mdc-datepicker--item-width);}
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height) 
+		var(--mdc-datepicker--item-height);}
 	.mdc-datepicker__days > .mdc-datepicker__days--header > label {
 	opacity: .5;}
 	.mdc-datepicker__days > .mdc-datepicker__days--out_of_month > label  {
@@ -595,9 +605,9 @@
 		var(--mdc-datepicker--month-item-width) 
 		var(--mdc-datepicker--month-item-width);
 	grid-template-rows: 		 
-		var(--mdc-datepicker--month-item-width) 
-		var(--mdc-datepicker--month-item-width) 
-		var(--mdc-datepicker--month-item-width);}
+		var(--mdc-datepicker--month-item-height) 
+		var(--mdc-datepicker--month-item-height) 
+		var(--mdc-datepicker--month-item-height);}
 		
 /* Years */		
 .mdc-datepicker__years {
@@ -615,11 +625,11 @@
 		var(--mdc-datepicker--year-item-width) 
 		var(--mdc-datepicker--year-item-width);
 	grid-template-rows: 
-		var(--mdc-datepicker--year-item-width) 
-		var(--mdc-datepicker--year-item-width) 
-		var(--mdc-datepicker--year-item-width) 
-		var(--mdc-datepicker--year-item-width) 
-		var(--mdc-datepicker--year-item-width);}
+		var(--mdc-datepicker--year-item-height) 
+		var(--mdc-datepicker--year-item-height) 
+		var(--mdc-datepicker--year-item-height) 
+		var(--mdc-datepicker--year-item-height) 
+		var(--mdc-datepicker--year-item-height);}
 
 /* In Line Selector */
 .mdc-datepicker__inline_selector {
@@ -649,13 +659,49 @@
 	color: var(--mdc-datepicker-active-ink);
 	background-color: var(--mdc-datepicker-active-fill);}
 	.mdc-datepicker__content > .mdc-datepicker__item.mdc-datepicker__active > label {
-	color: var(--mdc-datepicker-active-ink);}		
+	color: var(--mdc-datepicker-active-ink);}			
 	.mdc-datepicker__content > .mdc-datepicker__item.mdc-datepicker__active_first {
 	border-top-left-radius: 50%;
-	border-bottom-left-radius: 50%;}
+	border-bottom-left-radius: 50%;}	
 	.mdc-datepicker__content > .mdc-datepicker__item.mdc-datepicker__active_last {			
 	border-top-right-radius: 50%;
-	border-bottom-right-radius: 50%;}	
+	border-bottom-right-radius: 50%;}
+
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(1),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(8),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(15),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(22),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(29),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(36),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(43),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(1),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(5),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(9),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(1),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(6),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(11),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(16),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(21) {
+	border-top-left-radius: 50%;
+	border-bottom-left-radius: 50%;}
+
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(7),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(14),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(21),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(28),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(35),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(42),
+.mdc-datepicker__content > .mdc-datepicker__days--item.mdc-datepicker__active:nth-child(49),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(4),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(8),
+.mdc-datepicker__content > .mdc-datepicker__months--item.mdc-datepicker__active:nth-child(12),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(5),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(10),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(15),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(20),
+.mdc-datepicker__content > .mdc-datepicker__years--item.mdc-datepicker__active:nth-child(25) {
+	border-top-right-radius: 50%;
+	border-bottom-right-radius: 50%;}
 
 /* Disabled */
 .mdc-datepicker__content > .mdc-datepicker__item[disabled] {
@@ -674,7 +720,10 @@
 	.mdc-datepicker__content > .mdc-datepicker__item[count_tooltips="0"] > .mdc-datepicker__tooltip_indicator {
 	display: none;}			
 
-/* Header */
+/* -------- */
+/* Headers */
+/* -------- */
+/* Single Header */
 .mdc-datepicker__header--single_date {
 	width: 100%;
 	flex: 1;
@@ -684,16 +733,111 @@
 	justify-content: center;
 	flex-direction: column;
 	background-color: var(--mdc-datepicker--header-fill);
-	color: var(--mdc-datepicker--header-ink);}
-	.mdc-datepicker__header--single_date > * {
-		width: 100%;
-		text-align: center;
-		padding: 4px;}
-	.mdc-datepicker__header--single_date--weeek {
-		background-color: var(--mdc-filled-color);}
-	.mdc-datepicker__header--single_date--day {}
-	.mdc-datepicker__header--single_date--month {}
-	.mdc-datepicker__header--single_date--year {}
+	color: var(--mdc-datepicker--header-ink);
+	overflow: hidden;}
+	.mdc-datepicker__header--single_date > label {	
+	width: 100%;
+	text-align: center;
+  	font-weight: lighter;}
+  	.mdc-datepicker__header--single_date > .mdc-datepicker__header--single_date--week {
+	background-color: var(--mdc-filled-color);}
+	.mdc-datepicker__header--single_date:not(.mdc-datepicker__header--single_date_compact) > .mdc-datepicker__header--single_date--week {	
+	font-size: 0.875rem;
+	line-height: 0.875rem;
+	height: 0.875rem;
+	padding: 4px;}
+	.mdc-datepicker__header--single_date:not(.mdc-datepicker__header--single_date_compact) > .mdc-datepicker__header--single_date--day {
+	font-size: 4.5rem;
+	line-height: 4.5rem;	
+	height: 4.5rem;}
+	.mdc-datepicker__header--single_date:not(.mdc-datepicker__header--single_date_compact) > .mdc-datepicker__header--single_date--month {
+	text-transform: uppercase;
+	font-size: 1.5rem;
+	line-height: 1.5rem;
+	height: 1.5rem;
+	margin-top: 12px;}
+	.mdc-datepicker__header--single_date:not(.mdc-datepicker__header--single_date_compact) > .mdc-datepicker__header--single_date--year {	
+	font-size: 1.25rem;
+	line-height: 1.25rem;
+	height: 1.25rem;
+	margin-bottom: 12px;}
+	
+	.mdc-datepicker__header--single_date_compact > .mdc-datepicker__header--single_date--week {
+	font-size: 0.675rem;
+	line-height: 0.675rem;
+	height: 0.675rem;
+	padding: 4px;}
+	.mdc-datepicker__header--single_date_compact > .mdc-datepicker__header--single_date--day {
+	font-size: 2.5rem;
+	line-height: 2.5rem;	
+	height: 2.5rem;}
+	.mdc-datepicker__header--single_date_compact > .mdc-datepicker__header--single_date--month {
+	font-size: .85rem;
+	line-height: .85rem;
+	height: .85rem;
+	margin-top: 8px;}
+	.mdc-datepicker__header--single_date_compact > .mdc-datepicker__header--single_date--year {	
+	font-size: .825rem;
+	line-height: .825rem;
+	height: .825rem;
+	margin-bottom: 8px;}
+	
+
+/* Range Header */
+.mdc-datepicker__header--range_date {
+	width: 100%;
+	flex: 1;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--mdc-datepicker--header-fill);
+	color: var(--mdc-datepicker--header-ink);
+	padding-top: 8px;
+	padding-bottom: 8px;}			
+
+.mdc-datepicker__header--range_date > .mdc-datepicker__header--range_date--labels {
+	flex: 1;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	padding-right: 16px;}
+	.mdc-datepicker__header--range_date > .mdc-datepicker__header--range_date--labels > * {
+	width: 100%;}
+	.mdc-datepicker__header--range_date > .mdc-datepicker__header--range_date--labels > .mdc-datepicker__header--range_date--start,
+	.mdc-datepicker__header--range_date > .mdc-datepicker__header--range_date--labels > .mdc-datepicker__header--range_date--end  {
+	font-size: 0.75rem;
+	line-height: 0.75rem;
+	height: 0.75rem;
+	margin-top: 16px;
+	margin-bottom: 16px;}
+	.mdc-datepicker__header--range_date > .mdc-datepicker__header--range_date--labels > .mdc-datepicker__header--range_date--divider {	
+	height: 1px;
+	background-color: var(--mdc-datepicker--header-ink);
+	opacity: var(--mdc-track-opacity);}
+
+.mdc-datepicker__header--range_date--graphics {
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	height: 100%;
+	padding: 16px;}
+	.mdc-datepicker__header--range_date--circle {
+	width: 6px;
+	height: 6px;
+	border: 2px solid var(--mdc-datepicker--header-ink);
+	border-radius: 50%;}
+	.mdc-datepicker__header--range_date--line {
+	width: 0;
+	height: calc(1.5rem + 2px);
+	border-right: 4px dotted var(--mdc-datepicker--header-ink);
+	margin-top: 4px;
+	margin-bottom: 4px;
+	opacity: var(--mdc-track-opacity);}
 			
 /* ==========================================================================
    Tree

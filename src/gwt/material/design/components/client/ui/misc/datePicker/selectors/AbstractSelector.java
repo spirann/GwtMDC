@@ -99,6 +99,7 @@ public abstract class AbstractSelector<D extends Comparable<D> & HasPrevious<D> 
 			return;
 
 		values.forEach(value -> {
+			
 			final W item = drawItem(value);
 			applyMinMaxValues(item);
 			applyTooltips(value, item);
@@ -107,7 +108,7 @@ public abstract class AbstractSelector<D extends Comparable<D> & HasPrevious<D> 
 				if(!item.isEnabled())
 					return;
 				
-				final Collection<D> selectedDates = getSelection() == null ? new LinkedList<>() : getSelection();				
+				final Collection<D> selectedDates = getSelection() == null ? new LinkedList<>() : new LinkedList<>(getSelection());				
 				final boolean isSelected = selectedDates.contains(value);
 				
 				switch (getType()) {

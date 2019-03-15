@@ -60,9 +60,9 @@ public class MaterialDateRangePickerHeader extends MaterialValuedField<Date[]> {
 		super.onInitialize();
 		
 		final Div firstColumn = new Div();
-		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__CIRCLE));
-		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__LINE));
-		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER_PERIOD__CIRCLE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER__RANGE_DATE__CIRCLE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER__RANGE_DATE__LINE));
+		firstColumn.add(new Div(CssName.MDC_DATEPICKER__HEADER__RANGE_DATE__CIRCLE));
 		
 		final Div lastColumn = new Div();		
 		lastColumn.add(minDate);
