@@ -19,6 +19,7 @@
  */
 package gwt.material.design.components.client.ui.misc.datePicker.headers;
 
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.HandlerRegistration;
 import com.google.gwt.user.client.ui.HasValue;
@@ -96,5 +97,19 @@ public class SingleDateHeader extends Div implements HasValue<MdcDate>{
 		return compactMixin.isApplied();
 	}
 	
+	public HandlerRegistration addDayOfWeekClickHandler(final ClickHandler handler) {
+		return dayOfWeekLabel.addClickHandler(handler);
+	}
 	
+	public HandlerRegistration addMonthClickHandler(final ClickHandler handler) {
+		return monthLabel.addClickHandler(handler);
+	}
+	
+	public HandlerRegistration addDayClickHandler(final ClickHandler handler) {
+		return dayLabel.addClickHandler(handler);
+	}
+	
+	public HandlerRegistration addYearClickHandler(final ClickHandler handler) {
+		return yearLabel.addClickHandler(handler);
+	}
 }

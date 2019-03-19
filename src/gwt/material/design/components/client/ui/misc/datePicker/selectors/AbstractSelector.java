@@ -29,7 +29,7 @@ public abstract class AbstractSelector<D extends Comparable<D> & HasPrevious<D> 
 		extends Div implements HasType<DatePickerType>, HasSelection<Collection<D>>, HasSelectionHandlers<Collection<D>> {
 
 	protected final TypeMixin<AbstractSelector<D, W>, DatePickerType> typeMixin = new TypeMixin<>(this,
-			DatePickerType.RANGE);
+			DatePickerType.SINGLE);
 	protected final HasSelectionMixin<AbstractSelector<D, W>, Collection<D>> selectionMixin = new HasSelectionMixin<>(this);
 
 	protected final Map<D, W> items = new LinkedHashMap<>();

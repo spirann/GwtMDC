@@ -19,77 +19,128 @@
  */
 package gwt.material.design.components.client.ui;
 
-import java.util.Date;
+import java.util.Arrays;
+import java.util.Collection;
 
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.shared.HandlerRegistration;
 
-import gwt.material.design.components.client.resources.message.IMessages;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerBase;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerDaySelector;
-import gwt.material.design.components.client.ui.misc.calendar.MaterialDatePickerHeader;
+import gwt.material.design.components.client.base.interfaces.HasSelection;
+import gwt.material.design.components.client.base.mixin.HasSelectionMixin;
+import gwt.material.design.components.client.constants.CssName;
+import gwt.material.design.components.client.events.SelectionEvent.HasSelectionHandlers;
+import gwt.material.design.components.client.events.SelectionEvent.SelectionHandler;
+import gwt.material.design.components.client.lang.MdcDate;
+import gwt.material.design.components.client.lang.MdcMonth;
+import gwt.material.design.components.client.lang.MdcYear;
+import gwt.material.design.components.client.ui.html.Div;
+import gwt.material.design.components.client.ui.misc.datePicker.headers.SingleDateHeader;
+import gwt.material.design.components.client.ui.misc.datePicker.inlines.MonthYear;
+import gwt.material.design.components.client.ui.misc.datePicker.inlines.YearRange;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.day.Days;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.month.Months;
+import gwt.material.design.components.client.ui.misc.datePicker.selectors.year.Years;
 
 /**
  * 
  * @author Richeli Vargas
  *
  */
-@SuppressWarnings("deprecation")
-public class MaterialDatePicker
-		extends MaterialDatePickerBase<Date, MaterialDatePickerHeader, MaterialDatePickerDaySelector> {
+public class MaterialDatePicker extends Div implements HasSelection<MdcDate>, HasSelectionHandlers<MdcDate> {
 
-	protected Widget todayAction;
+	protected final SingleDateHeader header = new SingleDateHeader();
+	protected final MonthYear monthYear = new MonthYear();
+	protected final YearRange yearRange = new YearRange();
+	protected final Days days = new Days();
+	protected final Months months = new Months();
+	protected final Years years = new Years();
+
+	protected final HasSelectionMixin<MaterialDatePicker, MdcDate> selectionMixin = new HasSelectionMixin<>(this);
 
 	public MaterialDatePicker() {
-		super(new MaterialDatePickerHeader(), new MaterialDatePickerDaySelector());
-	}
-
-	public void setShowTodayAction(final boolean show) {
-		if (show && (todayAction == null || todayAction.getParent() == null))
-			todayAction = addAction(IMessages.INSTANCE.mdc_calendar_today(), event -> setValue(today()));
-		else if (!show && todayAction != null && todayAction.getParent() != null)
-			todayAction.removeFromParent();
+		super(CssName.MDC_DATEPICKER);
 	}
 
 	@Override
 	protected void onInitialize() {
 		super.onInitialize();
 
-		header.setValue(getValue());
+		header.addDayClickHandler(event -> {
+			final MdcDate date = header.getValue();
+			if (date != null)
+				monthYear.setSelection(date.getMdcMonth());
+		});
 		header.addYearClickHandler(event -> {
-			if (daySelector.isChangeYear())
-				toggleSelector(yearSelector);
 		});
-		header.addDateClickHandler(event -> {
-			yearSelector.setValue(getValue().getYear() + 1900);
-			monthSelector.setValue(getValue().getMonth() + 1);
-		});
-	}
 
-	/**
-	 * The clone prevents changes in the original object
-	 * 
-	 * @param value
-	 * @return
-	 */
-	private Date clone(Date value) {
-		if (value == null)
-			return null;
-		return new Date(value.getTime());
+		monthYear.addSelectionHandler(event -> {
+			days.draw(event.getValue());
+			months.setSelection(Arrays.asList(new MdcMonth(event.getValue().getMonth())), false);
+			years.setSelection(Arrays.asList(new MdcYear(event.getValue().getYear())), false);
+		});
+
+		yearRange.addSelectionHandler(event -> years.draw(event.getValue()));
+
+		days.addSelectionHandler(event -> {
+			final Collection<MdcDate> collection = event.getValue();
+			final MdcDate date = collection == null || collection.isEmpty() ? new MdcDate()
+					: collection.iterator().next();
+			header.setValue(date);
+		});
+
+		months.addSelectionHandler(event -> {
+
+			final Collection<MdcMonth> collection = event.getValue();
+			final MdcMonth month = collection == null || collection.isEmpty() ? new MdcMonth()
+					: collection.iterator().next();
+
+			final MdcMonth visibleMonth = monthYear.getSelection() == null ? new MdcMonth() : monthYear.getSelection();
+			visibleMonth.setMonth(month.getMonth());
+			monthYear.setSelection(visibleMonth);
+		});
+
+		years.addSelectionHandler(event -> {
+
+			final Collection<MdcYear> collection = event.getValue();
+			final MdcYear year = collection == null || collection.isEmpty() ? new MdcYear()
+					: collection.iterator().next();
+
+			yearRange.setSelection(year.getYear(), false);
+			
+			final MdcMonth visibleMonth = monthYear.getSelection() == null ? new MdcMonth() : monthYear.getSelection();
+			visibleMonth.setYear(year.getYear());
+			monthYear.setSelection(visibleMonth);
+
+		});
+
+		add(header);
+		add(monthYear);
+		add(days);
+		add(months);
+		add(yearRange);
+		add(years);
+
+		final MdcDate date = getSelection() == null ? new MdcDate() : getSelection();
+		header.setValue(date);
+		monthYear.setSelection(date.getMdcMonth());
 	}
 
 	@Override
-	public void setValue(Date value, boolean fireEvents) {
-		super.setValue(clone(value), fireEvents);
-		if (initialized) {
-			header.setValue(value, false);
-			if (value == null || daySelector.getValue() == null || value.getTime() != daySelector.getValue().getTime())
-				daySelector.setValue(value, false);
-			else if (daySelector.getVisibleMonth() - 1 != value.getMonth()
-					|| daySelector.getVisibleYear() - 1900 != value.getYear())
-				daySelector.setYearAndMonth(value.getYear(), value.getMonth());
+	public HandlerRegistration addSelectionHandler(SelectionHandler<MdcDate> handler) {
+		return selectionMixin.addSelectionHandler(handler);
+	}
 
-			monthSelector.setValue(value == null ? null : value.getMonth() + 1, false);
-			yearSelector.setValue(value == null ? null : value.getYear() + 1900, false);
-		}
+	@Override
+	public void setSelection(MdcDate selected) {
+		selectionMixin.setSelection(selected);
+	}
+
+	@Override
+	public void setSelection(MdcDate selected, boolean fireEvents) {
+		selectionMixin.setSelection(selected, fireEvents);
+	}
+
+	@Override
+	public MdcDate getSelection() {
+		return selectionMixin.getSelection();
 	}
 }

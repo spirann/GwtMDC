@@ -51,6 +51,11 @@ public class MdcMonth implements HasPrevious<MdcMonth>, HasNext<MdcMonth>, Compa
 		this(date.getYear() + 1900, date.getMonth() + 1);
 	}
 
+	@SuppressWarnings("deprecation")
+	public MdcMonth(final int month) {
+		this((new Date()).getYear() + 1900, month);
+	}
+	
 	public MdcMonth(final int year, final int month) {
 		super();
 
